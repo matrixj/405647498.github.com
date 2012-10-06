@@ -1,0 +1,35 @@
+# -*- coding:utf-8 -*-
+#+LANGUAGE:  zh
+#+TITLE:     linux调整笔记本亮度的命令
+#+AUTHOR:    孤峰独秀
+#+EMAIL:     jixiuf@gmail.com
+#+DATE:     2011-09-24 六
+#+DESCRIPTION:linux调整笔记本亮度的
+#+KEYWORDS: linux vga 
+#+OPTIONS:   H:2 num:nil toc:t \n:t @:t ::t |:t ^:t -:t f:t *:t <:t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil 
+#+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
+#+EXPORT_SELECT_TAGS: export
+#+EXPORT_EXCLUDE_TAGS: noexport
+#+FILETAGS: @Linux 
+
+联想笔记本上调亮度的按键是Fn+Up ,Fn+Down. 悲剧的是自从我在笔记本前打开一艵
+可乐之后，这个按键再也不灵了。
+最后找到调亮度的命令.
+首先亮度相关的信息在这里
+#+begin_src sh
+cat  /proc/acpi/video/VGA/LCD/brightness
+结果如下
+levels:  0 10 20 30 40 50 60 70 80 90 100
+current: 40
+#+end_src
+也就是说，亮度可取的值有这几个
+#+begin_quote
+levels:  0 10 20 30 40 50 60 70 80 90 100
+#+end_quote
+只要修改这个值，就可以了，但是我用vi直接编辑这个文件，竟然失败
+用下面这个命令竟可以，想不通
+#+begin_src sh
+echo -n 40 > /proc/acpi/video/VGA/LCD/brightness 
+echo -n 60 > /proc/acpi/video/VGA/LCD/brightness 
+#+end_src

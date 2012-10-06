@@ -1,0 +1,123 @@
+# -*- coding:utf-8 -*-
+#+LANGUAGE:  zh
+#+TITLE:     IO.org
+#+AUTHOR:    纪秀峰
+#+EMAIL:     jixiuf@gmail.com
+#+DATE:     2011-10-25 二
+#+DESCRIPTION:IO.org
+#+KEYWORDS: 
+#+OPTIONS:   H:2 num:nil toc:t \n:t @:t ::t |:t ^:t -:t f:t *:t <:t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil 
+#+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
+#+EXPORT_SELECT_TAGS: export
+#+EXPORT_EXCLUDE_TAGS: noexport
+#+FILETAGS: @C
+#+begin_src c
+/* line_nums.c 文件操作的示例,比如此处如何判断读至文件尾
+Sample Usage :    line_nums < /etc/group
+*/
+#include <stdio.h>
+#include <stdlib.h>
+#define TRUE 1
+int lineno = 0;
+int error_flag = 0;
+char buf[BUFSIZ]; /* BUFSIZ is defined in stdio.h */
+
+main(){
+  while(TRUE){
+    if (fgets(buf,BUFSIZ, stdin) == NULL){
+      /* fgets 返回nulll有两种可能,error或到文件尾,故有ferror 与feof来判断究竟是哪一种 */
+      if (ferror(stdin) != 0){
+        fprintf(stderr,"Error during reading\n");
+        error_flag = 1;
+      }
+      if (feof(stdin) != 0)
+        fprintf(stderr,"File ended\n");
+      clearerr(stdin);
+      break; /* exit the while loop */
+    }
+    else{
+      lineno++;
+      /* in the next line, "%3d" is used to restrict the
+         number to 3 digits.
+      */
+      fprintf(stdout,"%3d: ", lineno);
+      fputs(buf, stdout);
+    }
+  }
+  fprintf(stderr,"%d lines written\n", lineno);
+  printf ("%d\n",BUFSIZ);
+  exit(error_flag);
+}
+#+end_src
+#+begin_src c
+#include <stdio.h>
+#include <stdlib.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>    /* the man pages of the commands say which
+                         include files need to be mentioned */
+#define TRUE 1
+int bytes_read;
+size_t  fp_bytes_read;
+int fd;   /* File descriptors */
+int fd2;
+FILE *fp; /* File pointers */
+FILE *fp2;
+char buffer[BUFSIZ]; /* BUFSIZ is set up in stdio.h */
+
+main(){
+
+  /* Use File descriptors */
+  fd = open ("/etc/group", O_RDONLY);
+  if (fd == -1){
+    perror("Opening /etc/group");
+    exit(1);
+  }
+
+  while (TRUE){
+    bytes_read = read (fd, buffer,BUFSIZ);
+    if (bytes_read>0)
+      printf("%d bytes read from /etc/group.\n", bytes_read);
+    else{
+      if (bytes_read==0){
+        printf("End of file /etc/group reached\n");
+        close(fd);
+        break;
+      }
+      else if (bytes_read == -1){
+        perror("Reading /etc/group");
+        exit(1);
+      }
+    }
+  }
+
+
+  /* now use file pointers */
+  fp = fopen("/etc/passwd","r");
+  if (fp == NULL){
+    printf("fopen failed to open /etc/passwd\n");
+    exit(1);
+  }
+
+  while(TRUE){
+    fp_bytes_read= fread (buffer, 1, BUFSIZ, fp);
+    printf("%d bytes read from /etc/passwd.\n", fp_bytes_read);
+    if (fp_bytes_read==0)
+      break;
+  }
+
+  rewind(fp); /* go back to the start of the file */
+
+  /* Find the descriptor associated with a stream */
+  fd2 = fileno (fp);
+  if (fd2 == -1)
+    printf("fileno failed\n");
+
+  /* Find the stream associated with a descriptor */
+  fp2 = fdopen (fd2, "r");
+  if (fp2 == NULL)
+    printf("fdopen failed\n");
+  fclose(fp2);
+}
+#+end_src

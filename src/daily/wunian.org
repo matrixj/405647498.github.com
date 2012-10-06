@@ -1,0 +1,26 @@
+# -*- coding:utf-8 -*-
+#+LANGUAGE:  zh
+#+TITLE:     心不染境
+#+AUTHOR:    孤峰独秀
+#+EMAIL:     jixiuf@gmail.com
+#+DATE:     2011-06-14 星期二
+#+FILETAGS: @Daily
+#+DESCRIPTION:
+#+KEYWORDS: 
+#+OPTIONS:   H:2 num:nil toc:t \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc
+#+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
+#+EXPORT_SELECT_TAGS: export
+#+EXPORT_EXCLUDE_TAGS: noexport
+
+对于佛经来说：”无念”就是，”于念而无念”，”于诸境上，心不杂”，
+即在一切境上、心不被外境所染，在自己的心念上。常能远离一切外境，不
+在所遇境上起妄念。但不是百物不思，不是无思维存在，不是心中一片死
+寂，而是”心不染境”，在念念之中排除一切杂念妄想、排除”尘劳邪见”。
+简单来说：“无念”是一种极度专心的状态，而人处于这种状态的时候可以
+最大限度的爆发出自身的潜能，自然而然的达到了自已目的。有的运动员在
+比赛中因极度的专心，会让人好似进入另外一个世界，而在这个世界中，他
+什么都感觉不到但又对一切变化都能了然于胸，什么也想不到但又对自已接
+下来要做的事十分笃定。最后，他就有如神助般，在不知不觉中打败对手。
+总而言之，“无念”就是一个人状态最好的时候。
+

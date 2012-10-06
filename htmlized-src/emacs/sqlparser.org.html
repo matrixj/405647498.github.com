@@ -1,0 +1,254 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<!-- Created by htmlize-1.34 in css mode. -->
+<html>
+  <head>
+    <title>sqlparser.org</title>
+    <style type="text/css">
+    <!--
+      body {
+        color: #F8F8F8;
+        background-color: #0C1021;
+      }
+      .comment {
+        /* font-lock-comment-face */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-block {
+        /* org-block */
+        color: #b3b3b3;
+      }
+      .org-block-begin-line {
+        /* org-block-begin-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-block-end-line {
+        /* org-block-end-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-document-info {
+        /* org-document-info */
+        color: #afeeee;
+      }
+      .org-document-info-keyword {
+        /* org-document-info-keyword */
+        color: #b3b3b3;
+      }
+      .org-document-title {
+        /* org-document-title */
+        color: #afeeee;
+        font-size: 144%;
+        font-weight: bold;
+      }
+      .org-level-1 {
+        /* org-level-1 */
+        color: #FF6400;
+      }
+      .org-link {
+        /* org-link */
+        color: #00ffff;
+        text-decoration: underline;
+      }
+      .org-meta-line {
+        /* org-meta-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+
+      a {
+        color: inherit;
+        background-color: inherit;
+        font: inherit;
+        text-decoration: inherit;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+    -->
+    </style>
+  </head>
+  <body>
+    <pre>
+<span class="comment"># -*- coding:utf-8 -*-</span>
+<span class="org-meta-line">#+LANGUAGE:  zh
+</span><span class="org-document-info-keyword">#+TITLE:</span><span class="comment">     </span><span class="org-document-title">&#20026;mysql&#12289;sqlserver&#12289;oracle&#32534;&#20889;sql&#33050;&#26412;&#26102;&#34917;&#20840;&#34920;&#21517;&#12289;&#21015;&#21517;</span>
+<span class="org-document-info-keyword">#+AUTHOR:</span><span class="comment">    </span><span class="org-document-info">&#32426;&#31168;&#23792;</span>
+<span class="org-document-info-keyword">#+EMAIL:</span><span class="comment">     </span><span class="org-document-info">jixiuf@gmail.com</span>
+<span class="org-document-info-keyword">#+DATE:</span><span class="comment">     </span><span class="org-document-info">2011-07-21 &#22235;</span>
+<span class="org-meta-line">#+DESCRIPTION:&#20026;mysql&#21450;oracle&#32534;&#20889;sql&#33050;&#26412;&#26102;&#34917;&#20840;&#34920;&#21517;&#12289;&#21015;&#21517;
+#+KEYWORDS: emacs sql mysql oracle complete anything
+#+OPTIONS:   H:2 num:nil toc:t \n:t @:t ::t |:t ^:t -:t f:t *:t &lt;:t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil
+#+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
+#+EXPORT_SELECT_TAGS: export
+#+EXPORT_EXCLUDE_TAGS: noexport
+#+FILETAGS: @Emacs @SQL @DB @Oracle
+</span><span class="org-level-1">* &#38142;&#25509;</span>
+&#28436;&#31034;&#35270;&#39057;screencast <span class="org-link">screencast</span> mkv&#26684;&#24335; &#65292;&#29992;bzip &#36827;&#34892;&#21387;&#32553;
+&#25991;&#20214;&#19978;&#20256;&#21040;&#20102; <span class="org-link">http://emacswiki.org/Joseph</span>,
+&#21516;&#26102;&#28304;&#20195;&#30721;&#29992;git &#36827;&#34892;&#31649;&#29702;&#65292;&#22320;&#22336;&#22312;&#36825;&#37324;<span class="org-link">github.com/sqlparser</span>.
+<span class="org-level-1">* &#31616;&#20171;</span>
+  &#26368;&#36817;&#26032;&#20889;&#20102;&#19968;&#20010;&#20197;mysql &#20026;&#21518;&#31471;&#65292;&#24403;&#32534;&#20889;sql &#33050;&#26412;&#26102;&#65292;&#33021;&#36866;&#26102;&#22320;&#20174;mysql &#25968;&#25454;&#24211;&#20013;&#26597;&#35810;
+  &#36866;&#26102;&#25554;&#20837;&#21040;&#24403;&#21069;&#20809;&#26631;&#19979;&#30340;&#34920;&#21517;&#21015;&#21517;&#31561;&#20869;&#23481;&#30340;&#25193;&#23637;. &#21363;&#36827;&#34892;&#34920;&#21517;&#21015;&#21517;&#30340;&#34917;&#20840;&#12290;(&#29616;&#22312;&#20063;&#30456;&#24212;
+  &#30340;&#25552;&#20379;&#20102; oracle sqlserver &#29256;&#26412;&#30340;)
+  emacswiki&#19978;&#26377;<span class="org-link">SqlComplete</span> &#30340;&#20171;&#32461;&#65292;&#29992;&#20102;&#19968;&#19979;&#65292;&#21457;&#29616;&#24182;&#19981;&#22909;&#29992;&#12290;&#19981;&#22815;&#26234;&#33021;&#65292;&#27604;&#22914;&#23427;&#19981;
+  &#28165;&#26970;&#20160;&#20040;&#26102;&#20505;&#35813;&#25554;&#20837;&#34920;&#21517;&#65292;&#20160;&#20040;&#26102;&#20505;&#35813;&#25554;&#20837;&#21015;&#21517;&#12290;&#25152;&#20197;&#21482;&#22909;&#33258;&#24050;&#21160;&#25163;&#12290;
+
+  &#30456;&#21021;&#29992;&#36825;&#20010;sqlparser&#21517;&#23383;&#26159;&#22240;&#20026; &#22312;emacs &#20013;&#23545;sql &#35821;&#21477;&#36827;&#34892;&#32534;&#20889;&#26102;&#65292;&#24819;&#20889;&#19968;&#20123;&#35299;&#26512;&#24403;&#21069;sql
+  &#35821;&#21477;&#30340;&#30456;&#20851;&#20989;&#25968;&#65292;&#25152;&#20197;&#29992;&#20102;sqlparser&#36825;&#20010;&#21517;&#65292;&#21518;&#26469;&#38470;&#32493;&#28155;&#21152;&#20102;&#19968;&#20123;&#19982;sql&#30456;&#20851;&#30340;&#21151;&#33021;
+  &#29992;&#36825;&#20010;&#21517;&#23383;&#65292;&#20284;&#20046;&#19981;&#22826;&#21512;&#36866;&#65292;&#20294;&#20063;&#25042;&#24471;&#25913;&#20102;&#12290;
++  oracle-query.el
++  sqlserver-query.el
++  mysql-query.el
+   &#36825;&#19977;&#20010;&#25552;&#20379;&#26368;&#22522;&#26412;&#30340;&#36830;&#25509;&#25968;&#25454;&#24211;&#30340;&#21151;&#33021;
+
++ sqlparser-mysql-complete.el
++ sqlparser-oracle-complete.el
++ sqlparser-sqlserver-complete.el
+  &#36825;&#19977;&#20010;&#25991;&#20214; &#20998;&#21035;&#25552;&#20379;&#32534;&#20889; sql&#33050;&#26412;&#26102;&#34917;&#20840; &#34920;&#21517;&#12289;&#21015;&#21517;&#30340;&#21151;&#33021;&#12290;
+  &#27604;&#22914;&#22312;from &#20043;&#21518;&#65292;&#34917;&#20840;&#34920;&#21517;&#65292;&#22312;select ,where &#20043;&#21518;&#34917;&#20840;&#21015;&#21517;&#31561;.
+
+- sqlserver-table2entity-4csharp.el
+- sqlserver-table2entity-4java.el
+- oracle-table2entity-4csharp.el
+- oracle-table2entity-4java.el
+- mysql-table2entity-4csharp.el
+- mysql-table2entity-4java.el
+- mysql-table2record-erlang.el
+  &#36825;&#20960;&#20010;&#25991;&#20214;&#20998;&#21035;&#25552;&#20379;&#20102;&#23558;sqlserver mysql oracle&#30340;&#26576;&#20010;schema&#20013;&#25152;&#26377;&#30340;&#34920;&#23548;&#20986;&#25104;java
+  csharp &#23454;&#20307;&#31867;&#30340;&#21151;&#33021;&#12290;
+<span class="org-block-begin-line">  #+BEGIN_SRC sh
+</span><span class="org-block">M-x: sqlserver-table2entity-4csharp-interactively
+M-x: sqlserver-table2entity-4java-interactively
+M-x: oracle-table2entity-4java-interactively
+M-x: oracle-table2entity-4csharp-interactively
+M-x: mysql-table2entity-4csharp-interactively
+M-x: mysql-table2entity-4java-interactively
+M-x: erlang-mysql-generate-records
+</span><span class="org-block-end-line">  #+END_SRC
+</span>  &#20998;&#21035;&#25552;&#20379;&#36825;&#26679;&#20960;&#20010;&#20989;&#25968;
+  + mysql-query.el
+<span class="org-block-begin-line">    #+BEGIN_SRC emacs-lisp
+</span><span class="org-block">      ;; the normal way to use mysql-query.el is :
+      ;; 1:
+      (defvar mysql-connection (mysql-query-create-connection connection-info))
+      or
+      (defvar mysql-connection nil)
+      (unless (mysql-query-connection-alive-p  mysql-connection)
+        (setq mysql-connection (call-interactively 'mysql-query-create-connection)))
+
+      ;; 2:
+        (mysql-query              "select user from mysql.user" mysql-connection)
+        (mysql-query-with-heading "select user from mysql.user" mysql-connection)
+</span><span class="org-block-end-line">    #+END_SRC
+</span>  + oracle-query.el
+<span class="org-block-begin-line">    #+BEGIN_SRC emacs-lisp
+</span><span class="org-block">      ;; execute sql using sqlplus and return as list .
+      (oracle-query "select empno,ename from emp where empno&lt;=7499")
+      ;; got :     (("7369" "SMITH") ("7499" "ALLEN"))
+      ;; or
+      (oracle-query-with-heading "select empno,ename from emp where empno&lt;=7499")
+      ;; got :     (("EMPNO" "ENAME") ("7369" "SMITH") ("7499" "ALLEN"))
+      ;; using default connection ,not recommended.
+      (defvar connection (oracle-query-create-connection "scott/tiger"))
+      (oracle-query "select empno from emp" connection)
+      ;; recommended
+      ;; the normal way to use oracle-query.el is :
+      ;; 1:
+      (defvar sqlplus-connection nil)
+      (unless (oracle-query-connection-alive-p c)
+        (setq sqlplus-connection (call-interactively 'oracle-query-create-connection)))
+      ;; 2:
+      (oracle-query "select empno from emp" sqlplus-connection)
+      ;; 3:
+      (oracle-query-close-connection sqlplus-connection)
+</span><span class="org-block-end-line">    #+END_SRC
+</span>  + sqlserver-query.el
+<span class="org-block-begin-line">    #+BEGIN_SRC emacs-lisp
+</span><span class="org-block">        ;; the normal way to use sqlserver-query.el is :
+      ;; 1:
+      (defvar c nil)
+      (unless (sqlserver-query-connection-alive-p c)
+        (setq c (call-interactively 'sqlserver-query-create-connection)))
+      ;; 2:
+        (sqlserver-query "select empno from emp" c)
+        ;; or
+        (sqlserver-query-with-heading "select empno from emp" c)
+      ;; 3:
+        (sqlserver-query-close-connection c)
+</span><span class="org-block-end-line">    #+END_SRC
+</span><span class="org-level-1">* &#22914;&#20309;&#20351;&#29992;&#36827;&#34892;mysql &#30340;&#34920;&#21517;&#21015;&#21517;&#34917;&#20840;&#65306;</span>
+<span class="org-block-begin-line">#+BEGIN_SRC emacs-lisp
+</span><span class="org-block">  (require 'sqlparser-mysql-complete)
+  (define-key sql-mode-map (quote [M-return]) 'sqlparser-mysql-complete)
+  (define-key sql-interactive-mode-map  (quote [M-return]) 'sqlparser-mysql-complete)
+  ;; or
+  (defadvice sql-mysql (around start-mysql-complete-minor-mode activate)
+    "enable `mysql-complete-minor-mode' minor mode."
+    ad-do-it
+    (mysql-complete-minor-mode))
+  (define-derived-mode mysql-mode sql-mode "mysql"
+    "mysql mode"
+    (mysql-complete-minor-mode))
+
+  ;; `sqlparser-mysql-complete' default  bind on `TAB' in
+  ;; with `C-u' you can change the dbname
+  ;; with `C-uC-u' you can use another new mysql connection
+</span><span class="org-block-end-line">#+END_SRC
+</span><span class="org-block-begin-line">#+BEGIN_SRC emacs-lisp
+</span><span class="org-block">  (require 'sqlparser-oracle-complete)
+  (add-hook 'sql-mode-hook 'oracle-complete-minor-mode)
+  (add-hook 'sqlplus-mode-hook 'oracle-complete-minor-mode)
+  ;; or you can call M-x: oracle-complete-minor-mode
+  ;; and complete command is binded on `TAB' .
+  ;; with `C-u' you can complete with new connection string.
+</span><span class="org-block-end-line">#+END_SRC
+</span><span class="org-block-begin-line">#+BEGIN_SRC emacs-lisp
+</span><span class="org-block">   ;; there is a minor mode defined here
+        (sqlserver-complete-minor-mode)
+  ;; you can add it to sql-mode-hook
+  (add-hook  'sql-mode-hook 'sqlserver-complete-minor-mode)
+  ;; or call M-x sqlserver-complete-minor-mode
+
+   ;; and complete command is binded on `TAB' .
+
+  ;; 1. you should custom these variable
+  ;; `sqlserver-connection-info'
+   ;; `sqlserver-cmd' ;sqlcmd or osql
+  ;; for example
+  (setq sqlserver-connection-info
+        '((username . "sa")
+          (password . "sa")
+          (server-instance . "localhost\\SQLEXPRESS")
+          (dbname . "master"))
+        )
+  ;; or sometimes
+  (setq sqlserver-connection-info
+        '((username . "sa")
+          (password . "sa")
+          (server-instance . "localhost")
+          (dbname . "master")))
+
+  (setq sqlserver-cmd' 'sqlcmd) or (setq sqlserver-cmd' 'osql)
+
+
+  ;; my config file about sqlserver-complete-minor-mode looks like this .
+  (require 'sql)
+  (require 'sqlparser-sqlserver-complete)
+  (add-hook  'sql-mode-hook 'sqlserver-complete-minor-mode)
+  (add-hook  'sqlserver-complete-minor-mode-hook 'sqlserver-complete-minor-mode-setup)
+  (defun sqlserver-complete-minor-mode-setup()
+    (setq sqlserver-connection-info
+      '((username . "sa")
+        (password . "sa")
+        (server-instance . "localhost")
+        (dbname . "HAIHUA"))
+      )
+    (setq sqlserver-cmd 'sqlcmd)
+    )
+</span><span class="org-block-end-line">#+END_SRC
+</span></pre>
+  </body>
+</html>

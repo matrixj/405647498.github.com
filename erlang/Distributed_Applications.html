@@ -3,13 +3,13 @@
                "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="zh" xml:lang="zh">
 <head>
-<title>一个人的狂欢</title>
+<title>Distributed_Applications.org</title>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
-<meta name="title" content="一个人的狂欢"/>
+<meta name="title" content="Distributed_Applications.org"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2011-06-04 星期六"/>
-<meta name="author" content="孤峰独秀"/>
-<meta name="description" content=""/>
+<meta name="generated" content="2012-04-06 五"/>
+<meta name="author" content="纪秀峰"/>
+<meta name="description" content="Distributed_Applications.org"/>
 <meta name="keywords" content=""/>
 <style type='text/css'>
        body {
@@ -942,15 +942,15 @@ img {
 }
 
     </style>
-<link rel="stylesheet" type="text/css" href="style/emacs.css" />
-<script type='text/javascript' src='js/emacs.js'> </script>
+<link rel="stylesheet" type="text/css" href="../style/emacs.css" />
+<script type='text/javascript' src='../js/emacs.js'> </script>
 
 </head>
 <body>
 <div id="org-div-home-and-up" style="text-align:right;font-size:70%;white-space:nowrap;">
- <a accesskey="h" href="sitemap.html"> 站点地图 </a>
+ <a accesskey="h" href="../sitemap.html"> 站点地图 </a>
  |
- <a accesskey="H" href="index.html"> 首页 </a>
+ <a accesskey="H" href="../index.html"> 首页 </a>
 </div>
 
 <div id="preamble">
@@ -958,60 +958,175 @@ img {
 </div>
 
 <div id="content">
-<h1 class="title">一个人的狂欢</h1>
+<h1 class="title">Distributed_Applications.org</h1>
 
 
-<div id='logo-img' ><a  href='index.html'>▇█▓▒░◕~◕░▒▓█▇</a></div>
+<div id='logo-img' ><a  href='../index.html'>▇█▓▒░◕~◕░▒▓█▇</a></div>
 
 <div id='logo-text'>
   <a href='#' ><span align="left">░◕~◕░</span></a>
 </div>
 
 
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
 <ul>
-<li>首页还未做好，先看<a href="sitemap.html">站点地图</a>吧
-</li>
-<li><a href="about.html">About</a>
-</li>
+<li><a href="#sec-1">distributed application 某节点挂了后，此种application 会在另外一个节点上启动</a></li>
 </ul>
+</div>
+</div>
+
+<div id="outline-container-1" class="outline-2">
+<h2 id="sec-1">distributed application 某节点挂了后，此种application 会在另外一个节点上启动</h2>
+<div class="outline-text-2" id="text-1">
 
 
+<p><br/>
+ <a href="http://www.erlang.org/doc/design_principles/distributed_applications.html">http://www.erlang.org/doc/design\_principles/distributed\_applications.html</a><br/>
+ erl -name c@l92.168.0.44 -config c.config<br/>
+ erl -name c2@l92.168.0.44 -config c2.config<br/>
+ erl -name c3@l92.168.0.44 -config c3.config<br/>
+ erl -name emacs@l92.168.0.44 -config master.config<br/>
+</p><blockquote>
+
+<p>distributed = [{Application, [Timeout,] NodeDesc}]<br/>
+                                        NodeDesc = [Node | {Node,&hellip;,Node}]<br/>
+</p>
+</blockquote>
+
+
+<p><br/>
+ NodeDesc 表示此种Application可以在哪些节点上启动，优先级按NodeDesc[]中出现的顺序而定，但在{} 中的节点优先级相同<br/>
+ 比如:<br/>
+</p>
+<p><br/>
+<pre class="src src-erlang">{distributed, [{game_log_server, 5000, [<span class="org-string">'emacs@192.168.0.44'</span>, {<span class="org-string">'c@192.168.0.44'</span>,<span class="org-string">'c2@192.168.0.44'</span>,<span class="org-string">'c3@192.168.0.44'</span> }]}]}
+</pre>
+
+ game_log_server 会优先在'emacs@192.168.0.44'上启动，当'emacs@192.168.0.44'当掉后，会从{'c@192.168.0.44','c2@192.168.0.44','c3@192.168.0.44' }<br/>
+ 中选择一个节点，在此节点上启动game_log_server application<br/>
+ Timeout<br/>
+  表示等待多少ms 才决定在其他节点上来启动此 application(即当前节点或许会在Timeout时间内重启成功。)<br/>
+</p>
+<p><br/>
+</p><blockquote>
+
+<p>sync_nodes_mandatory = [Node]<br/>
+    Specifies which other nodes must be started (within the timeout specified by sync_nodes_timeout.<br/>
+sync_nodes_optional = [Node]<br/>
+    Specifies which other nodes can be started (within the timeout specified by sync_nodes_timeout.<br/>
+sync_nodes_timeout = integer() | infinity<br/>
+    Specifies how many milliseconds to wait for the other nodes to start.<br/>
+</p>
+</blockquote>
+
+
+<p><br/>
+ When started, the node will wait for all nodes specified by sync_nodes_mandatory and sync_nodes_optional to come up<br/>
+ 在启动当前节点的过程中，会等待 sync_nodes_mandatory 与 sync_nodes_optional属性中指定的节点启动后才启动,如果sync_nodes_mandatory<br/>
+ 中有任一节点启动失败，则此停止此节点的启动<br/>
+ 所有这些节点中<br/>
+ distributed and sync_nodes_timeout,两属性的值必须相同.<br/>
+ 当所有distributed属性中指定的节点启动成功后，此 application会首先在emacs@192.168.0.44上启动<br/>
+ application:start(Application)<br/>
+ Module:start(normal, StartArgs)<br/>
+ 当 emacs@192.168.0.44 当掉后,首先会尝试在等5000ms 让 emacs@192.168.0.44重启。<br/>
+ application会在新的节点上以<br/>
+ Module:start(normal, StartArgs)的方式重启，<br/>
+ 例外是如果此 application 定义的tart_phases(<a href="http://www.erlang.org/doc/design_principles/included_applications.html">http://www.erlang.org/doc/design\_principles/included\_applications.html</a>)<br/>
+ 则 Module:start({failover, Node}, StartArgs)<br/>
+</p>
+<p><br/>
+ 如果 emacs@192.168.0.44重启了。则此时 Takeover 事件会发生，即此 application会在 emacs@192.168.0.44 上重启，而 在old node<br/>
+ 上stop<br/>
+ Module:start({takeover, Node}, StartArgs)<br/>
+</p><ul>
+<li id="sec-1-1">master.config<br/>
+
+<p><br/>
+<pre class="src src-erlang">[{kernel,
+  [{distributed, [{game_log_server, 5000, [<span class="org-string">'emacs@192.168.0.44'</span>, {<span class="org-string">'c@192.168.0.44'</span>,<span class="org-string">'c2@192.168.0.44'</span> }]}]},
+   {sync_nodes_mandatory, [<span class="org-string">'c@192.168.0.44'</span>,<span class="org-string">'c2@192.168.0.44'</span> ]}, <span class="org-comment-delimiter">% </span><span class="org-comment">mandatory&#25176;&#31649;</span>
+   {sync_nodes_timeout, 5000}
+  ]
+ }
+].
+</pre>
+
+</p></li>
+</ul>
+<ul>
+<li id="sec-1-2">c.config<br/>
+
+<p><br/>
+<pre class="src src-erlang"><span class="org-comment-delimiter">%% </span><span class="org-comment">http://www.erlang.org/doc/design_principles/distributed_applications.html</span>
+<span class="org-comment-delimiter">%% </span><span class="org-comment">erl -name emacs@l92.168.0.44 -config master.config</span>
+<span class="org-comment-delimiter">%% </span><span class="org-comment">erl -name c@l92.168.0.44 -config c.config</span>
+<span class="org-comment-delimiter">%% </span><span class="org-comment">erl -name c2@l92.168.0.44 -config c2.config</span>
+<span class="org-comment-delimiter">%% </span><span class="org-comment">erl -name c3@l92.168.0.44 -config c3.config</span>
+[{kernel,
+  [{distributed, [{game_log_server, 5000, [<span class="org-string">'emacs@192.168.0.44'</span>, {<span class="org-string">'c@192.168.0.44'</span>,<span class="org-string">'c2@192.168.0.44'</span> }]}]},
+   {sync_nodes_mandatory, [<span class="org-string">'emacs@192.168.0.44'</span>,<span class="org-string">'c2@192.168.0.44'</span> ]},
+   {sync_nodes_timeout, 5000}
+  ]
+ }
+].
+</pre>
+
+
+
+<pre class="src src-erlang"><span class="org-comment-delimiter">%% </span><span class="org-comment">http://www.erlang.org/doc/design_principles/distributed_applications.html</span>
+<span class="org-comment-delimiter">%% </span><span class="org-comment">erl -name emacs@l92.168.0.44 -config master.config</span>
+<span class="org-comment-delimiter">%% </span><span class="org-comment">erl -name c@l92.168.0.44 -config c.config</span>
+<span class="org-comment-delimiter">%% </span><span class="org-comment">erl -name c2@l92.168.0.44 -config c2.config</span>
+<span class="org-comment-delimiter">%% </span><span class="org-comment">erl -name c3@l92.168.0.44 -config c3.config</span>
+[{kernel,
+  [{distributed, [{game_log_server, 5000, [<span class="org-string">'emacs@192.168.0.44'</span>, {<span class="org-string">'c@192.168.0.44'</span>,<span class="org-string">'c2@192.168.0.44'</span> }]}]},
+   {sync_nodes_mandatory, [<span class="org-string">'c@192.168.0.44'</span>,<span class="org-string">'emacs@192.168.0.44'</span> ]},
+   {sync_nodes_timeout, 5000}
+  ]
+ }
+].
+</pre>
 
 
 <div id='my-src'>
-<div id='org-src'><a href='src/index.org'>src</a></div>
-<div id='htmlized-src'><a href='htmlized-src/index.org.html'>htmlized-src</a></div>
+<div id='org-src'><a href='../src/erlang/Distributed_Applications.org'>src</a></div>
+<div id='htmlized-src'><a href='../htmlized-src/erlang/Distributed_Applications.org.html'>htmlized-src</a></div>
 </div>
 <div id='tags'><span id='tags-title'>Tags:</span><br />
-<p>
-    <a href="tags/@SVN.html">@SVN</a>
-    <a href="tags/@perl.html">@perl</a>
-    <a href="tags/@Java.html">@Java</a>
-    <a href="tags/@Mysql.html">@Mysql</a>
-    <a href="tags/@Erlang.html">@Erlang</a>
-    <a href="tags/@SQL.html">@SQL</a>
-    <a href="tags/@DB.html">@DB</a>
-    <a href="tags/@Oracle.html">@Oracle</a>
-    <a href="tags/@Ediff.html">@Ediff</a>
-    <a href="tags/@Git.html">@Git</a>
-    <a href="tags/@Cedet.html">@Cedet</a>
-    <a href="tags/@C-C++.html">@C-C++</a>
-    <a href="tags/@Daily.html">@Daily</a>
-    <a href="tags/@Eclipse.html">@Eclipse</a>
-    <a href="tags/@AutoHotKey.html">@AutoHotKey</a>
-    <a href="tags/@Windows.html">@Windows</a>
-    <a href="tags/@Linux.html">@Linux</a>
-    <a href="tags/@C.html">@C</a>
-    <a href="tags/@Emacs.html">@Emacs</a>
+    <a href="../tags/@SVN.html">@SVN</a><br/>
+    <a href="../tags/@perl.html">@perl</a><br/>
+    <a href="../tags/@Java.html">@Java</a><br/>
+    <a href="../tags/@Mysql.html">@Mysql</a><br/>
+    <a href="../tags/@Erlang.html">@Erlang</a><br/>
+    <a href="../tags/@SQL.html">@SQL</a><br/>
+    <a href="../tags/@DB.html">@DB</a><br/>
+    <a href="../tags/@Oracle.html">@Oracle</a><br/>
+    <a href="../tags/@Ediff.html">@Ediff</a><br/>
+    <a href="../tags/@Git.html">@Git</a><br/>
+    <a href="../tags/@Cedet.html">@Cedet</a><br/>
+    <a href="../tags/@C-C++.html">@C-C++</a><br/>
+    <a href="../tags/@Daily.html">@Daily</a><br/>
+    <a href="../tags/@Eclipse.html">@Eclipse</a><br/>
+    <a href="../tags/@AutoHotKey.html">@AutoHotKey</a><br/>
+    <a href="../tags/@Windows.html">@Windows</a><br/>
+    <a href="../tags/@Linux.html">@Linux</a><br/>
+    <a href="../tags/@C.html">@C</a><br/>
+    <a href="../tags/@Emacs.html">@Emacs</a><br/>
 </p>
-
-
+<p><br/>
+</div>
+</p></li>
+</ul>
+</div>
 </div>
 </div>
 
 <div id="postamble">
-<p class="date">Date: 2011-06-04 星期六</p>
-<p class="author">Author: 孤峰独秀</p>
+<p class="date">Date: 2012-04-06 五</p>
+<p class="author">Author: 纪秀峰</p>
 <p class="creator">Org version 7.8.03 with Emacs version 24</p>
 
 

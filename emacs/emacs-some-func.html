@@ -3,14 +3,14 @@
                "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="zh" xml:lang="zh">
 <head>
-<title>一个人的狂欢</title>
+<title>emacs-some-func.org</title>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
-<meta name="title" content="一个人的狂欢"/>
+<meta name="title" content="emacs-some-func.org"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2011-06-04 星期六"/>
+<meta name="generated" content="2011-07-04 一"/>
 <meta name="author" content="孤峰独秀"/>
-<meta name="description" content=""/>
-<meta name="keywords" content=""/>
+<meta name="description" content="emacs-some-func.org"/>
+<meta name="keywords" content="emacs "/>
 <style type='text/css'>
        body {
     background-color: #E5E5E5;
@@ -942,15 +942,15 @@ img {
 }
 
     </style>
-<link rel="stylesheet" type="text/css" href="style/emacs.css" />
-<script type='text/javascript' src='js/emacs.js'> </script>
+<link rel="stylesheet" type="text/css" href="../style/emacs.css" />
+<script type='text/javascript' src='../js/emacs.js'> </script>
 
 </head>
 <body>
 <div id="org-div-home-and-up" style="text-align:right;font-size:70%;white-space:nowrap;">
- <a accesskey="h" href="sitemap.html"> 站点地图 </a>
+ <a accesskey="h" href="../sitemap.html"> 站点地图 </a>
  |
- <a accesskey="H" href="index.html"> 首页 </a>
+ <a accesskey="H" href="../index.html"> 首页 </a>
 </div>
 
 <div id="preamble">
@@ -958,59 +958,147 @@ img {
 </div>
 
 <div id="content">
-<h1 class="title">一个人的狂欢</h1>
+<h1 class="title">emacs-some-func.org</h1>
 
 
-<div id='logo-img' ><a  href='index.html'>▇█▓▒░◕~◕░▒▓█▇</a></div>
+<div id='logo-img' ><a  href='../index.html'>▇█▓▒░◕~◕░▒▓█▇</a></div>
 
 <div id='logo-text'>
   <a href='#' ><span align="left">░◕~◕░</span></a>
 </div>
 
+<p>
+这个函数，用于跳转到下一处空格的位置，如果是连续的多个空格，则跳转到所有空<br/>
+格的开头及结尾。这个键我绑定在C-o上。<br/>
+</p>
+<p><br/>
+<pre class="src src-emacs-lisp"><span class="org-comment-delimiter">;;;</span><span class="org-comment">###</span><span class="org-comment"><span class="org-warning">autoload</span></span>
+(<span class="org-keyword">defun</span> <span class="org-function-name">joseph-jump-to-space-forward</span>()
+  (interactive)
+  (<span class="org-keyword">let</span> ((old-pos (point))
+        m-end m-begin
+        )
+    (<span class="org-keyword">when</span> (re-search-forward <span class="org-string">"[ \t]+"</span>  <span class="org-constant">nil</span> <span class="org-constant">t</span>)
+      (<span class="org-function-name">setq</span> m-begin (match-beginning 0))
+      (<span class="org-function-name">setq</span> m-end (match-end 0))
+      (goto-char m-begin)
+      (<span class="org-keyword">if</span> (<span class="org-keyword">equal</span> old-pos m-end)
+          (<span class="org-keyword">progn</span>
+            (re-search-forward <span class="org-string">"[ \t]+"</span>  <span class="org-constant">nil</span> <span class="org-constant">t</span>)
+            (goto-char (match-beginning 0)))
+        (<span class="org-keyword">if</span> (<span class="org-keyword">equal</span> m-begin old-pos)
+            (goto-char m-end)
+            )))))
+</pre>
 
-<ul>
-<li>首页还未做好，先看<a href="sitemap.html">站点地图</a>吧
-</li>
-<li><a href="about.html">About</a>
-</li>
-</ul>
+编写代码的时候添加或者删除注释是一个经常性的活动。默认emacs为这个工作已经做<br/>
+的很好了.不论你在写什么语言。都是`M-;'进行注释与反注释。<br/>
+即，如果你选中的区域已经被注释上了，则M-;取消注释。否则就是为你所中的区域添<br/>
+加注释。如果你没选中内容，则在行末添加注释。我想做的是，如果没有选中内容，<br/>
+则注释或者反注释当前行。如果在行末时，才在行末添加注释。<br/>
+将这个函数绑定在M-;上即可。<br/>
+</p>
+<p><br/>
+<pre class="src src-emacs-lisp"><span class="org-comment-delimiter">;;</span><span class="org-comment">&#20195;&#30721;&#27880;&#37322;&#24037;&#20316;&#65292;&#22914;&#26524;&#26377;&#36873;&#20013;&#21306;&#22495;&#65292;&#21017;&#27880;&#37322;&#25110;&#32773;&#21453;&#27880;&#37322;&#36825;&#20010;&#21306;&#22495;</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">&#22914;&#26524;&#65292;&#27809;&#36873;&#20013;&#21306;&#22495;&#65292;&#21017;&#27880;&#37322;&#25110;&#32773;&#27880;&#37322;&#24403;&#21069;&#34892;&#65292;&#22914;&#26524;&#20809;&#26631;&#22312;&#34892;&#26411;&#65292;&#21017;&#22312;&#34892;&#26411;&#28155;&#21152;&#25110;&#21024;&#38500;&#27880;&#37322;</span>
+<span class="org-comment-delimiter">;;;</span><span class="org-comment">###</span><span class="org-comment"><span class="org-warning">autoload</span></span>
+(<span class="org-keyword">defun</span> <span class="org-function-name">joseph-comment-dwim-line</span> (<span class="org-type">&amp;optional</span> arg)
+  <span class="org-doc">"Replacement for the comment-dwim command.</span>
+<span class="org-doc">If no region is selected and current line is not blank and we are not at the end of the line,</span>
+<span class="org-doc">then comment current line.</span>
+<span class="org-doc">Replaces default behaviour of comment-dwim, when it inserts comment at the end of the line."</span>
+  (interactive <span class="org-string">"*P"</span>)
+  (comment-normalize-vars)
+  (<span class="org-keyword">if</span> (<span class="org-keyword">and</span> (<span class="org-keyword">not</span> (region-active-p)) (<span class="org-keyword">not</span> (looking-at <span class="org-string">"[ \t]*$"</span>)))
+      (comment-or-uncomment-region (line-beginning-position) (line-end-position))
+    (comment-dwim arg)))
+</pre>
 
 
+写程序时在行尾添加分号,不必非得光标在行尾。<br/>
+</p>
+<p><br/>
+<pre class="src src-emacs-lisp">(<span class="org-function-name">define-key</span> java-mode-map <span class="org-string">";"</span>  'joseph-append-semicolon-at-eol)
+
+<span class="org-comment-delimiter">;;;</span><span class="org-comment">###</span><span class="org-comment"><span class="org-warning">autoload</span></span>
+(<span class="org-keyword">defun</span> <span class="org-function-name">joseph-append-semicolon-at-eol</span>(<span class="org-type">&amp;optional</span> arg)
+  <span class="org-doc">"&#22312;&#24403;&#21069;&#34892;&#20219;&#20309;&#20301;&#32622;&#36755;&#20837;&#20998;&#21495;&#37117;&#22312;&#34892;&#23614;&#28155;&#21152;&#20998;&#21495;&#65292;&#38500;&#38750;&#26412;&#34892;&#26377;for &#36825;&#20010;&#20851;&#38190;&#23383;&#65292;</span>
+<span class="org-doc">&#22914;&#26524;&#34892;&#23614;&#24050;&#32463;&#26377;&#20998;&#21495;&#21017;&#21024;&#38500;&#34892;&#23614;&#30340;&#20998;&#21495;&#65292;&#23558;&#20854;&#25554;&#20837;&#21040;&#24403;&#21069;&#20301;&#32622;,&#23601;&#26159;&#35828;&#36755;&#20837;&#20004;&#27425;&#20998;&#21495;&#21017;&#19981;&#22312;&#34892;&#23614;&#25554;&#20837;&#32780;&#26159;&#20687;&#27491;&#24120;&#24773;&#20917;&#19968;&#26679;."</span>
+  (interactive <span class="org-string">"*p"</span>)
+  (<span class="org-keyword">let*</span> ( ( init_position (point))
+          (b (line-beginning-position))
+          (e (line-end-position))
+          (line_str (buffer-substring b e))
+          (semicolon_end_of_line (string-match <span class="org-string">";[ \t]*$"</span> line_str ))
+          )
+    (<span class="org-keyword">if</span> semicolon_end_of_line <span class="org-comment-delimiter">;;;;</span><span class="org-comment">&#22914;&#26524;&#34892;&#23614;&#24050;&#32463;&#26377;&#20998;&#21495;&#65292;&#21017;&#21024;&#38500;&#34892;&#23614;&#30340;&#20998;&#21495;&#65292;&#24182;&#22312;&#24403;&#21069;&#20301;&#32622;&#36755;&#20837;&#20998;&#21495;;;;;;;</span>
+        (<span class="org-keyword">progn</span>
+          (<span class="org-keyword">save-excursion</span>
+            (goto-char (+ semicolon_end_of_line b))
+            (delete-char 1) )
+          (insert <span class="org-string">";"</span>) )
+      <span class="org-comment-delimiter">;;</span><span class="org-comment">&#22312;&#25972;&#34892;&#20869;&#23481;&#20013;&#25628;&#32034;&#26377;&#27809;&#26377;&#20851;&#38190;&#23383;for&#30340;&#23384;&#22312;,&#25110;&#32773;&#24403;&#21069;&#20301;&#32622;&#24050;&#32463;&#26159;&#34892;&#23614;,&#30452;&#25509;&#25554;&#20837;&#20998;&#21495;</span>
+      (<span class="org-keyword">if</span>   (<span class="org-keyword">or</span> (string-match <span class="org-string">"^[ \t]*$"</span> (buffer-substring init_position e))
+                (string-match <span class="org-string">"\\bfor\\b"</span> line_str))
+          (insert <span class="org-string">";"</span>)
+        (<span class="org-keyword">save-excursion</span> <span class="org-comment-delimiter">;;</span><span class="org-comment">&#22914;&#26524;&#25628;&#32034;&#19981;&#21040; for &#21017;&#22312;&#34892;&#23614;&#25554;&#20837;&#20998;&#21495;;</span>
+          (end-of-line)
+          (delete-trailing-whitespace)
+          (insert <span class="org-string">";"</span>)
+          )))))
+</pre>
+
+
+这个函数是将C-j 与C-o 的功能进行合并。<br/>
+当光标在行首时，调用此函数，在上一行添加空行。当光标在行尾时，调用此命令则<br/>
+在下一行添加空行。所以可以节省下一个快捷键<br/>
+</p>
+<p><br/>
+<pre class="src src-emacs-lisp"><span class="org-comment-delimiter">;;;</span><span class="org-comment">###</span><span class="org-comment"><span class="org-warning">autoload</span></span>
+(<span class="org-keyword">defun</span> <span class="org-function-name">open-line-or-new-line-dep-pos</span>()
+  <span class="org-doc">"if point is in head of line then open-line</span>
+<span class="org-doc">if point is at end of line , new-line-and-indent"</span>
+  (interactive)
+  (<span class="org-keyword">if</span> (<span class="org-keyword">and</span> (= (point) (point-at-bol))
+           (<span class="org-keyword">not</span> (looking-at <span class="org-string">"^[ \t]*$"</span>)))
+      (<span class="org-keyword">progn</span>
+        (open-line 1)
+        (indent-for-tab-command))
+    (newline-and-indent)))
+</pre>
 
 
 <div id='my-src'>
-<div id='org-src'><a href='src/index.org'>src</a></div>
-<div id='htmlized-src'><a href='htmlized-src/index.org.html'>htmlized-src</a></div>
+<div id='org-src'><a href='../src/emacs/emacs-some-func.org'>src</a></div>
+<div id='htmlized-src'><a href='../htmlized-src/emacs/emacs-some-func.org.html'>htmlized-src</a></div>
 </div>
 <div id='tags'><span id='tags-title'>Tags:</span><br />
-<p>
-    <a href="tags/@SVN.html">@SVN</a>
-    <a href="tags/@perl.html">@perl</a>
-    <a href="tags/@Java.html">@Java</a>
-    <a href="tags/@Mysql.html">@Mysql</a>
-    <a href="tags/@Erlang.html">@Erlang</a>
-    <a href="tags/@SQL.html">@SQL</a>
-    <a href="tags/@DB.html">@DB</a>
-    <a href="tags/@Oracle.html">@Oracle</a>
-    <a href="tags/@Ediff.html">@Ediff</a>
-    <a href="tags/@Git.html">@Git</a>
-    <a href="tags/@Cedet.html">@Cedet</a>
-    <a href="tags/@C-C++.html">@C-C++</a>
-    <a href="tags/@Daily.html">@Daily</a>
-    <a href="tags/@Eclipse.html">@Eclipse</a>
-    <a href="tags/@AutoHotKey.html">@AutoHotKey</a>
-    <a href="tags/@Windows.html">@Windows</a>
-    <a href="tags/@Linux.html">@Linux</a>
-    <a href="tags/@C.html">@C</a>
-    <a href="tags/@Emacs.html">@Emacs</a>
+    <a href="../tags/@SVN.html">@SVN</a><br/>
+    <a href="../tags/@perl.html">@perl</a><br/>
+    <a href="../tags/@Java.html">@Java</a><br/>
+    <a href="../tags/@Mysql.html">@Mysql</a><br/>
+    <a href="../tags/@Erlang.html">@Erlang</a><br/>
+    <a href="../tags/@SQL.html">@SQL</a><br/>
+    <a href="../tags/@DB.html">@DB</a><br/>
+    <a href="../tags/@Oracle.html">@Oracle</a><br/>
+    <a href="../tags/@Ediff.html">@Ediff</a><br/>
+    <a href="../tags/@Git.html">@Git</a><br/>
+    <a href="../tags/@Cedet.html">@Cedet</a><br/>
+    <a href="../tags/@C-C++.html">@C-C++</a><br/>
+    <a href="../tags/@Daily.html">@Daily</a><br/>
+    <a href="../tags/@Eclipse.html">@Eclipse</a><br/>
+    <a href="../tags/@AutoHotKey.html">@AutoHotKey</a><br/>
+    <a href="../tags/@Windows.html">@Windows</a><br/>
+    <a href="../tags/@Linux.html">@Linux</a><br/>
+    <a href="../tags/@C.html">@C</a><br/>
+    <a href="../tags/@Emacs.html">@Emacs</a><br/>
 </p>
-
-
+<p><br/>
 </div>
-</div>
+</p></div>
 
 <div id="postamble">
-<p class="date">Date: 2011-06-04 星期六</p>
+<p class="date">Date: 2011-07-04 一</p>
 <p class="author">Author: 孤峰独秀</p>
 <p class="creator">Org version 7.8.03 with Emacs version 24</p>
 

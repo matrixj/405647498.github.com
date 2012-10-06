@@ -1,0 +1,305 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<!-- Created by htmlize-1.34 in css mode. -->
+<html>
+  <head>
+    <title>AutoHotKeyExplorer.org</title>
+    <style type="text/css">
+    <!--
+      body {
+        color: #F8F8F8;
+        background-color: #0C1021;
+      }
+      .comment {
+        /* font-lock-comment-face */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-block {
+        /* org-block */
+        color: #b3b3b3;
+      }
+      .org-block-begin-line {
+        /* org-block-begin-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-block-end-line {
+        /* org-block-end-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-document-info {
+        /* org-document-info */
+        color: #afeeee;
+      }
+      .org-document-info-keyword {
+        /* org-document-info-keyword */
+        color: #b3b3b3;
+      }
+      .org-document-title {
+        /* org-document-title */
+        color: #afeeee;
+        font-size: 144%;
+        font-weight: bold;
+      }
+      .org-level-1 {
+        /* org-level-1 */
+        color: #FF6400;
+      }
+      .org-link {
+        /* org-link */
+        color: #00ffff;
+        text-decoration: underline;
+      }
+      .org-meta-line {
+        /* org-meta-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+
+      a {
+        color: inherit;
+        background-color: inherit;
+        font: inherit;
+        text-decoration: inherit;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+    -->
+    </style>
+  </head>
+  <body>
+    <pre>
+<span class="comment"># -*- coding:utf-8 -*-</span>
+<span class="org-meta-line">#+LANGUAGE:  zh
+</span><span class="org-document-info-keyword">#+TITLE:</span><span class="comment">     </span><span class="org-document-title">&#23545;"&#25105;&#30340;&#30005;&#33041;"  &#36827;&#34892;&#22686;&#24378;</span>
+<span class="org-document-info-keyword">#+AUTHOR:</span><span class="comment">    </span><span class="org-document-info">&#23396;&#23792;&#29420;&#31168;</span>
+<span class="org-document-info-keyword">#+EMAIL:</span><span class="comment">     </span><span class="org-document-info">jixiuf@gmail.com</span>
+<span class="org-document-info-keyword">#+DATE:</span><span class="comment">     </span><span class="org-document-info">2011-06-15 &#26143;&#26399;&#19977;</span>
+<span class="org-meta-line">#+DESCRIPTION:&#23545;"&#25105;&#30340;&#30005;&#33041;"  &#36827;&#34892;&#22686;&#24378;
+#+KEYWORDS: autohotkey explorer &#25105;&#30340;&#30005;&#33041;
+#+FILETAGS: @AutoHotKey @Windows
+#+OPTIONS:   H:2 num:nil toc:t \n:t @:t ::t |:t ^:t -:t f:t *:t &lt;:t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc
+#+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
+#+EXPORT_SELECT_TAGS: export
+#+EXPORT_EXCLUDE_TAGS: noexport
+</span>
+&#36825;&#37324;&#19981;&#23545;&#20195;&#30721;&#36827;&#34892;&#36807;&#20110;&#35814;&#32454;&#30340;&#35762;&#35299;&#12290;&#21482;&#36148;&#20195;&#30721;&#65292;&#24182;&#31616;&#21333;&#25551;&#36848;&#20854;&#21151;&#33021;<span class="org-link">
+AutoHotKey&#20960;&#20010;&#31616;&#21333;&#30340;&#23567;&#20363;&#23376;</span> &#20013;&#24050;&#32463;&#26377;&#19968;&#20010;&#20851;&#20110;&#23545;&#36164;&#28304;&#31649;&#29702;&#22120;&#20013;&#23454;&#29616;Ctl+alt+h
+<span class="org-link">&#19968;&#38190;&#26174;&#38544; &#38544;&#34255;&#25991;&#20214;</span>&#30340;&#21151;&#33021;&#65292;&#36825;&#37324;&#20877;&#32473;&#20986;&#20854;&#20182;&#20960;&#20010;&#19982;&#36164;&#28304;&#31649;&#29702;&#22120;&#26377;&#20851;&#30340;&#21151;&#33021;&#22686;&#24378;&#12290;
+<span class="org-level-1">* &#22797;&#21046;&#24403;&#21069;&#25991;&#20214;&#30340;&#36335;&#24452;</span>
+&#36825;&#27573;&#20195;&#30721;&#23454;&#29616;
++ Alt+1 : copy &#36873;&#20013;&#25991;&#20214;&#30340;&#21517;&#31216;
++ Alt+2 : copy &#24403;&#21069;&#36335;&#24452;&#21517;
++ Alt+3 : copy &#36873;&#20013;&#25991;&#20214;&#30340;&#23436;&#25972;&#36335;&#24452;&#21517;
+<span class="org-block-begin-line">#+begin_src c
+</span><span class="org-block">SetTitleMatchMode Regex ;&#21487;&#20197;&#20351;&#29992;&#27491;&#21017;&#34920;&#36798;&#24335;&#23545;&#26631;&#39064;&#36827;&#34892;&#21305;&#37197;
+; &#19979;&#38754;&#30340;&#31383;&#21475;&#31867;&#20381;&#27425;&#20026;&#65306;&#26700;&#38754;&#12289;Win+D&#21518;&#30340;&#26700;&#38754;&#12289;&#25105;&#30340;&#30005;&#33041;&#12289;&#36164;&#28304;&#31649;&#29702;&#22120;&#12289;&#21478;&#23384;&#20026;&#31561;
+#IfWinActive ahk_class Progman|WorkerW|CabinetWClass|ExploreWClass|#32770
+;;Alt+1 copy&#25991;&#20214;&#21517;
+!1::
+  send ^c
+  sleep,200
+  clipboard = %clipboard%
+  SplitPath, clipboard, name
+  clipboard = %name%
+  return
+;;alt+2 copy &#27492;&#25991;&#20214;&#25152;&#22312;&#30340;&#36335;&#24452;&#21517;
+!2::
+  send ^c
+  sleep,200
+  clipboard = %clipboard%
+  SplitPath, clipboard, , dir
+  clipboard = %dir%
+  return
+;;copy &#27492;&#25991;&#20214;&#30340;&#20840;&#36335;&#24452;&#21517;
+!3::
+  send ^c
+  sleep,200
+  clipboard = %clipboard%
+  return
+#IfWinActive
+</span><span class="org-block-end-line">#+end_src
+</span>
+<span class="org-level-1">* Alt+h &#19968;&#38190;&#26174;&#38544;&#25193;&#23637;&#21517;</span>
+<span class="org-block-begin-line">#+begin_src c
+</span><span class="org-block">SetTitleMatchMode Regex ;&#21487;&#20197;&#20351;&#29992;&#27491;&#21017;&#34920;&#36798;&#24335;&#23545;&#26631;&#39064;&#36827;&#34892;&#21305;&#37197;
+#IfWinActive ahk_class CabinetWClass|ExploreWClass
+;Alt+h TOGGLES FILE EXTENSIONS
+!h::
+RegRead, HiddenFiles_Status, HKEY_CURRENT_USER, Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced, HideFileExt
+If HiddenFiles_Status = 1
+     RegWrite, REG_DWORD, HKEY_CURRENT_USER, Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced, HideFileExt, 0
+Else
+   RegWrite, REG_DWORD, HKEY_CURRENT_USER, Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced, HideFileExt, 1
+WinGetClass, eh_Class,A
+If (eh_Class = "#32770" OR A_OSVersion = "WIN_VISTA")
+   send, {F5}
+Else PostMessage, 0x111, 28931,,, A
+Return
+#IfWinActive
+</span><span class="org-block-end-line">#+end_src
+</span>
+<span class="org-level-1">* Ctl+Alt+c &#22312;&#24403;&#21069;&#36335;&#24452;&#19979;&#25171;&#24320;Cmd.exe &#31383;&#21475;&#12290;  </span>
+<span class="org-block-begin-line">#+begin_src c
+</span><span class="org-block">SetTitleMatchMode Regex ;&#21487;&#20197;&#20351;&#29992;&#27491;&#21017;&#34920;&#36798;&#24335;&#23545;&#26631;&#39064;&#36827;&#34892;&#21305;&#37197;
+#IfWinActive ahk_class CabinetWClass|ExploreWClass
+; open 'cmd' in the current directory
+^!c::OpenCmdInCurrent()
+#IfWinActive
+
+; Opens the command shell 'cmd' in the directory browsed in Explorer.
+; Note: expecting to be run when the active window is Explorer.
+;
+OpenCmdInCurrent()
+{
+ ControlGetText, full_path, Edit1, A
+ IfInString full_path, \
+  {
+    Run, cmd /K cd /D "%full_path%"
+  }
+  else
+  {
+    Run, cmd /K cd /D "C:\ "
+  }
+}
+</span><span class="org-block-end-line">#+end_src
+</span>
+<span class="org-level-1">*  Alt+n &#26032;&#24314;&#25991;&#26412;&#25991;&#20214; Shift+= &#26032;&#24314;&#25991;&#20214;&#22841;</span>
+<span class="org-block-begin-line">#+begin_src c
+</span><span class="org-block">; create new text file
+SetTitleMatchMode Regex ;&#21487;&#20197;&#20351;&#29992;&#27491;&#21017;&#34920;&#36798;&#24335;&#23545;&#26631;&#39064;&#36827;&#34892;&#21305;&#37197;
+#IfWinActive ahk_class CabinetWClass|ExploreWClass
+
+;"+"  like Emacs dired: create new folder 
++=::Send !fwf
+
+!n::
+InputBox, UserInput, New File Name?, Please enter a New File Name(.txt), , 280, 100,,,,,.txt will be append
+if ErrorLevel
+{
+}else
+{
+  Send {Left}
+ControlGetText, ExplorePath, Edit1, A
+StringRight, isEndsWithPathSeaprator, ExplorePath, 1
+if (isEndsWithPathSeaprator ="\")
+{
+  newFilePath=%ExplorePath%%UserInput%.txt
+}else
+{
+  newFilePath=%ExplorePath%\%UserInput%.txt
+}
+FileAppend,, %newFilepath%
+ControlFocus, SysListView321,A
+; Switch the active window's keyboard layout/language to English:
+PostMessage, 0x50, 0, 0x4090409,, A  ; 0x50 is WM_INPUTLANGCHANGEREQUEST.
+SendInput {F5}%UserInput%  
+}
+return
+#IfWinActive 
+</span><span class="org-block-end-line">#+end_src
+</span><span class="org-level-1">* &#28966;&#28857;&#30340;&#31227;&#21160;</span>
+  + Ctrl+, &#36873;&#20013;&#31532;&#19968;&#20010;&#25991;&#20214;
+  + Ctrl+. &#36873;&#20013;&#26368;&#21518;&#19968;&#20010;&#25991;&#20214;
+  + ctrl+; &#23450;&#20301;&#21040;&#24038;&#20391;&#30446;&#24405;&#26641;
+  + ctrl+L &#23450;&#20301;&#22312;&#22320;&#22336;&#26639;
+<span class="org-block-begin-line">#+begin_src c
+</span><span class="org-block">#IfWinActive ahk_class CabinetWClass|ExploreWClass
+;;Ctrl+, &#36873;&#20013;&#31532;&#19968;&#20010;&#25991;&#20214;
+^,::
+   ControlFocus, SysListView321,A
+    Send {Home}
+return
+;;Ctrl+. &#36873;&#20013;&#26368;&#21518;&#19968;&#20010;&#25991;&#20214;
+^.::
+  ControlFocus, SysListView321,A
+  Send {End}
+  return
+  
+;;ctrl+; &#23450;&#20301;&#21040;&#30446;&#24405;&#26641;
+^;::
+  ControlFocus, SysTreeView321,A
+return
+
+ ;;ctrl+L &#23450;&#20301;&#22312;&#22320;&#22336;&#26639;
+^l:: ControlFocus, Edit1,A
+#IfWinActive 
+</span><span class="org-block-end-line">#+end_src
+</span><span class="org-level-1">* &#29992;&#38190;&#30424;&#36827;&#34892;&#31649;&#29702;</span>
+  &#19968;&#20123;&#32465;&#23450;&#27169;&#25311;Emacs &#20013;Dired&#65288;Emacs&#20013;&#30446;&#24405;&#31649;&#29702;&#24037;&#20855;&#65289; &#30340;&#25805;&#20316;&#12290;
++ Ctrl+n &#21521;&#19979;&#31227;&#21160;
++ Ctrl+p &#21521;&#19978;&#31227;&#21160;
++ Ctrl+f &#21521;&#21491;&#31227;&#21160;
++ Ctrl+b &#21521;&#24038;&#31227;&#21160;
++ Ctrl+h &#22914;&#26524;&#22312;&#24038;&#20391;&#30340;&#36164;&#28304;&#31649;&#29702;&#22120;&#20013;&#65292;&#34920;&#31034;&#25240;&#21472;&#30446;&#24405;&#26641;
++ Ctrl+j &#22522;&#26412;&#30456;&#24403;&#20110;&#22238;&#36710;&#65288;&#36827;&#20837;&#23376;&#30446;&#24405;&#21518;&#21518;&#36873;&#20013;&#31532;&#19968;&#20010;&#25991;&#20214;&#65289;
++ Ctrl+u &#19978;&#23618;&#30446;&#24405;&#65292;&#24182;&#36873;&#20013;&#31532;&#19968;&#20010;&#25991;&#20214;
+<span class="org-block-begin-line">#+begin_src c 
+</span><span class="org-block">#IfWinActive ahk_class ExploreWClass|CabinetWClass
+^n::Send {Down}
+^p::Send {Up}
+^j::
+  ControlGetFocus, focusedControl,A 
+    if(focusedControl="SysListView321")
+  {
+    Send {Enter}
+    ControlFocus, SysListView321,A
+    Send {Home}
+  }else
+  {
+    Send {Enter}
+  }
+return
+
+^f::Send {Right}
+
+^b::send {Left}
+^h::
+   ControlGetFocus, focusedControl,A 
+    if(focusedControl="SysTreeView321")
+  {
+    send {Left}
+  }else
+  {
+    Send ^h
+  }
+return
+ 
+^u::
+   ControlGetFocus, focusedControl,A 
+    if(focusedControl="SysListView321")
+  {
+    send     {backspace}
+    ControlFocus, SysListView321,A
+    Send {Home}
+  }
+return
+#IfWinActive 
+</span><span class="org-block-end-line">#+end_src
+</span><span class="org-level-1">* Ctrl+e &#29992;Emacs&#32534;&#36753;&#22120;&#25171;&#24320;&#36873;&#20013;&#30340;&#25991;&#20214;</span>
+<span class="org-block-begin-line">#+begin_src c
+</span><span class="org-block">;;&#38656;&#35201; emacsclientw &#22312;Path&#36335;&#24452;&#19979;
+openSelectedfileWithEamcs()
+{
+  ControlGetFocus, focusedControl,A
+  if (focusedControl="SysListView321")
+  {
+    ClipSaved := ClipboardAll
+    Send ^c
+    sleep,200
+    clipboard = %clipboard%
+    fullPath=%clipboard%
+    Clipboard := ClipSaved   
+    run , emacsclientw %fullPath%
+  }
+}
+#IfWinActive ahk_class ExploreWClass|CabinetWClass
+^e:: openSelectedfileWithEamcs()
+#IfWinActive
+</span><span class="org-block-end-line">#+end_src
+</span></pre>
+  </body>
+</html>

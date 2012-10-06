@@ -1,0 +1,371 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<!-- Created by htmlize-1.34 in css mode. -->
+<html>
+  <head>
+    <title>emysql_benchmark.org</title>
+    <style type="text/css">
+    <!--
+      body {
+        color: #F8F8F8;
+        background-color: #0C1021;
+      }
+      .comment {
+        /* font-lock-comment-face */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-block {
+        /* org-block */
+        color: #b3b3b3;
+      }
+      .org-block-begin-line {
+        /* org-block-begin-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-block-end-line {
+        /* org-block-end-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-document-info {
+        /* org-document-info */
+        color: #afeeee;
+      }
+      .org-document-info-keyword {
+        /* org-document-info-keyword */
+        color: #b3b3b3;
+      }
+      .org-document-title {
+        /* org-document-title */
+        color: #afeeee;
+        font-size: 144%;
+        font-weight: bold;
+      }
+      .org-level-1 {
+        /* org-level-1 */
+        color: #FF6400;
+      }
+      .org-level-2 {
+        /* org-level-2 */
+        color: #40E0D0;
+      }
+      .org-link {
+        /* org-link */
+        color: #00ffff;
+        text-decoration: underline;
+      }
+      .org-meta-line {
+        /* org-meta-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+
+      a {
+        color: inherit;
+        background-color: inherit;
+        font: inherit;
+        text-decoration: inherit;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+    -->
+    </style>
+  </head>
+  <body>
+    <pre>
+<span class="comment"># -*- coding:utf-8 -*-</span>
+<span class="org-meta-line">#+LANGUAGE:  zh
+</span><span class="org-document-info-keyword">#+TITLE:</span><span class="comment">     </span><span class="org-document-title">emysql &#21387;&#21147;&#27979;&#35797;</span>
+<span class="org-document-info-keyword">#+AUTHOR:</span><span class="comment">    </span><span class="org-document-info">&#32426;&#31168;&#23792;</span>
+<span class="org-document-info-keyword">#+EMAIL:</span><span class="comment">     </span><span class="org-document-info">jixiuf@gmail.com</span>
+<span class="org-document-info-keyword">#+DATE:</span><span class="comment">     </span><span class="org-document-info">2012-04-22 &#26085;</span>
+<span class="org-meta-line">#+DESCRIPTION:emysql &#21387;&#21147;&#27979;&#35797;
+#+KEYWORDS: erlang mysql emysql benchmark
+#+OPTIONS:   H:2 num:nil toc:t \n:t @:t ::t |:t ^:nil -:t f:t *:t &lt;:t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil
+#+FILETAGS: @Erlang @Mysql @DB
+</span>&#26412;&#31449;&#20851;&#20110;mysql&#30340;&#27979;&#35797;&#22312; <span class="org-link">file:../mysql/benchmark_demo.org</span>
+<span class="org-level-1">* &#24314;&#34920;&#35821;&#21477;</span>
+<span class="org-block-begin-line">#+BEGIN_SRC sql
+</span><span class="org-block">   CREATE TABLE `tbl_test` (
+    `id` int(11) NOT NULL AUTO_INCREMENT,
+    `onOffType` int(11) DEFAULT NULL,
+    `accountId` int(11) DEFAULT NULL,
+    `accountType` int(11) DEFAULT NULL,
+    `playerId` int(11) DEFAULT NULL,
+    `headHeroId` int(11) DEFAULT NULL,
+    `playerLevel` int(11) DEFAULT NULL,
+    `playerName` varchar(255) DEFAULT NULL,
+    `logTime` datetime DEFAULT NULL,
+    `clientVersion` varchar(255) DEFAULT NULL,
+    `clientType` varchar(255) DEFAULT NULL,
+    `issuers` varchar(255) DEFAULT NULL,
+    `flashPlayerVersion` int(11) DEFAULT NULL,
+    `connectType` int(11) DEFAULT NULL,
+    `gameServerName` varchar(255) DEFAULT NULL,
+    `ipAddr` varchar(255) DEFAULT NULL,
+    PRIMARY KEY (`id`)
+  );
+
+  DELIMITER $$
+  drop procedure if exists `insert_tbl_test`$$
+  create procedure `insert_tbl_test`(
+  IN inaccountId int(11),/**/
+  IN inaccountType int(11),/**/
+  IN inplayerId int(11),/**/
+  IN inheadHeroId int(11),/**/
+  IN inplayerLevel int(11),/**/
+  IN inplayerName varchar(255),/**/
+  IN inlogTime datetime,/**/
+  IN inclientVersion varchar(255),/**/
+  IN inclientType varchar(255),/**/
+  IN inissuers varchar(255),/**/
+  IN inflashPlayerVersion int(11),/**/
+  IN inconnectType int(11),/**/
+  IN ingameServerName varchar(255),/**/
+  IN inipAddr varchar(255),/**/
+  IN inonOffType int(11) /**/
+  )
+  BEGIN
+  insert into `tbl_on_off`(
+  `accountId`, /**/
+  `accountType`, /**/
+  `playerId`, /**/
+  `headHeroId`, /**/
+  `playerLevel`, /**/
+  `playerName`, /**/
+  `logTime`, /**/
+  `clientVersion`, /**/
+  `clientType`, /**/
+  `issuers`, /**/
+  `flashPlayerVersion`, /**/
+  `connectType`, /**/
+  `gameServerName`, /**/
+  `ipAddr`, /**/
+  `onOffType` /**/
+  ) values(
+  inaccountId,/**/
+  inaccountType,/**/
+  inplayerId,/**/
+  inheadHeroId,/**/
+  inplayerLevel,/**/
+  inplayerName,/**/
+  inlogTime,/**/
+  inclientVersion,/**/
+  inclientType,/**/
+  inissuers,/**/
+  inflashPlayerVersion,/**/
+  inconnectType,/**/
+  ingameServerName,/**/
+  inipAddr,/**/
+   inonOffType /**/
+  );
+  END$$
+  DELIMITER ;
+</span><span class="org-block-end-line">#+END_SRC
+</span><span class="org-level-1">* mysqlslap &#27979;&#35797;</span>
+<span class="org-block-begin-line">#+BEGIN_SRC sh
+</span><span class="org-block">&#20854;&#20013;&#20851;&#20110;&#24320;&#19968;&#20010;mysql&#36830;&#25509;&#25191;&#34892;10000&#27425;&#23384;&#20648;&#36807;&#31243;&#25554;&#20837;10000&#26465;&#25968;&#25454;&#30340;&#27979;&#35797;
+ mysqlslap --query="call insert_tbl_test(1,1,1,1,1,'name','1989-01-26','ver','t','dd',1,1,'name','localhost',1)" --concurrency=1  --number-of-queries 10000 --iterations=3 --engine=myisam -uroot -proot
+</span><span class="org-block-end-line">#+END_SRC
+</span><span class="org-block-begin-line">#+BEGIN_QUOTE
+</span>&#32467;&#26524;&#26174;&#31034;&#19981;&#29992;3s&#23601;&#25554;&#20837;&#20102;10000&#26465;&#25968;&#25454;
+jixiuf@jf /tmp/d $ mysqlslap --query="call insert_tbl_test(1,1,1,1,1,'name','1989-01-26','ver','t','dd',1,1,'name','localhost',1)" --concurrency=1  --number-of-queries 10000 --iterations=3 --engine=myisam -uroot -proot
+Benchmark
+    Running for engine myisam
+    Average number of seconds to run all queries: 2.496 seconds
+    Minimum number of seconds to run all queries: 2.469 seconds
+    Maximum number of seconds to run all queries: 2.551 seconds
+    Number of clients running queries: 1
+    Average number of queries per client: 10000<span class="org-meta-line">
+</span><span class="org-block-end-line">#+END_QUOTE
+</span><span class="org-block-begin-line">#+BEGIN_SRC sh
+</span><span class="org-block"> &#20351;&#29992;&#26222;&#36890;&#30340;insert &#35821;&#21477; (&#23545;&#20110;&#38750;&#24120;&#31616;&#21333;&#30340;insert&#35821;&#21477; &#27809;&#26377;&#24517;&#35201;&#21253;&#35013;&#25104;&#23384;&#20648;&#36807;&#31243;&#65292;&#20197;&#19979;
+  &#35777;&#26126;&#65292;&#23384;&#20648;&#36807;&#31243;&#19981;&#27604;&#31616;&#21333;insert&#24555;)
+  mysqlslap --query="insert into tbl_test(  accountId,  accountType,  playerId,  headHeroId,  playerLevel,  playerName,  logTime,  clientVersion,  clientType,  issuers,  flashPlayerVersion,  connectType,  gameServerName,  ipAddr,  onOffType  ) values(1,1,1,1,1,'name','1989-01-26','ver','t','dd',1,1,'name','localhost',1)"  --concurrency=1  --number-of-queries 10000 --iterations=3 --engine=myisam -uroot -proot
+</span><span class="org-block-end-line">#+END_SRC
+</span><span class="org-block-begin-line">  #+BEGIN_QUOTE
+</span>  jixiuf@jf /tmp/d $ mysqlslap --query="insert into tbl_test(  accountId,  accountType,  playerId,  headHeroId,  playerLevel,  playerName,  logTime,  clientVersion,  clientType,  issuers,  flashPlayerVersion,  connectType,  gameServerName,  ipAddr,  onOffType  ) values(1,1,1,1,1,'name','1989-01-26','ver','t','dd',1,1,'name','localhost',1)"  --concurrency=1  --number-of-queries 10000 --iterations=3 --engine=myisam -uroot -proot
+  Benchmark
+    Running for engine myisam
+    Average number of seconds to run all queries: 1.642 seconds
+    Minimum number of seconds to run all queries: 1.620 seconds
+    Maximum number of seconds to run all queries: 1.676 seconds
+    Number of clients running queries: 1
+  Average number of queries per client: 10000<span class="org-meta-line">
+</span><span class="org-block-end-line">  #+END_QUOTE
+</span>
+<span class="org-level-1">* emysql&#30340;&#21387;&#21147;&#27979;&#35797;&#65292;&#24320;&#19968;&#26465;mysql&#36830;&#25509;&#65292;&#29992;&#23384;&#20648;&#36807;&#31243;&#25554;&#20837;10000&#26465;&#25968;&#25454;</span>
+1. &#39318;&#20808;&#20462;&#25913;emysql&#30340; emysql.app.src,&#28155;&#21152;env&#30340;&#20540;{lock_timeout,infinity}
+   ,&#20197;&#36991;&#20813;&#22240;&#36229;&#26102; emysql&#19981;&#24037;&#20316; &#12290;&#21035;&#24536;&#20102;&#37325;&#26032;&#32534;&#35793;emysql
+<span class="org-block-begin-line">   #+BEGIN_SRC sh
+</span><span class="org-block">     %% Emysql .app file template
+     %% This template is filled out by rebar,
+     %% or make (Makefile made to fill modules in)
+     %% and then cp src/emysql.app.src ebin/emysql.app
+
+     %% Settings (defaults in include/emysql.hrl):
+     %% default_timeout (TIMEOUT = 8000)
+     %% lock_timeout (LOCK_TIMEOUT = 5000)
+
+     {application, emysql, [
+             {description, "Emysql - Erlang MySQL driver"},
+             {vsn, "0.2"},
+             {modules, []},
+             {mod, {emysql_app, ["%MAKETIME%"]}},
+             {registered, []},
+             {applications, [kernel, stdlib, crypto]},
+             {env, [{default_timeout, 5000},
+                     {lock_timeout,infinity}
+                     ]}
+             ]}.
+</span><span class="org-block-end-line">   #+END_SRC
+</span>
+<span class="org-level-2">** &#27979;&#35797;&#29992; press.erl</span>
+<span class="org-block-begin-line">#+BEGIN_SRC erlang
+</span><span class="org-block">  -module(press).
+  -export([get_timestamp/0,start/3,run/3]).
+  -include("emysql.hrl").
+
+  -record(state,{running=0,start_time,process_count_all,sql_count_each_process}).
+  %% &#21551;&#21160;ProcessCount&#20010;&#36827;&#31243;&#65292;&#27599;&#20010;&#36827;&#31243;&#25191;&#34892;SqlCountEachProcess&#27425;sql &#25805;&#20316;
+  start(ProcessCount,SqlCountEachProcess,MysqlConnectionCount)-&gt;
+      crypto:start(),
+      application:start(emysql),
+      emysql:add_pool(hello_pool, MysqlConnectionCount, "root", "root", "localhost", 3306, "mysqlslap", utf8),
+
+      CurrentTime=get_timestamp(),
+      spawn_link(?MODULE,run,[ProcessCount,SqlCountEachProcess,#state{start_time=CurrentTime,
+                                                                      process_count_all=ProcessCount,
+                                                                      sql_count_each_process=SqlCountEachProcess}])
+          .
+
+
+  recv(#state{running=0,start_time=StartTime,
+              process_count_all=ProcessCount,
+              sql_count_each_process=SqlCountEachProcess
+             })-&gt;
+      Usedtime =get_timestamp()-StartTime,
+      io:format("process_count:~p sql count each process:~p used time:~p~n",[ProcessCount,SqlCountEachProcess,Usedtime]),
+      emysql:remove_pool(hello_pool);
+  recv(#state{running=Running}=State)-&gt;
+      receive
+          done-&gt;
+              recv(State#state{running=Running-1})
+      end
+          .
+
+  run(0,_SqlCountEachProcess,#state{}=State)-&gt;
+      recv(State);
+  run(ProcessCount,SqlCountEachProcess,#state{running=Running}=State) -&gt;
+      Parent =self(),
+      spawn(fun()-&gt; run_sql(SqlCountEachProcess,Parent)end),
+      run(ProcessCount-1,SqlCountEachProcess,State#state{running=Running+1})
+          .
+
+  run_sql(0,Parent)-&gt;
+      Parent!done;
+  run_sql(SqlCountEachProcess,Parent) -&gt;
+      test2(),
+      run_sql(SqlCountEachProcess-1 ,Parent)
+          .
+
+
+  test2()-&gt;
+      %%"insert into tbl_test(  accountId,  accountType,  playerId,  headHeroId,  playerLevel,  playerName,  logTime,  clientVersion,  clientType,  issuers,  flashPlayerVersion,  connectType,  gameServerName,  ipAddr,  onOffType  ) values(1,1,1,1,1,'name','1989-01-26','ver','t','dd',1,1,'name','localhost',1)"
+      %% "call insert_tbl_test(1,1,1,1,1,'name','1989-01-26','ver','t','dd',1,1,'name','localhost',1);"
+      Result=emysql:execute(hello_pool,&lt;&lt; "call insert_tbl_test(1,1,1,1,1,'name','1989-01-26','ver','t','dd',1,1,'name','localhost',1);"&gt;&gt;),
+      case Result of
+          Rec when is_record(Rec ,ok_packet) -&gt;
+              ok;
+          Rec when is_record(Rec ,error_packet) -&gt;
+              io:format("~p~n",[Result])
+      end
+
+      %% %% Pid=global:whereis_name(emysql_center)
+          .
+  get_timestamp() -&gt;
+      {Mega,Sec,Micro} = erlang:now(),
+      ((Mega*1000000+Sec)*1000000+Micro)/1000.
+
+
+</span><span class="org-block-end-line">#+END_SRC
+</span><span class="org-block-begin-line">#+BEGIN_SRC sh
+</span><span class="org-block">&#21551;&#29992;10000&#20010;erlang&#36827;&#31243;&#65292;&#27599;&#20010;&#36827;&#31243;&#21521;emysql&#21457;&#19968;&#26465;sql(&#23384;&#20648;&#36807;&#31243;),&#26368;&#21518;&#19968;&#20010;&#21442;&#25968;&#26159;emysql&#36830;&#25509;&#27744;
+&#37324;&#21482;&#24320;&#19968;&#20010;mysql&#36830;&#25509;
+press:start(10000,1,1).
+</span><span class="org-block-end-line">#+END_SRC
+</span><span class="org-block-begin-line">#+BEGIN_SRC sh
+</span><span class="org-block">&#27979;&#35797;&#32467;&#26524;&#26174;&#31034;&#22823;&#27010;&#29992;&#20102;8&#31186;&#65292;&#22823;&#27010;&#26159;&#27604;&#21333;&#32431;&#30340;mysql&#27979;&#35797;&#24930;3~4&#20493; (7583/2496=3.45)
+(emacsdd@jf.org)4&gt; press:start(10000,1,1).
+process_count:10000 sql count each process:1 used time:7583.25390625
+</span><span class="org-block-end-line">#+END_SRC
+</span>&#26377;&#20123;&#32593;&#21451;&#24576;&#30097;&#21019;&#24314;10000&#20010;&#36827;&#31243;&#20063;&#20250;&#28040;&#32791;&#19968;&#37096;&#20998;&#26102;&#38388; &#65292;&#25152;&#20197;&#22686;&#21152;&#19979;&#38754;&#20960;&#20010;&#27979;&#35797; &#65292;&#32467;&#26524;&#26174;
+&#31034;&#25152;&#29992;&#26102;&#38388;&#20173;&#28982;&#22788;&#20110;7~9s&#36825;&#20010;&#33539;&#22260;&#20869;&#65292;&#24433;&#21709;&#19981;&#22823;
+<span class="org-block-begin-line">#+BEGIN_SRC sh
+</span><span class="org-block">&#36215;&#29992;&#19968;&#20010;&#36827;&#31243;&#65292;&#27492;&#36827;&#31243;&#21521;emysql&#21457;&#36865;10000&#26465;sql&#35821;&#21477;
+1&gt;  press:start(1,10000,1).
+process_count:1 sql count each process:10000 used time:8632.112060546875
+</span><span class="org-block-end-line">#+END_SRC
+</span><span class="org-block-begin-line">#+BEGIN_SRC sh
+</span><span class="org-block">1&gt;  press:start(10,1000,1).
+process_count:10 sql count each process:1000 used time:7520.348876953125
+</span><span class="org-block-end-line">#+END_SRC
+</span><span class="org-block-begin-line">#+BEGIN_SRC sh
+</span><span class="org-block">1&gt;  press:start(100,100,1).
+process_count:100 sql count each process:100 used time:7613.68896484375
+</span><span class="org-block-end-line">#+END_SRC
+</span><span class="comment"># &#20197;&#19979;&#26159;&#29992;java jdbc&#36830; mysql&#30340;&#27979;&#35797;</span>
+<span class="org-block-begin-line">#+BEGIN_SRC java
+</span><span class="org-block">import java.sql.Date;
+import java.sql.Types;
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.DriverManager;
+public class TestMysqlConn {
+    public static void main(String[] args) throws Exception {
+        // Class.forName("com.mysql.jdbc.Driver");
+        Class.forName("org.gjt.mm.mysql.Driver");
+        long start= System.currentTimeMillis();
+        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/mysqlslap?user=root&amp;password=root");
+        // call insert_tbl_test(1,1,1,1,1,'name','1989-01-26','ver','t','dd',1,1,'name','localhost',1)
+        CallableStatement cs = conn.prepareCall("{call insert_tbl_test(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
+        cs.setInt(1 , 1);
+        cs.setInt(2 , 1);
+        cs.setInt(3 , 1);
+        cs.setInt(4 , 1);
+        cs.setInt(5 , 1);
+        cs.setString(6 , "name");
+        cs.setDate(7 , new Date(1989 , 1 , 26));
+        cs.setString(8 , "ver");
+        cs.setString(9 , "t");
+        cs.setString(10 , "dd");
+        cs.setInt(11 ,1);
+        cs.setInt(12 ,1);
+        cs.setString(13 , "name");
+        cs.setString(14 , "localhost");
+        cs.setInt(15 , 1);
+        for (int i = 0; i &lt; 10000; i++) {
+            cs.executeUpdate();
+        }
+        long end= System.currentTimeMillis();
+        System.out.println(end-start);
+
+    }
+}
+</span><span class="org-block-end-line">#+END_SRC
+</span><span class="org-block-begin-line">#+BEGIN_QUOTE
+</span>java TestMysqlConn
+7198
+java TestMysqlConn
+7453
+java TestMysqlConn
+7031<span class="org-meta-line">
+</span><span class="org-block-end-line">#+END_QUOTE
+</span>&#27979;&#27979;&#32467;&#26524;&#26174;&#31034;&#65292;jdbc&#20063;&#29992;&#20102;&#22823;&#27010;7s&#24038;&#21491;&#30340;&#26102;&#38388;&#25191;&#34892;10000&#27425;&#23384;&#20648;&#36807;&#31243;&#30340;&#25554;&#20837;,
+&#21487;&#20197;&#35777;&#26126;emysql&#36319;java jdbc&#36830;mysql&#22522;&#26412;&#19981;&#30456;&#19978;&#19979;
+</pre>
+  </body>
+</html>

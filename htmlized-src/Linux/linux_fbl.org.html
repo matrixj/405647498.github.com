@@ -1,0 +1,114 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<!-- Created by htmlize-1.34 in css mode. -->
+<html>
+  <head>
+    <title>linux_fbl.org</title>
+    <style type="text/css">
+    <!--
+      body {
+        color: #F8F8F8;
+        background-color: #0C1021;
+      }
+      .comment {
+        /* font-lock-comment-face */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-block {
+        /* org-block */
+        color: #b3b3b3;
+      }
+      .org-block-begin-line {
+        /* org-block-begin-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-block-end-line {
+        /* org-block-end-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-document-info {
+        /* org-document-info */
+        color: #afeeee;
+      }
+      .org-document-info-keyword {
+        /* org-document-info-keyword */
+        color: #b3b3b3;
+      }
+      .org-document-title {
+        /* org-document-title */
+        color: #afeeee;
+        font-size: 144%;
+        font-weight: bold;
+      }
+      .org-level-1 {
+        /* org-level-1 */
+        color: #FF6400;
+      }
+      .org-link {
+        /* org-link */
+        color: #00ffff;
+        text-decoration: underline;
+      }
+      .org-meta-line {
+        /* org-meta-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+
+      a {
+        color: inherit;
+        background-color: inherit;
+        font: inherit;
+        text-decoration: inherit;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+    -->
+    </style>
+  </head>
+  <body>
+    <pre>
+<span class="comment"># -*- coding:utf-8 -*-</span>
+<span class="org-meta-line">#+LANGUAGE:  zh
+</span><span class="org-document-info-keyword">#+TITLE:</span><span class="comment">     </span><span class="org-document-title">linux&#19979;&#20998;&#36776;&#29575;&#35843;&#25972;</span>
+<span class="org-document-info-keyword">#+AUTHOR:</span><span class="comment">    </span><span class="org-document-info">&#32426;&#31168;&#23792;</span>
+<span class="org-document-info-keyword">#+EMAIL:</span><span class="comment">     </span><span class="org-document-info">jixiuf@gmail.com</span>
+<span class="org-document-info-keyword">#+DATE:</span><span class="comment">     </span><span class="org-document-info">2012-09-17 &#19968;</span>
+<span class="org-meta-line">#+DESCRIPTION:linux&#19979;&#20998;&#36776;&#29575;&#35843;&#25972;
+#+KEYWORDS:
+#+OPTIONS:   H:2 num:nil toc:t \n:t @:t ::t |:t ^:nil -:t f:t *:t &lt;:t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil
+#+FILETAGS:@Linux
+</span><span class="org-level-1">* &#21442;&#32771;</span>
+<span class="org-link">http://blog.csdn.net/wangfaqiang/article/details/6289959</span>
+<span class="org-block-begin-line">#+BEGIN_SRC sh
+</span><span class="org-block">&#25105;&#30340;&#29702;&#35299;&#23601;&#26159;&#65292;&#38271;1440 &#23485;900,&#28145;75
+root@jf /home/jixiuf # cvt 1440 900 75
+&#29983;&#25104; Modeline&#36825;&#19968;&#34892;
+# 1440x900 74.98 Hz (CVT 1.30MA) hsync: 70.64 kHz; pclk: 136.75 MHz
+Modeline "1440x900_75.00"  136.75  1440 1536 1688 1936  900 903 909 942 -hsync +vsync
+</span><span class="org-block-end-line">#+END_SRC
+</span>&#28982;&#21518;&#65292;&#37197;&#25104;&#36825;&#38754;&#30340;&#26679;&#23376;&#65292;&#21363;&#21487;
+<span class="org-block-begin-line">#+BEGIN_QUOTE
+</span>Section "Monitor"
+        Identifier      "Configured Monitor"
+        Modeline "1440x900_75.00"  136.75  1440 1536 1688 1936  900 903 909 942 -hsync +vsync
+        Option          "PreferredMode" "1440x900_75.00"
+EndSection
+
+Section "Screen"
+        Identifier      "Default Screen"
+        Monitor         "Configured Monitor"
+        Device          "Configured Video Device"
+EndSection
+
+Section "Device"
+        Identifier "Configured Video Device"
+EndSection<span class="org-meta-line">
+</span><span class="org-block-end-line">#+END_QUOTE
+</span></pre>
+  </body>
+</html>

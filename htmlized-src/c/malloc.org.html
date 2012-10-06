@@ -1,0 +1,102 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<!-- Created by htmlize-1.34 in css mode. -->
+<html>
+  <head>
+    <title>malloc.org</title>
+    <style type="text/css">
+    <!--
+      body {
+        color: #F8F8F8;
+        background-color: #0C1021;
+      }
+      .comment {
+        /* font-lock-comment-face */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-block {
+        /* org-block */
+        color: #b3b3b3;
+      }
+      .org-block-begin-line {
+        /* org-block-begin-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-block-end-line {
+        /* org-block-end-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-document-info {
+        /* org-document-info */
+        color: #afeeee;
+      }
+      .org-document-info-keyword {
+        /* org-document-info-keyword */
+        color: #b3b3b3;
+      }
+      .org-document-title {
+        /* org-document-title */
+        color: #afeeee;
+        font-size: 144%;
+        font-weight: bold;
+      }
+      .org-meta-line {
+        /* org-meta-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+
+      a {
+        color: inherit;
+        background-color: inherit;
+        font: inherit;
+        text-decoration: inherit;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+    -->
+    </style>
+  </head>
+  <body>
+    <pre>
+<span class="comment"># -*- coding:utf-8 -*-</span>
+<span class="org-meta-line">#+LANGUAGE:  zh
+</span><span class="org-document-info-keyword">#+TITLE:</span><span class="comment">     </span><span class="org-document-title">&#21160;&#24577;&#20869;&#22312;&#20998;&#37197;</span>
+<span class="org-document-info-keyword">#+AUTHOR:</span><span class="comment">    </span><span class="org-document-info">&#32426;&#31168;&#23792;</span>
+<span class="org-document-info-keyword">#+EMAIL:</span><span class="comment">     </span><span class="org-document-info">jixiuf@gmail.com</span>
+<span class="org-document-info-keyword">#+DATE:</span><span class="comment">     </span><span class="org-document-info">2011-10-23 &#26085;</span>
+<span class="org-meta-line">#+DESCRIPTION:&#21160;&#24577;&#20869;&#22312;&#20998;&#37197;
+#+KEYWORDS: c malloc
+#+OPTIONS:   H:2 num:nil toc:t \n:t @:t ::t |:t ^:t -:t f:t *:t &lt;:t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil 
+#+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
+#+EXPORT_SELECT_TAGS: export
+#+EXPORT_EXCLUDE_TAGS: noexport
+#+FILETAGS: @C 
+</span><span class="org-block-begin-line">#+begin_src c
+</span><span class="org-block">#include &lt;malloc.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+int main(int argc, char *argv[])
+{
+  char * src ="abcde";
+  char *p =malloc(2); //&#20998;&#37197;2&#20010;&#21333;&#20301;
+  strcpy(p ,"a");
+  printf ("%p\n",p); //&#25171;&#21360;&#24403;&#21069;p &#30340;&#22320;&#22336;
+
+  p=realloc(p,1026000);//&#37325;&#26032;&#23545;p&#36827;&#34892;&#20998;&#37197;,&#20998;&#37197;6&#20010;&#21333;&#20301;
+  printf ("%p\n",p) ;//&#25171;&#21360;&#24403;&#21069;p &#30340;&#22320;&#22336;
+  /* realloc() &#20989;&#25968;&#35201;&#27714;&#31532;&#19968;&#20010;&#21442;&#25968;&#24517;&#39035;&#26159; malloc()&#25110; calloc()&#30340;&#36820;&#22238;&#20540;    */
+  /* realloc&#29616;&#22312;&#21407;&#22320;&#33719;&#21462;&#25351;&#23450;&#22823;&#23567;&#30340;&#20869;&#23384;&#65292;&#22914;&#26524;&#19981;&#33021;&#65292;&#37027;&#20040;&#38656;&#35201;&#21478;&#22806;&#20998;&#37197;&#65292;&#20877;free&#21407;&#26469;&#30340;&#20869;&#23384;&#65307; */
+  strcpy(p ,src);
+  puts(p);
+  return 0;
+}
+</span><span class="org-block-end-line">#+end_src
+</span></pre>
+  </body>
+</html>

@@ -3,14 +3,14 @@
                "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="zh" xml:lang="zh">
 <head>
-<title>一个人的狂欢</title>
+<title>Emacs中的剪切复制</title>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
-<meta name="title" content="一个人的狂欢"/>
+<meta name="title" content="Emacs中的剪切复制"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2011-06-04 星期六"/>
+<meta name="generated" content="2011-07-04 一"/>
 <meta name="author" content="孤峰独秀"/>
-<meta name="description" content=""/>
-<meta name="keywords" content=""/>
+<meta name="description" content="emacs-kill-region-or-line.org"/>
+<meta name="keywords" content="emacs kill region line"/>
 <style type='text/css'>
        body {
     background-color: #E5E5E5;
@@ -942,15 +942,15 @@ img {
 }
 
     </style>
-<link rel="stylesheet" type="text/css" href="style/emacs.css" />
-<script type='text/javascript' src='js/emacs.js'> </script>
+<link rel="stylesheet" type="text/css" href="../style/emacs.css" />
+<script type='text/javascript' src='../js/emacs.js'> </script>
 
 </head>
 <body>
 <div id="org-div-home-and-up" style="text-align:right;font-size:70%;white-space:nowrap;">
- <a accesskey="h" href="sitemap.html"> 站点地图 </a>
+ <a accesskey="h" href="../sitemap.html"> 站点地图 </a>
  |
- <a accesskey="H" href="index.html"> 首页 </a>
+ <a accesskey="H" href="../index.html"> 首页 </a>
 </div>
 
 <div id="preamble">
@@ -958,59 +958,234 @@ img {
 </div>
 
 <div id="content">
-<h1 class="title">一个人的狂欢</h1>
+<h1 class="title">Emacs中的剪切复制</h1>
 
 
-<div id='logo-img' ><a  href='index.html'>▇█▓▒░◕~◕░▒▓█▇</a></div>
+<div id='logo-img' ><a  href='../index.html'>▇█▓▒░◕~◕░▒▓█▇</a></div>
 
 <div id='logo-text'>
   <a href='#' ><span align="left">░◕~◕░</span></a>
 </div>
 
 
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
 <ul>
-<li>首页还未做好，先看<a href="sitemap.html">站点地图</a>吧
+<li><a href="#sec-1">kill-line kill-region</a></li>
+<li><a href="#sec-2">joseph-kill-region-or-line。这样就可以省下C-w</a></li>
+<li><a href="#sec-3">这个是org-mode 下的版本。joseph-kill-region-or-org-kill-line</a></li>
+<li><a href="#sec-4">另外再说一说Emacs中的剪切复制。</a></li>
+<li><a href="#sec-5">Linux 下 与系统系统剪切板相关的操作。</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-1" class="outline-2">
+<h2 id="sec-1">kill-line kill-region</h2>
+<div class="outline-text-2" id="text-1">
+
+<p>C-k : kill-line<br/>
+C-w : kill-region<br/>
+注意C-k 的功能并不是剪切当前行，而是剪切当前行从光标到行末的内容。不要尝试<br/>
+写一个剪切整行的函数了，因为实在没有必要。默认情况下，要想剪切整行，只需光<br/>
+标跳转到行首，然后C-k就可以了。即C-aC-k ，这个按键并不难按。<br/>
+另外有个属性  kill-whole-line，它来控制在行首C-k 时，是否同时删除末尾换行符<br/>
+另外C-u0C-k 这个操作是删除从光标到行首的位置之间的内容，这个按键有点长，但<br/>
+我并不常用，就没重新进行绑定。<br/>
+</p>
+<p><br/>
+<pre class="src src-emacs-lisp">(<span class="org-function-name">setq-default</span> kill-whole-line <span class="org-constant">t</span>) <span class="org-comment-delimiter">;;</span>
+</pre>
+
+</p></div>
+
+</div>
+
+<div id="outline-container-2" class="outline-2">
+<h2 id="sec-2">joseph-kill-region-or-line。这样就可以省下C-w</h2>
+<div class="outline-text-2" id="text-2">
+
+<p>C-k 的功能已经够强大了吧。但是我还想做个功能增强。即当选中某区域的时候，则<br/>
+kill-region,否则才执行默认的C-k的功能。实现起来，很简单，只需要判断<br/>
+mark-active 属性是否为true就可以了。所以有了下面的<br/>
+joseph-kill-region-or-line。这样就可以省下C-w 这个按键进行其他绑定了。<br/>
+</p>
+<p><br/>
+<pre class="src src-emacs-lisp"><span class="org-comment-delimiter">;;</span><span class="org-comment">&#25105;&#20889;&#30340;&#19968;&#20010;&#20989;&#25968;,&#22914;&#26524;&#26377;&#36873;&#20013;&#21306;&#22495;,&#21017;kill&#36873;&#21306;,&#21542;&#21017;&#21024;&#38500;&#24403;&#21069;&#34892;</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">&#27880;&#24847;&#24403;&#21069;&#34892;&#24182;&#19981;&#20195;&#34920;&#25972;&#34892;,&#23427;&#21482;&#21024;&#38500;&#20809;&#26631;&#21040;&#34892;&#23614;&#30340;&#20869;&#23481;,&#20063;&#23601;&#26159;&#40664;&#35748;&#24773;&#20917;&#19979;</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">C-k &#25152;&#20855;&#26377;&#30340;&#21151;&#33021;</span>
+<span class="org-comment-delimiter">;;;</span><span class="org-comment">###</span><span class="org-comment"><span class="org-warning">autoload</span></span>
+(<span class="org-keyword">defun</span> <span class="org-function-name">joseph-kill-region-or-line</span>(<span class="org-type">&amp;optional</span> arg)
+  <span class="org-doc">"this function is a wrapper of (kill-line).</span>
+<span class="org-doc">   When called interactively with no active region, this function</span>
+<span class="org-doc">  will call (kill-line) ,else kill the region."</span>
+  (interactive <span class="org-string">"P"</span>)
+  (<span class="org-keyword">if</span> mark-active
+      (<span class="org-keyword">if</span> (= (region-beginning) (region-end) ) (kill-line arg)
+        (kill-region (region-beginning) (region-end) )
+        )
+    (kill-line arg)
+    )
+  )
+</pre>
+
+</p></div>
+
+</div>
+
+<div id="outline-container-3" class="outline-2">
+<h2 id="sec-3">这个是org-mode 下的版本。joseph-kill-region-or-org-kill-line</h2>
+<div class="outline-text-2" id="text-3">
+
+
+<p><br/>
+<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">joseph-kill-region-or-org-kill-line</span>(<span class="org-type">&amp;optional</span> arg)
+  <span class="org-doc">"this function is a wrapper of (kill-line).</span>
+<span class="org-doc">   When called interactively with no active region, this function</span>
+<span class="org-doc">  will call (kill-line) ,else kill the region."</span>
+  (interactive <span class="org-string">"P"</span>)
+  (<span class="org-keyword">if</span> mark-active
+      (<span class="org-keyword">if</span> (= (region-beginning) (region-end) ) (org-kill-line arg)
+        (kill-region (region-beginning) (region-end) )
+        )
+    (org-kill-line arg)
+    )
+  )
+</pre>
+
+</p></div>
+
+</div>
+
+<div id="outline-container-4" class="outline-2">
+<h2 id="sec-4">另外再说一说Emacs中的剪切复制。</h2>
+<div class="outline-text-2" id="text-4">
+
+<p>Emacs 中的剪切不叫剪切（cut），叫kill<br/>
+复制(copy)不叫copy ,叫kill-ring-save （这个可以理解为先kill掉放到kill-ring<br/>
+里，然后再把它save回来）. <br/>
+另外还有一个操作叫delete ,delete 与kill的区别是kill掉的内容会被放到<br/>
+kill-ring(剪切环)而delete掉的内容则直接删掉了，除了进行undo操作外没法找回删<br/>
+掉的内容。而kill 掉的内容很容易从kill-ring中取回。有了kill-ring的Emacs可以<br/>
+说是具有了多个剪贴板。<br/>
+说一说默认的与kill yank delete 有关的键绑定<br/>
+</p><ul>
+<li>C-w kill-region<br/>
 </li>
-<li><a href="about.html">About</a>
+<li>C-k kill-line<br/>
+</li>
+<li>C-M-k kill-sexp 这个比较复杂 它表示删除一个结构单元。对不同类型的文档（c java<br/>
+  文本 等）一个结构单元表示不同的含义。你可以尝试一下。(比如，你移动到一个<br/>
+  括号的开头，按下，则删除整个括号内的内容)<br/>
+</li>
+<li>C-d  delete-char<br/>
+</li>
+<li>M-d  kill-word<br/>
+</li>
+<li>C-backspace backward-kill-word<br/>
+
+<p><br/>
+</p></li>
+<li>M-w kill-ring-save 复制。<br/>
+</li>
+<li>C-y yank 粘贴。<br/>
+</li>
+<li>另外在按下C-y后，按一次或多次M-y 会循环取出kill-ring中的内容，然后贴到当<br/>
+  前位置 。<br/>
+
+<p>  <br/>
+</p></li>
+<li>但是kill-ring毕竟不是操作系统的剪切板，kill-ring里的内容是没法在其他程序<br/>
+  里利用的。所以要用好它又设及到与系统剪切板的同步的问题了。 在Windows 上<br/>
+  Emacs已经默认解决了这个问题。在Linux上没有。因为Linux的剪切板不只一个。所<br/>
+  以问题要复杂许多。<br/>
 </li>
 </ul>
 
+</div>
 
+</div>
+
+<div id="outline-container-5" class="outline-2">
+<h2 id="sec-5">Linux 下 与系统系统剪切板相关的操作。</h2>
+<div class="outline-text-2" id="text-5">
+
+
+<p><br/>
+<pre class="src src-emacs-lisp"><span class="org-comment-delimiter">;;</span><span class="org-comment">&#20851;&#20110;&#21098;&#20999;&#26495;: X&#20849;&#20139;&#20449;&#24687;&#30340;&#26377; clipboard primary secondary &#19977;&#20010;&#21306;&#22495;</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">&#20854;&#20013;clipboard &#23601;&#26159;&#25105;&#20204;&#24120;&#35828;&#30340;&#21098;&#20999;&#26495;,&#32780;primary &#23601;&#26159;&#24120;&#35828;&#30340;selection ,&#20063;&#23601;&#26159;&#35828;&#21482;&#35201;&#20320;&#36873;&#20013;&#19968;&#27573;&#20869;&#23481;,</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">&#37027;&#20040;&#36825;&#27573;&#20869;&#23481;&#23601;&#34987;&#23384;&#21040;primary &#20013;&#20102;,&#32780;secondary &#30446;&#21069;&#22909;&#20687;&#24050;&#32463;&#19981;&#25512;&#33616;&#20351;&#29992;&#20102;,&#25152;&#20197;&#19981;&#29992;&#32771;&#34385;</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">&#32780;emacs &#40664;&#35748;&#23384;&#22312;&#20869;&#23481;&#30340;&#21306;&#22495;&#19981;&#26159;&#19978;&#38754;&#20219;&#20309;&#19968;&#20010;,&#23427;&#21483;kill-ring&#21483;&#21098;&#20999;&#29615;,&#23427;&#33021;&#23384;&#20648;&#19981;&#21482;&#19968;&#20221;&#20869;&#23481;,</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">C-y &#20250;&#21462;&#20986;kill-ring &#20013;&#26368;&#36817;&#30340;&#19968;&#20221;&#20869;&#23481;,&#28982;&#21518;paste(&#19987;&#19994;&#28857;&#21483;yank)&#21040;buffer &#20013;,&#21487;&#20197;&#36890;&#36807;M-y</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">&#21462;&#24471;&#20197;&#21069;&#30340;&#29256;&#26412;</span>
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">setting-for-linux-x-clipboard</span> (<span class="org-type">&amp;optional</span> frame)
+  (<span class="org-keyword">when</span> (<span class="org-keyword">and</span> (eq system-type 'gnu/linux)(eq (window-system frame) 'x))
+    <span class="org-comment-delimiter">;;</span><span class="org-comment">&#22312;&#21521;kill-ring &#21152;&#20837;&#20869;&#23481;&#30340;&#21516;&#26102;&#20250;&#25191;&#34892;interprogram-cut-function &#21464;&#37327;&#25351;&#23450;&#30340;&#20989;&#25968;</span>
+    (<span class="org-function-name">setq-default</span> interprogram-cut-function 'x-select-text)<span class="org-comment-delimiter">;; </span><span class="org-comment">default</span>
+    <span class="org-comment-delimiter">;;</span><span class="org-comment">&#22312;&#25191;&#34892;yank &#25805;&#20316;&#26102;,&#20250;&#26816;&#26597;interprogram-paste-function &#21464;&#37327; &#25152;&#25351;&#21521;&#30340;&#20989;&#25968;</span>
+    <span class="org-comment-delimiter">;;</span><span class="org-comment">&#26159;&#21542;&#26377;&#36820;&#22238;&#20540;,&#22914;&#26524;&#26377;&#30340;&#35805;&#23601;&#23558;&#20854;yank&#22312;buffer &#20013;,&#21542;&#21017;&#30340;&#35805;&#25165;&#20250;&#20174;kill-ring&#20013;&#21462;&#20540;</span>
+    <span class="org-comment-delimiter">;;</span><span class="org-comment">&#32780;x-cut-buffer-or-selection-value  &#21644;x-select-text&#20989;&#25968;&#19968;&#26679;,</span>
+    <span class="org-comment-delimiter">;;</span><span class="org-comment">&#20063;&#20250;&#26681;&#25454;x-select-enable-clipboard &#21644;x-select-enable-primary &#30340;&#20540;</span>
+    <span class="org-comment-delimiter">;;</span><span class="org-comment">&#20915;&#23450;&#26159;&#21542;&#20174;clipboard &#21644;primary &#20013;&#21462;&#24471;&#20869;&#23481;</span>
+    (<span class="org-function-name">setq-default</span> interprogram-paste-function 'x-cut-buffer-or-selection-value)
+    <span class="org-comment-delimiter">;;</span><span class="org-comment">&#26377;&#20851;&#20110;&#24448;kill-ring&#21152;&#20837;&#20869;&#23481;&#26102; &#26159;&#21542;&#24448;clipboard ,&#21450;primary &#25918;&#20837;&#30340;&#21028;&#26029;</span>
+    (<span class="org-function-name">setq-default</span> x-select-enable-clipboard <span class="org-constant">t</span>) <span class="org-comment-delimiter">;</span><span class="org-comment">&#27599;&#19968;&#27425;&#24448;kill-ring &#37324;&#21152;&#20837;&#19996;&#35199;&#26102;,&#21516;&#26102;&#24448;clipboard&#20013;&#25918;&#19968;&#20221;,</span>
+    (<span class="org-function-name">setq-default</span> x-select-enable-primary  <span class="org-constant">nil</span>) <span class="org-comment-delimiter">;</span><span class="org-comment">&#27599;&#19968;&#27425;&#24448;kill-ring &#37324;&#21152;&#20837;&#19996;&#35199;&#26102;,&#26159;&#21542;&#20063;&#24448;primary &#20013;&#25918;&#20837;</span>
+    (<span class="org-function-name">setq-default</span> select-active-regions  <span class="org-constant">t</span>)<span class="org-comment-delimiter">;</span><span class="org-comment">&#36825;&#20010;&#24536;&#20102;&#20160;&#20040;&#24847;&#24605;</span>
+    <span class="org-comment-delimiter">;;</span><span class="org-comment">&#22312;&#36718;&#35810;kill-ring &#30340;&#26102;&#20505;&#26159;&#21542;&#20063;&#21516;&#27493;&#25913;&#21464;&#31995;&#32479;&#30340;clipboard primary</span>
+    <span class="org-comment-delimiter">;;</span><span class="org-comment">(&#35201;&#26681;&#25454;x-select-enable-clipboard ,&#21450;x-select-enable-primary&#30340;&#20540;&#20915;&#23450;&#21738;&#20010;&#20250;&#34987;&#25913;&#21464;)</span>
+    (<span class="org-function-name">setq-default</span> yank-pop-change-selection <span class="org-constant">t</span>)  <span class="org-comment-delimiter">;</span>
+    <span class="org-comment-delimiter">;;</span><span class="org-comment">Save clipboard strings into kill ring before replacing them</span>
+    (<span class="org-function-name">setq-default</span> save-interprogram-paste-before-kill <span class="org-constant">t</span>)
+
+    <span class="org-comment-delimiter">;; </span><span class="org-comment">make mouse middle-click only paste from primary X11 selection, not clipboard and kill ring.</span>
+    <span class="org-comment-delimiter">;;</span><span class="org-comment">&#40736;&#26631;&#20013;&#38190;&#31896;&#36148;,&#21482;&#32771;&#34385;X11&#20013;&#30340;selection ,&#19981;&#32771;&#34385;clipboard &#21644;emacs &#20013;&#30340;kill-ring</span>
+    (<span class="org-function-name">global-set-key</span> [mouse-2] 'mouse-yank-primary)
+    <span class="org-comment-delimiter">;;</span><span class="org-comment">&#20854;&#23454;&#26377;&#20102;&#20197;&#19978;&#20960;&#20010;&#37197;&#32622; &#19979;&#38754;&#36825;&#19977;&#20010;&#38190;&#23436;&#20840;&#27809;&#26377;&#24517;&#35201;,&#20294;&#20026;&#38450;&#19975;&#19968;,</span>
+    <span class="org-comment-delimiter">;;</span><span class="org-comment">&#23558;&#19982;&#21098;&#20999;&#26495;&#30456;&#20851;&#30340;&#19977;&#20010;&#25805;&#20316;&#32465;&#21040;&#36825;&#19977;&#20010;&#19981;&#24120;&#29992;&#30340;&#38190;&#19978;.</span>
+    (<span class="org-function-name">global-set-key</span> [(shift delete)] 'clipboard-kill-region)
+    (<span class="org-function-name">global-set-key</span> [(control insert)] 'clipboard-kill-ring-save)
+    (<span class="org-function-name">global-set-key</span> [(shift insert)] 'clipboard-yank)
+    )
+  )
+</pre>
 
 
 <div id='my-src'>
-<div id='org-src'><a href='src/index.org'>src</a></div>
-<div id='htmlized-src'><a href='htmlized-src/index.org.html'>htmlized-src</a></div>
+<div id='org-src'><a href='../src/emacs/emacs-kill-region-or-line.org'>src</a></div>
+<div id='htmlized-src'><a href='../htmlized-src/emacs/emacs-kill-region-or-line.org.html'>htmlized-src</a></div>
 </div>
 <div id='tags'><span id='tags-title'>Tags:</span><br />
-<p>
-    <a href="tags/@SVN.html">@SVN</a>
-    <a href="tags/@perl.html">@perl</a>
-    <a href="tags/@Java.html">@Java</a>
-    <a href="tags/@Mysql.html">@Mysql</a>
-    <a href="tags/@Erlang.html">@Erlang</a>
-    <a href="tags/@SQL.html">@SQL</a>
-    <a href="tags/@DB.html">@DB</a>
-    <a href="tags/@Oracle.html">@Oracle</a>
-    <a href="tags/@Ediff.html">@Ediff</a>
-    <a href="tags/@Git.html">@Git</a>
-    <a href="tags/@Cedet.html">@Cedet</a>
-    <a href="tags/@C-C++.html">@C-C++</a>
-    <a href="tags/@Daily.html">@Daily</a>
-    <a href="tags/@Eclipse.html">@Eclipse</a>
-    <a href="tags/@AutoHotKey.html">@AutoHotKey</a>
-    <a href="tags/@Windows.html">@Windows</a>
-    <a href="tags/@Linux.html">@Linux</a>
-    <a href="tags/@C.html">@C</a>
-    <a href="tags/@Emacs.html">@Emacs</a>
+    <a href="../tags/@SVN.html">@SVN</a><br/>
+    <a href="../tags/@perl.html">@perl</a><br/>
+    <a href="../tags/@Java.html">@Java</a><br/>
+    <a href="../tags/@Mysql.html">@Mysql</a><br/>
+    <a href="../tags/@Erlang.html">@Erlang</a><br/>
+    <a href="../tags/@SQL.html">@SQL</a><br/>
+    <a href="../tags/@DB.html">@DB</a><br/>
+    <a href="../tags/@Oracle.html">@Oracle</a><br/>
+    <a href="../tags/@Ediff.html">@Ediff</a><br/>
+    <a href="../tags/@Git.html">@Git</a><br/>
+    <a href="../tags/@Cedet.html">@Cedet</a><br/>
+    <a href="../tags/@C-C++.html">@C-C++</a><br/>
+    <a href="../tags/@Daily.html">@Daily</a><br/>
+    <a href="../tags/@Eclipse.html">@Eclipse</a><br/>
+    <a href="../tags/@AutoHotKey.html">@AutoHotKey</a><br/>
+    <a href="../tags/@Windows.html">@Windows</a><br/>
+    <a href="../tags/@Linux.html">@Linux</a><br/>
+    <a href="../tags/@C.html">@C</a><br/>
+    <a href="../tags/@Emacs.html">@Emacs</a><br/>
 </p>
-
-
+<p><br/>
+</div>
+</p></div>
 </div>
 </div>
 
 <div id="postamble">
-<p class="date">Date: 2011-06-04 星期六</p>
+<p class="date">Date: 2011-07-04 一</p>
 <p class="author">Author: 孤峰独秀</p>
 <p class="creator">Org version 7.8.03 with Emacs version 24</p>
 

@@ -1,0 +1,45 @@
+# -*- coding:utf-8 -*-
+#+LANGUAGE:  zh
+#+TITLE:     qsort 与函数指针 
+#+AUTHOR:    纪秀峰
+#+EMAIL:     jixiuf@gmail.com
+#+DATE:     2011-10-26 三
+#+DESCRIPTION:qsort 与函数指针 
+#+KEYWORDS: 
+#+OPTIONS:   H:2 num:nil toc:t \n:t @:t ::t |:t ^:t -:t f:t *:t <:t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil 
+#+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
+#+EXPORT_SELECT_TAGS: export
+#+EXPORT_EXCLUDE_TAGS: noexport
+#+FILETAGS: @C
+#+begin_src c
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <malloc.h>
+#include <string.h>
+//统计文件中字符数,单词数,行数
+int comp(int *a ,int *b ){
+  return *a<*b;
+}
+
+int main(int argc, char *argv[])
+{
+  int i,s[] ={ 1,3 ,12,5 };
+  /* 声明一个函数指针,它指向一个函数 */
+  int (*c)()=comp;
+
+  /* qsort() 函数,第一个是待排序的数组,
+     参数2,是数组的长度,
+     参数3是每个元素的长度
+     *参数4是一个函数指针,这个函数接受两个参数,
+     此函数用于比较
+  */
+  qsort(s,4,sizeof(int),c);
+
+  for(i=0;i<4;i++){
+    printf ("%d,",s[i]);
+  }
+  return 0;
+}
+#+end_src

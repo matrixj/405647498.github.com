@@ -3,14 +3,14 @@
                "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="zh" xml:lang="zh">
 <head>
-<title>一个人的狂欢</title>
+<title>为mysql、sqlserver、oracle编写sql脚本时补全表名、列名</title>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
-<meta name="title" content="一个人的狂欢"/>
+<meta name="title" content="为mysql、sqlserver、oracle编写sql脚本时补全表名、列名"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2011-06-04 星期六"/>
-<meta name="author" content="孤峰独秀"/>
-<meta name="description" content=""/>
-<meta name="keywords" content=""/>
+<meta name="generated" content="2011-07-21 四"/>
+<meta name="author" content="纪秀峰"/>
+<meta name="description" content="为mysql及oracle编写sql脚本时补全表名、列名"/>
+<meta name="keywords" content="emacs sql mysql oracle complete anything"/>
 <style type='text/css'>
        body {
     background-color: #E5E5E5;
@@ -942,15 +942,15 @@ img {
 }
 
     </style>
-<link rel="stylesheet" type="text/css" href="style/emacs.css" />
-<script type='text/javascript' src='js/emacs.js'> </script>
+<link rel="stylesheet" type="text/css" href="../style/emacs.css" />
+<script type='text/javascript' src='../js/emacs.js'> </script>
 
 </head>
 <body>
 <div id="org-div-home-and-up" style="text-align:right;font-size:70%;white-space:nowrap;">
- <a accesskey="h" href="sitemap.html"> 站点地图 </a>
+ <a accesskey="h" href="../sitemap.html"> 站点地图 </a>
  |
- <a accesskey="H" href="index.html"> 首页 </a>
+ <a accesskey="H" href="../index.html"> 首页 </a>
 </div>
 
 <div id="preamble">
@@ -958,60 +958,280 @@ img {
 </div>
 
 <div id="content">
-<h1 class="title">一个人的狂欢</h1>
+<h1 class="title">为mysql、sqlserver、oracle编写sql脚本时补全表名、列名</h1>
 
 
-<div id='logo-img' ><a  href='index.html'>▇█▓▒░◕~◕░▒▓█▇</a></div>
+<div id='logo-img' ><a  href='../index.html'>▇█▓▒░◕~◕░▒▓█▇</a></div>
 
 <div id='logo-text'>
   <a href='#' ><span align="left">░◕~◕░</span></a>
 </div>
 
 
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
 <ul>
-<li>首页还未做好，先看<a href="sitemap.html">站点地图</a>吧
+<li><a href="#sec-1">链接</a></li>
+<li><a href="#sec-2">简介</a></li>
+<li><a href="#sec-3">如何使用进行mysql 的表名列名补全：</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-1" class="outline-2">
+<h2 id="sec-1">链接</h2>
+<div class="outline-text-2" id="text-1">
+
+<p>演示视频screencast <a href="http://screencast-repos.googlecode.com/files/emacs-sqlparse-mysql-complete.mkv.bz2">screencast</a> mkv格式 ，用bzip 进行压缩<br/>
+文件上传到了 <a href="http://emacswiki.org/Joseph">http://emacswiki.org/Joseph</a>,<br/>
+同时源代码用git 进行管理，地址在这里<a href="https://github.com/jixiuf/sqlparser">github.com/sqlparser</a>.<br/>
+</p></div>
+
+</div>
+
+<div id="outline-container-2" class="outline-2">
+<h2 id="sec-2">简介</h2>
+<div class="outline-text-2" id="text-2">
+
+<p>  最近新写了一个以mysql 为后端，当编写sql 脚本时，能适时地从mysql 数据库中查询<br/>
+  适时插入到当前光标下的表名列名等内容的扩展. 即进行表名列名的补全。(现在也相应<br/>
+  的提供了 oracle sqlserver 版本的)<br/>
+  emacswiki上有<a href="http://www.emacswiki.org/emacs/SqlComplete">SqlComplete</a> 的介绍，用了一下，发现并不好用。不够智能，比如它不<br/>
+  清楚什么时候该插入表名，什么时候该插入列名。所以只好自已动手。<br/>
+</p>
+<p><br/>
+  相初用这个sqlparser名字是因为 在emacs 中对sql 语句进行编写时，想写一些解析当前sql<br/>
+  语句的相关函数，所以用了sqlparser这个名，后来陆续添加了一些与sql相关的功能<br/>
+  用这个名字，似乎不太合适，但也懒得改了。<br/>
+</p><ul>
+<li>oracle-query.el<br/>
 </li>
-<li><a href="about.html">About</a>
+<li>sqlserver-query.el<br/>
+</li>
+<li>mysql-query.el<br/>
+   这三个提供最基本的连接数据库的功能<br/>
+
+<p><br/>
+</p></li>
+<li>sqlparser-mysql-complete.el<br/>
+</li>
+<li>sqlparser-oracle-complete.el<br/>
+</li>
+<li>sqlparser-sqlserver-complete.el<br/>
+  这三个文件 分别提供编写 sql脚本时补全 表名、列名的功能。<br/>
+  比如在from 之后，补全表名，在select ,where 之后补全列名等.<br/>
+
+<p><br/>
+</p></li>
+<li>sqlserver-table2entity-4csharp.el<br/>
+</li>
+<li>sqlserver-table2entity-4java.el<br/>
+</li>
+<li>oracle-table2entity-4csharp.el<br/>
+</li>
+<li>oracle-table2entity-4java.el<br/>
+</li>
+<li>mysql-table2entity-4csharp.el<br/>
+</li>
+<li>mysql-table2entity-4java.el<br/>
+</li>
+<li>mysql-table2record-erlang.el<br/>
+  这几个文件分别提供了将sqlserver mysql oracle的某个schema中所有的表导出成java<br/>
+  csharp 实体类的功能。<br/>
+
+<p><br/>
+<pre class="src src-sh">M-x: sqlserver-table2entity-4csharp-interactively
+M-x: sqlserver-table2entity-4java-interactively
+M-x: oracle-table2entity-4java-interactively
+M-x: oracle-table2entity-4csharp-interactively
+M-x: mysql-table2entity-4csharp-interactively
+M-x: mysql-table2entity-4java-interactively
+M-x: erlang-mysql-generate-records
+</pre>
+
+  分别提供这样几个函数<br/>
+</p><ul>
+<li>mysql-query.el<br/>
+
+<p><br/>
+<pre class="src src-emacs-lisp"><span class="org-comment-delimiter">;; </span><span class="org-comment">the normal way to use mysql-query.el is :</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">1:</span>
+(<span class="org-keyword">defvar</span> <span class="org-variable-name">mysql-connection</span> (mysql-query-create-connection connection-info))
+<span class="org-keyword">or</span>
+(<span class="org-keyword">defvar</span> <span class="org-variable-name">mysql-connection</span> <span class="org-constant">nil</span>)
+(<span class="org-keyword">unless</span> (mysql-query-connection-alive-p  mysql-connection)
+  (<span class="org-function-name">setq</span> mysql-connection (call-interactively 'mysql-query-create-connection)))
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">2:</span>
+  (mysql-query              <span class="org-string">"select user from mysql.user"</span> mysql-connection)
+  (mysql-query-with-heading <span class="org-string">"select user from mysql.user"</span> mysql-connection)
+</pre>
+
+</p></li>
+<li>oracle-query.el<br/>
+
+<p><br/>
+<pre class="src src-emacs-lisp"><span class="org-comment-delimiter">;; </span><span class="org-comment">execute sql using sqlplus and return as list .</span>
+(oracle-query <span class="org-string">"select empno,ename from emp where empno&lt;=7499"</span>)
+<span class="org-comment-delimiter">;; </span><span class="org-comment">got :     (("7369" "SMITH") ("7499" "ALLEN"))</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">or</span>
+(oracle-query-with-heading <span class="org-string">"select empno,ename from emp where empno&lt;=7499"</span>)
+<span class="org-comment-delimiter">;; </span><span class="org-comment">got :     (("EMPNO" "ENAME") ("7369" "SMITH") ("7499" "ALLEN"))</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">using default connection ,not recommended.</span>
+(<span class="org-keyword">defvar</span> <span class="org-variable-name">connection</span> (oracle-query-create-connection <span class="org-string">"scott/tiger"</span>))
+(oracle-query <span class="org-string">"select empno from emp"</span> connection)
+<span class="org-comment-delimiter">;; </span><span class="org-comment">recommended</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">the normal way to use oracle-query.el is :</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">1:</span>
+(<span class="org-keyword">defvar</span> <span class="org-variable-name">sqlplus-connection</span> <span class="org-constant">nil</span>)
+(<span class="org-keyword">unless</span> (oracle-query-connection-alive-p c)
+  (<span class="org-function-name">setq</span> sqlplus-connection (call-interactively 'oracle-query-create-connection)))
+<span class="org-comment-delimiter">;; </span><span class="org-comment">2:</span>
+(oracle-query <span class="org-string">"select empno from emp"</span> sqlplus-connection)
+<span class="org-comment-delimiter">;; </span><span class="org-comment">3:</span>
+(oracle-query-close-connection sqlplus-connection)
+</pre>
+
+</p></li>
+<li>sqlserver-query.el<br/>
+
+<p><br/>
+<pre class="src src-emacs-lisp">  <span class="org-comment-delimiter">;; </span><span class="org-comment">the normal way to use sqlserver-query.el is :</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">1:</span>
+(<span class="org-keyword">defvar</span> <span class="org-variable-name">c</span> <span class="org-constant">nil</span>)
+(<span class="org-keyword">unless</span> (sqlserver-query-connection-alive-p c)
+  (<span class="org-function-name">setq</span> c (call-interactively 'sqlserver-query-create-connection)))
+<span class="org-comment-delimiter">;; </span><span class="org-comment">2:</span>
+  (sqlserver-query <span class="org-string">"select empno from emp"</span> c)
+  <span class="org-comment-delimiter">;; </span><span class="org-comment">or</span>
+  (sqlserver-query-with-heading <span class="org-string">"select empno from emp"</span> c)
+<span class="org-comment-delimiter">;; </span><span class="org-comment">3:</span>
+  (sqlserver-query-close-connection c)
+</pre>
+
+</p></li>
+</ul>
+
 </li>
 </ul>
 
+</div>
 
+</div>
+
+<div id="outline-container-3" class="outline-2">
+<h2 id="sec-3">如何使用进行mysql 的表名列名补全：</h2>
+<div class="outline-text-2" id="text-3">
+
+
+<p><br/>
+<pre class="src src-emacs-lisp">(<span class="org-keyword">require</span> '<span class="org-constant">sqlparser-mysql-complete</span>)
+(<span class="org-function-name">define-key</span> sql-mode-map (<span class="org-keyword">quote</span> [M-return]) 'sqlparser-mysql-complete)
+(<span class="org-function-name">define-key</span> sql-interactive-mode-map  (<span class="org-keyword">quote</span> [M-return]) 'sqlparser-mysql-complete)
+<span class="org-comment-delimiter">;; </span><span class="org-comment">or</span>
+(<span class="org-keyword">defadvice</span> <span class="org-function-name">sql-mysql</span> (around start-mysql-complete-minor-mode activate)
+  <span class="org-doc">"enable `</span><span class="org-doc"><span class="org-constant">mysql-complete-minor-mode</span></span><span class="org-doc">' minor mode."</span>
+  ad-do-it
+  (mysql-complete-minor-mode))
+(<span class="org-keyword">define-derived-mode</span> <span class="org-function-name">mysql-mode</span> sql-mode <span class="org-string">"mysql"</span>
+  <span class="org-doc">"mysql mode"</span>
+  (mysql-complete-minor-mode))
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">`</span><span class="org-comment"><span class="org-constant">sqlparser-mysql-complete</span></span><span class="org-comment">' default  bind on `</span><span class="org-comment"><span class="org-constant">TAB</span></span><span class="org-comment">' in</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">with `</span><span class="org-comment"><span class="org-constant">C-u</span></span><span class="org-comment">' you can change the dbname</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">with `</span><span class="org-comment"><span class="org-constant">C-uC-u</span></span><span class="org-comment">' you can use another new mysql connection</span>
+</pre>
+
+
+<pre class="src src-emacs-lisp">(<span class="org-keyword">require</span> '<span class="org-constant">sqlparser-oracle-complete</span>)
+(<span class="org-function-name">add-hook</span> 'sql-mode-hook 'oracle-complete-minor-mode)
+(<span class="org-function-name">add-hook</span> 'sqlplus-mode-hook 'oracle-complete-minor-mode)
+<span class="org-comment-delimiter">;; </span><span class="org-comment">or you can call M-x: oracle-complete-minor-mode</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">and complete command is binded on `</span><span class="org-comment"><span class="org-constant">TAB</span></span><span class="org-comment">' .</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">with `</span><span class="org-comment"><span class="org-constant">C-u</span></span><span class="org-comment">' you can complete with new connection string.</span>
+</pre>
+
+
+<pre class="src src-emacs-lisp"> <span class="org-comment-delimiter">;; </span><span class="org-comment">there is a minor mode defined here</span>
+      (sqlserver-complete-minor-mode)
+<span class="org-comment-delimiter">;; </span><span class="org-comment">you can add it to sql-mode-hook</span>
+(<span class="org-function-name">add-hook</span>  'sql-mode-hook 'sqlserver-complete-minor-mode)
+<span class="org-comment-delimiter">;; </span><span class="org-comment">or call M-x sqlserver-complete-minor-mode</span>
+
+ <span class="org-comment-delimiter">;; </span><span class="org-comment">and complete command is binded on `</span><span class="org-comment"><span class="org-constant">TAB</span></span><span class="org-comment">' .</span>
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">1. you should custom these variable</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">`</span><span class="org-comment"><span class="org-constant">sqlserver-connection-info</span></span><span class="org-comment">'</span>
+ <span class="org-comment-delimiter">;; </span><span class="org-comment">`</span><span class="org-comment"><span class="org-constant">sqlserver-cmd</span></span><span class="org-comment">' ;sqlcmd or osql</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">for example</span>
+(<span class="org-function-name">setq</span> sqlserver-connection-info
+      '((username . <span class="org-string">"sa"</span>)
+        (password . <span class="org-string">"sa"</span>)
+        (server-instance . <span class="org-string">"localhost\\SQLEXPRESS"</span>)
+        (dbname . <span class="org-string">"master"</span>))
+      )
+<span class="org-comment-delimiter">;; </span><span class="org-comment">or sometimes</span>
+(<span class="org-function-name">setq</span> sqlserver-connection-info
+      '((username . <span class="org-string">"sa"</span>)
+        (password . <span class="org-string">"sa"</span>)
+        (server-instance . <span class="org-string">"localhost"</span>)
+        (dbname . <span class="org-string">"master"</span>)))
+
+(<span class="org-function-name">setq</span> sqlserver-cmd' 'sqlcmd) <span class="org-keyword">or</span> (<span class="org-function-name">setq</span> sqlserver-cmd' 'osql)
+
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">my config file about sqlserver-complete-minor-mode looks like this .</span>
+(<span class="org-keyword">require</span> '<span class="org-constant">sql</span>)
+(<span class="org-keyword">require</span> '<span class="org-constant">sqlparser-sqlserver-complete</span>)
+(<span class="org-function-name">add-hook</span>  'sql-mode-hook 'sqlserver-complete-minor-mode)
+(<span class="org-function-name">add-hook</span>  'sqlserver-complete-minor-mode-hook 'sqlserver-complete-minor-mode-setup)
+(<span class="org-keyword">defun</span> <span class="org-function-name">sqlserver-complete-minor-mode-setup</span>()
+  (<span class="org-function-name">setq</span> sqlserver-connection-info
+    '((username . <span class="org-string">"sa"</span>)
+      (password . <span class="org-string">"sa"</span>)
+      (server-instance . <span class="org-string">"localhost"</span>)
+      (dbname . <span class="org-string">"HAIHUA"</span>))
+    )
+  (<span class="org-function-name">setq</span> sqlserver-cmd 'sqlcmd)
+  )
+</pre>
 
 
 <div id='my-src'>
-<div id='org-src'><a href='src/index.org'>src</a></div>
-<div id='htmlized-src'><a href='htmlized-src/index.org.html'>htmlized-src</a></div>
+<div id='org-src'><a href='../src/emacs/sqlparser.org'>src</a></div>
+<div id='htmlized-src'><a href='../htmlized-src/emacs/sqlparser.org.html'>htmlized-src</a></div>
 </div>
 <div id='tags'><span id='tags-title'>Tags:</span><br />
-<p>
-    <a href="tags/@SVN.html">@SVN</a>
-    <a href="tags/@perl.html">@perl</a>
-    <a href="tags/@Java.html">@Java</a>
-    <a href="tags/@Mysql.html">@Mysql</a>
-    <a href="tags/@Erlang.html">@Erlang</a>
-    <a href="tags/@SQL.html">@SQL</a>
-    <a href="tags/@DB.html">@DB</a>
-    <a href="tags/@Oracle.html">@Oracle</a>
-    <a href="tags/@Ediff.html">@Ediff</a>
-    <a href="tags/@Git.html">@Git</a>
-    <a href="tags/@Cedet.html">@Cedet</a>
-    <a href="tags/@C-C++.html">@C-C++</a>
-    <a href="tags/@Daily.html">@Daily</a>
-    <a href="tags/@Eclipse.html">@Eclipse</a>
-    <a href="tags/@AutoHotKey.html">@AutoHotKey</a>
-    <a href="tags/@Windows.html">@Windows</a>
-    <a href="tags/@Linux.html">@Linux</a>
-    <a href="tags/@C.html">@C</a>
-    <a href="tags/@Emacs.html">@Emacs</a>
+    <a href="../tags/@SVN.html">@SVN</a><br/>
+    <a href="../tags/@perl.html">@perl</a><br/>
+    <a href="../tags/@Java.html">@Java</a><br/>
+    <a href="../tags/@Mysql.html">@Mysql</a><br/>
+    <a href="../tags/@Erlang.html">@Erlang</a><br/>
+    <a href="../tags/@SQL.html">@SQL</a><br/>
+    <a href="../tags/@DB.html">@DB</a><br/>
+    <a href="../tags/@Oracle.html">@Oracle</a><br/>
+    <a href="../tags/@Ediff.html">@Ediff</a><br/>
+    <a href="../tags/@Git.html">@Git</a><br/>
+    <a href="../tags/@Cedet.html">@Cedet</a><br/>
+    <a href="../tags/@C-C++.html">@C-C++</a><br/>
+    <a href="../tags/@Daily.html">@Daily</a><br/>
+    <a href="../tags/@Eclipse.html">@Eclipse</a><br/>
+    <a href="../tags/@AutoHotKey.html">@AutoHotKey</a><br/>
+    <a href="../tags/@Windows.html">@Windows</a><br/>
+    <a href="../tags/@Linux.html">@Linux</a><br/>
+    <a href="../tags/@C.html">@C</a><br/>
+    <a href="../tags/@Emacs.html">@Emacs</a><br/>
 </p>
-
-
+<p><br/>
+</div>
+</p></div>
 </div>
 </div>
 
 <div id="postamble">
-<p class="date">Date: 2011-06-04 星期六</p>
-<p class="author">Author: 孤峰独秀</p>
+<p class="date">Date: 2011-07-21 四</p>
+<p class="author">Author: 纪秀峰</p>
 <p class="creator">Org version 7.8.03 with Emacs version 24</p>
 
 

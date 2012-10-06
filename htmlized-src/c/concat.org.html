@@ -1,0 +1,146 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<!-- Created by htmlize-1.34 in css mode. -->
+<html>
+  <head>
+    <title>concat.org</title>
+    <style type="text/css">
+    <!--
+      body {
+        color: #F8F8F8;
+        background-color: #0C1021;
+      }
+      .comment {
+        /* font-lock-comment-face */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-block {
+        /* org-block */
+        color: #b3b3b3;
+      }
+      .org-block-begin-line {
+        /* org-block-begin-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-block-end-line {
+        /* org-block-end-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-document-info {
+        /* org-document-info */
+        color: #afeeee;
+      }
+      .org-document-info-keyword {
+        /* org-document-info-keyword */
+        color: #b3b3b3;
+      }
+      .org-document-title {
+        /* org-document-title */
+        color: #afeeee;
+        font-size: 144%;
+        font-weight: bold;
+      }
+      .org-meta-line {
+        /* org-meta-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+
+      a {
+        color: inherit;
+        background-color: inherit;
+        font: inherit;
+        text-decoration: inherit;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+    -->
+    </style>
+  </head>
+  <body>
+    <pre>
+<span class="comment"># -*- coding:utf-8 -*-</span>
+<span class="org-meta-line">#+LANGUAGE:  zh
+</span><span class="org-document-info-keyword">#+TITLE:</span><span class="comment">     </span><span class="org-document-title">concat()&#21487;&#21464;&#38271;&#24230;&#21442;&#25968;&#30340;&#23454;&#29616;</span>
+<span class="org-document-info-keyword">#+AUTHOR:</span><span class="comment">    </span><span class="org-document-info">&#32426;&#31168;&#23792;</span>
+<span class="org-document-info-keyword">#+EMAIL:</span><span class="comment">     </span><span class="org-document-info">jixiuf@gmail.com</span>
+<span class="org-document-info-keyword">#+DATE:</span><span class="comment">     </span><span class="org-document-info">2011-10-22 &#20845;</span>
+<span class="org-meta-line">#+DESCRIPTION:concat()&#21487;&#21464;&#38271;&#24230;&#21442;&#25968;&#30340;&#23454;&#29616;
+#+KEYWORDS: c language
+#+OPTIONS:   H:2 num:nil toc:t \n:t @:t ::t |:t ^:t -:t f:t *:t &lt;:t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil 
+#+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
+#+EXPORT_SELECT_TAGS: export
+#+EXPORT_EXCLUDE_TAGS: noexport
+#+FILETAGS: @C
+</span><span class="org-block-begin-line">#+begin_src c
+</span><span class="org-block">//file name : strcap.c
+//created at: 2011&#24180;10&#26376;22&#26085; &#26143;&#26399;&#20845; 21&#26102;31&#20998;35&#31186;
+//author:  &#32426;&#31168;&#23792;
+
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;malloc.h&gt;
+#include &lt;string.h&gt;
+#include &lt;stdarg.h&gt;
+
+
+char *concat(char *first ,...){
+  size_t len;
+  va_list arg;
+  char *p ,*returnbuf;
+  if (first ==NULL){
+    return NULL;
+  }
+  len= strlen(first);
+  /* &#21487;&#21464;&#21442;&#25968;&#30340;&#35843;&#29992;&#22522;&#26412;&#35201; */
+  /*   va_start */
+  /*   va_arg (&#20013;&#38388;&#21487;&#22810;&#27425;&#35843;&#29992;,&#20197;&#20415;&#36941;&#21382;&#25152;&#26377;&#21487;&#21464;&#21442;&#25968;) */
+  /*   va_end */
+  /* &#19977;&#20010;&#20989;&#25968;&#35843;&#29992;&#26469;&#23436;&#25104; */
+  va_start(arg ,first);
+  while (NULL!= (p= va_arg(arg ,char*))){
+    len+=strlen(p);
+  }
+  va_end(arg);
+
+  len= len++;
+  returnbuf=  malloc(len);
+  //&#20197;&#19978;,&#21482;&#20026;&#35745;&#31639;,concat &#21518;&#30340;&#23383;&#31526;&#38271;&#24230;
+
+  if (returnbuf==NULL) return NULL;
+  strcpy(returnbuf ,first);
+  va_start(arg ,first);
+  while (NULL!=(p = va_arg(arg ,char*))){
+    strcat(returnbuf,p);
+  }
+  va_end(arg );
+  return returnbuf;
+}
+
+int main(int argc, char *argv[])
+{
+  // &#34429;&#35828;&#26159;&#21487;&#21464;&#38271;&#24230;&#21442;&#25968;,&#20294;c&#38656;&#35201;&#30693;&#36947;&#20160;&#20040;&#26102;&#20505;&#32467;&#26463;,&#25925;&#26368;&#21518;&#19968;&#20010;&#21442;&#25968;&#29305;&#27530;,&#20026;&#19968;&#20010;null,
+  //&#20026;&#20309;&#35201;&#25226;null&#36716;&#20026;char*:
+  //&#22240;&#20026; NULL &#23601;&#26159;0 ,0&#26377;&#26102;&#20250;&#34987;&#24403;&#20415;&#25968;&#23383;0,&#26377;&#26102;&#20250;&#34987;&#35299;&#26512;&#25104;null pointer
+  //&#27604;&#22914; char *p = 0; if(p != 0)
+  //*p &#21021;&#22987;&#21270;&#20026;0,&#23454;&#38469;&#26159;&#31354;&#25351;&#38024;,&#22240;&#20026;&#23427;&#21069;&#38754;&#26377; char* &#30340;&#31867;&#22411;&#22768;&#26126;&#25925;&#32534;&#35793;&#22120;,&#21487;&#20197;&#30693;&#36947;&#23427;&#26159;&#19968;&#20010;char* &#31867;&#22411;&#30340;&#31354;&#25351;&#38024;,&#32780;&#38750;&#25968;&#23383;0
+  //&#20294;,&#22312;&#20570;&#20026;&#20989;&#25968;&#21442;&#25968;&#20256;&#20837;&#26102;,&#23427;&#24182;&#19981;&#30693;&#36947;&#23427;&#31350;&#31455;&#26159;&#25968;&#23383;0&#36824;&#26159;&#19968;&#20010;&#31354;&#25351;&#20160;,&#25925;&#23558;&#23427;&#24378;&#36716;
+  // &#20026;char* &#31867;&#22411;&#30340;&#31354;&#25351;&#20160;,&#26126;&#30830;&#21578;&#35785;&#32534;&#35793;&#22120;&#23427;&#26159;&#19968;&#20010;&#31354;&#25351;&#38024;
+  /* &#28982;&#32780;, &#20256;&#20837;&#20989;&#25968;&#30340;&#21442;&#25968;&#19981;&#19968;&#23450;&#34987;&#24403;&#20316;&#25351;&#38024;&#29615;&#22659;, &#22240;&#32780;&#32534;&#35793;&#22120;&#21487;&#33021;&#19981;&#33021;&#35782;&#21035;&#26410;&#21152;&#20462;&#39280;&#30340; 0 ``&#34920;&#31034;" &#25351;&#38024; */
+  char * hel=  concat ("hello" ",world",(char*)NULL);
+  puts(hel);
+  free(hel);
+
+  hel=  concat ("hello" ",world,","again",(char*)NULL);
+  puts(hel);
+  free(hel);
+  return 0;
+}
+</span><span class="org-block-end-line">#+end_src
+</span></pre>
+  </body>
+</html>

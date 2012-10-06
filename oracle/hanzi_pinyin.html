@@ -3,13 +3,13 @@
                "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="zh" xml:lang="zh">
 <head>
-<title>一个人的狂欢</title>
+<title>汉字拼音对应表</title>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
-<meta name="title" content="一个人的狂欢"/>
+<meta name="title" content="汉字拼音对应表"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2011-06-04 星期六"/>
-<meta name="author" content="孤峰独秀"/>
-<meta name="description" content=""/>
+<meta name="generated" content="2012-04-29 日"/>
+<meta name="author" content="纪秀峰"/>
+<meta name="description" content="汉字拼音对应表"/>
 <meta name="keywords" content=""/>
 <style type='text/css'>
        body {
@@ -942,15 +942,15 @@ img {
 }
 
     </style>
-<link rel="stylesheet" type="text/css" href="style/emacs.css" />
-<script type='text/javascript' src='js/emacs.js'> </script>
+<link rel="stylesheet" type="text/css" href="../style/emacs.css" />
+<script type='text/javascript' src='../js/emacs.js'> </script>
 
 </head>
 <body>
 <div id="org-div-home-and-up" style="text-align:right;font-size:70%;white-space:nowrap;">
- <a accesskey="h" href="sitemap.html"> 站点地图 </a>
+ <a accesskey="h" href="../sitemap.html"> 站点地图 </a>
  |
- <a accesskey="H" href="index.html"> 首页 </a>
+ <a accesskey="H" href="../index.html"> 首页 </a>
 </div>
 
 <div id="preamble">
@@ -958,60 +958,112 @@ img {
 </div>
 
 <div id="content">
-<h1 class="title">一个人的狂欢</h1>
+<h1 class="title">汉字拼音对应表</h1>
 
 
-<div id='logo-img' ><a  href='index.html'>▇█▓▒░◕~◕░▒▓█▇</a></div>
+<div id='logo-img' ><a  href='../index.html'>▇█▓▒░◕~◕░▒▓█▇</a></div>
 
 <div id='logo-text'>
   <a href='#' ><span align="left">░◕~◕░</span></a>
 </div>
 
 
-<ul>
-<li>首页还未做好，先看<a href="sitemap.html">站点地图</a>吧
-</li>
-<li><a href="about.html">About</a>
-</li>
-</ul>
+<p>
+<a href="../download/hanzipinyin.txt">汉字拼音对应表</a>.txt<br/>
+</p>
+<p><br/>
+</p>
+<p><br/>
+<pre class="src src-sql">CREATE OR REPLACE DIRECTORY dat_dir_p
+AS <span class="org-string">'D:\pinyin\data'</span>;
+CREATE OR REPLACE DIRECTORY log_dir_p
+AS <span class="org-string">'D:\pinyin\log'</span>;
+CREATE OR REPLACE DIRECTORY bad_dir_p
+AS <span class="org-string">'D:\pinyin\bad'</span>;
+<span class="org-comment">-- &#29992;&#25143;&#35201;&#23545;&#36825;&#20960;&#20010;&#30446;&#24405;&#26377;&#20889;&#26435;&#38480;&#65292;</span>
+<span class="org-comment">-- &#25105;&#27979;&#35797; &#30340;&#26102;&#20505; &#27809;&#36890;&#36807; &#65292;&#22909;&#20320;&#26126;&#20960;&#20010;&#22810;&#38899;&#35789;&#30340;&#22788;&#29702;&#19978;&#26377;&#38382;&#39064;</span>
+
+GRANT READ ON DIRECTORY dat_dir_p TO itme;
+GRANT READ,WRITE ON DIRECTORY log_dir_p TO itme;
+GRANT READ,WRITE ON DIRECTORY bad_dir_p TO itme;
 
 
+CONNECT itme;
+
+CREATE TABLE tb_hanzipinyin
+(hangzi VARCHAR2(50),
+pinyin VARCHAR2(50)
+)
+ORGANIZATION EXTERNAL
+(
+TYPE ORACLE_LOADER
+DEFAULT DIRECTORY dat_dir_p
+ACCESS PARAMETERS
+(
+RECORDS delimited BY NEWLINE
+BADFILE bad_dir_p:<span class="org-string">'empxt%a_%p.bad'</span>
+LOGFILE log_dir_p:<span class="org-string">'empxt%a_%p.log'</span>
+FIELDS TERMINATED BY <span class="org-string">'#'</span>
+MISSING FIELD VALUES are NULL
+(hangzi,pinyin)
+
+)
+LOCATION (<span class="org-string">'hanzipinyin.txt'</span>)
+)
+PARALLEL
+REJECT LIMIT UNLIMITED;
+
+
+SELECT * FROM tb_hanzipinyin WHERE hangzi LIKE <span class="org-string">'&#21442;'</span>;
+
+CREATE OR REPLACE FUNCTION hanzi_to_pinyin(p_hanzi in VARCHAR2)
+  RETURN VARCHAR2 IS
+  v_return_pinyin VARCHAR2(20);
+  BEGIN
+    SELECT pinyin
+      INTO v_return_pinyin
+      FROM tb_hanzipinyin
+     WHERE hangzi = p_hanzi;
+  RETURN          v_return_pinyin;
+  EXCEPTION       WHEN OTHERS THEN RETURN <span class="org-string">'ERROR'</span>;
+END;
+
+SELECT hanzi_to_pinyin(<span class="org-string">'&#23567;'</span>) FROM DUAL;
+</pre>
 
 
 <div id='my-src'>
-<div id='org-src'><a href='src/index.org'>src</a></div>
-<div id='htmlized-src'><a href='htmlized-src/index.org.html'>htmlized-src</a></div>
+<div id='org-src'><a href='../src/oracle/hanzi_pinyin.org'>src</a></div>
+<div id='htmlized-src'><a href='../htmlized-src/oracle/hanzi_pinyin.org.html'>htmlized-src</a></div>
 </div>
 <div id='tags'><span id='tags-title'>Tags:</span><br />
-<p>
-    <a href="tags/@SVN.html">@SVN</a>
-    <a href="tags/@perl.html">@perl</a>
-    <a href="tags/@Java.html">@Java</a>
-    <a href="tags/@Mysql.html">@Mysql</a>
-    <a href="tags/@Erlang.html">@Erlang</a>
-    <a href="tags/@SQL.html">@SQL</a>
-    <a href="tags/@DB.html">@DB</a>
-    <a href="tags/@Oracle.html">@Oracle</a>
-    <a href="tags/@Ediff.html">@Ediff</a>
-    <a href="tags/@Git.html">@Git</a>
-    <a href="tags/@Cedet.html">@Cedet</a>
-    <a href="tags/@C-C++.html">@C-C++</a>
-    <a href="tags/@Daily.html">@Daily</a>
-    <a href="tags/@Eclipse.html">@Eclipse</a>
-    <a href="tags/@AutoHotKey.html">@AutoHotKey</a>
-    <a href="tags/@Windows.html">@Windows</a>
-    <a href="tags/@Linux.html">@Linux</a>
-    <a href="tags/@C.html">@C</a>
-    <a href="tags/@Emacs.html">@Emacs</a>
+    <a href="../tags/@SVN.html">@SVN</a><br/>
+    <a href="../tags/@perl.html">@perl</a><br/>
+    <a href="../tags/@Java.html">@Java</a><br/>
+    <a href="../tags/@Mysql.html">@Mysql</a><br/>
+    <a href="../tags/@Erlang.html">@Erlang</a><br/>
+    <a href="../tags/@SQL.html">@SQL</a><br/>
+    <a href="../tags/@DB.html">@DB</a><br/>
+    <a href="../tags/@Oracle.html">@Oracle</a><br/>
+    <a href="../tags/@Ediff.html">@Ediff</a><br/>
+    <a href="../tags/@Git.html">@Git</a><br/>
+    <a href="../tags/@Cedet.html">@Cedet</a><br/>
+    <a href="../tags/@C-C++.html">@C-C++</a><br/>
+    <a href="../tags/@Daily.html">@Daily</a><br/>
+    <a href="../tags/@Eclipse.html">@Eclipse</a><br/>
+    <a href="../tags/@AutoHotKey.html">@AutoHotKey</a><br/>
+    <a href="../tags/@Windows.html">@Windows</a><br/>
+    <a href="../tags/@Linux.html">@Linux</a><br/>
+    <a href="../tags/@C.html">@C</a><br/>
+    <a href="../tags/@Emacs.html">@Emacs</a><br/>
 </p>
-
-
+<p><br/>
 </div>
-</div>
+</p></div>
 
 <div id="postamble">
-<p class="date">Date: 2011-06-04 星期六</p>
-<p class="author">Author: 孤峰独秀</p>
+<p class="date">Date: 2012-04-29 日</p>
+<p class="author">Author: 纪秀峰</p>
 <p class="creator">Org version 7.8.03 with Emacs version 24</p>
 
 

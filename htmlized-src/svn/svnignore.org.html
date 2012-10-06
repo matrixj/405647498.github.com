@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<!-- Created by htmlize-1.34 in css mode. -->
+<html>
+  <head>
+    <title>svnignore.org</title>
+    <style type="text/css">
+    <!--
+      body {
+        color: #F8F8F8;
+        background-color: #0C1021;
+      }
+      .bold {
+        /* bold */
+        font-weight: bold;
+      }
+      .comment {
+        /* font-lock-comment-face */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-block {
+        /* org-block */
+        color: #b3b3b3;
+      }
+      .org-block-begin-line {
+        /* org-block-begin-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-block-end-line {
+        /* org-block-end-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-document-info {
+        /* org-document-info */
+        color: #afeeee;
+      }
+      .org-document-info-keyword {
+        /* org-document-info-keyword */
+        color: #b3b3b3;
+      }
+      .org-document-title {
+        /* org-document-title */
+        color: #afeeee;
+        font-size: 144%;
+        font-weight: bold;
+      }
+      .org-link {
+        /* org-link */
+        color: #00ffff;
+        text-decoration: underline;
+      }
+      .org-meta-line {
+        /* org-meta-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+
+      a {
+        color: inherit;
+        background-color: inherit;
+        font: inherit;
+        text-decoration: inherit;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+    -->
+    </style>
+  </head>
+  <body>
+    <pre>
+<span class="comment"># -*- coding:utf-8 -*-</span>
+<span class="org-meta-line">#+LANGUAGE:  zh
+</span><span class="org-document-info-keyword">#+TITLE:</span><span class="comment">     </span><span class="org-document-title">svn:ignore global-ignores property &#24573;&#30053;&#26576;&#20123;&#25991;&#20214;</span>
+<span class="org-document-info-keyword">#+AUTHOR:</span><span class="comment">    </span><span class="org-document-info">&#23396;&#23792;&#29420;&#31168;</span>
+<span class="org-document-info-keyword">#+EMAIL:</span><span class="comment">     </span><span class="org-document-info">jixiuf@gmail.com</span>
+<span class="org-document-info-keyword">#+DATE:</span><span class="comment">     </span><span class="org-document-info">2011-09-08 &#26143;&#26399;&#22235;</span>
+<span class="org-meta-line">#+DESCRIPTION:svn:ignore property &#30456;&#20851;&#20869;&#23481;
+#+KEYWORDS: svn ignore 
+#+OPTIONS:   H:2 num:nil toc:t \n:t @:t ::t |:t ^:t -:t f:t *:t &lt;:t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil
+#+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
+#+EXPORT_SELECT_TAGS: export
+#+EXPORT_EXCLUDE_TAGS: noexport
+#+FILETAGS: @SVN
+</span>
+
+
+&#21442;&#32771;&#65306;<span class="org-link">http://qa.taobao.com/?p=2163</span>
+
+<span class="org-block-begin-line">#+begin_src sh
+</span><span class="org-block">svn propedit svn:ignore . -editor-cmd notepad
+&#25110;
+EXPORT SVN_EDITOR=emacsclientw.exe 
+svn propedit svn:ignore . 
+</span><span class="org-block-end-line">#+end_src
+</span>&#36816;&#34892;&#19978;&#38754;&#30340;&#21629;&#20196;&#65292;&#20250;&#20351;&#29992;&#20320;&#35774;&#32622;&#30340;&#32534;&#36753;&#22120;&#32534;&#36753;svn:ignore &#23646;&#24615;&#30340;&#20869;&#23481;&#65292;
+&#20174;&#32593;&#19978;&#25214;&#20102;&#20960;&#20010;&#20363;&#23376;
+&#20284;&#20046; svn:ignore &#23646;&#24615;&#19981;&#33021;&#36882;&#24402;&#30446;&#24405;
+
+&#19981;&#36807;svn &#36824;&#26377;&#19968;&#20010;&#23646;&#24615;global-ignores ,&#36825;&#20010;&#23646;&#24615;&#21482;&#22312;&#23458;&#25143;&#31471;&#26377;&#25928;&#65292;
+&#22312;windows &#19978;&#65292;
+%appdata%/Subversion &#30446;&#24405;&#19979;&#26377;&#19968;&#20010;config &#25991;&#20214;
+&#22312;&#25991;&#20214;&#20013;[miscellany] &#23376;&#27169;&#22359;&#19979;&#65292;&#26377;&#19968;&#20010;&#27880;&#37322;&#25481;&#30340;&#23646;&#24615;global-ignore
+&#23427;&#30340;&#20540;&#26159;&#19968;&#31995;&#21015;&#34987;&#24573;&#30053;&#30340;&#25991;&#20214;&#30446;&#24405;&#23545;&#24212;&#30340;&#21305;&#37197;&#31526;&#65292;&#29992;&#31354;&#26684;&#26684;&#24335;
+<span class="org-block-begin-line">#+begin_quote
+</span>[miscellany]
+global-ignores = <span class="bold">*.usr *.hello *.o *.lo *.la *.al .libs *.so *.so.[0-9]*</span> *.a *.pyc *.pyo<span class="org-meta-line">
+</span><span class="org-block-end-line">#+end_quote
+</span>
+<span class="org-block-begin-line">#+begin_quote
+</span>global-ignores = <span class="bold">*.o *.lo *.la #*# .*</span>.rej <span class="bold">*.rej .*~ *~ .#*</span> .DS_Store thumbs.db Thumbs.db <span class="bold">*.bak *.class *.exe *.dll *.mine *.obj *.ncb *.lib *.log *.idb *.pdb *.ilk *.msi*</span> .res <span class="bold">*.pch *.suo *.exp *.*~ *.~*</span> ~*.* cvs CVS .CVS .cvs release Release debug Debug ignore Ignore bin Bin obj Obj <span class="bold">*.csproj.user *.user  _ReSharper.*</span> *.resharper.user<span class="org-meta-line">
+</span><span class="org-block-end-line">#+end_quote
+</span>
+My ignore pattern for Visual Studio:
+<span class="org-block-begin-line">#+begin_quote
+</span>global-ignores= <span class="bold">*/bin */obj */Release */Debug *.suo *.err *.log *.obj *.bin *.dll *.exe *.LOG *.user *.pdb [tT]emp [tT]empPE Ankh.Load thumbs.db *.resharper *.vspscc *.vsssccc *.scc */_ReSharper*</span> <span class="bold">*/_ReSharper.*</span> bin obj <span class="bold">*.resharperoptions *.db *.bak *_ReSharper*</span> *.snk logs output TestResults<span class="org-meta-line">
+</span><span class="org-block-end-line">#+end_quote
+</span>
+</pre>
+  </body>
+</html>

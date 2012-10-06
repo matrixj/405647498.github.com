@@ -3,14 +3,14 @@
                "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="zh" xml:lang="zh">
 <head>
-<title>一个人的狂欢</title>
+<title>svn:ignore global-ignores property 忽略某些文件</title>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
-<meta name="title" content="一个人的狂欢"/>
+<meta name="title" content="svn:ignore global-ignores property 忽略某些文件"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2011-06-04 星期六"/>
+<meta name="generated" content="2011-09-08 星期四"/>
 <meta name="author" content="孤峰独秀"/>
-<meta name="description" content=""/>
-<meta name="keywords" content=""/>
+<meta name="description" content="svn:ignore property 相关内容"/>
+<meta name="keywords" content="svn ignore "/>
 <style type='text/css'>
        body {
     background-color: #E5E5E5;
@@ -942,15 +942,15 @@ img {
 }
 
     </style>
-<link rel="stylesheet" type="text/css" href="style/emacs.css" />
-<script type='text/javascript' src='js/emacs.js'> </script>
+<link rel="stylesheet" type="text/css" href="../style/emacs.css" />
+<script type='text/javascript' src='../js/emacs.js'> </script>
 
 </head>
 <body>
 <div id="org-div-home-and-up" style="text-align:right;font-size:70%;white-space:nowrap;">
- <a accesskey="h" href="sitemap.html"> 站点地图 </a>
+ <a accesskey="h" href="../sitemap.html"> 站点地图 </a>
  |
- <a accesskey="H" href="index.html"> 首页 </a>
+ <a accesskey="H" href="../index.html"> 首页 </a>
 </div>
 
 <div id="preamble">
@@ -958,59 +958,99 @@ img {
 </div>
 
 <div id="content">
-<h1 class="title">一个人的狂欢</h1>
+<h1 class="title">svn:ignore global-ignores property 忽略某些文件</h1>
 
 
-<div id='logo-img' ><a  href='index.html'>▇█▓▒░◕~◕░▒▓█▇</a></div>
+<div id='logo-img' ><a  href='../index.html'>▇█▓▒░◕~◕░▒▓█▇</a></div>
 
 <div id='logo-text'>
   <a href='#' ><span align="left">░◕~◕░</span></a>
 </div>
 
 
-<ul>
-<li>首页还未做好，先看<a href="sitemap.html">站点地图</a>吧
-</li>
-<li><a href="about.html">About</a>
-</li>
-</ul>
 
 
+<p>
+参考：<a href="http://qa.taobao.com/?p=2163">http://qa.taobao.com/?p=2163</a><br/>
+</p>
+<p><br/>
+</p>
+<p><br/>
+<pre class="src src-sh">svn propedit svn:ignore . -editor-cmd notepad
+&#25110;
+EXPORT <span class="org-variable-name">SVN_EDITOR</span>=emacsclientw.exe 
+svn propedit svn:ignore . 
+</pre>
+
+运行上面的命令，会使用你设置的编辑器编辑svn:ignore 属性的内容，<br/>
+从网上找了几个例子<br/>
+似乎 svn:ignore 属性不能递归目录<br/>
+</p>
+<p><br/>
+不过svn 还有一个属性global-ignores ,这个属性只在客户端有效，<br/>
+在windows 上，<br/>
+%appdata%/Subversion 目录下有一个config 文件<br/>
+在文件中[miscellany] 子模块下，有一个注释掉的属性global-ignore<br/>
+它的值是一系列被忽略的文件目录对应的匹配符，用空格格式<br/>
+</p><blockquote>
+
+<p>[miscellany]<br/>
+global-ignores = <b>.usr *.hello *.o *.lo *.la *.al .libs *.so *.so.[0-9]</b> *.a *.pyc *.pyo<br/>
+</p>
+</blockquote>
 
 
+<p><br/>
+</p><blockquote>
+
+<p>global-ignores = <b>.o *.lo *.la #*# .</b>.rej <b>.rej .*~ *~ .#</b> .DS<sub>Store</sub> thumbs.db Thumbs.db <b>.bak *.class *.exe *.dll *.mine *.obj *.ncb *.lib *.log *.idb *.pdb *.ilk *.msi</b> .res <b>.pch *.suo *.exp *.*~ *.~</b> ~*.* cvs CVS .CVS .cvs release Release debug Debug ignore Ignore bin Bin obj Obj <b>.csproj.user *.user  <sub>ReSharper</sub>.</b> *.resharper.user<br/>
+</p>
+</blockquote>
+
+
+<p><br/>
+My ignore pattern for Visual Studio:<br/>
+</p><blockquote>
+
+<p>global-ignores= <b>/bin */obj */Release */Debug *.suo *.err *.log *.obj *.bin *.dll *.exe *.LOG *.user *.pdb [tT]emp [tT]empPE Ankh.Load thumbs.db *.resharper *.vspscc *.vsssccc *.scc */<sub>ReSharper</sub></b> <b>/<sub>ReSharper</sub>.</b> bin obj <b>.resharperoptions *.db *.bak *<sub>ReSharper</sub></b> *.snk logs output TestResults<br/>
+</p>
+</blockquote>
+
+
+<p><br/>
+</p>
+<p><br/>
 <div id='my-src'>
-<div id='org-src'><a href='src/index.org'>src</a></div>
-<div id='htmlized-src'><a href='htmlized-src/index.org.html'>htmlized-src</a></div>
+<div id='org-src'><a href='../src/svn/svnignore.org'>src</a></div>
+<div id='htmlized-src'><a href='../htmlized-src/svn/svnignore.org.html'>htmlized-src</a></div>
 </div>
 <div id='tags'><span id='tags-title'>Tags:</span><br />
-<p>
-    <a href="tags/@SVN.html">@SVN</a>
-    <a href="tags/@perl.html">@perl</a>
-    <a href="tags/@Java.html">@Java</a>
-    <a href="tags/@Mysql.html">@Mysql</a>
-    <a href="tags/@Erlang.html">@Erlang</a>
-    <a href="tags/@SQL.html">@SQL</a>
-    <a href="tags/@DB.html">@DB</a>
-    <a href="tags/@Oracle.html">@Oracle</a>
-    <a href="tags/@Ediff.html">@Ediff</a>
-    <a href="tags/@Git.html">@Git</a>
-    <a href="tags/@Cedet.html">@Cedet</a>
-    <a href="tags/@C-C++.html">@C-C++</a>
-    <a href="tags/@Daily.html">@Daily</a>
-    <a href="tags/@Eclipse.html">@Eclipse</a>
-    <a href="tags/@AutoHotKey.html">@AutoHotKey</a>
-    <a href="tags/@Windows.html">@Windows</a>
-    <a href="tags/@Linux.html">@Linux</a>
-    <a href="tags/@C.html">@C</a>
-    <a href="tags/@Emacs.html">@Emacs</a>
+    <a href="../tags/@SVN.html">@SVN</a><br/>
+    <a href="../tags/@perl.html">@perl</a><br/>
+    <a href="../tags/@Java.html">@Java</a><br/>
+    <a href="../tags/@Mysql.html">@Mysql</a><br/>
+    <a href="../tags/@Erlang.html">@Erlang</a><br/>
+    <a href="../tags/@SQL.html">@SQL</a><br/>
+    <a href="../tags/@DB.html">@DB</a><br/>
+    <a href="../tags/@Oracle.html">@Oracle</a><br/>
+    <a href="../tags/@Ediff.html">@Ediff</a><br/>
+    <a href="../tags/@Git.html">@Git</a><br/>
+    <a href="../tags/@Cedet.html">@Cedet</a><br/>
+    <a href="../tags/@C-C++.html">@C-C++</a><br/>
+    <a href="../tags/@Daily.html">@Daily</a><br/>
+    <a href="../tags/@Eclipse.html">@Eclipse</a><br/>
+    <a href="../tags/@AutoHotKey.html">@AutoHotKey</a><br/>
+    <a href="../tags/@Windows.html">@Windows</a><br/>
+    <a href="../tags/@Linux.html">@Linux</a><br/>
+    <a href="../tags/@C.html">@C</a><br/>
+    <a href="../tags/@Emacs.html">@Emacs</a><br/>
 </p>
-
-
+<p><br/>
 </div>
-</div>
+</p></div>
 
 <div id="postamble">
-<p class="date">Date: 2011-06-04 星期六</p>
+<p class="date">Date: 2011-09-08 星期四</p>
 <p class="author">Author: 孤峰独秀</p>
 <p class="creator">Org version 7.8.03 with Emacs version 24</p>
 

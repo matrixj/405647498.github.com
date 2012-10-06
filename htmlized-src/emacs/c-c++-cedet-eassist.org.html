@@ -1,0 +1,125 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<!-- Created by htmlize-1.34 in css mode. -->
+<html>
+  <head>
+    <title>c-c++-cedet-eassist.org</title>
+    <style type="text/css">
+    <!--
+      body {
+        color: #F8F8F8;
+        background-color: #0C1021;
+      }
+      .comment {
+        /* font-lock-comment-face */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-block {
+        /* org-block */
+        color: #b3b3b3;
+      }
+      .org-block-begin-line {
+        /* org-block-begin-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-block-end-line {
+        /* org-block-end-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-document-info {
+        /* org-document-info */
+        color: #afeeee;
+      }
+      .org-document-info-keyword {
+        /* org-document-info-keyword */
+        color: #b3b3b3;
+      }
+      .org-document-title {
+        /* org-document-title */
+        color: #afeeee;
+        font-size: 144%;
+        font-weight: bold;
+      }
+      .org-meta-line {
+        /* org-meta-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+
+      a {
+        color: inherit;
+        background-color: inherit;
+        font: inherit;
+        text-decoration: inherit;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+    -->
+    </style>
+  </head>
+  <body>
+    <pre>
+<span class="comment"># -*- coding:utf-8 -*-</span>
+<span class="org-meta-line">#+LANGUAGE:  zh
+</span><span class="org-document-info-keyword">#+TITLE:</span><span class="comment">     </span><span class="org-document-title">cedet eassist&#22312;c c++&#32534;&#31243;&#20013;&#30340;&#24212;&#29992;</span>
+<span class="org-document-info-keyword">#+AUTHOR:</span><span class="comment">    </span><span class="org-document-info">&#32426;&#31168;&#23792;</span>
+<span class="org-document-info-keyword">#+EMAIL:</span><span class="comment">     </span><span class="org-document-info">jixiuf@gmail.com</span>
+<span class="org-document-info-keyword">#+DATE:</span><span class="comment">     </span><span class="org-document-info">2012-08-27 &#19968;</span>
+<span class="org-meta-line">#+DESCRIPTION:cedet eassist&#22312;c c++&#32534;&#31243;&#20013;&#30340;&#24212;&#29992;
+#+KEYWORDS:
+#+OPTIONS:   H:2 num:nil toc:t \n:t @:t ::t |:t ^:nil -:t f:t *:t &lt;:t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil
+#+FILETAGS: @Cedet @Emacs @C-C++
+</span>eassist.el&#26159;cedet/contrib/&#19979;&#30340;&#19968;&#20010;&#25991;&#20214;,&#20027;&#35201;&#25552;&#20379;&#20102;&#20004;&#39033;&#21151;&#33021;&#65292;
+ + &#21015;&#20986;&#24403;&#21069;&#31867;&#30340;&#25152;&#26377;&#26041;&#27861;(&#36824;&#21487;&#20197;&#30452;&#25509;&#36755;&#20837;&#26041;&#27861;&#21517;&#26469;&#20174;&#20247;&#22810;&#30340;&#26041;&#27861;&#20013;&#36807;&#28388;)
+ + &#22312;&#22836;&#25991;&#20214;&#19982;&#20195;&#30721;&#25991;&#20214;&#38388;&#20999;&#25442;&#65292;&#21363;&#22312; .h &#19982;.c &#25110;.h &#19982;.cpp&#20004;&#20010;&#30456;&#20851;&#25991;&#20214;&#38388;&#20999;&#25442;
+ &#20197;&#19979;&#20869;&#23481;&#26159;&#20174; eassist.el&#25991;&#20214;&#20013;&#25688;&#20986;&#26469;&#30340;
+<span class="org-block-begin-line">#+BEGIN_QUOTE
+</span>1) Install CEDET package for Emacs (if you don't have CEDET already).
+2) Add convenient keymaps for fast EmacsAssist calls in c-mode and (or) python-mode
+   and for lisp:
+
+   (defun my-c-mode-common-hook ()
+     (define-key c-mode-base-map (kbd "M-o") 'eassist-switch-h-cpp)
+     (define-key c-mode-base-map (kbd "M-m") 'eassist-list-methods))
+   (add-hook 'c-mode-common-hook 'my-c-mode-common-hook)
+
+   (defun my-python-mode-hook ()
+     (define-key python-mode-map (kbd "M-m") 'eassist-list-methods))
+   (add-hook 'python-mode-hook 'my-python-mode-hook)
+
+   (define-key lisp-mode-shared-map (kbd "M-m") 'eassist-list-methods)
+
+3) Open any C++ file with class definition, press M-m.  Try to type
+   any method name(&#36824;&#21487;&#20197;&#30452;&#25509;&#36755;&#20837;&#26041;&#27861;&#21517;&#26469;&#20174;&#20247;&#22810;&#30340;&#26041;&#27861;&#20013;&#36807;&#28388;).
+4) Open any .cpp file.  Press M-o.  If there is .h or .hpp file in the
+   same folder, it will be opened.<span class="org-meta-line">
+</span><span class="org-block-end-line">#+END_QUOTE
+</span><span class="org-block-begin-line">#+BEGIN_SRC emacs-lisp
+</span><span class="org-block">(require 'eassisct)
+(defun my-c-mode-cedet-hook ()
+  (local-set-key "\C-ct" 'eassist-switch-h-cpp)
+  (local-set-key "\C-xt" 'eassist-switch-h-cpp)
+  (local-set-key "\C-ce" 'eassist-list-methods)
+  )
+(add-hook 'c-mode-common-hook 'my-c-mode-cedet-hook)
+</span><span class="org-block-end-line">#+END_SRC
+</span> &#21487;&#20197;&#36825;&#26679;&#37197;&#32622;
+<span class="org-block-begin-line">#+BEGIN_SRC emacs-lisp
+</span><span class="org-block">;; (require 'eassisct)
+;; eassist-switch-h-cpp and eassist-list-methods is autoloaded in cedet-contrib-load
+(require 'cedet-contrib-load)
+(defun my-c-mode-cedet-hook ()
+  (local-set-key "\C-ct" 'eassist-switch-h-cpp)
+  (local-set-key "\C-xt" 'eassist-switch-h-cpp)
+  (local-set-key "\C-ce" 'eassist-list-methods)
+  )
+(add-hook 'c-mode-common-hook 'my-c-mode-cedet-hook)
+</span><span class="org-block-end-line">#+END_SRC
+</span> &#20063;&#21487;&#20197;&#36825;&#26679;&#37197;&#32622;
+</pre>
+  </body>
+</html>

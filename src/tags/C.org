@@ -1,0 +1,6 @@
+# -*- coding:utf-8 -*-
+
+#+TITLE: Tag: C
+
+#+LANGUAGE:  zh
+   + [[file:../c/concat.org][concat()可变长度参数的实现]]

@@ -1,0 +1,2769 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+               "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh" xml:lang="zh">
+<head>
+<title>perl 一的些总结</title>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+<meta name="title" content="perl 一的些总结"/>
+<meta name="generator" content="Org-mode"/>
+<meta name="generated" content="2011-08-25 四"/>
+<meta name="author" content="孤峰独秀"/>
+<meta name="description" content="perl 一的些总结"/>
+<meta name="keywords" content="perl "/>
+<style type='text/css'>
+       body {
+    background-color: #E5E5E5;
+	scrollbar-face-color: #DEE3E7;
+	scrollbar-highlight-color: #FFFFFF;
+	scrollbar-shadow-color: #DEE3E7;
+	scrollbar-3dlight-color: #D1D7DC;
+	scrollbar-arrow-color:  #006699;
+	scrollbar-track-color: #EFEFEF;
+	scrollbar-darkshadow-color: #98AAB1;
+    /* background-color: #999966;  */
+    margin: 0em;
+}
+
+h1 {
+    font-size: 2.0em;
+    margin-top: 1.0em;
+    margin-bottom: 0.3em;
+}
+h2 {
+    font-size: 1.5em;
+    margin-top: 2.4em;
+    margin-bottom: 0.3em;
+}
+h3 {
+    font-size: 1.25em;
+    margin-top: 1.25em;
+    margin-bottom: 0.3em;
+}
+
+
+div#content {
+    font-family: Times, serif;
+    border-left: double #333300 3mm;
+    border-right: double #333300 3mm;
+    letter-spacing: 0.075em;
+    line-height: 1.4;
+    margin: 0em auto;
+    padding: 2em;
+    width: 92%;
+    height:100%; 
+    min-height:600px;           /*firefox do'nt support height:100% ,so*/
+ 
+}
+/* #table-of-contents { */
+/* 	font-size: 75%; */
+/* 	line-height: 1.4em; */
+/* 	position: fixed; */
+/* 	display: block; */
+/* 	left: -20px; */
+/* 	top: 5%; */
+/* 	width: 250px; */
+/* 	min-height:60px; */
+/* 	max-height:95%; */
+/* 	overflow:hidden; */
+/*     white-space:nowrap; */
+/* } */
+
+#org-div-home-and-up{
+	position: fixed;
+	display: block;
+	right: 18px;
+	top: 5px;
+	overflow:auto;
+    }
+#org-src{
+	position: fixed;
+	display: block;
+	right: 18px;
+	top: 20px;
+	overflow:hidden;
+    }
+#htmlized-src{
+	position: fixed;
+	display: block;
+	right: 54px;
+	top: 20px;
+	overflow:hidden;
+    }
+#table-of-contents h2 {
+	display:none;
+}
+
+#logo-text{
+	position: fixed;
+	display: block;
+	right: 16px;
+	bottom: 3px;
+	overflow:hidden;
+}
+#logo-img{
+    font-size: 60%;
+	position: fixed;
+	display: block;
+    left: 16px;
+	top: 3px;
+    }
+div#tags {
+	font-size: 75%;
+    text-align:right;
+	/* line-height: 1.4em; */
+	position: fixed;
+	display: block;
+	right: 40px;
+	top: 20%;
+	width: 90px;
+	/* min-height:60px; */
+	max-height:95%;
+	/* overflow:visible; */
+    /* white-space:pre-wrap; */
+}
+
+.title {
+    text-align:center;
+	padding-bottom: 7px;
+	margin-bottom: 20px;
+	border-bottom: 1px solid #222;
+}
+ a:link,a:active,a:visited { color : #006699; } 
+ a:hover		{ text-decoration: underline; color : #DD6900; } 
+
+.todo {color: #990000;}
+.done {color: #006666;}
+.timestamp-kwd {color: #444;}
+.tag {color: #DDD; font-size: 70%; font-weight: 500;}
+
+table {border: none;
+       width:90%;
+      }
+th	{
+	background-color: #006699; 
+}
+td	{
+    padding: .1em .7em .1em .3em;
+	background-color: Gainsboro
+}
+
+
+code {
+font-family: Andale Mono, Courier New, Courier, sans-serif; font-size: 12px; line-height: 14px; color: #0000A0;
+	background-color: #FAFAFA; border: #D1D7DC; border-style: solid;
+	border-left-width: 1px; border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px
+}
+
+/* pre { */
+/* 	border: 1px solid #555; */
+/* 	background: #EEEEEE; */
+/* 	font-size: 9pt; */
+/* 	padding: 1em; */
+/* } */
+pre.src {
+	border: 1px solid #555;
+	background:#0c1021;
+    /* background:#263111; */
+    color: #f7f8c6;
+	font-size: 10pt;
+    width:85%;
+	padding: 0em;
+	margin: 0;
+	width: 700px;
+	float: none;
+	clear: none;
+	line-height: 1.333;
+	text-align:left;
+    
+    /* overflow: scroll; */
+    max-height:500px;           /*IEXPLORE  don't support max-height*/
+    _height:expression(this.scrollHeight > 300 ? "300px" : "auto");
+    min-height:50px;
+    max-width:700px;
+    min-width:700px;
+    overflow-x:auto;
+    overflow-y:auto;
+}
+blockquote {
+	 border: #D1D7DC;
+     border-style: solid;
+	border-left-width: 1px;
+    border-top-width: 1px;
+    border-right-width: 1px;
+    border-bottom-width: 1px
+    
+    color: #444444;
+    line-height: 125%;
+	border: 1px solid #555;
+    background-color: #FAFAFA;    
+    width:95%;
+	padding: 1em;
+	margin: 0;
+	float: none;
+	clear: none;
+	text-align:left;
+    font-style:italic;
+    
+    /* overflow: scroll; */
+    max-height:300px;           /*IEXPLORE  don't support max-height*/
+    _height:expression(this.scrollHeight > 300 ? "300px" : "auto");
+    min-height:20px;
+    max-width:700px;
+    min-width:700px;
+    overflow-x:auto;
+    overflow-y:auto;
+}
+
+.org-function-name {
+    /* font-lock-function-name-face */
+    /* color: #0000ff; */
+     color: #87cefa;
+     font-stretch: normal;
+     text-decoration: none;
+}
+
+.org-keyword {
+    /* font-lock-keyword-face */
+    color: #00ffff;
+    text-decoration: none;
+    /* color: #a020f0; */
+}
+.org-doc
+ { color: #ffa07a;
+   text-decoration: none;
+ }
+p.author{
+    font-size:80%;
+    color:#556b2f;
+    font-style:italic;
+    position:fixed;
+    left:10px;
+    bottom:40px;
+}
+p.date{
+    font-size:80%;
+    color:#556b2f;
+    font-style:italic;
+    position:fixed;
+    left:10px;
+    bottom:0px;
+}
+p.creator{
+    font-size:80%;
+    color:#556b2f;
+    font-style:italic;
+    position:fixed;
+    left:10px;
+    bottom:20px;
+}
+
+img {
+    display:inline;
+	border: none;
+    float:none;
+    clear:none;
+    left:10px;
+}
+
+.share img {
+	opacity: .4;
+	-moz-opacity: .4;
+	filter: alpha(opacity=40);
+}
+
+.share img:hover {
+	opacity: 1;
+	-moz-opacity: 1;
+	filter: alpha(opacity=100);
+}
+
+.org-info-search-highlight
+{
+	background-color:#adefef; /* same color as emacs default */
+	color:#000000;
+	font-weight:bold;
+}
+
+.org-bbdb-company {
+    /* bbdb-company */
+    font-style: italic;
+}
+.org-bbdb-field-name {
+}
+.org-bbdb-field-value {
+}
+.org-bbdb-name {
+    /* bbdb-name */
+    text-decoration: underline;
+}
+.org-bold {
+    /* bold */
+    font-weight: bold;
+}
+.org-bold-italic {
+    /* bold-italic */
+    font-weight: bold;
+    font-style: italic;
+}
+.org-border {
+    /* border */
+    background-color: #000000;
+}
+.org-buffer-menu-buffer {
+    /* buffer-menu-buffer */
+    font-weight: bold;
+}
+.org-builtin {
+    /* font-lock-builtin-face */
+    color: #da70d6;
+}
+.org-button {
+    /* button */
+    text-decoration: underline;
+}
+.org-c-nonbreakable-space {
+    /* c-nonbreakable-space-face */
+    background-color: #ff0000;
+    font-weight: bold;
+}
+.org-calendar-today {
+    /* calendar-today */
+    text-decoration: underline;
+}
+.org-comment {
+    /* font-lock-comment-face */
+    color: #b22222;
+}
+.org-comment-delimiter {
+    /* font-lock-comment-delimiter-face */
+    color: #b22222;
+}
+.org-constant {
+    /* font-lock-constant-face */
+    color: #5f9ea0;
+}
+.org-cursor {
+    /* cursor */
+    background-color: #000000;
+}
+.org-default {
+    /* default */
+    color: #000000;
+    background-color: #ffffff;
+}
+.org-diary {
+    /* diary */
+    color: #ff0000;
+}
+.org-escape-glyph {
+    /* escape-glyph */
+    color: #a52a2a;
+}
+.org-file-name-shadow {
+    /* file-name-shadow */
+    color: #7f7f7f;
+}
+.org-fixed-pitch {
+}
+.org-fringe {
+    /* fringe */
+    background-color: #f2f2f2;
+}
+.org-header-line {
+    /* header-line */
+    color: #333333;
+    background-color: #e5e5e5;
+}
+.org-help-argument-name {
+    /* help-argument-name */
+    font-style: italic;
+}
+.org-highlight {
+    /* highlight */
+    background-color: #b4eeb4;
+}
+.org-holiday {
+    /* holiday */
+    background-color: #ffc0cb;
+}
+.org-info-header-node {
+    /* info-header-node */
+    color: #a52a2a;
+    font-weight: bold;
+    font-style: italic;
+}
+.org-info-header-xref {
+    /* info-header-xref */
+    color: #0000ff;
+    text-decoration: underline;
+}
+.org-info-menu-header {
+    /* info-menu-header */
+    font-weight: bold;
+}
+.org-info-menu-star {
+    /* info-menu-star */
+    color: #ff0000;
+}
+.org-info-node {
+    /* info-node */
+    color: #a52a2a;
+    font-weight: bold;
+    font-style: italic;
+}
+.org-info-title-1 {
+    /* info-title-1 */
+    font-size: 172%;
+    font-weight: bold;
+}
+.org-info-title-2 {
+    /* info-title-2 */
+    font-size: 144%;
+    font-weight: bold;
+}
+.org-info-title-3 {
+    /* info-title-3 */
+    font-size: 120%;
+    font-weight: bold;
+}
+.org-info-title-4 {
+    /* info-title-4 */
+    font-weight: bold;
+}
+.org-info-xref {
+    /* info-xref */
+    color: #0000ff;
+    text-decoration: underline;
+}
+.org-isearch {
+    /* isearch */
+    color: #b0e2ff;
+    background-color: #cd00cd;
+}
+.org-italic {
+    /* italic */
+    font-style: italic;
+}
+.org-lazy-highlight {
+    /* lazy-highlight */
+    background-color: #afeeee;
+}
+.org-link {
+    /* link */
+    color: #0000ff;
+    text-decoration: underline;
+}
+.org-link-visited {
+    /* link-visited */
+    color: #8b008b;
+    text-decoration: underline;
+}
+.org-match {
+    /* match */
+    background-color: #ffff00;
+}
+.org-menu {
+}
+.org-message-cited-text {
+    /* message-cited-text */
+    color: #ff0000;
+}
+.org-message-header-cc {
+    /* message-header-cc */
+    color: #191970;
+}
+.org-message-header-name {
+    /* message-header-name */
+    color: #6495ed;
+}
+.org-message-header-newsgroups {
+    /* message-header-newsgroups */
+    color: #00008b;
+    font-weight: bold;
+    font-style: italic;
+}
+.org-message-header-other {
+    /* message-header-other */
+    color: #4682b4;
+}
+.org-message-header-subject {
+    /* message-header-subject */
+    color: #000080;
+    font-weight: bold;
+}
+.org-message-header-to {
+    /* message-header-to */
+    color: #191970;
+    font-weight: bold;
+}
+.org-message-header-xheader {
+    /* message-header-xheader */
+    color: #0000ff;
+}
+.org-message-mml {
+    /* message-mml */
+    color: #228b22;
+}
+.org-message-separator {
+    /* message-separator */
+    color: #a52a2a;
+}
+.org-minibuffer-prompt {
+    /* minibuffer-prompt */
+    color: #0000cd;
+}
+.org-mm-uu-extract {
+    /* mm-uu-extract */
+    color: #006400;
+    background-color: #ffffe0;
+}
+.org-mode-line {
+    /* mode-line */
+    color: #000000;
+    background-color: #bfbfbf;
+}
+.org-mode-line-buffer-id {
+    /* mode-line-buffer-id */
+    font-weight: bold;
+}
+.org-mode-line-highlight {
+}
+.org-mode-line-inactive {
+    /* mode-line-inactive */
+    color: #333333;
+    background-color: #e5e5e5;
+}
+.org-mouse {
+    /* mouse */
+    background-color: #000000;
+}
+.org-negation-char {
+}
+.org-next-error {
+    /* next-error */
+    background-color: #eedc82;
+}
+.org-nobreak-space {
+    /* nobreak-space */
+    color: #a52a2a;
+    text-decoration: underline;
+}
+.org-org-agenda-date {
+    /* org-agenda-date */
+    color: #0000ff;
+}
+.org-org-agenda-date-weekend {
+    /* org-agenda-date-weekend */
+    color: #0000ff;
+    font-weight: bold;
+}
+.org-org-agenda-restriction-lock {
+    /* org-agenda-restriction-lock */
+    background-color: #ffff00;
+}
+.org-org-agenda-structure {
+    /* org-agenda-structure */
+    color: #0000ff;
+}
+.org-org-archived {
+    /* org-archived */
+    color: #7f7f7f;
+}
+.org-org-code {
+    /* org-code */
+    color: #7f7f7f;
+}
+.org-org-column {
+    /* org-column */
+    background-color: #e5e5e5;
+}
+.org-org-column-title {
+    /* org-column-title */
+    background-color: #e5e5e5;
+    font-weight: bold;
+    text-decoration: underline;
+}
+.org-org-date {
+    /* org-date */
+    color: #a020f0;
+    text-decoration: underline;
+}
+.org-org-done {
+    /* org-done */
+    color: #228b22;
+    font-weight: bold;
+}
+.org-org-drawer {
+    /* org-drawer */
+    color: #0000ff;
+}
+.org-org-ellipsis {
+    /* org-ellipsis */
+    color: #b8860b;
+    text-decoration: underline;
+}
+.org-org-formula {
+    /* org-formula */
+    color: #b22222;
+}
+.org-org-headline-done {
+    /* org-headline-done */
+    color: #bc8f8f;
+}
+.org-org-hide {
+    /* org-hide */
+    color: #e5e5e5;
+}
+.org-org-latex-and-export-specials {
+    /* org-latex-and-export-specials */
+    color: #8b4513;
+}
+.org-org-level-1 {
+    /* org-level-1 */
+    color: #0000ff;
+}
+.org-org-level-2 {
+    /* org-level-2 */
+    color: #b8860b;
+}
+.org-org-level-3 {
+    /* org-level-3 */
+    color: #a020f0;
+}
+.org-org-level-4 {
+    /* org-level-4 */
+    color: #b22222;
+}
+.org-org-level-5 {
+    /* org-level-5 */
+    color: #228b22;
+}
+.org-org-level-6 {
+    /* org-level-6 */
+    color: #5f9ea0;
+}
+.org-org-level-7 {
+    /* org-level-7 */
+    color: #da70d6;
+}
+.org-org-level-8 {
+    /* org-level-8 */
+    color: #bc8f8f;
+}
+.org-org-link {
+    /* org-link */
+    color: #a020f0;
+    text-decoration: underline;
+}
+.org-org-property-value {
+}
+.org-org-scheduled-previously {
+    /* org-scheduled-previously */
+    color: #b22222;
+}
+.org-org-scheduled-today {
+    /* org-scheduled-today */
+    color: #006400;
+}
+.org-org-sexp-date {
+    /* org-sexp-date */
+    color: #a020f0;
+}
+.org-org-special-keyword {
+    /* org-special-keyword */
+    color: #bc8f8f;
+}
+.org-org-table {
+    /* org-table */
+    color: #0000ff;
+}
+.org-org-tag {
+    /* org-tag */
+    font-weight: bold;
+}
+.org-org-target {
+    /* org-target */
+    text-decoration: underline;
+}
+.org-org-time-grid {
+    /* org-time-grid */
+    color: #b8860b;
+}
+.org-org-todo {
+    /* org-todo */
+    color: #ff0000;
+}
+.org-org-upcoming-deadline {
+    /* org-upcoming-deadline */
+    color: #b22222;
+}
+.org-org-verbatim {
+    /* org-verbatim */
+    color: #7f7f7f;
+    text-decoration: underline;
+}
+.org-org-warning {
+    /* org-warning */
+    color: #ff0000;
+    font-weight: bold;
+}
+.org-outline-1 {
+    /* outline-1 */
+    color: #0000ff;
+}
+.org-outline-2 {
+    /* outline-2 */
+    color: #b8860b;
+}
+.org-outline-3 {
+    /* outline-3 */
+    color: #a020f0;
+}
+.org-outline-4 {
+    /* outline-4 */
+    color: #b22222;
+}
+.org-outline-5 {
+    /* outline-5 */
+    color: #228b22;
+}
+.org-outline-6 {
+    /* outline-6 */
+    color: #5f9ea0;
+}
+.org-outline-7 {
+    /* outline-7 */
+    color: #da70d6;
+}
+.org-outline-8 {
+    /* outline-8 */
+    color: #bc8f8f;
+}
+.org-preprocessor {
+    /* font-lock-preprocessor-face */
+    color: #da70d6;
+}
+.org-query-replace {
+    /* query-replace */
+    color: #b0e2ff;
+    background-color: #cd00cd;
+}
+.org-regexp-grouping-backslash {
+    /* font-lock-regexp-grouping-backslash */
+    font-weight: bold;
+}
+.org-regexp-grouping-construct {
+    /* font-lock-regexp-grouping-construct */
+    font-weight: bold;
+}
+.org-region {
+    /* region */
+    background-color: #eedc82;
+}
+.org-rmail-highlight {
+}
+.org-scroll-bar {
+    /* scroll-bar */
+    background-color: #bfbfbf;
+}
+.org-secondary-selection {
+    /* secondary-selection */
+    background-color: #ffff00;
+}
+.org-shadow {
+    /* shadow */
+    color: #7f7f7f;
+}
+.org-show-paren-match {
+    /* show-paren-match */
+    background-color: #40e0d0;
+}
+.org-show-paren-mismatch {
+    /* show-paren-mismatch */
+    color: #ffffff;
+    background-color: #a020f0;
+}
+.org-string {
+    /* font-lock-string-face */
+    color: #bc8f8f;
+}
+.org-texinfo-heading {
+    /* texinfo-heading */
+    color: #0000ff;
+}
+.org-tool-bar {
+    /* tool-bar */
+    color: #000000;
+    background-color: #bfbfbf;
+}
+.org-tooltip {
+    /* tooltip */
+    color: #000000;
+    background-color: #ffffe0;
+}
+.org-trailing-whitespace {
+    /* trailing-whitespace */
+    background-color: #ff0000;
+}
+.org-type {
+    /* font-lock-type-face */
+    color: #228b22;
+}
+.org-underline {
+    /* underline */
+    text-decoration: underline;
+}
+.org-variable-name {
+    /* font-lock-variable-name-face */
+    color: #b8860b;
+}
+.org-variable-pitch {
+}
+.org-vertical-border {
+}
+.org-warning {
+    /* font-lock-warning-face */
+    color: #ff0000;
+    font-weight: bold;
+}
+
+
+
+.logo-link {
+    position: fixed;
+    top: 10px;
+    left: 30px;
+}
+
+/* These style are only for IE: */
+
+* html {
+    overflow: hidden;
+    padding-bottom:0px;
+    margin:0px;
+}
+
+* html body {
+    height: 100%;
+    overflow:auto;
+    font-size: 100%;
+    margin: 0px 0px 0px 250px;
+    padding: 0px 10% 0px 0px;
+}
+/* 针对Ie ,好像因为iexplore 不认识position:fixed 所以没办法让
+   导航部分的显示固定在特定的位置，不随滚动条而滚动
+ */
+* html #table-of-contents {
+    position: absolute;
+    width:200px;
+    left:10px
+    /*
+      The evil IE-JavaScript hack :-) depends on Picture and y-distance.
+      Added to support small screens (Netbooks...).
+      */
+    top: expression( ( 30 + ( noValue = document.documentElement.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop ) ) + 'px' );
+    /* top: expression((document.body.clientHeight - 210) + "px"); */
+     /* height: expression((document.body.clientHeight - 210) + "px"); */
+}
+* html #org-div-home-and-up {
+    position: absolute;
+    width:200px;
+    right:25px;
+    /*
+      The evil IE-JavaScript hack :-) depends on Picture and y-distance.
+      Added to support small screens (Netbooks...).
+      */
+    /* top: expression( ( 10 + ( noValue = document.documentElement.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop ) ) + 'px' ); */
+    /* top: expression((document.body.clientHeight - 210) + "px"); */
+     /* height: expression((document.body.clientHeight - 210) + "px"); */
+}
+* html #org-src{
+    position: absolute;
+    width:25px;
+    right:20px;
+}
+* html #htmlized-src{
+    position: absolute;
+    width:120px;
+    right:20px;
+}
+
+* html p.author{
+    position: absolute;
+    width:125px;
+    left:20px;
+}
+* html p.date{
+    position: absolute;
+    width:225px;
+    left:20px;
+    bottom:0px;
+}
+* html p.creator{
+    position: absolute;
+    width:425px;
+    left:20px;
+    bottom:20px;
+}
+
+* html h1 {
+    margin-top:10px;
+}
+
+* html .logo-link {
+    position: absolute;
+    top: 10px;
+    left: 30px;
+}
+
+* html #logo-text{
+    font-size: 75%;
+	position: absolute;
+	display: block;
+	right: 10px;
+	bottom: 3px;
+	overflow:hidden;
+}
+ 
+ 
+* html div#tags {
+	font-size: 75%;
+	/* line-height: 1.4em; */
+	position: absolute;
+	display: block;
+	right: -2px;
+	top: 10%;
+	width: 150px;
+	/* min-height:60px; */
+	max-height:95%;
+	/* overflow:visible; */
+    /* white-space:pre-wrap; */
+}
+
+    </style>
+<link rel="stylesheet" type="text/css" href="../style/emacs.css" />
+<script type='text/javascript' src='../js/emacs.js'> </script>
+<script type="text/javascript" src="http://orgmode.org/mathjax/MathJax.js">
+<!--/*--><![CDATA[/*><!--*/
+    MathJax.Hub.Config({
+        // Only one of the two following lines, depending on user settings
+        // First allows browser-native MathML display, second forces HTML/CSS
+        //  config: ["MMLorHTML.js"], jax: ["input/TeX"],
+            jax: ["input/TeX", "output/HTML-CSS"],
+        extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js",
+                     "TeX/noUndefined.js"],
+        tex2jax: {
+            inlineMath: [ ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"], ["\\begin{displaymath}","\\end{displaymath}"] ],
+            skipTags: ["script","noscript","style","textarea","pre","code"],
+            ignoreClass: "tex2jax_ignore",
+            processEscapes: false,
+            processEnvironments: true,
+            preview: "TeX"
+        },
+        showProcessingMessages: true,
+        displayAlign: "center",
+        displayIndent: "2em",
+
+        "HTML-CSS": {
+             scale: 100,
+             availableFonts: ["STIX","TeX"],
+             preferredFont: "TeX",
+             webFont: "TeX",
+             imageFont: "TeX",
+             showMathMenu: true,
+        },
+        MMLorHTML: {
+             prefer: {
+                 MSIE:    "MML",
+                 Firefox: "MML",
+                 Opera:   "HTML",
+                 other:   "HTML"
+             }
+        }
+    });
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="org-div-home-and-up" style="text-align:right;font-size:70%;white-space:nowrap;">
+ <a accesskey="h" href="../sitemap.html"> 站点地图 </a>
+ |
+ <a accesskey="H" href="../index.html"> 首页 </a>
+</div>
+
+<div id="preamble">
+
+</div>
+
+<div id="content">
+<h1 class="title">perl 一的些总结</h1>
+
+
+<div id='logo-img' ><a  href='../index.html'>▇█▓▒░◕~◕░▒▓█▇</a></div>
+
+<div id='logo-text'>
+  <a href='#' ><span align="left">░◕~◕░</span></a>
+</div>
+
+
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">perl 中变量以$开头，数组以@开头,关联数组(map) 以%开头;</a></li>
+<li><a href="#sec-2">Regexp :处在//之间</a>
+<ul>
+<li><a href="#sec-2-1">模式匹配选项</a></li>
+</ul>
+</li>
+<li><a href="#sec-3">子程序，函数</a>
+<ul>
+<li><a href="#sec-3-1">局部变量 my ,与local</a></li>
+<li><a href="#sec-3-2">参数传递 @_</a></li>
+<li><a href="#sec-3-3">别名传参（指针）</a></li>
+</ul>
+</li>
+<li><a href="#sec-4">Filesystem</a>
+<ul>
+<li><a href="#sec-4-1">打开文件，一行行读取.</a></li>
+<li><a href="#sec-4-2">linux相关特性， 管道 "|"</a></li>
+<li><a href="#sec-4-3">写文件 &gt; 与 重定向</a></li>
+<li><a href="#sec-4-4">是否使用缓冲区(写文件时)</a></li>
+<li><a href="#sec-4-5">4)指定读写权限</a></li>
+<li><a href="#sec-4-6">5)close函数</a></li>
+<li><a href="#sec-4-7">6)print, printf和write函数</a></li>
+<li><a href="#sec-4-8">7)select函数</a></li>
+<li><a href="#sec-4-9">8)eof函数 (endoffile)</a></li>
+<li><a href="#sec-4-10">间接文件变量</a></li>
+<li><a href="#sec-4-11">跳过和重读数据 seek tell</a></li>
+<li><a href="#sec-4-12">read (filevar, result, length, skipval);</a></li>
+<li><a href="#sec-4-13">sysread (filevar, result, length, skipval);</a></li>
+<li><a href="#sec-4-14">syswrite (filevar, data, length, skipval);</a></li>
+<li><a href="#sec-4-15">$char = getc (infile);   #从文件中读取单个字符。</a></li>
+<li><a href="#sec-4-16">binmode (filevar);</a></li>
+<li><a href="#sec-4-17">mkdir (dirname, permissions);</a></li>
+<li><a href="#sec-4-18">chdir (dirname); #改变当前工作目录。参数dirname可以为字符串，也可以为表达式</a></li>
+<li><a href="#sec-4-19">opendir (dirvar, dirname);</a></li>
+<li><a href="#sec-4-20">closedir (mydir)</a></li>
+<li><a href="#sec-4-21">readdir (mydir);</a></li>
+<li><a href="#sec-4-22">location = telldir (mydir);</a></li>
+<li><a href="#sec-4-23">seekdir(mydir, location);</a></li>
+<li><a href="#sec-4-24">rewinddir (mydir);</a></li>
+<li><a href="#sec-4-25">rmdir (dirname);</a></li>
+<li><a href="#sec-4-26">rename (oldname, newname);</a></li>
+<li><a href="#sec-4-27">num = unlink (filelist);</a></li>
+<li><a href="#sec-4-28">link (newlink, file);</a></li>
+<li><a href="#sec-4-29">symlink (newlink, file);</a></li>
+<li><a href="#sec-4-30">filename = readlink (linkname);</a></li>
+<li><a href="#sec-4-31">chmod (permissions, filelist);</a></li>
+<li><a href="#sec-4-32">chown (userid, groupid, filelist);</a></li>
+<li><a href="#sec-4-33">oldmaskval = umask (maskval);</a></li>
+<li><a href="#sec-4-34">truncate (filename, length);</a></li>
+<li><a href="#sec-4-35">stat (file);</a></li>
+<li><a href="#sec-4-36">lstat (file); #与stat类似，区别是将file看作是符号链接</a></li>
+<li><a href="#sec-4-37">currtime = time();</a></li>
+<li><a href="#sec-4-38">timelist = gmtime (timeval);</a></li>
+<li><a href="#sec-4-39">timelist = localtime (timeval);#与gmtime类似，区别为将时间值转换为本地时间</a></li>
+<li><a href="#sec-4-40">utime (acctime, modtime, filelist);</a></li>
+<li><a href="#sec-4-41">filedesc = fileno (filevar);#返回文件的内部UNIX文件描述。参数filevar为文件变量。</a></li>
+<li><a href="#sec-4-42">fcntl (filevar, fcntlrtn, value); # 详见同名UNIX函数帮助。</a></li>
+<li><a href="#sec-4-43">-e -r 测试文件、目录是否存在，是否可读</a></li>
+</ul>
+</li>
+<li><a href="#sec-5">pointer 引用，指针</a>
+<ul>
+<li><a href="#sec-5-1">使用反斜线(\)操作符</a></li>
+<li><a href="#sec-5-2">不仅变量、数组、Map 可以用指针引用之，子程序（函数）也可以</a></li>
+<li><a href="#sec-5-3">子程序的返回值不仅限于数据，还可以返回子程序的引用。返回的子程序在调用处执行</a></li>
+<li><a href="#sec-5-4">子程序，多数组参数传递</a></li>
+<li><a href="#sec-5-5">文件句柄的引用 \*</a></li>
+</ul>
+</li>
+<li><a href="#sec-6">多维数组</a>
+<ul>
+<li><a href="#sec-6-1">@_ 表示函数传参时，放置参数的数组</a></li>
+<li><a href="#sec-6-2">匹配时 各部分 $&amp; $` $' $1 ,$2</a></li>
+<li><a href="#sec-6-3">$<sup>o</sup> 表示操作系统</a></li>
+<li><a href="#sec-6-4">$. 表示在读取文件时，当前行是第几行</a></li>
+<li><a href="#sec-6-5">$$ 表示当前进程号</a></li>
+<li><a href="#sec-6-6">$_</a></li>
+<li><a href="#sec-6-7">$/ $\</a></li>
+<li><a href="#sec-6-8">$,</a></li>
+</ul>
+</li>
+<li><a href="#sec-7">关于 .. 两点</a>
+<ul>
+<li><a href="#sec-7-1">最简单的用法是表示一个数组</a></li>
+<li><a href="#sec-7-2">这两个点前后的内容，不仅仅可以是数字，字符串，也可以是一个表达式</a></li>
+</ul>
+</li>
+<li><a href="#sec-8">shift unshift push pop</a></li>
+<li><a href="#sec-9">last ===break</a></li>
+<li><a href="#sec-10"></a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-1" class="outline-2">
+<h2 id="sec-1">perl 中变量以$开头，数组以@开头,关联数组(map) 以%开头;</h2>
+<div class="outline-text-2" id="text-1">
+
+
+<p><br/>
+<pre class="src src-perl"><span class="org-comment-delimiter"># </span><span class="org-comment">variable </span>
+$<span class="org-variable-name">var</span>=<span class="org-string">"abcab"</span>;
+
+<span class="org-comment-delimiter">#</span><span class="org-comment">array</span>
+@<span class="org-underline"><span class="org-variable-name">array</span></span>=(<span class="org-string">"a"</span>,<span class="org-string">"b"</span> );
+print($<span class="org-variable-name">array</span>[0]);
+$<span class="org-variable-name">array</span>[2]=<span class="org-string">"c"</span>;
+<span class="org-comment-delimiter"># </span><span class="org-comment">.&#25968;&#32452;&#38388;&#25335;&#36125;</span>
+ @<span class="org-underline"><span class="org-variable-name">result</span></span> = @<span class="org-underline"><span class="org-variable-name">original</span></span>;
+
+@<span class="org-underline"><span class="org-variable-name">list1</span></span> = (2, 3, 4);
+@<span class="org-underline"><span class="org-variable-name">list2</span></span> = (1, @<span class="org-underline"><span class="org-variable-name">list1</span></span>, 5); <span class="org-comment"># @list2 = (1, 2, 3, 4, 5);</span>
+($<span class="org-variable-name">v1</span>,$<span class="org-variable-name">v2</span>)=@<span class="org-underline"><span class="org-variable-name">list1</span></span>;
+
+(1..10) = (1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+(<span class="org-string">"aaa"</span>..<span class="org-string">"aad"</span>) = (<span class="org-string">"aaa"</span>,<span class="org-string">"aab"</span>, <span class="org-string">"aac"</span>, <span class="org-string">"aad"</span>)
+
+</pre>
+
+
+<pre class="src src-perl"><span class="org-comment-delimiter">#</span><span class="org-comment">4&#12289;&#25968;&#32452;&#30340;&#36755;&#20986;&#65306;</span>
+ @<span class="org-underline"><span class="org-variable-name">array</span></span> = (1, 2, 3);
+    print (@<span class="org-underline"><span class="org-variable-name">array</span></span>, <span class="org-string">"\n"</span>);
+<span class="org-comment-delimiter">#  </span><span class="org-comment">&#32467;&#26524;&#20026;&#65306; 123</span>
+
+@<span class="org-underline"><span class="org-variable-name">array</span></span> = (1, 2, 3);
+ print (<span class="org-string">"@array\n"</span>);
+<span class="org-comment-delimiter">#  </span><span class="org-comment">&#32467;&#26524;&#20026;&#65306; 1 2 3</span>
+</pre>
+
+</p><ul>
+<li id="sec-1-1">数组长度<br/>
+
+<p><br/>
+<pre class="src src-perl">@<span class="org-underline"><span class="org-variable-name">array</span></span>=(<span class="org-string">"a"</span>,<span class="org-string">"b"</span>,<span class="org-string">"c"</span>)
+$<span class="org-variable-name">length</span>=@<span class="org-underline"><span class="org-variable-name">array</span></span>
+</pre>
+
+</p></li>
+</ul>
+<ul>
+<li id="sec-1-2">子数组<br/>
+    @array = (1 ,2,3 ,4,5);<br/>
+    @subarr=@array[0,1];<br/>
+    @subarr2=@array[1..4];<br/>
+</li>
+</ul>
+<ul>
+<li id="sec-1-3">数组 函数    sort() ,reverse() join() ,split<br/>
+
+<p><br/>
+<pre class="src src-perl">join(<span class="org-string">","</span> ,<span class="org-string">"a"</span>,<span class="org-string">"b"</span>,<span class="org-string">"c"</span>) ; <span class="org-comment">#= "a,b,c"</span>
+
+</pre>
+
+</p>
+<p>    <br/>
+</p>
+<p><br/>
+<pre class="src src-perl"><span class="org-comment-delimiter"># </span><span class="org-comment">map</span>
+%<span class="org-underline"><span class="org-variable-name">map</span></span>=(<span class="org-string">"key"</span>,<span class="org-string">"value"</span>,<span class="org-string">"key2"</span>, <span class="org-string">"value2"</span>);
+ &#27880;&#65306;&#29992;&#21015;&#34920;&#32473;&#20851;&#32852;&#25968;&#32452;&#36171;&#20540;&#26102;&#65292;Perl5&#20801;&#35768;&#20351;&#29992;<span class="org-string">"=&gt;"</span>&#25110;<span class="org-string">","</span>&#26469;&#20998;&#38548;&#19979;&#26631;&#19982;&#20540;&#65292;&#29992;<span class="org-string">"=&gt;"</span>&#21487;&#35835;&#24615;&#26356;&#22909;&#20123;&#65292;&#19978;&#38754;&#35821;&#21477;&#31561;&#25928;&#20110;&#65306;
+ %<span class="org-underline"><span class="org-variable-name">fruit</span></span> = (<span class="org-string">"apples"</span>=&gt;17,<span class="org-string">"bananas"</span>=&gt;9,<span class="org-string">"oranges"</span>=&gt;<span class="org-string">"none"</span>);
+<span class="org-comment-delimiter">##</span><span class="org-comment">&#21462;map &#30340;&#20540;</span>
+$<span class="org-variable-name">map</span>{<span class="org-string">"key"</span>} =value;
+
+<span class="org-comment-delimiter">## </span><span class="org-comment">add</span>
+$<span class="org-variable-name">map</span>{<span class="org-string">"key3"</span>}=<span class="org-string">"v3"</span>;
+
+<span class="org-comment-delimiter">## </span><span class="org-comment">delete</span>
+delete ($<span class="org-variable-name">map</span>{<span class="org-string">"key"</span>});
+
+</pre>
+
+数组,map 可以相互转换,如<br/>
+</p>
+<p><br/>
+<pre class="src src-perl">%<span class="org-underline"><span class="org-variable-name">a</span></span>=@<span class="org-underline"><span class="org-variable-name">a</span></span>;
+@<span class="org-underline"><span class="org-variable-name">a</span></span>=%<span class="org-underline"><span class="org-variable-name">a</span></span>;
+</pre>
+
+与map 相关的函数:<br/>
+</p>
+<p><br/>
+<pre class="src src-perl">keys(%<span class="org-underline"><span class="org-variable-name">map</span></span>) <span class="org-comment">#&#21462;&#25152;&#26377;keys &#20540;</span>
+
+</pre>
+
+
+<pre class="src src-perl">each &#21462;&#20986;map&#20013;&#27599;&#20010;&#38190;&#20540;&#23545;&#65292; &#36825;&#31181;&#26041;&#24335;&#27604;<span class="org-keyword">foreach</span>&#19982;keys()&#21512;&#20316; &#24555;
+%<span class="org-underline"><span class="org-variable-name">map</span></span>=(<span class="org-string">"a"</span>,<span class="org-string">"b"</span>, <span class="org-string">"c"</span>,<span class="org-string">"d"</span> );
+<span class="org-keyword">while</span> (($<span class="org-variable-name">k</span>,$<span class="org-variable-name">v</span>) = each(%<span class="org-underline"><span class="org-variable-name">map</span></span>)){
+    print(<span class="org-string">"$k:$v\n"</span>);
+}
+</pre>
+
+</p><ul>
+<li id="sec-1-3-1">split 返回数组 与返回匹配的次数<br/>
+
+<p><br/>
+<pre class="src src-perl">$<span class="org-variable-name">line</span>=<span class="org-string">'abcabcde'</span>;
+@<span class="org-underline"><span class="org-variable-name">result</span></span> =split(<span class="org-string">/c/</span> , $<span class="org-variable-name">line</span>); <span class="org-comment">#result= ("ab" ,"ab" ,"de")</span>
+<span class="org-keyword">foreach</span> $<span class="org-variable-name">ele</span> (@<span class="org-underline"><span class="org-variable-name">result</span></span>){
+    print($<span class="org-variable-name">ele</span> ,<span class="org-string">"\n"</span>);
+}
+$<span class="org-variable-name">result</span> =split(<span class="org-string">/c/</span> , $<span class="org-variable-name">line</span>);
+print($<span class="org-variable-name">result</span>); <span class="org-comment"># result =3</span>
+</pre>
+
+</p>
+<p>    <br/>
+</p></li>
+</ul>
+</li>
+</ul>
+</div>
+
+</div>
+
+<div id="outline-container-2" class="outline-2">
+<h2 id="sec-2">Regexp :处在//之间</h2>
+<div class="outline-text-2" id="text-2">
+
+<p>  缺省的，模式定界符为反斜线/，但其可用字母m自行指定，如：<br/>
+   m!/u/jqpublic/perl/prog1! 等价于/\/u\/jqpublic\/perl\/prog1/<br/>
+  例1:<br/>
+</p>
+<p><br/>
+<pre class="src src-perl">$<span class="org-variable-name">pattern</span> = <span class="org-string">"[\\t ]+"</span>;
+ @<span class="org-underline"><span class="org-variable-name">words</span></span> = split(<span class="org-string">/$pattern/</span>, $<span class="org-variable-name">line</span>);
+</pre>
+
+   在模式匹配后调用重用部分的结果可用变量$n，全部的结果用变量$&amp;。<br/>
+</p>
+<p><br/>
+<pre class="src src-perl">$<span class="org-variable-name">string</span> = <span class="org-string">"This string contains the number 25.11."</span>;
+$<span class="org-variable-name">string</span> =~ <span class="org-string">/-?(\d+)\.?(\d+)/</span>; <span class="org-comment"># &#21305;&#37197;&#32467;&#26524;&#20026;25.11</span>
+$<span class="org-variable-name">integerpart</span> = $<span class="org-variable-name">1</span>; <span class="org-comment"># now $integerpart = 25</span>
+$<span class="org-variable-name">decimalpart</span> = $<span class="org-variable-name">2</span>; <span class="org-comment"># now $decimalpart = 11</span>
+$<span class="org-variable-name">totalpart</span> = $&amp;; <span class="org-comment"># now totalpart = 25.11</span>
+</pre>
+
+</p>
+</div>
+
+<div id="outline-container-2-1" class="outline-3">
+<h3 id="sec-2-1">模式匹配选项</h3>
+<div class="outline-text-3" id="text-2-1">
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<caption></caption>
+<colgroup><col class="left" /><col class="left" />
+</colgroup>
+<tbody>
+<tr><td class="left">g</td><td class="left">global，匹配所有</td></tr>
+<tr><td class="left">i</td><td class="left">忽略大小写</td></tr>
+<tr><td class="left">m</td><td class="left">multiply ,将串视为多行，即$ ,匹配\n,而不是整个字符串的末尾</td></tr>
+<tr><td class="left">s</td><td class="left">single 与m反</td></tr>
+<tr><td class="left">o</td><td class="left">只赋值一次</td></tr>
+<tr><td class="left">x</td><td class="left">忽略regexp中的空白</td></tr>
+</tbody>
+</table>
+
+<ul>
+<li id="sec-2-1-1">g<br/>
+
+<p><br/>
+<pre class="src src-perl">&#21305;&#37197;&#25152;&#26377;&#21487;&#33021;&#30340;&#27169;&#24335;(g&#36873;&#39033;)
+   @<span class="org-underline"><span class="org-variable-name">matches</span></span> = <span class="org-string">"balata"</span> =~ <span class="org-string">/.a/</span>g; <span class="org-comment"># now @matches = ("ba", "la", "ta")</span>
+   &#21305;&#37197;&#30340;&#24490;&#29615;&#65306;
+   <span class="org-keyword">while</span> (<span class="org-string">"balata"</span> =~ <span class="org-string">/.a/</span>g) {
+     $<span class="org-variable-name">match</span> = $&amp;;
+     print (<span class="org-string">"$match\n"</span>);
+   }
+</pre>
+
+   结果为：<br/>
+     ba<br/>
+     la<br/>
+     ta<br/>
+</p></li>
+</ul>
+<ul>
+<li id="sec-2-1-2">s<br/>
+    <i>a.*bc/s匹配字符串axxxxx \nxxxxbc，但/a.*bc/则不匹配该字符串。 *  替换 s//</i> 与tr/// 的区别 <br/>
+  两者都是进行替换操作,区别是前者用正则表达示，后者：<br/>
+  tr/searchment/repalcement/;是把searchment的第一个字符换成replacement的第一<br/>
+  个字符，searchment的第二个字符换成replacement的第二个字符，类推<br/>
+举例<br/>
+
+<p><br/>
+<pre class="src src-perl">$<span class="org-variable-name">line</span>=<span class="org-string">"abcab"</span>;
+$<span class="org-variable-name">line</span> =~ s<span class="org-string">/ab/d/</span> ;
+print($<span class="org-variable-name">line</span>);
+</pre>
+
+结果为: dcab<br/>
+</p>
+<p><br/>
+<pre class="src src-perl">$<span class="org-variable-name">line</span>=<span class="org-string">"abcab"</span>;
+$<span class="org-variable-name">line</span> =~ s<span class="org-string">/ab/d/</span>g ;
+print($<span class="org-variable-name">line</span>);
+</pre>
+
+结果为 : dcd<br/>
+</p>
+<p><br/>
+区别是正则表达式后加一个g ，表示global ,即不仅仅进行一次替换，如果字符串中<br/>
+出现多处匹配正则的，所有匹配均予考虑<br/>
+</p>
+<p><br/>
+  tr/searchment/repalcement/;是把searchment的第一个字符换成replacement的第一<br/>
+  个字符，searchment的第二个字符换成replacement的第二个字符，类推<br/>
+</p>
+<p><br/>
+<pre class="src src-perl">$<span class="org-variable-name">line</span>=<span class="org-string">'abcDeF'</span>;
+$<span class="org-variable-name">line</span> =~ tr<span class="org-string">/abc/ABC/</span>;
+print($<span class="org-variable-name">line</span>);
+</pre>
+
+结果：ABCDeF<br/>
+</p></li>
+</ul>
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-3" class="outline-2">
+<h2 id="sec-3">子程序，函数</h2>
+<div class="outline-text-2" id="text-3">
+
+
+<p><br/>
+<pre class="src src-perl">  <span class="org-keyword">sub</span> <span class="org-function-name">subname</span>{
+    print(<span class="org-string">"hello"</span>);
+  }
+<span class="org-comment-delimiter"># </span><span class="org-comment">&#35843;&#29992;&#26041;&#27861; &#65292;&#29992;&amp;</span>
+<span class="org-comment-delimiter">#</span><span class="org-comment">&#22914;</span>
+$<span class="org-variable-name">subname</span>;
+
+<span class="org-comment-delimiter">#</span><span class="org-comment">&#22914;&#26524;&#35843;&#29992;&#22312;&#23376;&#31243;&#24207;&#23450;&#20041;&#20043;&#21518;&#65292;&#21487;&#20197;&#30465;&#30053;&amp;</span>
+subname;
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">&#21487;&#20197;&#29992;&#20851;&#38190;&#23383;do &#35843;&#29992;</span>
+<span class="org-keyword">do</span> subname;
+</pre>
+
+</p>
+</div>
+
+<div id="outline-container-3-1" class="outline-3">
+<h3 id="sec-3-1">局部变量 my ,与local</h3>
+<div class="outline-text-3" id="text-3-1">
+
+<p>   my 只在此子程序中有效，local 在子程序及此子程序所调用的子程序中有效<br/>
+</p>
+<p><br/>
+<pre class="src src-perl"><span class="org-type">local</span> ($<span class="org-variable-name">localVar</span>) =43;
+<span class="org-type">my</span> ($<span class="org-variable-name">my_var</span>)=<span class="org-string">"abc"</span>;
+</pre>
+
+</p>
+<p>   <br/>
+</p></div>
+
+</div>
+
+<div id="outline-container-3-2" class="outline-3">
+<h3 id="sec-3-2">参数传递 @_</h3>
+<div class="outline-text-3" id="text-3-2">
+
+<ul>
+<li id="sec-4-2-1">普通参数<br/>
+
+<p><br/>
+<pre class="src src-perl">&amp;<span class="org-function-name">subname</span>(1 ,2 ,3 );
+<span class="org-keyword">sub</span> <span class="org-function-name">subname</span>{
+  <span class="org-type">my</span>($<span class="org-variable-name">v1</span> ,$<span class="org-variable-name">v2</span>,$<span class="org-variable-name">v3</span>)=@<span class="org-underline"><span class="org-variable-name">_</span></span>;
+}
+</pre>
+
+</p></li>
+</ul>
+<ul>
+<li id="sec-4-2-2">array param<br/>
+    &amp;addlist(@mylist);<br/>
+    &amp;addlist($v1,$v2,$v3);<br/>
+sub addlist{<br/>
+  my (@list)=@_;<br/>
+}    <br/>
+参数为数组时，子程序只将它赋给一个数组变量。如<br/>
+
+<p><br/>
+<pre class="src src-perl"><span class="org-keyword">sub</span> <span class="org-function-name">twolists</span> {
+    <span class="org-type">my</span> (@<span class="org-underline"><span class="org-variable-name">list1</span></span>, @<span class="org-underline"><span class="org-variable-name">list2</span></span>) = @<span class="org-underline"><span class="org-variable-name">_</span></span>;
+  }
+<span class="org-comment-delimiter"># </span><span class="org-comment">&#20013;@list2&#24517;&#28982;&#20026;&#31354;&#12290;&#20294;&#31616;&#21333;&#21464;&#37327;&#21644;&#25968;&#32452;&#21464;&#37327;&#21487;&#20197;&#21516;&#26102;&#20256;&#36882;&#65306;</span>
+</pre>
+
+</p></li>
+</ul>
+</div>
+
+</div>
+
+<div id="outline-container-3-3" class="outline-3">
+<h3 id="sec-3-3">别名传参（指针）</h3>
+<div class="outline-text-3" id="text-3-3">
+
+<p>3、用别名的方法可以传递多个数组，如：<br/>
+</p>
+<p><br/>
+<pre class="src src-perl">@<span class="org-underline"><span class="org-variable-name">array1</span></span> = (1, 2, 3);
+@<span class="org-underline"><span class="org-variable-name">array2</span></span> = (4, 5, 6);
+&amp;<span class="org-function-name">two_array_sub</span> (*<span class="org-variable-name">array1</span>, *<span class="org-variable-name">array2</span>);
+<span class="org-keyword">sub</span> <span class="org-function-name">two_array_sub</span> {
+  <span class="org-type">my</span> (*<span class="org-variable-name">subarray1</span>, *<span class="org-variable-name">subarray2</span>) = @<span class="org-underline"><span class="org-variable-name">_</span></span>;
+}   
+</pre>
+
+</p></div>
+</div>
+
+</div>
+
+<div id="outline-container-4" class="outline-2">
+<h2 id="sec-4">Filesystem</h2>
+<div class="outline-text-2" id="text-4">
+
+
+<p>  <br/>
+</p>
+</div>
+
+<div id="outline-container-4-1" class="outline-3">
+<h3 id="sec-4-1">打开文件，一行行读取.</h3>
+<div class="outline-text-3" id="text-4-1">
+
+
+<p><br/>
+<pre class="src src-perl">open (VERSION , <span class="org-string">"/proc/version"</span>);
+<span class="org-keyword">while</span> ($<span class="org-variable-name">line</span> = &lt;<span class="org-constant">VERSION</span>&gt;){
+    print($<span class="org-variable-name">line</span> ,<span class="org-string">"\n"</span>);
+}
+</pre>
+
+</p></div>
+
+</div>
+
+<div id="outline-container-4-2" class="outline-3">
+<h3 id="sec-4-2">linux相关特性， 管道 "|"</h3>
+<div class="outline-text-3" id="text-4-2">
+
+
+<p><br/>
+<pre class="src src-perl">     open(pipo,<span class="org-string">"cat /proc/swaps |"</span>);
+     <span class="org-keyword">while</span>( $<span class="org-variable-name">line</span> = &lt;<span class="org-constant">pipo</span>&gt; ){
+         print($<span class="org-variable-name">line</span>,<span class="org-string">"\n"</span>);
+     }
+<span class="org-comment-delimiter"># </span><span class="org-comment">&#27492;&#22788;cat &#35835;&#21462;/proc/swaps&#25991;&#20214;&#30340;&#20869;&#23481;&#65292;&#28982;&#21518;&#36890;&#36807;&#31649;&#36947;&#36755;&#20986;&#65292;open()&#25171;&#24320;&#36825;&#20010;&#31649;&#36947;&#37324;</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">&#30340;&#20869;&#23481;</span>
+</pre>
+
+</p></div>
+
+</div>
+
+<div id="outline-container-4-3" class="outline-3">
+<h3 id="sec-4-3">写文件 &gt; 与&gt;&gt; 重定向</h3>
+<div class="outline-text-3" id="text-4-3">
+
+<p>缺省地，open打开文件用以读取其内容，若想打开文件以写入内容，则在文件名前加个<br/>
+大于号：open(MYVAR, "&gt;/u/file",)向已有的文件末尾添加内容用两个大于号<br/>
+</p>
+<p><br/>
+<pre class="src src-perl">open (STDOUT, <span class="org-string">"&gt;file1"</span>) || <span class="org-keyword">die</span> (<span class="org-string">"open STDOUT failed"</span>);
+open (STDERR, <span class="org-string">"&gt;&amp;STDOUT"</span>) || <span class="org-keyword">die</span> (<span class="org-string">"open STDERR failed"</span>);
+print STDOUT (<span class="org-string">"line 1\n"</span>);
+print STDERR (<span class="org-string">"line 2\n"</span>);
+close (STDOUT);
+close (STDERR); 
+</pre>
+
+
+<pre class="src src-perl">open (a, <span class="org-string">"&gt;file1"</span>) || <span class="org-keyword">die</span> (<span class="org-string">"open STDOUT failed"</span>);
+open (b, <span class="org-string">"&gt;&amp;a"</span>) || <span class="org-keyword">die</span> (<span class="org-string">"open STDERR failed"</span>);
+print a (<span class="org-string">"line 1\n"</span>);
+print b (<span class="org-string">"line 2\n"</span>);
+close (a);
+close (b); 
+</pre>
+
+</p></div>
+
+</div>
+
+<div id="outline-container-4-4" class="outline-3">
+<h3 id="sec-4-4">是否使用缓冲区(写文件时)</h3>
+<div class="outline-text-3" id="text-4-4">
+
+<p>   把值1赋给系统变量"$|"<br/>
+   系统变量"$|"指定文件是否进行缓冲而不管其是否应该使用缓冲。<br/>
+    如果$|为非零值则不使用缓冲。$|与系统变量$~和$<sup>协同工作，当未调用select函</sup><br/>
+    数时，$|影响当前缺省文件<br/>
+</p>
+<p><br/>
+<pre class="src src-perl"> open (STDOUT, <span class="org-string">"&gt;file1"</span>) || <span class="org-keyword">die</span> (<span class="org-string">"open STDOUT failed"</span>);
+ open (STDERR, <span class="org-string">"&gt;&amp;STDOUT"</span>) || <span class="org-keyword">die</span> (<span class="org-string">"open STDERR failed"</span>);
+ $| = 1; <span class="org-comment"># &#22240;&#26410;&#35843;&#29992;select&#65288;&#65289;&#65292;&#24403;&#21069;&#30340;&#32570;&#30465;&#25991;&#20214;&#20026;&#37325;&#23450;&#21521;&#21040;&#25991;&#20214;file1&#30340;STDOUT ,</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">&#27492;&#23558;$|=1 , &#24847;&#20026;stdout&#19981;&#29992;&#32531;&#20914;&#21306;</span>
+
+ select (STDERR);
+ $| = 1;
+
+ print STDOUT (<span class="org-string">"line 1\n"</span>);
+ print STDERR (<span class="org-string">"line 2\n"</span>);
+ close (STDOUT);
+ close (STDERR); 
+</pre>
+
+</p></div>
+
+</div>
+
+<div id="outline-container-4-5" class="outline-3">
+<h3 id="sec-4-5">4)指定读写权限</h3>
+<div class="outline-text-3" id="text-4-5">
+
+<p>    打开一个既可读又可写的文件方法是在文件名前加上"+&gt;"，如下：<br/>
+     open (READWRITE, "+&gt;file1");<br/>
+    此语句打开既可读又可写的文件file1，即可以重写其中的内容。文件读写操作最好与库函数seek和tell一起使用，这样可以跳到文件任何一点。<br/>
+    注：也可用前缀"+&lt;"指定可读写权限<br/>
+</p></div>
+
+</div>
+
+<div id="outline-container-4-6" class="outline-3">
+<h3 id="sec-4-6">5)close函数</h3>
+<div class="outline-text-3" id="text-4-6">
+
+<p>    用于关闭打开的文件。当用close关闭管道，即重定向的命令时，程序等待重定向的命令结束，如：<br/>
+     open (MYPIPE, "cat file*|");<br/>
+     close (MYPIPE);    <br/>
+</p></div>
+
+</div>
+
+<div id="outline-container-4-7" class="outline-3">
+<h3 id="sec-4-7">6)print, printf和write函数</h3>
+<div class="outline-text-3" id="text-4-7">
+
+<p>    print是这三个函数中最简单的，它向指定的文件输出，如果未指定，则输出到当前缺省文件中，如：<br/>
+     print ("Hello, there!\n");<br/>
+     print OUTFILE ("Hello, there!\n");<br/>
+    第一句输出到当前缺省文件中，若未调用select，则为STDOUT。第二句输出到由文件变量OUTFILE指定的文件中。<br/>
+    printf函数先格式化字符串再输出到指定文件或当前缺省文件中，如：<br/>
+     printf OUTFILE (“You owe me %8.2f", $owing);<br/>
+    此语句取出变量$owing的值并替换掉串中的%8.2f，%8.2f是域格式的例子，把$owing的值看作浮点数。<br/>
+    write函数使用输出格式把信息输出到文件中，如：<br/>
+     select (OUTFILE);<br/>
+     $~ = "MYFORMAT";<br/>
+     write;<br/>
+</p></div>
+
+</div>
+
+<div id="outline-container-4-8" class="outline-3">
+<h3 id="sec-4-8">7)select函数</h3>
+<div class="outline-text-3" id="text-4-8">
+
+<p>    select函数将通过参数传递的文件变量指定为新的当前缺省文件，如：<br/>
+     select (MYFILE);<br/>
+</p></div>
+
+</div>
+
+<div id="outline-container-4-9" class="outline-3">
+<h3 id="sec-4-9">8)eof函数 (endoffile)</h3>
+<div class="outline-text-3" id="text-4-9">
+
+<p>    eof函数查看最后一次读文件操作是否为文件最后一个记录，如果是，则返回非零<br/>
+    值，如果文件还有内容，返回零。一般情况下，对eof的调用不加括号，因为eof和<br/>
+    eof()是等效的，但与&lt;&gt;操作符一起使用时，eof和eof()就不同了。现在我们来创<br/>
+    建两个文件，分别叫做file1和file2。file1的内容为<br/>
+</p>
+<p><br/>
+<pre class="src src-perl"><span class="org-keyword">while</span> ($<span class="org-variable-name">line</span> = &lt;<span class="org-constant">STDIN</span>&gt;) {
+   print ($<span class="org-variable-name">line</span>);
+   <span class="org-keyword">if</span> (eof) {
+     print (<span class="org-string">"-- end of current file --\n"</span>);
+   }
+ }
+
+</pre>
+
+
+<pre class="src src-perl"><span class="org-keyword">while</span> ($<span class="org-variable-name">line</span> = &lt;<span class="org-constant">STDIN</span>&gt;) {
+   print ($<span class="org-variable-name">line</span>);
+   <span class="org-keyword">if</span> (eof()) {
+     print (<span class="org-string">"-- end of current file --\n"</span>);
+   }
+ } 
+</pre>
+
+如此运行上面两程序:<br/>
+</p>
+<p><br/>
+<pre class="src src-sh">root@localhost$&gt;   test.pl file1 file2
+</pre>
+
+只有所有文件都读过了，eof()才返回真，如果只是多个文件中前几个的末尾，返回值为假，因为还有要读取的输入<br/>
+</p></div>
+
+</div>
+
+<div id="outline-container-4-10" class="outline-3">
+<h3 id="sec-4-10">间接文件变量</h3>
+<div class="outline-text-3" id="text-4-10">
+
+<p>   可以用简单变量来代替文件变量，这时，简单变量中所存贮的字符串就被看作文件变量名<br/>
+</p>
+<p><br/>
+<pre class="src src-perl">&amp;<span class="org-function-name">open_file</span>(<span class="org-string">"INFILE"</span>, <span class="org-string">""</span>, <span class="org-string">"file1"</span>);
+&amp;<span class="org-function-name">open_file</span>(<span class="org-string">"OUTFILE"</span>, <span class="org-string">"&gt;"</span>, <span class="org-string">"file2"</span>);
+<span class="org-keyword">while</span> ($<span class="org-variable-name">line</span> = &amp;<span class="org-function-name">read_from_file</span>(<span class="org-string">"INFILE"</span>)) {
+  &amp;<span class="org-function-name">print_to_file</span>(<span class="org-string">"OUTFILE"</span>, $<span class="org-variable-name">line</span>);
+}
+
+<span class="org-keyword">sub</span> <span class="org-function-name">open_file</span> {
+   <span class="org-type">local</span> ($<span class="org-variable-name">filevar</span>, $<span class="org-variable-name">filemode</span>, $<span class="org-variable-name">filename</span>) = @<span class="org-underline"><span class="org-variable-name">_</span></span>;
+
+   open ($<span class="org-variable-name">filevar</span>, $<span class="org-variable-name">filemode</span> . $<span class="org-variable-name">filename</span>) ||
+     <span class="org-keyword">die</span> (<span class="org-string">"Can't open $filename"</span>);
+ }
+ <span class="org-keyword">sub</span> <span class="org-function-name">read_from_file</span> {
+   <span class="org-type">local</span> ($<span class="org-variable-name">filevar</span>) = @<span class="org-underline"><span class="org-variable-name">_</span></span>;
+
+   &lt;$<span class="org-variable-name">filevar</span>&gt;;
+ }
+ <span class="org-keyword">sub</span> <span class="org-function-name">print_to_file</span> {
+   <span class="org-type">local</span> ($<span class="org-variable-name">filevar</span>, $<span class="org-variable-name">line</span>) = @<span class="org-underline"><span class="org-variable-name">_</span></span>;
+
+   print $<span class="org-variable-name">filevar</span> ($<span class="org-variable-name">line</span>);
+ } 
+</pre>
+
+</p></div>
+
+</div>
+
+<div id="outline-container-4-11" class="outline-3">
+<h3 id="sec-4-11">跳过和重读数据 seek tell</h3>
+<div class="outline-text-3" id="text-4-11">
+
+<ul>
+<li id="sec-5-11-1">seek(filevar,distance,relative<sub>to</sub>);<br/>
+     在文件中向前/后移动，有三个参数：<br/>
+<ul>
+<li>1、filevar，文件变量<br/>
+</li>
+<li>2、distance，移动的字节数，正数向前移动，负数往回移动<br/>
+</li>
+<li>3、reletive<sub>to，值可为0、1或2。为0时，从文件头开始移动，为1时，相对于当</sub><br/>
+      前位置（将要读的下一行）移动，为2时，相对于文件末尾移动。运行成功返回真<br/>
+      （非零值），失败则返回零，常与tell函数合用。<br/>
+</li>
+</ul>
+
+</li>
+</ul>
+<ul>
+<li id="sec-5-11-2">tell (filevar);<br/>
+    返回从文件头到当前位置的距离。<br/>
+<ol>
+<li>seek和tell不能用于指向管道的文件变量。<br/>
+</li>
+<li>seek和tell中文件变量参数可使用表达式。<br/>
+</li>
+</ol>
+
+</li>
+</ul>
+</div>
+
+</div>
+
+<div id="outline-container-4-12" class="outline-3">
+<h3 id="sec-4-12">read (filevar, result, length, skipval);</h3>
+<div class="outline-text-3" id="text-4-12">
+
+<p>      解说 read函数设计得与UNIX的fread函数等效，可以读取任意长度的字符（字节）存入一个简单变量。其参数有四个：<br/>
+</p><ul>
+<li>1、filevar：文件变量<br/>
+</li>
+<li>2、result：存贮结果的简单变量（或数组元素）<br/>
+</li>
+<li>3、length：读取的字节数<br/>
+</li>
+<li>4、skipval：可选项，指定读文件之前跳过的字节数。 返回值为实际读取的字<br/>
+      节数，如果已到了文件末尾，则返回零，如果出错，则返回空串。<br/>
+</li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="outline-container-4-13" class="outline-3">
+<h3 id="sec-4-13">sysread (filevar, result, length, skipval);</h3>
+<div class="outline-text-3" id="text-4-13">
+
+<p>    更快的读取数据，与UNIX函数read等效，参数与read相同<br/>
+</p></div>
+
+</div>
+
+<div id="outline-container-4-14" class="outline-3">
+<h3 id="sec-4-14">syswrite (filevar, data, length, skipval);</h3>
+<div class="outline-text-3" id="text-4-14">
+
+<p>   更快的写入数据，与UNIX函数write等效，参数：<br/>
+</p><ul>
+<li>1、filevar：将要写入的文件<br/>
+</li>
+<li>2、data：存贮要写入数据的变量<br/>
+</li>
+<li>3、length：要写入的字节数<br/>
+</li>
+<li>4、skipval写操作之前跳过的字节数。<br/>
+</li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="outline-container-4-15" class="outline-3">
+<h3 id="sec-4-15">$char = getc (infile);   #从文件中读取单个字符。</h3>
+<div class="outline-text-3" id="text-4-15">
+
+</div>
+
+</div>
+
+<div id="outline-container-4-16" class="outline-3">
+<h3 id="sec-4-16">binmode (filevar);</h3>
+<div class="outline-text-3" id="text-4-16">
+
+<p>   当你的系统（如类DOS系统）对文本文件和二进制文件有所区别时使用。必须在打<br/>
+   开文件后、读取文件前使用<br/>
+</p></div>
+
+</div>
+
+<div id="outline-container-4-17" class="outline-3">
+<h3 id="sec-4-17">mkdir (dirname, permissions);</h3>
+<div class="outline-text-3" id="text-4-17">
+
+<p>   1、dirname：将要创建的目录名，可以为字符串或表达式<br/>
+   2、permissions：8进制数，指定目录的访问权限，其值和意义见下表，权限的组<br/>
+   合方法为将相应的值相加<br/>
+   值 | 权限             |<br/>
+ 4000 | 运行时设置用户ID |<br/>
+ 2000 | 运行时设置组ID   |<br/>
+ 1000 | 粘贴位           |<br/>
+ 0400 | 拥有者读权限     |<br/>
+ 0200 | 拥有者写权限     |<br/>
+ 0100 | 拥有者执行权限   |<br/>
+ 0040 | 组读权限         |<br/>
+ 0020 | 组写权限         |<br/>
+ 0010 | 组执行权限       |<br/>
+ 0004 | 所有人读权限     |<br/>
+ 0002 | 所有人写权限     |<br/>
+ 0001 | 所有人执行权限   |<br/>
+</p></div>
+
+</div>
+
+<div id="outline-container-4-18" class="outline-3">
+<h3 id="sec-4-18">chdir (dirname); #改变当前工作目录。参数dirname可以为字符串，也可以为表达式</h3>
+<div class="outline-text-3" id="text-4-18">
+
+</div>
+
+</div>
+
+<div id="outline-container-4-19" class="outline-3">
+<h3 id="sec-4-19">opendir (dirvar, dirname);</h3>
+<div class="outline-text-3" id="text-4-19">
+
+<p>开目录，与下面几个函数合用，可查看某目录中文件列表。参数为：<br/>
+、dirvar：目录变量，与文件变量类似<br/>
+、dirname：目录名，可为字符串或表达式<br/>
+功返回真值，失败返回假。<br/>
+：程序中可用同名的目录变量和文件变量，根据环境确定取成分<br/>
+</p>
+<p><br/>
+<pre class="src src-perl">opendir (tmpdir, <span class="org-string">"/tmp/"</span>) ||print <span class="org-string">"die"</span>;
+@<span class="org-underline"><span class="org-variable-name">fs</span></span>=readdir (tmpdir);
+<span class="org-keyword">foreach</span> <span class="org-type">my</span> $<span class="org-variable-name">f</span> ( @<span class="org-underline"><span class="org-variable-name">fs</span></span>){
+    print $<span class="org-variable-name">f</span> ,<span class="org-string">"\n"</span> ;    
+}
+</pre>
+
+</p></div>
+
+</div>
+
+<div id="outline-container-4-20" class="outline-3">
+<h3 id="sec-4-20">closedir (mydir)</h3>
+<div class="outline-text-3" id="text-4-20">
+
+
+<p><br/>
+</p></div>
+
+</div>
+
+<div id="outline-container-4-21" class="outline-3">
+<h3 id="sec-4-21">readdir (mydir);</h3>
+<div class="outline-text-3" id="text-4-21">
+
+<p>给简单变量时，每次赋予一个文件或子目录名，对数组则赋予全部文件和子目录名<br/>
+</p></div>
+
+</div>
+
+<div id="outline-container-4-22" class="outline-3">
+<h3 id="sec-4-22">location = telldir (mydir);</h3>
+<div class="outline-text-3" id="text-4-22">
+
+<p>   象在文件中前后移动一样，telldir和下面的seekdir用于在目录列表中前后移动<br/>
+</p></div>
+
+</div>
+
+<div id="outline-container-4-23" class="outline-3">
+<h3 id="sec-4-23">seekdir(mydir, location);</h3>
+<div class="outline-text-3" id="text-4-23">
+
+<p>   location必须为telldir返回的值<br/>
+</p></div>
+
+</div>
+
+<div id="outline-container-4-24" class="outline-3">
+<h3 id="sec-4-24">rewinddir (mydir);</h3>
+<div class="outline-text-3" id="text-4-24">
+
+<p>   将读取目录的位置重置回开头，从而可以重读目录列表<br/>
+</p></div>
+
+</div>
+
+<div id="outline-container-4-25" class="outline-3">
+<h3 id="sec-4-25">rmdir (dirname);</h3>
+<div class="outline-text-3" id="text-4-25">
+
+<p>   删除空目录。成功则返回真（非零值），失败返回假（零值）<br/>
+</p></div>
+
+</div>
+
+<div id="outline-container-4-26" class="outline-3">
+<h3 id="sec-4-26">rename (oldname, newname);</h3>
+<div class="outline-text-3" id="text-4-26">
+
+</div>
+
+</div>
+
+<div id="outline-container-4-27" class="outline-3">
+<h3 id="sec-4-27">num = unlink (filelist);</h3>
+<div class="outline-text-3" id="text-4-27">
+
+<p>   删除文件。参数为文件名列表，返回值为实际删除的文件数目。此函数之所以叫<br/>
+nlink而不叫delete是因为它实际所做的是删除文件的链接<br/>
+</p></div>
+
+</div>
+
+<div id="outline-container-4-28" class="outline-3">
+<h3 id="sec-4-28">link (newlink, file);</h3>
+<div class="outline-text-3" id="text-4-28">
+
+<p>   创建现有文件的链接&ndash;硬链接，file是被链接的文件，newlink是被创建的链接。<br/>
+功返回真，失败返回假。当删除这两个链接中的一个时，还可以用另一个来访问该文<br/>
+。<br/>
+</p></div>
+
+</div>
+
+<div id="outline-container-4-29" class="outline-3">
+<h3 id="sec-4-29">symlink (newlink, file);</h3>
+<div class="outline-text-3" id="text-4-29">
+
+<p>建现有文件的符号链接，即指向文件名，而不是指向文件本身。参数和返回值同上。<br/>
+原文件被删除（如：被unlinke函数删除），则被创建链接不可用，除非再创建一个与原被链接的文件同名的文件。<br/>
+</p></div>
+
+</div>
+
+<div id="outline-container-4-30" class="outline-3">
+<h3 id="sec-4-30">filename = readlink (linkname);</h3>
+<div class="outline-text-3" id="text-4-30">
+
+<p>   如果linkname为符号链接文件，返回其实际指向的文件。否则返回空串<br/>
+</p></div>
+
+</div>
+
+<div id="outline-container-4-31" class="outline-3">
+<h3 id="sec-4-31">chmod (permissions, filelist);</h3>
+<div class="outline-text-3" id="text-4-31">
+
+<p>   改变文件的访问权限。参数为：<br/>
+、permissions为将要设置的权限，其含义见上述mkdir中权限表<br/>
+、filelist为欲改变权限的文件列表<br/>
+</p></div>
+
+</div>
+
+<div id="outline-container-4-32" class="outline-3">
+<h3 id="sec-4-32">chown (userid, groupid, filelist);</h3>
+<div class="outline-text-3" id="text-4-32">
+
+</div>
+
+</div>
+
+<div id="outline-container-4-33" class="outline-3">
+<h3 id="sec-4-33">oldmaskval = umask (maskval);</h3>
+<div class="outline-text-3" id="text-4-33">
+
+<p>   设置文件访问权限掩码，返回值为当前掩码。<br/>
+</p></div>
+
+</div>
+
+<div id="outline-container-4-34" class="outline-3">
+<h3 id="sec-4-34">truncate (filename, length);</h3>
+<div class="outline-text-3" id="text-4-34">
+
+<p>   将文件的长度减少到length字节。如果文件长度已经小于length，则不做任何事。<br/>
+   其中filename可以为文件名，也可以为文件变量<br/>
+</p></div>
+
+</div>
+
+<div id="outline-container-4-35" class="outline-3">
+<h3 id="sec-4-35">stat (file);</h3>
+<div class="outline-text-3" id="text-4-35">
+
+<p>       获取文件状态。参数file可为文件名也可为文件变量。返回列表元素依次为：<br/>
+</p><ul>
+<li>文件所在设备<br/>
+</li>
+<li>内部参考号(inode)<br/>
+</li>
+<li>访问权限<br/>
+</li>
+<li>硬链接数<br/>
+</li>
+<li>属主的(数字)ID<br/>
+</li>
+<li>所属组的(数字)ID<br/>
+</li>
+<li>设备类型（如果file是设备的话）<br/>
+</li>
+<li>文件大小（字节数）<br/>
+</li>
+<li>最后访问时间<br/>
+</li>
+<li>最后修改时间<br/>
+</li>
+<li>最后改变状态时间<br/>
+</li>
+<li>I/O操作最佳块大小<br/>
+</li>
+<li>分配给该文件的块数<br/>
+</li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="outline-container-4-36" class="outline-3">
+<h3 id="sec-4-36">lstat (file); #与stat类似，区别是将file看作是符号链接</h3>
+<div class="outline-text-3" id="text-4-36">
+
+</div>
+
+</div>
+
+<div id="outline-container-4-37" class="outline-3">
+<h3 id="sec-4-37">currtime = time();</h3>
+<div class="outline-text-3" id="text-4-37">
+
+<p>   返回从1970年1月1日起累计秒数。<br/>
+</p></div>
+
+</div>
+
+<div id="outline-container-4-38" class="outline-3">
+<h3 id="sec-4-38">timelist = gmtime (timeval);</h3>
+<div class="outline-text-3" id="text-4-38">
+
+<p>   将由time, stat 或 -A 和 -M 文件测试操作符返回的时间转换成格林威治时间。返回列表元素依次为：<br/>
+</p><ul>
+<li>秒<br/>
+</li>
+<li>分钟<br/>
+</li>
+<li>小时，0~23<br/>
+</li>
+<li>日期<br/>
+</li>
+<li>月份，0~11(一月~十二月)<br/>
+</li>
+<li>年份<br/>
+</li>
+<li>星期，0~6(周日~周六)<br/>
+</li>
+<li>一年中的日期，0~364<br/>
+</li>
+<li>是否夏令时的标志<br/>
+</li>
+</ul>
+
+</div>
+
+</div>
+
+<div id="outline-container-4-39" class="outline-3">
+<h3 id="sec-4-39">timelist = localtime (timeval);#与gmtime类似，区别为将时间值转换为本地时间</h3>
+<div class="outline-text-3" id="text-4-39">
+
+</div>
+
+</div>
+
+<div id="outline-container-4-40" class="outline-3">
+<h3 id="sec-4-40">utime (acctime, modtime, filelist);</h3>
+<div class="outline-text-3" id="text-4-40">
+
+<p>   变文件的最后访问时间和最后更改时间。例如：<br/>
+</p>
+<p><br/>
+<pre class="src src-perl">acctime = -A <span class="org-string">"file1"</span>;
+modtime = -M <span class="org-string">"file1"</span>;
+filelist = (<span class="org-string">"file2"</span>, <span class="org-string">"file3"</span>);
+time ($<span class="org-variable-name">acctime</span>, $<span class="org-variable-name">modtime</span>, @<span class="org-underline"><span class="org-variable-name">filelist</span></span>);
+</pre>
+
+</p></div>
+
+</div>
+
+<div id="outline-container-4-41" class="outline-3">
+<h3 id="sec-4-41">filedesc = fileno (filevar);#返回文件的内部UNIX文件描述。参数filevar为文件变量。</h3>
+<div class="outline-text-3" id="text-4-41">
+
+</div>
+
+</div>
+
+<div id="outline-container-4-42" class="outline-3">
+<h3 id="sec-4-42">fcntl (filevar, fcntlrtn, value); # 详见同名UNIX函数帮助。</h3>
+<div class="outline-text-3" id="text-4-42">
+
+<p>    flock (filevar, flockop);<br/>
+</p></div>
+
+</div>
+
+<div id="outline-container-4-43" class="outline-3">
+<h3 id="sec-4-43">-e -r 测试文件、目录是否存在，是否可读</h3>
+<div class="outline-text-3" id="text-4-43">
+
+
+<p><br/>
+<pre class="src src-perl">$<span class="org-variable-name">x</span>=<span class="org-string">"abc.txt"</span>;
+<span class="org-keyword">if</span>(-e $<span class="org-variable-name">x</span>) { <span class="org-comment">#abc.txt&#26159;&#21542;&#23384;&#22312;&#65311;</span>
+    &#12288;&#12288;<span class="org-comment"># &#23384;&#22312;&#25805;&#20316;</span>
+} <span class="org-keyword">else</span> {
+    &#12288;&#12288;printf <span class="org-string">"&#25991;&#20214;&#19981;&#23384;&#22312;&#12290;\n"</span>;
+}
+</pre>
+
+</p><blockquote>
+
+<p>-r 文件或目录可读<br/>
+-w 文件或目录可写<br/>
+-x 文件或目录执行<br/>
+-o 文件或目录归用户所有<br/>
+-R 文件或目录对真正用户可读<br/>
+-W 文件或目录对真正用户可写<br/>
+-X 文件或目录对真正用户执行<br/>
+-O 文件或目录归真正用户所有<br/>
+-e 文件或目录存在<br/>
+-z 文件存在且大小为0<br/>
+-s 文件或目录存在且不为0(返回字节数)<br/>
+-f 文件为普通文件<br/>
+-d 文件为目录<br/>
+-l 文件为符号链接<br/>
+-p 文件为命名管道(FIFO)<br/>
+-S 文件为一个套口(socket)<br/>
+-b 文件为块特殊文件<br/>
+-c 文件为字符特殊文件<br/>
+-t 打开tty控制台的文件句柄<br/>
+-u 文件或目录是设置用户ID号<br/>
+-g 文件或目录是设置用户组ID号<br/>
+-k 文件或目录的sticky位置位<br/>
+-T 文件是文本文件<br/>
+-B 文件是二进制文件<br/>
+-M 以天为单位的存在时间<br/>
+-A 以天为单位访问时间<br/>
+-C 以天为单位同代码更改时间<br/>
+</p>
+</blockquote>
+
+
+<p><br/>
+</p>
+<p>   <br/>
+</p></div>
+</div>
+
+</div>
+
+<div id="outline-container-5" class="outline-2">
+<h2 id="sec-5">pointer 引用，指针</h2>
+<div class="outline-text-2" id="text-5">
+
+<p>   如果$pointer的值为一个数组的指针，则通过形式@$pointer来访问数组中的元素。<br/>
+   形式@$pointer的意义为“取出$pointer中的地址值当作数组使用”。类似的，<br/>
+   %$pointer为指向哈希表中第一个元素的引用<br/>
+</p>
+</div>
+
+<div id="outline-container-5-1" class="outline-3">
+<h3 id="sec-5-1">使用反斜线(\)操作符</h3>
+<div class="outline-text-3" id="text-5-1">
+
+<p>    反斜线操作符与C语言中传递地址的操作符&amp;功能类似。一般是用\创建变量又一个<br/>
+    新的引用。下面为创建简单变量的引用的例子<br/>
+</p>
+<p><br/>
+<pre class="src src-perl">  $<span class="org-variable-name">var</span>=<span class="org-string">"abc"</span>;
+ $<span class="org-variable-name">pointer</span>=\$<span class="org-variable-name">var</span>;
+ print($$<span class="org-variable-name">pointer</span>);
+
+@<span class="org-underline"><span class="org-variable-name">array</span></span> = (<span class="org-string">"a"</span>,<span class="org-string">"b"</span>,<span class="org-string">"c"</span>);
+$<span class="org-variable-name">p</span> =\@<span class="org-underline"><span class="org-variable-name">array</span></span>;
+print(@$<span class="org-variable-name">p</span>);
+
+%<span class="org-underline"><span class="org-variable-name">map</span></span>=(<span class="org-string">"a"</span>,<span class="org-string">"aaa"</span>,<span class="org-string">"b"</span>,<span class="org-string">"bbbe"</span>);
+$<span class="org-variable-name">p</span>=\%<span class="org-underline"><span class="org-variable-name">map</span></span>;
+print(%$<span class="org-variable-name">p</span>);
+</pre>
+
+
+</p></div>
+
+</div>
+
+<div id="outline-container-5-2" class="outline-3">
+<h3 id="sec-5-2">不仅变量、数组、Map 可以用指针引用之，子程序（函数）也可以</h3>
+<div class="outline-text-3" id="text-5-2">
+
+<p>    $pointer<sub>to</sub><sub>sub</sub> = sub {&hellip; declaration of sub &hellip;};<br/>
+    调用方法<br/>
+    &amp;$pointer<sub>to</sub><sub>sub</sub>(param)<br/>
+</p>
+<p>    <br/>
+</p></div>
+
+</div>
+
+<div id="outline-container-5-3" class="outline-3">
+<h3 id="sec-5-3">子程序的返回值不仅限于数据，还可以返回子程序的引用。返回的子程序在调用处执行</h3>
+<div class="outline-text-3" id="text-5-3">
+
+
+<p><br/>
+<pre class="src src-perl"><span class="org-keyword">sub</span> <span class="org-function-name">errorMsg</span> {
+    <span class="org-type">my</span> $<span class="org-variable-name">lvl</span> = shift;
+<span class="org-comment-delimiter">#</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">define the subroutine to run when called.</span>
+<span class="org-comment-delimiter">#</span>
+    <span class="org-keyword">return</span> <span class="org-keyword">sub</span> {
+        <span class="org-type">my</span> $<span class="org-variable-name">msg</span> = shift; <span class="org-comment"># Define the error type now.</span>
+        print <span class="org-string">"Err Level $lvl:$msg\n"</span>; }; <span class="org-comment"># print later.</span>
+}
+$<span class="org-variable-name">severe</span> = errorMsg(<span class="org-string">"Severe"</span>);
+$<span class="org-variable-name">fatal</span> = errorMsg(<span class="org-string">"Fatal"</span>);
+$<span class="org-variable-name">annoy</span> = errorMsg(<span class="org-string">"Annoying"</span>);
+
+&amp;$<span class="org-variable-name">severe</span>(<span class="org-string">"Divide by zero"</span>);
+&amp;$<span class="org-variable-name">fatal</span>(<span class="org-string">"Did you forget to use a semi-colon?"</span>);
+&amp;$<span class="org-variable-name">annoy</span>(<span class="org-string">"Uninitialized variable in use"</span>); 
+
+</pre>
+
+
+</p></div>
+
+</div>
+
+<div id="outline-container-5-4" class="outline-3">
+<h3 id="sec-5-4">子程序，多数组参数传递</h3>
+<div class="outline-text-3" id="text-5-4">
+
+
+<p><br/>
+<pre class="src src-perl">@<span class="org-underline"><span class="org-variable-name">a1</span></span>=(<span class="org-string">"a"</span> ,<span class="org-string">"b"</span>,<span class="org-string">"c"</span>);
+@<span class="org-underline"><span class="org-variable-name">a2</span></span>= (<span class="org-string">"1"</span>,<span class="org-string">"2"</span>,<span class="org-string">"3"</span>);
+<span class="org-keyword">sub</span> <span class="org-function-name">sub1</span>{
+    <span class="org-type">my</span> ($<span class="org-variable-name">p1</span>,$<span class="org-variable-name">p2</span>)=@<span class="org-underline"><span class="org-variable-name">_</span></span>;
+    print(@$<span class="org-variable-name">p1</span>,<span class="org-string">"\n"</span>);
+    print(@$<span class="org-variable-name">p2</span>,<span class="org-string">"\n"</span>);
+}
+&amp;<span class="org-function-name">sub1</span>(\@<span class="org-underline"><span class="org-variable-name">a1</span></span>,\@<span class="org-underline"><span class="org-variable-name">a2</span></span>);
+
+</pre>
+
+</p></div>
+
+</div>
+
+<div id="outline-container-5-5" class="outline-3">
+<h3 id="sec-5-5">文件句柄的引用 \*</h3>
+<div class="outline-text-3" id="text-5-5">
+
+
+<p><br/>
+<pre class="src src-perl"><span class="org-comment-delimiter"># </span><span class="org-comment">&#25991;&#20214;&#21477;&#26564;&#30340;&#20256;&#36882; \* </span>
+&amp;<span class="org-function-name">spitOut</span>(\*<span class="org-variable-name">STDOUT</span>);
+
+open(file1,<span class="org-string">"&gt;/tmp/file1"</span>);
+&amp;<span class="org-function-name">spitOut</span>(\*<span class="org-variable-name">file1</span>);
+
+<span class="org-comment-delimiter">#</span><span class="org-comment">&#36825;&#26679;&#20284;&#20046;&#20063;&#21487;&#20197;</span>
+open($<span class="org-variable-name">file2</span>,<span class="org-string">"&gt;/tmp/file2"</span>);
+&amp;<span class="org-function-name">spitOut</span>($<span class="org-variable-name">file2</span>);
+
+<span class="org-keyword">sub</span> <span class="org-function-name">spitOut</span> {
+    <span class="org-type">my</span> $<span class="org-variable-name">filehandle</span>=shift;
+    print $<span class="org-variable-name">filehandle</span> <span class="org-string">"Gee Wilbur, I like this lettuce\n"</span>;
+} 
+</pre>
+
+</p></div>
+</div>
+
+</div>
+
+<div id="outline-container-6" class="outline-2">
+<h2 id="sec-6">多维数组</h2>
+<div class="outline-text-2" id="text-6">
+
+
+<p><br/>
+<pre class="src src-perl">$<span class="org-variable-name">line</span> = [<span class="org-string">'solid'</span>, <span class="org-string">'black'</span>, [<span class="org-string">'1'</span>,<span class="org-string">'2'</span>,<span class="org-string">'3'</span>] , [<span class="org-string">'4'</span>, <span class="org-string">'5'</span>, <span class="org-string">'6'</span>]];
+print <span class="org-string">"\$line-&gt;[0] = $line-&gt;[0] \n"</span>;
+print <span class="org-string">"\$line-&gt;[2][0] = $line-&gt;[2][0] \n"</span>;
+
+</pre>
+
+   使用哈希表和数组时，用$和用-&gt;是类似的，对数组而言下面两个语句等效：<br/>
+    $$names[ 0] = "kamran";<br/>
+    $names-&gt;[ 0] = "kamran";<br/>
+    对哈希表而言下面两个语句等效：<br/>
+    $$lastnames{"kamran"} = "Husain";<br/>
+    $lastnames->{"kamran"} = "Husain";
+
+*  OO 面向对象 
+   模块(module)就是Perl包(pachage)   扩展名pm是包的缺省扩展名，意为Perl Module
+   一个Perl类是仅是一个包而已。当你看到Perl文档中提到“类”时，把它看作
+   “包”就行了
+   保留“1;”为最后一行。这是Perl包的必需条件
+   
+   可以用单引号(')操作符来定位类中的变量，类中成员的定位形式如：
+   Perl5中，可用双冒号替代单引号
+
+<pre class="src src-perl">$<span class="org-variable-name">class</span><span class="org-string">'$member</span>
+<span class="org-string">$class::$member</span>
+</pre>
+
+   
+创建建一个 Cocoa.pm
+ + 构造方法为new
+   构造函数是类的子程序，它返回与类名相关的一个引用。将类名与引用相结合称为
+   “祝福”一个对象，因为建立该结合的函数名为bless()
+
+<pre class="src src-perl">bless YeReference [,classname]
+YeReference&#26159;&#23545;&#34987;&#8220;&#31069;&#31119;&#8221;&#30340;&#23545;&#35937;&#30340;&#24341;&#29992;&#65292;classname&#26159;&#21487;&#36873;&#39033;&#65292;&#25351;&#23450;&#23545;&#35937;&#33719;&#21462;&#26041;&#27861;&#30340;&#21253;&#21517;&#65292;&#20854;&#32570;&#30465;&#20540;&#20026;&#24403;&#21069;&#21253;&#21517;&#12290;
+</pre>
+
+   将下文存为Cocoa.pm
+ORG-LIST-END-MARKER
+
+<pre class="src src-perl"><span class="org-comment-delimiter"># </span><span class="org-comment">1&#12289;&#19968;&#23450;&#35201;&#22312;&#26500;&#36896;&#20989;&#25968;&#20013;&#21021;&#22987;&#21270;&#21464;&#37327;&#65307;</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">2&#12289;&#19968;&#23450;&#35201;&#29992;my&#20989;&#25968;&#22312;&#26041;&#27861;&#20013;&#21019;&#24314;&#21464;&#37327;&#65307;</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">3&#12289;&#19968;&#23450;&#19981;&#35201;&#22312;&#26041;&#27861;&#20013;&#20351;&#29992;local&#65292;&#38500;&#38750;&#30495;&#30340;&#24819;&#25226;&#21464;&#37327;&#20256;&#36882;&#32473;&#20854;&#23427;&#23376;&#31243;&#24207;&#65307;</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">4&#12289;&#19968;&#23450;&#19981;&#35201;&#22312;&#31867;&#27169;&#22359;&#20013;&#20351;&#29992;&#20840;&#23616;&#21464;&#37327;&#12290; </span>
+  <span class="org-keyword">sub</span> <span class="org-function-name">new</span> {
+      <span class="org-type">my</span>  $<span class="org-variable-name">this</span>= {} Create an anonymous hash, and <span class="org-comment">#self points to it.</span>
+          bless $<span class="org-variable-name">this</span>  <span class="org-comment"># bless($this) # Connect the hash to the package Cocoa.</span>
+          <span class="org-keyword">return</span> $<span class="org-variable-name">this</span>; <span class="org-comment"># Return the reference to the hash.</span>
+  }
+
+    ;1 <span class="org-comment">#&#36825;&#19968;&#34892;&#24517;&#39035;&#20026;&#25918;&#22312;&#26368;&#21518;&#19968;&#34892;</span>
+</pre>
+
+创建一个Cocoa 对象
+
+<pre class="src src-perl">push (@<span class="org-underline"><span class="org-variable-name">INC</span></span>,<span class="org-string">'pwd'</span>); <span class="org-comment"># &#23558;&#24403;&#34892;&#36335;&#24452;&#21152;&#21040;include &#19979;</span>
+<span class="org-keyword">use</span> <span class="org-constant">Cocoa</span>;  <span class="org-comment">#&#22312;@INC &#19979;&#25628;&#23547;Cocoa.pm &#24182;include &#20043;</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">&#19977;&#31181;&#21019;&#24314;&#23545;&#35937;&#30340;&#26041;&#27861;</span>
+$<span class="org-variable-name">cup</span> = new Cocoa;  &#21019;&#24314;&#19968;&#20010;&#23545;&#35937;
+$<span class="org-variable-name">cup</span> = Cocoa-&gt;new(); 
+$<span class="org-variable-name">cup</span> = Cocoa::new(); <span class="org-comment">#    &#22914;&#26524;&#20320;&#26159;C&#31243;&#24207;&#21592;&#65292;&#21487;&#20197;&#29992;&#21452;&#20882;&#21495;&#24378;&#21046;&#20351;&#29992;Cocoa&#21253;&#20013;&#30340;new()&#20989;&#25968;&#65292;&#22914;&#65306;</span>
+
+</pre>
+
+
+*  q qq qw qr qx 等的含义 
+**  q 与qq 
+   q~~是对对'号转义的方式而提倡用的，，这样写的时候就可以不用\'
+   qq~~是对对"号转义的方式而提倡用的，这样写的时候就可以不用\"   
+***  q 是对单引号的转义 
+   q~~是对对'号转义的方式而提倡用的，，这样写的时候就可以不用\'
+   q{abc'd},或者
+   q<abc'c>
+   q[abc'd]等
+***  qq 
+
+<pre class="src src-perl">  qq<span class="org-string">{hello}</span>
+&#8221;hello&#8220;
+<span class="org-comment-delimiter"># </span><span class="org-comment">&#21516;&#20041; ,&#21363;&#30456;&#24403;&#20110;&#25226;&#19968;&#27573;&#20869;&#23481;&#24341;&#36215;&#26469;</span>
+
+</pre>
+
+   
+**  qw 代表用空格来分元素 
+   qw{foo bar}的意思为用空格分解字符串，得到列表，相当于如下语句
+   split(' ','foo bar') 得到的结果是'foo','bar'
+
+<pre class="src src-perl">@<span class="org-underline"><span class="org-variable-name">list</span></span> = (<span class="org-string">"perl"</span>,<span class="org-string">"Regular"</span>,<span class="org-string">"network"</span>,<span class="org-string">"web"</span>);
+<span class="org-comment-delimiter">#</span><span class="org-comment">&#21487;&#20197;&#31561;&#20215;&#20110;:</span>
+@<span class="org-underline"><span class="org-variable-name">list</span></span> = qw<span class="org-string">(perl Regular network web)</span>;
+@<span class="org-underline"><span class="org-variable-name">list</span></span> = qw<span class="org-string">{perl Regular network web}</span>;
+
+</pre>
+
+**  qr 代表创建正则 
+
+<pre class="src src-perl">     $<span class="org-variable-name">myword</span> = <span class="org-string">"cnangel"</span>;
+     $<span class="org-variable-name">replaceword</span> = qr<span class="org-string">(cnangel)</span>;
+     $<span class="org-variable-name">finalword</span> = <span class="org-string">"ok"</span> <span class="org-keyword">if</span> ($<span class="org-variable-name">myword</span> =~ $<span class="org-variable-name">replaceword</span>);
+<span class="org-comment-delimiter"># </span><span class="org-comment">qr{whatever} &#19982;qr(whaterver) &#19982;/whatever/&#21516;</span>
+</pre>
+
+   
+
+<pre class="src src-perl">$<span class="org-variable-name">v</span> = <span class="org-string">"abc"</span>;
+$<span class="org-variable-name">r</span>=  qr<span class="org-string">{b}</span>;
+$<span class="org-variable-name">match</span> =  $<span class="org-variable-name">v</span> =~ $<span class="org-variable-name">r</span>;
+print <span class="org-string">"match"</span> <span class="org-keyword">if</span> $<span class="org-variable-name">match</span>==1 ;
+</pre>
+
+**  qx 
+
+<pre class="src src-perl">qx <span class="org-string">{cat /proc/version &gt;/tmp/c}</span>
+</pre>
+
+*  @_ $_ $, $. $$ ,$& 等几个符号的含义 
+</p>
+</div>
+
+<div id="outline-container-6-1" class="outline-3">
+<h3 id="sec-6-1">@_ 表示函数传参时，放置参数的数组</h3>
+<div class="outline-text-3" id="text-6-1">
+
+
+<p><br/>
+<pre class="src src-perl">    <span class="org-keyword">sub</span> <span class="org-function-name">sub1</span>{
+        <span class="org-type">my</span> ($<span class="org-variable-name">var1</span> ,$<span class="org-variable-name">var2</span>)=@<span class="org-underline"><span class="org-variable-name">_</span></span>;
+<span class="org-comment-delimiter"># </span><span class="org-comment">&#20063;&#21487;&#20197;&#20889;&#25104;</span>
+<span class="org-type">my</span> var1 = $<span class="org-variable-name">_</span>[0];
+<span class="org-type">my</span> var2 = $<span class="org-variable-name">_</span>[1];
+<span class="org-comment-delimiter">#</span><span class="org-comment">&#21487;&#20197;&#29702;&#35299;&#20026;&#21442;&#25968;&#23384;&#25918;&#22312;&#25968;&#32452;@_ &#20013;&#65292;&#21487;&#20197;</span>
+<span class="org-comment-delimiter">#</span><span class="org-comment">&#29992;$_&#21152;&#19979;&#26631; &#21462;&#20854;&#20013;&#26576;&#20010;&#20803;&#32032;</span>
+    }
+</pre>
+
+
+</p></div>
+
+</div>
+
+<div id="outline-container-6-2" class="outline-3">
+<h3 id="sec-6-2">匹配时 各部分 $&amp; $` $' $1 ,$2</h3>
+<div class="outline-text-3" id="text-6-2">
+
+<p>   $&amp; 用来存放匹配的值<br/>
+   $` 用来存放匹配内容之前的串<br/>
+   $' 用来存放匹配内容之后的串<br/>
+</p>
+<p><br/>
+<pre class="src src-perl">$<span class="org-variable-name">var</span> =<span class="org-string">"beforehelloafter"</span>;
+$<span class="org-variable-name">var</span> =~ <span class="org-string">/h(el)lo/</span> ;
+print ($&amp; ,<span class="org-string">"\n"</span>); <span class="org-comment"># print  "hello"</span>
+print ($`, <span class="org-string">"\n"</span>); <span class="org-comment"># print "before"</span>
+print ($<span class="org-string">', "\n"); # print '</span>after<span class="org-string">'</span>
+<span class="org-string">print ($1, "\n"); # print "el"</span>
+</pre>
+
+</p>
+<p>   <br/>
+</p>
+<p>   <br/>
+</p></div>
+
+</div>
+
+<div id="outline-container-6-3" class="outline-3">
+<h3 id="sec-6-3">$<sup>o</sup> 表示操作系统</h3>
+<div class="outline-text-3" id="text-6-3">
+
+
+<p><br/>
+</p></div>
+
+</div>
+
+<div id="outline-container-6-4" class="outline-3">
+<h3 id="sec-6-4">$. 表示在读取文件时，当前行是第几行</h3>
+<div class="outline-text-3" id="text-6-4">
+
+
+<p><br/>
+<pre class="src src-perl">open(file , <span class="org-string">"/tmp/b.pl"</span>);
+<span class="org-keyword">while</span>($<span class="org-variable-name">line</span> = &lt;<span class="org-constant">file</span>&gt;){
+    print ( <span class="org-string">"&#24403;&#21069;&#26159;&#31532;"</span> , $. , <span class="org-string">"&#34892;,&#20869;&#23481;&#26159;:"</span>, $<span class="org-variable-name">line</span>,<span class="org-string">"\n"</span>); 
+}
+
+</pre>
+
+</p>
+<p>   <br/>
+</p></div>
+
+</div>
+
+<div id="outline-container-6-5" class="outline-3">
+<h3 id="sec-6-5">$$ 表示当前进程号</h3>
+<div class="outline-text-3" id="text-6-5">
+
+</div>
+
+</div>
+
+<div id="outline-container-6-6" class="outline-3">
+<h3 id="sec-6-6">$_</h3>
+<div class="outline-text-3" id="text-6-6">
+
+<p>   $_ is known as the "default input and pattern matching space". In other words, if you read in<br/>
+   from a file handle at the top of a while loop, or run a foreach loop and don't name a loop<br/>
+   variable, $_ is set up for you. Then any regular expression matches, chops (and lcs and many<br/>
+   more) without a parameter, and even prints assume you want to work on $_. 就是说如果从一个文件用<br/>
+   while 或foreach 读取一行内容， 而你没用一个变量存变读取到的这一行，那么，默认把它放到$_ 变量中。<br/>
+   不仅如此，任何像match chos print 等操作的函数，默认以它作参数，如果你没指定的话因此<br/>
+</p>
+<p><br/>
+<pre class="src src-perl">open(file , <span class="org-string">"/tmp/b.pl"</span>);
+<span class="org-keyword">while</span>($<span class="org-variable-name">line</span> = &lt;<span class="org-constant">file</span>&gt;){
+    print ( <span class="org-string">"&#24403;&#21069;&#26159;&#31532;"</span> , $. , <span class="org-string">"&#34892;,&#20869;&#23481;&#26159;:"</span>, $<span class="org-variable-name">line</span>,<span class="org-string">"\n"</span>); 
+}
+
+</pre>
+
+
+
+<pre class="src src-perl">open(file , <span class="org-string">"/tmp/b.pl"</span>);
+<span class="org-keyword">while</span>( &lt;<span class="org-constant">file</span>&gt;){
+ print ( <span class="org-string">"&#24403;&#21069;&#26159;&#31532;"</span> , $. , <span class="org-string">"&#34892;,&#20869;&#23481;&#26159;:"</span>, $<span class="org-variable-name">_</span>,<span class="org-string">"\n"</span>); 
+}
+</pre>
+
+两段代码等价<br/>
+</p>
+<p><br/>
+再给一个例子<br/>
+</p>
+<p><br/>
+<pre class="src src-perl">open(file , <span class="org-string">"/tmp/b.pl"</span>);
+<span class="org-keyword">while</span>( &lt;<span class="org-constant">file</span>&gt;){
+    print ; 
+}
+</pre>
+
+
+
+</p></div>
+
+</div>
+
+<div id="outline-container-6-7" class="outline-3">
+<h3 id="sec-6-7">$/ $\</h3>
+<div class="outline-text-3" id="text-6-7">
+
+<ul>
+<li id="sec-10-7-1">$/<br/>
+   “$/” 和 “$\”分别是输入输出记录分隔符。当你在读或者写数据时，他们主要控制用什么来定义一个“记<br/>
+   录”。<br/>
+   &lt;STDIN&gt;<br/>
+   &lt;file&gt;<br/>
+   表示从stdin 或一个文件读入一“行”数据，注意，被引号引起来的行。之所以称为行是因为我们把变量<br/>
+   $/ 设成了\n ,如果把它设成其他的值，如<br/>
+<blockquote>
+
+<p>   This is the definition of my life<br/>
+%%<br/>
+We are far too young and clever<br/>
+%%<br/>
+Stab a sorry heart<br/>
+With your favorite finger<br/>
+</p>
+</blockquote>
+
+
+<p><br/>
+   有这样一段内容,把们把$/ 设成 %%\n时，如此从此文件读数据时&lt;file&gt; 读的不再是一行，而是靠%%分隔的内<br/>
+   家<br/>
+   而chmop()函数，要从一个字符串删除的内容，也是这个变量里指定的内容<br/>
+   但是当你修改了这些特殊变量的值后，你会得到一个警告<br/>
+   因为你有可能忘记把它恢复原值，而使其他部分的程序可能产生bug<br/>
+   好的做法是local 化之<br/>
+</p>
+<p><br/>
+<pre class="src src-perl">{ <span class="org-comment"># &#27880;&#24847;&#21040;&#27809;&#65292;&#21487;&#20197;&#25226;&#19968;&#27573;&#20195;&#30721;&#25918;&#22312;{} &#22359;&#20013;&#65292;&#32780;&#20854;&#20013;&#30340;local&#21464;&#37327;&#65292;&#22312;&#22806;&#19981;&#36215;&#20316;&#29992;</span>
+ <span class="org-type">local</span> $/ = <span class="org-string">"%%\n"</span>;
+
+ open(QUOTE, <span class="org-string">"/tmp/a.java"</span>);)
+ <span class="org-keyword">while</span> (&lt;<span class="org-constant">QUOTE</span>&gt;) {
+  chomp;
+  print;
+ }
+ }
+</pre>
+
+   另外如果将$/ 置空的话，则从一个文件中读取内容时则一次读取整个文件<br/>
+</p>
+<p><br/>
+<pre class="src src-perl"><span class="org-type">my</span> $<span class="org-variable-name">file</span> = <span class="org-keyword">do</span> { <span class="org-type">local</span> $/; &lt;<span class="org-constant">FILE</span>&gt; };
+</pre>
+
+   又如果，$/ 值是一个数字的指针时，则一次读取这个数字的大小的字节数<br/>
+</p>
+<p><br/>
+<pre class="src src-perl"> {
+<span class="org-type">local</span> $/ = \2048; <span class="org-comment"># &#19968;&#27425;&#35835;&#21462;2k</span>
+
+<span class="org-keyword">while</span> (&lt;<span class="org-constant">FILE</span>&gt;) {
+ <span class="org-comment"># $_ contains the next 2048 bytes from FILE</span>
+}
+}
+</pre>
+
+</p></li>
+</ul>
+<ul>
+<li id="sec-10-7-2">$\<br/>
+    $\而与输出有关，即print 打印一个字符串时默认在其末尾添加此字符串<br/>
+    默认$\为空串什么也不打印<br/>
+
+<p><br/>
+<pre class="src src-perl">       <span class="org-keyword">sub</span> <span class="org-function-name">println</span>{
+       <span class="org-type">local</span> $\=<span class="org-string">"\n"</span>;
+       print @<span class="org-underline"><span class="org-variable-name">_</span></span> ;
+      }
+<span class="org-comment-delimiter">#</span><span class="org-comment">&#27604;&#22914;&#65292;&#21487;&#20197;&#23450;&#20041;&#19968;&#20010;println()&#20989;&#25968;</span>
+ println(<span class="org-string">"hello"</span>);
+ println(<span class="org-string">"world"</span>);
+</pre>
+
+</p>
+<p>    <br/>
+</p>
+<p><br/>
+</p></li>
+</ul>
+</div>
+
+</div>
+
+<div id="outline-container-6-8" class="outline-3">
+<h3 id="sec-6-8">$,</h3>
+<div class="outline-text-3" id="text-6-8">
+
+
+<p><br/>
+<pre class="src src-perl"><span class="org-type">my</span> @<span class="org-underline"><span class="org-variable-name">arr</span></span> = (1, 2, 3);
+
+ print @<span class="org-underline"><span class="org-variable-name">arr</span></span>;  <span class="org-comment"># &#25171;&#21360;123 </span>
+ print <span class="org-string">"@arr"</span>; <span class="org-comment"># &#25171;&#21360; &#8220;1 2 3" ,&#20998;&#38548;&#31526;&#40664;&#35748;&#26159;&#31354;&#26684;&#65292;&#30001;$, &#21464;&#37327;&#25351;&#23450;</span>
+</pre>
+
+</p></div>
+</div>
+
+</div>
+
+<div id="outline-container-7" class="outline-2">
+<h2 id="sec-7">关于 .. 两点</h2>
+<div class="outline-text-2" id="text-7">
+
+
+</div>
+
+<div id="outline-container-7-1" class="outline-3">
+<h3 id="sec-7-1">最简单的用法是表示一个数组</h3>
+<div class="outline-text-3" id="text-7-1">
+
+
+<p><br/>
+<pre class="src src-perl">   @<span class="org-underline"><span class="org-variable-name">v</span></span> = 1 .. 10;
+   print (@<span class="org-underline"><span class="org-variable-name">v</span></span>);
+<span class="org-comment-delimiter"># </span><span class="org-comment">&#23450;&#20041;&#20174;1&#21040;10&#30340;&#25968;&#32452;</span>
+</pre>
+
+</p>
+<p>  <br/>
+</p></div>
+
+</div>
+
+<div id="outline-container-7-2" class="outline-3">
+<h3 id="sec-7-2">这两个点前后的内容，不仅仅可以是数字，字符串，也可以是一个表达式</h3>
+<div class="outline-text-3" id="text-7-2">
+
+<p>   如果是表达式：<br/>
+   第一个操作数（“..“左侧的表达式）将被求值，如果得出的值为假，此次操作将什么也不做并<br/>
+   返回假值。<br/>
+   如果得出的值为真，操作返回真值并继续依次返回下面的值直到第二个操作数（“..”操作符右面<br/>
+   的表达式）返回真值 .注意到 “直到” 这两个字没有<br/>
+</p>
+<p><br/>
+   也就是说可以把它用作if 后的括号中做真假判断<br/>
+   比如java 中的代码注释以 /* 为开头 */为结束<br/>
+   我现在想取出这种代码中的这种注释。<br/>
+   我可以把判断 当前行中包不包括 <i>* 作为第一个操作数，而把判断当前行包不包括*</i> 作为第二个操作数<br/>
+   就是说，如果遇到/* 就满足了if 条件，开始作if 里的操作，做完一次操作就判断一下第二个操作数满不满<br/>
+   足，如果满足的话，停止，否则，继续<br/>
+</p>
+<p><br/>
+<pre class="src src-perl">open(FILE,<span class="org-string">"/tmp/a.java"</span>);
+<span class="org-keyword">while</span> (&lt;<span class="org-constant">FILE</span>&gt;) {
+    <span class="org-keyword">if</span>  ( m<span class="org-string">!/\*!</span> .. m<span class="org-string">!\*/!</span>){
+        print  $<span class="org-variable-name">_</span> ;
+     }
+}
+</pre>
+
+</p>
+<p>   <br/>
+</p></div>
+</div>
+
+</div>
+
+<div id="outline-container-8" class="outline-2">
+<h2 id="sec-8">shift unshift push pop</h2>
+<div class="outline-text-2" id="text-8">
+
+<ul>
+<li>shift 头部插入<br/>
+</li>
+<li>unshift 头部删除<br/>
+</li>
+<li>push 末尾插入<br/>
+</li>
+</ul>
+
+
+<p><br/>
+</p></div>
+
+</div>
+
+<div id="outline-container-9" class="outline-2">
+<h2 id="sec-9">last ===break</h2>
+<div class="outline-text-2" id="text-9">
+
+<p>  next === continue;<br/>
+</p>
+<p><br/>
+</p></div>
+
+</div>
+
+<div id="outline-container-10" class="outline-2">
+<h2 id="sec-10"></h2>
+<div class="outline-text-2" id="text-10">
+
+
+<p><br/>
+<div id='my-src'>
+<div id='org-src'><a href='../src/perl/perl.org'>src</a></div>
+<div id='htmlized-src'><a href='../htmlized-src/perl/perl.org.html'>htmlized-src</a></div>
+</div>
+<div id='tags'><span id='tags-title'>Tags:</span><br />
+    <a href="../tags/@SVN.html">@SVN</a><br/>
+    <a href="../tags/@perl.html">@perl</a><br/>
+    <a href="../tags/@Java.html">@Java</a><br/>
+    <a href="../tags/@Mysql.html">@Mysql</a><br/>
+    <a href="../tags/@Erlang.html">@Erlang</a><br/>
+    <a href="../tags/@SQL.html">@SQL</a><br/>
+    <a href="../tags/@DB.html">@DB</a><br/>
+    <a href="../tags/@Oracle.html">@Oracle</a><br/>
+    <a href="../tags/@Ediff.html">@Ediff</a><br/>
+    <a href="../tags/@Git.html">@Git</a><br/>
+    <a href="../tags/@Cedet.html">@Cedet</a><br/>
+    <a href="../tags/@C-C++.html">@C-C++</a><br/>
+    <a href="../tags/@Daily.html">@Daily</a><br/>
+    <a href="../tags/@Eclipse.html">@Eclipse</a><br/>
+    <a href="../tags/@AutoHotKey.html">@AutoHotKey</a><br/>
+    <a href="../tags/@Windows.html">@Windows</a><br/>
+    <a href="../tags/@Linux.html">@Linux</a><br/>
+    <a href="../tags/@C.html">@C</a><br/>
+    <a href="../tags/@Emacs.html">@Emacs</a><br/>
+</p>
+<p><br/>
+</div>
+</p></div>
+</div>
+</div>
+
+<div id="postamble">
+<p class="date">Date: 2011-08-25 四</p>
+<p class="author">Author: 孤峰独秀</p>
+<p class="creator">Org version 7.8.03 with Emacs version 24</p>
+
+
+</div>
+<p><br/><br/>
+<!-- hhmts start --> <!-- hhmts end --></p>
+
+</body>
+</html>

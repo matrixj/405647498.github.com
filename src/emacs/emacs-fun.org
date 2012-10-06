@@ -1,0 +1,77 @@
+# -*- coding:utf-8 -*-
+#+LANGUAGE:  zh
+#+TITLE:     emacs中一些有趣的东西
+#+AUTHOR:    孤峰独秀
+#+EMAIL:     jixiuf@gmail.com
+#+DESCRIPTION:emacs中一些有趣的东西
+#+KEYWORDS: emacs fun game 
+#+OPTIONS:   H:2 num:nil toc:t \n:t @:t ::t |:t ^:t -:t f:t *:t <:t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc
+#+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
+#+EXPORT_SELECT_TAGS: export
+#+EXPORT_EXCLUDE_TAGS: noexport
+#+FILETAGS: @Emacs @Linux 
+
+* 心理医生doctor
+ M-x doctor ,然后试着跟他交谈，很有意思，不过它不认识中文。
+* 几个游戏，
+因为平常不玩游戏，所以也懒得去记游戏对应的函数名,试着从菜单栏里找
+Tools/Games/
+其中Snake 是贪吃蛇，Tetris 是俄罗斯方块,还有其也几个小游戏，没怎么玩过
+* animate-birthday-present  animate-string两个函数
+  这个可以利用文字作出动画的效果。因为是动画，所以用文字不太容易表示,可以试
+  着运行 animate-birthday-present这个命令，这只是个示例，它内部实际是调用
+  animate-string这个函数
+  比如，我写的下面这个函数，bye bye 的页面
+#+begin_src emacs-lisp
+  (defun bye ()
+  "say bye-bye !"
+    (interactive)
+    ;; Make a suitable buffer to display the birthday present in.
+    (switch-to-buffer (get-buffer-create "*bye*"))
+    (erase-buffer)
+    ;; Display the empty buffer.
+    (sit-for 0)
+    (animate-string "下次再会!" 6)
+    (sit-for 1) ;;停1秒钟
+    (animate-string " Bye!!!" 9)
+    )
+#+end_src
+
+* 小时候玩过一个扑克牌游戏，就是给你四张牌，对这四张牌进行加减乘除运算最终得到的数字是24
+  刚从emacswiki [[http://www.emacswiki.org/emacs/EmacsTickets][emacswiki]] 上发现一个与这个类似的游戏，不过不是给你玩的是，
+  是给Emacs 玩的。就是给你一串数字，在数字之间可以随意加入加减乘除的运算符，
+  最终得到结果100 ,结果有人用elisp 把它实现了
+#+begin_src emacs-lisp
+(defvar bil-list nil "list of valid tickets.")
+(defun bil-calc (pbil pidx)
+  "nil"
+  (let ((idx pidx)
+    	(sbil pbil))
+    (condition-case nil
+    	;; prevent division by zero
+    	(when (string= (calc-eval sbil) "100")
+    	  (add-to-list 'bil-list sbil))
+      (error nil))
+    (if (= idx (length sbil))
+    	nil
+      (mapcar (lambda (lid)
+                (mapcar (lambda (sign)
+                          (bil-calc (concat (substring sbil 0 lid) sign (substring sbil lid)) lid))
+                        '("+" "-" "*" "/")))
+    	      (let ((lix (+ idx 1)))
+                (mapcar (lambda (not-used) (setq lix (+ lix 1))) (make-list (- (length sbil) lix) nil)))))))
+
+(defun bil-findit (num)
+  "Find play solution for number NUM."
+  (progn
+    (setq bil-list nil)
+    (bil-calc num 0)
+    bil-list))
+
+  
+#+end_src
+  比如对168324进行运算的结果 是"16*8-32+4"
+#+begin_src emacs-lisp
+(bil-findit "168324")
+#+end_src

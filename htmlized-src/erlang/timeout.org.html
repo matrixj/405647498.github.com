@@ -1,0 +1,196 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<!-- Created by htmlize-1.34 in css mode. -->
+<html>
+  <head>
+    <title>timeout.org</title>
+    <style type="text/css">
+    <!--
+      body {
+        color: #F8F8F8;
+        background-color: #0C1021;
+      }
+      .comment {
+        /* font-lock-comment-face */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-block {
+        /* org-block */
+        color: #b3b3b3;
+      }
+      .org-block-begin-line {
+        /* org-block-begin-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-block-end-line {
+        /* org-block-end-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-document-info {
+        /* org-document-info */
+        color: #afeeee;
+      }
+      .org-document-info-keyword {
+        /* org-document-info-keyword */
+        color: #b3b3b3;
+      }
+      .org-document-title {
+        /* org-document-title */
+        color: #afeeee;
+        font-size: 144%;
+        font-weight: bold;
+      }
+      .org-meta-line {
+        /* org-meta-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+
+      a {
+        color: inherit;
+        background-color: inherit;
+        font: inherit;
+        text-decoration: inherit;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+    -->
+    </style>
+  </head>
+  <body>
+    <pre>
+<span class="comment"># -*- coding:utf-8 -*-</span>
+<span class="org-meta-line">#+LANGUAGE:  zh
+</span><span class="org-document-info-keyword">#+TITLE:</span><span class="comment">     </span><span class="org-document-title">receive timeout</span>
+<span class="org-document-info-keyword">#+AUTHOR:</span><span class="comment">    </span><span class="org-document-info">&#32426;&#31168;&#23792;</span>
+<span class="org-document-info-keyword">#+EMAIL:</span><span class="comment">     </span><span class="org-document-info">jixiuf@gmail.com</span>
+<span class="org-document-info-keyword">#+DATE:</span><span class="comment">     </span><span class="org-document-info">2011-11-12 &#20845;</span>
+<span class="org-meta-line">#+DESCRIPTION:receive timeout
+#+KEYWORDS: erlang
+#+OPTIONS:   H:2 num:nil toc:t \n:t @:t ::t |:t ^:t -:t f:t *:t &lt;:t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil
+#+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
+#+EXPORT_SELECT_TAGS: export
+#+EXPORT_EXCLUDE_TAGS: noexport
+#+FILETAGS: @Erlang
+</span>
+<span class="org-block-begin-line">#+begin_src erlang
+</span><span class="org-block">receive
+    Message1 [when Guard1] -&gt;
+        Actions1 ;
+    Message2 [when Guard2] -&gt;
+        Actions2 ;
+    ...
+after
+    TimeOutExpr -&gt;
+        ActionsT
+end
+</span><span class="org-block-end-line">#+end_src
+</span>&#20363;:
+<span class="org-block-begin-line">#+begin_src erlang
+</span><span class="org-block">-module(tt).
+-export([start/0,value/1,loop/1,test/0]).
+
+
+start()-&gt;
+    spawn(tt,loop,[0])
+        .
+
+value(T) -&gt;
+    T!{self(),value},
+    receive
+        Val-&gt;
+            Val
+    after 1000 -&gt;                               %&#19968;&#31186;&#38047;&#36229;&#26102;
+            timeout
+    end
+        .
+loop (Val) -&gt;
+    receive
+        inc-&gt;
+            loop(Val+1);
+        {From,value}-&gt;
+            From! Val
+    end.
+
+test() -&gt;
+    P=tt:start(),
+    P!inc,
+    P!inc,
+    value(P).
+</span><span class="org-block-end-line">#+end_src
+</span>
+&#22312;&#36229;&#26102;&#34920;&#36798;&#24335;&#30340;&#21442;&#25968;&#20013;&#26377;&#20004;&#20010;&#20540;&#26377;&#29305;&#27530;&#24847;&#20041;&#65306;
++ infinity
+
+&#21407;&#23376;&#24335;infinity&#34920;&#31034;&#36229;&#26102;&#27704;&#36828;&#20063;&#19981;&#20250;&#21457;&#29983;&#12290;&#22914;&#26524;&#36229;&#26102;&#26102;&#38388;&#38656;&#35201;&#22312;&#36816;&#34892;&#26102;&#35745;&#31639;&#30340;&#35805;&#65292;&#36825;&#20010;
+&#21151;&#33021;&#23601;&#24456;&#26377;&#29992;&#12290;&#25105;&#20204;&#21487;&#33021;&#20250;&#24076;&#26395;&#36890;&#36807;&#23545;&#19968;&#20010;&#34920;&#36798;&#24335;&#36827;&#34892;&#27714;&#20540;&#26469;&#24471;&#21040;&#36229;&#26102;&#38271;&#24230;&#65306;&#22914;&#26524;&#36820;&#22238;
+&#20540;&#26159;infinity&#30340;&#35805;&#65292;&#21017;&#27704;&#20037;&#31561;&#24453;&#12290;
+
++ 0
+&#25968;&#20540;0&#34920;&#31034;&#36229;&#26102;&#20250;&#31435;&#21363;&#21457;&#29983;&#65292;&#19981;&#36807;&#22312;&#37027;&#20043;&#21069;&#31995;&#32479;&#20173;&#28982;&#20250;&#39318;&#20808;&#23581;&#35797;&#23545;&#37038;&#31665;&#20013;&#24050;&#26377;&#30340;&#28040;&#24687;&#36827;
+    &#34892;&#21305;&#37197;&#12290;(&#25105;&#20272;&#35745;&#21547;&#20041;&#26159;:&#22914;&#26524;&#24050;&#26377;&#30340;&#28040;&#24687;&#21305;&#37197;&#25104;&#21151;,&#21017;&#19981;&#36816;&#34892;&#36229;&#26102;&#23376;&#21477;,&#33509;&#27492;&#26102;&#37038;
+    &#31665;&#20013;&#27809;&#20219;&#20309;&#28040;&#24687;,&#21017;&#31435;&#21363;&#36816;&#34892;&#36229;&#26102;&#23376;&#21477;.)
+
+<span class="org-block-begin-line">#+begin_src erlang
+</span><span class="org-block">  %% &#27604;&#22914;,&#30830;&#23450; &#40736;&#26631;&#21452;&#20987;&#25110;&#21333;&#20987;&#20107;&#20214;
+  get_event() -&gt;
+      receive
+          {mouse, click} -&gt;
+              receive
+                  {mouse, click} -&gt;
+                      double_click
+              after double_click_interval() -&gt;
+                  single_click
+              end
+          ...
+      end.
+</span><span class="org-block-end-line">#+end_src
+</span><span class="org-block-begin-line">#+begin_src erlang
+</span><span class="org-block">  %% &#36229;&#26102;,sleep
+  sleep(Time) -&gt;
+      receive
+          after Time -&gt;
+              true
+      end.
+</span><span class="org-block-end-line">#+end_src
+</span><span class="org-block-begin-line">#+begin_src erlang
+</span><span class="org-block">  %% flush_buffer()&#28165;&#31354;&#24403;&#21069;&#36827;&#31243;&#30340;&#37038;&#31665;&#65306;
+
+  %% &#21482;&#35201;&#37038;&#31665;&#20013;&#36824;&#26377;&#28040;&#24687;&#65292;&#31532;&#19968;&#20010;&#28040;&#24687;&#20250;&#34987;&#21305;&#37197;&#21040;&#65288;&#26410;&#32465;&#23450;&#21464;&#37327;AnyMessage&#20250;&#21305;&#37197;&#21040;&#20219;&#20309;&#28040;
+  %% &#24687;&#65292;&#22312;&#36825;&#37324;&#23601;&#26159;&#31532;&#19968;&#20010;&#28040;&#24687;&#65289;&#65292;&#28982;&#21518;flush_buffer&#20250;&#20877;&#27425;&#34987;&#35843;&#29992;&#65292;&#20294;&#26159;&#22914;&#26524;&#37038;&#31665;&#24050;&#32463;&#20026;
+  %% &#31354;&#20102;&#65292;&#37027;&#20040;&#20989;&#25968;&#20250;&#20174;&#36229;&#26102;&#23376;&#21477;&#20013;&#36820;&#22238;&#12290;
+
+  flush_buffer() -&gt;
+      receive
+          AnyMessage -&gt;                           %&#27880;&#24847;&#39318;&#23383;&#27597;&#22823;&#20889;&#34920;&#31034;&#36825;&#26159;&#19968;&#20010;&#21464;&#37327;,&#25152;&#20197;&#21487;&#20197;&#21542;&#37197;&#20219;&#20309;&#20256;&#36807;&#26469;&#30340;&#28040;&#24687;.
+              flush_buffer()
+          after 0 -&gt;
+              true
+      end.
+
+</span><span class="org-block-end-line">#+end_src
+</span><span class="org-block-begin-line">#+begin_src erlang
+</span><span class="org-block">  %% &#28040;&#24687;&#30340;&#20248;&#20808;&#32423;&#20063;&#21487;&#20197;&#36890;&#36807;&#20351;&#29992;0&#20316;&#20026;&#36229;&#26102;&#38271;&#24230;&#26469;&#23454;&#29616;&#65306;
+
+  %% &#20989;&#25968;priority_receive&#20250;&#36820;&#22238;&#37038;&#31665;&#20013;&#31532;&#19968;&#20010;&#28040;&#24687;&#65292;
+  %% &#38500;&#38750;&#26377;&#28040;&#24687;interrupt&#21457;&#36865;&#21040;&#20102;&#37038;&#31665;&#20013;&#65292;&#27492;&#26102;&#23558;&#36820;&#22238;interrupt
+  %% &#21363;&#28040;&#24687; interrupt &#20248;&#20808;&#32423;&#36739;&#20854;&#20182;&#39640;.
+  priority_receive() -&gt;
+      receive
+          interrupt -&gt;
+              interrupt
+      after 0 -&gt;
+          receive
+              AnyMessage -&gt;
+                  AnyMessage
+          end
+      end
+
+</span><span class="org-block-end-line">#+end_src
+</span></pre>
+  </body>
+</html>

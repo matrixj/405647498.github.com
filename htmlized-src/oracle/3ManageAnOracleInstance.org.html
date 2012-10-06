@@ -1,0 +1,344 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<!-- Created by htmlize-1.34 in css mode. -->
+<html>
+  <head>
+    <title>3ManageAnOracleInstance.org</title>
+    <style type="text/css">
+    <!--
+      body {
+        color: #F8F8F8;
+        background-color: #0C1021;
+      }
+      .comment {
+        /* font-lock-comment-face */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .italic {
+        /* italic */
+        font-style: italic;
+      }
+      .org-block {
+        /* org-block */
+        color: #b3b3b3;
+      }
+      .org-block-begin-line {
+        /* org-block-begin-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-block-end-line {
+        /* org-block-end-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-document-info {
+        /* org-document-info */
+        color: #afeeee;
+      }
+      .org-document-info-keyword {
+        /* org-document-info-keyword */
+        color: #b3b3b3;
+      }
+      .org-document-title {
+        /* org-document-title */
+        color: #afeeee;
+        font-size: 144%;
+        font-weight: bold;
+      }
+      .org-level-1 {
+        /* org-level-1 */
+        color: #FF6400;
+      }
+      .org-level-2 {
+        /* org-level-2 */
+        color: #40E0D0;
+      }
+      .org-level-3 {
+        /* org-level-3 */
+        color: #FBDE2D;
+      }
+      .org-meta-line {
+        /* org-meta-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-table {
+        /* org-table */
+        color: #87cefa;
+      }
+
+      a {
+        color: inherit;
+        background-color: inherit;
+        font: inherit;
+        text-decoration: inherit;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+    -->
+    </style>
+  </head>
+  <body>
+    <pre>
+<span class="comment"># -*- coding:utf-8 -*-</span>
+<span class="org-meta-line">#+LANGUAGE:  zh
+</span><span class="org-document-info-keyword">#+TITLE:</span><span class="comment">     </span><span class="org-document-title">3.ManageAnOracleInstance.org</span>
+<span class="org-document-info-keyword">#+AUTHOR:</span><span class="comment">    </span><span class="org-document-info">&#23396;&#23792;&#29420;&#31168;</span>
+<span class="org-document-info-keyword">#+EMAIL:</span><span class="comment">     </span><span class="org-document-info">jixiuf@gmail.com</span>
+<span class="org-document-info-keyword">#+DATE:</span><span class="comment">     </span><span class="org-document-info">2011-07-09 &#20845;</span>
+<span class="org-meta-line">#+DESCRIPTION:3ManageAnOracleInstance.org
+#+KEYWORDS: oracle linux 
+#+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
+#+FILETAGS: @Oracle
+</span><span class="org-level-1">* &#23398;&#20064;&#30446;&#26631;</span>
+  + create and manager  initialization parameter files &#31649;&#29702;&#21442;&#25968;&#25991;&#20214;
+  + start up and shutdown oracle instance.&#21551;&#21160;&#20851;&#38381;oracle instance
+  + monitor and use diagnostic files 
+
+<span class="org-level-1">* $ORACLE_BASE  $ORACLE_HOME $ORACLE_SID</span>
+  oracle &#20844;&#21496;&#19981;&#21482;oracle&#25968;&#25454;&#24211;&#19968;&#20010;&#36719;&#20214;&#65292;&#20182;&#20204;&#24076;&#26395;&#25226;&#20182;&#20204;&#30340;&#25152;&#26377;&#36719;&#20214;&#23433;&#35013;&#22312;&#21516;&#19968;&#20010;
+  &#30446;&#24405;&#19979;&#65292;&#21363;$ORACLE_BASE&#30446;&#24405;&#12290;&#32780;$ORACLE_HOME&#30340;&#20540;&#21017;&#26159;oracle&#25968;&#25454;&#24211;&#30340;&#23433;&#35013;&#30446;&#24405;.
+  &#23427;&#26159; $ORACLE_BASE&#19979;&#30340;&#19968;&#20010;&#30446;&#24405;&#12290;&#32780; $ORACLE_SID&#21017;&#26159;&#19968;&#20010;&#25968;&#25454;&#24211;instance&#30340;&#21517;&#31216;&#12290;
+  &#19968;&#20010;oracle database&#21487;&#20197;&#26377;&#22810;&#20010;oracle instance.&#32780;&#19981;&#21516;&#30340;instance &#36890;&#36807;
+  $ORACLE_SID &#26469;&#21306;&#20998;&#12290;&#21478;&#22806; &#22312;linux&#19978;&#12290;&#19968;&#20010;oracle instance &#20250;&#21551;&#29992;&#22810;&#20010;&#36827;&#31243;&#65292;&#23427;
+  &#20204;&#20849;&#20139;&#19968;&#22359;&#20869;&#23384;&#65292;&#32780;&#36825;&#22359;&#20869;&#23384;&#30340;&#20301;&#32622;&#26159;&#36890;&#36807; $ORACLE_HOME&#19982;$ORACLE_SID&#20004;&#20010;&#21464;&#37327;&#30340;
+  &#20540;&#36890;&#36807;hash &#35745;&#31639;&#21518;&#24471;&#21040;&#30340;&#12290;&#65288;&#21487;&#20197;&#36825;&#26679;&#29702;&#35299;&#65292;&#21487;&#33021;&#24182;&#19981;&#23436;&#20840;&#27491;&#30830;&#65289;.Windows &#19978;&#65292;&#19968;
+  &#20010;oracle instance &#21482;&#26377;&#19968;&#20010;&#36827;&#31243;&#65292;&#36827;&#31243;&#20013;&#20877;&#20998;&#20986;&#22810;&#20010;&#32447;&#31243;&#12290;&#25152;&#20197;&#19981;&#38656;&#35201;&#36827;&#31243;&#38388;&#20849;&#20139;
+  &#20869;&#23384;&#12290;
+  &#27604;&#22914;&#25105;&#31995;&#32479;&#19978;&#23545;&#24212;&#30340;&#20540;&#26159;&#65306;
+  
+  <span class="org-table">| $ORACLE_BASE | </span><span class="org-table"><span class="italic">/home/oracle/</span></span><span class="org-table">                                   |</span>
+  <span class="org-table">| $ORACLE_HOME | /home/oracle/app/oracle/product/11.2.0/dbhome_1 |</span>
+  <span class="org-table">| $ORACLE_SID  | orcl                                            |</span>
+
+<span class="org-level-1">* Initialization  Parameter Files &#21442;&#25968;&#25991;&#20214;</span>
+  
+  &#21442;&#25968;&#25991;&#20214;&#20998;&#20004;&#31181;,&#21442;&#25968;&#25991;&#20214;&#22312;linux&#19978;&#20301;&#20110; $ORACLE_HOME/dbs/&#30446;&#24405;&#19979;&#12290;windows &#19978;&#65292;
+  &#22909;&#20687;&#26159; $ORACLE_HOME/database/. &#21442;&#25968;&#20998;explicit&#21644;inplicit &#65292;&#26174;&#24335;&#25110;&#38544;&#24335;&#12290;&#26410;&#22768;
+  &#26126;&#30340;&#21017;&#20351;&#29992;oracle&#40664;&#35748;&#30340;&#35774;&#32622;&#65292;&#21363;inplicit
+<span class="org-level-2">**   Static parameter file :PFILE ,&#32431;&#25991;&#26412;&#12290;</span>
+     $ORACLE_HOME/dbs/initSID.ora (&#27880;&#65306;SID&#20026; $ORACLE_SID&#30340;&#20540;)&#22914;initorcl.ora
+     &#20854;&#20013;&#30340;&#20540;&#20250;&#22312;oracle instance &#21551;&#21160;&#26102;&#35835;&#20837;&#12290;&#30446;&#24405;&#19979;&#26377;&#20010;init.ora&#30340;&#31034;&#20363;&#25991;&#20214;&#65292;
+     &#21487;&#20197;&#21442;&#29031;&#20043;&#12290;&#19981;&#36807;&#22909;&#20687;oracle9&#19978;&#30340;init.ora&#25991;&#20214;&#22826;&#32769;&#20102;&#65292;&#26368;&#21518;&#20462;&#25913;&#26102;&#38388;1989&#24180;&#38024;
+     &#23545;oracle8&#30340;&#65292;&#21487;&#33021;&#19981;&#33021;&#29992;&#12290;&#22909;&#20687;&#19981;&#25512;&#33616;&#20351;&#29992;&#12290; &#22312;linux &#19978;&#65292;&#27809;&#23454;&#39564;&#25104;&#21151;.
+
+<span class="org-level-2">**   Persistent server parameter file : SPFILE</span>
+     &#20063;&#20301;&#20110; $ORACLE_HOME/dbs/&#30446;&#24405;&#19979;&#12290;&#21517;&#31216;&#20197;spfie&#25171;&#22836;&#12290;
+     + &#20108;&#36827;&#21046;&#25991;&#20214;&#12290;
+     + &#30001;oracle server&#26469;&#32500;&#25252;&#65292;&#21363;&#65292;&#36890;&#36807;sqlplus&#29992;&#21629;&#20196;&#20462;&#25913;&#12290;
+     + Always resides on the server side &#23384;&#22312;&#20110;oracle &#26381;&#21153;&#22120;&#19978;&#65292;&#19981;&#22312;&#23458;&#25143;&#31471;&#12290;
+       (&#38450;&#27490;&#22810;&#20010;&#29256;&#26412;&#30340;&#23384;&#22312;&#65292;&#23548;&#33268;&#20320;&#19981;&#30693;&#35813;&#29992;&#21738;&#20010;pfile)
+     + ability to make changes persistent across  shutdown and startup
+       &#20462;&#25913;&#21518;&#65292;&#21363;&#20351;&#37325;&#21551;&#65292;&#20851;&#38381;&#65292;&#23427;&#20250;&#19968;&#30452;&#26377;&#25928;&#12290;
+     + can have Recovery Manager(RMan ,oracle&#30340;&#22791;&#20221;&#24037;&#20855;)support backing up
+       to initialization file .&#21363;&#65292;RM&#22791;&#20221;&#26102;&#20182;&#20250;&#22791;&#20221; initialization file .
+<span class="org-level-3">*** &#21019;&#24314;SPFILE</span>
+    + &#26681;&#25454;PFILE &#21019;&#24314;SPFILE
+          &#36827;&#20837;sqlplus&#21518;&#20351;&#29992;&#20197;&#19979;&#21629;&#20196; 
+       create spfile= '/tmp/spfile_example1'  FROM pfile= '/tmp/init.ora';
+       &#25110;&#32773;&#31616;&#20889;&#20026;&#65292;
+        create spfile from pfile; &#21017;&#20351;&#29992;&#40664;&#35748;&#30340;pfile &#21019;&#24314;spfle
+        &#21069;&#25552;&#26159;&#40664;&#35748;&#30340;pfile &#23384;&#22312;&#12290;
+        &#20351;&#29992;linux &#19979;&#30340;&#21629;&#20196;strings &#26597;&#30475;&#29983;&#25104;&#30340;spfile &#20013;&#30340;&#23383;&#31526;&#20018;
+        strings /tmp/spfile_example1
+<span class="org-level-3">*** &#20462;&#25913; SPFILE&#30340;&#20869;&#23481;&#12290;</span>
+<span class="org-block-begin-line">    #+begin_src sql
+</span><span class="org-block">    alert system set parameter = value  &lt;comment= 'text'&gt;  &lt;deferred&gt;
+    &lt;scope=  memory|spfile|both&gt; &lt;sid='sid|*'&gt;
+</span><span class="org-block-end-line">    #+end_src
+</span>    &#25324;&#21495;&#20013;&#30340;&#20869;&#23481;&#20026;&#21487;&#36873;
+    <span class="org-table">| comment  | &#27880;&#37322;                                                             |</span>
+    <span class="org-table">| deferred | &#19979;&#19968;&#27425;&#30331;&#24405;&#30340;&#26102;&#20505;&#26377;&#25928;                                               |</span>
+    <span class="org-table">| scope    | &#24433;&#21709;&#30340;&#33539;&#22260;&#65292;&#21482;&#20462;&#25913;&#20869;&#23384;&#20013;&#30340;&#21442;&#25968;&#65292;&#20462;&#25913;spfile,&#20004;&#32773;&#37117;&#20462;&#25913; &#65288;&#40664;&#35748;both&#65289; |</span>
+    <span class="org-table">| sid      | &#21487;&#20197;&#25351;&#23450;&#21482;&#23545;&#26576;&#19968;&#29305;&#23450;&#30340;instance&#30340;&#21442;&#25968;&#36827;&#34892;&#20462;&#25913;                       |</span>
+    <span class="org-table">|          |                                                                    |</span>
+    alter system set undo_tablespace=undo2;
+    alert system reset undo_tablespace;
+    &#35814;&#35265;&#32852;&#26426;&#25991;&#26723;
+<span class="org-level-3">*** &#26681;&#25454; SPFILE&#21019;&#24314; PFILE</span>
+    create pfile ='/tmp/pfile' from spfile
+    create pfile ='/tmp/pfile' from spfile='/tmp/spfile.ora'
+<span class="org-level-3">*** SPFILE &#27604; PFILE&#22909;</span>
+
+<span class="org-level-1">* oracle&#30340;&#21551;&#21160;&#36807;&#31243;</span>
+  oracle&#23547;&#25214; parameter file&#30340;&#39034;&#24207;
+   + spfileSID.ora
+   + Default spfile : spfile.ora
+   + initSID.ora
+   + Default PFILE :(&#21487;&#33021;&#26159;init.ora,&#26410;&#39564;&#35777;)
+     (&#36825;&#20960;&#20010;&#25991;&#20214;&#37117;&#22312; $ORACLE_HOME/dbs/&#30446;&#24405;&#19979;)
+     &#25110;&#32773;&#25163;&#21160;&#25351;&#23450;&#20351;&#29992;&#21738;&#20010; pfile
+     startup  pfile='/path/to/pfile.ora'
+     &#20294;&#26159;&#27809;&#26377;spfile='' &#30340;&#21442;&#25968;
+     &#19981;&#36807;&#21487;&#20197;&#26377;&#21487;&#36873;&#30340;&#35299;&#20915;&#26041;&#26696;&#65292;&#22312;&#19968;&#20010;pfile &#20013;&#21152;&#20837;&#19968;&#21477;
+<span class="org-block-begin-line">     #+begin_src sql
+</span><span class="org-block">     SPFILE=/path/to/spfile
+</span><span class="org-block-end-line">     #+end_src
+</span>     &#28982;&#21518;&#20351;&#29992;
+<span class="org-block-begin-line">     #+begin_src sql
+</span><span class="org-block">     startup pfile='/path/to/pfile'
+</span><span class="org-block-end-line">     #+end_src
+</span>     &#38388;&#25509;&#25351;&#23450;spfile
+     
+<span class="org-level-1">* &#35841;&#33021;&#24320;&#20851;oracle</span>
+  1). &#25805;&#20316;&#31995;&#32479;&#30340;&#31649;&#29702;&#21592;
+  2). &#34987;&#36171;&#20104; sysdba system&#26435;&#38480;&#30340;&#29992;&#25143;
+<span class="org-level-1">* oracle database &#30340;&#29366;&#24577;</span>
+  --------------startup-------------------------&gt;
+  
+  shutdown ----&gt; nomount------&gt;mount------&gt;open
+  
+  &lt;--------------shutdown------------------------
+
+<span class="org-level-2">**    shutdown----&gt;nomount&#21551;&#21160;&#19968;&#20010;instance</span>
+  + &#39318;&#20808;&#35835;&#21462;&#21442;&#25968;&#25991;&#20214;(spfile or pfile)
+  + &#20998;&#37197; SGA&#20869;&#23384;&#65292;&#21551;&#21160;&#21518;&#21488;&#36827;&#31243;,&#27492;&#26102;&#36824;&#27809;&#22312;oracle database&#19982;&#36825;&#27573;&#20869;&#22312;&#21450;&#36827;&#31243;&#20851;
+   &#32852;.
+  + &#24403;instance &#21551;&#21160;&#26102;&#65292;database &#20250;&#23558;&#19968;&#20123; explicit&#30340;parameter&#20889;&#21040;alert log &#20013;&#12290;
+    &#20320;&#21487;&#20197;&#20381;&#27425;&#36816;&#34892;
+<span class="org-block-begin-line">    #+begin_src sql
+</span><span class="org-block">    sqlplus /nolog
+    conn / as sysdba 
+    startup nomount
+    alert database mount
+
+</span><span class="org-block-end-line">    #+end_src
+</span><span class="org-level-2">**    nomount----&gt;mount &#23558;&#36825;&#20010;&#21551;&#21160;&#30340;instance&#19982;database&#36827;&#34892;&#20851;&#32852;</span>
+      instance &#23547;&#25214;control file &#24182;open &#20043;.control file &#26159;&#20197;
+      CONTROL_FILES='/PATH/TO/CTL_FILE.ctl'.&#24418;&#24335;&#23384;&#22312;&#20110;parameter&#25991;&#20214;&#20013;&#30340;
+<span class="org-level-2">**    mount-----&gt;open </span>
+      mount&#20043;&#21518;&#65292;&#26222;&#36890;&#29992;&#25143;&#26159;&#26080;&#20851;&#36830;&#25509;database&#30340;.
+      &#36825;&#20010;&#36807;&#31243;&#20250;&#26681;&#25454;control file &#20013;&#30340;&#25551;&#36848;&#65292;&#23547;&#25214;&#20854;&#20182;&#19968;&#20123;&#24517;&#39035;&#30340;&#25991;&#20214;
+      (online datafiles ,redo log files).&#22914;&#26524;&#19968;&#20010;tablespace&#22312;&#19978;&#19968;&#27425;shutdown
+      &#26102;&#22788;&#20110;offline&#29366;&#24577;&#65292;&#27492;&#26102;&#23427;&#20381;&#28982;&#22914;&#25925;(offline)&#65292;&#22914;&#26524;&#65292;&#27809;&#25214;&#21040;online
+      datafiles ,or redo log files ,&#20250;&#25253;&#38169;.&#19968;&#33324;&#27492;&#26102;&#38656;&#35201;&#36827;&#34892;&#24674;&#22797;&#12290;
+      &#25152;&#20197;&#21487;&#20197;&#22312;&#19981;&#21516;&#30340;&#29366;&#24577;&#36827;&#34892;&#19968;&#23450;&#30340;&#32500;&#25252;&#24037;&#20316;&#12290;
+    
+<span class="org-level-2">** oracle&#29366;&#24577;&#30340;&#20999;&#25442;</span>
+   + alter database nomount
+   + alert database mount
+   + alert database open
+     &#29366;&#24577;&#21482;&#33021;&#20174;shutdown &#21040;nomount ,&#30001;nomount&#21464;&#25104;mount 
+     &#30001;mount &#21464;open &#32780;&#19981;&#33021;&#21453;&#36807;&#26469;&#12290;
+<span class="org-level-2">** Restricted mode &#21463;&#38480;&#27169;&#24335;&#65292;</span>
+   &#21482;&#26377;&#20855;&#26377;restricted &#26435;&#38480;&#30340;&#29992;&#25143;&#25165;&#33021;&#36830;&#19978;&#26469;&#65292;&#23427;&#36319;open&#29366;&#24577;&#30456;&#21516;&#65292;&#21482;&#26159;&#19981;&#20801;&#35768;&#26222;&#36890;
+   &#30340;&#29992;&#25143;&#36830;&#25509;&#19978;&#26469;&#65292;&#26377;&#20123;&#21629;&#20196;&#22312;mount&#29366;&#24577;&#19979;&#27809;&#27861;&#20351;&#29992;&#65292;&#32780;&#21448;&#19981;&#24819;&#21551;&#21160;&#21040;open&#29366;&#24577;&#12290;&#21482;
+   &#33021;&#20855;&#26377;&#21644;restricted session&#31995;&#32479;&#26435;&#38480;&#30340;&#29992;&#25143;&#25165;&#21487;&#20197;&#35775;&#38382;&#25968;&#25454;&#24211;&#65292;
+   &#32780;&#36890;&#24120;&#21482;&#26377;&#25968;&#25454;&#24211;&#31649;&#29702;&#21592;&#20855;&#26377;&#36825;&#31181;&#31995;&#32479;&#26435;&#38480;
+   &#65292;&#23454;&#20363;&#21482;&#33021;&#20026;&#31649;&#29702;&#29992;&#25143;&#26381;&#21153;&#65292;&#24403;&#37319;&#29992;&#36825;&#31181;&#27169;&#24335;&#21551;&#21160;&#26102;&#65292;&#20027;&#35201;&#26159;&#20026;&#20102;&#23436;&#25104;&#20197;&#19979;&#20219;&#21153;&#65306;
+   1). &#25191;&#34892;export&#25110;import&#25968;&#25454;
+   2). &#25191;&#34892;data load
+   3). &#20020;&#26102;&#38450;&#27490;&#29992;&#25143;&#20351;&#29992;&#25968;&#25454;
+   4). &#25191;&#34892;&#26576;&#20123;&#31227;&#26893;&#25110;&#21319;&#32423;&#25805;&#20316;
+<span class="org-block-begin-line">   #+begin_src sql
+</span><span class="org-block">   startup restrict
+</span><span class="org-block-end-line">   #+end_src
+</span>   &#22914;&#26524;&#24050;&#32463;&#22788;&#20110;open&#29366;&#24577;&#65292;&#21487;&#20197;&#20351;&#29992;
+<span class="org-block-begin-line">   #+begin_src sql
+</span><span class="org-block">   alter system enable restricted session
+   alter system diable restricted session (&#22238;&#21040;&#27491;&#24120;open&#29366;&#24577;)
+</span><span class="org-block-end-line">   #+end_src
+</span>   &#22788;&#20110;&#36825;&#31181;&#29366;&#24577;,&#19968;&#33324;&#26159;&#31649;&#29702;&#21592;&#24819;&#36827;&#34892;&#19968;&#23450;&#30340;&#32500;&#25252;&#24037;&#20316;&#12290;
+   &#36171;&#20104;&#26576;&#29992;&#25143;&#26435;&#38480;&#21487;&#20197;&#22312;restircted mode&#19979;&#24037;&#20316;. 
+<span class="org-block-begin-line">   #+begin_src sql
+</span><span class="org-block">   grant restricted session to scott;
+</span><span class="org-block-end-line">   #+end_src
+</span>   
+<span class="org-level-3">*** &#26597;&#25110;kill&#25481;&#19968;&#20010;&#20250;&#35805; v$session &#21487;&#30693;&#30446;&#21069;&#36830;&#25509;&#30340;&#20250;&#35805;,</span>
+    &#23545;&#20110;&#24050;&#32463;&#36830;&#25509;&#30340;session,&#21487;&#20197;&#25226;&#23427;&#36386;&#20986;&#21435;
+<span class="org-block-begin-line">    #+begin_src sql
+</span><span class="org-block">    select  SADDR ,SID,  SERIAL#,  AUDSID ,username from v$session;
+</span><span class="org-block-end-line">    #+end_src
+</span>    &#36825;&#26159;&#34920;&#20013;&#30340;&#21069;&#20960;&#21015;&#65292; &#20027;&#35201;&#30475;sid ,username ,&#21487;&#33021;&#20250;&#26377;&#24456;&#22810;username&#26159;&#31354;&#65292;&#34920;&#31034;
+    &#36825;&#26159;&#19968;&#20010;&#21518;&#21488;&#36827;&#31243;&#65292;&#25214;&#21040;&#26576;&#19968;&#29992;&#25143;&#30340;sid&#21518;
+<span class="org-block-begin-line">    #+begin_src sql
+</span><span class="org-block">    alter system kill session 'sid,serial#'
+   alter system kill session '15,6'
+</span><span class="org-block-end-line">    #+end_src
+</span>    
+<span class="org-level-2">** Read Mode</span>
+<span class="org-block-begin-line">   #+begin_src sql
+</span><span class="org-block">    startup mount
+    alter database open read only
+</span><span class="org-block-end-line">   #+end_src
+</span>   &#21487;&#20197;&#65306;
+   + execute queries
+   + execute disks sorts using  Logically Managered TableSpace
+   + take data files  offline or online ,but not tablespace(&#21487;&#20197;&#25226;
+     tablespace&#30340;&#26576;&#20010;data file &#35774;&#25104;&#31163;&#32447;&#65292;&#22312;&#32447;&#65292;&#20294;&#19981;&#33021;&#25972;&#20010;tablespace)
+   + perform recovery  of offline data files  and tablespace&#65292;&#21487;&#20197;&#23545;&#31163;&#32447;&#30340;
+     data file &#25110; tablespace&#36827;&#34892;&#24674;&#22797;&#25805;&#20316;.
+     
+
+<span class="org-level-2">** oracle database&#30340;&#20851;&#38381;</span>
+<span class="org-level-3">*** Close a Database</span>
+    &#23558;SGA&#20013;&#30340;database data &#12289;recovery data &#20889;&#20837;data file &#12289;redo log file
+    the database is closed ,but still mounted 
+<span class="org-level-3">*** Unmount a Database</span>
+    disassociate a database from the instance.
+    the database is unmounted .
+    the control files is closed .
+<span class="org-level-3">*** Shutdown an instance</span>
+    SGA &#20869;&#23384;&#37322;&#25918;&#65292;&#26432;&#25481;&#21518;&#21488;&#36827;&#31243;
+    
+<span class="org-level-3">*** shutdown &#21629;&#20196;</span>
+    <span class="org-table">| shutdown mode                      | abort | immediate | transactional | normal |</span>
+    <span class="org-table">| all new connection                 | No    | No        | No            | No     |</span>
+    <span class="org-table">| wait until current session end     | no    | no        | no            | yes    |</span>
+    <span class="org-table">| wait util current transaction end  | no    | no        | yes           | yes    |</span>
+    <span class="org-table">| force a checkpoint and close files | no    | yes       | yes           | yes    |</span>
+<span class="org-block-begin-line">#+begin_src sql
+</span><span class="org-block">shutdown immediate ,&#26368;&#24120;&#29992;&#65292;&#23427;&#19981;&#31561;&#20107;&#21153;&#23436;&#25104;&#65292;&#32780;&#26159;&#22238;&#28378;&#65292;&#20445;&#35777;&#25968;&#25454;&#30340;&#23436;&#25972;&#65292;&#21516;&#26102;
+&#24555;&#36895;&#30340;&#20851;&#38381;
+</span><span class="org-block-end-line">#+end_src
+</span>
+<span class="org-level-3">*** v$transcation &#21487;&#20197;&#26597;&#26159;&#21542;&#26377;&#27963;&#21160;&#30340;&#20107;&#21153;&#65292;&#21363;&#26410;&#25552;&#20132;&#30340;&#20107;&#21153;&#12290;</span>
+<span class="org-block-begin-line">    #+begin_src sql
+</span><span class="org-block">    select addr ,status from v$transcation
+</span><span class="org-block-end-line">    #+end_src
+</span>    shutdown transaction &#21629;&#20196;&#20250;&#19968;&#30452;&#31561;&#21040;&#25152;&#26377;&#20107;&#21153;&#22343;&#25552;&#20132;&#21518;&#12290;
+
+<span class="org-level-1">* Diagnostic Files (&#35786;&#26029;&#25991;&#20214;)</span>
+   + &#35760;&#24405;&#19968;&#20123;&#22823;&#20107;&#20214;&#65292;&#22914;&#21551;&#21160;&#20851;&#38381;&#31561;
+   + used to resolve problems
+   + used to better manage the database on a day-to-day  bsis
+  &#20027;&#35201;&#21253;&#25324;&#20197;&#19979;&#20960;&#31181;&#31867;&#22411;&#30340;files
+<span class="org-level-2">** alert_SID.log</span>
+   + record you command
+   + record results of major event
+   + used for day-to-day operational  info.
+   + used to diagnosing  database error
+&#23427;&#20301;&#20110; background_dump_dest &#21442;&#25968;&#23545;&#24212;&#30340;&#25991;&#20214;&#22841;&#19979;&#12290;
+show parameter dump 
+
+<span class="org-level-2">**  Background  trace files</span>
+    &#35760;&#24405;&#21518;&#21488;&#36827;&#31243;&#30340;&#20449;&#24687;&#65292;&#21518;&#21488;&#36827;&#31243;&#20986;&#38169;&#26102;&#35760;&#24405;
+    &#25991;&#20214;&#21517;&#65306;    SID_precessName_pid.trc
+<span class="org-level-2">**  user trace files </span>
+    &#25991;&#20214;&#21517;&#65306;    SID_ora_pid.trc
+    &#20301;&#32622;&#22312;user_dump_dest   
+    + procuded by user process
+    + can  be generated by a server process
+    + contain statistics  for traced sql statement .
+    + contain usr messages
+      &#40664;&#35748;&#21482;&#22312;user precess &#20986;&#38169;&#26102;&#25165;&#35760;&#24405;&#12290;&#20063;&#21487;&#20197;&#38543;&#26102;&#37117;&#20570;
+    + alter session set sql_trace=true
+      &#25110;&#32773;&#35774;&#21442;&#25968;sql_trace=true
+
+<span class="org-level-1">* sqlplus &#23567;&#25216;&#24039;&#65292;&#35843;&#25972;&#26576;&#21015;&#30340;&#26174;&#31034;&#23485;&#24230;</span>
+  + set pagesize 300
+  + set linesize 200
+  + col col_name format a30
+
+<span class="org-level-1">* oracle instance &#21551;&#21160;&#21518;&#65292;&#26597;&#30475;parameter&#30340;&#20540;&#12290;</span>
+<span class="org-level-2">** &#26597;&#21160;&#24577;&#35270;&#22270; v$parameter</span>
+   select name ,value ,type from v$parameter where name='';
+<span class="org-level-2">** &#36890;&#36807;show parameter&#21629;&#20196;&#65292;</span>
+   &#22914;&#65306; show parameter sga &#65292;&#27880;&#21442;&#25968;&#21517;&#19981;&#38656;&#35201;&#36755;&#20837;&#23436;&#25972;&#30340;&#21517;&#31216;&#65292;&#22914;&#36825;&#20010;&#21629;&#20196;&#65292;&#20250;
+   &#26174;&#31034;&#25152;&#26377;&#21442;&#25968;&#21517;&#31216;&#21253;&#21547;sga &#30340;&#21442;&#25968;&#12290;
+
+</pre>
+  </body>
+</html>

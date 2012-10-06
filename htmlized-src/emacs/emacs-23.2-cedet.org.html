@@ -1,0 +1,176 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<!-- Created by htmlize-1.34 in css mode. -->
+<html>
+  <head>
+    <title>emacs-23.2-cedet.org</title>
+    <style type="text/css">
+    <!--
+      body {
+        color: #F8F8F8;
+        background-color: #0C1021;
+      }
+      .comment {
+        /* font-lock-comment-face */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-block {
+        /* org-block */
+        color: #b3b3b3;
+      }
+      .org-block-begin-line {
+        /* org-block-begin-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-block-end-line {
+        /* org-block-end-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-document-info {
+        /* org-document-info */
+        color: #afeeee;
+      }
+      .org-document-info-keyword {
+        /* org-document-info-keyword */
+        color: #b3b3b3;
+      }
+      .org-document-title {
+        /* org-document-title */
+        color: #afeeee;
+        font-size: 144%;
+        font-weight: bold;
+      }
+      .org-link {
+        /* org-link */
+        color: #00ffff;
+        text-decoration: underline;
+      }
+      .org-meta-line {
+        /* org-meta-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+
+      a {
+        color: inherit;
+        background-color: inherit;
+        font: inherit;
+        text-decoration: inherit;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+    -->
+    </style>
+  </head>
+  <body>
+    <pre>
+<span class="comment"># -*- coding:utf-8 -*-</span>
+<span class="org-document-info-keyword">#+TITLE:</span><span class="comment">     </span><span class="org-document-title">emacs-23.2&#23433;&#35013;&#23448;&#32593;cedet</span>
+<span class="org-document-info-keyword">#+AUTHOR:</span><span class="comment">    </span><span class="org-document-info">&#23396;&#23792;&#29420;&#31168;</span>
+<span class="org-document-info-keyword">#+EMAIL:</span><span class="comment">     </span><span class="org-document-info">jixiuf@gmail.com</span>
+<span class="org-document-info-keyword">#+DATE:</span><span class="comment">      </span><span class="org-document-info">2011-06-08 &#26143;&#26399;&#19977;</span>
+<span class="org-meta-line">#+DESCRIPTION: emacs cedet 
+#+KEYWORDS: emacs cedet 
+#+LANGUAGE:  zh
+#+FILETAGS: @Emacs @Linux @Windows
+</span>
+&#20851;&#20110;emacs-23.2&#23433;&#35013;&#23448;&#26041;&#25552;&#20379;&#30340;cedet &#30340;&#26041;&#27861;
+&#23545;&#20110;linux &#26469;&#35828;&#26469;cedet&#30446;&#24405;&#19979;&#25191;&#34892;make &#19968;&#33324;&#23601;&#21487;&#20197;&#20102;.
+&#20294;&#23545;&#20110;windows&#26469;&#35828;,&#22240;&#20026;&#27809;&#26377;make&#31561;&#19968;&#31995;&#21015;&#30340;&#21629;&#20196;,&#36825;&#25307;&#23601;&#19981;&#31649;&#29992;&#20102;,
+&#23448;&#26041;&#30340;&#23433;&#35013;&#25351;&#21335;&#19978;&#35828;windows&#19978;&#21487;&#20197;
+<span class="org-block-begin-line">#+begin_src sh
+</span><span class="org-block">;;     emacs -Q -l cedet-build.el -f cedet-build
+</span><span class="org-block-end-line">#+end_src
+</span>&#36816;&#34892;&#36825;&#26465;&#21629;&#20196;&#26469;&#32534;&#35793;cedet-1.0
+&#25105;&#35201;&#35828;&#30340;&#37325;&#28857;&#19981;&#22312;&#36825;
+&#37325;&#28857;&#26159;
+&#22312;&#37197;&#32622;&#25991;&#20214;&#20013;&#36816;&#34892;&#36825;&#26465;&#21629;&#20196;&#30340;&#26102;&#20505;
+<span class="org-block-begin-line">#+begin_src emacs-lisp
+</span><span class="org-block">(load-file "~/.emacs.d/site-lisp/cedet-1.0/common/cedet.el")
+</span><span class="org-block-end-line">#+end_src
+</span>&#25253;
+     (error "CEDET Version 1.0 already loaded.")
+ &#36825;&#26679;&#30340;&#38169;&#35823;&#30340;&#35299;&#20915;&#21150;&#27861;.
+  &#22240;&#20026; emacs-23.2&#20869;&#32622;&#20102;&#19968;&#20010;cedet.&#23548;&#33268;&#21152;&#36733;&#22833;&#36133;.
+  &#19981;&#36807;Emacs&#20869;&#32622;&#30340;CEDET&#21644;CEDET&#30340;&#23448;&#32593;&#21457;&#24067;&#30340;&#26159;&#19981;&#19968;&#26679;&#30340;, &#25105;&#35273;&#24471;&#20869;&#32622;&#30340;
+  &#21487;&#33021;&#31283;&#23450;&#20123;, &#20294;&#26159;&#26368;&#26032;&#30340;&#21151;&#33021;&#21487;&#33021;&#27809;&#26377;, &#25152;&#20197;&#25105;&#36824;&#26159;&#36873;&#25321;&#20102;CEDET&#23448;&#26041;&#30340;
+  &#29256;&#26412;, &#20855;&#20307;&#20570;&#27861;&#23601;&#26159;&#25226;CEDET&#23448;&#26041;&#29256;&#26412;&#19979;&#36733;&#19979;&#26469;&#21518;, &#28982;&#21518;&#25226;&#23427;&#30340;&#36335;&#24452;&#21152;&#21040;
+  load-path&#30340;&#26368;&#21069;&#38754;, &#36825;&#26679;&#23601;&#21487;&#20197;&#35206;&#30422;Emacs&#20869;&#32622;&#30340;&#20102;.
+  &#33267;&#20110;&#21152;&#36733;&#36335;&#24452;&#30340;&#26041;&#27861;,&#20320;&#21487;&#20197;&#19968;&#20010;&#20010;&#23558;cedet&#30446;&#24405;&#19979;&#30340;&#25152;&#26377;&#30446;&#24405;
+  &#36890;&#36807;&#36825;&#31181;&#26041;&#24335;&#19968;&#20010;&#20010;&#25163;&#21160;&#21152;&#21040;load-path&#20013;
+<span class="org-block-begin-line">#+begin_src emacs-lisp
+</span><span class="org-block">(add-to-list 'load-path  "cedet/..");
+</span><span class="org-block-end-line">#+end_src  
+</span>
+&#19981;&#36807;&#25105;&#22312;&#32593;&#19978;&#25214;&#21040;&#19968;&#32534;&#25991;&#31456;
+<span class="org-link">http://emacser.com/emacs-23-2-release.htm</span>
+&#36825;&#20301;&#20161;&#20804;&#30340;&#37197;&#32622;&#25991;&#20214;&#22312;<span class="org-link">http://dea.googlecode.com</span>
+
+&#25105;&#20174;&#37324;&#38754;&#25214;&#21040;&#20102;&#23427;&#30340;&#35299;&#20915;&#26041;&#27861;:
+<span class="org-block-begin-line">#+begin_src  emacs-lisp
+</span><span class="org-block"> (defvar cedet-path "/tmp/cedet-1.0/" "Path of `cedet'")  
+ (my-add-subdirs-to-load-path cedet-path)
+</span><span class="org-block-end-line">#+end_src
+</span> &#22522;&#26412;&#20869;&#23481;&#23601;&#36825;&#20004;&#21477;,&#20294;&#38382;&#39064;&#26159; my-add-subdirs-to-load-path
+ &#20989;&#25968;&#22312;&#20309;&#22788;&#23450;&#20041;&#21364;&#36153;&#20102;&#19968;&#30058;&#25163;&#33050;,&#20170;&#25226;&#23427;&#25688;&#24405;&#20986;&#26469;&#20165;&#20379;&#21442;&#32771;
+<span class="org-block-begin-line">#+begin_src emacs-lisp
+</span><span class="org-block"> ;; -*- Emacs-Lisp -*-
+
+(defun my-add-subdirs-to-load-path (dir)
+  "&#25226;DIR&#30340;&#25152;&#26377;&#23376;&#30446;&#24405;&#37117;&#21152;&#21040;`load-path'&#37324;&#38754;"
+  (interactive)
+  (let ((default-directory (concat dir "/")))
+    (add-to-list 'load-path dir)
+    (if (fboundp 'normal-top-level-add-subdirs-to-load-path)
+        (normal-top-level-add-subdirs-to-load-path))))
+
+;; Fix bug of `normal-top-level-add-subdirs-to-load-path'
+;; which can not add directory which name end with ".elc?"
+;; copy from emacs23 startup.el and modify it
+(defun normal-top-level-add-subdirs-to-load-path ()
+  "Add all subdirectories of current directory to `load-path'.
+More precisely, this uses only the subdirectories whose names
+start with letters or digits; it excludes any subdirectory named `RCS'
+or `CVS', and any subdirectory that contains a file named `.nosearch'."
+  (let (dirs
+        attrs
+        (pending (list default-directory)))
+    ;; This loop does a breadth-first tree walk on DIR's subtree,
+    ;; putting each subdir into DIRS as its contents are examined.
+    (while pending
+      (push (pop pending) dirs)
+      (let* ((this-dir (car dirs))
+             (contents (directory-files this-dir))
+             (default-directory this-dir)
+             (canonicalized (if (fboundp 'untranslated-canonical-name)
+                                (untranslated-canonical-name this-dir))))
+        ;; The Windows version doesn't report meaningful inode
+        ;; numbers, so use the canonicalized absolute file name of the
+        ;; directory instead.
+        (setq attrs (or canonicalized
+                        (nthcdr 10 (file-attributes this-dir))))
+        (unless (member attrs normal-top-level-add-subdirs-inode-list)
+          (push attrs normal-top-level-add-subdirs-inode-list)
+          (dolist (file contents)
+            ;; The lower-case variants of RCS and CVS are for DOS/Windows.
+            (unless (member file '("." ".." "RCS" "CVS" "rcs" "cvs"))
+              (when (and (string-match "\\`[[:alnum:]]" file)
+                         ;; Avoid doing a `stat' when it isn't necessary
+                         ;; because that can cause trouble when an NFS server
+                         ;; is down.
+                         (file-directory-p file))
+                (let ((expanded (expand-file-name file)))
+                  (unless (file-exists-p (expand-file-name ".nosearch"
+                                                           expanded))
+                    (setq pending (nconc pending (list expanded)))))))))))
+    (if (equal window-system 'w32)
+        (setq load-path (append (nreverse dirs) load-path))
+      (normal-top-level-add-to-load-path (cdr (nreverse dirs))))))
+</span><span class="org-block-end-line">#+end_src
+</span> 
+</pre>
+  </body>
+</html>

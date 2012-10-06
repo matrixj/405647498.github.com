@@ -1,0 +1,9 @@
+# -*- coding:utf-8 -*-
+
+#+TITLE: Tag: @Git
+
+#+LANGUAGE:  zh
+   + [[file:../git/git.org][git拾遗]]
+   + [[file:../git/git-proxy-on-windows.org][在windows上通过代理访问github.com]]
+   + [[file:../emacs/emacs-vc.org][emacs 进行版本控制(Version Control)]]
+   + [[file:../emacs/ediff-git-mergetool.org][使用Emacs中的Ediff 作为git mergetool使用的工具进行文件合并]]

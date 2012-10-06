@@ -3,14 +3,14 @@
                "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="zh" xml:lang="zh">
 <head>
-<title>一个人的狂欢</title>
+<title>对"我的电脑"  进行增强</title>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
-<meta name="title" content="一个人的狂欢"/>
+<meta name="title" content="对"我的电脑"  进行增强"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2011-06-04 星期六"/>
+<meta name="generated" content="2011-06-15 星期三"/>
 <meta name="author" content="孤峰独秀"/>
-<meta name="description" content=""/>
-<meta name="keywords" content=""/>
+<meta name="description" content="对"我的电脑"  进行增强"/>
+<meta name="keywords" content="autohotkey explorer 我的电脑"/>
 <style type='text/css'>
        body {
     background-color: #E5E5E5;
@@ -942,15 +942,15 @@ img {
 }
 
     </style>
-<link rel="stylesheet" type="text/css" href="style/emacs.css" />
-<script type='text/javascript' src='js/emacs.js'> </script>
+<link rel="stylesheet" type="text/css" href="../style/emacs.css" />
+<script type='text/javascript' src='../js/emacs.js'> </script>
 
 </head>
 <body>
 <div id="org-div-home-and-up" style="text-align:right;font-size:70%;white-space:nowrap;">
- <a accesskey="h" href="sitemap.html"> 站点地图 </a>
+ <a accesskey="h" href="../sitemap.html"> 站点地图 </a>
  |
- <a accesskey="H" href="index.html"> 首页 </a>
+ <a accesskey="H" href="../index.html"> 首页 </a>
 </div>
 
 <div id="preamble">
@@ -958,59 +958,362 @@ img {
 </div>
 
 <div id="content">
-<h1 class="title">一个人的狂欢</h1>
+<h1 class="title">对"我的电脑"  进行增强</h1>
 
 
-<div id='logo-img' ><a  href='index.html'>▇█▓▒░◕~◕░▒▓█▇</a></div>
+<div id='logo-img' ><a  href='../index.html'>▇█▓▒░◕~◕░▒▓█▇</a></div>
 
 <div id='logo-text'>
   <a href='#' ><span align="left">░◕~◕░</span></a>
 </div>
 
 
+<p>
+这里不对代码进行过于详细的讲解。只贴代码，并简单描述其功能<a href="AutoHotKey_1.html"> AutoHotKey几个简单的小例子</a> 中已经有一个关于对资源管理器中实现Ctl+alt+h<br/>
+<a href="AutoHotKey_1.html#sec-2_3">一键显隐 隐藏文件</a>的功能，这里再给出其他几个与资源管理器有关的功能增强。<br/>
+</p>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
 <ul>
-<li>首页还未做好，先看<a href="sitemap.html">站点地图</a>吧
+<li><a href="#sec-1">复制当前文件的路径</a></li>
+<li><a href="#sec-2">Alt+h 一键显隐扩展名</a></li>
+<li><a href="#sec-3">Ctl+Alt+c 在当前路径下打开Cmd.exe 窗口。</a></li>
+<li><a href="#sec-4">Alt+n 新建文本文件 Shift+= 新建文件夹</a></li>
+<li><a href="#sec-5">焦点的移动</a></li>
+<li><a href="#sec-6">用键盘进行管理</a></li>
+<li><a href="#sec-7">Ctrl+e 用Emacs编辑器打开选中的文件</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-1" class="outline-2">
+<h2 id="sec-1">复制当前文件的路径</h2>
+<div class="outline-text-2" id="text-1">
+
+<p>这段代码实现<br/>
+</p><ul>
+<li>Alt+1 : copy 选中文件的名称<br/>
 </li>
-<li><a href="about.html">About</a>
+<li>Alt+2 : copy 当前路径名<br/>
+</li>
+<li>Alt+3 : copy 选中文件的完整路径名<br/>
 </li>
 </ul>
 
 
+<p><br/>
+<pre class="src src-c"><span class="org-type">SetTitleMatchMode</span> <span class="org-variable-name">Regex</span> ;&#21487;&#20197;&#20351;&#29992;&#27491;&#21017;&#34920;&#36798;&#24335;&#23545;&#26631;&#39064;&#36827;&#34892;&#21305;&#37197;
+; &#19979;&#38754;&#30340;&#31383;&#21475;&#31867;&#20381;&#27425;&#20026;&#65306;&#26700;&#38754;&#12289;Win+D&#21518;&#30340;&#26700;&#38754;&#12289;&#25105;&#30340;&#30005;&#33041;&#12289;&#36164;&#28304;&#31649;&#29702;&#22120;&#12289;&#21478;&#23384;&#20026;&#31561;
+<span class="org-preprocessor">#IfWinActive</span> ahk_class Progman|WorkerW|CabinetWClass|ExploreWClass|#32770
+;;Alt+1 copy&#25991;&#20214;&#21517;
+<span class="org-negation-char">!</span>1::
+  send ^c
+  sleep,200
+  clipboard = %clipboard%
+  SplitPath, clipboard, <span class="org-type">name</span>
+  <span class="org-variable-name">clipboard</span> = %
+  <span class="org-keyword">return</span>
+;;alt+2 copy &#27492;&#25991;&#20214;&#25152;&#22312;&#30340;&#36335;&#24452;&#21517;
+<span class="org-negation-char">!</span>2::
+  send ^c
+  sleep,200
+  clipboard = %clipboard%
+  SplitPath, clipboard, , <span class="org-type">dir</span>
+  <span class="org-variable-name">clipboard</span> = %dir%
+  <span class="org-keyword">return</span>
+;;<span class="org-type">copy</span> <span class="org-variable-name">&#27492;&#25991;&#20214;&#30340;&#20840;&#36335;&#24452;&#21517;</span>
+<span class="org-negation-char">!</span>3::
+  send ^c
+  sleep,200
+  clipboard = %clipboard%
+  <span class="org-keyword">return</span>
+<span class="org-preprocessor">#IfWinActive</span>
+</pre>
+
+
+</p></div>
+
+</div>
+
+<div id="outline-container-2" class="outline-2">
+<h2 id="sec-2">Alt+h 一键显隐扩展名</h2>
+<div class="outline-text-2" id="text-2">
+
+
+<p><br/>
+<pre class="src src-c"><span class="org-type">SetTitleMatchMode</span> <span class="org-variable-name">Regex</span> ;&#21487;&#20197;&#20351;&#29992;&#27491;&#21017;&#34920;&#36798;&#24335;&#23545;&#26631;&#39064;&#36827;&#34892;&#21305;&#37197;
+<span class="org-preprocessor">#IfWinActive</span> ahk_class CabinetWClass|ExploreWClass
+;Alt+h TOGGLES FILE EXTENSIONS
+<span class="org-negation-char">!</span>h::
+RegRead, HiddenFiles_Status, HKEY_CURRENT_USER, Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced, HideFileExt
+<span class="org-type">If</span> <span class="org-variable-name">HiddenFiles_Status</span> = 1
+     RegWrite, REG_DWORD, HKEY_CURRENT_USER, Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced, HideFileExt, 0
+Else
+   RegWrite, REG_DWORD, HKEY_CURRENT_USER, Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced, HideFileExt, 1
+WinGetClass, eh_Class,<span class="org-type">A</span>
+<span class="org-function-name">If</span> (eh_Class = <span class="org-string">"#32770"</span> OR A_OSVersion = <span class="org-string">"WIN_VISTA"</span>)
+   send, {F5}
+<span class="org-type">Else</span> <span class="org-variable-name">PostMessage</span>, 0x111, 28931,,, <span class="org-type">A</span>
+<span class="org-variable-name">Return</span>
+<span class="org-preprocessor">#IfWinActive</span>
+</pre>
+
+
+</p></div>
+
+</div>
+
+<div id="outline-container-3" class="outline-2">
+<h2 id="sec-3">Ctl+Alt+c 在当前路径下打开Cmd.exe 窗口。</h2>
+<div class="outline-text-2" id="text-3">
+
+
+<p><br/>
+<pre class="src src-c"><span class="org-type">SetTitleMatchMode</span> <span class="org-variable-name">Regex</span> ;&#21487;&#20197;&#20351;&#29992;&#27491;&#21017;&#34920;&#36798;&#24335;&#23545;&#26631;&#39064;&#36827;&#34892;&#21305;&#37197;
+<span class="org-preprocessor">#IfWinActive</span> ahk_class CabinetWClass|ExploreWClass
+; open <span class="org-string">'cmd'</span> in the current directory
+^<span class="org-negation-char">!</span>c::OpenCmdInCurrent()
+<span class="org-preprocessor">#IfWinActive</span>
+
+; Opens the <span class="org-type">command</span> <span class="org-variable-name">shell</span> <span class="org-string">'cmd'</span> in the directory browsed in Explorer.
+; <span class="org-constant">Note</span>: expecting to be run when the active window <span class="org-type">is</span> <span class="org-variable-name">Explorer</span>.
+;
+<span class="org-function-name">OpenCmdInCurrent</span>()
+{
+ ControlGetText, full_path, Edit1, A
+ <span class="org-type">IfInString</span> <span class="org-variable-name">full_path</span>, \
+  {
+    Run, cmd /K cd /D <span class="org-string">"%full_path%"</span>
+  }
+  <span class="org-keyword">else</span>
+  {
+    Run, cmd /K cd /D <span class="org-string">"C:\ "</span>
+  }
+}
+</pre>
+
+
+</p></div>
+
+</div>
+
+<div id="outline-container-4" class="outline-2">
+<h2 id="sec-4">Alt+n 新建文本文件 Shift+= 新建文件夹</h2>
+<div class="outline-text-2" id="text-4">
+
+
+<p><br/>
+<pre class="src src-c">; create new text file
+<span class="org-type">SetTitleMatchMode</span> <span class="org-variable-name">Regex</span> ;&#21487;&#20197;&#20351;&#29992;&#27491;&#21017;&#34920;&#36798;&#24335;&#23545;&#26631;&#39064;&#36827;&#34892;&#21305;&#37197;
+<span class="org-preprocessor">#IfWinActive</span> ahk_class CabinetWClass|ExploreWClass
+
+;<span class="org-string">"+"</span>  like Emacs dired: create new folder 
++=::Send <span class="org-negation-char">!</span>fwf
+
+<span class="org-negation-char">!</span>n::
+InputBox, UserInput, New <span class="org-type">File</span> <span class="org-variable-name">Name</span>?, Please enter a New <span class="org-type">File</span> <span class="org-function-name">Name</span>(.txt), , 280, 100,,,,,.txt will be append
+<span class="org-keyword">if</span> ErrorLevel
+{
+}<span class="org-keyword">else</span>
+{
+  Send {Left}
+ControlGetText, ExplorePath, Edit1, <span class="org-type">A</span>
+<span class="org-variable-name">StringRight</span>, isEndsWithPathSeaprator, ExplorePath, 1
+<span class="org-keyword">if</span> (isEndsWithPathSeaprator =<span class="org-warning">"</span><span class="org-string">\")</span>
+<span class="org-string">{</span>
+<span class="org-string">  newFilePath=%ExplorePath%%UserInput%.txt</span>
+<span class="org-string">}else</span>
+<span class="org-string">{</span>
+<span class="org-string">  newFilePath=%ExplorePath%\%UserInput%.txt</span>
+<span class="org-string">}</span>
+<span class="org-string">FileAppend,, %newFilepath%</span>
+<span class="org-string">ControlFocus, SysListView321,A</span>
+<span class="org-string">; Switch the active window's keyboard layout/language to English:</span>
+<span class="org-string">PostMessage, 0x50, 0, 0x4090409,, A  ; 0x50 is WM_INPUTLANGCHANGEREQUEST.</span>
+<span class="org-string">SendInput {F5}%UserInput%  </span>
+<span class="org-string">}</span>
+<span class="org-string">return</span>
+<span class="org-string">#IfWinActive </span>
+</pre>
+
+</p></div>
+
+</div>
+
+<div id="outline-container-5" class="outline-2">
+<h2 id="sec-5">焦点的移动</h2>
+<div class="outline-text-2" id="text-5">
+
+<ul>
+<li>Ctrl+, 选中第一个文件<br/>
+</li>
+<li>Ctrl+. 选中最后一个文件<br/>
+</li>
+<li>ctrl+; 定位到左侧目录树<br/>
+</li>
+<li>ctrl+L 定位在地址栏<br/>
+</li>
+</ul>
+
+
+<p><br/>
+<pre class="src src-c"><span class="org-preprocessor">#IfWinActive</span> ahk_class CabinetWClass|ExploreWClass
+;;Ctrl+, &#36873;&#20013;&#31532;&#19968;&#20010;&#25991;&#20214;
+^,::
+   ControlFocus, SysListView321,<span class="org-type">A</span>
+    <span class="org-variable-name">Send</span> {Home}
+<span class="org-keyword">return</span>
+;;Ctrl+. &#36873;&#20013;&#26368;&#21518;&#19968;&#20010;&#25991;&#20214;
+^.::
+  ControlFocus, SysListView321,<span class="org-type">A</span>
+  <span class="org-variable-name">Send</span> {End}
+  <span class="org-keyword">return</span>
+
+;;ctrl+; &#23450;&#20301;&#21040;&#30446;&#24405;&#26641;
+^;::
+  ControlFocus, SysTreeView321,A
+<span class="org-keyword">return</span>
+
+ ;;ctrl+L &#23450;&#20301;&#22312;&#22320;&#22336;&#26639;
+^l:: ControlFocus, Edit1,A
+<span class="org-preprocessor">#IfWinActive</span> 
+</pre>
+
+</p></div>
+
+</div>
+
+<div id="outline-container-6" class="outline-2">
+<h2 id="sec-6">用键盘进行管理</h2>
+<div class="outline-text-2" id="text-6">
+
+<p>  一些绑定模拟Emacs 中Dired（Emacs中目录管理工具） 的操作。<br/>
+</p><ul>
+<li>Ctrl+n 向下移动<br/>
+</li>
+<li>Ctrl+p 向上移动<br/>
+</li>
+<li>Ctrl+f 向右移动<br/>
+</li>
+<li>Ctrl+b 向左移动<br/>
+</li>
+<li>Ctrl+h 如果在左侧的资源管理器中，表示折叠目录树<br/>
+</li>
+<li>Ctrl+j 基本相当于回车（进入子目录后后选中第一个文件）<br/>
+</li>
+<li>Ctrl+u 上层目录，并选中第一个文件<br/>
+</li>
+</ul>
+
+
+<p><br/>
+<pre class="src src-c"><span class="org-preprocessor">#IfWinActive</span> ahk_class ExploreWClass|CabinetWClass
+^n::Send {Down}
+^p::Send {Up}
+^j::
+  ControlGetFocus, focusedControl,A 
+    <span class="org-keyword">if</span>(focusedControl=<span class="org-string">"SysListView321"</span>)
+  {
+    Send {Enter}
+    ControlFocus, SysListView321,<span class="org-type">A</span>
+    <span class="org-variable-name">Send</span> {Home}
+  }<span class="org-keyword">else</span>
+  {
+    Send {Enter}
+  }
+<span class="org-keyword">return</span>
+
+^f::Send {Right}
+
+^b::send {Left}
+^h::
+   ControlGetFocus, focusedControl,A 
+    <span class="org-keyword">if</span>(focusedControl=<span class="org-string">"SysTreeView321"</span>)
+  {
+    send {Left}
+  }<span class="org-keyword">else</span>
+  {
+    Send ^h
+  }
+<span class="org-keyword">return</span>
+
+^u::
+   ControlGetFocus, focusedControl,A 
+    <span class="org-keyword">if</span>(focusedControl=<span class="org-string">"SysListView321"</span>)
+  {
+    send     {backspace}
+    ControlFocus, SysListView321,<span class="org-type">A</span>
+    <span class="org-variable-name">Send</span> {Home}
+  }
+<span class="org-keyword">return</span>
+<span class="org-preprocessor">#IfWinActive</span> 
+</pre>
+
+</p></div>
+
+</div>
+
+<div id="outline-container-7" class="outline-2">
+<h2 id="sec-7">Ctrl+e 用Emacs编辑器打开选中的文件</h2>
+<div class="outline-text-2" id="text-7">
+
+
+<p><br/>
+<pre class="src src-c">;;&#38656;&#35201; emacsclientw <span class="org-type">&#22312;Path&#36335;&#24452;&#19979;</span>
+<span class="org-function-name">openSelectedfileWithEamcs</span>()
+{
+  ControlGetFocus, focusedControl,A
+  <span class="org-keyword">if</span> (focusedControl=<span class="org-string">"SysListView321"</span>)
+  {
+    <span class="org-constant">ClipSaved</span> := ClipboardAll
+    Send ^c
+    sleep,200
+    clipboard = %clipboard%
+    fullPath=%clipboard%
+    Clipboard := ClipSaved   
+    run , emacsclientw %fullPath%
+  }
+}
+<span class="org-preprocessor">#IfWinActive</span> ahk_class ExploreWClass|CabinetWClass
+^e:: openSelectedfileWithEamcs()
+<span class="org-preprocessor">#IfWinActive</span>
+</pre>
 
 
 <div id='my-src'>
-<div id='org-src'><a href='src/index.org'>src</a></div>
-<div id='htmlized-src'><a href='htmlized-src/index.org.html'>htmlized-src</a></div>
+<div id='org-src'><a href='../src/autohotkey/AutoHotKeyExplorer.org'>src</a></div>
+<div id='htmlized-src'><a href='../htmlized-src/autohotkey/AutoHotKeyExplorer.org.html'>htmlized-src</a></div>
 </div>
 <div id='tags'><span id='tags-title'>Tags:</span><br />
-<p>
-    <a href="tags/@SVN.html">@SVN</a>
-    <a href="tags/@perl.html">@perl</a>
-    <a href="tags/@Java.html">@Java</a>
-    <a href="tags/@Mysql.html">@Mysql</a>
-    <a href="tags/@Erlang.html">@Erlang</a>
-    <a href="tags/@SQL.html">@SQL</a>
-    <a href="tags/@DB.html">@DB</a>
-    <a href="tags/@Oracle.html">@Oracle</a>
-    <a href="tags/@Ediff.html">@Ediff</a>
-    <a href="tags/@Git.html">@Git</a>
-    <a href="tags/@Cedet.html">@Cedet</a>
-    <a href="tags/@C-C++.html">@C-C++</a>
-    <a href="tags/@Daily.html">@Daily</a>
-    <a href="tags/@Eclipse.html">@Eclipse</a>
-    <a href="tags/@AutoHotKey.html">@AutoHotKey</a>
-    <a href="tags/@Windows.html">@Windows</a>
-    <a href="tags/@Linux.html">@Linux</a>
-    <a href="tags/@C.html">@C</a>
-    <a href="tags/@Emacs.html">@Emacs</a>
+    <a href="../tags/@SVN.html">@SVN</a><br/>
+    <a href="../tags/@perl.html">@perl</a><br/>
+    <a href="../tags/@Java.html">@Java</a><br/>
+    <a href="../tags/@Mysql.html">@Mysql</a><br/>
+    <a href="../tags/@Erlang.html">@Erlang</a><br/>
+    <a href="../tags/@SQL.html">@SQL</a><br/>
+    <a href="../tags/@DB.html">@DB</a><br/>
+    <a href="../tags/@Oracle.html">@Oracle</a><br/>
+    <a href="../tags/@Ediff.html">@Ediff</a><br/>
+    <a href="../tags/@Git.html">@Git</a><br/>
+    <a href="../tags/@Cedet.html">@Cedet</a><br/>
+    <a href="../tags/@C-C++.html">@C-C++</a><br/>
+    <a href="../tags/@Daily.html">@Daily</a><br/>
+    <a href="../tags/@Eclipse.html">@Eclipse</a><br/>
+    <a href="../tags/@AutoHotKey.html">@AutoHotKey</a><br/>
+    <a href="../tags/@Windows.html">@Windows</a><br/>
+    <a href="../tags/@Linux.html">@Linux</a><br/>
+    <a href="../tags/@C.html">@C</a><br/>
+    <a href="../tags/@Emacs.html">@Emacs</a><br/>
 </p>
-
-
+<p><br/>
+</div>
+</p></div>
 </div>
 </div>
 
 <div id="postamble">
-<p class="date">Date: 2011-06-04 星期六</p>
+<p class="date">Date: 2011-06-15 星期三</p>
 <p class="author">Author: 孤峰独秀</p>
 <p class="creator">Org version 7.8.03 with Emacs version 24</p>
 

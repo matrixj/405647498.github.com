@@ -1,0 +1,190 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<!-- Created by htmlize-1.34 in css mode. -->
+<html>
+  <head>
+    <title>IO.org</title>
+    <style type="text/css">
+    <!--
+      body {
+        color: #F8F8F8;
+        background-color: #0C1021;
+      }
+      .comment {
+        /* font-lock-comment-face */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-block {
+        /* org-block */
+        color: #b3b3b3;
+      }
+      .org-block-begin-line {
+        /* org-block-begin-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-block-end-line {
+        /* org-block-end-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-document-info {
+        /* org-document-info */
+        color: #afeeee;
+      }
+      .org-document-info-keyword {
+        /* org-document-info-keyword */
+        color: #b3b3b3;
+      }
+      .org-document-title {
+        /* org-document-title */
+        color: #afeeee;
+        font-size: 144%;
+        font-weight: bold;
+      }
+      .org-meta-line {
+        /* org-meta-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+
+      a {
+        color: inherit;
+        background-color: inherit;
+        font: inherit;
+        text-decoration: inherit;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+    -->
+    </style>
+  </head>
+  <body>
+    <pre>
+<span class="comment"># -*- coding:utf-8 -*-</span>
+<span class="org-meta-line">#+LANGUAGE:  zh
+</span><span class="org-document-info-keyword">#+TITLE:</span><span class="comment">     </span><span class="org-document-title">IO.org</span>
+<span class="org-document-info-keyword">#+AUTHOR:</span><span class="comment">    </span><span class="org-document-info">&#32426;&#31168;&#23792;</span>
+<span class="org-document-info-keyword">#+EMAIL:</span><span class="comment">     </span><span class="org-document-info">jixiuf@gmail.com</span>
+<span class="org-document-info-keyword">#+DATE:</span><span class="comment">     </span><span class="org-document-info">2011-10-25 &#20108;</span>
+<span class="org-meta-line">#+DESCRIPTION:IO.org
+#+KEYWORDS: 
+#+OPTIONS:   H:2 num:nil toc:t \n:t @:t ::t |:t ^:t -:t f:t *:t &lt;:t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil 
+#+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
+#+EXPORT_SELECT_TAGS: export
+#+EXPORT_EXCLUDE_TAGS: noexport
+#+FILETAGS: @C
+</span><span class="org-block-begin-line">#+begin_src c
+</span><span class="org-block">/* line_nums.c &#25991;&#20214;&#25805;&#20316;&#30340;&#31034;&#20363;,&#27604;&#22914;&#27492;&#22788;&#22914;&#20309;&#21028;&#26029;&#35835;&#33267;&#25991;&#20214;&#23614;
+Sample Usage :    line_nums &lt; /etc/group
+*/
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#define TRUE 1
+int lineno = 0;
+int error_flag = 0;
+char buf[BUFSIZ]; /* BUFSIZ is defined in stdio.h */
+
+main(){
+  while(TRUE){
+    if (fgets(buf,BUFSIZ, stdin) == NULL){
+      /* fgets &#36820;&#22238;nulll&#26377;&#20004;&#31181;&#21487;&#33021;,error&#25110;&#21040;&#25991;&#20214;&#23614;,&#25925;&#26377;ferror &#19982;feof&#26469;&#21028;&#26029;&#31350;&#31455;&#26159;&#21738;&#19968;&#31181; */
+      if (ferror(stdin) != 0){
+        fprintf(stderr,"Error during reading\n");
+        error_flag = 1;
+      }
+      if (feof(stdin) != 0)
+        fprintf(stderr,"File ended\n");
+      clearerr(stdin);
+      break; /* exit the while loop */
+    }
+    else{
+      lineno++;
+      /* in the next line, "%3d" is used to restrict the
+         number to 3 digits.
+      */
+      fprintf(stdout,"%3d: ", lineno);
+      fputs(buf, stdout);
+    }
+  }
+  fprintf(stderr,"%d lines written\n", lineno);
+  printf ("%d\n",BUFSIZ);
+  exit(error_flag);
+}
+</span><span class="org-block-end-line">#+end_src
+</span><span class="org-block-begin-line">#+begin_src c
+</span><span class="org-block">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;sys/types.h&gt;
+#include &lt;sys/stat.h&gt;
+#include &lt;fcntl.h&gt;    /* the man pages of the commands say which
+                         include files need to be mentioned */
+#define TRUE 1
+int bytes_read;
+size_t  fp_bytes_read;
+int fd;   /* File descriptors */
+int fd2;
+FILE *fp; /* File pointers */
+FILE *fp2;
+char buffer[BUFSIZ]; /* BUFSIZ is set up in stdio.h */
+
+main(){
+
+  /* Use File descriptors */
+  fd = open ("/etc/group", O_RDONLY);
+  if (fd == -1){
+    perror("Opening /etc/group");
+    exit(1);
+  }
+
+  while (TRUE){
+    bytes_read = read (fd, buffer,BUFSIZ);
+    if (bytes_read&gt;0)
+      printf("%d bytes read from /etc/group.\n", bytes_read);
+    else{
+      if (bytes_read==0){
+        printf("End of file /etc/group reached\n");
+        close(fd);
+        break;
+      }
+      else if (bytes_read == -1){
+        perror("Reading /etc/group");
+        exit(1);
+      }
+    }
+  }
+
+
+  /* now use file pointers */
+  fp = fopen("/etc/passwd","r");
+  if (fp == NULL){
+    printf("fopen failed to open /etc/passwd\n");
+    exit(1);
+  }
+
+  while(TRUE){
+    fp_bytes_read= fread (buffer, 1, BUFSIZ, fp);
+    printf("%d bytes read from /etc/passwd.\n", fp_bytes_read);
+    if (fp_bytes_read==0)
+      break;
+  }
+
+  rewind(fp); /* go back to the start of the file */
+
+  /* Find the descriptor associated with a stream */
+  fd2 = fileno (fp);
+  if (fd2 == -1)
+    printf("fileno failed\n");
+
+  /* Find the stream associated with a descriptor */
+  fp2 = fdopen (fd2, "r");
+  if (fp2 == NULL)
+    printf("fdopen failed\n");
+  fclose(fp2);
+}
+</span><span class="org-block-end-line">#+end_src
+</span></pre>
+  </body>
+</html>

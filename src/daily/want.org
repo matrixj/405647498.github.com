@@ -1,0 +1,18 @@
+# -*- coding:utf-8 -*-
+#+LANGUAGE:  zh
+#+TITLE:     追逐自我的幸福
+#+AUTHOR:    孤峰独秀
+#+EMAIL:     jixiuf@gmail.com
+#+DATE:     2011-06-15 星期三
+#+FILETAGS: @Daily
+#+DESCRIPTION:自我 追逐 幸福
+#+KEYWORDS: 自我 追逐 幸福
+#+OPTIONS:   H:2 num:nil toc:t \n:t @:t ::t |:t ^:t -:t f:t *:t <:t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc
+#+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
+#+EXPORT_SELECT_TAGS: export
+#+EXPORT_EXCLUDE_TAGS: noexport
+
+如果总是着眼于此刻的追逐，实际上常常是追逐那些公认的有价值之物，而失去了真正
+的自我追求很容易堕入物质化的功利主义，这种状况下一切只有利益没有意义，只有富
+有没有幸福，很容易苦逼。

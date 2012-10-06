@@ -3,13 +3,13 @@
                "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="zh" xml:lang="zh">
 <head>
-<title>一个人的狂欢</title>
+<title>cedet eassist在c c++编程中的应用</title>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
-<meta name="title" content="一个人的狂欢"/>
+<meta name="title" content="cedet eassist在c c++编程中的应用"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2011-06-04 星期六"/>
-<meta name="author" content="孤峰独秀"/>
-<meta name="description" content=""/>
+<meta name="generated" content="2012-08-27 一"/>
+<meta name="author" content="纪秀峰"/>
+<meta name="description" content="cedet eassist在c c++编程中的应用"/>
 <meta name="keywords" content=""/>
 <style type='text/css'>
        body {
@@ -942,15 +942,15 @@ img {
 }
 
     </style>
-<link rel="stylesheet" type="text/css" href="style/emacs.css" />
-<script type='text/javascript' src='js/emacs.js'> </script>
+<link rel="stylesheet" type="text/css" href="../style/emacs.css" />
+<script type='text/javascript' src='../js/emacs.js'> </script>
 
 </head>
 <body>
 <div id="org-div-home-and-up" style="text-align:right;font-size:70%;white-space:nowrap;">
- <a accesskey="h" href="sitemap.html"> 站点地图 </a>
+ <a accesskey="h" href="../sitemap.html"> 站点地图 </a>
  |
- <a accesskey="H" href="index.html"> 首页 </a>
+ <a accesskey="H" href="../index.html"> 首页 </a>
 </div>
 
 <div id="preamble">
@@ -958,60 +958,122 @@ img {
 </div>
 
 <div id="content">
-<h1 class="title">一个人的狂欢</h1>
+<h1 class="title">cedet eassist在c c++编程中的应用</h1>
 
 
-<div id='logo-img' ><a  href='index.html'>▇█▓▒░◕~◕░▒▓█▇</a></div>
+<div id='logo-img' ><a  href='../index.html'>▇█▓▒░◕~◕░▒▓█▇</a></div>
 
 <div id='logo-text'>
   <a href='#' ><span align="left">░◕~◕░</span></a>
 </div>
 
-
-<ul>
-<li>首页还未做好，先看<a href="sitemap.html">站点地图</a>吧
+<p>
+eassist.el是cedet/contrib/下的一个文件,主要提供了两项功能，<br/>
+</p><ul>
+<li>列出当前类的所有方法(还可以直接输入方法名来从众多的方法中过滤)<br/>
 </li>
-<li><a href="about.html">About</a>
+<li>在头文件与代码文件间切换，即在 .h 与.c 或.h 与.cpp两个相关文件间切换<br/>
 </li>
 </ul>
 
+<p> 以下内容是从 eassist.el文件中摘出来的<br/>
+</p><blockquote>
+
+<ol>
+<li>Install CEDET package for Emacs (if you don't have CEDET already).<br/>
+</li>
+<li>Add convenient keymaps for fast EmacsAssist calls in c-mode and (or) python-mode<br/>
+   and for lisp:<br/>
+
+<p><br/>
+   (defun my-c-mode-common-hook ()<br/>
+     (define-key c-mode-base-map (kbd "M-o") 'eassist-switch-h-cpp)<br/>
+     (define-key c-mode-base-map (kbd "M-m") 'eassist-list-methods))<br/>
+   (add-hook 'c-mode-common-hook 'my-c-mode-common-hook)<br/>
+</p>
+<p><br/>
+   (defun my-python-mode-hook ()<br/>
+     (define-key python-mode-map (kbd "M-m") 'eassist-list-methods))<br/>
+   (add-hook 'python-mode-hook 'my-python-mode-hook)<br/>
+</p>
+<p><br/>
+   (define-key lisp-mode-shared-map (kbd "M-m") 'eassist-list-methods)<br/>
+</p>
+<p><br/>
+</p></li>
+<li>Open any C++ file with class definition, press M-m.  Try to type<br/>
+   any method name(还可以直接输入方法名来从众多的方法中过滤).<br/>
+</li>
+<li>Open any .cpp file.  Press M-o.  If there is .h or .hpp file in the<br/>
+   same folder, it will be opened.<br/>
+</li>
+</ol>
 
 
+<p><br/>
+</p>
+</blockquote>
 
+
+<p><br/>
+<pre class="src src-emacs-lisp">(<span class="org-keyword">require</span> '<span class="org-constant">eassisct</span>)
+(<span class="org-keyword">defun</span> <span class="org-function-name">my-c-mode-cedet-hook</span> ()
+  (local-set-key <span class="org-string">"\C-ct"</span> 'eassist-switch-h-cpp)
+  (local-set-key <span class="org-string">"\C-xt"</span> 'eassist-switch-h-cpp)
+  (local-set-key <span class="org-string">"\C-ce"</span> 'eassist-list-methods)
+  )
+(<span class="org-function-name">add-hook</span> 'c-mode-common-hook 'my-c-mode-cedet-hook)
+</pre>
+
+ 可以这样配置<br/>
+</p>
+<p><br/>
+<pre class="src src-emacs-lisp"><span class="org-comment-delimiter">;; </span><span class="org-comment">(require 'eassisct)</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">eassist-switch-h-cpp and eassist-list-methods is autoloaded in cedet-contrib-load</span>
+(<span class="org-keyword">require</span> '<span class="org-constant">cedet-contrib-load</span>)
+(<span class="org-keyword">defun</span> <span class="org-function-name">my-c-mode-cedet-hook</span> ()
+  (local-set-key <span class="org-string">"\C-ct"</span> 'eassist-switch-h-cpp)
+  (local-set-key <span class="org-string">"\C-xt"</span> 'eassist-switch-h-cpp)
+  (local-set-key <span class="org-string">"\C-ce"</span> 'eassist-list-methods)
+  )
+(<span class="org-function-name">add-hook</span> 'c-mode-common-hook 'my-c-mode-cedet-hook)
+</pre>
+
+ 也可以这样配置<br/>
+</p>
+<p><br/>
 <div id='my-src'>
-<div id='org-src'><a href='src/index.org'>src</a></div>
-<div id='htmlized-src'><a href='htmlized-src/index.org.html'>htmlized-src</a></div>
+<div id='org-src'><a href='../src/emacs/c-c++-cedet-eassist.org'>src</a></div>
+<div id='htmlized-src'><a href='../htmlized-src/emacs/c-c++-cedet-eassist.org.html'>htmlized-src</a></div>
 </div>
 <div id='tags'><span id='tags-title'>Tags:</span><br />
-<p>
-    <a href="tags/@SVN.html">@SVN</a>
-    <a href="tags/@perl.html">@perl</a>
-    <a href="tags/@Java.html">@Java</a>
-    <a href="tags/@Mysql.html">@Mysql</a>
-    <a href="tags/@Erlang.html">@Erlang</a>
-    <a href="tags/@SQL.html">@SQL</a>
-    <a href="tags/@DB.html">@DB</a>
-    <a href="tags/@Oracle.html">@Oracle</a>
-    <a href="tags/@Ediff.html">@Ediff</a>
-    <a href="tags/@Git.html">@Git</a>
-    <a href="tags/@Cedet.html">@Cedet</a>
-    <a href="tags/@C-C++.html">@C-C++</a>
-    <a href="tags/@Daily.html">@Daily</a>
-    <a href="tags/@Eclipse.html">@Eclipse</a>
-    <a href="tags/@AutoHotKey.html">@AutoHotKey</a>
-    <a href="tags/@Windows.html">@Windows</a>
-    <a href="tags/@Linux.html">@Linux</a>
-    <a href="tags/@C.html">@C</a>
-    <a href="tags/@Emacs.html">@Emacs</a>
+    <a href="../tags/@SVN.html">@SVN</a><br/>
+    <a href="../tags/@perl.html">@perl</a><br/>
+    <a href="../tags/@Java.html">@Java</a><br/>
+    <a href="../tags/@Mysql.html">@Mysql</a><br/>
+    <a href="../tags/@Erlang.html">@Erlang</a><br/>
+    <a href="../tags/@SQL.html">@SQL</a><br/>
+    <a href="../tags/@DB.html">@DB</a><br/>
+    <a href="../tags/@Oracle.html">@Oracle</a><br/>
+    <a href="../tags/@Ediff.html">@Ediff</a><br/>
+    <a href="../tags/@Git.html">@Git</a><br/>
+    <a href="../tags/@Cedet.html">@Cedet</a><br/>
+    <a href="../tags/@C-C++.html">@C-C++</a><br/>
+    <a href="../tags/@Daily.html">@Daily</a><br/>
+    <a href="../tags/@Eclipse.html">@Eclipse</a><br/>
+    <a href="../tags/@AutoHotKey.html">@AutoHotKey</a><br/>
+    <a href="../tags/@Windows.html">@Windows</a><br/>
+    <a href="../tags/@Linux.html">@Linux</a><br/>
+    <a href="../tags/@C.html">@C</a><br/>
+    <a href="../tags/@Emacs.html">@Emacs</a><br/>
 </p>
-
-
+<p><br/>
 </div>
-</div>
+</p></div>
 
 <div id="postamble">
-<p class="date">Date: 2011-06-04 星期六</p>
-<p class="author">Author: 孤峰独秀</p>
+<p class="date">Date: 2012-08-27 一</p>
+<p class="author">Author: 纪秀峰</p>
 <p class="creator">Org version 7.8.03 with Emacs version 24</p>
 
 

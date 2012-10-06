@@ -1,0 +1,23 @@
+# -*- coding:utf-8 -*-
+
+#+TITLE: Tag: @Erlang
+
+#+LANGUAGE:  zh
+   + [[file:../erlang/timeout.org][receive timeout]]
+   + [[file:../erlang/spawn_link.org][spawn_link 进程关联]]
+   + [[file:../erlang/release_handle_rebar_hot_code_swap.org][release_handler rebar hot code swap]]
+   + [[file:../erlang/release.org][erlang.org]]
+   + [[file:../erlang/record_info.org][record_info.org]]
+   + [[file:../erlang/mochiweb_http_load.org][mochiweb 的使用 及 可开tcp连接数的(http长连接) 测试]]
+   + [[file:../erlang/mochiweb_comet_chat.org][网上即时聊天原理(mochiweb+jquery实现)]]
+   + [[file:../erlang/message.org][分布式,聊天小例]]
+   + [[file:../erlang/hot_code_swap.org][热代码替换拾遗]]
+   + [[file:../erlang/global_register_name.org][global_register_name.org]]
+   + [[file:../erlang/gb_tree_dict.org][gb_tree dict proplist orddict]]
+   + [[file:../erlang/emysql_benchmark.org][emysql 压力测试]]
+   + [[file:../erlang/echo.org][echo]]
+   + [[file:../erlang/distel.org][erlang distel]]
+   + [[file:../erlang/dic.org][Dict,or Map的简单实现]]
+   + [[file:../erlang/counter.org][计数器,并行示例]]
+   + [[file:../erlang/catch.org][catch ,throw ,异常处理]]
+   + [[file:../erlang/binary_bit.org][erlang的二进制数据处理，binnary,及bit Syntax(语法)]]

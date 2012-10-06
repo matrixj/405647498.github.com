@@ -1,0 +1,337 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<!-- Created by htmlize-1.34 in css mode. -->
+<html>
+  <head>
+    <title>right-left-rule.org</title>
+    <style type="text/css">
+    <!--
+      body {
+        color: #F8F8F8;
+        background-color: #0C1021;
+      }
+      .bold {
+        /* bold */
+        font-weight: bold;
+      }
+      .comment {
+        /* font-lock-comment-face */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-document-info {
+        /* org-document-info */
+        color: #afeeee;
+      }
+      .org-document-info-keyword {
+        /* org-document-info-keyword */
+        color: #b3b3b3;
+      }
+      .org-document-title {
+        /* org-document-title */
+        color: #afeeee;
+        font-size: 144%;
+        font-weight: bold;
+      }
+      .org-level-1 {
+        /* org-level-1 */
+        color: #FF6400;
+      }
+      .org-meta-line {
+        /* org-meta-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+
+      a {
+        color: inherit;
+        background-color: inherit;
+        font: inherit;
+        text-decoration: inherit;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+    -->
+    </style>
+  </head>
+  <body>
+    <pre>
+<span class="comment"># -*- coding:utf-8 -*-</span>
+<span class="org-meta-line">#+LANGUAGE:  zh
+</span><span class="org-document-info-keyword">#+TITLE:</span><span class="comment">     </span><span class="org-document-title">c&#37324;&#30340;&#21464;&#37327;&#25110;&#20989;&#25968;&#25110;&#25968;&#32452;&#30340;&#22768;&#26126;&#30340;&#35299;&#26512;,&#20808;&#21491;&#21518;&#24038;&#27861;&#21017;</span>
+<span class="org-document-info-keyword">#+AUTHOR:</span><span class="comment">    </span><span class="org-document-info">&#32426;&#31168;&#23792;</span>
+<span class="org-document-info-keyword">#+EMAIL:</span><span class="comment">     </span><span class="org-document-info">jixiuf@gmail.com</span>
+<span class="org-document-info-keyword">#+DATE:</span><span class="comment">     </span><span class="org-document-info">2011-10-26 &#19977;</span>
+<span class="org-meta-line">#+DESCRIPTION:c&#37324;&#30340;&#21464;&#37327;&#25110;&#20989;&#25968;&#25110;&#25968;&#32452;&#30340;&#22768;&#26126;&#30340;&#35299;&#26512;,&#20808;&#21491;&#21518;&#24038;&#27861;&#21017;
+#+KEYWORDS: C 
+#+OPTIONS:   H:2 num:nil toc:t \n:t @:t ::t |:t ^:t -:t f:t *:t &lt;:t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil 
+#+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
+#+EXPORT_SELECT_TAGS: export
+#+EXPORT_EXCLUDE_TAGS: noexport
+#+FILETAGS: @C
+</span><span class="org-level-1">* &#27604;&#22914;&#30475;&#21040;&#36825;&#26679;&#19968;&#20010;&#22768;&#26126;,&#20320;&#32943;&#23450;&#22836;&#37117;&#22823;&#20102;.:</span>
+int *(*(*F())[])();
+ - F is a function returning a pointer to an array of pointers to
+   functions returning a pointer to int.
+<span class="org-level-1">* &#27861;&#21017;</span>
+1 &#20808;&#25214;&#21040;&#25110;&#21464;&#37327;&#25110;&#20989;&#25968;&#25110;&#25968;&#32452;(&#22240;&#20026;&#29616;&#22312;&#36824;&#19981;&#30693;&#36947;&#23427;&#20498;&#24213;&#26159;&#20160;&#20040;,&#26242;&#21629;&#21517;&#20026;id)&#30340;&#21517;&#31216;.&#27604;&#22914;&#27492;&#22788;&#30340;F
+2 &#25509;&#19979;&#26469;,&#20174;F&#24448;&#21491;&#35835;,&#22914;&#26524;&#36935;&#21040;
+     &#19979;&#38754;&#19977;&#31181;&#26631;&#19987;&#26102;&#30340;&#35835;&#27861;:
+     - *          as "pointer to"           &#25351;&#21521;..&#30340;&#25351;&#38024;
+     - []         as "array of"            &#26159;...&#31867;&#22411;&#30340;&#25968;&#32452;
+     - ()         as "function returning"  &#26159;&#19968;&#20010;&#36820;&#22238;..&#31867;&#22411;&#30340;&#20989;&#25968;
+&#27604;&#22914;
++ F()
+&#35835;&#20316;
+  - F&#26159;&#19968;&#20010;&#36820;&#22238;(..&#31867;&#22411;)&#30340;&#20989;&#25968;,
+  - F is a function returing ...
+&#31867;&#22411;&#25105;&#20204;&#36824;&#19981;&#30693;&#36947;.
+&#24403;&#35835;&#23436;&#36825;&#20010;id,&#25110;&#32773;&#36935;&#21040;&#21491;&#25324;&#21495;)&#26102;,&#24320;&#22987;&#27839;id &#24448;&#24038;&#35835;
+&#27604;&#22914;&#25509;&#19979;&#26469;&#26159;
++  *F()
+  &#35835;&#20316; 
+ - F&#26159;&#19968;&#20010;&#36820;&#22238; ((&#25351;&#21521;..&#30340;&#25351;&#38024;) &#31867;&#22411;)&#30340;&#20989;&#25968;, (1&#22240;&#20026;&#36825;&#20010;&#25351;&#38024;&#25351;&#21521;&#20160;&#20040;,&#36824;&#19981;&#28165;&#26970;&#29992;..&#20195;&#26367;)
+ - F is a function returing a pointer to ...
+
+&#36935;&#21040;&#24038;&#25324;&#21495;,&#21017;&#36820;&#22238;&#32487;&#32493;&#21521;&#21491;&#35835;
+
++ (*F())[]
+&#36935;&#21040;)&#24448;&#24038;,&#21448;&#36935;&#21040;(,&#21464;&#20026;&#24448;&#21491;,&#28982;&#21518;&#26159;[]:
+ - F&#26159;&#19968;&#20010;&#36820;&#22238;(&#25351;&#21521;(..&#31867;&#22411;&#30340;&#25968;&#32452;)&#30340;&#25351;&#38024;)&#30340;&#20989;&#25968;, 
+ - F is a function returing a pointer to  an array of...
+
++ (*(*F())[])
+ - F&#26159;&#19968;&#20010;&#36820;&#22238;( &#25351;&#21521;((&#25351;&#21521;..&#31867;&#22411;&#30340;&#25351;&#38024;) &#31867;&#22411;&#30340;&#25968;&#32452;)&#30340;&#25351;&#38024;)&#30340;&#20989;&#25968;, 
+ - F is a function returing a pointer to  an array of a pointer to ...
+
++ (*(*F())[])()
+- F&#26159;&#19968;&#20010;&#36820;&#22238; (&#25351;&#21521; ((&#25351;&#21521;(&#36820;&#22238;..&#31867;&#22411;&#30340;&#20989;&#25968;)&#30340;&#25351;&#38024;) &#31867;&#22411;&#30340;&#25968;&#32452;)  &#30340;&#25351;&#38024;) &#30340;&#20989;&#25968;, 
+- F is a function returing a pointer to  an array of a pointer to  a function returing ..
+
++ int *(*(*F())[])();
+
+ - F&#26159;&#19968;&#20010;&#36820;&#22238;(&#25351;&#21521; ((&#25351;&#21521;(&#36820;&#22238;(&#25351;&#21521;int&#30340;&#25351;&#38024;)&#31867;&#22411;&#30340;&#20989;&#25968;)&#25351;&#38024;) &#31867;&#22411;&#30340;&#25968;&#32452;) &#30340;&#25351;&#38024;) &#30340;&#20989;&#25968;, 
+ - F is a function returing a pointer to  an array of a pointer to  a function returing   a pointer to int
+
+<span class="org-level-1">* &#19968;&#20123;&#31034;&#20363;</span>
+  int x;
+ - x is an int.
+
+int *x;
+ - x is a pointer to an int.
+
+int **x;
+ - x is a pointer to a pointer to an int.
+
+const int x;
+ - x is a const int (constant integer).
+
+const int *x;
+ - x is a pointer to a const int. The value of x may change, but
+   the integer that it points to not be changed. In other words,
+   x cannot be used to alter the value to which it points.
+
+int *const x;
+ - x is a constant pointer to an int. The value may not change,
+   but the integer that it points to may change. In other words,
+   x will always point at the same location, but the contents may
+   vary.
+
+const int *const x;
+ - x is a constant pointer to a constant integer. The value of x
+   may not change, and the integer that it points to may not
+   change. In other words, x will always point at the same
+   location, which cannot be modified via x.
+
+int x[];
+ - x is an array of int.
+
+int x[99 ];
+ - x is an array of 99 int's.
+
+int *x[];
+ - x is an array of pointers to int.
+
+int (*x)[];
+ - x is a pointer to an array of int.
+
+int *(*x)[];
+ - x is a pointer to an array of pointers to int.
+
+int F();
+ - F is a function returning int.
+
+int *F();
+ - F is a function returning a pointer to int.
+
+int (*x)();
+ - x is a pointer to a function returning int.
+
+int (*x[ 99])();
+ - x is an array of 99 pointers to functions returning int.
+
+int (*F())();
+ - F is a function returning a pointer to a function returning int.
+
+int *(*F())();
+ - F is a function returning a pointer to a function returning a
+   pointer to an int.
+
+int (*F())[];
+ - F is a function returning a pointer to an array of int.
+
+int (*(*F())[])();
+ - F is a function returning a pointer to an array of pointers to
+   functions returning int.
+
+int *(*(*F())[])();
+ - F is a function returning a pointer to an array of pointers to
+   functions returning a pointer to int.
+
+
++++Date last modified: 05-Jul-1997
+
+Organization: KFW Corporation, Newbury Park, CA
+Message-ID: &lt;<a href="mailto:1990Jul16.195111.5976&#64;kfw.COM">1990Jul16.195111.5976&#64;kfw.COM</a>&gt;
+Newsgroups: comp.lang.c
+
+I've received several mail messages since offering to explain the 
+right-left rule via e-mail, so I've decided to post.  For those of
+you who already know this or don't care, quit now (this is a little
+long).
+
+The "right-left" rule is a completely regular rule for deciphering C
+declarations.  It can also be useful in creating them.
+
+First, symbols.  Read
+
+     *          as "pointer to"
+     []         as "array of"
+     ()         as "function returning"
+
+as you encounter them in the declaration.
+
+STEP 1
+------
+Find the identifier.  This is your starting point.  Then say to yourself,
+"identifier is".  You've started your declaration.
+
+STEP 2
+------
+Look at the symbols on the right of the identifier.  If, say, you find "()"
+there, then you know that this is the declaration for a function.  So you
+would then have "identifier is function returning".  Or if you found a 
+"[]" there, you would say "identifier is array of".  Continue right until
+you run out of symbols <span class="bold">*OR*</span> hit a <span class="bold">*right*</span> parenthesis ")".  (If you hit a 
+left parenthesis, that's the beginning of a () symbol, even if there
+is stuff in between the parentheses.  More on that below.)
+
+STEP 3
+------
+Look at the symbols to the left of the identifier.  If it is not one of our
+symbols above (say, something like "int"), just say it.  Otherwise, translate
+it into English using that table above.  Keep going left until you run out of
+symbols <span class="bold">*OR*</span> hit a <span class="bold">*left*</span> parenthesis "(".  
+
+Now repeat steps 2 and 3 until you've formed your declaration.  Here are some
+examples:
+
+     int *p[];
+
+1) Find identifier.          int *p[];
+                                  ^
+   "p is"
+
+2) Move right until out of symbols or left parenthesis hit.
+                             int *p[];
+                                   ^^
+   "p is array of"
+
+3) Can't move right anymore (out of symbols), so move left and find:
+                             int *p[];
+                                 ^
+   "p is array of pointer to"
+
+4) Keep going left and find:
+                             int *p[];
+                             ^^^
+   "p is array of pointer to int".
+
+Another example:
+
+   int *(*func())();
+
+1) Find the identifier.      int *(*func())();
+                                    ^^^^
+   "func is"
+
+2) Move right.               int *(*func())();
+                                        ^^
+   "func is function returning"
+
+3) Can't move right anymore because of the right parenthesis, so move left.
+                             int *(*func())();
+                                   ^
+   "func is function returning pointer to"
+
+4) Can't move left anymore because of the left parenthesis, so keep going
+   right.                    int *(*func())();
+                                           ^^
+   "func is function returning pointer to function returning"
+
+5) Can't move right anymore because we're out of symbols, so go left.
+                             int *(*func())();
+                                 ^
+   "func is function returning pointer to function returning pointer to"
+
+6) And finally, keep going left, because there's nothing left on the right.
+                             int *(*func())();
+                             ^^^
+   "func is function returning pointer to function returning pointer to int".
+
+As you can see, this rule can be quite useful.  You can also use it to
+sanity check yourself while you are creating declarations, and to give
+you a hint about where the put the next symbol and whether parentheses
+are required.
+
+Some declarations look much more complicated than they are due to array
+sizes and argument lists in prototype form.  If you see "[ 3]", that's
+read as "array (size 3) of...".  If you see "(char *,int)" that's read
+as "function expecting (char *,int) and returning...".  Here's a fun
+one:
+
+                 int (*(*fun_one)(char *,double))[9 ][20 ];
+
+I won't go through each of the steps to decipher this one.  It's:
+
+     "fun_one is pointer to function expecting (char *,double) and 
+      returning pointer to array (size 9) of array (size 20) of int."
+
+As you can see, it's not as complicated if you get rid of the array sizes
+and argument lists:
+
+     int (*(*fun_one)())[][];
+
+You can decipher it that way, and then put in the array sizes and argument
+lists later.
+
+Some final words:
+
+It is quite possible to make illegal declarations using this rule,
+so some knowledge of what's legal in C is necessary.  For instance,
+if the above had been:
+
+     int *((*fun_one)())[][];
+
+it would have been "fun_one is pointer to function returning array of array of
+                                          ^^^^^^^^^^^^^^^^^^^^^^^^
+pointer to int".  Since a function cannot return an array, but only a 
+pointer to an array, that declaration is illegal.
+
+Will
+will@kfw.com
+uunet!charyb!will 
+</pre>
+  </body>
+</html>

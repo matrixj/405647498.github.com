@@ -1,0 +1,132 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<!-- Created by htmlize-1.34 in css mode. -->
+<html>
+  <head>
+    <title>4ManageADatabase.org</title>
+    <style type="text/css">
+    <!--
+      body {
+        color: #F8F8F8;
+        background-color: #0C1021;
+      }
+      .comment {
+        /* font-lock-comment-face */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-document-info {
+        /* org-document-info */
+        color: #afeeee;
+      }
+      .org-document-info-keyword {
+        /* org-document-info-keyword */
+        color: #b3b3b3;
+      }
+      .org-document-title {
+        /* org-document-title */
+        color: #afeeee;
+        font-size: 144%;
+        font-weight: bold;
+      }
+      .org-level-1 {
+        /* org-level-1 */
+        color: #FF6400;
+      }
+      .org-level-2 {
+        /* org-level-2 */
+        color: #40E0D0;
+      }
+      .org-level-3 {
+        /* org-level-3 */
+        color: #FBDE2D;
+      }
+      .org-level-4 {
+        /* org-level-4 */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-level-5 {
+        /* org-level-5 */
+        color: #8DA6CE;
+      }
+      .org-meta-line {
+        /* org-meta-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-table {
+        /* org-table */
+        color: #87cefa;
+      }
+
+      a {
+        color: inherit;
+        background-color: inherit;
+        font: inherit;
+        text-decoration: inherit;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+    -->
+    </style>
+  </head>
+  <body>
+    <pre>
+<span class="comment"># -*- coding:utf-8 -*-</span>
+<span class="org-meta-line">#+LANGUAGE:  zh
+</span><span class="org-document-info-keyword">#+TITLE:</span><span class="comment">     </span><span class="org-document-title">4ManageADatabase.org</span>
+<span class="org-document-info-keyword">#+AUTHOR:</span><span class="comment">    </span><span class="org-document-info">&#23396;&#23792;&#29420;&#31168;</span>
+<span class="org-document-info-keyword">#+EMAIL:</span><span class="comment">     </span><span class="org-document-info">jixiuf@gmail.com</span>
+<span class="org-document-info-keyword">#+DATE:</span><span class="comment">     </span><span class="org-document-info">2011-07-10 &#26085;</span>
+<span class="org-meta-line">#+DESCRIPTION:4ManageADatabase.org
+#+KEYWORDS: oracle database db
+#+OPTIONS:   H:2 num:nil toc:t \n:t @:t ::t |:t ^:t -:t f:t *:t &lt;:t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil 
+#+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
+#+EXPORT_SELECT_TAGS: export
+#+EXPORT_EXCLUDE_TAGS: noexport
+#+FILETAGS: @Oracle @DB
+</span>
+<span class="org-level-1">* &#23398;&#20064;&#30446;&#26631;</span>
+  + list the prerequisites necessary  for database creation.
+  + create a database using  Oracle Database Configuration Assistant (DBCA)
+  + create a daatabase manually
+  + create a database  using Oracle Managered Files (OMF)
+
+<span class="org-level-1">* Planing for your database is the first step of managing a database</span>
+<span class="org-level-2">** Define the purpose of your database (&#35268;&#21010;)</span>
+  + oltp &#32852;&#26426;&#20107;&#21153;&#22788;&#29702; (&#22823;&#37327;&#24182;&#21457;&#65292;&#30701;&#23567;&#20107;&#21153;)
+  + olap &#25968;&#25454;&#20179;&#24211;  (&#23569;&#37327;&#24182;&#21457;&#65292;&#22823;&#20107;&#21153;)
+<span class="org-level-2">** defind the type of your database ,&#21516;&#19978;&#19968;&#26465;</span>
+<span class="org-level-2">** outline a database architectural design  (&#22914;&#20309;&#23384;&#20648;&#65292;&#20960;&#22359;&#30828;&#30424;&#31561;)</span>
+<span class="org-level-1">* Create your database</span>
+<span class="org-level-2">** &#22270;&#20351;&#29992;&#24320;&#30028;&#38754;&#30340;&#24037;&#20855;&#21019;&#24314;&#25968;&#25454;&#24211;&#65292;DBCA ,&#36816;&#34892;dbca &#21629;&#20196;&#21363;&#21487;&#12290;</span>
+<span class="org-level-2">** &#25163;&#24037;&#26041;&#24335;&#21019;&#24314;&#12290;</span>
+<span class="org-level-3">*** &#25351;&#23450; $ORACLE_SID &#30340;&#20540;</span>
+<span class="org-level-3">*** &#25351;&#23450;&#19968;&#20123;&#29615;&#22659;&#21464;&#37327;&#30340;&#20540;</span>
+    <span class="org-table">| ORACLE_BASE | ORACLE_HOME | ORA_NLS33 | PATH | LD_LIBRARY_PATH |</span>
+<span class="org-level-3">*** &#25351;&#23450; &#35748;&#35777;&#26041;&#27861;</span>
+<span class="org-level-4">**** with a password file</span>
+<span class="org-level-4">**** OS authentication</span>
+     &#22312;linux &#19978;&#65292;&#21482;&#35201;&#23646;&#20110;dba &#32452;&#30340;&#29992;&#25143;&#65292;&#23601;&#26377;&#26435;&#38480;&#21019;&#24314;database. 
+<span class="org-level-3">*** &#22914;&#20309;&#21024;&#38500;&#19968;&#20010;database</span>
+<span class="org-level-4">**** &#20351;&#29992;dbca&#22270;&#24418;&#30028;&#38754;&#21024;&#38500;    </span>
+<span class="org-level-4">**** &#25163;&#21160;&#21024;&#38500;    </span>
+<span class="org-level-5">***** &#21024;&#38500; $ORACLE_HOME/dbs/ &#30446;&#24405;&#19979;&#30456;&#24212;&#21407;parameter file ,</span>
+      &#22914;&#65292;&#20197;orcl database &#30340;&#21024;&#38500;&#20026;&#20363;&#65292;&#21024;&#38500;&#27492;&#30446;&#24405;&#19979;&#30340;&#25152;&#26377;&#24102;orcl &#30340;&#25991;&#20214;
+<span class="org-level-5">***** &#21024;&#38500; $ORACLE_BASE/oradata/$ORACLE_SID&#30446;&#24405;</span>
+<span class="org-level-5">***** &#21024;&#38500; $ORACLE_BASE/admin/$ORACLE_SID&#30446;&#24405;</span>
+<span class="org-level-1">* User  Oracle Data Migration Assistant  to migrate from an earlier version database</span>
+  (&#25968;&#25454;&#36801;&#31227;)
+<span class="org-level-1">* oracle &#25512;&#33616;&#30340;arch (OFA : Optimal Flexible Arch)</span>
+  + Establish a directory structure  where any database  file can be stored
+    on any disk resource
+  + separate objects  with different  behavior  into different tablespace
+  + Maximuse database reliablity and performance by separating database
+    components across disk resource .(&#27604;&#22914;&#23558;online redo log&#19982; data file&#25918;&#21040;
+    &#19981;&#21516;&#30913;&#30424;&#19978;)
+
+</pre>
+  </body>
+</html>

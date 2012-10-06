@@ -1,0 +1,7 @@
+# -*- coding:utf-8 -*-
+
+#+TITLE: Tag: @erlang
+
+#+LANGUAGE:  zh
+   + [[file:../erlang/timeout.org][receive timeout]]
+   + [[file:../erlang/binary_bit.org][erlang的二进制数据处理，binnary,及bit Syntax(语法)]]

@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<!-- Created by htmlize-1.34 in css mode. -->
+<html>
+  <head>
+    <title>gb_tree_dict.org</title>
+    <style type="text/css">
+    <!--
+      body {
+        color: #F8F8F8;
+        background-color: #0C1021;
+      }
+      .comment {
+        /* font-lock-comment-face */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-document-info {
+        /* org-document-info */
+        color: #afeeee;
+      }
+      .org-document-info-keyword {
+        /* org-document-info-keyword */
+        color: #b3b3b3;
+      }
+      .org-document-title {
+        /* org-document-title */
+        color: #afeeee;
+        font-size: 144%;
+        font-weight: bold;
+      }
+      .org-level-1 {
+        /* org-level-1 */
+        color: #FF6400;
+      }
+      .org-level-2 {
+        /* org-level-2 */
+        color: #40E0D0;
+      }
+      .org-level-3 {
+        /* org-level-3 */
+        color: #FBDE2D;
+      }
+      .org-link {
+        /* org-link */
+        color: #00ffff;
+        text-decoration: underline;
+      }
+      .org-meta-line {
+        /* org-meta-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+
+      a {
+        color: inherit;
+        background-color: inherit;
+        font: inherit;
+        text-decoration: inherit;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+    -->
+    </style>
+  </head>
+  <body>
+    <pre>
+<span class="comment"># -*- coding:utf-8 -*-</span>
+<span class="org-meta-line">#+LANGUAGE:  zh
+</span><span class="org-document-info-keyword">#+TITLE:</span><span class="comment">     </span><span class="org-document-title">gb_tree dict proplist orddict</span>
+<span class="org-document-info-keyword">#+AUTHOR:</span><span class="comment">    </span><span class="org-document-info">&#32426;&#31168;&#23792;</span>
+<span class="org-document-info-keyword">#+EMAIL:</span><span class="comment">     </span><span class="org-document-info">jixiuf@gmail.com</span>
+<span class="org-document-info-keyword">#+DATE:</span><span class="comment">     </span><span class="org-document-info">2011-11-20 &#26085;</span>
+<span class="org-meta-line">#+DESCRIPTION:erlang.org
+#+KEYWORDS: erlang
+#+OPTIONS:   H:2 num:nil toc:t \n:t @:t ::t |:t ^:nil -:t f:t *:t &lt;:t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil
+#+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
+#+EXPORT_SELECT_TAGS: export
+#+EXPORT_EXCLUDE_TAGS: noexport
+#+FILETAGS: @Erlang
+</span><span class="org-level-1">* and or andalso orelse</span>
+Expr1 orelse Expr2 Expr2&#21487;&#33021;&#34987;&#30701;&#36335;&#65292; &#19981;&#36816;&#31639;
+Expr1 or Expr2 Expr2&#19968;&#23450;&#20250;&#34987;&#36816;&#31639;
+Expr1 andalso Expr2 Expr2&#19968;&#23450;&#20250;&#34987;&#36816;&#31639;
+Expr1 and Expr2 Expr2&#21487;&#33021;&#34987;&#30701;&#36335;&#65292; &#19981;&#36816;&#31639;
+
+<span class="org-level-1">* Key-Value &#23384;&#20648;</span>
+<span class="org-level-2">**  &#23545;&#20110;&#23567;&#25968;&#25454;&#37327;&#65292;  &#26377;proplist &#21644; orddict</span>
+<span class="org-level-3">*** proplist</span>
+  &#25552;&#20379;&#20102;&#65292;
+  proplists:delete/2, proplists:get_value/2, proplists:get_all_values/2, proplists:lookup/2 and
+  proplists:lookup_all/2.
+  &#27809;&#26377;add or update &#26041;&#27861;&#65292;&#21482;&#33021;&#25163;&#24037;&#20351;&#29992; [H|T] &#30340;&#26041;&#24335;&#33258;&#24050;&#22788;&#29702;&#65292;&#20854;&#20869;&#37096;&#32467;&#26500;[{Key,Value}].
+  &#21487;&#20197;&#20351;&#29992;lists:keyreplace/4.&#36827;&#34892;&#22788;&#29702;
+<span class="org-level-3">*** orddict</span>
+   the whole list is sorted for faster average lookup,
+   75&#24038;&#21491;&#20010;&#20803;&#32032;&#26102;&#25928;&#29575;&#26368;&#39640;
+<span class="org-level-2">** &#23545;&#20110;&#22823;&#25968;&#25454;&#37327; &#26377;dicts gb_trees</span>
+<span class="org-level-3">***   dicts &#36866;&#20110;&#35835;&#22810;&#20110;&#20889;&#30340;</span>
+   Dicts are thus very good choices to scale orddicts up whenever it is needed.
+<span class="org-level-3">***   gb_trees&#36866;&#20110;&#20889;&#22810;&#20110;&#35835;&#30340;</span>
+      &#27491;&#24120;&#30340;gb_trees:enter/2, gb_trees:lookup/2 and gb_trees:delete_any/2
+      smart &#30340;&#65306;gb_trees:insert/3, gb_trees:get/2, gb_trees:update/3 and gb_trees:delete/2.
+      smart&#30340;&#20043;&#22788;&#22312;&#20110;&#65292;&#23427;&#35748;&#20026;&#35201;&#22788;&#29702;&#30340;key&#22312; gb_trees&#20013;&#23384;&#22312;&#65292;&#25152;&#20197;&#19968;&#20123;&#26816;&#26597;&#19981;&#24517;&#20570;&#65292;&#36895;&#24230;&#20250;&#24555;&#19968;&#28857;&#12290;
+
+<span class="org-link">https://github.com/jixiuf/helloerlang/tree/master/benchmark/src</span>
+</pre>
+  </body>
+</html>

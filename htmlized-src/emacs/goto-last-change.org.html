@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<!-- Created by htmlize-1.34 in css mode. -->
+<html>
+  <head>
+    <title>goto-last-change.org</title>
+    <style type="text/css">
+    <!--
+      body {
+        color: #F8F8F8;
+        background-color: #0C1021;
+      }
+      .comment {
+        /* font-lock-comment-face */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-block {
+        /* org-block */
+        color: #b3b3b3;
+      }
+      .org-block-begin-line {
+        /* org-block-begin-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-block-end-line {
+        /* org-block-end-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-document-info {
+        /* org-document-info */
+        color: #afeeee;
+      }
+      .org-document-info-keyword {
+        /* org-document-info-keyword */
+        color: #b3b3b3;
+      }
+      .org-document-title {
+        /* org-document-title */
+        color: #afeeee;
+        font-size: 144%;
+        font-weight: bold;
+      }
+      .org-link {
+        /* org-link */
+        color: #00ffff;
+        text-decoration: underline;
+      }
+      .org-meta-line {
+        /* org-meta-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+
+      a {
+        color: inherit;
+        background-color: inherit;
+        font: inherit;
+        text-decoration: inherit;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+    -->
+    </style>
+  </head>
+  <body>
+    <pre>
+<span class="comment"># -*- coding:utf-8 -*-</span>
+<span class="org-meta-line">#+LANGUAGE:  zh
+</span><span class="org-document-info-keyword">#+TITLE:</span><span class="comment">     </span><span class="org-document-title">goto-last-change.el &#36339;&#36716;&#21040;&#26368;&#36817;&#20960;&#27425;&#32534;&#36753;&#30340;&#20301;&#32622;</span>
+<span class="org-document-info-keyword">#+AUTHOR:</span><span class="comment">    </span><span class="org-document-info">&#32426;&#31168;&#23792;</span>
+<span class="org-document-info-keyword">#+EMAIL:</span><span class="comment">     </span><span class="org-document-info">jixiuf@gmail.com</span>
+<span class="org-document-info-keyword">#+DATE:</span><span class="comment">     </span><span class="org-document-info">2012-07-04 &#19977;</span>
+<span class="org-meta-line">#+DESCRIPTION:goto-last-change.org
+#+KEYWORDS:
+#+OPTIONS:   H:2 num:nil toc:t \n:t @:t ::t |:t ^:nil -:t f:t *:t &lt;:t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil
+#+FILETAGS:
+</span>emacs &#19968;&#20010;&#22909;&#22788;&#26159;&#21487;&#20197;&#24555;&#36895;&#36827;&#34892;&#20809;&#26631;&#30340;&#23450;&#20301;&#65292;&#21253;&#25324;&#36339;&#36716;&#21040; &#21333;&#35789;&#12289;&#21464;&#37327;&#12289;&#34892;&#12289;&#20989;&#25968;&#12289;&#34920;&#36798;
+&#24335;&#30340;&#24320;&#22836;&#12289;&#32467;&#26524;&#31561;&#12290;&#36825;&#20010; <span class="org-link">GotoLastChange</span> &#20063;&#26159;&#19968;&#20010;&#36827;&#34892;&#24555;&#36895;&#23450;&#20301;&#30340;&#25193;&#23637;&#65292;
+&#20320;&#22312;&#26576;&#20010;buffer&#20013;&#30340;&#26576;&#22788;&#36827;&#34892;&#20102;&#32534;&#36753;&#65292;&#28982;&#21518;&#21448;&#21040;&#21478;&#19968;&#20010;&#36328;&#24230;&#36739;&#22823;&#30340;&#22320;&#26041;&#36827;&#34892;&#32534;&#36753;&#65292;&#31361;&#28982;&#24819;
+&#22238;&#21040;&#21407;&#26469;&#20301;&#32622;&#26102;&#65292;&#36825;&#20010;&#25193;&#23637;&#23601;&#24456;&#26377;&#29992;&#22788;&#20102;&#12290;&#36825;&#20010;&#25193;&#23637;&#19981;&#20165;&#35760;&#20303;&#30340;&#26159;&#26368;&#36817;&#19968;&#27425;&#30340;&#32534;&#36753;&#20301;&#32622;&#65292;
+&#32780;&#24050;&#21487;&#20197;&#35760;&#20303;&#26368;&#36817;n&#27425;&#30340;&#32534;&#36753;&#20301;&#32622;&#65292;&#21482;&#35201;&#22810;&#27425;&#35843;&#29992;goto-last-change&#21363;&#21487;
+<span class="org-block-begin-line">#+BEGIN_SRC emacs-list
+</span><span class="org-block">    (require 'goto-last-change)
+    (global-set-key (kbd "C-x C-/") 'goto-last-change)
+</span><span class="org-block-end-line">#+END_SRC
+</span></pre>
+  </body>
+</html>

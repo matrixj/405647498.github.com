@@ -1,0 +1,7 @@
+# -*- coding:utf-8 -*-
+
+#+TITLE: Tag: @C-C++
+
+#+LANGUAGE:  zh
+   + [[file:../emacs/c-c++-cedet-symref.org][c-c++-cedet-symref.org]]
+   + [[file:../emacs/c-c++-cedet-eassist.org][cedet eassist在c c++编程中的应用]]

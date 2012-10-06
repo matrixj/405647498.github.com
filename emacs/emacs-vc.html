@@ -1,0 +1,1474 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+               "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh" xml:lang="zh">
+<head>
+<title>emacs 进行版本控制(Version Control)</title>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+<meta name="title" content="emacs 进行版本控制(Version Control)"/>
+<meta name="generator" content="Org-mode"/>
+<meta name="generated" content="2011-07-05 二"/>
+<meta name="author" content="孤峰独秀"/>
+<meta name="description" content="emacs 进行版本控制(Version Control)"/>
+<meta name="keywords" content="vc emacs svn psvn git scm "/>
+<style type='text/css'>
+       body {
+    background-color: #E5E5E5;
+	scrollbar-face-color: #DEE3E7;
+	scrollbar-highlight-color: #FFFFFF;
+	scrollbar-shadow-color: #DEE3E7;
+	scrollbar-3dlight-color: #D1D7DC;
+	scrollbar-arrow-color:  #006699;
+	scrollbar-track-color: #EFEFEF;
+	scrollbar-darkshadow-color: #98AAB1;
+    /* background-color: #999966;  */
+    margin: 0em;
+}
+
+h1 {
+    font-size: 2.0em;
+    margin-top: 1.0em;
+    margin-bottom: 0.3em;
+}
+h2 {
+    font-size: 1.5em;
+    margin-top: 2.4em;
+    margin-bottom: 0.3em;
+}
+h3 {
+    font-size: 1.25em;
+    margin-top: 1.25em;
+    margin-bottom: 0.3em;
+}
+
+
+div#content {
+    font-family: Times, serif;
+    border-left: double #333300 3mm;
+    border-right: double #333300 3mm;
+    letter-spacing: 0.075em;
+    line-height: 1.4;
+    margin: 0em auto;
+    padding: 2em;
+    width: 92%;
+    height:100%; 
+    min-height:600px;           /*firefox do'nt support height:100% ,so*/
+ 
+}
+/* #table-of-contents { */
+/* 	font-size: 75%; */
+/* 	line-height: 1.4em; */
+/* 	position: fixed; */
+/* 	display: block; */
+/* 	left: -20px; */
+/* 	top: 5%; */
+/* 	width: 250px; */
+/* 	min-height:60px; */
+/* 	max-height:95%; */
+/* 	overflow:hidden; */
+/*     white-space:nowrap; */
+/* } */
+
+#org-div-home-and-up{
+	position: fixed;
+	display: block;
+	right: 18px;
+	top: 5px;
+	overflow:auto;
+    }
+#org-src{
+	position: fixed;
+	display: block;
+	right: 18px;
+	top: 20px;
+	overflow:hidden;
+    }
+#htmlized-src{
+	position: fixed;
+	display: block;
+	right: 54px;
+	top: 20px;
+	overflow:hidden;
+    }
+#table-of-contents h2 {
+	display:none;
+}
+
+#logo-text{
+	position: fixed;
+	display: block;
+	right: 16px;
+	bottom: 3px;
+	overflow:hidden;
+}
+#logo-img{
+    font-size: 60%;
+	position: fixed;
+	display: block;
+    left: 16px;
+	top: 3px;
+    }
+div#tags {
+	font-size: 75%;
+    text-align:right;
+	/* line-height: 1.4em; */
+	position: fixed;
+	display: block;
+	right: 40px;
+	top: 20%;
+	width: 90px;
+	/* min-height:60px; */
+	max-height:95%;
+	/* overflow:visible; */
+    /* white-space:pre-wrap; */
+}
+
+.title {
+    text-align:center;
+	padding-bottom: 7px;
+	margin-bottom: 20px;
+	border-bottom: 1px solid #222;
+}
+ a:link,a:active,a:visited { color : #006699; } 
+ a:hover		{ text-decoration: underline; color : #DD6900; } 
+
+.todo {color: #990000;}
+.done {color: #006666;}
+.timestamp-kwd {color: #444;}
+.tag {color: #DDD; font-size: 70%; font-weight: 500;}
+
+table {border: none;
+       width:90%;
+      }
+th	{
+	background-color: #006699; 
+}
+td	{
+    padding: .1em .7em .1em .3em;
+	background-color: Gainsboro
+}
+
+
+code {
+font-family: Andale Mono, Courier New, Courier, sans-serif; font-size: 12px; line-height: 14px; color: #0000A0;
+	background-color: #FAFAFA; border: #D1D7DC; border-style: solid;
+	border-left-width: 1px; border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px
+}
+
+/* pre { */
+/* 	border: 1px solid #555; */
+/* 	background: #EEEEEE; */
+/* 	font-size: 9pt; */
+/* 	padding: 1em; */
+/* } */
+pre.src {
+	border: 1px solid #555;
+	background:#0c1021;
+    /* background:#263111; */
+    color: #f7f8c6;
+	font-size: 10pt;
+    width:85%;
+	padding: 0em;
+	margin: 0;
+	width: 700px;
+	float: none;
+	clear: none;
+	line-height: 1.333;
+	text-align:left;
+    
+    /* overflow: scroll; */
+    max-height:500px;           /*IEXPLORE  don't support max-height*/
+    _height:expression(this.scrollHeight > 300 ? "300px" : "auto");
+    min-height:50px;
+    max-width:700px;
+    min-width:700px;
+    overflow-x:auto;
+    overflow-y:auto;
+}
+blockquote {
+	 border: #D1D7DC;
+     border-style: solid;
+	border-left-width: 1px;
+    border-top-width: 1px;
+    border-right-width: 1px;
+    border-bottom-width: 1px
+    
+    color: #444444;
+    line-height: 125%;
+	border: 1px solid #555;
+    background-color: #FAFAFA;    
+    width:95%;
+	padding: 1em;
+	margin: 0;
+	float: none;
+	clear: none;
+	text-align:left;
+    font-style:italic;
+    
+    /* overflow: scroll; */
+    max-height:300px;           /*IEXPLORE  don't support max-height*/
+    _height:expression(this.scrollHeight > 300 ? "300px" : "auto");
+    min-height:20px;
+    max-width:700px;
+    min-width:700px;
+    overflow-x:auto;
+    overflow-y:auto;
+}
+
+.org-function-name {
+    /* font-lock-function-name-face */
+    /* color: #0000ff; */
+     color: #87cefa;
+     font-stretch: normal;
+     text-decoration: none;
+}
+
+.org-keyword {
+    /* font-lock-keyword-face */
+    color: #00ffff;
+    text-decoration: none;
+    /* color: #a020f0; */
+}
+.org-doc
+ { color: #ffa07a;
+   text-decoration: none;
+ }
+p.author{
+    font-size:80%;
+    color:#556b2f;
+    font-style:italic;
+    position:fixed;
+    left:10px;
+    bottom:40px;
+}
+p.date{
+    font-size:80%;
+    color:#556b2f;
+    font-style:italic;
+    position:fixed;
+    left:10px;
+    bottom:0px;
+}
+p.creator{
+    font-size:80%;
+    color:#556b2f;
+    font-style:italic;
+    position:fixed;
+    left:10px;
+    bottom:20px;
+}
+
+img {
+    display:inline;
+	border: none;
+    float:none;
+    clear:none;
+    left:10px;
+}
+
+.share img {
+	opacity: .4;
+	-moz-opacity: .4;
+	filter: alpha(opacity=40);
+}
+
+.share img:hover {
+	opacity: 1;
+	-moz-opacity: 1;
+	filter: alpha(opacity=100);
+}
+
+.org-info-search-highlight
+{
+	background-color:#adefef; /* same color as emacs default */
+	color:#000000;
+	font-weight:bold;
+}
+
+.org-bbdb-company {
+    /* bbdb-company */
+    font-style: italic;
+}
+.org-bbdb-field-name {
+}
+.org-bbdb-field-value {
+}
+.org-bbdb-name {
+    /* bbdb-name */
+    text-decoration: underline;
+}
+.org-bold {
+    /* bold */
+    font-weight: bold;
+}
+.org-bold-italic {
+    /* bold-italic */
+    font-weight: bold;
+    font-style: italic;
+}
+.org-border {
+    /* border */
+    background-color: #000000;
+}
+.org-buffer-menu-buffer {
+    /* buffer-menu-buffer */
+    font-weight: bold;
+}
+.org-builtin {
+    /* font-lock-builtin-face */
+    color: #da70d6;
+}
+.org-button {
+    /* button */
+    text-decoration: underline;
+}
+.org-c-nonbreakable-space {
+    /* c-nonbreakable-space-face */
+    background-color: #ff0000;
+    font-weight: bold;
+}
+.org-calendar-today {
+    /* calendar-today */
+    text-decoration: underline;
+}
+.org-comment {
+    /* font-lock-comment-face */
+    color: #b22222;
+}
+.org-comment-delimiter {
+    /* font-lock-comment-delimiter-face */
+    color: #b22222;
+}
+.org-constant {
+    /* font-lock-constant-face */
+    color: #5f9ea0;
+}
+.org-cursor {
+    /* cursor */
+    background-color: #000000;
+}
+.org-default {
+    /* default */
+    color: #000000;
+    background-color: #ffffff;
+}
+.org-diary {
+    /* diary */
+    color: #ff0000;
+}
+.org-escape-glyph {
+    /* escape-glyph */
+    color: #a52a2a;
+}
+.org-file-name-shadow {
+    /* file-name-shadow */
+    color: #7f7f7f;
+}
+.org-fixed-pitch {
+}
+.org-fringe {
+    /* fringe */
+    background-color: #f2f2f2;
+}
+.org-header-line {
+    /* header-line */
+    color: #333333;
+    background-color: #e5e5e5;
+}
+.org-help-argument-name {
+    /* help-argument-name */
+    font-style: italic;
+}
+.org-highlight {
+    /* highlight */
+    background-color: #b4eeb4;
+}
+.org-holiday {
+    /* holiday */
+    background-color: #ffc0cb;
+}
+.org-info-header-node {
+    /* info-header-node */
+    color: #a52a2a;
+    font-weight: bold;
+    font-style: italic;
+}
+.org-info-header-xref {
+    /* info-header-xref */
+    color: #0000ff;
+    text-decoration: underline;
+}
+.org-info-menu-header {
+    /* info-menu-header */
+    font-weight: bold;
+}
+.org-info-menu-star {
+    /* info-menu-star */
+    color: #ff0000;
+}
+.org-info-node {
+    /* info-node */
+    color: #a52a2a;
+    font-weight: bold;
+    font-style: italic;
+}
+.org-info-title-1 {
+    /* info-title-1 */
+    font-size: 172%;
+    font-weight: bold;
+}
+.org-info-title-2 {
+    /* info-title-2 */
+    font-size: 144%;
+    font-weight: bold;
+}
+.org-info-title-3 {
+    /* info-title-3 */
+    font-size: 120%;
+    font-weight: bold;
+}
+.org-info-title-4 {
+    /* info-title-4 */
+    font-weight: bold;
+}
+.org-info-xref {
+    /* info-xref */
+    color: #0000ff;
+    text-decoration: underline;
+}
+.org-isearch {
+    /* isearch */
+    color: #b0e2ff;
+    background-color: #cd00cd;
+}
+.org-italic {
+    /* italic */
+    font-style: italic;
+}
+.org-lazy-highlight {
+    /* lazy-highlight */
+    background-color: #afeeee;
+}
+.org-link {
+    /* link */
+    color: #0000ff;
+    text-decoration: underline;
+}
+.org-link-visited {
+    /* link-visited */
+    color: #8b008b;
+    text-decoration: underline;
+}
+.org-match {
+    /* match */
+    background-color: #ffff00;
+}
+.org-menu {
+}
+.org-message-cited-text {
+    /* message-cited-text */
+    color: #ff0000;
+}
+.org-message-header-cc {
+    /* message-header-cc */
+    color: #191970;
+}
+.org-message-header-name {
+    /* message-header-name */
+    color: #6495ed;
+}
+.org-message-header-newsgroups {
+    /* message-header-newsgroups */
+    color: #00008b;
+    font-weight: bold;
+    font-style: italic;
+}
+.org-message-header-other {
+    /* message-header-other */
+    color: #4682b4;
+}
+.org-message-header-subject {
+    /* message-header-subject */
+    color: #000080;
+    font-weight: bold;
+}
+.org-message-header-to {
+    /* message-header-to */
+    color: #191970;
+    font-weight: bold;
+}
+.org-message-header-xheader {
+    /* message-header-xheader */
+    color: #0000ff;
+}
+.org-message-mml {
+    /* message-mml */
+    color: #228b22;
+}
+.org-message-separator {
+    /* message-separator */
+    color: #a52a2a;
+}
+.org-minibuffer-prompt {
+    /* minibuffer-prompt */
+    color: #0000cd;
+}
+.org-mm-uu-extract {
+    /* mm-uu-extract */
+    color: #006400;
+    background-color: #ffffe0;
+}
+.org-mode-line {
+    /* mode-line */
+    color: #000000;
+    background-color: #bfbfbf;
+}
+.org-mode-line-buffer-id {
+    /* mode-line-buffer-id */
+    font-weight: bold;
+}
+.org-mode-line-highlight {
+}
+.org-mode-line-inactive {
+    /* mode-line-inactive */
+    color: #333333;
+    background-color: #e5e5e5;
+}
+.org-mouse {
+    /* mouse */
+    background-color: #000000;
+}
+.org-negation-char {
+}
+.org-next-error {
+    /* next-error */
+    background-color: #eedc82;
+}
+.org-nobreak-space {
+    /* nobreak-space */
+    color: #a52a2a;
+    text-decoration: underline;
+}
+.org-org-agenda-date {
+    /* org-agenda-date */
+    color: #0000ff;
+}
+.org-org-agenda-date-weekend {
+    /* org-agenda-date-weekend */
+    color: #0000ff;
+    font-weight: bold;
+}
+.org-org-agenda-restriction-lock {
+    /* org-agenda-restriction-lock */
+    background-color: #ffff00;
+}
+.org-org-agenda-structure {
+    /* org-agenda-structure */
+    color: #0000ff;
+}
+.org-org-archived {
+    /* org-archived */
+    color: #7f7f7f;
+}
+.org-org-code {
+    /* org-code */
+    color: #7f7f7f;
+}
+.org-org-column {
+    /* org-column */
+    background-color: #e5e5e5;
+}
+.org-org-column-title {
+    /* org-column-title */
+    background-color: #e5e5e5;
+    font-weight: bold;
+    text-decoration: underline;
+}
+.org-org-date {
+    /* org-date */
+    color: #a020f0;
+    text-decoration: underline;
+}
+.org-org-done {
+    /* org-done */
+    color: #228b22;
+    font-weight: bold;
+}
+.org-org-drawer {
+    /* org-drawer */
+    color: #0000ff;
+}
+.org-org-ellipsis {
+    /* org-ellipsis */
+    color: #b8860b;
+    text-decoration: underline;
+}
+.org-org-formula {
+    /* org-formula */
+    color: #b22222;
+}
+.org-org-headline-done {
+    /* org-headline-done */
+    color: #bc8f8f;
+}
+.org-org-hide {
+    /* org-hide */
+    color: #e5e5e5;
+}
+.org-org-latex-and-export-specials {
+    /* org-latex-and-export-specials */
+    color: #8b4513;
+}
+.org-org-level-1 {
+    /* org-level-1 */
+    color: #0000ff;
+}
+.org-org-level-2 {
+    /* org-level-2 */
+    color: #b8860b;
+}
+.org-org-level-3 {
+    /* org-level-3 */
+    color: #a020f0;
+}
+.org-org-level-4 {
+    /* org-level-4 */
+    color: #b22222;
+}
+.org-org-level-5 {
+    /* org-level-5 */
+    color: #228b22;
+}
+.org-org-level-6 {
+    /* org-level-6 */
+    color: #5f9ea0;
+}
+.org-org-level-7 {
+    /* org-level-7 */
+    color: #da70d6;
+}
+.org-org-level-8 {
+    /* org-level-8 */
+    color: #bc8f8f;
+}
+.org-org-link {
+    /* org-link */
+    color: #a020f0;
+    text-decoration: underline;
+}
+.org-org-property-value {
+}
+.org-org-scheduled-previously {
+    /* org-scheduled-previously */
+    color: #b22222;
+}
+.org-org-scheduled-today {
+    /* org-scheduled-today */
+    color: #006400;
+}
+.org-org-sexp-date {
+    /* org-sexp-date */
+    color: #a020f0;
+}
+.org-org-special-keyword {
+    /* org-special-keyword */
+    color: #bc8f8f;
+}
+.org-org-table {
+    /* org-table */
+    color: #0000ff;
+}
+.org-org-tag {
+    /* org-tag */
+    font-weight: bold;
+}
+.org-org-target {
+    /* org-target */
+    text-decoration: underline;
+}
+.org-org-time-grid {
+    /* org-time-grid */
+    color: #b8860b;
+}
+.org-org-todo {
+    /* org-todo */
+    color: #ff0000;
+}
+.org-org-upcoming-deadline {
+    /* org-upcoming-deadline */
+    color: #b22222;
+}
+.org-org-verbatim {
+    /* org-verbatim */
+    color: #7f7f7f;
+    text-decoration: underline;
+}
+.org-org-warning {
+    /* org-warning */
+    color: #ff0000;
+    font-weight: bold;
+}
+.org-outline-1 {
+    /* outline-1 */
+    color: #0000ff;
+}
+.org-outline-2 {
+    /* outline-2 */
+    color: #b8860b;
+}
+.org-outline-3 {
+    /* outline-3 */
+    color: #a020f0;
+}
+.org-outline-4 {
+    /* outline-4 */
+    color: #b22222;
+}
+.org-outline-5 {
+    /* outline-5 */
+    color: #228b22;
+}
+.org-outline-6 {
+    /* outline-6 */
+    color: #5f9ea0;
+}
+.org-outline-7 {
+    /* outline-7 */
+    color: #da70d6;
+}
+.org-outline-8 {
+    /* outline-8 */
+    color: #bc8f8f;
+}
+.org-preprocessor {
+    /* font-lock-preprocessor-face */
+    color: #da70d6;
+}
+.org-query-replace {
+    /* query-replace */
+    color: #b0e2ff;
+    background-color: #cd00cd;
+}
+.org-regexp-grouping-backslash {
+    /* font-lock-regexp-grouping-backslash */
+    font-weight: bold;
+}
+.org-regexp-grouping-construct {
+    /* font-lock-regexp-grouping-construct */
+    font-weight: bold;
+}
+.org-region {
+    /* region */
+    background-color: #eedc82;
+}
+.org-rmail-highlight {
+}
+.org-scroll-bar {
+    /* scroll-bar */
+    background-color: #bfbfbf;
+}
+.org-secondary-selection {
+    /* secondary-selection */
+    background-color: #ffff00;
+}
+.org-shadow {
+    /* shadow */
+    color: #7f7f7f;
+}
+.org-show-paren-match {
+    /* show-paren-match */
+    background-color: #40e0d0;
+}
+.org-show-paren-mismatch {
+    /* show-paren-mismatch */
+    color: #ffffff;
+    background-color: #a020f0;
+}
+.org-string {
+    /* font-lock-string-face */
+    color: #bc8f8f;
+}
+.org-texinfo-heading {
+    /* texinfo-heading */
+    color: #0000ff;
+}
+.org-tool-bar {
+    /* tool-bar */
+    color: #000000;
+    background-color: #bfbfbf;
+}
+.org-tooltip {
+    /* tooltip */
+    color: #000000;
+    background-color: #ffffe0;
+}
+.org-trailing-whitespace {
+    /* trailing-whitespace */
+    background-color: #ff0000;
+}
+.org-type {
+    /* font-lock-type-face */
+    color: #228b22;
+}
+.org-underline {
+    /* underline */
+    text-decoration: underline;
+}
+.org-variable-name {
+    /* font-lock-variable-name-face */
+    color: #b8860b;
+}
+.org-variable-pitch {
+}
+.org-vertical-border {
+}
+.org-warning {
+    /* font-lock-warning-face */
+    color: #ff0000;
+    font-weight: bold;
+}
+
+
+
+.logo-link {
+    position: fixed;
+    top: 10px;
+    left: 30px;
+}
+
+/* These style are only for IE: */
+
+* html {
+    overflow: hidden;
+    padding-bottom:0px;
+    margin:0px;
+}
+
+* html body {
+    height: 100%;
+    overflow:auto;
+    font-size: 100%;
+    margin: 0px 0px 0px 250px;
+    padding: 0px 10% 0px 0px;
+}
+/* 针对Ie ,好像因为iexplore 不认识position:fixed 所以没办法让
+   导航部分的显示固定在特定的位置，不随滚动条而滚动
+ */
+* html #table-of-contents {
+    position: absolute;
+    width:200px;
+    left:10px
+    /*
+      The evil IE-JavaScript hack :-) depends on Picture and y-distance.
+      Added to support small screens (Netbooks...).
+      */
+    top: expression( ( 30 + ( noValue = document.documentElement.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop ) ) + 'px' );
+    /* top: expression((document.body.clientHeight - 210) + "px"); */
+     /* height: expression((document.body.clientHeight - 210) + "px"); */
+}
+* html #org-div-home-and-up {
+    position: absolute;
+    width:200px;
+    right:25px;
+    /*
+      The evil IE-JavaScript hack :-) depends on Picture and y-distance.
+      Added to support small screens (Netbooks...).
+      */
+    /* top: expression( ( 10 + ( noValue = document.documentElement.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop ) ) + 'px' ); */
+    /* top: expression((document.body.clientHeight - 210) + "px"); */
+     /* height: expression((document.body.clientHeight - 210) + "px"); */
+}
+* html #org-src{
+    position: absolute;
+    width:25px;
+    right:20px;
+}
+* html #htmlized-src{
+    position: absolute;
+    width:120px;
+    right:20px;
+}
+
+* html p.author{
+    position: absolute;
+    width:125px;
+    left:20px;
+}
+* html p.date{
+    position: absolute;
+    width:225px;
+    left:20px;
+    bottom:0px;
+}
+* html p.creator{
+    position: absolute;
+    width:425px;
+    left:20px;
+    bottom:20px;
+}
+
+* html h1 {
+    margin-top:10px;
+}
+
+* html .logo-link {
+    position: absolute;
+    top: 10px;
+    left: 30px;
+}
+
+* html #logo-text{
+    font-size: 75%;
+	position: absolute;
+	display: block;
+	right: 10px;
+	bottom: 3px;
+	overflow:hidden;
+}
+ 
+ 
+* html div#tags {
+	font-size: 75%;
+	/* line-height: 1.4em; */
+	position: absolute;
+	display: block;
+	right: -2px;
+	top: 10%;
+	width: 150px;
+	/* min-height:60px; */
+	max-height:95%;
+	/* overflow:visible; */
+    /* white-space:pre-wrap; */
+}
+
+    </style>
+<link rel="stylesheet" type="text/css" href="../style/emacs.css" />
+<script type='text/javascript' src='../js/emacs.js'> </script>
+
+</head>
+<body>
+<div id="org-div-home-and-up" style="text-align:right;font-size:70%;white-space:nowrap;">
+ <a accesskey="h" href="../sitemap.html"> 站点地图 </a>
+ |
+ <a accesskey="H" href="../index.html"> 首页 </a>
+</div>
+
+<div id="preamble">
+
+</div>
+
+<div id="content">
+<h1 class="title">emacs 进行版本控制(Version Control)</h1>
+
+
+<div id='logo-img' ><a  href='../index.html'>▇█▓▒░◕~◕░▒▓█▇</a></div>
+
+<div id='logo-text'>
+  <a href='#' ><span align="left">░◕~◕░</span></a>
+</div>
+
+<p>
+什么是版本控制就不多说了，常见的版本控制工具有svn git cvs 等。我只用过svn及<br/>
+git ,常用git ，所以以git 以例进行说明。另外，Emacs 中有个vc.el ,vc是version<br/>
+control 的缩写，它不是svn git 之类的版本控制工具。怎么介绍它呢，它是一个接口<br/>
+吧，不论你用的是svn 还是git 都可以用它进行版本控制。但毕竟每个版本控制工具都<br/>
+有它特有的特性，所以vc对svn git 等专有的功能并没有做到统一，不会常用的<br/>
+update commit ,checkout 等最基本的操作它都实现了。所以vc的存在还是很有必要的。<br/>
+</p>
+<p><br/>
+</p>
+<p><br/>
+<pre class="src src-emacs-lisp"><span class="org-comment-delimiter">;; </span><span class="org-comment">Version Control Merge Diff Ediff</span>
+(<span class="org-keyword">eval-after-load</span> 'vc-svn '(<span class="org-keyword">progn</span> (<span class="org-keyword">require</span> '<span class="org-constant">psvn</span>)))
+
+<span class="org-comment-delimiter">;;</span><span class="org-comment">version control :VC</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">&#22312;&#36827;&#34892;`</span><span class="org-comment"><span class="org-constant">C-xvv</span></span><span class="org-comment">' `</span><span class="org-comment"><span class="org-constant">C-xvi</span></span><span class="org-comment">'&#31561;&#25805;&#20316;&#26102;&#19981;&#24517;&#36827;&#34892;&#30830;&#35748;,</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">&#33258;&#21160;&#20445;&#23384;&#24403;&#21069;buffer&#21518;&#36827;&#34892;&#25805;&#20316; &#38500;&#38750;&#36827;&#34892;&#19968;&#20010;&#21361;&#38505;&#30340;&#25805;&#20316;,&#22914;&#22238;&#28378;</span>
+(<span class="org-function-name">setq-default</span> vc-suppress-confirm <span class="org-constant">t</span>)
+<span class="org-comment-delimiter">;;</span><span class="org-comment">VC &#30340;&#24456;&#22810;&#25805;&#20316;&#26159;&#35843;&#29992;&#22806;&#37096;&#21629;&#20196;,&#23427;&#36873;&#39033;&#20250;&#25552;&#31034;&#21629;&#20196;&#30340;&#30456;&#24212;&#20449;&#24687;,&#22914;&#36816;&#34892;&#20102;&#21738;&#20010;&#21629;&#20196;</span>
+(<span class="org-function-name">setq-default</span> vc-command-messages <span class="org-constant">t</span> )
+<span class="org-comment-delimiter">;;</span><span class="org-comment">,&#40664;&#35748;`</span><span class="org-comment"><span class="org-constant">C-cC-c</span></span><span class="org-comment">'&#26159;&#27492;&#25805;&#20316;,&#20294;&#24635;&#25163;&#35823;,&#32534;&#36753;&#23436;&#25552;&#20132;&#26085;&#24535;&#30340;&#20869;&#23481;,&#36827;&#34892;&#25552;&#20132;&#25805;&#20316;</span>
+(<span class="org-keyword">eval-after-load</span> 'log-edit
+  '(<span class="org-keyword">progn</span> (<span class="org-function-name">define-key</span> vc-log-mode-map <span class="org-string">"\C-x\C-s"</span> 'log-edit-done)))
+
+<span class="org-comment-delimiter">;;</span><span class="org-comment">C-xv= &#20351;&#29992;ediff</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">ediff C-xv= ,C-xvC-=  diff</span>
+
+(<span class="org-keyword">eval-after-load</span> 'vc-hooks
+  '(<span class="org-keyword">progn</span>
+     (<span class="org-keyword">require</span> '<span class="org-constant">ediff</span>)
+     (<span class="org-keyword">defun</span> <span class="org-function-name">ediff-current-buffer-revision</span> ()
+       <span class="org-doc">"Run Ediff to diff current buffer's file against VC depot.</span>
+<span class="org-doc">Uses `</span><span class="org-doc"><span class="org-constant">vc.el</span></span><span class="org-doc">' or `</span><span class="org-doc"><span class="org-constant">rcs.el</span></span><span class="org-doc">' depending on `</span><span class="org-doc"><span class="org-constant">ediff-version-control-package</span></span><span class="org-doc">'."</span>
+       (interactive)
+       (<span class="org-keyword">let</span> ((file (<span class="org-keyword">or</span> (buffer-file-name)
+                       (<span class="org-warning">error</span> <span class="org-string">"Current buffer is not visiting a file"</span>))))
+         (<span class="org-keyword">if</span> (<span class="org-keyword">and</span> (buffer-modified-p)
+                  (y-or-n-p (message <span class="org-string">"Buffer %s is modified. Save buffer? "</span>
+                                     (buffer-name))))
+             (save-buffer (current-buffer)))
+         (ediff-load-version-control)
+         (funcall
+          (intern (format <span class="org-string">"ediff-%S-internal"</span> ediff-version-control-package))
+          <span class="org-string">""</span> <span class="org-string">""</span> <span class="org-constant">nil</span>)))
+     (<span class="org-function-name">define-key</span> vc-prefix-map (kbd <span class="org-string">"C-="</span>) 'ediff-current-buffer-revision)
+<span class="org-comment-delimiter">;;     </span><span class="org-comment">(define-key vc-prefix-map "=" 'ediff-current-buffer-revision);;C-xv=</span>
+<span class="org-comment-delimiter">;;     </span><span class="org-comment">(define-key vc-prefix-map (kbd "C-=") 'vc-diff);;&#21407;&#26469;&#30340;C-xv=,&#29616;&#22312;&#32465;&#23450;&#21040;C-xvC-=</span>
+     ))
+
+<span class="org-comment-delimiter">;;</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">&#22312;  *vc-change-log* &#20013;&#40664;&#35748;=&#32465;&#23450;&#22312; log-view-diff</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">&#20351;&#29992;diff &#36827;&#34892;&#27604;&#36739; &#65292;&#27492;&#22788;&#40664;&#35748;&#25913;&#20026;&#20351;&#29992;ediff &#36827;&#34892;&#27604;&#36739;&#65292;</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">= ediff ,and C-= diff ,in *vc-change-log*</span>
+
+(<span class="org-keyword">eval-after-load</span> 'log-view
+  '(<span class="org-keyword">progn</span>
+     (<span class="org-keyword">require</span> '<span class="org-constant">ediff-vers</span>)
+     (<span class="org-keyword">defun</span> <span class="org-function-name">log-view-ediff</span> (beg end)
+       <span class="org-doc">"the ediff version of `</span><span class="org-doc"><span class="org-constant">log-view-diff</span></span><span class="org-doc">'"</span>
+       (interactive
+        (list (<span class="org-keyword">if</span> mark-active (region-beginning) (point))
+              (<span class="org-keyword">if</span> mark-active (region-end) (point))))
+       (<span class="org-keyword">let</span> ((fr (log-view-current-tag beg))
+             (to (log-view-current-tag end)))
+         (<span class="org-keyword">when</span> (string-equal fr to)
+           (<span class="org-keyword">save-excursion</span>
+             (goto-char end)
+             (log-view-msg-next)
+             (<span class="org-function-name">setq</span> to (log-view-current-tag))))
+         (ediff-vc-internal to fr)))
+      (<span class="org-function-name">define-key</span> log-view-mode-map (kbd <span class="org-string">"C-="</span>) 'log-view-ediff) <span class="org-comment-delimiter">;;</span><span class="org-comment">&#20351;&#29992;ediff &#36827;&#34892;&#27604;&#36739;</span>
+     <span class="org-comment-delimiter">;; </span><span class="org-comment">(define-key log-view-mode-map "=" 'log-view-ediff) ;;&#20351;&#29992;ediff &#36827;&#34892;&#27604;&#36739;</span>
+     <span class="org-comment-delimiter">;; </span><span class="org-comment">(define-key log-view-mode-map (kbd "C-=") 'log-view-diff) ;;&#21407;&#26469;&#30340;`=' ,&#29616;&#22312;&#32465;&#23450;&#20026;`</span><span class="org-comment"><span class="org-constant">C-=</span></span><span class="org-comment">'</span>
+     )
+  )
+
+
+<span class="org-comment-delimiter">;;</span><span class="org-comment">&#22312;&#20351;&#29992;diff&#27604;&#36739;&#20004;&#20010;&#25991;&#20214;&#26102;&#65292;&#35843;&#29992;&#27492;&#20989;&#25968;&#65292;&#20250;</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">&#36716;&#25442;&#20026;&#20351;&#29992;ediff &#36827;&#34892;&#27604;&#36739;</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">&#36825;&#20010;&#22909;&#20687;&#20165;&#23545;&#26222;&#36890;&#25991;&#20214;&#30340;&#27604;&#36739;&#26377;&#29992;&#65292;&#26377;&#29256;&#26412;&#25511;&#21046;&#30340;&#25991;&#20214;&#26080;&#29992;&#65292;&#22240;&#20026;&#23427;&#20204;&#20855;&#26377;&#21516;&#26679;&#30340;&#25991;&#20214;&#21517;&#65292;</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">&#36825;&#20010;&#20989;&#25968;&#27809;&#27861;&#21306;&#20998;&#23427;&#20204;</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">diff2ediff function</span>
+
+(<span class="org-keyword">eval-after-load</span> 'diff-mode
+  '(<span class="org-keyword">progn</span>
+     (<span class="org-keyword">defun</span> <span class="org-function-name">diff-2-ediff</span> ()
+       <span class="org-doc">"invoke ediff on the context of 2 files in diff-mode"</span>
+       (interactive)
+       <span class="org-comment-delimiter">;; </span><span class="org-comment">A</span>
+       (<span class="org-keyword">destructuring-bind</span> (buf-A line-offset pos old new <span class="org-type">&amp;optional</span> switched)
+           (diff-find-source-location '<span class="org-constant">t</span> <span class="org-constant">nil</span>)
+         <span class="org-comment-delimiter">;; </span><span class="org-comment">B</span>
+         (<span class="org-keyword">destructuring-bind</span> (buf-B line-offset pos old new <span class="org-type">&amp;optional</span> switched)
+             (diff-find-source-location <span class="org-constant">nil</span> <span class="org-constant">nil</span>)
+           (ediff-buffers buf-A buf-B))))
+     (<span class="org-function-name">define-key</span> diff-mode-map (kbd <span class="org-string">"C-="</span>) 'diff-2-ediff)))
+
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">C-x v v     vc-next-action -- perform the next logical control operation on file &#20250;&#26681;&#25454;&#24403;&#21069;&#25991;&#20214;&#29366;&#24577;&#20915;&#23450;&#35813;&#20570;&#20160;&#20040;</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">1.&#22914;&#26524;&#24403;&#21069;&#30340;&#25991;&#20214;(work file)&#19981;&#22312;&#20219;&#20309;&#19968;&#20010;version control &#31649;&#29702;&#19979;,&#21017;&#35810;&#38382;&#20320;&#21019;&#24314;&#20160;&#20040;&#26679;&#30340;&#20179;&#24211;,&#22914;svn git&#31561;.</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">2.&#22914;&#26524;&#22312;&#31649;&#29702;&#19979;,&#21017;register the file. &#21363;git add filename.</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">3.&#22914;&#26524;work file &#19982;&#24211;&#20013;&#30340;&#25991;&#20214;&#19968;&#26679;,do nothing.</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">4.&#33509;&#19981;&#19968;&#26679;,&#21017;&#36827;&#34892;merge (checkout &#25110;update) &#25805;&#20316;. &#21363;&#26356;&#26032;(&#22909;&#20687;&#24182;&#19981;&#26356;&#26032;,&#26356;&#26032;&#38656;&#35201;`</span><span class="org-comment"><span class="org-constant">C-xvu</span></span><span class="org-comment">')</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">5.&#22914;&#26524;&#20320;&#23545;work file &#36827;&#34892;&#30340;&#20462;&#25913;&#21017;&#36827;&#34892;checkin(&#21363;commit)&#25805;&#20316;,&#23427;&#20250;&#25171;&#24320;&#19968;&#20010;*VC-LOG*buffer&#35753;&#20320;&#36755;&#20837;&#26085;&#24535;,&#20851;&#20110;*VC-LOG* &#35265;&#19979;&#38754;&#30340;&#27880;&#37322;</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">6.&#22914;&#26524;&#26377;&#20914;&#31361;&#21017;&#20808;merge &#26368;&#26032;&#30340;&#25991;&#20214;&#21040;work file,&#27492;&#26102;work file &#22788;&#20110;&#20914;&#31361;&#29366;&#24577;,&#38656;&#35201;&#35299;&#20915;&#20914;&#31361;,&#32487;&#32493;`</span><span class="org-comment"><span class="org-constant">C-xvv</span></span><span class="org-comment">'&#21518;&#35828;&#26126;&#20914;&#31361;&#24050;&#35299;&#20915;&#27492;&#21518;&#20877;`</span><span class="org-comment"><span class="org-constant">c-xvv</span></span><span class="org-comment">'&#21017;&#25552;&#20132;</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">`</span><span class="org-comment"><span class="org-constant">C-uC-xvv</span></span><span class="org-comment">' &#21487;&#20197;&#36873;&#25321;&#36827;&#20837;&#21738;&#20010;&#20998;&#25903;,reversion,</span>
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">C-x v i     vc-register -- add a new file to version control  ;;&#30456;&#24403;&#20110;git add .&#23558;&#25991;&#20214;&#21152;&#20837;&#21040;&#29256;&#26412;&#31649;&#29702;&#24403;&#20013;</span>
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">C-x v ~     vc-version-other-window -- look at other revisions</span>
+<span class="org-comment-delimiter">;;             </span><span class="org-comment">&#26597;&#30475;&#27492;&#25991;&#20214;&#20197;&#21069;&#30340;&#29256;&#26412;&#23545;&#24212;&#30340;&#20869;&#23481;,&#38656;&#35201;&#36755;&#20837;&#29256;&#26412;&#21495;,git &#25805;&#20316;&#19981;&#22826;&#26041;&#20415;,&#22240;&#20026;&#29256;&#26412;&#21495;&#19981;&#26159;&#36882;&#22686;&#30340;&#25968;&#23383;,&#32780;&#26159;SHA1&#20540;</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">C-x v =     vc-diff -- diff with other revisions</span>
+<span class="org-comment-delimiter">;;             </span><span class="org-comment">&#23545;&#26410;&#25552;&#20132;&#30340;&#25991;&#20214;&#19982;&#26368;&#26032;&#30340;&#29256;&#26412;&#23545;&#24212;&#30340;&#25991;&#20214;&#36827;&#34892;diff&#25805;&#20316;,C-u&#21487;&#20197;&#36873;&#25321;&#29992;&#21738;&#20004;&#20010;&#29256;&#26412;,&#19981;&#20165;&#21487;&#20197;&#21333;&#25991;&#20214;diff,</span>
+<span class="org-comment-delimiter">;;             </span><span class="org-comment">&#21487;&#20197;&#26159;fileset,&#22914;&#20309;&#23545;&#22810;&#25991;&#20214;&#36827;&#34892;&#25805;&#20316;&#30475;vc-dir mode `</span><span class="org-comment"><span class="org-constant">C-xvd</span></span><span class="org-comment">' &#31867;&#20284;&#20110;dired, ibuffer.</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">C-x v D     &#21516;`</span><span class="org-comment"><span class="org-constant">C-xv=</span></span><span class="org-comment">' ,&#19981;&#36807;&#26159;&#23545;&#25152;&#26377;&#30340;&#25991;&#20214;&#36827;&#34892;&#19982;&#26368;&#26032;&#30340;&#29256;&#26412;&#36827;&#34892;diff&#25805;&#20316;(`</span><span class="org-comment"><span class="org-constant">C-xv=</span></span><span class="org-comment">'&#38656;&#35201;&#36873;&#25321;&#25805;&#20316;&#21738;&#20123;&#25991;&#20214;),&#21363;&#26174;&#31034;&#26368;&#36817;&#36827;&#34892;&#20102;&#21738;&#20123;&#26410;&#25552;&#20132;&#30340;&#20462;&#25913;</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">C-x v u     vc-revert-buffer -- undo checkout  &#25918;&#24323;&#23545;&#25991;&#20214;&#30340;&#20462;&#25913;,&#21363;&#37325;&#26032;update &#19968;&#19979;.</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">&#26597;&#30475;&#26085;&#24535; `</span><span class="org-comment"><span class="org-constant">*vc-change-log*</span></span><span class="org-comment">' buffer</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">C-x v l     vc-print-log -- show log (not in ChangeLog format) &#26174;&#31034;&#26085;&#24535;,&#21482;&#26174;&#31034;&#24403;&#21069;&#25991;&#20214;&#26377;&#20851;&#30340;&#26085;&#24535;</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">&#36825;&#20010;&#25171;&#24320;&#30340;&#26085;&#24535;buffer &#21151;&#33021;&#32477;&#23545;&#19981;&#27490;&#26174;&#31034;&#26085;&#24535;&#36825;&#20040;&#31616;&#21333;&#65292;</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">&#20320;&#21487;&#20197;&#25353;&#19979;C-hb &#26597;&#30475;&#19968;&#19979;&#23427;&#30340;&#38190;&#32465;&#23450;&#65292;</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">&#27604;&#22914;= &#26159;&#36827;&#34892;diff&#27604;&#36739;&#65292;&#40664;&#35748;&#26159;&#26368;&#26032;&#30340;&#29256;&#26412;&#65292;&#19982;&#20320;&#20809;&#26631;&#19979;&#30340;&#29256;&#26412;&#36827;&#34892;&#27604;&#36739;</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">&#20063;&#21487;&#20197;&#29992;m ,mark &#20004;&#20010;&#29256;&#26412;&#21518;&#65292;&#28982;&#21518;= ,&#23558;&#20854;&#36827;&#34892;&#27604;&#36739;</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">C-x v L     `</span><span class="org-comment"><span class="org-constant">vc-print-root-log</span></span><span class="org-comment">' &#26174;&#31034;&#26085;&#24535;,&#26174;&#31034;&#25152;&#26377;&#26085;&#24535;</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">&#22312;*vc-change-log*buffer &#20013;&#21487;&#20197;&#36827;&#34892;&#20197;&#19979;&#25805;&#20316;</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">`p' &#36339;&#36716;&#21040;&#21069;&#19968;&#20010;&#26085;&#24535;&#26465;&#30446;</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">`n' &#36339;&#36716;&#21040;&#19979;&#19968;&#20010;&#26085;&#24535;&#26465;&#30446;</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">`P'</span>
+<span class="org-comment-delimiter">;;      </span><span class="org-comment">Move to the log of the previous file, when the logs of multiple</span>
+<span class="org-comment-delimiter">;;      </span><span class="org-comment">files are in the log buffer (*note VC Directory Mode::).</span>
+<span class="org-comment-delimiter">;;      </span><span class="org-comment">Otherwise, just move to the beginning of the log.  A numeric</span>
+<span class="org-comment-delimiter">;;      </span><span class="org-comment">prefix argument is a repeat count, so `C-u 10 P' would move</span>
+<span class="org-comment-delimiter">;;      </span><span class="org-comment">backward 10 files.</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">`N'</span>
+<span class="org-comment-delimiter">;;      </span><span class="org-comment">Move to the log of the next file, when the logs of multiple files</span>
+<span class="org-comment-delimiter">;;      </span><span class="org-comment">are in the log buffer (*note VC Directory Mode::).  It also takes a</span>
+<span class="org-comment-delimiter">;;      </span><span class="org-comment">numeric prefix argument as a repeat count.</span>
+
+<span class="org-comment-delimiter">;;</span><span class="org-comment">`a'  &#23545;&#24403;&#21069;&#23545;&#24212;&#30340;&#29256;&#26412;&#36827;&#34892;annotate &#25805;&#20316;,&#35814;&#35265;`</span><span class="org-comment"><span class="org-constant">C-xvg</span></span><span class="org-comment">' ,&#19979;&#38754;&#26377;&#27880;&#37322;</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">e   &#37325;&#26032;&#32534;&#36753;&#24403;&#21069;&#30340;&#26085;&#24535;&#20869;&#23481;,&#24182;&#19981;&#26159;&#25152;&#26377;&#30340;&#31649;&#29702;&#24037;&#20855;&#37117;&#25903;&#25345;</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">f   &#26597;&#30475;&#24341;&#29256;&#26412;&#30340;&#25991;&#20214;&#23545;&#24212;&#30340;&#20869;&#23481;,&#30456;&#24403;&#20110;`</span><span class="org-comment"><span class="org-constant">C-xv~</span></span><span class="org-comment">' &#28982;&#21518;&#36755;&#20837;&#29256;&#26412;&#21495;&#30340;&#25805;&#20316;,&#23545;git &#26469;&#35828;&#27604;`</span><span class="org-comment"><span class="org-constant">C-xv~</span></span><span class="org-comment">'&#26041;&#20415;</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">d   diff &#23545;&#27492;&#29256;&#26412;&#19982;&#21069;&#19968;&#20010;&#29256;&#26412;&#30340;&#24403;&#21069;&#25991;&#20214;diff&#25805;&#20316;</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">D   diff ,&#21516;d ,&#19981;&#36807;&#26159;&#25152;&#26377;&#30340;&#25991;&#20214;,</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">ChangeLog &#25991;&#20214;</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">`</span><span class="org-comment"><span class="org-constant">C-x4a</span></span><span class="org-comment">' &#22312;ChangeLog&#25991;&#20214;&#20013;&#28155;&#21152;&#19968;&#20010;&#26465;&#30446;,&#20851;&#20110;&#24403;&#21069;&#25991;&#20214;&#30340;&#20462;&#25913;&#30340;,&#24403;&#21069;&#26085;&#26399;&#30340;.</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">`</span><span class="org-comment"><span class="org-constant">C-xva</span></span><span class="org-comment">' &#26681;&#25454;version control &#26085;&#24535;&#33258;&#21160;&#29983;&#25104;ChangeLog,&#19981;&#36807;svn git &#30446;&#24405;&#36824;&#19981;&#25903;&#25345;.</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">&#22312;&#32534;&#36753;ChangeLog&#26102;</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">`</span><span class="org-comment"><span class="org-constant">C-j</span></span><span class="org-comment">' &#33258;&#21160;&#32553;&#36827;</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">C-x`  &#25171;&#24320;&#27492;&#26465;&#30446;&#23545;&#24212;&#30340;&#25991;&#20214;</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">`</span><span class="org-comment"><span class="org-constant">C-xvd</span></span><span class="org-comment">' vc-dir  &#22810;&#25991;&#20214;&#25805;&#20316;</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">C-x v d     vc-directory -- show all files which are not up to date</span>
+<span class="org-comment-delimiter">;;             </span><span class="org-comment">&#25805;&#20316;&#26377;&#28857;&#31867;&#20284;dired ,&#23427;&#26159;VC &#25903;&#25345;&#22810;&#25991;&#20214;&#25805;&#20316;&#30340;&#26041;&#24335;,&#22312;*vc-dir* buffer &#20013;&#20250;&#26174;&#31034;&#22788;&#20110;version control&#31649;&#29702;&#19979;&#30340;&#25991;&#20214;</span>
+<span class="org-comment-delimiter">;;             </span><span class="org-comment">&#19981;&#36807;&#40664;&#35748;up-to-date &#30340;&#25991;&#20214;&#21450;&#30456;&#24212;&#30340;&#23376;&#30446;&#24405;&#20250;&#34987;&#38544;&#34255;,&#20363;&#22806;&#26159;&#36825;&#20010;up-to-date &#30340;&#25991;&#20214;&#26159;&#21018;&#21018;&#34987;&#20320;&#25552;&#20132;&#23548;&#33268;&#30340;,&#21017;&#19981;&#38544;&#34255;.</span>
+<span class="org-comment-delimiter">;;            </span><span class="org-comment">&#20854;&#26684;&#24335;&#22914;&#19979;</span>
+<span class="org-comment-delimiter">;;           </span><span class="org-comment">./</span>
+<span class="org-comment-delimiter">;;           </span><span class="org-comment">modified           file1.c</span>
+<span class="org-comment-delimiter">;;           </span><span class="org-comment">needs-update       file2.c</span>
+<span class="org-comment-delimiter">;;           </span><span class="org-comment">needs-merge        file3.c</span>
+<span class="org-comment-delimiter">;;           </span><span class="org-comment">unregistered        g.c</span>
+
+<span class="org-comment-delimiter">;;           </span><span class="org-comment">&#20854;&#20013;&#24456;&#22810;&#21629;&#20196;&#31867;&#20284;&#20110;dired</span>
+<span class="org-comment-delimiter">;;           </span><span class="org-comment">n p TAB SPC &#19978;&#19979;&#31661;&#22836;&#36827;&#34892;&#23548;&#33322;</span>
+<span class="org-comment-delimiter">;;           </span><span class="org-comment">`</span><span class="org-comment"><span class="org-constant">RET</span></span><span class="org-comment">' &#21644;f &#25171;&#24320;&#30456;&#24212;&#25991;&#20214; ,o &#22312;&#21478;&#22806;&#19968;&#20010;&#31383;&#21475;&#25171;&#24320;</span>
+<span class="org-comment-delimiter">;;           </span><span class="org-comment">q &#36864;&#20986;</span>
+<span class="org-comment-delimiter">;;           </span><span class="org-comment">x &#38544;&#34255;&#25152;&#26377;up-to-date&#30340;&#25991;&#20214;</span>
+<span class="org-comment-delimiter">;;           </span><span class="org-comment">m &#23545;&#25991;&#20214;&#36827;&#34892;&#26631;&#35760;,&#28982;&#21518;&#21487;&#20197;&#23545;&#26631;&#35760;&#30340;&#25991;&#20214;&#36827;&#34892;&#25805;&#20316;,&#22914;commit&#25552;&#20132;</span>
+<span class="org-comment-delimiter">;;          </span><span class="org-comment">`M' &#26631;&#35760;&#25152;&#26377;&#19982;&#24403;&#21069;&#25991;&#20214;&#29366;&#24577;&#30456;&#21516;&#30340;&#25991;&#20214;</span>
+<span class="org-comment-delimiter">;;           </span><span class="org-comment">u &#19982;U&#21017;&#26159;m M&#30456;&#21453;&#30340;&#25805;&#20316;</span>
+<span class="org-comment-delimiter">;;           </span><span class="org-comment">&#23545;&#26631;&#35760;&#30340;&#25991;&#20214;&#25110;&#32773;&#24403;&#21069;&#25991;&#20214;&#30340;&#20869;&#23481;&#36827;&#34892;&#25628;&#32034;&#26367;&#25442;</span>
+<span class="org-comment-delimiter">;;           </span><span class="org-comment">`S' searches the marked files.</span>
+<span class="org-comment-delimiter">;;           </span><span class="org-comment">`Q' does a query replace on the marked files.</span>
+<span class="org-comment-delimiter">;;           </span><span class="org-comment">`M-s a C-s' does an incremental search on the marked files.</span>
+<span class="org-comment-delimiter">;;           </span><span class="org-comment">`M-s a C-M-s' does an incremental search on the marked files.</span>
+<span class="org-comment-delimiter">;;</span>
+<span class="org-comment-delimiter">;;           </span><span class="org-comment">&#21478;&#22806;&#20197;`</span><span class="org-comment"><span class="org-constant">C-xv</span></span><span class="org-comment">'&#20026;&#21069;&#32512;&#30340;&#21629;&#20196;&#22312;vc-dir buffer&#20013;&#37117;&#26377;&#23545;&#24212;&#30340;&#30701;&#30340;&#38190;&#32465;&#23450;</span>
+<span class="org-comment-delimiter">;;           </span><span class="org-comment">&#22914;l &#23545;&#24212; `</span><span class="org-comment"><span class="org-constant">C-xvl</span></span><span class="org-comment">' &#26597;&#30475;&#26085;&#24535;</span>
+<span class="org-comment-delimiter">;;            </span><span class="org-comment">`=', `+'`l', `i',`v'</span>
+<span class="org-comment-delimiter">;;           </span><span class="org-comment">&#23545;&#22810;&#25991;&#20214;&#36827;&#34892;&#25805;&#20316;&#26102;,&#25991;&#20214;&#24517;&#39035;&#22788;&#20110;&#30456;&#21516;&#30340;&#29366;&#24577;,&#25110;&#32773;&#20860;&#23481;&#24577;</span>
+<span class="org-comment-delimiter">;;            </span><span class="org-comment">(added, modified and removed states &#20026;&#20860;&#23481;&#24577;</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">`</span><span class="org-comment"><span class="org-constant">C-xvg</span></span><span class="org-comment">' vc-annotate &#26597;&#30475;&#26576;&#20010;&#29305;&#23450;&#25991;&#20214;&#33258;&#22987;&#33267;&#32456;&#30340;&#21464;&#21270;</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">&#20301;&#20110;info &#30340;Emacs&gt;&gt;Maintaining&gt;&gt;Version Control&gt;&gt;Old Revisions</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">C-x v g     vc-annotate -- show when each line in a tracked file was added and by whom</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">`</span><span class="org-comment"><span class="org-constant">C-uC-xvg</span></span><span class="org-comment">' &#21017;&#19981;&#26159;&#23545;&#40664;&#35748;&#30340;&#24403;&#21069;buffer&#36827;&#34892;&#25805;&#20316;,&#35753;&#20320;&#36873;&#25321;?</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">&#26576;&#19968;&#20010;&#29305;&#23450;&#29256;&#26412;&#25991;&#20214;&#30340;&#20869;&#23481;&#22312;&#19981;&#21516;&#30340;&#29256;&#26412;&#37117;&#26377;&#22686;&#20943;,&#32780;vc-annotate &#29992;&#19981;&#21516;&#30340;&#39068;&#33394;&#34920;&#31034;&#25991;&#20214;&#20013;&#19981;&#21516;</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">&#20195;&#30721;&#30340;&#21382;&#21490;, &#32418;&#33394;&#30340;&#37096;&#20998;&#26159;&#26368;&#36817;&#25165;&#28155;&#21152;&#30340;,&#34013;&#33394;&#30340;&#21017;&#26159;&#26368;&#21021;&#23601;&#21152;&#20837;&#30340;&#20869;&#23481;,&#20013;&#38388;&#36807;&#31243;&#28155;&#21152;&#30340;&#20195;&#30721;&#20063;&#20250;&#29992;&#19981;&#21516;&#30340;&#39068;&#33394;&#36827;&#34892;&#26631;&#35760;</span>
+
+<span class="org-comment-delimiter">;;</span><span class="org-comment">*Annotate* buffer &#30340;&#26684;&#24335;&#26159;:&#21491;&#36793;&#26159;&#20195;&#30721;,&#24038;&#36793;&#21017;&#26159;&#21491;&#36793;&#27599;&#19968;&#34892;&#20195;&#30721;&#25152;&#23545;&#24212;&#30340;&#29256;&#26412;,&#20063;&#23601;&#26159;&#20195;&#34920;&#20102;&#36825;&#19968;&#34892;&#20195;&#30721;&#26159;&#22312;&#21738;&#20010;&#29256;&#26412;</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">&#30340;&#26102;&#20505;&#28155;&#21152;&#36827;&#26469;&#30340;.</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">&#36827;&#20837;Annotate mode &#21518;&#36824;&#21487;&#20197;&#36827;&#34892;&#20854;&#20182;&#25805;&#20316;</span>
+
+<span class="org-comment-delimiter">;;</span><span class="org-comment">p  &#23545;&#27492;&#25991;&#20214;&#30340;&#19978;&#19968;&#20010;&#29256;&#26412;&#36827;&#34892;vc-annotate&#25805;&#20316;</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">n  ........&#19979;........................</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">j &#23545;`</span><span class="org-comment"><span class="org-constant">&#24403;&#21069;&#34892;</span></span><span class="org-comment">' &#25152;&#23545;&#24212;&#30340;&#29256;&#26412;&#30340;&#24403;&#21069;&#25991;&#20214;&#36827;&#34892;vc-annotate&#25805;&#20316;,&#27604;&#22914;&#24403;&#21069;&#34892;&#30340;&#20195;&#30721;&#26159;&#22312;&#29256;&#26412;&#21495;&#20026;3&#30340;&#26102;&#20505;&#28155;&#21152;&#36827;&#26469;&#30340;,</span>
+<span class="org-comment-delimiter">;;  </span><span class="org-comment">&#21017;&#27492;&#25805;&#20316;&#20250;&#23545;&#27492;&#25991;&#20214;&#29256;&#26412;&#20026;3&#26102;&#30340;&#20869;&#23481;&#36827;&#34892;vc-annotate&#25805;&#20316;</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">w  &#36890;&#36807;p n j &#25805;&#20316;&#21518;&#26377;&#21487;&#33021;&#20320;&#24536;&#35760;&#20102;&#24403;&#21069;buffer&#20013;&#30340;&#20869;&#23481;&#21040;&#24213;&#26159;&#21738;&#20010;&#29256;&#26412;&#30340;,&#21487;&#20197;&#29992;w &#22238;&#21040;&#26368;&#21021;&#36816;&#34892;`</span><span class="org-comment"><span class="org-constant">C-xvg</span></span><span class="org-comment">' &#26102;&#30340;&#29256;&#26412;</span>
+<span class="org-comment-delimiter">;;   </span><span class="org-comment">w &#34920;&#31034;working revision &#20854;&#23454;&#23601;&#26159;&#26368;&#26032;&#30340;&#19968;&#20010;&#29256;&#26412;</span>
+
+<span class="org-comment-delimiter">;;</span><span class="org-comment">a `</span><span class="org-comment"><span class="org-constant">&#24403;&#21069;&#34892;</span></span><span class="org-comment">' &#21017;&#30456;&#24403;&#20110;&#20808;&#36827;&#34892;j&#25805;&#20316;,&#28982;&#21518;&#36827;&#34892;p&#25805;&#20316;,&#20854;&#20316;&#29992;&#26159;&#26597;&#30475;&#36824;&#27809;&#26377;&#21152;&#20837;&#24403;&#21069;&#34892;&#30340;&#20869;&#23481;&#26102;&#30340;&#21069;&#19968;&#20010;&#29256;&#26412;&#23545;&#24212;&#30340;&#25991;&#20214;&#26159;&#20160;&#20040;&#26679;&#23376;&#30340;</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">f `</span><span class="org-comment"><span class="org-constant">&#24403;&#21069;&#34892;</span></span><span class="org-comment">' file&#36319;j&#31867;&#20284;,&#19981;&#36807;&#19981;&#36827;&#34892;vc-annotate&#25805;&#20316;,&#20165;&#26174;&#31034;&#24403;&#21069;&#34892;&#23545;&#24212;&#29256;&#26412;&#30340;&#25991;&#20214;&#20869;&#23481;</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">d `</span><span class="org-comment"><span class="org-constant">&#24403;&#21069;&#34892;</span></span><span class="org-comment">' diff&#25805;&#20316;,&#24403;&#21069;&#34892;&#23545;&#24212;&#19968;&#20010;&#29256;&#26412;,&#29992;&#27492;&#29256;&#26412;&#19982;&#23427;&#30340;&#21069;&#19968;&#20010;&#29256;&#26412;&#36827;&#34892;diff&#25805;&#20316;,&#21363;&#26597;&#30475;&#21040;&#24213;&#36825;&#19968;&#27425;&#30340;&#29256;&#26412;&#21464;&#21270;&#26377;&#21738;&#20123;&#21464;&#21270;</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">D `</span><span class="org-comment"><span class="org-constant">&#24403;&#21069;&#34892;</span></span><span class="org-comment">' diff&#25805;&#20316;,&#19982;d&#31867;&#20284;,&#19981;&#36807;&#27492;&#27425;&#26174;&#31034;&#30340;&#19981;&#20165;&#26159;&#24403;&#21069;&#25991;&#20214;&#30340;diff,&#32780;&#26159;&#27492;&#27425;&#25552;&#20132;&#25152;&#26377;&#25991;&#20214;&#30340;&#21464;&#21270;.</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">l `</span><span class="org-comment"><span class="org-constant">&#24403;&#21069;&#34892;</span></span><span class="org-comment">' log &#26174;&#31034;&#26085;&#24535; ,&#26174;&#31034;&#24403;&#21069;&#34892;&#25152;&#23545;&#24212;&#30340;&#29256;&#26412; &#30456;&#24212;&#30340;&#26085;&#24535;</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">v &#40664;&#35748;&#21491;&#36793;&#20195;&#30721;&#24038;&#36793;&#29256;&#26412;&#21495;,v &#21017;toggle &#26159;&#21542;&#26174;&#31034;&#29256;&#26412;&#21495;,&#29992;&#22788;&#19981;&#22823;.</span>
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">(C-x C-q    by default, C-x C-q is no longer bound, so it's better to use the above binding)</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">C-x v c     vc-cancel-version -- delete the latest revision (often it makes more sense to look at an old revision</span>
+<span class="org-comment-delimiter">;;             </span><span class="org-comment">and check that in again!) &#22238;&#28378;&#25805;&#20316;</span>
+<span class="org-comment-delimiter">;;             </span><span class="org-comment">git svn &#29616;&#22312;&#36824;&#19981;&#25903;&#25345;,</span>
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">C-x v s     vc-create-snapshot -- tag all the files with a symbolic name ,</span>
+<span class="org-comment-delimiter">;;             </span><span class="org-comment">&#21019;&#24314;&#26631;&#31614;tag ,git &#30456;&#24403;&#20110;git tag newTAGname</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">C-x v r     vc-retrieve-snapshot -- undo checkouts and return to a snapshot with a symbolic name</span>
+<span class="org-comment-delimiter">;;             </span><span class="org-comment">git &#30456;&#24403;&#20110;git checkout newTAGname ,&#20250;&#22788;&#20110;&#19968;&#20010;&#26080;&#21517;&#30340;branch &#27492;&#26102;work dir&#20013;&#30340;&#25991;&#20214;&#37117;&#26159;tagName&#26102;&#30340;&#29256;&#26412;</span>
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">C-x v a     vc-update-change-log -- update ChangeLog</span>
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">C-x v m     vc-merge</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">C-x v h     vc-insert-headers</span>
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">VC-LOG</span>
+
+<span class="org-comment-delimiter">;;</span><span class="org-comment">&#20851;&#20110;*VC-LOG*  &#36827;&#20837;&#36825;&#20010;buffer &#21518;</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">`</span><span class="org-comment"><span class="org-constant">C-cC-c</span></span><span class="org-comment">' &#23436;&#25104;&#26085;&#24535;&#30340;&#22635;&#20889;,commit.</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">`</span><span class="org-comment"><span class="org-constant">C-cC-f</span></span><span class="org-comment">' &#26174;&#31034;&#36825;&#27425;&#25552;&#20132;&#26377;&#21738;&#20123;&#25991;&#20214;&#20316;&#20102;&#20462;&#25913;,&#19981;&#36807;&#22914;&#26524;&#26159;&#22312;&#30452;&#25509;&#32534;&#36753;&#26576;&#20010;work file&#26102;&#25191;&#34892;`</span><span class="org-comment"><span class="org-constant">C-xvv</span></span><span class="org-comment">' &#21017;&#26174;&#31034;&#30340;&#20165;&#26159;&#24403;&#21069;work file</span>
+<span class="org-comment-delimiter">;;          </span><span class="org-comment">&#29992;&#22788;&#19981;&#22823;,&#22914;&#26524;&#26159;&#22312;`</span><span class="org-comment"><span class="org-constant">C-xvd</span></span><span class="org-comment">'&#36827;&#20837;vc-dir&#27169;&#24335;&#36827;&#34892;&#22810;&#25991;&#20214;&#25805;&#20316;&#21518;,&#25191;&#34892;`</span><span class="org-comment"><span class="org-constant">C-xvv</span></span><span class="org-comment">'&#36827;&#20837;vc-log&#21017;`</span><span class="org-comment"><span class="org-constant">C-cC-f</span></span><span class="org-comment">'&#26174;&#31034;&#30340;&#25165;&#26159;&#25805;&#20316;&#30340;&#22810;&#25991;&#20214;</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">`</span><span class="org-comment"><span class="org-constant">C-cC-d</span></span><span class="org-comment">' &#26174;&#31034;diff.</span>
+<span class="org-comment-delimiter">;;  </span><span class="org-comment">&#22312;minibuffer&#20013;&#25105;&#20204;&#21487;&#20197;&#29992;`</span><span class="org-comment"><span class="org-constant">M-p</span></span><span class="org-comment">'&#21069;&#19968;&#20010; `</span><span class="org-comment"><span class="org-constant">M-n</span></span><span class="org-comment">'&#19979;&#19968;&#20010; `</span><span class="org-comment"><span class="org-constant">M-r</span></span><span class="org-comment">'&#21521;&#21518;&#25628;&#32034; `</span><span class="org-comment"><span class="org-constant">M-s</span></span><span class="org-comment">'&#21521;&#21069;&#25628;&#32034; &#31561;&#26597;&#30475;&#20197;&#24448;&#30340;&#21382;&#21490;,</span>
+<span class="org-comment-delimiter">;;  </span><span class="org-comment">&#21516;&#26679;&#22312;*VC-LOG*&#20013;&#20063;&#21487;&#20197;&#26597;&#30475;&#20197;&#24448;&#30340;&#25552;&#20132;&#21382;&#21490;.&#25805;&#20316;&#30456;&#21516;.</span>
+
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">merge &#25991;&#20214;&#30340;&#21512;&#24182; ,&#24863;&#35273;&#26377;&#20102;ediff&#65292;&#36825;&#20010;&#24037;&#20855;&#22522;&#26412;&#29992;&#19981;&#21040;</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">`M-x emerge-files'  ;;&#27604;&#36739;&#20004;&#20010;&#25991;&#20214;,</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">`M-x emerge-files-with-ancestor';;&#27604;&#36739;&#20004;&#20010;&#25991;&#20214;,&#23427;&#20204;&#37117;&#26159;&#20174;&#26576;&#19968;&#20010;&#31062;&#20808;&#25991;&#20214;&#21464;&#21270;&#26469;&#30340;.</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">`M-x emerge-buffers'</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">`M-x emerge-buffers-with-ancestor'</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">&#36816;&#34892;&#20197;&#19978;&#21629;&#20196;&#20250;&#25171;&#24320;&#19977;&#20010;buffer:A,B and *merge*, merge&#21518;&#21487;&#20197;`</span><span class="org-comment"><span class="org-constant">C-xC-w</span></span><span class="org-comment">'&#20445;&#23384;merge&#21518;&#30340;&#25991;&#20214;</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">*merge* buffer&#20013;&#40664;&#35748;&#30340;&#20869;&#23481;&#26159;A&#30340;,&#21487;&#20197;&#29992;n ,p &#20381;&#27425;&#21015;&#20986;&#19982;B&#25991;&#20214;&#30340;&#19981;&#21516;&#20043;&#22788;,&#19981;&#21516;&#20043;&#22788;&#20250;&#29992;</span>
+<span class="org-comment-delimiter">;;     </span><span class="org-comment">vvvvvvvvvvvvvvvvvvvv</span>
+<span class="org-comment-delimiter">;;     </span><span class="org-comment">TEXT THAT DIFFERS</span>
+<span class="org-comment-delimiter">;;     </span><span class="org-comment">^^^^^^^^^^^^^^^^^^^^</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">a,b            &#23383;&#27597;v&#25110;^&#22841;&#22312;&#20013;&#38388;,&#27492;&#26102;&#21487;&#20197;&#29992;a &#25110;&#32773;b&#25353;&#38190; ,&#20915;&#23450;merge&#21518;&#30340;&#25991;&#20214;&#26159;&#36873;&#29992;A&#20013;&#30340;&#20869;&#23481;&#36824;&#26159;B&#20013;&#30340;&#20869;&#23481;</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">n,p         &#36873;&#20013;&#20043;&#21518;v^ &#23383;&#26679;&#23601;&#20250;&#28040;&#22833;,&#28982;&#21518;&#21487;&#20197;&#32487;&#32493;&#29992;n ,p&#26174;&#31034;&#19979;&#19968;&#22788;&#25110;&#19978;&#19968;&#22788;&#30340;&#19981;&#21516;(diff),&#30452;&#33267;&#26174;&#31034;&#23436;&#25152;&#26377;&#30340;&#19981;&#21516;</span>
+<span class="org-comment-delimiter">;;            </span><span class="org-comment">merge &#23601;&#31639;&#23436;&#27605;`</span><span class="org-comment"><span class="org-constant">C-xC-w</span></span><span class="org-comment">'&#20445;&#23384;&#21518;&#21363;&#21487;.`C-]'&#21017;&#25918;&#24323;&#21512;&#24182;.</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">`</span><span class="org-comment"><span class="org-constant">C-uNj</span></span><span class="org-comment">'     &#38500;&#20102;n p&#21629;&#20196;&#22806;`</span><span class="org-comment"><span class="org-constant">C-uNj</span></span><span class="org-comment">' &#21487;&#20197;&#36339;&#36716;&#21040;&#31532;N&#20010;diff&#22788;,N&#26159;&#25968;&#23383;</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">'.'         &#21017;&#26159;&#26174;&#31034;&#20809;&#26631;&#24403;&#21069;&#20301;&#32622;&#30340;diff(&#29992;vvv^^^&#23383;&#26679;&#25324;&#36215;&#26469;,)&#27809;&#26377;&#19981;&#21516;&#20043;&#22788;&#21017;&#19981;&#26174;&#31034;`</span><span class="org-comment"><span class="org-constant">C-u.</span></span><span class="org-comment">'&#21516;"."&#19981;&#36807;</span>
+<span class="org-comment-delimiter">;;            </span><span class="org-comment">&#24403;&#21069;&#20301;&#32622;&#22914;&#26080;diff&#21017;&#26174;&#31034;&#31532;&#36817;&#22788;&#30340;diff.</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">q          &#36864;&#20986;</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">`C-]'       &#36864;&#20986;abort</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">e          &#36807;&#20837;"Edit mode" ,&#27492;&#26102;&#21487;&#20197;&#25163;&#21160;&#36755;&#20837;&#20869;&#23481;,&#36827;&#20837;"Edit mode"&#21518;&#19978;&#38754;&#30340;&#21629;&#20196;&#20381;&#28982;&#26377;&#25928;&#19981;&#36807;&#35201;&#21152;`</span><span class="org-comment"><span class="org-constant">C-cC-c</span></span><span class="org-comment">'&#21069;&#32512;</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">`</span><span class="org-comment"><span class="org-constant">C-cC-cf</span></span><span class="org-comment">'   &#22238;&#21040;"Fast mode" &#19982;e&#21629;&#20196;&#30456;&#21453;,</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">l          recenter &#21516;`</span><span class="org-comment"><span class="org-constant">C-l</span></span><span class="org-comment">' &#37325;&#26032;&#35843;&#25972;&#19977;&#20010;buffer&#20013;&#30340;&#20869;&#23481;,</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">`</span><span class="org-comment"><span class="org-constant">da</span></span><span class="org-comment">'       &#36873;&#25321;A&#25991;&#20214;&#30340;&#20869;&#23481;&#20316;&#23481;&#40664;&#35748;"*merge*"buffer&#20013;&#30340;&#20869;&#23481;</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">`</span><span class="org-comment"><span class="org-constant">db</span></span><span class="org-comment">'       &#21516;`</span><span class="org-comment"><span class="org-constant">da</span></span><span class="org-comment">'</span>
+<span class="org-comment-delimiter">;;  </span><span class="org-comment">`</span><span class="org-comment"><span class="org-constant">ca</span></span><span class="org-comment">' `</span><span class="org-comment"><span class="org-constant">cb</span></span><span class="org-comment">' copy A&#25110;B&#20013;&#30340;&#20869;&#23481;&#26159;kill ring</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">`</span><span class="org-comment"><span class="org-constant">ia</span></span><span class="org-comment">' `</span><span class="org-comment"><span class="org-constant">ib</span></span><span class="org-comment">'   &#25554;&#20837;A(B)&#20013;&#30340;&#24403;&#21069;diff&#21040;&#20809;&#26631;&#22788;</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">m           &#36873;&#20013;diff&#20013;&#30340;&#20869;&#23481;,put the 'marker' and 'point' around diff.</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">&#22235;&#20010;&#28378;&#21160;&#31383;&#21475;&#30340;&#21629;&#20196;</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">`^'         Scroll all three windows down (like `</span><span class="org-comment"><span class="org-constant">M-v</span></span><span class="org-comment">').</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">`v'         Scroll all three windows up (like `</span><span class="org-comment"><span class="org-constant">C-v</span></span><span class="org-comment">').</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">`&lt;'         Scroll all three windows left (like `C-x &lt;').</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">`&gt;'         Scroll all three windows right (like `C-x &gt;').</span>
+<span class="org-comment-delimiter">;;</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">`|'         Reset horizontal scroll on all three windows.</span>
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">`</span><span class="org-comment"><span class="org-constant">x1</span></span><span class="org-comment">'       &#25910;&#32553;"merge" &#31383;&#21475;&#21482;&#26174;&#31034;&#19968;&#34892;,(`</span><span class="org-comment"><span class="org-constant">C-ul</span></span><span class="org-comment">'&#24674;&#22797;)</span>
+
+<span class="org-comment-delimiter">;;</span><span class="org-comment">`</span><span class="org-comment"><span class="org-constant">xc</span></span><span class="org-comment">'        combine&#21512;&#24182;&#20004;&#22788;&#30340;diff&#20869;&#23481;</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">`</span><span class="org-comment"><span class="org-constant">xf</span></span><span class="org-comment">'       &#26174;&#31034;&#27491;&#23384;&#27604;&#36739;&#30340;&#20004;&#20010;&#25991;&#20214;&#30340;&#21517;&#23383;,(`</span><span class="org-comment"><span class="org-constant">C-ul</span></span><span class="org-comment">'&#24674;&#22797;)</span>
+
+<span class="org-comment-delimiter">;;</span><span class="org-comment">`</span><span class="org-comment"><span class="org-constant">xj</span></span><span class="org-comment">'       &#21512;&#24182;&#24403;&#21069;diff&#19982;&#19979;&#19968;&#20010;diff ,`</span><span class="org-comment"><span class="org-constant">C-uxj</span></span><span class="org-comment">'&#21017;&#26159;&#19982;&#21069;&#19968;&#20010;&#36827;&#34892;&#21512;&#24182;</span>
+
+<span class="org-comment-delimiter">;;</span><span class="org-comment">`</span><span class="org-comment"><span class="org-constant">xs</span></span><span class="org-comment">'         &#20998;&#35299;&#24403;&#21069;diff&#20026;&#20004;&#20010;diff.</span>
+
+<span class="org-comment-delimiter">;;</span><span class="org-comment">`</span><span class="org-comment"><span class="org-constant">xt</span></span><span class="org-comment">'        Trim identical lines off the top and bottom of the difference.</span>
+<span class="org-comment-delimiter">;;            </span><span class="org-comment">Such lines occur when the A and B versions are identical but</span>
+<span class="org-comment-delimiter">;;            </span><span class="org-comment">differ from the ancestor version.</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">diff</span>
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">&#20851;&#20110;diff ,patch &#34917;&#19969;&#30340;&#20351;&#29992;</span>
+
+<span class="org-comment-delimiter">;;</span><span class="org-comment">&#26377;&#19968;&#20010;&#26087;&#30340;&#25991;&#20214;a , &#20320;&#32534;&#36753;&#20102;a&#23558;&#36825;&#20010;&#32534;&#36753;&#21518;&#30340;&#25991;&#20214;&#21629;&#20196;&#20026;b</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">&#29616;&#22312;&#24819;&#29983;&#25104;&#19968;&#20010;&#34917;&#19969;&#25991;&#20214;,&#23558;&#36825;&#20010;&#34917;&#19969;&#25991;&#20214;&#24212;&#29992;&#21040;a &#19978;,&#23601;&#20250;&#21464;&#25104;b</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">&#29983;&#25104;&#36825;&#20010;&#34917;&#19969;&#25991;&#20214;&#30340;&#21629;&#20196;&#26159;diff</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">diff -ubB a b&gt;a.patch  (-u&#25351;&#23450;&#29983;&#25104;&#30340;&#26684;&#24335;,-b&#24573;&#30053;&#31354;&#26684;-B&#24573;&#30053;&#31354;&#26684;&#24341;&#36215;&#30340;&#24046;&#24322;)</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">&#36825;&#26679;&#22312;&#24403;&#21069;&#30446;&#24405;&#19979;&#20250;&#29983;&#25104;a.patch&#30340;&#25991;&#20214;,</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">&#36825;&#26679;&#20320;&#21487;&#20197;&#23558;&#20320;&#30340;&#34917;&#19969;&#25991;&#20214;&#21457;&#24067;&#21040;&#32593;&#19978;,&#21035;&#20154;&#25343;&#21040;&#20320;&#30340;&#34917;&#19969;&#21450;a&#25991;&#20214; &#25918;&#22312;&#21516;&#19968;&#20010;&#30446;&#24405;</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">patch -p0 &lt;a.patch a  &#36825;&#26679;&#25171;&#19978;&#34917;&#19969;&#21518;,a&#20013;&#30340;&#20869;&#23481;&#23601;&#19982;b&#20013;&#30340;&#20869;&#23481;&#26080;&#24322;</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">&#21487;&#26159;&#20320;&#21518;&#24724;&#20102;,&#19981;&#36215;&#25171;&#36825;&#20010;&#34917;&#19969;,&#24819;&#23601;a&#24674;&#22797;&#21407;&#26679;</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">patch -R &lt;a.patch a  &#36825;&#26679;a&#25991;&#20214;&#23601;&#21464;&#25104;&#20102;&#26368;&#21021;&#30340;&#27169;&#26679;&#20102;.</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">diff mode &#20687;Compilation mode &#19968;&#26679;,&#21487;&#20197;&#29992;C-x` `</span><span class="org-comment"><span class="org-constant">C-cC-c</span></span><span class="org-comment">' &#22312;&#21508;&#20010;&#26465;&#30446;&#38388;&#36339;&#36716;</span>
+
+(<span class="org-function-name">setq</span> diff-switches <span class="org-string">"-ubB"</span>)
+<span class="org-comment-delimiter">;;</span><span class="org-comment">&#27880;&#24847;linux&#19979;&#30340;diff a b ,&#20854;&#20013;a &#26159;&#26087;&#25991;&#20214;,b&#26159;&#26032;&#25991;&#20214;</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">&#22312;Emacs&#20013;`</span><span class="org-comment"><span class="org-constant">M-x</span></span><span class="org-comment">' diff  &#20808;&#23601;&#20320;&#36873;&#25321;&#30340;&#26159;b&#28982;&#21518;&#25165;&#26159;a</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">&#19968;&#20010;hunk &#23601;&#26159;&#19968;&#22788;: @@ -130,7 +130,7 @@</span>
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">`</span><span class="org-comment"><span class="org-constant">M-n</span></span><span class="org-comment">' &#36339;&#21040;&#19979;&#19968;&#20010;&#24046;&#24322;&#22788;(hunk)</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">`</span><span class="org-comment"><span class="org-constant">M-p</span></span><span class="org-comment">' &#36339;&#21040;&#19978;&#19968;&#20010;&#24046;&#24322;&#22788;(hunk)</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">`M-}' &#36339;&#21040;&#19979;&#19968;&#20010;&#25991;&#20214; (&#22312;&#22810;&#25991;&#20214;&#34917;&#19969;&#20013;)</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">`M-{'</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">`</span><span class="org-comment"><span class="org-constant">M-k</span></span><span class="org-comment">' &#21024;&#38500;&#36825;&#20010;(hunk)</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">`</span><span class="org-comment"><span class="org-constant">M-K</span></span><span class="org-comment">' &#21024;&#38500;&#20851;&#20110;&#36825;&#20010;&#25991;&#20214;&#30340;(hunk)</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">`</span><span class="org-comment"><span class="org-constant">C-cC-a</span></span><span class="org-comment">' &#23558;&#24403;&#21069;&#30340;hunk&#25171;&#21040;&#26087;&#25991;&#20214;&#20013; `</span><span class="org-comment"><span class="org-constant">diff-apply-hunk</span></span><span class="org-comment">'</span>
+<span class="org-comment-delimiter">;;          </span><span class="org-comment">`</span><span class="org-comment"><span class="org-constant">C-u</span></span><span class="org-comment">' &#21017;&#36827;&#34892;&#30456;&#21453;&#30340;&#25805;&#20316;,&#27880;&#24847;&#22914;&#26524;&#36825;&#20010;hunk&#24050;&#32463;&#25171;&#36807;</span>
+<span class="org-comment-delimiter">;;          </span><span class="org-comment">&#20877;&#36816;&#34892;`</span><span class="org-comment"><span class="org-constant">C-cC-a</span></span><span class="org-comment">'&#20250;&#38382;&#20320;&#26159;&#21542;reverse&#21453;&#21521;&#25805;&#20316;</span>
+
+<span class="org-comment-delimiter">;;</span><span class="org-comment">`</span><span class="org-comment"><span class="org-constant">C-cC-b</span></span><span class="org-comment">' &#39640;&#20142;&#26174;&#31034;&#21040;&#26102;&#24213;&#26377;&#21738;&#20123;&#21024;&#20943;`</span><span class="org-comment"><span class="org-constant">diff-refine-hunk</span></span><span class="org-comment">'</span>
+
+<span class="org-comment-delimiter">;;</span><span class="org-comment">`</span><span class="org-comment"><span class="org-constant">C-cC-c</span></span><span class="org-comment">' &#26597;&#30475;&#26087;&#30340;&#25991;&#20214;`</span><span class="org-comment"><span class="org-constant">diff-goto-source</span></span><span class="org-comment">'</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">`</span><span class="org-comment"><span class="org-constant">C-cC-e</span></span><span class="org-comment">' &#36215;&#19968;&#20010;Ediff&#20250;&#35805;`</span><span class="org-comment"><span class="org-constant">diff-ediff-patch</span></span><span class="org-comment">'</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">`</span><span class="org-comment"><span class="org-constant">C-cC-n</span></span><span class="org-comment">' `</span><span class="org-comment"><span class="org-constant">diff-restrict-view</span></span><span class="org-comment">' &#23601;&#26159;Narrowing ,&#21482;&#26174;&#31034;&#24403;&#21069;hunk&#30340;&#20869;&#23481;`</span><span class="org-comment"><span class="org-constant">C-xnw</span></span><span class="org-comment">' &#30456;&#21453;&#25805;&#20316;widen&#20043;</span>
+<span class="org-comment-delimiter">;;         </span><span class="org-comment">`</span><span class="org-comment"><span class="org-constant">C-u</span></span><span class="org-comment">',&#21017;&#23545;&#25991;&#20214;&#32780;&#38750;hunk</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">`</span><span class="org-comment"><span class="org-constant">C-cC-r</span></span><span class="org-comment">'  `</span><span class="org-comment"><span class="org-constant">diff-reverse-direction</span></span><span class="org-comment">' &#20132;&#25442;&#26032;&#32769;&#25991;&#20214;(diff a b &#21464;&#25104;diff b a)</span>
+<span class="org-comment-delimiter">;;</span>
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">`C-c C-s'</span>
+<span class="org-comment-delimiter">;;      </span><span class="org-comment">Split the hunk at point (`</span><span class="org-comment"><span class="org-constant">diff-split-hunk</span></span><span class="org-comment">').  This is for manually</span>
+<span class="org-comment-delimiter">;;      </span><span class="org-comment">editing patches, and only works with the "unified diff format"</span>
+<span class="org-comment-delimiter">;;      </span><span class="org-comment">produced by the `</span><span class="org-comment"><span class="org-constant">-u</span></span><span class="org-comment">' or `</span><span class="org-comment"><span class="org-constant">--unified</span></span><span class="org-comment">' options to the `</span><span class="org-comment"><span class="org-constant">diff</span></span><span class="org-comment">' program.</span>
+<span class="org-comment-delimiter">;;      </span><span class="org-comment">If you need to split a hunk in the "context diff format" produced</span>
+<span class="org-comment-delimiter">;;      </span><span class="org-comment">by the `</span><span class="org-comment"><span class="org-constant">-c</span></span><span class="org-comment">' or `</span><span class="org-comment"><span class="org-constant">--context</span></span><span class="org-comment">' options to `</span><span class="org-comment"><span class="org-constant">diff</span></span><span class="org-comment">', first convert the</span>
+<span class="org-comment-delimiter">;;      </span><span class="org-comment">buffer to the unified diff format with `C-c C-u'.</span>
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">`C-c C-d'</span>
+<span class="org-comment-delimiter">;;      </span><span class="org-comment">Convert the entire buffer to the "context diff format"</span>
+<span class="org-comment-delimiter">;;      </span><span class="org-comment">(`</span><span class="org-comment"><span class="org-constant">diff-unified-&gt;context</span></span><span class="org-comment">').  With a prefix argument, convert only</span>
+<span class="org-comment-delimiter">;;      </span><span class="org-comment">the text within the region.</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">`C-c C-u'</span>
+<span class="org-comment-delimiter">;;      </span><span class="org-comment">Convert the entire buffer to unified diff format</span>
+<span class="org-comment-delimiter">;;      </span><span class="org-comment">(`</span><span class="org-comment"><span class="org-constant">diff-context-&gt;unified</span></span><span class="org-comment">').  With a prefix argument, convert</span>
+<span class="org-comment-delimiter">;;      </span><span class="org-comment">unified format to context format.  When the mark is active, convert</span>
+<span class="org-comment-delimiter">;;      </span><span class="org-comment">only the text within the region.</span>
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">`C-c C-w' &#37325;&#26032;&#29983;&#25104;diff&#25991;&#20214;,&#27492;&#27425;&#24573;&#30053;&#31354;&#26684;</span>
+<span class="org-comment-delimiter">;;      </span><span class="org-comment">Refine the current hunk so that it disregards changes in whitespace</span>
+<span class="org-comment-delimiter">;;      </span><span class="org-comment">(`</span><span class="org-comment"><span class="org-constant">diff-refine-hunk</span></span><span class="org-comment">').</span>
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">`C-x 4 A'</span>
+<span class="org-comment-delimiter">;;      </span><span class="org-comment">Generate a ChangeLog entry, like `C-x 4 a' does (*note Change</span>
+<span class="org-comment-delimiter">;;      </span><span class="org-comment">Log::), for each one of the hunks</span>
+<span class="org-comment-delimiter">;;      </span><span class="org-comment">(`</span><span class="org-comment"><span class="org-constant">diff-add-change-log-entries-other-window</span></span><span class="org-comment">').  This creates a</span>
+<span class="org-comment-delimiter">;;      </span><span class="org-comment">skeleton of the log of changes that you can later fill with the</span>
+<span class="org-comment-delimiter">;;      </span><span class="org-comment">actual descriptions of the changes.  `C-x 4 a' itself in Diff mode</span>
+<span class="org-comment-delimiter">;;      </span><span class="org-comment">operates on behalf of the current hunk's file, but gets the</span>
+<span class="org-comment-delimiter">;;      </span><span class="org-comment">function name from the patch itself.  This is useful for making</span>
+<span class="org-comment-delimiter">;;      </span><span class="org-comment">log entries for functions that are deleted by the patch.</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">`M-x diff-show-trailing-whitespaces RET'</span>
+<span class="org-comment-delimiter">;;      </span><span class="org-comment">Highlight trailing whitespace characters, except for those used by</span>
+<span class="org-comment-delimiter">;;      </span><span class="org-comment">the patch syntax (*note Useless Whitespace::).</span>
+(<span class="org-keyword">eval-after-load</span> 'diff-mode
+  <span class="org-comment-delimiter">;;</span><span class="org-comment">&#20026;*Diff* mode &#35774;&#32622;&#39640;&#24230;face</span>
+  '(<span class="org-keyword">require</span> '<span class="org-constant">diff-mode-</span>)
+  )
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Ediff</span>
+(<span class="org-function-name">setq-default</span> ediff-window-setup-function (<span class="org-keyword">quote</span> ediff-setup-windows-plain))
+<span class="org-comment-delimiter">;;</span><span class="org-comment">Ediff&#24120;&#29992;&#30340;&#21629;&#20196;</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">`</span><span class="org-comment"><span class="org-constant">ediff-files</span></span><span class="org-comment">' `</span><span class="org-comment"><span class="org-constant">ediff-current-file</span></span><span class="org-comment">' `</span><span class="org-comment"><span class="org-constant">ediff-directories</span></span><span class="org-comment">'</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">`</span><span class="org-comment"><span class="org-constant">edir-revisions</span></span><span class="org-comment">' `</span><span class="org-comment"><span class="org-constant">edir-merge-revisions</span></span><span class="org-comment">' `</span><span class="org-comment"><span class="org-constant">ediff-show-registry</span></span><span class="org-comment">'</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">`</span><span class="org-comment"><span class="org-constant">edir-merge-revisions-with-ancestor</span></span><span class="org-comment">'</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">`</span><span class="org-comment"><span class="org-constant">ediff-revision</span></span><span class="org-comment">' `</span><span class="org-comment"><span class="org-constant">ediff-patch-file</span></span><span class="org-comment">'</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">`</span><span class="org-comment"><span class="org-constant">ediff-merge-files</span></span><span class="org-comment">' `</span><span class="org-comment"><span class="org-constant">ediff-merge-files-with-ancestor</span></span><span class="org-comment">'</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">`</span><span class="org-comment"><span class="org-constant">ediff-merge-directories</span></span><span class="org-comment">' `</span><span class="org-comment"><span class="org-constant">ediff-merge-revisions</span></span><span class="org-comment">'</span>
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">`v'            scroll A and B</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">`V'            scroll the buffers down</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">`</span><span class="org-comment"><span class="org-constant">wd</span></span><span class="org-comment">'           write diff to a file</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">`</span><span class="org-comment"><span class="org-constant">wb</span></span><span class="org-comment">' `</span><span class="org-comment"><span class="org-constant">wc</span></span><span class="org-comment">'`</span><span class="org-comment"><span class="org-constant">wa</span></span><span class="org-comment">'  Saves buffer A, if it was modified.</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">`a'  `b' `c'   &#25226;A&#20013;&#30456;&#21069;&#30340;&#30340;difference region copy&#21040;B&#20013;&#30456;&#24212;&#30456;&#24212;&#20301;&#32622;,`</span><span class="org-comment"><span class="org-constant">rb</span></span><span class="org-comment">' &#21487;&#20197;&#24674;&#22797;B&#21040;&#21407;&#29366;</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">`</span><span class="org-comment"><span class="org-constant">ab</span></span><span class="org-comment">'           &#21516;`a'&#19981;&#36807;&#26159;&#22312;3&#20010;&#25991;&#20214;&#23545;&#27604;&#30340;&#26102;&#20505;</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">`p' `n'         &#36873;&#20013;&#19978;&#19968;&#20010;(&#19979;&#19968;&#20010;)difference region</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">`j' `</span><span class="org-comment"><span class="org-constant">-j</span></span><span class="org-comment">' `</span><span class="org-comment"><span class="org-constant">Nj</span></span><span class="org-comment">';; `n' &#19982;'p'&#26159;&#30456;&#23545;&#36339;&#36716;,&#27492;&#20026;&#32477;&#23545;&#36339;&#36716;,N&#26159;&#25968;&#23383;,&#34920;&#31034;&#36339;&#21040;&#31532;N&#20010;difference region,</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">-j&#34920;&#31034;&#36339;&#21040;&#36339;&#21518;</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">`</span><span class="org-comment"><span class="org-constant">ga</span></span><span class="org-comment">'              &#23558;A&#20013;&#36339;(point)&#26368;&#36817;&#30340;difference region&#36873;&#20013;</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">`!'               Recomputes the difference regions ,&#38450;&#27490;&#22240;&#20026;&#20462;&#25913;&#23548;&#33268;&#39640;&#20142;&#20986;&#38169;</span>
+<span class="org-comment-delimiter">;;  </span><span class="org-comment">`m'             &#35843;&#25972;&#31383;&#21475;&#22312;&#22823;&#23567;&#23613;&#37327;&#22823;(toggle</span>
+<span class="org-comment-delimiter">;;   </span><span class="org-comment">`|'            toggle &#26159;&#27700;&#24179;&#36824;&#26159;&#22402;&#30452;&#25670;&#25918;&#20004;&#20010;window</span>
+<span class="org-comment-delimiter">;;   </span><span class="org-comment">'r'            &#37325;&#32622;merge&#20013;&#30340;&#20869;&#23481;&#21040;&#26410;&#20462;&#25913;&#21069;(&#21482;&#22312;merge&#20250;&#35805;&#20013;&#26377;&#29992;)</span>
+<span class="org-comment-delimiter">;;   </span><span class="org-comment">`</span><span class="org-comment"><span class="org-constant">ra</span></span><span class="org-comment">' `</span><span class="org-comment"><span class="org-constant">rb</span></span><span class="org-comment">' `</span><span class="org-comment"><span class="org-constant">rc</span></span><span class="org-comment">' ::: `a' `b' `c' undo&#25805;&#20316; (&#21482;&#22312;compare&#20250;&#35805;&#20013;&#26377;&#29992;)</span>
+<span class="org-comment-delimiter">;;   </span><span class="org-comment">`##'          &#36339;&#36807;&#21482;&#22240; &#31354;&#26684;TAB&#19981;&#21516;&#24341;&#36215;&#30340;difference</span>
+<span class="org-comment-delimiter">;;   </span><span class="org-comment">`#c'          &#36339;&#36807;&#21482;&#22240; &#22823;&#23567;&#20889;&#19981;&#21516;&#24341;&#36215;&#30340;difference</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">`#h' `#f'       &#22788;&#29702;&#22240;&#20026;&#22823;&#37327;&#30456;&#21516;&#30340;&#21464;&#37327;&#26367;&#25442;&#24341;&#36215;&#30340;difference</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">`A' `B' `C'    toggle Read-Only in A(B,C)</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">~             &#20132;&#25442;A B&#31383;&#21475;</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">i            &#26174;&#31034;&#24403;&#21069;&#36827;&#34892;&#30340;Ediff Session&#30340;&#20449;&#24687;,&#22914;&#22312;&#23545;&#21738;&#20004;&#20010;&#25991;&#20214;&#36827;&#34892;&#23545;&#27604;&#31561;</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">D             &#26174;&#31034;diff&#21629;&#20196;&#30340;&#36755;&#20986;&#32467;&#26524;,&#29983;&#25104;diff&#25991;&#20214;</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">R             &#26174;&#31034;&#25152;&#26377;&#21487;&#29992;&#30340;Ediff Session,&#22522;&#26412;&#23601;&#26159;&#21382;&#21490;&#27983;&#35272;`</span><span class="org-comment"><span class="org-constant">ediff-show-registry</span></span><span class="org-comment">'</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">z            &#26242;&#26102;&#25346;&#36215;,(&#20851;&#38381;&#30456;&#20851;&#31383;&#21475;,) &#21487;&#20197;`R' &#36827;&#34892;&#24674;&#22797;&#20250;&#35805;</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">q               quit.</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">`/' Displays the ancestor file during merges.</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">s            &#25910;&#32553;merge&#31383;&#21475;(toggle) ,`</span><span class="org-comment"><span class="org-constant">4s</span></span><span class="org-comment">' &#21017;&#22686;&#22823;4&#34892;</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">+            &#21512;&#24182;A B &#30340;&#24403;&#21069; difference region</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">=           &#21551;&#29992;&#19968;&#20010;&#26032;&#30340;&#23376;&#20250;&#35805;&#23545;&#24403;&#21069;difference region&#36827;&#34892;&#23545;&#27604;</span>
+
+<span class="org-comment-delimiter">;;</span><span class="org-comment">git mergetool &#20351;&#29992;ediff ,&#21069;&#25552;&#21487;&#20197;&#27491;&#24120;&#20351;&#29992;emacsclient ,&#24182;&#19988;Emacs&#24050;&#32463;&#21551;&#21160;&#12290;</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">~/.gitconfig</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">[mergetool "ediff"]</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">cmd = emacsclient --eval \"(git-mergetool-emacsclient-ediff \\\"$LOCAL\\\" \\\"$REMOTE\\\" \\\"$BASE\\\" \\\"$MERGED\\\")\"</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">trustExitCode = false</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">[mergetool]</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">prompt = false</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">[merge]</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">tool = ediff</span>
+<span class="org-comment-delimiter">;;</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Setup for ediff.</span>
+<span class="org-comment-delimiter">;;</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">(require 'ediff)</span>
+
+(<span class="org-keyword">defvar</span> <span class="org-variable-name">ediff-after-quit-hooks</span> <span class="org-constant">nil</span>
+  <span class="org-doc">"* Hooks to run after ediff or emerge is quit."</span>)
+
+(<span class="org-keyword">defadvice</span> <span class="org-function-name">ediff-quit</span> (after edit-after-quit-hooks activate)
+  (run-hooks 'ediff-after-quit-hooks))
+
+(<span class="org-function-name">setq</span> git-mergetool-emacsclient-ediff-active <span class="org-constant">nil</span>)
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">local-ediff-frame-maximize</span> ()
+  (<span class="org-keyword">when</span> (boundp 'display-usable-bounds)
+    (<span class="org-keyword">let*</span> ((bounds (display-usable-bounds))
+           (x (nth 0 bounds))
+           (y (nth 1 bounds))
+           (width (/ (nth 2 bounds) (frame-char-width)))
+           (height (/ (nth 3 bounds) (frame-char-height))))
+      (set-frame-width (selected-frame) width)
+      (set-frame-height (selected-frame) height)
+      (set-frame-position (selected-frame) x y))  )
+  )
+(<span class="org-function-name">setq</span> ediff-window-setup-function 'ediff-setup-windows-plain)
+(<span class="org-function-name">setq</span> ediff-split-window-function 'split-window-horizontally)
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">local-ediff-before-setup-hook</span> ()
+  (<span class="org-function-name">setq</span> local-ediff-saved-frame-configuration (current-frame-configuration))
+  (<span class="org-function-name">setq</span> local-ediff-saved-window-configuration (current-window-configuration))
+  (local-ediff-frame-maximize)
+  (<span class="org-keyword">if</span> git-mergetool-emacsclient-ediff-active
+      (raise-frame)))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">local-ediff-quit-hook</span> ()
+  (set-frame-configuration local-ediff-saved-frame-configuration)
+  (set-window-configuration local-ediff-saved-window-configuration))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">local-ediff-suspend-hook</span> ()
+  (set-frame-configuration local-ediff-saved-frame-configuration)
+  (set-window-configuration local-ediff-saved-window-configuration))
+
+(<span class="org-function-name">add-hook</span> 'ediff-before-setup-hook 'local-ediff-before-setup-hook)
+(<span class="org-function-name">add-hook</span> 'ediff-quit-hook 'local-ediff-quit-hook 'append)
+(<span class="org-function-name">add-hook</span> 'ediff-suspend-hook 'local-ediff-suspend-hook 'append)
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Useful for ediff merge from emacsclient.</span>
+(<span class="org-keyword">defun</span> <span class="org-function-name">git-mergetool-emacsclient-ediff</span> (local remote base merged)
+  (<span class="org-function-name">setq</span> git-mergetool-emacsclient-ediff-active <span class="org-constant">t</span>)
+  (<span class="org-keyword">if</span> (file-readable-p base)
+      (ediff-merge-files-with-ancestor local remote base <span class="org-constant">nil</span> merged)
+    (ediff-merge-files local remote <span class="org-constant">nil</span> merged))
+  (recursive-edit))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">git-mergetool-emacsclient-ediff-after-quit-hook</span> ()
+  (exit-recursive-edit))
+
+(<span class="org-function-name">add-hook</span> 'ediff-after-quit-hooks 'git-mergetool-emacsclient-ediff-after-quit-hook 'append)
+(<span class="org-keyword">provide</span> '<span class="org-constant">joseph-vc</span>)
+</pre>
+
+
+
+<div id='my-src'>
+<div id='org-src'><a href='../src/emacs/emacs-vc.org'>src</a></div>
+<div id='htmlized-src'><a href='../htmlized-src/emacs/emacs-vc.org.html'>htmlized-src</a></div>
+</div>
+<div id='tags'><span id='tags-title'>Tags:</span><br />
+    <a href="../tags/@SVN.html">@SVN</a><br/>
+    <a href="../tags/@perl.html">@perl</a><br/>
+    <a href="../tags/@Java.html">@Java</a><br/>
+    <a href="../tags/@Mysql.html">@Mysql</a><br/>
+    <a href="../tags/@Erlang.html">@Erlang</a><br/>
+    <a href="../tags/@SQL.html">@SQL</a><br/>
+    <a href="../tags/@DB.html">@DB</a><br/>
+    <a href="../tags/@Oracle.html">@Oracle</a><br/>
+    <a href="../tags/@Ediff.html">@Ediff</a><br/>
+    <a href="../tags/@Git.html">@Git</a><br/>
+    <a href="../tags/@Cedet.html">@Cedet</a><br/>
+    <a href="../tags/@C-C++.html">@C-C++</a><br/>
+    <a href="../tags/@Daily.html">@Daily</a><br/>
+    <a href="../tags/@Eclipse.html">@Eclipse</a><br/>
+    <a href="../tags/@AutoHotKey.html">@AutoHotKey</a><br/>
+    <a href="../tags/@Windows.html">@Windows</a><br/>
+    <a href="../tags/@Linux.html">@Linux</a><br/>
+    <a href="../tags/@C.html">@C</a><br/>
+    <a href="../tags/@Emacs.html">@Emacs</a><br/>
+</p>
+<p><br/>
+</div>
+</p></div>
+
+<div id="postamble">
+<p class="date">Date: 2011-07-05 二</p>
+<p class="author">Author: 孤峰独秀</p>
+<p class="creator">Org version 7.8.03 with Emacs version 24</p>
+
+
+</div>
+<p><br/><br/>
+<!-- hhmts start --> <!-- hhmts end --></p>
+
+</body>
+</html>

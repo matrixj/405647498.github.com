@@ -1,0 +1,102 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<!-- Created by htmlize-1.34 in css mode. -->
+<html>
+  <head>
+    <title>lcd-vga.org</title>
+    <style type="text/css">
+    <!--
+      body {
+        color: #F8F8F8;
+        background-color: #0C1021;
+      }
+      .comment {
+        /* font-lock-comment-face */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-block {
+        /* org-block */
+        color: #b3b3b3;
+      }
+      .org-block-begin-line {
+        /* org-block-begin-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-block-end-line {
+        /* org-block-end-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-document-info {
+        /* org-document-info */
+        color: #afeeee;
+      }
+      .org-document-info-keyword {
+        /* org-document-info-keyword */
+        color: #b3b3b3;
+      }
+      .org-document-title {
+        /* org-document-title */
+        color: #afeeee;
+        font-size: 144%;
+        font-weight: bold;
+      }
+      .org-meta-line {
+        /* org-meta-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+
+      a {
+        color: inherit;
+        background-color: inherit;
+        font: inherit;
+        text-decoration: inherit;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+    -->
+    </style>
+  </head>
+  <body>
+    <pre>
+<span class="comment"># -*- coding:utf-8 -*-</span>
+<span class="org-meta-line">#+LANGUAGE:  zh
+</span><span class="org-document-info-keyword">#+TITLE:</span><span class="comment">     </span><span class="org-document-title">linux&#35843;&#25972;&#31508;&#35760;&#26412;&#20142;&#24230;&#30340;&#21629;&#20196;</span>
+<span class="org-document-info-keyword">#+AUTHOR:</span><span class="comment">    </span><span class="org-document-info">&#23396;&#23792;&#29420;&#31168;</span>
+<span class="org-document-info-keyword">#+EMAIL:</span><span class="comment">     </span><span class="org-document-info">jixiuf@gmail.com</span>
+<span class="org-document-info-keyword">#+DATE:</span><span class="comment">     </span><span class="org-document-info">2011-09-24 &#20845;</span>
+<span class="org-meta-line">#+DESCRIPTION:linux&#35843;&#25972;&#31508;&#35760;&#26412;&#20142;&#24230;&#30340;
+#+KEYWORDS: linux vga 
+#+OPTIONS:   H:2 num:nil toc:t \n:t @:t ::t |:t ^:t -:t f:t *:t &lt;:t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil 
+#+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
+#+EXPORT_SELECT_TAGS: export
+#+EXPORT_EXCLUDE_TAGS: noexport
+#+FILETAGS: @Linux 
+</span>
+&#32852;&#24819;&#31508;&#35760;&#26412;&#19978;&#35843;&#20142;&#24230;&#30340;&#25353;&#38190;&#26159;Fn+Up ,Fn+Down. &#24754;&#21095;&#30340;&#26159;&#33258;&#20174;&#25105;&#22312;&#31508;&#35760;&#26412;&#21069;&#25171;&#24320;&#19968;&#33397;
+&#21487;&#20048;&#20043;&#21518;&#65292;&#36825;&#20010;&#25353;&#38190;&#20877;&#20063;&#19981;&#28789;&#20102;&#12290;
+&#26368;&#21518;&#25214;&#21040;&#35843;&#20142;&#24230;&#30340;&#21629;&#20196;.
+&#39318;&#20808;&#20142;&#24230;&#30456;&#20851;&#30340;&#20449;&#24687;&#22312;&#36825;&#37324;
+<span class="org-block-begin-line">#+begin_src sh
+</span><span class="org-block">cat  /proc/acpi/video/VGA/LCD/brightness
+&#32467;&#26524;&#22914;&#19979;
+levels:  0 10 20 30 40 50 60 70 80 90 100
+current: 40
+</span><span class="org-block-end-line">#+end_src
+</span>&#20063;&#23601;&#26159;&#35828;&#65292;&#20142;&#24230;&#21487;&#21462;&#30340;&#20540;&#26377;&#36825;&#20960;&#20010;
+<span class="org-block-begin-line">#+begin_quote
+</span>levels:  0 10 20 30 40 50 60 70 80 90 100<span class="org-meta-line">
+</span><span class="org-block-end-line">#+end_quote
+</span>&#21482;&#35201;&#20462;&#25913;&#36825;&#20010;&#20540;&#65292;&#23601;&#21487;&#20197;&#20102;&#65292;&#20294;&#26159;&#25105;&#29992;vi&#30452;&#25509;&#32534;&#36753;&#36825;&#20010;&#25991;&#20214;&#65292;&#31455;&#28982;&#22833;&#36133;
+&#29992;&#19979;&#38754;&#36825;&#20010;&#21629;&#20196;&#31455;&#21487;&#20197;&#65292;&#24819;&#19981;&#36890;
+<span class="org-block-begin-line">#+begin_src sh
+</span><span class="org-block">echo -n 40 &gt; /proc/acpi/video/VGA/LCD/brightness 
+echo -n 60 &gt; /proc/acpi/video/VGA/LCD/brightness 
+</span><span class="org-block-end-line">#+end_src
+</span></pre>
+  </body>
+</html>

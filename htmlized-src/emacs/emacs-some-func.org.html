@@ -1,0 +1,172 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<!-- Created by htmlize-1.34 in css mode. -->
+<html>
+  <head>
+    <title>emacs-some-func.org</title>
+    <style type="text/css">
+    <!--
+      body {
+        color: #F8F8F8;
+        background-color: #0C1021;
+      }
+      .comment {
+        /* font-lock-comment-face */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-block {
+        /* org-block */
+        color: #b3b3b3;
+      }
+      .org-block-begin-line {
+        /* org-block-begin-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-block-end-line {
+        /* org-block-end-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-document-info {
+        /* org-document-info */
+        color: #afeeee;
+      }
+      .org-document-info-keyword {
+        /* org-document-info-keyword */
+        color: #b3b3b3;
+      }
+      .org-document-title {
+        /* org-document-title */
+        color: #afeeee;
+        font-size: 144%;
+        font-weight: bold;
+      }
+      .org-meta-line {
+        /* org-meta-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+
+      a {
+        color: inherit;
+        background-color: inherit;
+        font: inherit;
+        text-decoration: inherit;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+    -->
+    </style>
+  </head>
+  <body>
+    <pre>
+<span class="comment"># -*- coding:utf-8 -*-</span>
+<span class="org-meta-line">#+LANGUAGE:  zh
+</span><span class="org-document-info-keyword">#+TITLE:</span><span class="comment">     </span><span class="org-document-title">emacs-some-func.org</span>
+<span class="org-document-info-keyword">#+AUTHOR:</span><span class="comment">    </span><span class="org-document-info">&#23396;&#23792;&#29420;&#31168;</span>
+<span class="org-document-info-keyword">#+EMAIL:</span><span class="comment">     </span><span class="org-document-info">jixiuf@gmail.com</span>
+<span class="org-document-info-keyword">#+DATE:</span><span class="comment">     </span><span class="org-document-info">2011-07-04 &#19968;</span>
+<span class="org-meta-line">#+DESCRIPTION:emacs-some-func.org
+#+KEYWORDS: emacs 
+#+OPTIONS:   H:2 num:nil toc:t \n:t @:t ::t |:t ^:t -:t f:t *:t &lt;:t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc
+#+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
+#+EXPORT_SELECT_TAGS: export
+#+EXPORT_EXCLUDE_TAGS: noexport
+#+FILETAGS: @Emacs
+</span>&#36825;&#20010;&#20989;&#25968;&#65292;&#29992;&#20110;&#36339;&#36716;&#21040;&#19979;&#19968;&#22788;&#31354;&#26684;&#30340;&#20301;&#32622;&#65292;&#22914;&#26524;&#26159;&#36830;&#32493;&#30340;&#22810;&#20010;&#31354;&#26684;&#65292;&#21017;&#36339;&#36716;&#21040;&#25152;&#26377;&#31354;
+&#26684;&#30340;&#24320;&#22836;&#21450;&#32467;&#23614;&#12290;&#36825;&#20010;&#38190;&#25105;&#32465;&#23450;&#22312;C-o&#19978;&#12290;
+<span class="org-block-begin-line">#+begin_src emacs-lisp
+</span><span class="org-block">;;;###autoload
+(defun joseph-jump-to-space-forward()
+  (interactive)
+  (let ((old-pos (point))
+        m-end m-begin
+        )
+    (when (re-search-forward "[ \t]+"  nil t)
+      (setq m-begin (match-beginning 0))
+      (setq m-end (match-end 0))
+      (goto-char m-begin)
+      (if (equal old-pos m-end)
+          (progn
+            (re-search-forward "[ \t]+"  nil t)
+            (goto-char (match-beginning 0)))
+        (if (equal m-begin old-pos)
+            (goto-char m-end)
+            )))))
+</span><span class="org-block-end-line">#+end_src
+</span>&#32534;&#20889;&#20195;&#30721;&#30340;&#26102;&#20505;&#28155;&#21152;&#25110;&#32773;&#21024;&#38500;&#27880;&#37322;&#26159;&#19968;&#20010;&#32463;&#24120;&#24615;&#30340;&#27963;&#21160;&#12290;&#40664;&#35748;emacs&#20026;&#36825;&#20010;&#24037;&#20316;&#24050;&#32463;&#20570;
+&#30340;&#24456;&#22909;&#20102;.&#19981;&#35770;&#20320;&#22312;&#20889;&#20160;&#20040;&#35821;&#35328;&#12290;&#37117;&#26159;`M-;'&#36827;&#34892;&#27880;&#37322;&#19982;&#21453;&#27880;&#37322;&#12290;
+&#21363;&#65292;&#22914;&#26524;&#20320;&#36873;&#20013;&#30340;&#21306;&#22495;&#24050;&#32463;&#34987;&#27880;&#37322;&#19978;&#20102;&#65292;&#21017;M-;&#21462;&#28040;&#27880;&#37322;&#12290;&#21542;&#21017;&#23601;&#26159;&#20026;&#20320;&#25152;&#20013;&#30340;&#21306;&#22495;&#28155;
+&#21152;&#27880;&#37322;&#12290;&#22914;&#26524;&#20320;&#27809;&#36873;&#20013;&#20869;&#23481;&#65292;&#21017;&#22312;&#34892;&#26411;&#28155;&#21152;&#27880;&#37322;&#12290;&#25105;&#24819;&#20570;&#30340;&#26159;&#65292;&#22914;&#26524;&#27809;&#26377;&#36873;&#20013;&#20869;&#23481;&#65292;
+&#21017;&#27880;&#37322;&#25110;&#32773;&#21453;&#27880;&#37322;&#24403;&#21069;&#34892;&#12290;&#22914;&#26524;&#22312;&#34892;&#26411;&#26102;&#65292;&#25165;&#22312;&#34892;&#26411;&#28155;&#21152;&#27880;&#37322;&#12290;
+&#23558;&#36825;&#20010;&#20989;&#25968;&#32465;&#23450;&#22312;M-;&#19978;&#21363;&#21487;&#12290;
+<span class="org-block-begin-line">#+begin_src emacs-lisp
+</span><span class="org-block">;;&#20195;&#30721;&#27880;&#37322;&#24037;&#20316;&#65292;&#22914;&#26524;&#26377;&#36873;&#20013;&#21306;&#22495;&#65292;&#21017;&#27880;&#37322;&#25110;&#32773;&#21453;&#27880;&#37322;&#36825;&#20010;&#21306;&#22495;
+;;&#22914;&#26524;&#65292;&#27809;&#36873;&#20013;&#21306;&#22495;&#65292;&#21017;&#27880;&#37322;&#25110;&#32773;&#27880;&#37322;&#24403;&#21069;&#34892;&#65292;&#22914;&#26524;&#20809;&#26631;&#22312;&#34892;&#26411;&#65292;&#21017;&#22312;&#34892;&#26411;&#28155;&#21152;&#25110;&#21024;&#38500;&#27880;&#37322;
+;;;###autoload
+(defun joseph-comment-dwim-line (&amp;optional arg)
+  "Replacement for the comment-dwim command.
+If no region is selected and current line is not blank and we are not at the end of the line,
+then comment current line.
+Replaces default behaviour of comment-dwim, when it inserts comment at the end of the line."
+  (interactive "*P")
+  (comment-normalize-vars)
+  (if (and (not (region-active-p)) (not (looking-at "[ \t]*$")))
+      (comment-or-uncomment-region (line-beginning-position) (line-end-position))
+    (comment-dwim arg)))
+</span><span class="org-block-end-line">#+end_src
+</span>
+&#20889;&#31243;&#24207;&#26102;&#22312;&#34892;&#23614;&#28155;&#21152;&#20998;&#21495;,&#19981;&#24517;&#38750;&#24471;&#20809;&#26631;&#22312;&#34892;&#23614;&#12290;
+<span class="org-block-begin-line">#+begin_src emacs-lisp
+</span><span class="org-block">(define-key java-mode-map ";"  'joseph-append-semicolon-at-eol)
+ 
+;;;###autoload
+(defun joseph-append-semicolon-at-eol(&amp;optional arg)
+  "&#22312;&#24403;&#21069;&#34892;&#20219;&#20309;&#20301;&#32622;&#36755;&#20837;&#20998;&#21495;&#37117;&#22312;&#34892;&#23614;&#28155;&#21152;&#20998;&#21495;&#65292;&#38500;&#38750;&#26412;&#34892;&#26377;for &#36825;&#20010;&#20851;&#38190;&#23383;&#65292;
+&#22914;&#26524;&#34892;&#23614;&#24050;&#32463;&#26377;&#20998;&#21495;&#21017;&#21024;&#38500;&#34892;&#23614;&#30340;&#20998;&#21495;&#65292;&#23558;&#20854;&#25554;&#20837;&#21040;&#24403;&#21069;&#20301;&#32622;,&#23601;&#26159;&#35828;&#36755;&#20837;&#20004;&#27425;&#20998;&#21495;&#21017;&#19981;&#22312;&#34892;&#23614;&#25554;&#20837;&#32780;&#26159;&#20687;&#27491;&#24120;&#24773;&#20917;&#19968;&#26679;."
+  (interactive "*p")
+  (let* ( ( init_position (point))
+          (b (line-beginning-position))
+          (e (line-end-position))
+          (line_str (buffer-substring b e))
+          (semicolon_end_of_line (string-match ";[ \t]*$" line_str ))
+          )
+    (if semicolon_end_of_line ;;;;&#22914;&#26524;&#34892;&#23614;&#24050;&#32463;&#26377;&#20998;&#21495;&#65292;&#21017;&#21024;&#38500;&#34892;&#23614;&#30340;&#20998;&#21495;&#65292;&#24182;&#22312;&#24403;&#21069;&#20301;&#32622;&#36755;&#20837;&#20998;&#21495;;;;;;;
+        (progn
+          (save-excursion
+            (goto-char (+ semicolon_end_of_line b))
+            (delete-char 1) )
+          (insert ";") )
+      ;;&#22312;&#25972;&#34892;&#20869;&#23481;&#20013;&#25628;&#32034;&#26377;&#27809;&#26377;&#20851;&#38190;&#23383;for&#30340;&#23384;&#22312;,&#25110;&#32773;&#24403;&#21069;&#20301;&#32622;&#24050;&#32463;&#26159;&#34892;&#23614;,&#30452;&#25509;&#25554;&#20837;&#20998;&#21495;
+      (if   (or (string-match "^[ \t]*$" (buffer-substring init_position e))
+                (string-match "\\bfor\\b" line_str))
+          (insert ";")
+        (save-excursion ;;&#22914;&#26524;&#25628;&#32034;&#19981;&#21040; for &#21017;&#22312;&#34892;&#23614;&#25554;&#20837;&#20998;&#21495;;
+          (end-of-line)
+          (delete-trailing-whitespace)
+          (insert ";")
+          )))))
+</span><span class="org-block-end-line">#+end_src
+</span>
+&#36825;&#20010;&#20989;&#25968;&#26159;&#23558;C-j &#19982;C-o &#30340;&#21151;&#33021;&#36827;&#34892;&#21512;&#24182;&#12290;
+&#24403;&#20809;&#26631;&#22312;&#34892;&#39318;&#26102;&#65292;&#35843;&#29992;&#27492;&#20989;&#25968;&#65292;&#22312;&#19978;&#19968;&#34892;&#28155;&#21152;&#31354;&#34892;&#12290;&#24403;&#20809;&#26631;&#22312;&#34892;&#23614;&#26102;&#65292;&#35843;&#29992;&#27492;&#21629;&#20196;&#21017;
+&#22312;&#19979;&#19968;&#34892;&#28155;&#21152;&#31354;&#34892;&#12290;&#25152;&#20197;&#21487;&#20197;&#33410;&#30465;&#19979;&#19968;&#20010;&#24555;&#25463;&#38190;
+<span class="org-block-begin-line">#+begin_src emacs-lisp
+</span><span class="org-block">;;;###autoload
+(defun open-line-or-new-line-dep-pos()
+  "if point is in head of line then open-line
+if point is at end of line , new-line-and-indent"
+  (interactive)
+  (if (and (= (point) (point-at-bol))
+           (not (looking-at "^[ \t]*$")))
+      (progn
+        (open-line 1)
+        (indent-for-tab-command))
+    (newline-and-indent)))
+</span><span class="org-block-end-line">#+end_src
+</span></pre>
+  </body>
+</html>

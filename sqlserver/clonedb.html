@@ -3,14 +3,14 @@
                "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="zh" xml:lang="zh">
 <head>
-<title>一个人的狂欢</title>
+<title>clone db in sqlserver </title>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
-<meta name="title" content="一个人的狂欢"/>
+<meta name="title" content="clone db in sqlserver "/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2011-06-04 星期六"/>
-<meta name="author" content="孤峰独秀"/>
-<meta name="description" content=""/>
-<meta name="keywords" content=""/>
+<meta name="generated" content="2011-10-28 星期五"/>
+<meta name="author" content="纪秀峰"/>
+<meta name="description" content="clone db in sqlserver "/>
+<meta name="keywords" content="sql server "/>
 <style type='text/css'>
        body {
     background-color: #E5E5E5;
@@ -942,15 +942,15 @@ img {
 }
 
     </style>
-<link rel="stylesheet" type="text/css" href="style/emacs.css" />
-<script type='text/javascript' src='js/emacs.js'> </script>
+<link rel="stylesheet" type="text/css" href="../style/emacs.css" />
+<script type='text/javascript' src='../js/emacs.js'> </script>
 
 </head>
 <body>
 <div id="org-div-home-and-up" style="text-align:right;font-size:70%;white-space:nowrap;">
- <a accesskey="h" href="sitemap.html"> 站点地图 </a>
+ <a accesskey="h" href="../sitemap.html"> 站点地图 </a>
  |
- <a accesskey="H" href="index.html"> 首页 </a>
+ <a accesskey="H" href="../index.html"> 首页 </a>
 </div>
 
 <div id="preamble">
@@ -958,60 +958,221 @@ img {
 </div>
 
 <div id="content">
-<h1 class="title">一个人的狂欢</h1>
+<h1 class="title">clone db in sqlserver </h1>
 
 
-<div id='logo-img' ><a  href='index.html'>▇█▓▒░◕~◕░▒▓█▇</a></div>
+<div id='logo-img' ><a  href='../index.html'>▇█▓▒░◕~◕░▒▓█▇</a></div>
 
 <div id='logo-text'>
   <a href='#' ><span align="left">░◕~◕░</span></a>
 </div>
 
 
-<ul>
-<li>首页还未做好，先看<a href="sitemap.html">站点地图</a>吧
-</li>
-<li><a href="about.html">About</a>
-</li>
-</ul>
+
+<pre class="src src-sql"><span class="org-comment">-- sqlserver &#65292;&#26681;&#25454;&#24050;&#26377;&#25968;&#25454;&#24211;&#21019;&#24314;&#19968;&#20010;&#23436;&#20840;&#30456;&#21516;&#30340;&#25968;&#25454;&#24211;</span>
+<span class="org-comment">--  &#21407;&#29702;&#26159;&#20808;&#29992;backup &#35821;&#21477;&#23558;&#24403;&#21069;&#25968;&#25454;&#24211;&#22791;&#20221;&#25104;&#19968;&#20010;&#22791;&#20221;&#25991;&#20214;</span>
+<span class="org-comment">--  &#28982;&#21518;&#29992;restore &#21629;&#20196;&#24674;&#22797;&#12290;&#20013;&#38388;&#36807;&#31243;&#20013;&#65292;&#20250;&#23558;&#25968;&#25454;&#25991;&#20214;&#19982;&#26085;&#24535;&#25991;&#20214;</span>
+<span class="org-comment">-- &#30340;&#21517;&#23383;&#21450;&#25968;&#25454;&#24211;&#30340;&#21517;&#23383;&#36827;&#34892;&#26356;&#25913;&#65292;&#20174;&#32780;&#65292;&#23454;&#29616;clone .</span>
+
+USE master
+GO
+<span class="org-comment">--&#21407;&#22987;&#30340;&#25968;&#25454;&#24211;&#21517;&#31216;&#12290;&#27604;&#22914;&#27492;&#22788;&#25105;&#35774;&#25104;HAIHUA_MRP </span>
+<span class="org-comment">-- the original database (use 'SET @DB = NULL' to disable backup)</span>
+DECLARE @DB varchar(200)
+SET @DB = <span class="org-string">'meiji_0421_null'</span>
+
+<span class="org-comment">-- &#29983;&#25104;&#30340;&#22791;&#20221;&#25991;&#20214;&#30340;&#20301;&#32622;</span>
+<span class="org-comment">-- the backup filename</span>
+DECLARE @BackupFile varchar(2000)
+SET @BackupFile = <span class="org-string">'c:\meiji_jixf4.dat'</span>
+
+<span class="org-comment">-- &#26032;&#25968;&#25454;&#24211;&#30340;&#21517;&#23383;</span>
+<span class="org-comment">-- the new database name</span>
+DECLARE @TestDB varchar(200)
+SET @TestDB = <span class="org-string">'meiji_jixf4'</span>
+<span class="org-comment">-- &#26032;&#25968;&#25454;&#24211;&#25152;&#29992;&#21040;&#30340;&#26085;&#24535;&#25991;&#20214;&#21450;&#25968;&#25454;&#25991;&#20214;&#30340;&#21517;&#23383;&#65292;&#19981;&#21253;&#21547;&#21518;&#32512;&#23383;</span>
+<span class="org-comment">-- &#19979;&#25991;&#20250;&#33258;&#21160;&#36861;&#21152;&#21518;&#32512;&#21517;</span>
+<span class="org-comment">-- the new database files without .mdf/.ldf</span>
+DECLARE @RestoreFile varchar(2000)
+SET @RestoreFile = <span class="org-string">'c:\meiji_jixf4'</span>
 
 
+<span class="org-comment">-- ****************************************************************</span>
+<span class="org-comment">--                    no change below this line</span>
+<span class="org-comment">--  &#20197;&#19979;&#20869;&#23481;&#65292;&#19981;&#35201;&#20462;&#25913;</span>
+<span class="org-comment">-- ****************************************************************</span>
+
+
+DECLARE @query varchar(2000)
+
+DECLARE @DataFile varchar(2000)
+SET @DataFile = @RestoreFile + <span class="org-string">'.mdf'</span>
+
+DECLARE @LogFile varchar(2000)
+SET @LogFile = @RestoreFile + <span class="org-string">'.ldf'</span>
+
+IF @DB IS NOT NULL
+BEGIN
+SET @query = <span class="org-string">'BACKUP DATABASE '</span> + @DB + <span class="org-string">' TO DISK = '</span> + QUOTENAME(@BackupFile, <span class="org-string">''''</span>)
+EXEC (@query)
+END
+
+<span class="org-comment">-- RESTORE FILELISTONLY FROM DISK = 'C:\temp\backup.dat'</span>
+<span class="org-comment">-- RESTORE HEADERONLY FROM DISK = 'C:\temp\backup.dat'</span>
+<span class="org-comment">-- RESTORE LABELONLY FROM DISK = 'C:\temp\backup.dat'</span>
+<span class="org-comment">-- RESTORE VERIFYONLY FROM DISK = 'C:\temp\backup.dat'</span>
+
+IF EXISTS(SELECT * FROM sysdatabases WHERE name = @TestDB)
+BEGIN
+SET @query = <span class="org-string">'DROP DATABASE '</span> + @TestDB
+EXEC (@query)
+END
+
+<span class="org-comment">-- RESTORE HEADERONLY FROM DISK = @BackupFile</span>
+<span class="org-comment">-- DECLARE @File int</span>
+<span class="org-comment">-- SET @File = @@ROWCOUNT</span>
+
+DECLARE @Data varchar(500)
+DECLARE @Log varchar(500)
+
+SET @query = <span class="org-string">'RESTORE FILELISTONLY FROM DISK = '</span> + QUOTENAME(@BackupFile , <span class="org-string">''''</span>)
+
+<span class="org-comment">--- &#36825;&#24352;&#20020;&#26102;&#34920;&#30340;&#32467;&#26500;&#19982;SET @query = 'RESTORE FILELISTONLY FROM DISK = ' + QUOTENAME(@BackupFile , '''')</span>
+<span class="org-comment">--  &#21629;&#20196;&#30340;&#32467;&#26524;&#30456;&#21516;&#65292;&#30446;&#30340;&#21482;&#26159;&#20026;&#20102;&#20445;&#23384;&#19978;&#36848;&#32467;&#26524;&#21040;&#19968;&#24352;&#34920;&#65292;&#28982;&#21518;&#21462;&#24471;&#20854;&#20013;&#26085;&#24535;&#25991;&#20214;&#21450;&#25968;&#25454;&#25991;&#20214;&#30340;logicalName</span>
+<span class="org-comment">-- &#22240;&#20026;&#22312;restore &#26102;&#65292;&#20250;&#29992;&#21040;&#23427;&#23558;&#26085;&#24535;&#25991;&#20214;&#25968;&#25454;&#25991;&#20214;&#30340;&#20301;&#32622;&#36827;&#34892;&#26356;&#25913;</span>
+CREATE TABLE #restoretemp
+(
+LogicalName varchar(500),
+PhysicalName varchar(500),
+type varchar(10),
+FilegroupName varchar(200),
+size int,
+maxsize bigint,
+fileid varchar(200),
+createlsn varchar(200),
+droplsn  varchar(200),
+uniqueid varchar(200),
+readonlylsn  varchar(200),
+readwritelsn varchar(200),
+backupsizeinbytes bigint ,
+sourceblocksize int ,
+filegroupid int ,
+loggroupguid varchar(200),
+differentialbaselsn bigint,
+differentialbaseguid varchar(200),
+isreadonly bit,
+ispresent bit
+
+
+)
+INSERT #restoretemp EXEC (@query)
+
+SELECT @Data = LogicalName FROM #restoretemp WHERE type = <span class="org-string">'D'</span>
+SELECT @Log = LogicalName FROM #restoretemp WHERE type = <span class="org-string">'L'</span>
+
+PRINT @Data
+PRINT @Log
+
+TRUNCATE TABLE #restoretemp
+drop table  #restoretemp
+SET @query = <span class="org-string">'RESTORE DATABASE '</span> + @TestDB + <span class="org-string">' FROM DISK = '</span> + QUOTENAME(@BackupFile, <span class="org-string">''''</span>) + 
+<span class="org-string">' WITH MOVE '</span> + QUOTENAME(@Data, <span class="org-string">''''</span>) + <span class="org-string">' TO '</span> + QUOTENAME(@DataFile, <span class="org-string">''''</span>) + <span class="org-string">', MOVE '</span> +
+QUOTENAME(@Log, <span class="org-string">''''</span>) + <span class="org-string">' TO '</span> + QUOTENAME(@LogFile, <span class="org-string">''''</span>)  
+EXEC (@query)
+GO
+<span class="org-comment">------------------------------------------</span>
+<span class="org-comment">--&#31616;&#21333;&#30340;&#31034;&#20363;&#65292;&#19981;&#20855;&#36890;&#29992;&#65292;&#20294;&#20856;&#22411;&#65292;&#19978;&#38754;&#30340;&#20195;&#30721;&#22522;&#26412;&#20351;&#29992;&#36825;&#38754;&#20195;&#30721;</span>
+<span class="org-comment">-- backup database jixf to disk='d:jixf_data.bak'</span>
+<span class="org-comment">-- Restore FILELISTONLY FROM DISK='d:\jixf_data.bak'</span>
+<span class="org-comment">-- rESTORE DATABASE jixf2</span>
+<span class="org-comment">-- FROM DISK='d:\jixf_data.bak'</span>
+<span class="org-comment">-- WITH</span>
+<span class="org-comment">-- MOVE 'jixf' TO 'D:\jixf_data2.mdf',</span>
+<span class="org-comment">-- MOVE 'jixf_log' TO 'D:\jixf_data2_log.ldf'</span>
+
+<span class="org-comment">-- rESTORE DATABASE jixf2</span>
+<span class="org-comment">-- FROM DISK='d:\jixf_data.bak'</span>
+<span class="org-comment">-- WITH</span>
+<span class="org-comment">-- MOVE 'jixf' TO 'D:\jixf_data2.mdf',</span>
+<span class="org-comment">-- MOVE 'jixf_log' TO 'D:\jixf_data2_log.ldf',stats=5</span>
+
+<span class="org-comment">-- RESTORE HEADERONLY FROM DISK ='d:\jixf_data.bak'</span>
+
+
+
+<span class="org-comment">-- backup database  [HAIHUA_MRP_Test_jujt(20110905)] TO DISK = N'C:\HAIHUA_MRP_Test_jujt.bak'  </span>
+<span class="org-comment">-- go</span>
+
+<span class="org-comment">-- rESTORE DATABASE jixf23</span>
+<span class="org-comment">-- FROM</span>
+<span class="org-comment">-- DISK = N'C:\HAIHUA_MRP_Test_jujt.bak'</span>
+<span class="org-comment">-- WITH</span>
+<span class="org-comment">-- MOVE 'HAIHUA_MRP_TEST1' TO 'D:\jixf_data23.mdf',</span>
+<span class="org-comment">-- MOVE 'HAIHUA_MRP_TEST1_log' TO 'D:\jixf_data23_log.ldf',stats=5</span>
+
+
+<span class="org-comment">-- rESTORE DATABASE jixf23</span>
+<span class="org-comment">-- FROM DISK = N'C:\HAIHUA_MRP_Test_jujt.bak'</span>
+<span class="org-comment">-- WITH</span>
+<span class="org-comment">-- MOVE 'HAIHUA_MRP_TEST1' TO 'D:\jixf_data23.mdf',</span>
+<span class="org-comment">-- MOVE 'HAIHUA_MRP_TEST1_log' TO 'D:\jixf_data23_log.ldf',stats=5</span>
+
+<span class="org-comment">-- RESTORE HEADERONLY FROM DISK = N'C:\HAIHUA_MRP_Test_jujt.bak'</span>
+
+<span class="org-comment">-- 20110921</span>
+<span class="org-comment">-- rESTORE DATABASE HAIHUA_MRP_Test_WANGZL_20110921</span>
+<span class="org-comment">-- FROM</span>
+<span class="org-comment">-- DISK = N'c:\haihua\HAIHUA_MRP_TEST_20110921_BAK.bak'</span>
+<span class="org-comment">-- WITH</span>
+<span class="org-comment">-- MOVE 'HAIHUA_MRP_TEST1' TO 'c:\haihua\Temp\db\jixf_data56.mdf',</span>
+<span class="org-comment">-- MOVE 'HAIHUA_MRP_TEST1_log' TO 'c:\haihua\Temp\db\jixf_data56_log.ldf',stats=5</span>
+
+
+
+<span class="org-comment">-- rESTORE DATABASE HAIHUA_MRP_Test_WANGZL_20110921</span>
+<span class="org-comment">-- FROM </span>
+<span class="org-comment">-- DISK = N'c:\haihua\HAIHUA_MRP_TEST_20110921_BAK.bak'</span>
+<span class="org-comment">-- WITH</span>
+<span class="org-comment">-- MOVE 'HAIHUA_MRP_TEST1' TO  'c:\haihua\Temp\db\jixf_data56.mdf',</span>
+<span class="org-comment">-- MOVE 'HAIHUA_MRP_TEST1_log' TO 'c:\haihua\Temp\db\jixf_data56_log.ldf',stats=5</span>
+
+<span class="org-comment">-- RESTORE HEADERONLY FROM DISK =N'c:\haihua\HAIHUA_MRP_TEST_20110921_BAK.bak'</span>
+</pre>
 
 
 <div id='my-src'>
-<div id='org-src'><a href='src/index.org'>src</a></div>
-<div id='htmlized-src'><a href='htmlized-src/index.org.html'>htmlized-src</a></div>
+<div id='org-src'><a href='../src/sqlserver/clonedb.org'>src</a></div>
+<div id='htmlized-src'><a href='../htmlized-src/sqlserver/clonedb.org.html'>htmlized-src</a></div>
 </div>
 <div id='tags'><span id='tags-title'>Tags:</span><br />
 <p>
-    <a href="tags/@SVN.html">@SVN</a>
-    <a href="tags/@perl.html">@perl</a>
-    <a href="tags/@Java.html">@Java</a>
-    <a href="tags/@Mysql.html">@Mysql</a>
-    <a href="tags/@Erlang.html">@Erlang</a>
-    <a href="tags/@SQL.html">@SQL</a>
-    <a href="tags/@DB.html">@DB</a>
-    <a href="tags/@Oracle.html">@Oracle</a>
-    <a href="tags/@Ediff.html">@Ediff</a>
-    <a href="tags/@Git.html">@Git</a>
-    <a href="tags/@Cedet.html">@Cedet</a>
-    <a href="tags/@C-C++.html">@C-C++</a>
-    <a href="tags/@Daily.html">@Daily</a>
-    <a href="tags/@Eclipse.html">@Eclipse</a>
-    <a href="tags/@AutoHotKey.html">@AutoHotKey</a>
-    <a href="tags/@Windows.html">@Windows</a>
-    <a href="tags/@Linux.html">@Linux</a>
-    <a href="tags/@C.html">@C</a>
-    <a href="tags/@Emacs.html">@Emacs</a>
+    <a href="../tags/@SVN.html">@SVN</a><br/>
+    <a href="../tags/@perl.html">@perl</a><br/>
+    <a href="../tags/@Java.html">@Java</a><br/>
+    <a href="../tags/@Mysql.html">@Mysql</a><br/>
+    <a href="../tags/@Erlang.html">@Erlang</a><br/>
+    <a href="../tags/@SQL.html">@SQL</a><br/>
+    <a href="../tags/@DB.html">@DB</a><br/>
+    <a href="../tags/@Oracle.html">@Oracle</a><br/>
+    <a href="../tags/@Ediff.html">@Ediff</a><br/>
+    <a href="../tags/@Git.html">@Git</a><br/>
+    <a href="../tags/@Cedet.html">@Cedet</a><br/>
+    <a href="../tags/@C-C++.html">@C-C++</a><br/>
+    <a href="../tags/@Daily.html">@Daily</a><br/>
+    <a href="../tags/@Eclipse.html">@Eclipse</a><br/>
+    <a href="../tags/@AutoHotKey.html">@AutoHotKey</a><br/>
+    <a href="../tags/@Windows.html">@Windows</a><br/>
+    <a href="../tags/@Linux.html">@Linux</a><br/>
+    <a href="../tags/@C.html">@C</a><br/>
+    <a href="../tags/@Emacs.html">@Emacs</a><br/>
 </p>
-
-
+<p><br/>
 </div>
-</div>
+</p></div>
 
 <div id="postamble">
-<p class="date">Date: 2011-06-04 星期六</p>
-<p class="author">Author: 孤峰独秀</p>
+<p class="date">Date: 2011-10-28 星期五</p>
+<p class="author">Author: 纪秀峰</p>
 <p class="creator">Org version 7.8.03 with Emacs version 24</p>
 
 

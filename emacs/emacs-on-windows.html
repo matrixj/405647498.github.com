@@ -3,14 +3,14 @@
                "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="zh" xml:lang="zh">
 <head>
-<title>一个人的狂欢</title>
+<title>Windows上Emacs的安装及emacsclient进行C/S连接</title>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
-<meta name="title" content="一个人的狂欢"/>
+<meta name="title" content="Windows上Emacs的安装及emacsclient进行C/S连接"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2011-06-04 星期六"/>
+<meta name="generated" content="2011-06-03 星期五"/>
 <meta name="author" content="孤峰独秀"/>
-<meta name="description" content=""/>
-<meta name="keywords" content=""/>
+<meta name="description" content="我收集的一些链接地址"/>
+<meta name="keywords" content="Emacs emacsclient Client/Server"/>
 <style type='text/css'>
        body {
     background-color: #E5E5E5;
@@ -942,15 +942,15 @@ img {
 }
 
     </style>
-<link rel="stylesheet" type="text/css" href="style/emacs.css" />
-<script type='text/javascript' src='js/emacs.js'> </script>
+<link rel="stylesheet" type="text/css" href="../style/emacs.css" />
+<script type='text/javascript' src='../js/emacs.js'> </script>
 
 </head>
 <body>
 <div id="org-div-home-and-up" style="text-align:right;font-size:70%;white-space:nowrap;">
- <a accesskey="h" href="sitemap.html"> 站点地图 </a>
+ <a accesskey="h" href="../sitemap.html"> 站点地图 </a>
  |
- <a accesskey="H" href="index.html"> 首页 </a>
+ <a accesskey="H" href="../index.html"> 首页 </a>
 </div>
 
 <div id="preamble">
@@ -958,59 +958,236 @@ img {
 </div>
 
 <div id="content">
-<h1 class="title">一个人的狂欢</h1>
+<h1 class="title">Windows上Emacs的安装及emacsclient进行C/S连接</h1>
 
 
-<div id='logo-img' ><a  href='index.html'>▇█▓▒░◕~◕░▒▓█▇</a></div>
+<div id='logo-img' ><a  href='../index.html'>▇█▓▒░◕~◕░▒▓█▇</a></div>
 
 <div id='logo-text'>
   <a href='#' ><span align="left">░◕~◕░</span></a>
 </div>
 
 
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
 <ul>
-<li>首页还未做好，先看<a href="sitemap.html">站点地图</a>吧
-</li>
-<li><a href="about.html">About</a>
+<li><a href="#sec-1">一堆废话</a></li>
+<li><a href="#sec-2">下载</a></li>
+<li><a href="#sec-3">配置</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-1" class="outline-2">
+<h2 id="sec-1">一堆废话</h2>
+<div class="outline-text-2" id="text-1">
+
+<p>    在windows 上使用emacs .实在是个无奈之举.没办法,在公司大家都得用windows.<br/>
+但刚用熟Emacs,实在不忍心就这样仍了它.虽然让Emacs委屈下嫁Windows,有让人联想鲜<br/>
+花牛粪的不快,但"弱女虽非男，慰情聊胜无",大家就凑合凑合吧. 不知是大幸还是不幸<br/>
+windows上有诸如cygwin MinGW之类的linux模拟器,但用起来常不经意的就给你开个小<br/>
+玩笑,让你哭笑不得.让你看到一点希望,但又希望得如此渺茫,巴巴地让你看着看着,直<br/>
+到磨掉你最后一点耐心.想来人生也不过如此,跑题了.<br/>
+</p>
+<p><br/>
+    首先,在Windows上emacs &ndash; &ndash;deamon这个参数是用不上了,但总不能每打开一个文<br/>
+档就要启动一个Emacs吧, 那样树懒也要开口大骂,嫌它太慢了.好吧，说一下什么是--<br/>
+&ndash;deamon,在Linux 平台下，Emacs 可以这样运行：emacs &ndash; &ndash;daemon.这样运行后有<br/>
+什么效果呢，什么效果也没有，你不会看到有任何窗口弹出。那怎么用它编辑文件呢，<br/>
+没有窗口弹出的编辑器算哪门子编辑器。那就是在运行了这个命令之后运行另外一个命<br/>
+令:emacsclient ,运行这个命令后并不会重新启动一个emacs进程，它只是作为一个客<br/>
+户端连接到了emacs &ndash; &ndash;daemon 这个进程上。你配置文件中的所有配置在emacs --<br/>
+&ndash;daemon 运行的时候就已经加载到内存了，当你运行emacsclinet 时它只是打开一个<br/>
+窗口来编辑你的文件。这样就可以避免每打开一个文件，都要启动一个emacs 进程、重<br/>
+新加载一遍你的配置文件这个费时费力费感情的动作了。<br/>
+</p>
+<p><br/>
+</p>
+<p><br/>
+    但是很可惜&ndash; &ndash;daemon 这个参数使用了Linux系统下有而Windows 没有的特性，<br/>
+自然到了Windows 上，就没它什么事了。没法让Emacs做为后台服务启动,只好启动一个<br/>
+Emacs之后再也不关闭,然后用emacsclient 或者gnuclient 去连这个没关闭的Emacs了.这<br/>
+就好比你不让我躺在你家床上睡大觉,还不让我偶尔赖着你家沙发不走嘛,未免太不尽人<br/>
+情了吧,人家可是有心在你这安家的.<br/>
+</p>
+<p><br/>
+    额外提一点,要在windows上用好emacsclient gnuclient 还真的费一点事,其实搞<br/>
+清楚的原理, 条理是很清晰的,但如果你跟Emacs仿佛古时的新婚男女,竟是初见,要你用<br/>
+好它那 也确实有点让人为难.我没用gnuclient 也没用打过补丁的EmacsW32,只用<br/>
+Emacs 自带的emacsclient,就已经足够了.<br/>
+</p></div>
+
+</div>
+
+<div id="outline-container-2" class="outline-2">
+<h2 id="sec-2">下载</h2>
+<div class="outline-text-2" id="text-2">
+
+<p>  下面从头到尾介绍Emacs 在Windows 上的安装及简单配置首先到<a href="http://ftp.gnu.org/pub/gnu/emacs/windows/ ">这个</a>目录下载<br/>
+emacs 的安装包目前的最新版是23.3所以下载<a href="http://ftp.gnu.org/pub/gnu/emacs/windows/emacs-23.3-bin-i386.zip">emacs-23.3-bin-i386.zip</a> 这个这可以了.<br/>
+上面这个是相对比较稳定正式发布的.而在<a href="http://alpha.gnu.org/gnu/emacs/windows/">这个 </a>网站上的是Emacs 的最新版，一周一更<br/>
+新，相对上面那个不太稳定，但绝对可用. 下载下来，放到一个目录中不包含空格，不<br/>
+包含汉字的路径下。解压开后，里面有个bin目录，目录下有个addpm.exe ,点这个程序<br/>
+以后会将Emacs加入到开始菜单中。另外还有个runemacs.exe 一般情况下用这个程序就<br/>
+可以启动Emacs .你可以发送一个链接到桌面上，便于使用。另外有一个emacs.exe 这<br/>
+个程序和runemacs.exe 一样。但是会启动一个黑窗口，也就是说它是一个用于在cmd下<br/>
+使用的命令。另外还有emacsclientw.exe emacsclient.exe 这两个就是上面提到的客<br/>
+户端程序如果仅仅是让Emacs 能用，到这里就可以结束了。双击runemacs.exe就可以使<br/>
+用Emacs 了。<br/>
+</p></div>
+
+</div>
+
+<div id="outline-container-3" class="outline-2">
+<h2 id="sec-3">配置</h2>
+<div class="outline-text-2" id="text-3">
+
+<ul>
+<li id="sec-3-1">关于Emacs 的配置文件 .emacs文件 及.emacs.d目录 及主目录(Home)<br/>
+   在Linux 下，每个用户都有属于它自已的目录称为主目录，即HOME变量所指向的目<br/>
+   录，如joseph用户的home 目录是指/home/joseph/这个目录。而Linux 下的程序的<br/>
+   配置文件都在用户主目录下，一般它们的配置文件都以点开头 ，这是因为linux 下<br/>
+   以点开头的文件是隐藏文件， 而Emacs的配置文件，请你用大腿想一想，就会猜到<br/>
+   它名叫.emacs了。而emacs 的配置文件用到后来内容会变得越来越大，比如我的配<br/>
+   置文件现在大概有30M ，把它存放在一个文件中会显得很乱，且不容易管理，所以<br/>
+   出现了.emacs.d目录。一般使用emacs的用户会把相应的配置文件分成一个个小文件<br/>
+   放到这个目录里。<br/>
+
+<p><br/>
+   在Windows下 默认情况下,emacs的配置文件是在这个目录下的C:\Documents and<br/>
+   Settings\Administrator\Application Data\也就是说这个目录大概等同于linux<br/>
+   的home目录。大哥,别让我连Administrator要替换成你的用户名都要告诉你. 在这<br/>
+   个目录下你可以创建.emacs这样一个文件,如果你运行emacs之后它没自动创建这个<br/>
+   文件,要让你自已创建它,说不定还真有点困难,因为默认Windows的资源管理器是不<br/>
+   能创建以点开头的文件及文件夹的,cmd.exe下可以用命令可以做到. 不过你可以创<br/>
+   建"_emacs"文件,效果与.emacs一样,前提是此目录下没有.emacs不要告诉我此目录<br/>
+   下已经有.emacs文件了,你还把配置的内容写到_emacs文件里,然后问我为什么配置<br/>
+   没起作用. 不过对"C:\Documents and Settings\Administrator\Application<br/>
+   Data\"这个目录我实在没有好感,它脸长得太长先不用说,单看看它路径里的空格数<br/>
+   量就够让你喝一壶的了,真想不通有点软为何要在在目录里加上一个空格,而有时偏<br/>
+   偏它又处理不好空格带来的麻烦.所以我首先要将默认的C:\Documents and<br/>
+   Settings\Administrator\Application Data\"目录修改为一个短一点的目录,譬<br/>
+   如: "d:\".还能更短吗? 如何修改,只要修改HOME系统变量就行了.<br/>
+</p></li>
+</ul>
+<ul>
+<li id="sec-3-2">新建 HOME环境变量<br/>
+大体步骤是这样的. 右击"我的电脑"~属性~环境变量,然后点击上面的那个"新建<br/>
+",然后变量名输入"HOME"变量值输入"d:\",一路确定之后Home变量就设好了.<br/>
+<img src="../img/env_home.JPG" alt="HOME=D:\emacs-23.3" /><br/>
 </li>
 </ul>
+<ul>
+<li id="sec-3-3">创建.emacs.d目录和.emacs文件<br/>
+相信.emacs.d目录和.emacs文件是困扰大家很久的问题了，其实有个简单的办法可以解<br/>
+决此问题。启动emacs，用鼠标点击Options菜单，随便点击一两个选项，比如点击一下<br/>
+Active Region Highlighting，然后点击Save Options。先不要担心你会破坏了什么东<br/>
+西，这样做的目的是让emacs自动创建.emacs.d目录以及.emacs文件！观察你的Emacs窗<br/>
+口最后一行，是否显示“Wrote d:/.emacs”？如果是的话就对了，当你选择Save<br/>
+Options的时候，Emacs会在home路径下产生.emacs文件，并把配置信息写进这个文件。<br/>
+现在看看你的d:\目录下是否产生了这两个东西？<br/>
+</li>
+</ul>
+<ul>
+<li id="sec-3-4">修改Path 变量，将D:\\emacs-23.3\\bin加入到Path中去，其实现在可以不加，<br/>
+  但为了以后使用方便，最好加上。<br/>
 
+<p><br/>
+然后在d:\建.emacs或者_emacs文件在里面进行配置就可以了. Emacs用得时间长<br/>
+了你的配置文件会变得很大很难管理所以一般大家都会建一个.emacs.d的目录,然<br/>
+后把其他的配置文件放在这个目录里. 下面简单起见只用.emacs这一个配置文件.<br/>
+</p>
+<p><br/>
+</p></li>
+</ul>
+<ul>
+<li id="sec-3-5">配置d:\.emacs文件或d:_emacs<br/>
 
+<p><br/>
+<pre class="src src-emacs-lisp">(<span class="org-function-name">setq</span> server-auth-dir <span class="org-string">"d:\")</span>
+<span class="org-string"><span class="org-warning">(</span></span><span class="org-string">setq server-name "</span>emacs-server-file<span class="org-string">")</span>
+<span class="org-string"><span class="org-warning">(</span></span><span class="org-string">server-start)</span>
+</pre>
 
+</p>
+<p>      <br/>
+    然后像建HOME变量一样建一个<br/>
+</p></li>
+</ul>
+<ul>
+<li id="sec-3-6">EMACS_SERVER_FILE  与 ALTERNATE_EDITOR环境变量<br/>
 
+<p>       <br/>
+</p><ul>
+<li id="sec-3-6-1">EMACS_SERVER_FILE变量,值为"d:\emacs-server-file"<br/>
+<img src="../img/env_emacs_server_file.JPG" alt="ALTERNATE_EDITOR=d:\emacs-23.3\runemacs.exe" /><br/>
+
+<p><br/>
+</p></li>
+</ul>
+<ul>
+<li id="sec-3-6-2">ALTERNATE_EDITOR=d:\emacs-23.3\runemacs.exe<br/>
+<img src="../img/env_alternate_editor.JPG"  alt="../img/env_alternate_editor.JPG" /><br/>
+
+<p>       <br/>
+</p></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li id="sec-3-7">右键菜单中加入 "Open With Emacs"<br/>
+下面要实现，在资源管理器的右键菜单中加入，"Open with Emacs"这个一个选项<br/>
+。假设你把Emacs 解压到了d:\emacs-23.3\这个目录下。<br/>
+用注册表编辑器新建这样一个项<br/>
+
+<p><br/>
+<pre class="src src-c">[HKEY_CLASSES_ROOT\*\Shell\Open With Emacs\command]
+@=<span class="org-string">"D:\\emacs-23.3\\bin\\emacsclientw.exe %0"</span>
+</pre>
+
+<a href="../download/emacsclientw.reg">或者下载这个reg文件,双击导入即可</a><br/>
+</p>
+<p><br/>
+<img src="../img/emacsclient_reg.JPG"  alt="../img/emacsclient_reg.JPG" /><br/>
+<img src="../img/open_with_emacs.JPG"  alt="../img/open_with_emacs.JPG" /><br/>
+</p>
+<p><br/>
 <div id='my-src'>
-<div id='org-src'><a href='src/index.org'>src</a></div>
-<div id='htmlized-src'><a href='htmlized-src/index.org.html'>htmlized-src</a></div>
+<div id='org-src'><a href='../src/emacs/emacs-on-windows.org'>src</a></div>
+<div id='htmlized-src'><a href='../htmlized-src/emacs/emacs-on-windows.org.html'>htmlized-src</a></div>
 </div>
 <div id='tags'><span id='tags-title'>Tags:</span><br />
-<p>
-    <a href="tags/@SVN.html">@SVN</a>
-    <a href="tags/@perl.html">@perl</a>
-    <a href="tags/@Java.html">@Java</a>
-    <a href="tags/@Mysql.html">@Mysql</a>
-    <a href="tags/@Erlang.html">@Erlang</a>
-    <a href="tags/@SQL.html">@SQL</a>
-    <a href="tags/@DB.html">@DB</a>
-    <a href="tags/@Oracle.html">@Oracle</a>
-    <a href="tags/@Ediff.html">@Ediff</a>
-    <a href="tags/@Git.html">@Git</a>
-    <a href="tags/@Cedet.html">@Cedet</a>
-    <a href="tags/@C-C++.html">@C-C++</a>
-    <a href="tags/@Daily.html">@Daily</a>
-    <a href="tags/@Eclipse.html">@Eclipse</a>
-    <a href="tags/@AutoHotKey.html">@AutoHotKey</a>
-    <a href="tags/@Windows.html">@Windows</a>
-    <a href="tags/@Linux.html">@Linux</a>
-    <a href="tags/@C.html">@C</a>
-    <a href="tags/@Emacs.html">@Emacs</a>
+    <a href="../tags/@SVN.html">@SVN</a><br/>
+    <a href="../tags/@perl.html">@perl</a><br/>
+    <a href="../tags/@Java.html">@Java</a><br/>
+    <a href="../tags/@Mysql.html">@Mysql</a><br/>
+    <a href="../tags/@Erlang.html">@Erlang</a><br/>
+    <a href="../tags/@SQL.html">@SQL</a><br/>
+    <a href="../tags/@DB.html">@DB</a><br/>
+    <a href="../tags/@Oracle.html">@Oracle</a><br/>
+    <a href="../tags/@Ediff.html">@Ediff</a><br/>
+    <a href="../tags/@Git.html">@Git</a><br/>
+    <a href="../tags/@Cedet.html">@Cedet</a><br/>
+    <a href="../tags/@C-C++.html">@C-C++</a><br/>
+    <a href="../tags/@Daily.html">@Daily</a><br/>
+    <a href="../tags/@Eclipse.html">@Eclipse</a><br/>
+    <a href="../tags/@AutoHotKey.html">@AutoHotKey</a><br/>
+    <a href="../tags/@Windows.html">@Windows</a><br/>
+    <a href="../tags/@Linux.html">@Linux</a><br/>
+    <a href="../tags/@C.html">@C</a><br/>
+    <a href="../tags/@Emacs.html">@Emacs</a><br/>
 </p>
-
-
+<p><br/>
+</div>
+</p></li>
+</ul>
+</div>
 </div>
 </div>
 
 <div id="postamble">
-<p class="date">Date: 2011-06-04 星期六</p>
+<p class="date">Date: 2011-06-03 星期五</p>
 <p class="author">Author: 孤峰独秀</p>
 <p class="creator">Org version 7.8.03 with Emacs version 24</p>
 

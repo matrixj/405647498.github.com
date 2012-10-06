@@ -1,0 +1,217 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<!-- Created by htmlize-1.34 in css mode. -->
+<html>
+  <head>
+    <title>msys-bash-ls-color.org</title>
+    <style type="text/css">
+    <!--
+      body {
+        color: #F8F8F8;
+        background-color: #0C1021;
+      }
+      .comment {
+        /* font-lock-comment-face */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-block {
+        /* org-block */
+        color: #b3b3b3;
+      }
+      .org-block-begin-line {
+        /* org-block-begin-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-block-end-line {
+        /* org-block-end-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-document-info {
+        /* org-document-info */
+        color: #afeeee;
+      }
+      .org-document-info-keyword {
+        /* org-document-info-keyword */
+        color: #b3b3b3;
+      }
+      .org-document-title {
+        /* org-document-title */
+        color: #afeeee;
+        font-size: 144%;
+        font-weight: bold;
+      }
+      .org-meta-line {
+        /* org-meta-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+
+      a {
+        color: inherit;
+        background-color: inherit;
+        font: inherit;
+        text-decoration: inherit;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+    -->
+    </style>
+  </head>
+  <body>
+    <pre>
+<span class="comment"># -*- coding:utf-8 -*-</span>
+<span class="org-meta-line">#+LANGUAGE:  zh
+</span><span class="org-document-info-keyword">#+TITLE:</span><span class="comment">     </span><span class="org-document-title">&#22312;Windows&#19978;&#20351;&#29992;MSYS&#20013;&#30340;bash&#24182;&#20351;ls&#21487;&#20197;&#26174;&#31034;&#39068;&#33394;</span>
+<span class="org-document-info-keyword">#+AUTHOR:</span><span class="comment">    </span><span class="org-document-info">&#32426;&#31168;&#23792;</span>
+<span class="org-document-info-keyword">#+EMAIL:</span><span class="comment">     </span><span class="org-document-info">jixiuf@gmail.com</span>
+<span class="org-document-info-keyword">#+DATE:</span><span class="comment">     </span><span class="org-document-info">2011-10-28 &#26143;&#26399;&#20116;</span>
+<span class="org-meta-line">#+DESCRIPTION:&#22312;Windows&#19978;&#20351;&#29992;MSYS&#20013;&#30340;bash&#24182;&#20351;ls&#21487;&#20197;&#26174;&#31034;&#39068;&#33394;
+#+KEYWORDS: msys windows bash emacs color
+#+OPTIONS:   H:2 num:nil toc:t \n:t @:t ::t |:t ^:t -:t f:t *:t &lt;:t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil 
+#+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
+#+EXPORT_SELECT_TAGS: export
+#+EXPORT_EXCLUDE_TAGS: noexport
+#+FILETAGS: @Emacs @Windows
+</span>&#22312;Windows&#19978;&#65292;&#26377;Emacs&#20013;&#20351;&#29992;MSYS&#20013;&#30340;bash&#20316;&#20026;shell,&#39318;&#20808;&#20026;&#20102;&#26041;&#20415;&#20351;&#29992;&#65292;&#20889;&#20102;&#20004;&#20010;
+&#20989;&#25968;bash &#19982;bash-cd &#20998;&#21035;&#32465;&#23450;&#22312; Control+F1 ,Alt+F1&#19978;
+&#65292;&#20004;&#32773;&#30340;&#21306;&#21035;&#19978;bash-cd &#20250;&#22312;&#27599;&#27425;&#20999;&#25442;&#21040;*bash* buffer&#26102;&#65292;
+&#36816;&#34892;cd &#21629;&#20196;&#65292;&#36339;&#21040;&#24403;&#21069;&#25991;&#20214;&#25152;&#22312;&#30446;&#24405;&#65292;&#32780;bash&#21017;&#19981;&#20250;&#12290;
+&#21478;&#22806;&#25353;&#19968;&#20010;C-f1 &#26159;&#20197;&#21322;&#31383;&#21475;&#30340;&#24418;&#24335;&#21551;&#21160;bash ,&#25353;&#19979;&#20004;&#27425;C-f1
+&#20999;&#25442;&#21040;&#20840;&#23631;&#27169;&#24335;&#65292;&#36825;&#20004;&#27425;&#25353;&#19979;C-f1&#20013;&#38388;&#19981;&#33021;&#26377;&#20854;&#20182;&#25353;&#38190; &#65292;&#21542;&#21017;&#26159;&#38544;&#34255;bash&#25152;&#22312;&#31383;&#21475;&#65292;
+&#32780;&#22312;&#20840;&#23631;&#27169;&#24335;&#25353;&#19979;C-f1&#21017;&#26159;&#38544;&#34255;*bash*
+
+<span class="org-block-begin-line">#+begin_src emacs-lisp
+</span><span class="org-block">(global-set-key [C-f1] 'bash-cd)
+(global-set-key [M-f1] 'bash)
+
+;;&#36825;&#37324;&#24456;&#22810;&#21464;&#37327;&#65292;&#37117;&#34987;&#25105;&#29992;let &#32622;&#25104;&#20020;&#26102;&#21464;&#37327;&#65292;&#32780;&#20840;&#23616;&#30340;&#30456;&#24212;&#21464;&#37327;&#24182;&#27809;&#20570;&#20462;&#25913;&#65292;
+;;&#22240;&#20026;&#22312;windows &#19978;&#65292;&#25105;&#20351;&#29992;&#40664;&#35748;&#30340;cdmproxy
+;;;###autoload
+(defun bash ()
+  "Start `bash' shell."
+  (interactive)
+  (let ((binary-process-input t)
+        (binary-process-output nil)
+        (comint-scroll-show-maximum-output 'this)
+        (shell-file-name "bash")
+        ;; I don't know why on windows ,if I add -C switch ,then the color
+        ;; can't show correctly, so I comment it (shell-command-switch "-c");
+        (explicit-shell-file-name "bash") ;;term.el
+        (explicit-bash-args '("-login" "-i"))
+        (comint-completion-addsuffix t);;&#30446;&#24405;&#34917;&#20840;&#26102;,&#22312;&#26411;&#23614;&#21152;&#19968;&#20010;"/"&#23383;&#31526;
+        (comint-eol-on-send t)
+        (comint-file-name-quote-list '(?\  ?\")) ;;&#24403;&#25991;&#20214;&#21517;&#20013;&#26377;&#36825;&#20123;(&#31354;&#26684;&#24341;&#21495;)&#29305;&#27530;&#23383;&#31526;&#26102;&#20250;&#25226;&#36825;&#20123;&#29305;&#27530;&#23383;&#31526;&#29992;"\"&#36716;&#20041;
+        (w32-quote-process-args ?\")  ;;&#20877;&#32473;&#31243;&#24207;&#20256;&#36882;&#21442;&#25968;&#30340;&#26102;&#20505;,&#20351;&#29992;&#36825;&#20010;&#23383;&#31526;&#23558;&#21442;&#25968;&#25324;&#36215;&#26469;
+        ;; (eval-after-load 'ediff-diff '(progn (setq ediff-shell shell-file-name))) ;;Ediff shell
+        ;; Unfortunately, when you visit a DOS text file within an
+        ;; encoded file, you'll see CRs (^Ms) in the buffer.
+        ;; If `binary-process-output' is set to `nil', this problem goes
+        ;; away, which is fine for files of type `.gz'.
+        (ediff-shell shell-file-name))
+    ;; (when (equal system-type 'windows-nt)
+    ;;   (setq comint-output-filter-functions '(comint-strip-ctrl-m))) &#19981;&#30693;&#21407;&#22240;&#20026;&#20309;windows &#19978;&#65292;&#21152;&#20102;&#36825;&#21477;&#21518;&#65292;shell&#19981;&#26174;&#39068;&#33394;
+    (setenv "SHELL" explicit-shell-file-name)
+    (if (and (get-buffer "*bash*")
+             (buffer-live-p (get-buffer "*bash*")))
+        (cond
+         ( (not (string= (buffer-name) "*bash*"))
+           (switch-to-buffer-other-window "*bash*"))
+         ((and (string= (buffer-name) "*bash*")
+               (&gt; (length (window-list)) 1)
+               (member last-command '(bash-cd bash)))
+          (delete-other-windows)
+          )
+         ((and (string= (buffer-name) "*bash*")
+               (&gt; (length (window-list)) 1))
+          (delete-window)
+          )
+         ((and
+           (string= (buffer-name) "*bash*")
+           (equal (length (window-list)) 1))
+          (bury-buffer)
+          ))
+      (shell "*bash*")(sleep-for 1)
+      )
+    ))
+
+;;;###autoload
+(defun bash-cd(&amp;optional dir)
+  (interactive)
+  (let ((dest-dir-cd (or dir default-directory)))
+    (bash)
+    (with-current-buffer "*bash*"
+      (goto-char (point-max))
+      (insert (concat "cd " dest-dir-cd))
+      (comint-send-input))
+    ))
+</span><span class="org-block-end-line">#+end_src
+</span>
+$HOME/.bashrc&#30340;&#35774;&#32622;
+&#27880;&#24847;&#65292;&#22312; d:/usr/MinGW/msys/1.0/etc/profile&#20013;&#38656;&#35201;&#21152;&#19978;&#19979;&#38754;&#19968;&#21477;&#25918;&#22312;$HOME&#19979;
+&#30340;.bashrc&#25165;&#20250;&#36215;&#20316;&#29992;
+<span class="org-block-begin-line">#+begin_src sh
+</span><span class="org-block">. "$HOME/.bashrc"
+</span><span class="org-block-end-line">#+end_src
+</span><span class="org-block-begin-line">#+begin_src sh
+</span><span class="org-block">cd "$HOME"
+cd ~
+
+GREP_OPTIONS="--exclude-dir=\.svn --exclude=*.class --exclude-dir=classes --exclude=*.doc --exclude=*.csv --exclude=TAGS"
+export GREP_OPTIONS
+# &#35774;&#32622;&#39068;&#33394;
+LS_COLORS='no=00:fi=00:di=01;37;44:ln=01;36:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=01;05;37;41:mi=01;05;37;41:ex=01;32:*.cmd=01;32:*.exe=01;32:*.com=01;32:*.btm=01;32:*.bat=01;32:*.sh=01;32:*.csh=01;32:*.tar=01;31:*.tgz=01;31:*.arj=01;31:*.taz=01;31:*.lzh=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.gz=01;31:*.bz2=01;31:*.bz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.rar=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.jpg=01;35:*.jpeg=01;35:*.gif=01;35:*.bmp=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.mng=01;35:*.xcf=01;35:*.pcx=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.avi=01;35:*.mkv=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.mov=01;35:*.qt=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.fli=01;35:*.gl=01;35:*.dl=01;35:*.pdf=00;32:*.ps=00;32:*.txt=00;32:*.patch=00;32:*.diff=00;32:*.log=00;32:*.tex=00;32:*.doc=00;32:*.mp3=01;32:*.wav=01;32:*.mid=01;32:*.midi=01;32:*.au=01;32:*.ogg=01;32:*.flac=01;32:*.aac=01;32:';
+export LS_COLORS 
+
+
+# export LANG=zh_CN.UTF-8
+# export LC_CTYPE="zh_CN.UTF-8"
+# export LC_NUMERIC="zh_CN.UTF-8"
+# export LC_TIME="zh_CN.UTF-8"
+# export LC_COLLATE="zh_CN.UTF-8"
+# export LC_MONETARY="zh_CN.UTF-8"
+# export LC_MESSAGES="zh_CN.UTF-8"
+# export LC_ALL="zh_CN.UTF-8"
+# alias ls='ls --show-control-chars -F --color=tty'
+alias ls="ls --color  --show-control-chars -F"
+alias la="ls -a --color=auto"
+alias ll="ls -lh --color=auto"
+alias rm="rm -r"
+alias cp="cp -r"
+alias ps="ps -ef -W"
+alias pp="ps -ef -W |grep"
+alias ..="cd .."
+alias cd..="cd .."
+
+
+export LANG=zh_CN.UTF-8
+export LC_CTYPE="zh_CN.UTF-8"
+export LC_NUMERIC="zh_CN.UTF-8"
+export LC_TIME="zh_CN.UTF-8"
+export LC_COLLATE="zh_CN.UTF-8"
+export LC_MONETARY="zh_CN.UTF-8"
+export LC_MESSAGES="zh_CN.UTF-8"
+export LC_ALL="zh_CN.UTF-8"
+
+;;&#36825;&#37324;&#20026;emacs&#21450;&#27491;&#24120;&#30340;cygwin ,&#25110;mssy &#35774;&#32622;&#19981;&#21516;&#30340;PS1
+case $TERM in
+cygwin)
+export PS1='\[\033]0;$MSYSTEM:\w\007
+\033[32m\]\u@\h \[\033[33m\w\033[0m\]
+$ '
+;;
+*)
+export PS1='\W\$ ' # for emacs and others 
+;;
+esac
+
+</span><span class="org-block-end-line">#+end_src
+</span>
+;; (when (equal system-type 'windows-nt)
+;;   (setq comint-output-filter-functions '(comint-strip-ctrl-m))) &#19981;&#30693;&#21407;&#22240;&#20026;&#20309;windows &#19978;&#65292;&#21152;&#20102;&#36825;&#21477;&#21518;&#65292;shell&#19981;&#26174;&#39068;&#33394;
+</pre>
+  </body>
+</html>

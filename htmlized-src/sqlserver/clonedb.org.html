@@ -1,0 +1,252 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<!-- Created by htmlize-1.34 in css mode. -->
+<html>
+  <head>
+    <title>clonedb.org</title>
+    <style type="text/css">
+    <!--
+      body {
+        color: #F8F8F8;
+        background-color: #0C1021;
+      }
+      .comment {
+        /* font-lock-comment-face */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-block {
+        /* org-block */
+        color: #b3b3b3;
+      }
+      .org-block-begin-line {
+        /* org-block-begin-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-block-end-line {
+        /* org-block-end-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-document-info {
+        /* org-document-info */
+        color: #afeeee;
+      }
+      .org-document-info-keyword {
+        /* org-document-info-keyword */
+        color: #b3b3b3;
+      }
+      .org-document-title {
+        /* org-document-title */
+        color: #afeeee;
+        font-size: 144%;
+        font-weight: bold;
+      }
+      .org-meta-line {
+        /* org-meta-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+
+      a {
+        color: inherit;
+        background-color: inherit;
+        font: inherit;
+        text-decoration: inherit;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+    -->
+    </style>
+  </head>
+  <body>
+    <pre>
+<span class="comment"># -*- coding:utf-8 -*-</span>
+<span class="org-meta-line">#+LANGUAGE:  zh
+</span><span class="org-document-info-keyword">#+TITLE:</span><span class="comment">     </span><span class="org-document-title">clone db in sqlserver </span>
+<span class="org-document-info-keyword">#+AUTHOR:</span><span class="comment">    </span><span class="org-document-info">&#32426;&#31168;&#23792;</span>
+<span class="org-document-info-keyword">#+EMAIL:</span><span class="comment">     </span><span class="org-document-info">jixiuf@gmail.com</span>
+<span class="org-document-info-keyword">#+DATE:</span><span class="comment">     </span><span class="org-document-info">2011-10-28 &#26143;&#26399;&#20116;</span>
+<span class="org-meta-line">#+DESCRIPTION:clone db in sqlserver 
+#+KEYWORDS: sql server 
+#+OPTIONS:   H:2 num:nil toc:t \n:t @:t ::t |:t ^:t -:t f:t *:t &lt;:t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil 
+#+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
+#+EXPORT_SELECT_TAGS: export
+#+EXPORT_EXCLUDE_TAGS: noexport
+#+FILETAGS: @SQL
+</span>
+<span class="org-block-begin-line">#+begin_src sql
+</span><span class="org-block">-- sqlserver &#65292;&#26681;&#25454;&#24050;&#26377;&#25968;&#25454;&#24211;&#21019;&#24314;&#19968;&#20010;&#23436;&#20840;&#30456;&#21516;&#30340;&#25968;&#25454;&#24211;
+--  &#21407;&#29702;&#26159;&#20808;&#29992;backup &#35821;&#21477;&#23558;&#24403;&#21069;&#25968;&#25454;&#24211;&#22791;&#20221;&#25104;&#19968;&#20010;&#22791;&#20221;&#25991;&#20214;
+--  &#28982;&#21518;&#29992;restore &#21629;&#20196;&#24674;&#22797;&#12290;&#20013;&#38388;&#36807;&#31243;&#20013;&#65292;&#20250;&#23558;&#25968;&#25454;&#25991;&#20214;&#19982;&#26085;&#24535;&#25991;&#20214;
+-- &#30340;&#21517;&#23383;&#21450;&#25968;&#25454;&#24211;&#30340;&#21517;&#23383;&#36827;&#34892;&#26356;&#25913;&#65292;&#20174;&#32780;&#65292;&#23454;&#29616;clone .
+
+USE master
+GO
+--&#21407;&#22987;&#30340;&#25968;&#25454;&#24211;&#21517;&#31216;&#12290;&#27604;&#22914;&#27492;&#22788;&#25105;&#35774;&#25104;HAIHUA_MRP 
+-- the original database (use 'SET @DB = NULL' to disable backup)
+DECLARE @DB varchar(200)
+SET @DB = 'meiji_0421_null'
+
+-- &#29983;&#25104;&#30340;&#22791;&#20221;&#25991;&#20214;&#30340;&#20301;&#32622;
+-- the backup filename
+DECLARE @BackupFile varchar(2000)
+SET @BackupFile = 'c:\meiji_jixf4.dat'
+
+-- &#26032;&#25968;&#25454;&#24211;&#30340;&#21517;&#23383;
+-- the new database name
+DECLARE @TestDB varchar(200)
+SET @TestDB = 'meiji_jixf4'
+-- &#26032;&#25968;&#25454;&#24211;&#25152;&#29992;&#21040;&#30340;&#26085;&#24535;&#25991;&#20214;&#21450;&#25968;&#25454;&#25991;&#20214;&#30340;&#21517;&#23383;&#65292;&#19981;&#21253;&#21547;&#21518;&#32512;&#23383;
+-- &#19979;&#25991;&#20250;&#33258;&#21160;&#36861;&#21152;&#21518;&#32512;&#21517;
+-- the new database files without .mdf/.ldf
+DECLARE @RestoreFile varchar(2000)
+SET @RestoreFile = 'c:\meiji_jixf4'
+
+
+-- ****************************************************************
+--                    no change below this line
+--  &#20197;&#19979;&#20869;&#23481;&#65292;&#19981;&#35201;&#20462;&#25913;
+-- ****************************************************************
+
+
+DECLARE @query varchar(2000)
+
+DECLARE @DataFile varchar(2000)
+SET @DataFile = @RestoreFile + '.mdf'
+
+DECLARE @LogFile varchar(2000)
+SET @LogFile = @RestoreFile + '.ldf'
+
+IF @DB IS NOT NULL
+BEGIN
+SET @query = 'BACKUP DATABASE ' + @DB + ' TO DISK = ' + QUOTENAME(@BackupFile, '''')
+EXEC (@query)
+END
+
+-- RESTORE FILELISTONLY FROM DISK = 'C:\temp\backup.dat'
+-- RESTORE HEADERONLY FROM DISK = 'C:\temp\backup.dat'
+-- RESTORE LABELONLY FROM DISK = 'C:\temp\backup.dat'
+-- RESTORE VERIFYONLY FROM DISK = 'C:\temp\backup.dat'
+
+IF EXISTS(SELECT * FROM sysdatabases WHERE name = @TestDB)
+BEGIN
+SET @query = 'DROP DATABASE ' + @TestDB
+EXEC (@query)
+END
+
+-- RESTORE HEADERONLY FROM DISK = @BackupFile
+-- DECLARE @File int
+-- SET @File = @@ROWCOUNT
+
+DECLARE @Data varchar(500)
+DECLARE @Log varchar(500)
+
+SET @query = 'RESTORE FILELISTONLY FROM DISK = ' + QUOTENAME(@BackupFile , '''')
+
+--- &#36825;&#24352;&#20020;&#26102;&#34920;&#30340;&#32467;&#26500;&#19982;SET @query = 'RESTORE FILELISTONLY FROM DISK = ' + QUOTENAME(@BackupFile , '''')
+--  &#21629;&#20196;&#30340;&#32467;&#26524;&#30456;&#21516;&#65292;&#30446;&#30340;&#21482;&#26159;&#20026;&#20102;&#20445;&#23384;&#19978;&#36848;&#32467;&#26524;&#21040;&#19968;&#24352;&#34920;&#65292;&#28982;&#21518;&#21462;&#24471;&#20854;&#20013;&#26085;&#24535;&#25991;&#20214;&#21450;&#25968;&#25454;&#25991;&#20214;&#30340;logicalName
+-- &#22240;&#20026;&#22312;restore &#26102;&#65292;&#20250;&#29992;&#21040;&#23427;&#23558;&#26085;&#24535;&#25991;&#20214;&#25968;&#25454;&#25991;&#20214;&#30340;&#20301;&#32622;&#36827;&#34892;&#26356;&#25913;
+CREATE TABLE #restoretemp
+(
+LogicalName varchar(500),
+PhysicalName varchar(500),
+type varchar(10),
+FilegroupName varchar(200),
+size int,
+maxsize bigint,
+fileid varchar(200),
+createlsn varchar(200),
+droplsn  varchar(200),
+uniqueid varchar(200),
+readonlylsn  varchar(200),
+readwritelsn varchar(200),
+backupsizeinbytes bigint ,
+sourceblocksize int ,
+filegroupid int ,
+loggroupguid varchar(200),
+differentialbaselsn bigint,
+differentialbaseguid varchar(200),
+isreadonly bit,
+ispresent bit
+
+
+)
+INSERT #restoretemp EXEC (@query)
+
+SELECT @Data = LogicalName FROM #restoretemp WHERE type = 'D'
+SELECT @Log = LogicalName FROM #restoretemp WHERE type = 'L'
+
+PRINT @Data
+PRINT @Log
+
+TRUNCATE TABLE #restoretemp
+drop table  #restoretemp
+SET @query = 'RESTORE DATABASE ' + @TestDB + ' FROM DISK = ' + QUOTENAME(@BackupFile, '''') + 
+' WITH MOVE ' + QUOTENAME(@Data, '''') + ' TO ' + QUOTENAME(@DataFile, '''') + ', MOVE ' +
+QUOTENAME(@Log, '''') + ' TO ' + QUOTENAME(@LogFile, '''')  
+EXEC (@query)
+GO
+------------------------------------------
+--&#31616;&#21333;&#30340;&#31034;&#20363;&#65292;&#19981;&#20855;&#36890;&#29992;&#65292;&#20294;&#20856;&#22411;&#65292;&#19978;&#38754;&#30340;&#20195;&#30721;&#22522;&#26412;&#20351;&#29992;&#36825;&#38754;&#20195;&#30721;
+-- backup database jixf to disk='d:jixf_data.bak'
+-- Restore FILELISTONLY FROM DISK='d:\jixf_data.bak'
+-- rESTORE DATABASE jixf2
+-- FROM DISK='d:\jixf_data.bak'
+-- WITH
+-- MOVE 'jixf' TO 'D:\jixf_data2.mdf',
+-- MOVE 'jixf_log' TO 'D:\jixf_data2_log.ldf'
+
+-- rESTORE DATABASE jixf2
+-- FROM DISK='d:\jixf_data.bak'
+-- WITH
+-- MOVE 'jixf' TO 'D:\jixf_data2.mdf',
+-- MOVE 'jixf_log' TO 'D:\jixf_data2_log.ldf',stats=5
+
+-- RESTORE HEADERONLY FROM DISK ='d:\jixf_data.bak'
+
+
+
+-- backup database  [HAIHUA_MRP_Test_jujt(20110905)] TO DISK = N'C:\HAIHUA_MRP_Test_jujt.bak'  
+-- go
+
+-- rESTORE DATABASE jixf23
+-- FROM
+-- DISK = N'C:\HAIHUA_MRP_Test_jujt.bak'
+-- WITH
+-- MOVE 'HAIHUA_MRP_TEST1' TO 'D:\jixf_data23.mdf',
+-- MOVE 'HAIHUA_MRP_TEST1_log' TO 'D:\jixf_data23_log.ldf',stats=5
+
+
+-- rESTORE DATABASE jixf23
+-- FROM DISK = N'C:\HAIHUA_MRP_Test_jujt.bak'
+-- WITH
+-- MOVE 'HAIHUA_MRP_TEST1' TO 'D:\jixf_data23.mdf',
+-- MOVE 'HAIHUA_MRP_TEST1_log' TO 'D:\jixf_data23_log.ldf',stats=5
+
+-- RESTORE HEADERONLY FROM DISK = N'C:\HAIHUA_MRP_Test_jujt.bak'
+
+-- 20110921
+-- rESTORE DATABASE HAIHUA_MRP_Test_WANGZL_20110921
+-- FROM
+-- DISK = N'c:\haihua\HAIHUA_MRP_TEST_20110921_BAK.bak'
+-- WITH
+-- MOVE 'HAIHUA_MRP_TEST1' TO 'c:\haihua\Temp\db\jixf_data56.mdf',
+-- MOVE 'HAIHUA_MRP_TEST1_log' TO 'c:\haihua\Temp\db\jixf_data56_log.ldf',stats=5
+
+
+
+-- rESTORE DATABASE HAIHUA_MRP_Test_WANGZL_20110921
+-- FROM 
+-- DISK = N'c:\haihua\HAIHUA_MRP_TEST_20110921_BAK.bak'
+-- WITH
+-- MOVE 'HAIHUA_MRP_TEST1' TO  'c:\haihua\Temp\db\jixf_data56.mdf',
+-- MOVE 'HAIHUA_MRP_TEST1_log' TO 'c:\haihua\Temp\db\jixf_data56_log.ldf',stats=5
+
+-- RESTORE HEADERONLY FROM DISK =N'c:\haihua\HAIHUA_MRP_TEST_20110921_BAK.bak'
+</span><span class="org-block-end-line">#+end_src
+</span></pre>
+  </body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<!-- Created by htmlize-1.34 in css mode. -->
+<html>
+  <head>
+    <title>echo.org</title>
+    <style type="text/css">
+    <!--
+      body {
+        color: #F8F8F8;
+        background-color: #0C1021;
+      }
+      .comment {
+        /* font-lock-comment-face */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-block {
+        /* org-block */
+        color: #b3b3b3;
+      }
+      .org-block-begin-line {
+        /* org-block-begin-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-block-end-line {
+        /* org-block-end-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-document-info {
+        /* org-document-info */
+        color: #afeeee;
+      }
+      .org-document-info-keyword {
+        /* org-document-info-keyword */
+        color: #b3b3b3;
+      }
+      .org-document-title {
+        /* org-document-title */
+        color: #afeeee;
+        font-size: 144%;
+        font-weight: bold;
+      }
+      .org-meta-line {
+        /* org-meta-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+
+      a {
+        color: inherit;
+        background-color: inherit;
+        font: inherit;
+        text-decoration: inherit;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+    -->
+    </style>
+  </head>
+  <body>
+    <pre>
+<span class="comment"># -*- coding:utf-8 -*-</span>
+<span class="org-meta-line">#+LANGUAGE:  zh
+</span><span class="org-document-info-keyword">#+TITLE:</span><span class="comment">     </span><span class="org-document-title">echo</span>
+<span class="org-document-info-keyword">#+AUTHOR:</span><span class="comment">    </span><span class="org-document-info">&#32426;&#31168;&#23792;</span>
+<span class="org-document-info-keyword">#+EMAIL:</span><span class="comment">     </span><span class="org-document-info">jixiuf@gmail.com</span>
+<span class="org-document-info-keyword">#+DATE:</span><span class="comment">     </span><span class="org-document-info">2011-11-08 &#20108;</span>
+<span class="org-meta-line">#+DESCRIPTION:echo
+#+KEYWORDS: erlang echo
+#+OPTIONS:   H:2 num:nil toc:t \n:t @:t ::t |:t ^:t -:t f:t *:t &lt;:t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil
+#+FILETAGS: @Erlang
+</span>
+<span class="org-block-begin-line">#+begin_src erlang
+</span><span class="org-block">-module(echo).
+-export([start/0, loop/0]).
+
+start() -&gt;
+    I=    spawn(echo, loop, []),                %&#21551;&#21160;&#19968;&#20010;&#36827;&#31243;I ,&#36825;&#20010;&#36827;&#31243;&#19982;echo &#27169;&#22359;&#20869;&#30340;loop&#20989;&#25968;&#30456;&#32465;&#23450;,loop&#20989;&#25968;&#26377;[](&#21363;0)&#20010;&#21442;&#25968;,
+    I!{self(),helo},                            %&#21521;&#36827;&#34892;I&#21457;&#36865;&#19968;&#26465;&#28040;&#24687; ,&#20869;&#23481;&#20026;&#24403;&#21069;&#36827;&#31243;&#30340;Id.
+    receive                                     %&#21457;&#36865;&#23436;&#27605;&#21518;,&#20063;&#36827;&#34892;receive&#38459;&#22622;&#29366;&#24577;,&#20934;&#22791;&#25509;&#25910;&#28040;&#24687;
+        Msg-&gt;                                   %
+            io:format("~w~n",[Msg])             %&#23558;&#25509;&#25910;&#30340;&#30340;&#28040;&#24687;&#36827;&#34892;  print.
+    end.
+loop() -&gt;
+    receive                                     %&#36827;&#34892;loop&#20989;&#25968;&#21518;,&#39532;&#19978;&#38459;&#38548;&#22622;.
+        {From, Message} -&gt;                      %&#25509;&#25910;&#26684;&#24335;&#20026;{From,Message}&#30340;&#28040;&#24687;.
+            From ! Message,                     %&#21521;From &#36820;&#22238;&#25509;&#25910;&#21040;&#30340;&#28040;&#24687;Message
+            loop()                              %&#32487;&#32493;&#35843;&#29992;loop&#25509;&#25910;&#19979;&#19968;&#26465;&#28040;&#24687;
+    end.
+</span><span class="org-block-end-line">#+end_src
+</span></pre>
+  </body>
+</html>

@@ -1,0 +1,305 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<!-- Created by htmlize-1.34 in css mode. -->
+<html>
+  <head>
+    <title>binary_bit.org</title>
+    <style type="text/css">
+    <!--
+      body {
+        color: #F8F8F8;
+        background-color: #0C1021;
+      }
+      .comment {
+        /* font-lock-comment-face */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .ethan-wspace {
+        /* ethan-wspace-face */
+        background-color: #ffffcccccccc;
+      }
+      .org-block {
+        /* org-block */
+        color: #b3b3b3;
+      }
+      .org-block-begin-line {
+        /* org-block-begin-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-block-end-line {
+        /* org-block-end-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-document-info {
+        /* org-document-info */
+        color: #afeeee;
+      }
+      .org-document-info-keyword {
+        /* org-document-info-keyword */
+        color: #b3b3b3;
+      }
+      .org-document-title {
+        /* org-document-title */
+        color: #afeeee;
+        font-size: 144%;
+        font-weight: bold;
+      }
+      .org-level-1 {
+        /* org-level-1 */
+        color: #FF6400;
+      }
+      .org-level-2 {
+        /* org-level-2 */
+        color: #40E0D0;
+      }
+      .org-level-3 {
+        /* org-level-3 */
+        color: #FBDE2D;
+      }
+      .org-level-4 {
+        /* org-level-4 */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-link {
+        /* org-link */
+        color: #00ffff;
+        text-decoration: underline;
+      }
+      .org-meta-line {
+        /* org-meta-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-table {
+        /* org-table */
+        color: #87cefa;
+      }
+
+      a {
+        color: inherit;
+        background-color: inherit;
+        font: inherit;
+        text-decoration: inherit;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+    -->
+    </style>
+  </head>
+  <body>
+    <pre>
+<span class="comment"># -*- coding:utf-8 -*-</span>
+<span class="org-meta-line">#+LANGUAGE:  zh
+</span><span class="org-document-info-keyword">#+TITLE:</span><span class="comment">     </span><span class="org-document-title">erlang&#30340;&#20108;&#36827;&#21046;&#25968;&#25454;&#22788;&#29702;&#65292;binnary,&#21450;bit Syntax(&#35821;&#27861;)</span>
+<span class="org-document-info-keyword">#+AUTHOR:</span><span class="comment">    </span><span class="org-document-info">&#32426;&#31168;&#23792;</span>
+<span class="org-document-info-keyword">#+EMAIL:</span><span class="comment">     </span><span class="org-document-info">jixiuf@gmail.com</span>
+<span class="org-document-info-keyword">#+DATE:</span><span class="comment">     </span><span class="org-document-info">2012-01-07 &#20845;</span>
+<span class="org-meta-line">#+DESCRIPTION:erlang&#30340;&#20108;&#36827;&#21046;&#25968;&#25454;&#22788;&#29702;&#65292;binnary,&#21450;bit Syntax(&#35821;&#27861;)
+#+KEYWORDS: erlang binary bit byte
+#+OPTIONS:   H:2 num:nil toc:t \n:t @:t ::t |:t ^:nil -:t f:t *:t &lt;:t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil
+#+FILETAGS: @Erlang
+</span>
+erlang &#23545;&#20110;&#20108;&#36827;&#21046;&#30340;&#25968;&#25454;&#22788;&#29702;&#25552;&#20379;&#20102;&#38750;&#24120;&#24378;&#22823;&#30340;&#35821;&#27861;&#65292;&#32780;&#19968;&#33324;&#35821;&#35328;&#23545;&#20110;&#20108;&#36827;&#21046;&#25968;&#25454;&#30340;&#22788;
+&#29702;&#22810;&#29992;&#31227;&#20301;&#25805;&#20316;&#26469;&#23436;&#25104;&#12290;
+<span class="org-level-1">* &#39318;&#20808;&#34917;&#20805;&#28857;&#22522;&#30784;&#30693;&#35782;&#65292;&#20813;&#24471;&#19968;&#20250;&#28151;&#20081;&#20102;&#12290;</span>
+<span class="org-block-begin-line">#+begin_src sh
+</span><span class="org-block">1 byte = 8 bit (1&#23383;&#33410; === 8&#20301;)
+1 int =4 byte = 32 bit(&#20854;&#20182;&#35821;&#35328;&#20013; &#19968;&#33324;&#24773;&#20917;&#19979;int &#31867;&#22411;&#20026;4&#23383;&#33410;&#65292;32&#20301;)
+2^8 =256 (2 &#30340;&#20843;&#27425;&#26041;&#26159;256,)
+&#20284;&#20046;erlang &#19981;&#21306;&#20998;int float ,
+</span><span class="org-block-end-line">#+end_src
+</span>
+<span class="org-table">|---------+------+------+------+------+------+------+------+------+------+------+------+------+------+------+------+------|</span>
+<span class="org-table">| hex     |    0 |    1 |    2 |    3 |    4 |    5 |    6 |    7 |    8 |    9 |    a |    b |    c |    d |    e |    f |</span>
+<span class="org-table">|---------+------+------+------+------+------+------+------+------+------+------+------+------+------+------+------+------|</span>
+<span class="org-table">| binnary | 0000 | 0001 | 0010 | 0011 | 0100 | 0101 | 0110 | 0111 | 1000 | 1001 | 1010 | 1011 | 1100 | 1101 | 1110 | 1111 |</span>
+<span class="org-table">|---------+------+------+------+------+------+------+------+------+------+------+------+------+------+------+------+------|</span>
+&#25152;&#20197;&#19968;&#20010;&#21313;&#20845;&#36827;&#21046;&#23383;&#31526;&#38656;&#35201;4&#20301;(4bit)&#26469;&#34920;&#31034;,&#25925;&#19968;&#23383;&#33410;(byte)&#21487;&#20197;&#23481;&#32435;2&#20010;&#21313;&#20845;&#36827;&#21046;&#23383;&#31526;,
+&#25925; 16#ffffff &#21344;3&#23383;&#33410;&#65292;24&#20301;&#65292;&#23601;&#19981;&#38590;&#29702;&#35299;&#20102;.
+<span class="org-level-1">* &#20108;&#36827;&#21046;&#65292;&#20843;&#36827;&#21046;&#65292;&#21313;&#20845;&#36827;&#21046;&#25968;&#30340;&#34920;&#31034;&#26041;&#27861;&#20030;&#20363;</span>
+  <span class="org-table">| &#20108;&#36827;&#21046;     | &#20843;&#36827;&#21046;     | &#21313;&#20845;&#36827;&#21046;  |</span>
+  <span class="org-table">| 2#00001111 | 8#12345670 | 16#ff     |</span>
+  <span class="org-table">| 2#0010     | 8#123      | 16#ff0011 |</span>
+  <span class="org-table">|            |            |           |</span>
+<span class="org-level-1">* erlang &#20960;&#20010;&#21462;size &#30340;BIF(build in functions)</span>
+  + size/1 &#36820;&#22238;&#23383;&#33410;&#25968;(byte&#20026;&#21333;&#20301;)
+  + bit_size/1 (&#36820;&#22238;&#20301;&#25968;,bit&#20026;&#21333;&#20301;)
+<span class="org-level-1">* bit syntax &#37325;&#22836;&#25103;</span>
+<span class="org-level-2">** &#25972;&#25968;&#65292;</span>
+   &#23545;&#20110;&#23383;&#27597;&#65292;&#25968;&#23383;&#36716;&#21270;&#25104;binary,&#21487;&#20197;&#36827;&#34892;&#36825;&#26679;&#30340;&#25805;&#20316;
+<span class="org-block-begin-line">   #+begin_src erlang
+</span><span class="org-block">     (emacs@jf.org)77&gt; A = &lt;&lt;12&gt;&gt;.
+     &lt;&lt;"\f"&gt;&gt;
+     (emacs@jf.org)78&gt; B = &lt;&lt;23&gt;&gt;.
+     &lt;&lt;23&gt;&gt;
+     (emacs@jf.org)79&gt; C = &lt;&lt;257&gt;&gt;. % &#22823;&#20110;256
+     &lt;&lt;1&gt;&gt;
+     (emacs@jf.org)80&gt; bit_size(A).
+     8
+     (emacs@jf.org)81&gt; bit_size(C).
+     8
+     (emacs@jf.org)82&gt;
+</span><span class="org-block-end-line">   #+end_src
+</span>   <span class="org-table">|                  decimal |           binary |</span>
+   <span class="org-table">|                       12 |         00001100 |</span>
+   <span class="org-table">|                       23 |         00010111 |</span>
+   <span class="org-table">| 257(&#21482;&#21462;&#21069;8bit 00000001) | 0000000100000001 |</span>
+&#20197;&#19978;&#21487;&#35265;: &#23545;&#20110;&#25968;&#23383;&#30340;&#24773;&#20917;&#65306;&#25968;&#23383;&#21482;&#33021;&#25509;&#21463;8bit &#30340;&#25968;&#23383;&#65292;&#21363;&#23567;&#20110;256&#30340;&#25968;&#23383;(&#19981;&#21253;&#25324;256)
+
+<span class="org-block-begin-line">#+begin_src erlang
+</span><span class="org-block">     (emacs@jf.org)63&gt; B= &lt;&lt;1,2,3,4&gt;&gt;. %B&#26159;&#20108;&#36827;&#21046;&#25968;&#25454;&#65292;32bit
+     &lt;&lt;1,2,3,4&gt;&gt;
+     (emacs@jf.org)64&gt; &lt;&lt;C:32&gt;&gt; = B.  %&#32473;&#25972;&#25968;C&#36171;&#20540;
+     &lt;&lt;1,2,3,4&gt;&gt;
+     (emacs@jf.org)65&gt; C.
+     16909060
+     (emacs@jf.org)66&gt;F = &lt;&lt;C:32&gt;&gt;.    % int --&gt;binary ,F&#26159;&#20108;&#36827;&#21046;
+     &lt;&lt;1,2,3,4&gt;&gt;
+</span><span class="org-block-end-line">#+end_src
+</span><span class="org-table">|  decimal |                              binary |</span>
+<span class="org-table">|        1 |                            00000001 |</span>
+<span class="org-table">|        2 |                            00000010 |</span>
+<span class="org-table">|        3 |                            00000011 |</span>
+<span class="org-table">|        4 |                            00000100 |</span>
+<span class="org-table">| 16909060 | 00000001 00000010 00000011 00000100 |</span>
+&#23545;&#20197;&#19978;&#20195;&#30721;&#36827;&#34892;&#20998;&#26512;,&#21487;&#20197;&#24471;&#30693;&#22914;&#20309;&#20174;&#19968;&#20010;&#20108;&#36827;&#21046;&#25968;&#20013;&#25130;&#21462;&#20986;&#19968;&#20010;int &#26469;&#65292;
+&#21450;&#22914;&#20309;&#23558;&#19968;&#20010;int &#20540;&#20889;&#21040;&#20108;&#36827;&#21046;&#25968;&#25454;&#20013;
+
+<span class="org-level-2">** &#23383;&#31526;,&#27599;&#20010;&#23383;&#31526;&#20197;&#20854;ascii &#20540;&#26469;&#22788;&#29702;</span>
+<span class="org-block-begin-line">#+begin_src erlang
+</span><span class="org-block">     (emacs@jf.org)110&gt; A = &lt;&lt;"a"&gt;&gt;. % &#31561;&#25928;&#20110; A = &lt;&lt;97&gt;&gt;.
+     &lt;&lt;"a"&gt;&gt;
+     (emacs@jf.org)111&gt; A. % A&#26159;&#20108;&#36827;&#21046;&#25968;&#25454;
+     &lt;&lt;"a"&gt;&gt;
+     (emacs@jf.org)112&gt; &lt;&lt;B:8&gt;&gt; = A.
+     &lt;&lt;"a"&gt;&gt;
+     (emacs@jf.org)113&gt; B. % B&#26159;&#25972;&#25968;&#65292;8bit
+     97
+     (emacs@jf.org)114&gt; bit_size(A).
+     8
+     (emacs@jf.org)115&gt; size(A).
+     1
+     (emacs@jf.org)116&gt; E = &lt;&lt;"ab"&gt;&gt;. %&#31561;&#25928;&#20110; E = &lt;&lt;97,98&gt;&gt;.
+     &lt;&lt;"ab"&gt;&gt;
+       % &#21478;&#22806;&#23383;&#31526;&#36824;&#21487;&#20197;&#36825;&#26679;&#34920;&#31034;   $a,$b,$c
+      (emacs@jf.org)132&gt;  C = &lt;&lt;$a&gt;&gt;.
+        &lt;&lt;"a"&gt;&gt;
+</span><span class="org-block-end-line">#+end_src
+</span><span class="org-level-2">** &#20854;&#20182;&#31034;&#20363;</span>
+<span class="org-block-begin-line">   #+begin_src erlang
+</span><span class="org-block">     (emacs@jf.org)127&gt; A = &lt;&lt;1,2,3&gt;&gt;.
+     &lt;&lt;1,2,3&gt;&gt;
+     (emacs@jf.org)128&gt; bit_size(A).
+     24
+     (emacs@jf.org)129&gt; B = &lt;&lt;1,2,3:16&gt;&gt;.
+     &lt;&lt;1,2,0,3&gt;&gt;
+     (emacs@jf.org)130&gt; bit_size(B).
+     32
+     (emacs@jf.org)131&gt;
+</span><span class="org-block-end-line">   #+end_src
+</span>   &#20851;&#20110;&#20301;&#25968;&#30340;&#25511;&#21046;
+   <span class="org-table">| 3:16 | ,16&#20301;&#30340;&#25968;&#23383;3 | 00000000 00000011 |</span>
+   <span class="org-table">|    3 | 8&#20301;&#30340;&#25968;&#23383;3   |          00000011 |</span>
+<span class="org-level-2">** &#20108;&#36827;&#21046;&#30340;&#34920;&#31034;&#26041;&#27861;&#65292;&#23436;&#20840;&#35821;&#27861;</span>
+    + Value
+<span class="ethan-wspace">    </span>+ Value:Size
+<span class="ethan-wspace">    </span>+ Value/TypeSpecifierList
+<span class="ethan-wspace">    </span>+ Value:Size/TypeSpecifierList
+<span class="org-level-3">*** &#20854;&#20013;TypeSpecifierList&#21487;&#20197;&#26159;&#20197;&#19979;&#20960;&#31181;&#31867;&#22411;&#21450;&#20854;&#32452;&#21512;&#65292;&#32452;&#21512;&#20197; - &#30456;&#36830;</span>
+<span class="org-level-4">**** Type(&#31867;&#22411;)</span>
+        integer | float | binary | bytes | bitstring | bits | utf8 | utf16 | utf32
+        bytes == binary
+        bits == bitstring
+<span class="org-level-4">**** Signedness (&#26159;&#21542;&#20026;&#26377;&#31526;&#21495;&#25972;&#25968; + /-)</span>
+        signed  | unsigned
+        &#21482;&#26377;&#24403;Type &#20026;integer &#26102;&#26377;&#25928;&#65292;&#40664;&#35748;&#20026;unsigned
+
+<span class="org-level-4">**** Endianness(&#23383;&#33410;&#24207;) (default big)</span>
+       big | little | native
+       &#21738;&#20010;&#23383;&#33410;&#23384;&#20648;&#22312;&#20302;&#22320;&#22336;(&#20869;&#23384;&#22320;&#22336;)
+       &#32593;&#32476;&#20256;&#36755;&#19968;&#33324;&#37319;&#29992;&#22823;&#31471;&#24207;big&#65292;&#20063;&#34987;&#31216;&#20043;&#20026;&#32593;&#32476;&#23383;&#33410;&#24207;&#65292;&#25110;&#32593;&#32476;&#24207;
+&#27604;&#22914;&#23545;&#20110;&#19968;&#20010;32&#20301;&#30340;&#25972;&#25968; 72 ,&#36825;32&#20301;&#26159;&#22914;&#20309;&#23433;&#25490;&#30340;
+<span class="org-table">|     72 | little-endian                       | big-endian                          |</span>
+<span class="org-table">|     72 | &lt;&lt;72,0,0,0&gt;&gt;                        | &lt;&lt;0,0,0,72&gt;&gt;                        |</span>
+<span class="org-table">| binary | 01001000 00000000 00000000 00000000 | 00000000 01001000 00000000 00000000 |</span>
+<span class="org-block-begin-line">#+begin_src erlang
+</span><span class="org-block">(emacs@jf.org)1&gt; A = &lt;&lt;72:32&gt;&gt;. % big-endian
+&lt;&lt;0,0,0,72&gt;&gt;
+</span><span class="org-block-end-line">#+end_src
+</span><span class="org-level-4">**** Unit</span>
+     &#35821;&#27861; unit:Integer ,&#22914;unit:1
+     &#21462;&#20540;&#33539;&#22260;1..257
+     <span class="org-table">| integer,float,bitstring |            1 |</span>
+     <span class="org-table">| binary                  |            8 |</span>
+     <span class="org-table">| utf8 ,utf16,utf32,      | &#19981;&#38656;&#35201;&#27492;&#23646;&#24615; |</span>
+<span class="org-block-begin-line">        #+begin_src erlang
+</span><span class="org-block">        10&gt; &lt;&lt;X1/unsigned&gt;&gt; =  &lt;&lt;-44&gt;&gt;.
+        &lt;&lt;"&#212;"&gt;&gt;
+        11&gt; X1.
+        212
+        12&gt; &lt;&lt;X2/signed&gt;&gt; =  &lt;&lt;-44&gt;&gt;.
+        &lt;&lt;"&#212;"&gt;&gt;
+        13&gt; X2.
+        -44
+        14&gt; &lt;&lt;X2/integer-signed-little&gt;&gt; =  &lt;&lt;-44&gt;&gt;.
+        &lt;&lt;"&#212;"&gt;&gt;
+        15&gt; X2.
+        -44
+        16&gt; &lt;&lt;N:8/unit:1&gt;&gt; = &lt;&lt;72&gt;&gt;.
+        &lt;&lt;"H"&gt;&gt;
+        17&gt; N.
+        72
+        18&gt; &lt;&lt;N/integer&gt;&gt; = &lt;&lt;72&gt;&gt;.
+        &lt;&lt;"H"&gt;&gt;
+        19&gt; &lt;&lt;Y:4/little-unit:8&gt;&gt; = &lt;&lt;72,0,0,0&gt;&gt;.
+        &lt;&lt;72,0,0,0&gt;&gt;
+        20&gt; Y.
+        72
+</span><span class="org-block-end-line">        #+end_src
+</span><span class="org-level-1">* &#31227;&#20301; and or &#31561;&#20256;&#32479;&#25805;&#20316;</span>
+  + bsl (Bit Shift Left),
+  + bsr (Bit Shift Right),
+  + band,
+  + bor,
+  + bxor,
+  + bnot.
+<span class="org-level-1">* &#31034;&#20363; int32--&gt;binary binary--&gt;int32</span>
+  &#23558;int32&#36716;&#25442;&#25104;binary ,&#20174;binary &#22836;&#37096;&#35835;&#21462;32&#20301;&#65292;&#36716;&#25104;int32
+<span class="org-block-begin-line">#+begin_src erlang
+</span><span class="org-block">-module(aaa).
+-export([int32_2_binary/1,read_int32_from_binary/1]).
+
+
+%%int&#25353;&#32593;&#32476;&#23383;&#33410;&#27969; &#36716;&#25104;binary
+%%&#32593;&#32476;&#20256;&#36755;&#19968;&#33324;&#37319;&#29992;&#22823;&#31471;&#24207;big&#65292;&#20063;&#34987;&#31216;&#20043;&#20026;&#32593;&#32476;&#23383;&#33410;&#24207;&#65292;&#25110;&#32593;&#32476;&#24207;
+%%&#32780;erlang &#40664;&#35748;&#23601;&#26159;big
+int32_2_binary(Int) when is_integer(Int)-&gt;
+    &lt;&lt;Int:32&gt;&gt; ;
+int32_2_binary(Bin) when is_binary(Bin) -&gt;                          %&#33509;&#26412;&#23601;Bin ,&#30452;&#25509;&#36820;&#22238;
+    Bin.
+
+%%&#40664;&#35748;binary &#38271;&#24230;&#22823;&#20110;32
+read_int32_from_binary(Bin) when is_binary(Bin)-&gt;
+    &lt;&lt;Int:32,_/bits&gt;&gt; = Bin,
+    Int
+        ;
+read_int32_from_binary(Int) when is_integer(Int) -&gt;
+    Int.
+%% aaa:read_int32_from_binary(&lt;&lt;"abcdefghijk"&gt;&gt;).
+%% 1633837924
+%% 1100001 01100010 01100011 01100100
+%% 97      98       99          100
+%% a       b         c          d
+</span><span class="org-block-end-line">#+end_src
+</span><span class="org-level-1">* &#21442;&#32771;&#38142;&#25509;</span>
+ + <span class="org-link">learnyousomeerlang.com/bit syntax</span>
+ + <span class="org-link">http://www.erlang.org/euc/00/bit_syntax.html</span>
+ + <span class="org-link">&#23383;&#33410;&#24207;wiki</span>
+</pre>
+  </body>
+</html>

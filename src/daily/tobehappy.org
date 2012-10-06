@@ -1,0 +1,21 @@
+# -*- coding:utf-8 -*-
+#+LANGUAGE:  zh
+#+TITLE:     tobehappy
+#+EMAIL:     jixiuf@gmail.com
+#+DATE:      2011-06-03 星期五
+#+FILETAGS: @Daily
+#+OPTIONS:   H:2 num:nil toc:t \n:t @:t ::t |:t ^:t -:t f:t *:t <:t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc
+#+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
+#+EXPORT_SELECT_TAGS: export
+#+EXPORT_EXCLUDE_TAGS: noexport
+         其实天很蓝
+         阴云总要散
+         其实海不宽
+         此岸连彼岸
+         其实梦很浅
+         万物皆自然
+         其实泪也甜
+         当你心如愿
+         其实我的想法很简单
+         只要你快乐平安每一天！ 

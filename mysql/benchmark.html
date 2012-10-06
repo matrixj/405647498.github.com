@@ -3,14 +3,14 @@
                "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="zh" xml:lang="zh">
 <head>
-<title>一个人的狂欢</title>
+<title>mysql压力测试</title>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
-<meta name="title" content="一个人的狂欢"/>
+<meta name="title" content="mysql压力测试"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2011-06-04 星期六"/>
-<meta name="author" content="孤峰独秀"/>
-<meta name="description" content=""/>
-<meta name="keywords" content=""/>
+<meta name="generated" content="2012-10-03 21:59:33 CST"/>
+<meta name="author" content="纪秀峰"/>
+<meta name="description" content="mysql压力测试"/>
+<meta name="keywords" content="mysql db"/>
 <style type='text/css'>
        body {
     background-color: #E5E5E5;
@@ -942,15 +942,15 @@ img {
 }
 
     </style>
-<link rel="stylesheet" type="text/css" href="style/emacs.css" />
-<script type='text/javascript' src='js/emacs.js'> </script>
+<link rel="stylesheet" type="text/css" href="../style/emacs.css" />
+<script type='text/javascript' src='../js/emacs.js'> </script>
 
 </head>
 <body>
 <div id="org-div-home-and-up" style="text-align:right;font-size:70%;white-space:nowrap;">
- <a accesskey="h" href="sitemap.html"> 站点地图 </a>
+ <a accesskey="h" href="../sitemap.html"> 站点地图 </a>
  |
- <a accesskey="H" href="index.html"> 首页 </a>
+ <a accesskey="H" href="../index.html"> 首页 </a>
 </div>
 
 <div id="preamble">
@@ -958,60 +958,144 @@ img {
 </div>
 
 <div id="content">
-<h1 class="title">一个人的狂欢</h1>
+<h1 class="title">mysql压力测试</h1>
 
 
-<div id='logo-img' ><a  href='index.html'>▇█▓▒░◕~◕░▒▓█▇</a></div>
+<div id='logo-img' ><a  href='../index.html'>▇█▓▒░◕~◕░▒▓█▇</a></div>
 
 <div id='logo-text'>
   <a href='#' ><span align="left">░◕~◕░</span></a>
 </div>
 
 
-<ul>
-<li>首页还未做好，先看<a href="sitemap.html">站点地图</a>吧
-</li>
-<li><a href="about.html">About</a>
-</li>
-</ul>
+<p>
+MySQL从5.1.4版开始带有一个压力测试工具mysqlslap，通过模拟多个并发客户端访问<br/>
+mysql来执行测试。 "man mysqlslap" 可以看到有下面一条示例<br/>
+</p>
+<p><br/>
+</p>
+<p><br/>
+<pre class="src src-sh">mysqlslap --delimiter=<span class="org-string">";"</span> --create=<span class="org-string">"CREATE TABLE a (b int);INSERT INTO a VALUES (23)"</span>  --query=<span class="org-string">"SELECT * FROM a"</span> --concurrency=50 --iterations=200 -uroot -p
+</pre>
+
+&ndash;create ="用于生成一个表，"后绪的查询<br/>
+&ndash;query 用这个表做测试,这里一般是insert ,或select 或update 语句<br/>
+&ndash;create 可以是几条sql语句 ，也可以是一个文件名，里面写满sql语句<br/>
+</p>
+<p><br/>
+</p>
+<p><br/>
+指定并发数： —concurrency ,可以多个值，逗号分开<br/>
+</p>
+<p><br/>
+<pre class="src src-sh">mysqlslap -a --concurrency=50,100 --number-of-queries 1000 --debug-info -uroot -proot
+</pre>
+
+指定查询总次数： —number-of-queries<br/>
+-a, &ndash;auto-generate-sql 自动生成一条测试用的语句， 不用你写sql进行测试<br/>
+比如这句的结果是(分别测试了并发为50,和100时，总共进行1000次访问花费的时间 )<br/>
+这里列出了最大、最小、平均值。均为相同的值，因为 只进行了一次测试 ，<br/>
+重复多次（迭代多次）： —iterations<br/>
+</p>
+<p><br/>
+<pre class="src src-sh">&#36827;&#34892;5 &#27425;&#27979;&#35797; &#21487;&#26174;&#31034;&#20026;&#26368;&#22823; &#26368;&#23567; &#24179;&#22343;&#20540;
+mysqlslap -a --concurrency=50,100 --number-of-queries 1000 --iterations=5 --debug-info  -uroot -proot
+</pre>
+
+</p><blockquote>
+
+<p>Benchmark<br/>
+    Average number of seconds to run all queries: 0.204 seconds<br/>
+    Minimum number of seconds to run all queries: 0.204 seconds<br/>
+    Maximum number of seconds to run all queries: 0.204 seconds<br/>
+    Number of clients running queries: 50<br/>
+    Average number of queries per client: 20<br/>
+</p>
+<p><br/>
+Benchmark<br/>
+    Average number of seconds to run all queries: 0.260 seconds<br/>
+    Minimum number of seconds to run all queries: 0.260 seconds<br/>
+    Maximum number of seconds to run all queries: 0.260 seconds<br/>
+    Number of clients running queries: 100<br/>
+    Average number of queries per client: 10<br/>
+</p>
+<p><br/>
+</p>
+<p><br/>
+User time 0.13, System time 0.07<br/>
+Maximum resident set size 5640, Integral resident set size 0<br/>
+Non-physical pagefaults 2371, Physical pagefaults 0, Swaps 0<br/>
+Blocks in 0 out 0, Messages in 0 out 0, Signals 0<br/>
+Voluntary context switches 8661, Involuntary context switches 19<br/>
+</p>
+</blockquote>
+
+
+<p><br/>
+指定引擎： —engine<br/>
+</p>
+<p><br/>
+<pre class="src src-sh">mysqlslap -a --concurrency=50,100 --number-of-queries 1000 --iterations=5 --engine=myisam,innodb --debug-info
+</pre>
+
+其他参数 &ndash;help<br/>
+</p>
+<p><br/>
+<pre class="src src-sh">-auto-generate-sql, -a
+&#33258;&#21160;&#29983;&#25104;&#27979;&#35797;&#34920;&#21644;&#25968;&#25454;&#65288;&#29992;&#31995;&#32479;&#33258;&#24049;&#29983;&#25104;&#30340;SQL&#35821;&#21477;&#26469;&#27979;&#35797;&#65289;
+
+-auto-generate-sql-load-type=type
+&#27979;&#35797;&#35821;&#21477;&#30340;&#31867;&#22411;&#12290;&#21462;&#20540;&#21253;&#25324;&#65306;read&#65292;key&#65292;write&#65292;update&#21644;mixed(&#22810;&#31181;&#28151;&#21512;&#65292;&#40664;&#35748;)&#12290;
+
+-number-char-cols=N, -x N
+&#33258;&#21160;&#29983;&#25104;&#30340;&#27979;&#35797;&#34920;&#20013;&#21253;&#21547;&#22810;&#23569;&#20010;&#23383;&#31526;&#31867;&#22411;&#30340;&#21015;&#65292;&#40664;&#35748;1
+
+-number-int-cols=N, -y N
+&#33258;&#21160;&#29983;&#25104;&#30340;&#27979;&#35797;&#34920;&#20013;&#21253;&#21547;&#22810;&#23569;&#20010;&#25968;&#23383;&#31867;&#22411;&#30340;&#21015;&#65292;&#40664;&#35748;1
+
+-number-of-queries=N
+<span class="org-function-name">&#24635;&#30340;&#27979;&#35797;&#26597;&#35810;&#27425;&#25968;</span>(&#24182;&#21457;&#23458;&#25143;&#25968;&#215;&#27599;&#23458;&#25143;&#26597;&#35810;&#27425;&#25968;)
+</pre>
 
 
 
-
+另外<br/>
+select benchmark( 5000000, md5( 'test' ) );<br/>
+可以做压力测试 ，如执行5000000 次md5()<br/>
+</p>
+<p><br/>
 <div id='my-src'>
-<div id='org-src'><a href='src/index.org'>src</a></div>
-<div id='htmlized-src'><a href='htmlized-src/index.org.html'>htmlized-src</a></div>
+<div id='org-src'><a href='../src/mysql/benchmark.org'>src</a></div>
+<div id='htmlized-src'><a href='../htmlized-src/mysql/benchmark.org.html'>htmlized-src</a></div>
 </div>
 <div id='tags'><span id='tags-title'>Tags:</span><br />
-<p>
-    <a href="tags/@SVN.html">@SVN</a>
-    <a href="tags/@perl.html">@perl</a>
-    <a href="tags/@Java.html">@Java</a>
-    <a href="tags/@Mysql.html">@Mysql</a>
-    <a href="tags/@Erlang.html">@Erlang</a>
-    <a href="tags/@SQL.html">@SQL</a>
-    <a href="tags/@DB.html">@DB</a>
-    <a href="tags/@Oracle.html">@Oracle</a>
-    <a href="tags/@Ediff.html">@Ediff</a>
-    <a href="tags/@Git.html">@Git</a>
-    <a href="tags/@Cedet.html">@Cedet</a>
-    <a href="tags/@C-C++.html">@C-C++</a>
-    <a href="tags/@Daily.html">@Daily</a>
-    <a href="tags/@Eclipse.html">@Eclipse</a>
-    <a href="tags/@AutoHotKey.html">@AutoHotKey</a>
-    <a href="tags/@Windows.html">@Windows</a>
-    <a href="tags/@Linux.html">@Linux</a>
-    <a href="tags/@C.html">@C</a>
-    <a href="tags/@Emacs.html">@Emacs</a>
+    <a href="../tags/@SVN.html">@SVN</a><br/>
+    <a href="../tags/@perl.html">@perl</a><br/>
+    <a href="../tags/@Java.html">@Java</a><br/>
+    <a href="../tags/@Mysql.html">@Mysql</a><br/>
+    <a href="../tags/@Erlang.html">@Erlang</a><br/>
+    <a href="../tags/@SQL.html">@SQL</a><br/>
+    <a href="../tags/@DB.html">@DB</a><br/>
+    <a href="../tags/@Oracle.html">@Oracle</a><br/>
+    <a href="../tags/@Ediff.html">@Ediff</a><br/>
+    <a href="../tags/@Git.html">@Git</a><br/>
+    <a href="../tags/@Cedet.html">@Cedet</a><br/>
+    <a href="../tags/@C-C++.html">@C-C++</a><br/>
+    <a href="../tags/@Daily.html">@Daily</a><br/>
+    <a href="../tags/@Eclipse.html">@Eclipse</a><br/>
+    <a href="../tags/@AutoHotKey.html">@AutoHotKey</a><br/>
+    <a href="../tags/@Windows.html">@Windows</a><br/>
+    <a href="../tags/@Linux.html">@Linux</a><br/>
+    <a href="../tags/@C.html">@C</a><br/>
+    <a href="../tags/@Emacs.html">@Emacs</a><br/>
 </p>
-
-
+<p><br/>
 </div>
-</div>
+</p></div>
 
 <div id="postamble">
-<p class="date">Date: 2011-06-04 星期六</p>
-<p class="author">Author: 孤峰独秀</p>
+<p class="date">Date: 2012-10-03 21:59:33 CST</p>
+<p class="author">Author: 纪秀峰</p>
 <p class="creator">Org version 7.8.03 with Emacs version 24</p>
 
 

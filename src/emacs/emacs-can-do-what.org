@@ -1,0 +1,239 @@
+# -*- coding:utf-8 -*-
+#+LANGUAGE:  zh
+#+TITLE:     GNU/Emacs 可以做什么
+#+AUTHOR:    孤峰独秀
+#+EMAIL:     jixiuf@gmail.com
+#+DATE:     2011-08-27 六
+#+DESCRIPTION:GNU/Emacs 可以做什么
+#+KEYWORDS: emacs 
+#+OPTIONS:   H:2 num:nil toc:t \n:t @:t ::t |:t ^:nil -:t f:t *:t <:t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil 
+#+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
+#+EXPORT_SELECT_TAGS: export
+#+EXPORT_EXCLUDE_TAGS: noexport
+#+FILETAGS: @Emacs
+我所有的Emacs相关的配置，在 [[https://github.com/jixiuf/emacs_conf]] 可以找到
+* yasnippet (yet another snippet) 浙大一牛人为Emacs写的插件 模版
+  它可以 为 html java cs c c++ ,所有你可以想像的到的语言定义 模版， 语法极
+  简单
+  http://code.google.com/p/yasnippet/
+  官网上有完整的关于yasnippet的视频
+  http://yasnippet.googlecode.com/files/yas_demo.mp4
+
+* 我为csharp 写的生成seter getter 的函数
+将选中区域内的所有格式为
+private DateTime LAST_MONTH_CHECKSTOCK_DATE;
+private DateTime last;
+的变量，替换成
+private DateTime LAST_MONTH_CHECKSTOCK_DATE;
+public DateTime Last_Month_Checkstock_Date
+{
+set {LAST_MONTH_CHECKSTOCK_DATE=value ;}
+get {return LAST_MONTH_CHECKSTOCK_DATE ;}
+}
+private DateTime last;
+public DateTime Last
+{
+set {last=value ;}
+get {return last ;}
+}
+#+begin_src emacs-lisp
+  (defun csharp-setter-getter(beg end)
+  "generate sets and gets for c#."
+  (interactive "r")
+  (let ((region-string (buffer-substring-no-properties beg end))
+        var var-type   capitalize-var set-gets)
+    (with-temp-buffer
+      (csharp-mode)
+      (insert region-string) (insert "\n")
+      (goto-char (point-min))(end-of-line)
+      (while (not (eobp))
+        (if (string-match "^[ \t]*$" (buffer-substring-no-properties (point-at-bol) (point-at-eol)))
+            (progn (forward-line)(end-of-line))
+          (backward-sexp)
+          (setq var (thing-at-point 'sexp))
+          (backward-sexp)
+          (setq var-type (thing-at-point 'sexp))
+          (kill-region (point-at-bol) (point-at-eol))
+          (insert (csharp-a-setter-getter var-type var))
+          (forward-line)(end-of-line)))
+      (indent-region (point-min) (point-max))
+      (setq set-gets (buffer-string))
+      )
+    (kill-region beg end)
+    (insert set-gets)
+    )
+  )
+#+end_src
+
+* (我写的函数)自动生成sql server 的建表语句
+  根据格式如下的一段内容自动生成sql server  的create table 语句
+ STOCK_ID									IDENTITY
+ SEMIFINISHER_ID									INT
+ STOCK_WEIGHT									DECIMAL					18,2
+ STOCK_YEAR_MONTH									DATATIME
+ START_WEIGHT									DECIMAL					18,2
+ CREATE_DATETIME									DATETIME
+ CREATER_ID									NVARCHAR					20
+ UPDATE_DATETIME									DATETIME
+ UPDATER_ID									NVARCHAR					20
+ DELETE_FLG									NVARCHAR					1
+  
+* Emacs 的列编辑模式(Emacs称矩形编辑rect),
+  Emacs 不仅可以选择几行数据，而且可以选择列
+  我用到的与列编辑有关的 扩展
+  http://www.emacswiki.org/emacs/rect-mark.el
+  我定义的快捷键
+  Alt+space 设置mark
+  C-x-r-k(Control+x,r,k) 列删除
+  C-x-r-t                列插入
+  C-x-r-y                列粘贴
+  
+比如以下此为例
+ 1删除每行开头的分号
+ 2 在每行开头插入# 
+#whateveryouwantSTOCK_ID									IDENTITY
+#whateveryouwantSEMIFINISHER_ID									INT
+#whateveryouwantSTOCK_WEIGHT									DECIMAL
+#whateveryouwantSTOCK_YEAR_MONTH									DATATIME
+#whateveryouwantSTART_WEIGHT									DECIMAL
+#whateveryouwantCREATE_DATETIME									DATETIME
+#whateveryouwantCREATER_ID									NVARCHAR
+#whateveryouwantUPDATE_DATETIME									DATETIME
+#whateveryouwantUPDATER_ID									NVARCHAR
+#whateveryouwantDELETE_FLG									NVARCHAR
+* 美化sql
+  需要 blancosqlformatter-0.1.1.jar 作后台进程处理 
+  http://www.emacswiki.org/emacs/SqlBeautify
+  
+* 作为数据库前端，以oracle ,mysql 为例
+* （我写的）编写mysql 脚本时，适时的补全表名列名
+  http://www.emacswiki.org/emacs/sqlparser-mysql-complete.el
+* (我写的)编写oracle 脚本时，适时的补全表名列名
+  http://www.emacswiki.org/emacs/sqlparser-oracle-complete.el
+* （我写的）AutoJavaComplete 编写Java代码时自动补全
+  http://www.emacswiki.org/emacs/AutoJavaComplete
+* dired (Emacs的文件管理系统(资源管理器))
+  此例演示使用dired文件管理系统及 第四讲中提到的列编辑
+  模式批量重命名文件
+  
+* org-mode 非程序员的mode
+  我现在编写的这个文件使用的mode 就是org-mode
+  它的第一特定是TAB 进行折叠
+  整个文件其实很大，但是现在只显示骨架，整体结构很清晰.
+
+* org-mode 将org mode 编写的文件导出成单个html文件，
+  在orgmode模式下  C-cC-e 之后，可以导出成多种格式，
+   以导出此文件为例
+* org-mode 将某目录下所有org 文件，以个人站点的形式，导出
+  比如，将我的 /home/jixiuf/documents/org/src/
+  目录下的所有org 文件，导出成html 放到
+  /home/jixiuf/documents/org/public_html/
+  目录下为例
+  
+* org-table ,org-mode 中的表格
+  
+  | head   | head2 | head3 |
+  | hello  | world | ok    |
+  | this   | is    | come  |
+  | a text | table | on    |
+  |        |       |       |
+
+  | another     | one                    |
+  |-------------+------------------------|
+  | ok          | ok                     |
+  | Idon't know | can you editor do this |
+  |             |                        |
+
+* 在emacs使用stardict 词典,需要sdvc(命令行下的stardict) 支持
+  ，将下面函数绑定到`C-cd'上 .光标移动到单词上,按下C-cd即可查词典
+#+begin_src emacs-lisp
+(defun sdcv-to-buffer ()
+  "Search dict in region or world."
+  (interactive)
+  (let ((word (if mark-active
+                  (buffer-substring-no-properties (region-beginning) (region-end))
+                (current-word nil t)))
+        (buf-name (buffer-name))
+        )
+    ;; (setq word (read-string (format "Search the dictionary for (default %s): " word)
+    ;;                         nil nil word))
+    (set-buffer (get-buffer-create "*sdcv*"))
+    (buffer-disable-undo)
+    (erase-buffer)
+    (insert (shell-command-to-string  (format "sdcv -n %s " word) ))
+    (if (equal buf-name "*sdcv*")
+        (switch-to-buffer "*sdcv*")
+      (switch-to-buffer-other-window "*sdcv*")
+      )
+    (goto-char (point-min))
+    ))
+#+end_src
+* emacs中的游戏
+* diff 文件的比较
+  比较两个文件的不同
+
+* diff 版本控制工具中各版本的差异
+  C-xv=  对工作区中的文件与版本控制下的最新版进行比较
+  比如，我所有的emacs配置文件使用git 进行版本管理,
+* 在svn 或git等版本控制工具管理的文件里，查看此文件的历史
+  C-xvl 查看历史,
+  
+* Version Control  
+  emacs 有一个Version Control ，它试图将所有现存的版本管理工具
+  如svn cvs git 等等版本控制工具在emacs中的使用方式得到统一
+  比如，不论你是svn 还是git ,
+  C-xvl 都是查看此文件的历史
+  C-xv+ 更新此文件到最新版
+  C-xvu revert
+  而功能最强大的功能C-xvv 对应的，它会根据当前文件所处的状态，自动
+  决定下一部操作该如何做
+  
+* Ediff 文件的合并，对比的工具，一般与版本控制工具使用，如git ,svn.
+* 录制键盘宏
+  另外说一点我对键盘和鼠标的一些看法，不想带有太多的偏见.
+  键盘的优点是:每一次击键都是确定的，具有可重复性
+  鼠标优点是易用，但是每次点击所对应的坐标，不太具有可重复性
+  这一次在(100,200)处点击的是确定按钮，下一次可能就是其他按钮了.
+  所以你没法记住一个坐标，然后将它重复点击n次(就算能，可重复性相对键盘较差
+  一点,说到这，推荐大家学习一下AutoHotKey这款开源软件).
+  
+  而Emacs 用熟了之后，是要完全脱离鼠标的使用的，虽然它也添加了对鼠标的支持，
+  鼠标、菜单栏、工具栏只起一个辅助作用.
+
+  键盘的每一次按键是确定的，每一个按键序列都对应着Emacs中的一个命令
+  (Command). 如此，将一段同样的操作录制下来，重复多次，便可以简化繁琐的重复
+  性操作
+  C-x(  开始录制键盘宏
+  C-x)  结束录制键盘宏
+  C-xe  重复最近录制的键盘宏
+  C-u3C-xe 重复3次最近录制的键盘宏
+  C-u0C-xe 重复无数次最近录制的键盘宏,直到遇到错误
+
+  演示示例，
+  有这样一段内容，它们以冒号进行分隔，现在把每一行以冒号分隔的最后一部分内
+  容删掉
+  下面进行操作
+  录制完成
+  C-xe 调用
+  其实可以C-u4C-xe 调用4次即可
+  四次调用
+#+begin_quote
+root:x:0:
+bin:x:1:
+daemon:x:2:
+sys:x:3:
+adm:x:4:
+#+end_quote
+
+  分析：
+   1 把光标移动到第一行的末尾
+     M-<   (实际是Shift-Alt+,) (beginning-of-buffer) 函数，跳到第一行
+     C-e    (Control-e)       (move-end-of-line)  移动到行尾
+   2 开始录制键盘宏 C-x(        (kmacro-start-macro)  
+      C-backspace              (backward-kill-word) 删除光标前的一个单词
+      C-n                      (next-line)          光标移动到下一行
+      C-e                       (move-end-of-line)  移动到行尾
+      注意开始录制的时候光标所处的位置，与录制结束后所处的位置应该相似 ,才
+     能使录制的内容多次执行后无误 (比如此处均处于每行的末尾) 
+   3 结束录制键盘宏 C-x)        (kmacro-end-macro)

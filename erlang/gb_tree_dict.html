@@ -3,14 +3,14 @@
                "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="zh" xml:lang="zh">
 <head>
-<title>一个人的狂欢</title>
+<title>gb_tree dict proplist orddict</title>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
-<meta name="title" content="一个人的狂欢"/>
+<meta name="title" content="gb_tree dict proplist orddict"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2011-06-04 星期六"/>
-<meta name="author" content="孤峰独秀"/>
-<meta name="description" content=""/>
-<meta name="keywords" content=""/>
+<meta name="generated" content="2011-11-20 日"/>
+<meta name="author" content="纪秀峰"/>
+<meta name="description" content="erlang.org"/>
+<meta name="keywords" content="erlang"/>
 <style type='text/css'>
        body {
     background-color: #E5E5E5;
@@ -942,15 +942,15 @@ img {
 }
 
     </style>
-<link rel="stylesheet" type="text/css" href="style/emacs.css" />
-<script type='text/javascript' src='js/emacs.js'> </script>
+<link rel="stylesheet" type="text/css" href="../style/emacs.css" />
+<script type='text/javascript' src='../js/emacs.js'> </script>
 
 </head>
 <body>
 <div id="org-div-home-and-up" style="text-align:right;font-size:70%;white-space:nowrap;">
- <a accesskey="h" href="sitemap.html"> 站点地图 </a>
+ <a accesskey="h" href="../sitemap.html"> 站点地图 </a>
  |
- <a accesskey="H" href="index.html"> 首页 </a>
+ <a accesskey="H" href="../index.html"> 首页 </a>
 </div>
 
 <div id="preamble">
@@ -958,60 +958,131 @@ img {
 </div>
 
 <div id="content">
-<h1 class="title">一个人的狂欢</h1>
+<h1 class="title">gb_tree dict proplist orddict</h1>
 
 
-<div id='logo-img' ><a  href='index.html'>▇█▓▒░◕~◕░▒▓█▇</a></div>
+<div id='logo-img' ><a  href='../index.html'>▇█▓▒░◕~◕░▒▓█▇</a></div>
 
 <div id='logo-text'>
   <a href='#' ><span align="left">░◕~◕░</span></a>
 </div>
 
 
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
 <ul>
-<li>首页还未做好，先看<a href="sitemap.html">站点地图</a>吧
-</li>
-<li><a href="about.html">About</a>
+<li><a href="#sec-1">and or andalso orelse</a></li>
+<li><a href="#sec-2">Key-Value 存储</a>
+<ul>
+<li><a href="#sec-2-1">对于小数据量，  有proplist 和 orddict</a></li>
+<li><a href="#sec-2-2">对于大数据量 有dicts gb_trees</a></li>
+</ul>
 </li>
 </ul>
+</div>
+</div>
+
+<div id="outline-container-1" class="outline-2">
+<h2 id="sec-1">and or andalso orelse</h2>
+<div class="outline-text-2" id="text-1">
+
+<p>Expr1 orelse Expr2 Expr2可能被短路， 不运算<br/>
+Expr1 or Expr2 Expr2一定会被运算<br/>
+Expr1 andalso Expr2 Expr2一定会被运算<br/>
+Expr1 and Expr2 Expr2可能被短路， 不运算<br/>
+</p>
+<p><br/>
+</p></div>
+
+</div>
+
+<div id="outline-container-2" class="outline-2">
+<h2 id="sec-2">Key-Value 存储</h2>
+<div class="outline-text-2" id="text-2">
 
 
+</div>
 
+<div id="outline-container-2-1" class="outline-3">
+<h3 id="sec-2-1">对于小数据量，  有proplist 和 orddict</h3>
+<div class="outline-text-3" id="text-2-1">
 
+<ul>
+<li id="sec-2-1-1">proplist<br/>
+  提供了，<br/>
+  proplists:delete/2, proplists:get_value/2, proplists:get_all_values/2, proplists:lookup/2 and<br/>
+  proplists:lookup_all/2.<br/>
+  没有add or update 方法，只能手工使用 [H|T] 的方式自已处理，其内部结构[{Key,Value}].<br/>
+  可以使用lists:keyreplace/4.进行处理<br/>
+</li>
+</ul>
+<ul>
+<li id="sec-2-1-2">orddict<br/>
+   the whole list is sorted for faster average lookup,<br/>
+   75左右个元素时效率最高<br/>
+</li>
+</ul>
+</div>
+
+</div>
+
+<div id="outline-container-2-2" class="outline-3">
+<h3 id="sec-2-2">对于大数据量 有dicts gb_trees</h3>
+<div class="outline-text-3" id="text-2-2">
+
+<ul>
+<li id="sec-2-2-1">dicts 适于读多于写的<br/>
+   Dicts are thus very good choices to scale orddicts up whenever it is needed.<br/>
+</li>
+</ul>
+<ul>
+<li id="sec-2-2-2">gb_trees适于写多于读的<br/>
+      正常的gb_trees:enter/2, gb_trees:lookup/2 and gb_trees:delete_any/2<br/>
+      smart 的：gb_trees:insert/3, gb_trees:get/2, gb_trees:update/3 and gb_trees:delete/2.<br/>
+      smart的之处在于，它认为要处理的key在 gb_trees中存在，所以一些检查不必做，速度会快一点。<br/>
+
+<p><br/>
+<a href="https://github.com/jixiuf/helloerlang/tree/master/benchmark/src">https://github.com/jixiuf/helloerlang/tree/master/benchmark/src</a><br/>
+</p>
+<p><br/>
 <div id='my-src'>
-<div id='org-src'><a href='src/index.org'>src</a></div>
-<div id='htmlized-src'><a href='htmlized-src/index.org.html'>htmlized-src</a></div>
+<div id='org-src'><a href='../src/erlang/gb_tree_dict.org'>src</a></div>
+<div id='htmlized-src'><a href='../htmlized-src/erlang/gb_tree_dict.org.html'>htmlized-src</a></div>
 </div>
 <div id='tags'><span id='tags-title'>Tags:</span><br />
-<p>
-    <a href="tags/@SVN.html">@SVN</a>
-    <a href="tags/@perl.html">@perl</a>
-    <a href="tags/@Java.html">@Java</a>
-    <a href="tags/@Mysql.html">@Mysql</a>
-    <a href="tags/@Erlang.html">@Erlang</a>
-    <a href="tags/@SQL.html">@SQL</a>
-    <a href="tags/@DB.html">@DB</a>
-    <a href="tags/@Oracle.html">@Oracle</a>
-    <a href="tags/@Ediff.html">@Ediff</a>
-    <a href="tags/@Git.html">@Git</a>
-    <a href="tags/@Cedet.html">@Cedet</a>
-    <a href="tags/@C-C++.html">@C-C++</a>
-    <a href="tags/@Daily.html">@Daily</a>
-    <a href="tags/@Eclipse.html">@Eclipse</a>
-    <a href="tags/@AutoHotKey.html">@AutoHotKey</a>
-    <a href="tags/@Windows.html">@Windows</a>
-    <a href="tags/@Linux.html">@Linux</a>
-    <a href="tags/@C.html">@C</a>
-    <a href="tags/@Emacs.html">@Emacs</a>
+    <a href="../tags/@SVN.html">@SVN</a><br/>
+    <a href="../tags/@perl.html">@perl</a><br/>
+    <a href="../tags/@Java.html">@Java</a><br/>
+    <a href="../tags/@Mysql.html">@Mysql</a><br/>
+    <a href="../tags/@Erlang.html">@Erlang</a><br/>
+    <a href="../tags/@SQL.html">@SQL</a><br/>
+    <a href="../tags/@DB.html">@DB</a><br/>
+    <a href="../tags/@Oracle.html">@Oracle</a><br/>
+    <a href="../tags/@Ediff.html">@Ediff</a><br/>
+    <a href="../tags/@Git.html">@Git</a><br/>
+    <a href="../tags/@Cedet.html">@Cedet</a><br/>
+    <a href="../tags/@C-C++.html">@C-C++</a><br/>
+    <a href="../tags/@Daily.html">@Daily</a><br/>
+    <a href="../tags/@Eclipse.html">@Eclipse</a><br/>
+    <a href="../tags/@AutoHotKey.html">@AutoHotKey</a><br/>
+    <a href="../tags/@Windows.html">@Windows</a><br/>
+    <a href="../tags/@Linux.html">@Linux</a><br/>
+    <a href="../tags/@C.html">@C</a><br/>
+    <a href="../tags/@Emacs.html">@Emacs</a><br/>
 </p>
-
-
+<p><br/>
+</div>
+</p></li>
+</ul>
+</div>
+</div>
 </div>
 </div>
 
 <div id="postamble">
-<p class="date">Date: 2011-06-04 星期六</p>
-<p class="author">Author: 孤峰独秀</p>
+<p class="date">Date: 2011-11-20 日</p>
+<p class="author">Author: 纪秀峰</p>
 <p class="creator">Org version 7.8.03 with Emacs version 24</p>
 
 

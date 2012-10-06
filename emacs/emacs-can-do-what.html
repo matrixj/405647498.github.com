@@ -1,0 +1,1450 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+               "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh" xml:lang="zh">
+<head>
+<title>GNU/Emacs 可以做什么</title>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+<meta name="title" content="GNU/Emacs 可以做什么"/>
+<meta name="generator" content="Org-mode"/>
+<meta name="generated" content="2011-08-27 六"/>
+<meta name="author" content="孤峰独秀"/>
+<meta name="description" content="GNU/Emacs 可以做什么"/>
+<meta name="keywords" content="emacs "/>
+<style type='text/css'>
+       body {
+    background-color: #E5E5E5;
+	scrollbar-face-color: #DEE3E7;
+	scrollbar-highlight-color: #FFFFFF;
+	scrollbar-shadow-color: #DEE3E7;
+	scrollbar-3dlight-color: #D1D7DC;
+	scrollbar-arrow-color:  #006699;
+	scrollbar-track-color: #EFEFEF;
+	scrollbar-darkshadow-color: #98AAB1;
+    /* background-color: #999966;  */
+    margin: 0em;
+}
+
+h1 {
+    font-size: 2.0em;
+    margin-top: 1.0em;
+    margin-bottom: 0.3em;
+}
+h2 {
+    font-size: 1.5em;
+    margin-top: 2.4em;
+    margin-bottom: 0.3em;
+}
+h3 {
+    font-size: 1.25em;
+    margin-top: 1.25em;
+    margin-bottom: 0.3em;
+}
+
+
+div#content {
+    font-family: Times, serif;
+    border-left: double #333300 3mm;
+    border-right: double #333300 3mm;
+    letter-spacing: 0.075em;
+    line-height: 1.4;
+    margin: 0em auto;
+    padding: 2em;
+    width: 92%;
+    height:100%; 
+    min-height:600px;           /*firefox do'nt support height:100% ,so*/
+ 
+}
+/* #table-of-contents { */
+/* 	font-size: 75%; */
+/* 	line-height: 1.4em; */
+/* 	position: fixed; */
+/* 	display: block; */
+/* 	left: -20px; */
+/* 	top: 5%; */
+/* 	width: 250px; */
+/* 	min-height:60px; */
+/* 	max-height:95%; */
+/* 	overflow:hidden; */
+/*     white-space:nowrap; */
+/* } */
+
+#org-div-home-and-up{
+	position: fixed;
+	display: block;
+	right: 18px;
+	top: 5px;
+	overflow:auto;
+    }
+#org-src{
+	position: fixed;
+	display: block;
+	right: 18px;
+	top: 20px;
+	overflow:hidden;
+    }
+#htmlized-src{
+	position: fixed;
+	display: block;
+	right: 54px;
+	top: 20px;
+	overflow:hidden;
+    }
+#table-of-contents h2 {
+	display:none;
+}
+
+#logo-text{
+	position: fixed;
+	display: block;
+	right: 16px;
+	bottom: 3px;
+	overflow:hidden;
+}
+#logo-img{
+    font-size: 60%;
+	position: fixed;
+	display: block;
+    left: 16px;
+	top: 3px;
+    }
+div#tags {
+	font-size: 75%;
+    text-align:right;
+	/* line-height: 1.4em; */
+	position: fixed;
+	display: block;
+	right: 40px;
+	top: 20%;
+	width: 90px;
+	/* min-height:60px; */
+	max-height:95%;
+	/* overflow:visible; */
+    /* white-space:pre-wrap; */
+}
+
+.title {
+    text-align:center;
+	padding-bottom: 7px;
+	margin-bottom: 20px;
+	border-bottom: 1px solid #222;
+}
+ a:link,a:active,a:visited { color : #006699; } 
+ a:hover		{ text-decoration: underline; color : #DD6900; } 
+
+.todo {color: #990000;}
+.done {color: #006666;}
+.timestamp-kwd {color: #444;}
+.tag {color: #DDD; font-size: 70%; font-weight: 500;}
+
+table {border: none;
+       width:90%;
+      }
+th	{
+	background-color: #006699; 
+}
+td	{
+    padding: .1em .7em .1em .3em;
+	background-color: Gainsboro
+}
+
+
+code {
+font-family: Andale Mono, Courier New, Courier, sans-serif; font-size: 12px; line-height: 14px; color: #0000A0;
+	background-color: #FAFAFA; border: #D1D7DC; border-style: solid;
+	border-left-width: 1px; border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px
+}
+
+/* pre { */
+/* 	border: 1px solid #555; */
+/* 	background: #EEEEEE; */
+/* 	font-size: 9pt; */
+/* 	padding: 1em; */
+/* } */
+pre.src {
+	border: 1px solid #555;
+	background:#0c1021;
+    /* background:#263111; */
+    color: #f7f8c6;
+	font-size: 10pt;
+    width:85%;
+	padding: 0em;
+	margin: 0;
+	width: 700px;
+	float: none;
+	clear: none;
+	line-height: 1.333;
+	text-align:left;
+    
+    /* overflow: scroll; */
+    max-height:500px;           /*IEXPLORE  don't support max-height*/
+    _height:expression(this.scrollHeight > 300 ? "300px" : "auto");
+    min-height:50px;
+    max-width:700px;
+    min-width:700px;
+    overflow-x:auto;
+    overflow-y:auto;
+}
+blockquote {
+	 border: #D1D7DC;
+     border-style: solid;
+	border-left-width: 1px;
+    border-top-width: 1px;
+    border-right-width: 1px;
+    border-bottom-width: 1px
+    
+    color: #444444;
+    line-height: 125%;
+	border: 1px solid #555;
+    background-color: #FAFAFA;    
+    width:95%;
+	padding: 1em;
+	margin: 0;
+	float: none;
+	clear: none;
+	text-align:left;
+    font-style:italic;
+    
+    /* overflow: scroll; */
+    max-height:300px;           /*IEXPLORE  don't support max-height*/
+    _height:expression(this.scrollHeight > 300 ? "300px" : "auto");
+    min-height:20px;
+    max-width:700px;
+    min-width:700px;
+    overflow-x:auto;
+    overflow-y:auto;
+}
+
+.org-function-name {
+    /* font-lock-function-name-face */
+    /* color: #0000ff; */
+     color: #87cefa;
+     font-stretch: normal;
+     text-decoration: none;
+}
+
+.org-keyword {
+    /* font-lock-keyword-face */
+    color: #00ffff;
+    text-decoration: none;
+    /* color: #a020f0; */
+}
+.org-doc
+ { color: #ffa07a;
+   text-decoration: none;
+ }
+p.author{
+    font-size:80%;
+    color:#556b2f;
+    font-style:italic;
+    position:fixed;
+    left:10px;
+    bottom:40px;
+}
+p.date{
+    font-size:80%;
+    color:#556b2f;
+    font-style:italic;
+    position:fixed;
+    left:10px;
+    bottom:0px;
+}
+p.creator{
+    font-size:80%;
+    color:#556b2f;
+    font-style:italic;
+    position:fixed;
+    left:10px;
+    bottom:20px;
+}
+
+img {
+    display:inline;
+	border: none;
+    float:none;
+    clear:none;
+    left:10px;
+}
+
+.share img {
+	opacity: .4;
+	-moz-opacity: .4;
+	filter: alpha(opacity=40);
+}
+
+.share img:hover {
+	opacity: 1;
+	-moz-opacity: 1;
+	filter: alpha(opacity=100);
+}
+
+.org-info-search-highlight
+{
+	background-color:#adefef; /* same color as emacs default */
+	color:#000000;
+	font-weight:bold;
+}
+
+.org-bbdb-company {
+    /* bbdb-company */
+    font-style: italic;
+}
+.org-bbdb-field-name {
+}
+.org-bbdb-field-value {
+}
+.org-bbdb-name {
+    /* bbdb-name */
+    text-decoration: underline;
+}
+.org-bold {
+    /* bold */
+    font-weight: bold;
+}
+.org-bold-italic {
+    /* bold-italic */
+    font-weight: bold;
+    font-style: italic;
+}
+.org-border {
+    /* border */
+    background-color: #000000;
+}
+.org-buffer-menu-buffer {
+    /* buffer-menu-buffer */
+    font-weight: bold;
+}
+.org-builtin {
+    /* font-lock-builtin-face */
+    color: #da70d6;
+}
+.org-button {
+    /* button */
+    text-decoration: underline;
+}
+.org-c-nonbreakable-space {
+    /* c-nonbreakable-space-face */
+    background-color: #ff0000;
+    font-weight: bold;
+}
+.org-calendar-today {
+    /* calendar-today */
+    text-decoration: underline;
+}
+.org-comment {
+    /* font-lock-comment-face */
+    color: #b22222;
+}
+.org-comment-delimiter {
+    /* font-lock-comment-delimiter-face */
+    color: #b22222;
+}
+.org-constant {
+    /* font-lock-constant-face */
+    color: #5f9ea0;
+}
+.org-cursor {
+    /* cursor */
+    background-color: #000000;
+}
+.org-default {
+    /* default */
+    color: #000000;
+    background-color: #ffffff;
+}
+.org-diary {
+    /* diary */
+    color: #ff0000;
+}
+.org-escape-glyph {
+    /* escape-glyph */
+    color: #a52a2a;
+}
+.org-file-name-shadow {
+    /* file-name-shadow */
+    color: #7f7f7f;
+}
+.org-fixed-pitch {
+}
+.org-fringe {
+    /* fringe */
+    background-color: #f2f2f2;
+}
+.org-header-line {
+    /* header-line */
+    color: #333333;
+    background-color: #e5e5e5;
+}
+.org-help-argument-name {
+    /* help-argument-name */
+    font-style: italic;
+}
+.org-highlight {
+    /* highlight */
+    background-color: #b4eeb4;
+}
+.org-holiday {
+    /* holiday */
+    background-color: #ffc0cb;
+}
+.org-info-header-node {
+    /* info-header-node */
+    color: #a52a2a;
+    font-weight: bold;
+    font-style: italic;
+}
+.org-info-header-xref {
+    /* info-header-xref */
+    color: #0000ff;
+    text-decoration: underline;
+}
+.org-info-menu-header {
+    /* info-menu-header */
+    font-weight: bold;
+}
+.org-info-menu-star {
+    /* info-menu-star */
+    color: #ff0000;
+}
+.org-info-node {
+    /* info-node */
+    color: #a52a2a;
+    font-weight: bold;
+    font-style: italic;
+}
+.org-info-title-1 {
+    /* info-title-1 */
+    font-size: 172%;
+    font-weight: bold;
+}
+.org-info-title-2 {
+    /* info-title-2 */
+    font-size: 144%;
+    font-weight: bold;
+}
+.org-info-title-3 {
+    /* info-title-3 */
+    font-size: 120%;
+    font-weight: bold;
+}
+.org-info-title-4 {
+    /* info-title-4 */
+    font-weight: bold;
+}
+.org-info-xref {
+    /* info-xref */
+    color: #0000ff;
+    text-decoration: underline;
+}
+.org-isearch {
+    /* isearch */
+    color: #b0e2ff;
+    background-color: #cd00cd;
+}
+.org-italic {
+    /* italic */
+    font-style: italic;
+}
+.org-lazy-highlight {
+    /* lazy-highlight */
+    background-color: #afeeee;
+}
+.org-link {
+    /* link */
+    color: #0000ff;
+    text-decoration: underline;
+}
+.org-link-visited {
+    /* link-visited */
+    color: #8b008b;
+    text-decoration: underline;
+}
+.org-match {
+    /* match */
+    background-color: #ffff00;
+}
+.org-menu {
+}
+.org-message-cited-text {
+    /* message-cited-text */
+    color: #ff0000;
+}
+.org-message-header-cc {
+    /* message-header-cc */
+    color: #191970;
+}
+.org-message-header-name {
+    /* message-header-name */
+    color: #6495ed;
+}
+.org-message-header-newsgroups {
+    /* message-header-newsgroups */
+    color: #00008b;
+    font-weight: bold;
+    font-style: italic;
+}
+.org-message-header-other {
+    /* message-header-other */
+    color: #4682b4;
+}
+.org-message-header-subject {
+    /* message-header-subject */
+    color: #000080;
+    font-weight: bold;
+}
+.org-message-header-to {
+    /* message-header-to */
+    color: #191970;
+    font-weight: bold;
+}
+.org-message-header-xheader {
+    /* message-header-xheader */
+    color: #0000ff;
+}
+.org-message-mml {
+    /* message-mml */
+    color: #228b22;
+}
+.org-message-separator {
+    /* message-separator */
+    color: #a52a2a;
+}
+.org-minibuffer-prompt {
+    /* minibuffer-prompt */
+    color: #0000cd;
+}
+.org-mm-uu-extract {
+    /* mm-uu-extract */
+    color: #006400;
+    background-color: #ffffe0;
+}
+.org-mode-line {
+    /* mode-line */
+    color: #000000;
+    background-color: #bfbfbf;
+}
+.org-mode-line-buffer-id {
+    /* mode-line-buffer-id */
+    font-weight: bold;
+}
+.org-mode-line-highlight {
+}
+.org-mode-line-inactive {
+    /* mode-line-inactive */
+    color: #333333;
+    background-color: #e5e5e5;
+}
+.org-mouse {
+    /* mouse */
+    background-color: #000000;
+}
+.org-negation-char {
+}
+.org-next-error {
+    /* next-error */
+    background-color: #eedc82;
+}
+.org-nobreak-space {
+    /* nobreak-space */
+    color: #a52a2a;
+    text-decoration: underline;
+}
+.org-org-agenda-date {
+    /* org-agenda-date */
+    color: #0000ff;
+}
+.org-org-agenda-date-weekend {
+    /* org-agenda-date-weekend */
+    color: #0000ff;
+    font-weight: bold;
+}
+.org-org-agenda-restriction-lock {
+    /* org-agenda-restriction-lock */
+    background-color: #ffff00;
+}
+.org-org-agenda-structure {
+    /* org-agenda-structure */
+    color: #0000ff;
+}
+.org-org-archived {
+    /* org-archived */
+    color: #7f7f7f;
+}
+.org-org-code {
+    /* org-code */
+    color: #7f7f7f;
+}
+.org-org-column {
+    /* org-column */
+    background-color: #e5e5e5;
+}
+.org-org-column-title {
+    /* org-column-title */
+    background-color: #e5e5e5;
+    font-weight: bold;
+    text-decoration: underline;
+}
+.org-org-date {
+    /* org-date */
+    color: #a020f0;
+    text-decoration: underline;
+}
+.org-org-done {
+    /* org-done */
+    color: #228b22;
+    font-weight: bold;
+}
+.org-org-drawer {
+    /* org-drawer */
+    color: #0000ff;
+}
+.org-org-ellipsis {
+    /* org-ellipsis */
+    color: #b8860b;
+    text-decoration: underline;
+}
+.org-org-formula {
+    /* org-formula */
+    color: #b22222;
+}
+.org-org-headline-done {
+    /* org-headline-done */
+    color: #bc8f8f;
+}
+.org-org-hide {
+    /* org-hide */
+    color: #e5e5e5;
+}
+.org-org-latex-and-export-specials {
+    /* org-latex-and-export-specials */
+    color: #8b4513;
+}
+.org-org-level-1 {
+    /* org-level-1 */
+    color: #0000ff;
+}
+.org-org-level-2 {
+    /* org-level-2 */
+    color: #b8860b;
+}
+.org-org-level-3 {
+    /* org-level-3 */
+    color: #a020f0;
+}
+.org-org-level-4 {
+    /* org-level-4 */
+    color: #b22222;
+}
+.org-org-level-5 {
+    /* org-level-5 */
+    color: #228b22;
+}
+.org-org-level-6 {
+    /* org-level-6 */
+    color: #5f9ea0;
+}
+.org-org-level-7 {
+    /* org-level-7 */
+    color: #da70d6;
+}
+.org-org-level-8 {
+    /* org-level-8 */
+    color: #bc8f8f;
+}
+.org-org-link {
+    /* org-link */
+    color: #a020f0;
+    text-decoration: underline;
+}
+.org-org-property-value {
+}
+.org-org-scheduled-previously {
+    /* org-scheduled-previously */
+    color: #b22222;
+}
+.org-org-scheduled-today {
+    /* org-scheduled-today */
+    color: #006400;
+}
+.org-org-sexp-date {
+    /* org-sexp-date */
+    color: #a020f0;
+}
+.org-org-special-keyword {
+    /* org-special-keyword */
+    color: #bc8f8f;
+}
+.org-org-table {
+    /* org-table */
+    color: #0000ff;
+}
+.org-org-tag {
+    /* org-tag */
+    font-weight: bold;
+}
+.org-org-target {
+    /* org-target */
+    text-decoration: underline;
+}
+.org-org-time-grid {
+    /* org-time-grid */
+    color: #b8860b;
+}
+.org-org-todo {
+    /* org-todo */
+    color: #ff0000;
+}
+.org-org-upcoming-deadline {
+    /* org-upcoming-deadline */
+    color: #b22222;
+}
+.org-org-verbatim {
+    /* org-verbatim */
+    color: #7f7f7f;
+    text-decoration: underline;
+}
+.org-org-warning {
+    /* org-warning */
+    color: #ff0000;
+    font-weight: bold;
+}
+.org-outline-1 {
+    /* outline-1 */
+    color: #0000ff;
+}
+.org-outline-2 {
+    /* outline-2 */
+    color: #b8860b;
+}
+.org-outline-3 {
+    /* outline-3 */
+    color: #a020f0;
+}
+.org-outline-4 {
+    /* outline-4 */
+    color: #b22222;
+}
+.org-outline-5 {
+    /* outline-5 */
+    color: #228b22;
+}
+.org-outline-6 {
+    /* outline-6 */
+    color: #5f9ea0;
+}
+.org-outline-7 {
+    /* outline-7 */
+    color: #da70d6;
+}
+.org-outline-8 {
+    /* outline-8 */
+    color: #bc8f8f;
+}
+.org-preprocessor {
+    /* font-lock-preprocessor-face */
+    color: #da70d6;
+}
+.org-query-replace {
+    /* query-replace */
+    color: #b0e2ff;
+    background-color: #cd00cd;
+}
+.org-regexp-grouping-backslash {
+    /* font-lock-regexp-grouping-backslash */
+    font-weight: bold;
+}
+.org-regexp-grouping-construct {
+    /* font-lock-regexp-grouping-construct */
+    font-weight: bold;
+}
+.org-region {
+    /* region */
+    background-color: #eedc82;
+}
+.org-rmail-highlight {
+}
+.org-scroll-bar {
+    /* scroll-bar */
+    background-color: #bfbfbf;
+}
+.org-secondary-selection {
+    /* secondary-selection */
+    background-color: #ffff00;
+}
+.org-shadow {
+    /* shadow */
+    color: #7f7f7f;
+}
+.org-show-paren-match {
+    /* show-paren-match */
+    background-color: #40e0d0;
+}
+.org-show-paren-mismatch {
+    /* show-paren-mismatch */
+    color: #ffffff;
+    background-color: #a020f0;
+}
+.org-string {
+    /* font-lock-string-face */
+    color: #bc8f8f;
+}
+.org-texinfo-heading {
+    /* texinfo-heading */
+    color: #0000ff;
+}
+.org-tool-bar {
+    /* tool-bar */
+    color: #000000;
+    background-color: #bfbfbf;
+}
+.org-tooltip {
+    /* tooltip */
+    color: #000000;
+    background-color: #ffffe0;
+}
+.org-trailing-whitespace {
+    /* trailing-whitespace */
+    background-color: #ff0000;
+}
+.org-type {
+    /* font-lock-type-face */
+    color: #228b22;
+}
+.org-underline {
+    /* underline */
+    text-decoration: underline;
+}
+.org-variable-name {
+    /* font-lock-variable-name-face */
+    color: #b8860b;
+}
+.org-variable-pitch {
+}
+.org-vertical-border {
+}
+.org-warning {
+    /* font-lock-warning-face */
+    color: #ff0000;
+    font-weight: bold;
+}
+
+
+
+.logo-link {
+    position: fixed;
+    top: 10px;
+    left: 30px;
+}
+
+/* These style are only for IE: */
+
+* html {
+    overflow: hidden;
+    padding-bottom:0px;
+    margin:0px;
+}
+
+* html body {
+    height: 100%;
+    overflow:auto;
+    font-size: 100%;
+    margin: 0px 0px 0px 250px;
+    padding: 0px 10% 0px 0px;
+}
+/* 针对Ie ,好像因为iexplore 不认识position:fixed 所以没办法让
+   导航部分的显示固定在特定的位置，不随滚动条而滚动
+ */
+* html #table-of-contents {
+    position: absolute;
+    width:200px;
+    left:10px
+    /*
+      The evil IE-JavaScript hack :-) depends on Picture and y-distance.
+      Added to support small screens (Netbooks...).
+      */
+    top: expression( ( 30 + ( noValue = document.documentElement.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop ) ) + 'px' );
+    /* top: expression((document.body.clientHeight - 210) + "px"); */
+     /* height: expression((document.body.clientHeight - 210) + "px"); */
+}
+* html #org-div-home-and-up {
+    position: absolute;
+    width:200px;
+    right:25px;
+    /*
+      The evil IE-JavaScript hack :-) depends on Picture and y-distance.
+      Added to support small screens (Netbooks...).
+      */
+    /* top: expression( ( 10 + ( noValue = document.documentElement.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop ) ) + 'px' ); */
+    /* top: expression((document.body.clientHeight - 210) + "px"); */
+     /* height: expression((document.body.clientHeight - 210) + "px"); */
+}
+* html #org-src{
+    position: absolute;
+    width:25px;
+    right:20px;
+}
+* html #htmlized-src{
+    position: absolute;
+    width:120px;
+    right:20px;
+}
+
+* html p.author{
+    position: absolute;
+    width:125px;
+    left:20px;
+}
+* html p.date{
+    position: absolute;
+    width:225px;
+    left:20px;
+    bottom:0px;
+}
+* html p.creator{
+    position: absolute;
+    width:425px;
+    left:20px;
+    bottom:20px;
+}
+
+* html h1 {
+    margin-top:10px;
+}
+
+* html .logo-link {
+    position: absolute;
+    top: 10px;
+    left: 30px;
+}
+
+* html #logo-text{
+    font-size: 75%;
+	position: absolute;
+	display: block;
+	right: 10px;
+	bottom: 3px;
+	overflow:hidden;
+}
+ 
+ 
+* html div#tags {
+	font-size: 75%;
+	/* line-height: 1.4em; */
+	position: absolute;
+	display: block;
+	right: -2px;
+	top: 10%;
+	width: 150px;
+	/* min-height:60px; */
+	max-height:95%;
+	/* overflow:visible; */
+    /* white-space:pre-wrap; */
+}
+
+    </style>
+<link rel="stylesheet" type="text/css" href="../style/emacs.css" />
+<script type='text/javascript' src='../js/emacs.js'> </script>
+
+</head>
+<body>
+<div id="org-div-home-and-up" style="text-align:right;font-size:70%;white-space:nowrap;">
+ <a accesskey="h" href="../sitemap.html"> 站点地图 </a>
+ |
+ <a accesskey="H" href="../index.html"> 首页 </a>
+</div>
+
+<div id="preamble">
+
+</div>
+
+<div id="content">
+<h1 class="title">GNU/Emacs 可以做什么</h1>
+
+
+<div id='logo-img' ><a  href='../index.html'>▇█▓▒░◕~◕░▒▓█▇</a></div>
+
+<div id='logo-text'>
+  <a href='#' ><span align="left">░◕~◕░</span></a>
+</div>
+
+<p>
+我所有的Emacs相关的配置，在 <a href="https://github.com/jixiuf/emacs_conf">https://github.com/jixiuf/emacs_conf</a> 可以找到<br/>
+</p>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">yasnippet (yet another snippet) 浙大一牛人为Emacs写的插件 模版</a></li>
+<li><a href="#sec-2">我为csharp 写的生成seter getter 的函数</a></li>
+<li><a href="#sec-3">(我写的函数)自动生成sql server 的建表语句</a></li>
+<li><a href="#sec-4">Emacs 的列编辑模式(Emacs称矩形编辑rect),</a></li>
+<li><a href="#sec-5">美化sql</a></li>
+<li><a href="#sec-6">作为数据库前端，以oracle ,mysql 为例</a></li>
+<li><a href="#sec-7">（我写的）编写mysql 脚本时，适时的补全表名列名</a></li>
+<li><a href="#sec-8">(我写的)编写oracle 脚本时，适时的补全表名列名</a></li>
+<li><a href="#sec-9">（我写的）AutoJavaComplete 编写Java代码时自动补全</a></li>
+<li><a href="#sec-10">dired (Emacs的文件管理系统(资源管理器))</a></li>
+<li><a href="#sec-11">org-mode 非程序员的mode</a></li>
+<li><a href="#sec-12">org-mode 将org mode 编写的文件导出成单个html文件，</a></li>
+<li><a href="#sec-13">org-mode 将某目录下所有org 文件，以个人站点的形式，导出</a></li>
+<li><a href="#sec-14">org-table ,org-mode 中的表格</a></li>
+<li><a href="#sec-15">在emacs使用stardict 词典,需要sdvc(命令行下的stardict) 支持</a></li>
+<li><a href="#sec-16">emacs中的游戏</a></li>
+<li><a href="#sec-17">diff 文件的比较</a></li>
+<li><a href="#sec-18">diff 版本控制工具中各版本的差异</a></li>
+<li><a href="#sec-19">在svn 或git等版本控制工具管理的文件里，查看此文件的历史</a></li>
+<li><a href="#sec-20">Version Control</a></li>
+<li><a href="#sec-21">Ediff 文件的合并，对比的工具，一般与版本控制工具使用，如git ,svn.</a></li>
+<li><a href="#sec-22">录制键盘宏</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-1" class="outline-2">
+<h2 id="sec-1">yasnippet (yet another snippet) 浙大一牛人为Emacs写的插件 模版</h2>
+<div class="outline-text-2" id="text-1">
+
+<p>  它可以 为 html java cs c c++ ,所有你可以想像的到的语言定义 模版， 语法极<br/>
+  简单<br/>
+  <a href="http://code.google.com/p/yasnippet/">http://code.google.com/p/yasnippet/</a><br/>
+  官网上有完整的关于yasnippet的视频<br/>
+  <a href="http://yasnippet.googlecode.com/files/yas_demo.mp4">http://yasnippet.googlecode.com/files/yas\_demo.mp4</a><br/>
+</p>
+<p><br/>
+</p></div>
+
+</div>
+
+<div id="outline-container-2" class="outline-2">
+<h2 id="sec-2">我为csharp 写的生成seter getter 的函数</h2>
+<div class="outline-text-2" id="text-2">
+
+<p>将选中区域内的所有格式为<br/>
+private DateTime LAST_MONTH_CHECKSTOCK_DATE;<br/>
+private DateTime last;<br/>
+的变量，替换成<br/>
+private DateTime LAST_MONTH_CHECKSTOCK_DATE;<br/>
+public DateTime Last_Month_Checkstock_Date<br/>
+{<br/>
+set {LAST_MONTH_CHECKSTOCK_DATE=value ;}<br/>
+get {return LAST_MONTH_CHECKSTOCK_DATE ;}<br/>
+}<br/>
+private DateTime last;<br/>
+public DateTime Last<br/>
+{<br/>
+set {last=value ;}<br/>
+get {return last ;}<br/>
+}<br/>
+</p>
+<p><br/>
+<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">csharp-setter-getter</span>(beg end)
+<span class="org-doc">"generate sets and gets for c#."</span>
+(interactive <span class="org-string">"r"</span>)
+(<span class="org-keyword">let</span> ((region-string (buffer-substring-no-properties beg end))
+      var var-type   capitalize-var set-gets)
+  (<span class="org-keyword">with-temp-buffer</span>
+    (csharp-mode)
+    (insert region-string) (insert <span class="org-string">"\n"</span>)
+    (goto-char (point-min))(end-of-line)
+    (<span class="org-keyword">while</span> (<span class="org-keyword">not</span> (eobp))
+      (<span class="org-keyword">if</span> (string-match <span class="org-string">"^[ \t]*$"</span> (buffer-substring-no-properties (point-at-bol) (point-at-eol)))
+          (<span class="org-keyword">progn</span> (forward-line)(end-of-line))
+        (backward-sexp)
+        (<span class="org-function-name">setq</span> var (thing-at-point 'sexp))
+        (backward-sexp)
+        (<span class="org-function-name">setq</span> var-type (thing-at-point 'sexp))
+        (kill-region (point-at-bol) (point-at-eol))
+        (insert (csharp-a-setter-getter var-type var))
+        (forward-line)(end-of-line)))
+    (indent-region (point-min) (point-max))
+    (<span class="org-function-name">setq</span> set-gets (buffer-string))
+    )
+  (kill-region beg end)
+  (insert set-gets)
+  )
+)
+</pre>
+
+
+</p></div>
+
+</div>
+
+<div id="outline-container-3" class="outline-2">
+<h2 id="sec-3">(我写的函数)自动生成sql server 的建表语句</h2>
+<div class="outline-text-2" id="text-3">
+
+<p>  根据格式如下的一段内容自动生成sql server  的create table 语句<br/>
+ STOCK_ID                                   IDENTITY<br/>
+ SEMIFINISHER_ID                                    INT<br/>
+ STOCK_WEIGHT                                   DECIMAL                 18,2<br/>
+ STOCK_YEAR_MONTH                                   DATATIME<br/>
+ START_WEIGHT                                   DECIMAL                 18,2<br/>
+ CREATE_DATETIME                                    DATETIME<br/>
+ CREATER_ID                                 NVARCHAR                    20<br/>
+ UPDATE_DATETIME                                    DATETIME<br/>
+ UPDATER_ID                                 NVARCHAR                    20<br/>
+ DELETE_FLG                                 NVARCHAR                    1<br/>
+</p>
+<p>  <br/>
+</p></div>
+
+</div>
+
+<div id="outline-container-4" class="outline-2">
+<h2 id="sec-4">Emacs 的列编辑模式(Emacs称矩形编辑rect),</h2>
+<div class="outline-text-2" id="text-4">
+
+<p>  Emacs 不仅可以选择几行数据，而且可以选择列<br/>
+  我用到的与列编辑有关的 扩展<br/>
+  <a href="http://www.emacswiki.org/emacs/rect-mark.el">http://www.emacswiki.org/emacs/rect-mark.el</a><br/>
+  我定义的快捷键<br/>
+  Alt+space 设置mark<br/>
+  C-x-r-k(Control+x,r,k) 列删除<br/>
+  C-x-r-t                列插入<br/>
+  C-x-r-y                列粘贴<br/>
+</p>
+<p>  <br/>
+比如以下此为例<br/>
+ 1删除每行开头的分号<br/>
+ 2 在每行开头插入# <br/>
+</p></div>
+
+</div>
+
+<div id="outline-container-5" class="outline-2">
+<h2 id="sec-5">美化sql</h2>
+<div class="outline-text-2" id="text-5">
+
+<p>  需要 blancosqlformatter-0.1.1.jar 作后台进程处理 <br/>
+  <a href="http://www.emacswiki.org/emacs/SqlBeautify">http://www.emacswiki.org/emacs/SqlBeautify</a><br/>
+</p>
+<p>  <br/>
+</p></div>
+
+</div>
+
+<div id="outline-container-6" class="outline-2">
+<h2 id="sec-6">作为数据库前端，以oracle ,mysql 为例</h2>
+<div class="outline-text-2" id="text-6">
+
+</div>
+
+</div>
+
+<div id="outline-container-7" class="outline-2">
+<h2 id="sec-7">（我写的）编写mysql 脚本时，适时的补全表名列名</h2>
+<div class="outline-text-2" id="text-7">
+
+<p>  <a href="http://www.emacswiki.org/emacs/sqlparser-mysql-complete.el">http://www.emacswiki.org/emacs/sqlparser-mysql-complete.el</a><br/>
+</p></div>
+
+</div>
+
+<div id="outline-container-8" class="outline-2">
+<h2 id="sec-8">(我写的)编写oracle 脚本时，适时的补全表名列名</h2>
+<div class="outline-text-2" id="text-8">
+
+<p>  <a href="http://www.emacswiki.org/emacs/sqlparser-oracle-complete.el">http://www.emacswiki.org/emacs/sqlparser-oracle-complete.el</a><br/>
+</p></div>
+
+</div>
+
+<div id="outline-container-9" class="outline-2">
+<h2 id="sec-9">（我写的）AutoJavaComplete 编写Java代码时自动补全</h2>
+<div class="outline-text-2" id="text-9">
+
+<p>  <a href="http://www.emacswiki.org/emacs/AutoJavaComplete">http://www.emacswiki.org/emacs/AutoJavaComplete</a><br/>
+</p></div>
+
+</div>
+
+<div id="outline-container-10" class="outline-2">
+<h2 id="sec-10">dired (Emacs的文件管理系统(资源管理器))</h2>
+<div class="outline-text-2" id="text-10">
+
+<p>  此例演示使用dired文件管理系统及 第四讲中提到的列编辑<br/>
+  模式批量重命名文件<br/>
+</p>
+<p>  <br/>
+</p></div>
+
+</div>
+
+<div id="outline-container-11" class="outline-2">
+<h2 id="sec-11">org-mode 非程序员的mode</h2>
+<div class="outline-text-2" id="text-11">
+
+<p>  我现在编写的这个文件使用的mode 就是org-mode<br/>
+  它的第一特定是TAB 进行折叠<br/>
+  整个文件其实很大，但是现在只显示骨架，整体结构很清晰.<br/>
+</p>
+<p><br/>
+</p></div>
+
+</div>
+
+<div id="outline-container-12" class="outline-2">
+<h2 id="sec-12">org-mode 将org mode 编写的文件导出成单个html文件，</h2>
+<div class="outline-text-2" id="text-12">
+
+<p>  在orgmode模式下  C-cC-e 之后，可以导出成多种格式，<br/>
+   以导出此文件为例<br/>
+</p></div>
+
+</div>
+
+<div id="outline-container-13" class="outline-2">
+<h2 id="sec-13">org-mode 将某目录下所有org 文件，以个人站点的形式，导出</h2>
+<div class="outline-text-2" id="text-13">
+
+<p>  比如，将我的 <i>home/jixiuf/documents/org/src</i><br/>
+  目录下的所有org 文件，导出成html 放到<br/>
+  <i>home/jixiuf/documents/org/public_html</i><br/>
+  目录下为例<br/>
+</p>
+<p>  <br/>
+</p></div>
+
+</div>
+
+<div id="outline-container-14" class="outline-2">
+<h2 id="sec-14">org-table ,org-mode 中的表格</h2>
+<div class="outline-text-2" id="text-14">
+
+
+<p>  <br/>
+</p><table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<caption></caption>
+<colgroup><col class="left" /><col class="left" /><col class="left" />
+</colgroup>
+<tbody>
+<tr><td class="left">head</td><td class="left">head2</td><td class="left">head3</td></tr>
+<tr><td class="left">hello</td><td class="left">world</td><td class="left">ok</td></tr>
+<tr><td class="left">this</td><td class="left">is</td><td class="left">come</td></tr>
+<tr><td class="left">a text</td><td class="left">table</td><td class="left">on</td></tr>
+</tbody>
+</table>
+
+
+<p><br/>
+</p><table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<caption></caption>
+<colgroup><col class="left" /><col class="left" />
+</colgroup>
+<thead>
+<tr><th scope="col" class="left">another</th><th scope="col" class="left">one</th></tr>
+</thead>
+<tbody>
+<tr><td class="left">ok</td><td class="left">ok</td></tr>
+<tr><td class="left">Idon't know</td><td class="left">can you editor do this</td></tr>
+</tbody>
+</table>
+
+
+<p><br/>
+</p></div>
+
+</div>
+
+<div id="outline-container-15" class="outline-2">
+<h2 id="sec-15">在emacs使用stardict 词典,需要sdvc(命令行下的stardict) 支持</h2>
+<div class="outline-text-2" id="text-15">
+
+<p>  ，将下面函数绑定到`C-cd'上 .光标移动到单词上,按下C-cd即可查词典<br/>
+</p>
+<p><br/>
+<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">sdcv-to-buffer</span> ()
+  <span class="org-doc">"Search dict in region or world."</span>
+  (interactive)
+  (<span class="org-keyword">let</span> ((word (<span class="org-keyword">if</span> mark-active
+                  (buffer-substring-no-properties (region-beginning) (region-end))
+                (current-word <span class="org-constant">nil</span> <span class="org-constant">t</span>)))
+        (buf-name (buffer-name))
+        )
+    <span class="org-comment-delimiter">;; </span><span class="org-comment">(setq word (read-string (format "Search the dictionary for (default %s): " word)</span>
+    <span class="org-comment-delimiter">;;                         </span><span class="org-comment">nil nil word))</span>
+    (set-buffer (get-buffer-create <span class="org-string">"*sdcv*"</span>))
+    (buffer-disable-undo)
+    (erase-buffer)
+    (insert (shell-command-to-string  (format <span class="org-string">"sdcv -n %s "</span> word) ))
+    (<span class="org-keyword">if</span> (<span class="org-keyword">equal</span> buf-name <span class="org-string">"*sdcv*"</span>)
+        (switch-to-buffer <span class="org-string">"*sdcv*"</span>)
+      (switch-to-buffer-other-window <span class="org-string">"*sdcv*"</span>)
+      )
+    (goto-char (point-min))
+    ))
+</pre>
+
+</p></div>
+
+</div>
+
+<div id="outline-container-16" class="outline-2">
+<h2 id="sec-16">emacs中的游戏</h2>
+<div class="outline-text-2" id="text-16">
+
+</div>
+
+</div>
+
+<div id="outline-container-17" class="outline-2">
+<h2 id="sec-17">diff 文件的比较</h2>
+<div class="outline-text-2" id="text-17">
+
+<p>  比较两个文件的不同<br/>
+</p>
+<p><br/>
+</p></div>
+
+</div>
+
+<div id="outline-container-18" class="outline-2">
+<h2 id="sec-18">diff 版本控制工具中各版本的差异</h2>
+<div class="outline-text-2" id="text-18">
+
+<p>  C-xv=  对工作区中的文件与版本控制下的最新版进行比较<br/>
+  比如，我所有的emacs配置文件使用git 进行版本管理,<br/>
+</p></div>
+
+</div>
+
+<div id="outline-container-19" class="outline-2">
+<h2 id="sec-19">在svn 或git等版本控制工具管理的文件里，查看此文件的历史</h2>
+<div class="outline-text-2" id="text-19">
+
+<p>  C-xvl 查看历史,<br/>
+</p>
+<p>  <br/>
+</p></div>
+
+</div>
+
+<div id="outline-container-20" class="outline-2">
+<h2 id="sec-20">Version Control</h2>
+<div class="outline-text-2" id="text-20">
+
+<p>  emacs 有一个Version Control ，它试图将所有现存的版本管理工具<br/>
+  如svn cvs git 等等版本控制工具在emacs中的使用方式得到统一<br/>
+  比如，不论你是svn 还是git ,<br/>
+  C-xvl 都是查看此文件的历史<br/>
+  C-xv+ 更新此文件到最新版<br/>
+  C-xvu revert<br/>
+  而功能最强大的功能C-xvv 对应的，它会根据当前文件所处的状态，自动<br/>
+  决定下一部操作该如何做<br/>
+</p>
+<p>  <br/>
+</p></div>
+
+</div>
+
+<div id="outline-container-21" class="outline-2">
+<h2 id="sec-21">Ediff 文件的合并，对比的工具，一般与版本控制工具使用，如git ,svn.</h2>
+<div class="outline-text-2" id="text-21">
+
+</div>
+
+</div>
+
+<div id="outline-container-22" class="outline-2">
+<h2 id="sec-22">录制键盘宏</h2>
+<div class="outline-text-2" id="text-22">
+
+<p>  另外说一点我对键盘和鼠标的一些看法，不想带有太多的偏见.<br/>
+  键盘的优点是:每一次击键都是确定的，具有可重复性<br/>
+  鼠标优点是易用，但是每次点击所对应的坐标，不太具有可重复性<br/>
+  这一次在(100,200)处点击的是确定按钮，下一次可能就是其他按钮了.<br/>
+  所以你没法记住一个坐标，然后将它重复点击n次(就算能，可重复性相对键盘较差<br/>
+  一点,说到这，推荐大家学习一下AutoHotKey这款开源软件).<br/>
+</p>
+<p>  <br/>
+  而Emacs 用熟了之后，是要完全脱离鼠标的使用的，虽然它也添加了对鼠标的支持，<br/>
+  鼠标、菜单栏、工具栏只起一个辅助作用.<br/>
+</p>
+<p><br/>
+  键盘的每一次按键是确定的，每一个按键序列都对应着Emacs中的一个命令<br/>
+  (Command). 如此，将一段同样的操作录制下来，重复多次，便可以简化繁琐的重复<br/>
+  性操作<br/>
+  C-x(  开始录制键盘宏<br/>
+  C-x)  结束录制键盘宏<br/>
+  C-xe  重复最近录制的键盘宏<br/>
+  C-u3C-xe 重复3次最近录制的键盘宏<br/>
+  C-u0C-xe 重复无数次最近录制的键盘宏,直到遇到错误<br/>
+</p>
+<p><br/>
+  演示示例，<br/>
+  有这样一段内容，它们以冒号进行分隔，现在把每一行以冒号分隔的最后一部分内<br/>
+  容删掉<br/>
+  下面进行操作<br/>
+  录制完成<br/>
+  C-xe 调用<br/>
+  其实可以C-u4C-xe 调用4次即可<br/>
+  四次调用<br/>
+</p><blockquote>
+
+<p>root:x:0:<br/>
+bin:x:1:<br/>
+daemon:x:2:<br/>
+sys:x:3:<br/>
+adm:x:4:<br/>
+</p>
+</blockquote>
+
+
+<p><br/>
+  分析：<br/>
+   1 把光标移动到第一行的末尾<br/>
+     M-&lt;   (实际是Shift-Alt+,) (beginning-of-buffer) 函数，跳到第一行<br/>
+     C-e    (Control-e)       (move-end-of-line)  移动到行尾<br/>
+   2 开始录制键盘宏 C-x(        (kmacro-start-macro)  <br/>
+      C-backspace              (backward-kill-word) 删除光标前的一个单词<br/>
+      C-n                      (next-line)          光标移动到下一行<br/>
+      C-e                       (move-end-of-line)  移动到行尾<br/>
+      注意开始录制的时候光标所处的位置，与录制结束后所处的位置应该相似 ,才<br/>
+     能使录制的内容多次执行后无误 (比如此处均处于每行的末尾) <br/>
+   3 结束录制键盘宏 C-x)        (kmacro-end-macro)<br/>
+</p>
+<p><br/>
+<div id='my-src'>
+<div id='org-src'><a href='../src/emacs/emacs-can-do-what.org'>src</a></div>
+<div id='htmlized-src'><a href='../htmlized-src/emacs/emacs-can-do-what.org.html'>htmlized-src</a></div>
+</div>
+<div id='tags'><span id='tags-title'>Tags:</span><br />
+    <a href="../tags/@SVN.html">@SVN</a><br/>
+    <a href="../tags/@perl.html">@perl</a><br/>
+    <a href="../tags/@Java.html">@Java</a><br/>
+    <a href="../tags/@Mysql.html">@Mysql</a><br/>
+    <a href="../tags/@Erlang.html">@Erlang</a><br/>
+    <a href="../tags/@SQL.html">@SQL</a><br/>
+    <a href="../tags/@DB.html">@DB</a><br/>
+    <a href="../tags/@Oracle.html">@Oracle</a><br/>
+    <a href="../tags/@Ediff.html">@Ediff</a><br/>
+    <a href="../tags/@Git.html">@Git</a><br/>
+    <a href="../tags/@Cedet.html">@Cedet</a><br/>
+    <a href="../tags/@C-C++.html">@C-C++</a><br/>
+    <a href="../tags/@Daily.html">@Daily</a><br/>
+    <a href="../tags/@Eclipse.html">@Eclipse</a><br/>
+    <a href="../tags/@AutoHotKey.html">@AutoHotKey</a><br/>
+    <a href="../tags/@Windows.html">@Windows</a><br/>
+    <a href="../tags/@Linux.html">@Linux</a><br/>
+    <a href="../tags/@C.html">@C</a><br/>
+    <a href="../tags/@Emacs.html">@Emacs</a><br/>
+</p>
+<p><br/>
+</div>
+</p></div>
+</div>
+</div>
+
+<div id="postamble">
+<p class="date">Date: 2011-08-27 六</p>
+<p class="author">Author: 孤峰独秀</p>
+<p class="creator">Org version 7.8.03 with Emacs version 24</p>
+
+
+</div>
+<p><br/><br/>
+<!-- hhmts start --> <!-- hhmts end --></p>
+
+</body>
+</html>

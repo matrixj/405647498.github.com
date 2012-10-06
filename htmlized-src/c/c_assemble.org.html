@@ -1,0 +1,481 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<!-- Created by htmlize-1.34 in css mode. -->
+<html>
+  <head>
+    <title>c_assemble.org</title>
+    <style type="text/css">
+    <!--
+      body {
+        color: #F8F8F8;
+        background-color: #0C1021;
+      }
+      .comment {
+        /* font-lock-comment-face */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-block {
+        /* org-block */
+        color: #b3b3b3;
+      }
+      .org-block-begin-line {
+        /* org-block-begin-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-block-end-line {
+        /* org-block-end-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-document-info {
+        /* org-document-info */
+        color: #afeeee;
+      }
+      .org-document-info-keyword {
+        /* org-document-info-keyword */
+        color: #b3b3b3;
+      }
+      .org-document-title {
+        /* org-document-title */
+        color: #afeeee;
+        font-size: 144%;
+        font-weight: bold;
+      }
+      .org-level-1 {
+        /* org-level-1 */
+        color: #FF6400;
+      }
+      .org-link {
+        /* org-link */
+        color: #00ffff;
+        text-decoration: underline;
+      }
+      .org-meta-line {
+        /* org-meta-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .underline {
+      }
+
+      a {
+        color: inherit;
+        background-color: inherit;
+        font: inherit;
+        text-decoration: inherit;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+    -->
+    </style>
+  </head>
+  <body>
+    <pre>
+<span class="comment"># -*- coding:utf-8 -*-</span>
+<span class="org-meta-line">#+LANGUAGE:  zh
+</span><span class="org-document-info-keyword">#+TITLE:</span><span class="comment">     </span><span class="org-document-title">c&#19982;&#27719;&#32534;</span>
+<span class="org-document-info-keyword">#+AUTHOR:</span><span class="comment">    </span><span class="org-document-info">&#32426;&#31168;&#23792;</span>
+<span class="org-document-info-keyword">#+EMAIL:</span><span class="comment">     </span><span class="org-document-info">jixiuf@gmail.com</span>
+<span class="org-document-info-keyword">#+DATE:</span><span class="comment">     </span><span class="org-document-info">2012-04-29 &#26085;</span>
+<span class="org-meta-line">#+DESCRIPTION:c&#19982;&#27719;&#32534;
+#+KEYWORDS:
+#+OPTIONS:   H:2 num:nil toc:t \n:t @:t ::t |:t ^:nil -:t f:t *:t &lt;:t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil
+#+FILETAGS: @C
+</span><span class="org-level-1">* &#21442;&#32771;</span>
+  <span class="org-link">http://learn.akae.cn/media/ch19s01.html</span>
+<span class="org-block-begin-line">#+BEGIN_SRC c
+</span><span class="org-block">int bar(int c, int d)
+{
+    int e = c + d;
+    return e;
+}
+
+int foo(int a, int b)
+{
+    return bar(a, b);
+}
+
+int main(void)
+{
+    foo(2, 3);
+    return 0;
+}
+</span><span class="org-block-end-line">#+END_SRC
+</span>
+&#22914;&#26524;&#22312;&#32534;&#35793;&#26102;&#21152;&#19978;-g&#36873;&#39033;&#65288;&#22312;&#31532; 10 &#31456; gdb&#35762;&#36807;-g&#36873;&#39033;&#65289;&#65292;&#37027;&#20040;&#29992;objdump&#21453;&#27719;&#32534;&#26102;&#21487;&#20197;&#25226;
+C&#20195;&#30721;&#21644;&#27719;&#32534;&#20195;&#30721;&#31359;&#25554;&#36215;&#26469;&#26174;&#31034;&#65292;&#36825;&#26679;C&#20195;&#30721;&#21644;&#27719;&#32534;&#20195;&#30721;&#30340;&#23545;&#24212;&#20851;&#31995;&#30475;&#24471;&#26356;&#28165;&#26970;&#12290;&#21453;&#27719;&#32534;&#30340;
+&#32467;&#26524;&#24456;&#38271;&#65292;&#20197;&#19979;&#21482;&#21015;&#20986;&#25105;&#20204;&#20851;&#24515;&#30340;&#37096;&#20998;&#12290;
+<span class="org-block-begin-line">#+BEGIN_SRC sh
+</span><span class="org-block">gcc -g main.c
+objdump -dS a.out
+</span><span class="org-block-end-line">#+END_SRC
+</span>&#36755;&#20986;&#32467;&#26524;&#22914;&#19979;:
+<span class="org-block-begin-line">#+BEGIN_SRC c
+</span><span class="org-block">main:     file format elf32-i386
+
+
+Disassembly of section .init:
+
+08048294 &lt;_init&gt;:
+ 8048294:    55                       push   %ebp
+ 8048295:    89 e5                    mov    %esp,%ebp
+ 8048297:    83 ec 08                 sub    $0x8,%esp
+ 804829a:    e8 65 00 00 00           call   8048304 &lt;_start+0x24&gt;
+ 804829f:    e8 ec 00 00 00           call   8048390 &lt;_start+0xb0&gt;
+ 80482a4:    e8 d7 01 00 00           call   8048480 &lt;__libc_csu_fini+0x10&gt;
+ 80482a9:    c9                       leave
+ 80482aa:    c3                       ret
+
+Disassembly of section .plt:
+
+080482ac &lt;<a href="mailto:__gmon_start__&#64;plt-0x10">__gmon_start__&#64;plt-0x10</a>&gt;:
+ 80482ac:    ff 35 f8 9f 04 08        pushl  0x8049ff8
+ 80482b2:    ff 25 fc 9f 04 08        jmp    *0x8049ffc
+ 80482b8:    00 00                    add    %al,(%eax)
+    ...
+
+080482bc &lt;<a href="mailto:__gmon_start__&#64;plt">__gmon_start__&#64;plt</a>&gt;:
+ 80482bc:    ff 25 00 a0 04 08        jmp    *0x804a000
+ 80482c2:    68 00 00 00 00           push   $0x0
+ 80482c7:    e9 e0 ff ff ff           jmp    80482ac &lt;_init+0x18&gt;
+
+080482cc &lt;<a href="mailto:__libc_start_main&#64;plt">__libc_start_main&#64;plt</a>&gt;:
+ 80482cc:    ff 25 04 a0 04 08        jmp    *0x804a004
+ 80482d2:    68 08 00 00 00           push   $0x8
+ 80482d7:    e9 d0 ff ff ff           jmp    80482ac &lt;_init+0x18&gt;
+
+Disassembly of section .text:
+
+080482e0 &lt;_start&gt;:
+ 80482e0:    31 ed                    xor    %ebp,%ebp
+ 80482e2:    5e                       pop    %esi
+ 80482e3:    89 e1                    mov    %esp,%ecx
+ 80482e5:    83 e4 f0                 and    $0xfffffff0,%esp
+ 80482e8:    50                       push   %eax
+ 80482e9:    54                       push   %esp
+ 80482ea:    52                       push   %edx
+ 80482eb:    68 70 84 04 08           push   $0x8048470
+ 80482f0:    68 10 84 04 08           push   $0x8048410
+ 80482f5:    51                       push   %ecx
+ 80482f6:    56                       push   %esi
+ 80482f7:    68 e5 83 04 08           push   $0x80483e5
+ 80482fc:    e8 cb ff ff ff           call   80482cc &lt;<a href="mailto:__libc_start_main&#64;plt">__libc_start_main&#64;plt</a>&gt;
+ 8048301:    f4                       hlt
+ 8048302:    90                       nop
+ 8048303:    90                       nop
+ 8048304:    55                       push   %ebp
+ 8048305:    89 e5                    mov    %esp,%ebp
+ 8048307:    53                       push   %ebx
+ 8048308:    83 ec 04                 sub    $0x4,%esp
+ 804830b:    e8 00 00 00 00           call   8048310 &lt;_start+0x30&gt;
+ 8048310:    5b                       pop    %ebx
+ 8048311:    81 c3 e4 1c 00 00        add    $0x1ce4,%ebx
+ 8048317:    8b 93 fc ff ff ff        mov    -0x4(%ebx),%edx
+ 804831d:    85 d2                    test   %edx,%edx
+ 804831f:    74 05                    je     8048326 &lt;_start+0x46&gt;
+ 8048321:    e8 96 ff ff ff           call   80482bc &lt;<a href="mailto:__gmon_start__&#64;plt">__gmon_start__&#64;plt</a>&gt;
+ 8048326:    58                       pop    %eax
+ 8048327:    5b                       pop    %ebx
+ 8048328:    c9                       leave
+ 8048329:    c3                       ret
+ 804832a:    90                       nop
+ 804832b:    90                       nop
+ 804832c:    90                       nop
+ 804832d:    90                       nop
+ 804832e:    90                       nop
+ 804832f:    90                       nop
+ 8048330:    55                       push   %ebp
+ 8048331:    89 e5                    mov    %esp,%ebp
+ 8048333:    53                       push   %ebx
+ 8048334:    83 ec 04                 sub    $0x4,%esp
+ 8048337:    80 3d 10 a0 04 08 00     cmpb   $0x0,0x804a010
+ 804833e:    75 3d                    jne    804837d &lt;_start+0x9d&gt;
+ 8048340:    a1 14 a0 04 08           mov    0x804a014,%eax
+ 8048345:    bb 18 9f 04 08           mov    $0x8049f18,%ebx
+ 804834a:    81 eb 14 9f 04 08        sub    $0x8049f14,%ebx
+ 8048350:    c1 fb 02                 sar    $0x2,%ebx
+ 8048353:    4b                       dec    %ebx
+ 8048354:    39 d8                    cmp    %ebx,%eax
+ 8048356:    73 1e                    jae    8048376 &lt;_start+0x96&gt;
+ 8048358:    90                       nop
+ 8048359:    8d b4 26 00 00 00 00     lea    0x0(%esi,%eiz,1),%esi
+ 8048360:    40                       inc    %eax
+ 8048361:    a3 14 a0 04 08           mov    %eax,0x804a014
+ 8048366:    ff 14 85 14 9f 04 08     call   *0x8049f14(,%eax,4)
+ 804836d:    a1 14 a0 04 08           mov    0x804a014,%eax
+ 8048372:    39 d8                    cmp    %ebx,%eax
+ 8048374:    72 ea                    jb     8048360 &lt;_start+0x80&gt;
+ 8048376:    c6 05 10 a0 04 08 01     movb   $0x1,0x804a010
+ 804837d:    83 c4 04                 add    $0x4,%esp
+ 8048380:    5b                       pop    %ebx
+ 8048381:    c9                       leave
+ 8048382:    c3                       ret
+ 8048383:    8d b6 00 00 00 00        lea    0x0(%esi),%esi
+ 8048389:    8d bc 27 00 00 00 00     lea    0x0(%edi,%eiz,1),%edi
+ 8048390:    55                       push   %ebp
+ 8048391:    89 e5                    mov    %esp,%ebp
+ 8048393:    83 ec 18                 sub    $0x18,%esp
+ 8048396:    a1 1c 9f 04 08           mov    0x8049f1c,%eax
+ 804839b:    85 c0                    test   %eax,%eax
+ 804839d:    74 12                    je     80483b1 &lt;_start+0xd1&gt;
+ 804839f:    b8 00 00 00 00           mov    $0x0,%eax
+ 80483a4:    85 c0                    test   %eax,%eax
+ 80483a6:    74 09                    je     80483b1 &lt;_start+0xd1&gt;
+ 80483a8:    c7 04 24 1c 9f 04 08     movl   $0x8049f1c,(%esp)
+ 80483af:    ff d0                    call   *%eax
+ 80483b1:    c9                       leave
+ 80483b2:    c3                       ret
+ 80483b3:    90                       nop
+
+080483b4 &lt;bar&gt;:
+int bar(int c, int d)
+{
+ 80483b4:    55                       push   %ebp
+ 80483b5:    89 e5                    mov    %esp,%ebp
+ 80483b7:    83 ec 10                 sub    $0x10,%esp
+    int e = c + d;
+ 80483ba:    8b 45 0c                 mov    0xc(%ebp),%eax
+ 80483bd:    8b 55 08                 mov    0x8(%ebp),%edx
+ 80483c0:    8d 04 02                 lea    (%edx,%eax,1),%eax
+ 80483c3:    89 45 fc                 mov    %eax,-0x4(%ebp)
+    return e;
+ 80483c6:    8b 45 fc                 mov    -0x4(%ebp),%eax
+}
+ 80483c9:    c9                       leave
+ 80483ca:    c3                       ret
+
+080483cb &lt;foo&gt;:
+
+int foo(int a, int b)
+{
+ 80483cb:    55                       push   %ebp
+ 80483cc:    89 e5                    mov    %esp,%ebp
+ 80483ce:    83 ec 08                 sub    $0x8,%esp
+    return bar(a, b);
+ 80483d1:    8b 45 0c                 mov    0xc(%ebp),%eax
+ 80483d4:    89 44 24 04              mov    %eax,0x4(%esp)
+ 80483d8:    8b 45 08                 mov    0x8(%ebp),%eax
+ 80483db:    89 04 24                 mov    %eax,(%esp)
+ 80483de:    e8 d1 ff ff ff           call   80483b4 &lt;bar&gt;
+}
+ 80483e3:    c9                       leave
+ 80483e4:    c3                       ret
+
+080483e5 &lt;main&gt;:
+
+int main(void)
+{
+ 80483e5:    55                       push   %ebp
+ 80483e6:    89 e5                    mov    %esp,%ebp
+ 80483e8:    83 ec 08                 sub    $0x8,%esp
+    foo(2, 3);
+ 80483eb:    c7 44 24 04 03 00 00     movl   $0x3,0x4(%esp)
+ 80483f2:    00
+ 80483f3:    c7 04 24 02 00 00 00     movl   $0x2,(%esp)
+ 80483fa:    e8 cc ff ff ff           call   80483cb &lt;foo&gt;
+    return 0;
+ 80483ff:    b8 00 00 00 00           mov    $0x0,%eax
+}
+ 8048404:    c9                       leave
+ 8048405:    c3                       ret
+ 8048406:    90                       nop
+ 8048407:    90                       nop
+ 8048408:    90                       nop
+ 8048409:    90                       nop
+ 804840a:    90                       nop
+ 804840b:    90                       nop
+ 804840c:    90                       nop
+ 804840d:    90                       nop
+ 804840e:    90                       nop
+ 804840f:    90                       nop
+
+08048410 &lt;__libc_csu_init&gt;:
+ 8048410:    55                       push   %ebp
+ 8048411:    89 e5                    mov    %esp,%ebp
+ 8048413:    57                       push   %edi
+ 8048414:    56                       push   %esi
+ 8048415:    53                       push   %ebx
+ 8048416:    e8 00 00 00 00           call   804841b &lt;__libc_csu_init+0xb&gt;
+ 804841b:    5b                       pop    %ebx
+ 804841c:    81 c3 d9 1b 00 00        add    $0x1bd9,%ebx
+ 8048422:    83 ec 1c                 sub    $0x1c,%esp
+ 8048425:    8d bb 18 ff ff ff        lea    -0xe8(%ebx),%edi
+ 804842b:    e8 64 fe ff ff           call   8048294 &lt;_init&gt;
+ 8048430:    8d 83 18 ff ff ff        lea    -0xe8(%ebx),%eax
+ 8048436:    29 c7                    sub    %eax,%edi
+ 8048438:    c1 ff 02                 sar    $0x2,%edi
+ 804843b:    85 ff                    test   %edi,%edi
+ 804843d:    74 29                    je     8048468 &lt;__libc_csu_init+0x58&gt;
+ 804843f:    31 f6                    xor    %esi,%esi
+ 8048441:    8d b4 26 00 00 00 00     lea    0x0(%esi,%eiz,1),%esi
+ 8048448:    8b 45 10                 mov    0x10(%ebp),%eax
+ 804844b:    89 44 24 08              mov    %eax,0x8(%esp)
+ 804844f:    8b 45 0c                 mov    0xc(%ebp),%eax
+ 8048452:    89 44 24 04              mov    %eax,0x4(%esp)
+ 8048456:    8b 45 08                 mov    0x8(%ebp),%eax
+ 8048459:    89 04 24                 mov    %eax,(%esp)
+ 804845c:    ff 94 b3 18 ff ff ff     call   *-0xe8(%ebx,%esi,4)
+ 8048463:    46                       inc    %esi
+ 8048464:    39 fe                    cmp    %edi,%esi
+ 8048466:    72 e0                    jb     8048448 &lt;__libc_csu_init+0x38&gt;
+ 8048468:    83 c4 1c                 add    $0x1c,%esp
+ 804846b:    5b                       pop    %ebx
+ 804846c:    5e                       pop    %esi
+ 804846d:    5f                       pop    %edi
+ 804846e:    c9                       leave
+ 804846f:    c3                       ret
+
+08048470 &lt;__libc_csu_fini&gt;:
+ 8048470:    55                       push   %ebp
+ 8048471:    89 e5                    mov    %esp,%ebp
+ 8048473:    c9                       leave
+ 8048474:    c3                       ret
+ 8048475:    90                       nop
+ 8048476:    90                       nop
+ 8048477:    90                       nop
+ 8048478:    90                       nop
+ 8048479:    90                       nop
+ 804847a:    90                       nop
+ 804847b:    90                       nop
+ 804847c:    90                       nop
+ 804847d:    90                       nop
+ 804847e:    90                       nop
+ 804847f:    90                       nop
+ 8048480:    55                       push   %ebp
+ 8048481:    89 e5                    mov    %esp,%ebp
+ 8048483:    53                       push   %ebx
+ 8048484:    83 ec 04                 sub    $0x4,%esp
+ 8048487:    a1 0c 9f 04 08           mov    0x8049f0c,%eax
+ 804848c:    83 f8 ff                 cmp    $0xffffffff,%eax
+ 804848f:    74 1b                    je     80484ac &lt;__libc_csu_fini+0x3c&gt;
+ 8048491:    bb 0c 9f 04 08           mov    $0x8049f0c,%ebx
+ 8048496:    8d 76 00                 lea    0x0(%esi),%esi
+ 8048499:    8d bc 27 00 00 00 00     lea    0x0(%edi,%eiz,1),%edi
+ 80484a0:    ff d0                    call   *%eax
+ 80484a2:    83 eb 04                 sub    $0x4,%ebx
+ 80484a5:    8b 03                    mov    (%ebx),%eax
+ 80484a7:    83 f8 ff                 cmp    $0xffffffff,%eax
+ 80484aa:    75 f4                    jne    80484a0 &lt;__libc_csu_fini+0x30&gt;
+ 80484ac:    83 c4 04                 add    $0x4,%esp
+ 80484af:    5b                       pop    %ebx
+ 80484b0:    c9                       leave
+ 80484b1:    c3                       ret
+ 80484b2:    90                       nop
+ 80484b3:    90                       nop
+
+Disassembly of section .fini:
+
+080484b4 &lt;_fini&gt;:
+ 80484b4:    55                       push   %ebp
+ 80484b5:    89 e5                    mov    %esp,%ebp
+ 80484b7:    53                       push   %ebx
+ 80484b8:    83 ec 04                 sub    $0x4,%esp
+ 80484bb:    e8 00 00 00 00           call   80484c0 &lt;_fini+0xc&gt;
+ 80484c0:    5b                       pop    %ebx
+ 80484c1:    81 c3 34 1b 00 00        add    $0x1b34,%ebx
+ 80484c7:    e8 64 fe ff ff           call   8048330 &lt;_start+0x50&gt;
+ 80484cc:    59                       pop    %ecx
+ 80484cd:    5b                       pop    %ebx
+ 80484ce:    c9                       leave
+ 80484cf:    c3                       ret
+</span><span class="org-block-end-line">#+END_SRC
+</span>
+&#19968;&#27573;&#19968;&#27573;&#30340;&#29702;&#35299;,&#20174;main &#24320;&#22987;:
+&#39318;&#20808; &#26632;&#30340;&#20998;&#37197; &#26159;&#20174;&#39640;&#22320;&#22336;&#21521;&#20302;&#22320;&#22336;&#25193;&#23637;&#30340;&#65292;&#25152;&#20197;&#20837;&#26632;&#20250;&#23548;&#33268;&#26632;&#39030;&#22320;&#22336;&#21464;&#23567;&#12290;
+&#22312; <span class="underline">_&#27599;&#20010;&#20989;&#25968;_</span> &#30340; <span class="underline">_&#26632;&#24103;_</span> &#20013;&#65292;ebp&#25351;&#21521;&#26632;&#24213;&#65292;&#32780;esp&#25351;&#21521;&#26632;&#39030;&#65292;&#22312; <span class="underline">_&#26576;&#19968;&#20010;&#20989;&#25968;_</span> &#25191;&#34892;&#36807;
+&#31243;&#20013;esp&#38543;&#30528;&#21387;&#26632;&#21644;&#20986;&#26632;&#25805;&#20316;&#38543;&#26102;&#21464;&#21270;&#65292;&#32780;ebp&#26159;&#19981;&#21160;&#30340;&#65292;&#20989;&#25968;&#30340;&#21442;&#25968;&#21644;&#23616;&#37096;&#21464;&#37327;&#37117;&#26159;&#36890;&#36807;ebp&#30340;&#20540;&#21152;&#19978;&#19968;&#20010;&#20559;
+&#31227;&#37327;&#26469;&#35775;&#38382;
+
+<span class="org-block-begin-line">#+BEGIN_SRC c
+</span><span class="org-block">int main(void)
+{
+&#20851;&#20110;&#36825;&#20004;&#20010;&#25805;&#20316;&#22312;foo&#20989;&#25968;&#20013;&#36827;&#34892;&#35762;&#35299;
+ 80483e5:    55                       push   %ebp
+ 80483e6:    89 e5                    mov    %esp,%ebp
+
+&#23558;&#26632;&#39030;&#25351;&#38024;&#22320;&#22336;&#20943;8byte(&#20004;&#20010;int&#30340;&#38271;&#24230;),&#22312;&#26632;&#19978;&#24320;&#36767;&#20004;&#20010;int&#23383;&#33410;&#30340;&#38271;&#24230;
+ 80483e8:    83 ec 08                 sub    $0x8,%esp
+    foo(2, 3);
+
+ &#20381;&#27425;&#23558; &#21442;&#25968;3 &#12289;2&#20837; &#26632; ,0x4(%esp)&#34920;&#31034;&#30340;&#22320;&#22336;&#26159; :4+ esp&#20013;&#25152;&#25351;&#22320;&#22336;
+ 80483eb:    c7 44 24 04 03 00 00     movl   $0x3,0x4(%esp)
+ 80483f2:    00
+ 80483f3:    c7 04 24 02 00 00 00     movl   $0x2,(%esp)
+&#36339;&#21040;foo()&#20989;&#25968;&#30340;&#39318;&#22320;&#22336;&#36827;&#34892;&#25191;&#34892;
+ 80483fa:    e8 cc ff ff ff           call   80483cb &lt;foo&gt;
+    return 0;
+&#36825;&#34892;move&#19981;&#29702;&#35299;
+ 80483ff:    b8 00 00 00 00           mov    $0x0,%eax
+}
+</span><span class="org-block-end-line">#+END_SRC
+</span>foo&#20989;&#25968;&#30340;&#35843;&#29992;
+<span class="org-block-begin-line">#+BEGIN_SRC c
+</span><span class="org-block">int foo(int a, int b)
+{
+&#39318;&#20808;&#32463;&#36807;main&#30340;&#35843;&#29992;&#65292;&#26632;&#19978;&#20803;&#32032;&#20381;&#27425;&#26159; 3,2,
+&#32463;&#36807;&#27492;&#27493;push   %ebp ,&#26632;&#21464;&#25104;&#20102;&#65292;3 ,2 ,%ebp ,&#27880;&#24847;&#65292;&#27492;&#26102;&#65292;%ebp&#20013;&#30340;&#22320;&#22336;&#26159;main &#20989;&#25968;
+&#30340;&#39318;&#22320;&#22336;,&#21363;&#23558;main &#20989;&#25968;&#30340;&#39318;&#22320;&#22336;&#21387;&#26632;&#65292;&#65288;&#20445;&#23384;main&#30340;&#39318;&#22320;&#22336;&#65292;&#20197;&#20415;&#35843;&#29992;&#23436;foo&#20989;&#25968;&#65292;&#32487;
+&#32493;&#25191;&#34892;main&#20989;&#25968;&#26102;&#24674;&#22797;ebp&#30340;&#20540;&#65289;(push&#25805;&#20316;&#22312;&#20837;&#26632;&#26102;&#65292;&#20250;&#33258;&#21160;&#23558;esp&#30340;&#20540;&#20943;4)
+80483cb:    55                       push   %ebp
+%esp &#22987;&#32456;&#25351;&#21521;&#26632;&#39030;&#20803;&#32032;
+&#32463;mov    %esp,%ebp &#65292;&#27492;&#26102;ebp&#25152;&#25351;&#30340;&#22320;&#22336;&#36319;&#24403;&#19979; esp&#25152;&#25351;&#30340;&#26632;&#39030;&#22320;&#22336;&#30456;&#21516;
+&#21363;&#23558;ebp&#25351;&#21521;&#26032;&#30340; foo&#20989;&#25968;&#26632;&#24103;&#30340;&#39318;&#22320;&#22336;
+ 80483cc:    89 e5                    mov    %esp,%ebp
+&#20934;&#22791;&#21521;&#26632;&#19978;&#21387;&#20837;&#20004;&#20010;&#20803;&#32032;&#65292;
+&#27492;&#26102;&#26632;&#19978;&#20803;&#32032;&#20026;: 3,2,main_ebp,&#31354;,&#31354;
+&#27492;&#26102;ebp&#19982;esp&#20043;&#38388;&#26377;&#20004;&#20010;&#31354;&#20803;&#32032;
+ 80483ce:    83 ec 08                 sub    $0x8,%esp
+    return bar(a, b);
+&#32463;&#27492;&#25805;&#20316; &#26632;&#21464;&#25104; 3,2,main_ebp,3,&#31354;
+0xc+%ebp&#30340;&#22320;&#22336;&#20013;&#30340;&#20869;&#23481;&#26159;3,
+ 80483d1:    8b 45 0c                 mov    0xc(%ebp),%eax
+ 80483d4:    89 44 24 04              mov    %eax,0x4(%esp)
+
+&#32463;&#27492;&#25805;&#20316; &#26632;&#21464;&#25104; 3,2,main_ebp,3,2
+ 80483d8:    8b 45 08                 mov    0x8(%ebp),%eax
+ 80483db:    89 04 24                 mov    %eax,(%esp)
+
+&#36339;&#21040;80483b4&#22788;&#25191;&#34892;bar()&#20989;&#25968;
+ 80483de:    e8 d1 ff ff ff           call   80483b4 &lt;bar&gt;
+}
+</span><span class="org-block-end-line">#+END_SRC
+</span>P.S.&#20851;&#20110;&#22320;&#22336;&#30340;&#34920;&#31034;&#26041;&#24335; 0xc(%ebp)&#20869;&#23481;&#35265; <span class="org-link">&#23547;&#22336;&#26041;&#24335;</span>
+<span class="org-block-begin-line">#+BEGIN_SRC c
+</span><span class="org-block">080483b4 &lt;bar&gt;:
+int bar(int c, int d)
+{
+ 80483b4:    55                       push   %ebp
+ 80483b5:    89 e5                    mov    %esp,%ebp
+# &#36825;&#20010;sub &#21629;&#20196;&#65292;&#25105;&#19981;&#22826;&#26126;&#30333; &#65292;&#21442;&#25968;&#20026;&#20160;&#20040;&#26159;10,&#32780;&#19981;&#26159;0xc,&#25110;&#32773;8
+#&#22914;&#26524;&#31639;&#19978;&#23616;&#37096;&#21464;&#37327;e &#30340;&#31350;&#31455;&#24212;&#35813;&#26159;8+4,&#22914;&#26524;&#19981;&#31639;&#65292;&#21017;&#20026;8,&#20026;&#20160;&#20040;&#26159;10&#21602;
+ 80483b7:    83 ec 10                 sub    $0x10,%esp
+    int e = c + d;
+# &#36825;&#26159;&#23558;foo&#20989;&#25968;&#20013;&#26368;&#21518;&#21387;&#26632;&#30340;&#20004;&#20010;&#21442;&#25968;&#21462;&#20986;&#25918;&#21040;eax edx&#20013;&#65292;
+ 80483ba:    8b 45 0c                 mov    0xc(%ebp),%eax
+ 80483bd:    8b 55 08                 mov    0x8(%ebp),%edx
+#&#36825;&#20010;&#21033;&#29992; &#23547;&#22336;(%dex,%eax,1)= %edx+%eax+1 ,&#21363;&#20570;&#21152;&#27861;&#36816;&#31639;&#65292;
+#&#38590;&#36947;&#27809;&#26377;add&#25351;&#20196;&#65311; lea&#26159;&#23558;&#36816;&#31639;&#21518;&#30340;&#32467;&#26524;&#23384;&#21040;%eax&#20013;
+ 80483c0:    8d 04 02                 lea    (%edx,%eax,1),%eax
+#&#23558;&#36816;&#31639;&#32467;&#26524;&#23384;&#21040;&#23616;&#37096;&#21464;&#37327;e&#20013;
+ 80483c3:    89 45 fc                 mov    %eax,-0x4(%ebp)
+    return e;
+ &#25226;e&#30340;&#20540;&#25918;&#21040;%eax&#20013;&#65292;&#36820;&#21152;
+ 80483c6:    8b 45 fc                 mov    -0x4(%ebp),%eax
+}
+ 80483c9:    c9                       leave
+ 80483ca:    c3                       ret
+</span><span class="org-block-end-line">#+END_SRC
+</span>bar&#20989;&#25968;&#26377;&#19968;&#20010;int&#22411;&#30340;&#36820;&#22238;&#20540;&#65292;&#36825;&#20010;&#36820;&#22238;&#20540;&#26159;&#36890;&#36807;eax&#23492;&#23384;&#22120;&#20256;&#36882;&#30340;&#65292;&#25152;&#20197;&#39318;&#20808;&#25226;e&#30340;&#20540;&#35835;
+&#21040;eax&#23492;&#23384;&#22120;&#20013;&#12290;&#28982;&#21518;&#25191;&#34892;leave&#25351;&#20196;&#65292;&#36825;&#20010;&#25351;&#20196;&#26159;&#20989;&#25968;&#24320;&#22836;&#30340;push %ebp&#21644;mov %esp,%ebp
+&#30340;&#36870;&#25805;&#20316;&#65306;
+&#26368;&#21518;&#26159;ret&#25351;&#20196;&#65292;&#23427;&#26159;call&#25351;&#20196;&#30340;&#36870;&#25805;&#20316;&#65306;
+
++ &#21442;&#25968;&#21387;&#26632;&#20256;&#36882;&#65292;&#24182;&#19988;&#26159;&#20174;&#21491;&#21521;&#24038;&#20381;&#27425;&#21387;&#26632;&#12290;
++ ebp&#24635;&#26159;&#25351;&#21521;&#24403;&#21069;&#26632;&#24103;&#30340;&#26632;&#24213;&#12290;
++ &#36820;&#22238;&#20540;&#36890;&#36807;eax&#23492;&#23384;&#22120;&#20256;&#36882;
+</pre>
+  </body>
+</html>

@@ -3,14 +3,14 @@
                "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="zh" xml:lang="zh">
 <head>
-<title>一个人的狂欢</title>
+<title>emacs中一些有趣的东西</title>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
-<meta name="title" content="一个人的狂欢"/>
+<meta name="title" content="emacs中一些有趣的东西"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2011-06-04 星期六"/>
+<meta name="generated" content="2012-10-03 22:00:35 CST"/>
 <meta name="author" content="孤峰独秀"/>
-<meta name="description" content=""/>
-<meta name="keywords" content=""/>
+<meta name="description" content="emacs中一些有趣的东西"/>
+<meta name="keywords" content="emacs fun game "/>
 <style type='text/css'>
        body {
     background-color: #E5E5E5;
@@ -942,15 +942,15 @@ img {
 }
 
     </style>
-<link rel="stylesheet" type="text/css" href="style/emacs.css" />
-<script type='text/javascript' src='js/emacs.js'> </script>
+<link rel="stylesheet" type="text/css" href="../style/emacs.css" />
+<script type='text/javascript' src='../js/emacs.js'> </script>
 
 </head>
 <body>
 <div id="org-div-home-and-up" style="text-align:right;font-size:70%;white-space:nowrap;">
- <a accesskey="h" href="sitemap.html"> 站点地图 </a>
+ <a accesskey="h" href="../sitemap.html"> 站点地图 </a>
  |
- <a accesskey="H" href="index.html"> 首页 </a>
+ <a accesskey="H" href="../index.html"> 首页 </a>
 </div>
 
 <div id="preamble">
@@ -958,59 +958,156 @@ img {
 </div>
 
 <div id="content">
-<h1 class="title">一个人的狂欢</h1>
+<h1 class="title">emacs中一些有趣的东西</h1>
 
 
-<div id='logo-img' ><a  href='index.html'>▇█▓▒░◕~◕░▒▓█▇</a></div>
+<div id='logo-img' ><a  href='../index.html'>▇█▓▒░◕~◕░▒▓█▇</a></div>
 
 <div id='logo-text'>
   <a href='#' ><span align="left">░◕~◕░</span></a>
 </div>
 
 
+
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
 <ul>
-<li>首页还未做好，先看<a href="sitemap.html">站点地图</a>吧
-</li>
-<li><a href="about.html">About</a>
-</li>
+<li><a href="#sec-1">心理医生doctor</a></li>
+<li><a href="#sec-2">几个游戏，</a></li>
+<li><a href="#sec-3">animate-birthday-present  animate-string两个函数</a></li>
+<li><a href="#sec-4">小时候玩过一个扑克牌游戏，就是给你四张牌，对这四张牌进行加减乘除运算最终得到的数字是24</a></li>
 </ul>
+</div>
+</div>
+
+<div id="outline-container-1" class="outline-2">
+<h2 id="sec-1">心理医生doctor</h2>
+<div class="outline-text-2" id="text-1">
+
+<p> M-x doctor ,然后试着跟他交谈，很有意思，不过它不认识中文。<br/>
+</p></div>
+
+</div>
+
+<div id="outline-container-2" class="outline-2">
+<h2 id="sec-2">几个游戏，</h2>
+<div class="outline-text-2" id="text-2">
+
+<p>因为平常不玩游戏，所以也懒得去记游戏对应的函数名,试着从菜单栏里找<br/>
+Tools/Games/<br/>
+其中Snake 是贪吃蛇，Tetris 是俄罗斯方块,还有其也几个小游戏，没怎么玩过<br/>
+</p></div>
+
+</div>
+
+<div id="outline-container-3" class="outline-2">
+<h2 id="sec-3">animate-birthday-present  animate-string两个函数</h2>
+<div class="outline-text-2" id="text-3">
+
+<p>  这个可以利用文字作出动画的效果。因为是动画，所以用文字不太容易表示,可以试<br/>
+  着运行 animate-birthday-present这个命令，这只是个示例，它内部实际是调用<br/>
+  animate-string这个函数<br/>
+  比如，我写的下面这个函数，bye bye 的页面<br/>
+</p>
+<p><br/>
+<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">bye</span> ()
+<span class="org-doc">"say bye-bye !"</span>
+  (interactive)
+  <span class="org-comment-delimiter">;; </span><span class="org-comment">Make a suitable buffer to display the birthday present in.</span>
+  (switch-to-buffer (get-buffer-create <span class="org-string">"*bye*"</span>))
+  (erase-buffer)
+  <span class="org-comment-delimiter">;; </span><span class="org-comment">Display the empty buffer.</span>
+  (sit-for 0)
+  (animate-string <span class="org-string">"&#19979;&#27425;&#20877;&#20250;!"</span> 6)
+  (sit-for 1) <span class="org-comment-delimiter">;;</span><span class="org-comment">&#20572;1&#31186;&#38047;</span>
+  (animate-string <span class="org-string">" Bye!!!"</span> 9)
+  )
+</pre>
 
 
+</p></div>
+
+</div>
+
+<div id="outline-container-4" class="outline-2">
+<h2 id="sec-4">小时候玩过一个扑克牌游戏，就是给你四张牌，对这四张牌进行加减乘除运算最终得到的数字是24</h2>
+<div class="outline-text-2" id="text-4">
+
+<p>  刚从emacswiki <a href="http://www.emacswiki.org/emacs/EmacsTickets">emacswiki</a> 上发现一个与这个类似的游戏，不过不是给你玩的是，<br/>
+  是给Emacs 玩的。就是给你一串数字，在数字之间可以随意加入加减乘除的运算符，<br/>
+  最终得到结果100 ,结果有人用elisp 把它实现了<br/>
+</p>
+<p><br/>
+<pre class="src src-emacs-lisp">(<span class="org-keyword">defvar</span> <span class="org-variable-name">bil-list</span> <span class="org-constant">nil</span> <span class="org-doc">"list of valid tickets."</span>)
+(<span class="org-keyword">defun</span> <span class="org-function-name">bil-calc</span> (pbil pidx)
+  <span class="org-doc">"nil"</span>
+  (<span class="org-keyword">let</span> ((idx pidx)
+        (sbil pbil))
+    (<span class="org-keyword">condition-case</span> <span class="org-constant">nil</span>
+        <span class="org-comment-delimiter">;; </span><span class="org-comment">prevent division by zero</span>
+        (<span class="org-keyword">when</span> (string= (calc-eval sbil) <span class="org-string">"100"</span>)
+          (add-to-list 'bil-list sbil))
+      (<span class="org-warning">error</span> <span class="org-constant">nil</span>))
+    (<span class="org-keyword">if</span> (= idx (length sbil))
+        <span class="org-constant">nil</span>
+      (mapcar (<span class="org-keyword">lambda</span> (lid)
+                (mapcar (<span class="org-keyword">lambda</span> (sign)
+                          (bil-calc (concat (substring sbil 0 lid) sign (substring sbil lid)) lid))
+                        '(<span class="org-string">"+"</span> <span class="org-string">"-"</span> <span class="org-string">"*"</span> <span class="org-string">"/"</span>)))
+              (<span class="org-keyword">let</span> ((lix (+ idx 1)))
+                (mapcar (<span class="org-keyword">lambda</span> (not-used) (<span class="org-function-name">setq</span> lix (+ lix 1))) (make-list (- (length sbil) lix) <span class="org-constant">nil</span>)))))))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">bil-findit</span> (num)
+  <span class="org-doc">"Find play solution for number NUM."</span>
+  (<span class="org-keyword">progn</span>
+    (<span class="org-function-name">setq</span> bil-list <span class="org-constant">nil</span>)
+    (bil-calc num 0)
+    bil-list))
+
+
+</pre>
+
+  比如对168324进行运算的结果 是"16*8-32+4"<br/>
+</p>
+<p><br/>
+<pre class="src src-emacs-lisp">(bil-findit <span class="org-string">"168324"</span>)
+</pre>
 
 
 <div id='my-src'>
-<div id='org-src'><a href='src/index.org'>src</a></div>
-<div id='htmlized-src'><a href='htmlized-src/index.org.html'>htmlized-src</a></div>
+<div id='org-src'><a href='../src/emacs/emacs-fun.org'>src</a></div>
+<div id='htmlized-src'><a href='../htmlized-src/emacs/emacs-fun.org.html'>htmlized-src</a></div>
 </div>
 <div id='tags'><span id='tags-title'>Tags:</span><br />
-<p>
-    <a href="tags/@SVN.html">@SVN</a>
-    <a href="tags/@perl.html">@perl</a>
-    <a href="tags/@Java.html">@Java</a>
-    <a href="tags/@Mysql.html">@Mysql</a>
-    <a href="tags/@Erlang.html">@Erlang</a>
-    <a href="tags/@SQL.html">@SQL</a>
-    <a href="tags/@DB.html">@DB</a>
-    <a href="tags/@Oracle.html">@Oracle</a>
-    <a href="tags/@Ediff.html">@Ediff</a>
-    <a href="tags/@Git.html">@Git</a>
-    <a href="tags/@Cedet.html">@Cedet</a>
-    <a href="tags/@C-C++.html">@C-C++</a>
-    <a href="tags/@Daily.html">@Daily</a>
-    <a href="tags/@Eclipse.html">@Eclipse</a>
-    <a href="tags/@AutoHotKey.html">@AutoHotKey</a>
-    <a href="tags/@Windows.html">@Windows</a>
-    <a href="tags/@Linux.html">@Linux</a>
-    <a href="tags/@C.html">@C</a>
-    <a href="tags/@Emacs.html">@Emacs</a>
+    <a href="../tags/@SVN.html">@SVN</a><br/>
+    <a href="../tags/@perl.html">@perl</a><br/>
+    <a href="../tags/@Java.html">@Java</a><br/>
+    <a href="../tags/@Mysql.html">@Mysql</a><br/>
+    <a href="../tags/@Erlang.html">@Erlang</a><br/>
+    <a href="../tags/@SQL.html">@SQL</a><br/>
+    <a href="../tags/@DB.html">@DB</a><br/>
+    <a href="../tags/@Oracle.html">@Oracle</a><br/>
+    <a href="../tags/@Ediff.html">@Ediff</a><br/>
+    <a href="../tags/@Git.html">@Git</a><br/>
+    <a href="../tags/@Cedet.html">@Cedet</a><br/>
+    <a href="../tags/@C-C++.html">@C-C++</a><br/>
+    <a href="../tags/@Daily.html">@Daily</a><br/>
+    <a href="../tags/@Eclipse.html">@Eclipse</a><br/>
+    <a href="../tags/@AutoHotKey.html">@AutoHotKey</a><br/>
+    <a href="../tags/@Windows.html">@Windows</a><br/>
+    <a href="../tags/@Linux.html">@Linux</a><br/>
+    <a href="../tags/@C.html">@C</a><br/>
+    <a href="../tags/@Emacs.html">@Emacs</a><br/>
 </p>
-
-
+<p><br/>
+</div>
+</p></div>
 </div>
 </div>
 
 <div id="postamble">
-<p class="date">Date: 2011-06-04 星期六</p>
+<p class="date">Date: 2012-10-03 22:00:35 CST</p>
 <p class="author">Author: 孤峰独秀</p>
 <p class="creator">Org version 7.8.03 with Emacs version 24</p>
 

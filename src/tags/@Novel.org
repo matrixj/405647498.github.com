@@ -1,0 +1,6 @@
+# -*- coding:utf-8 -*-
+
+#+TITLE: Tag: @Novel
+
+#+LANGUAGE:  zh
+   + [[file:../daily/night.org][夜色缤纷]]

@@ -1,0 +1,345 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<!-- Created by htmlize-1.34 in css mode. -->
+<html>
+  <head>
+    <title>release_handle_rebar_hot_code_swap.org</title>
+    <style type="text/css">
+    <!--
+      body {
+        color: #F8F8F8;
+        background-color: #0C1021;
+      }
+      .comment {
+        /* font-lock-comment-face */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-block {
+        /* org-block */
+        color: #b3b3b3;
+      }
+      .org-block-begin-line {
+        /* org-block-begin-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-block-end-line {
+        /* org-block-end-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-document-info {
+        /* org-document-info */
+        color: #afeeee;
+      }
+      .org-document-info-keyword {
+        /* org-document-info-keyword */
+        color: #b3b3b3;
+      }
+      .org-document-title {
+        /* org-document-title */
+        color: #afeeee;
+        font-size: 144%;
+        font-weight: bold;
+      }
+      .org-level-1 {
+        /* org-level-1 */
+        color: #FF6400;
+      }
+      .org-link {
+        /* org-link */
+        color: #00ffff;
+        text-decoration: underline;
+      }
+      .org-meta-line {
+        /* org-meta-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+
+      a {
+        color: inherit;
+        background-color: inherit;
+        font: inherit;
+        text-decoration: inherit;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+    -->
+    </style>
+  </head>
+  <body>
+    <pre>
+<span class="comment"># -*- coding:utf-8 -*-</span>
+<span class="org-meta-line">#+LANGUAGE:  zh
+</span><span class="org-document-info-keyword">#+TITLE:</span><span class="comment">     </span><span class="org-document-title">release_handler rebar hot code swap</span>
+<span class="org-document-info-keyword">#+AUTHOR:</span><span class="comment">    </span><span class="org-document-info">&#32426;&#31168;&#23792;</span>
+<span class="org-document-info-keyword">#+EMAIL:</span><span class="comment">     </span><span class="org-document-info">jixiuf@gmail.com</span>
+<span class="org-document-info-keyword">#+DATE:</span><span class="comment">     </span><span class="org-document-info">2012-05-18 &#26143;&#26399;&#20116;</span>
+<span class="org-meta-line">#+DESCRIPTION:readme.org
+#+KEYWORDS:
+#+OPTIONS:   H:2 num:nil toc:t \n:t @:t ::t |:t ^:nil -:t f:t *:t &lt;:t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil
+#+FILETAGS:@Erlang
+</span>
+<span class="org-level-1">* &#27979;&#35797;&#20195;&#30721;&#20301;&#32622;</span>
+  <span class="org-link">https://github.com/jixiuf/helloerlang/tree/master/release_handle</span>
+<span class="org-level-1">* appup&#25991;&#20214;&#30340;&#26684;&#24335;</span>
+<span class="org-block-begin-line">  #+BEGIN_QUOTE
+</span>  {Vsn,                         % Vsn &#20026;&#24403;&#21069;version&#30340;appliction&#29256;&#26412;&#21495;
+  [{UpFromVsn1, InstructionsU1}, %UpFromVsn1 &#26159;&#21069;&#19968;&#29256;&#30340;&#29256;&#26412;&#21495; ,InstructionsU1  &#26159;&#19968;&#20010; &#25351;&#20196; list
+  ...,
+  {UpFromVsnK, InstructionsUK}],
+  [{DownToVsn1, InstructionsD1},
+  ...,
+  {DownToVsnK, InstructionsDK}]}.<span class="org-meta-line">
+</span><span class="org-block-end-line">  #+END_QUOTE
+</span>  &#21442;&#32771;&#65306;
++ <span class="org-link">https://bitbucket.org/basho/rebar/wiki/ReleaseHandling</span>
++ <span class="org-link">https://github.com/basho/rebar/wiki/Upgrades</span>
++ <span class="org-link">http://www.metabrew.com/article/erlangotp-releases-rebar-release_handler-appup-etc</span>
++ <span class="org-link">http://www.metabrew.com/article/erlang-rebar-tutorial-generating-releases-upgrades</span>
++ <span class="org-link">http://www.erlang.org/doc/design_principles/appup_cookbook.html#sup</span>
++ <span class="org-link">http://www.erlang.org/doc/design_principles/release_handling.html</span>
++ <span class="org-link">http://www.erlang.org/doc/system_principles/create_target.html</span>
++ <span class="org-link">http://www.erlang.org/doc/man/reltool.html</span>
++ <span class="org-link">http://stackoverflow.com/questions/7324556/cannot-start-sample-erlang-release-generated-with-rebar</span>
+
+<span class="org-level-1">* &#25805;&#20316;&#27493;&#39588;</span>
+<span class="org-block-begin-line">  #+BEGIN_SRC sh
+</span><span class="org-block">  cd release_handle/release_h/
+  make clean
+</span><span class="org-block-end-line">  #+END_SRC
+</span>
+<span class="org-block-begin-line">  #+BEGIN_SRC sh
+</span><span class="org-block">  cp src-0.1 src
+  make
+</span><span class="org-block-end-line">  #+END_SRC
+</span>  &#20808;&#20351;&#29992;0.1&#29256;&#30340;src&#36827;&#34892;&#32534;&#35793;
+
+<span class="org-block-begin-line">  #+BEGIN_SRC sh
+</span><span class="org-block">  make createnode
+  #&#36825;&#20010;make &#25351;&#20196;&#20854;&#23454;&#25191;&#34892;&#22914;&#19979;&#21629;&#20196;
+  mkdir rel;cd rel;../rebar create-node nodeid=release_h
+</span><span class="org-block-end-line">  #+END_SRC
+</span>
+  &#29983;&#25104; ./rel&#30446;&#24405;,
+  &#19981;&#22826;&#26126;&#30333;&#20026;&#20160;&#20040;rebar&#36215;&#21517;&#23383;&#21483;create-node
+  &#20294;&#26159;&#35201;&#24819;&#36816;&#34892; rebar generate
+  ./rel/&#30446;&#24405;&#19979;&#24517;&#39035;&#26377;rebar create-node nodeid=$(PROJECT) &#21629;&#20196;&#29983;&#25104;&#30340;
+  &#19968;&#31995;&#21015;&#25991;&#20214;&#25165;&#34892;&#65292;&#27604;&#22914; reltool.config
+  &#29983;&#25104;&#30340;reltool.config&#24418;&#22914;&#65306;
+<span class="org-block-begin-line">  #+BEGIN_SRC erlang
+</span><span class="org-block">    {sys, [
+           {lib_dirs, []},
+           {erts, [{mod_cond, derived}, {app_file, strip}]},
+           {app_file, strip},
+           {rel, "release_h", "1",
+            [
+             kernel,
+             stdlib,
+             sasl,
+             release_h
+            ]},
+           {rel, "start_clean", "",
+            [
+             kernel,
+             stdlib
+            ]},
+           {boot_rel, "release_h"},
+           {profile, embedded},
+           {incl_cond, exclude},
+           {excl_archive_filters, [".*"]}, %% Do not archive built libs
+           {excl_sys_filters, ["^bin/.*", "^erts.*/bin/(dialyzer|typer)",
+                               "^erts.*/(doc|info|include|lib|man|src)"]},
+           {excl_app_filters, ["\.gitignore"]},
+           {app, sasl,   [{incl_cond, include}]},
+           {app, stdlib, [{incl_cond, include}]},
+           {app, kernel, [{incl_cond, include}]},
+           {app, release_h, [{incl_cond, include}]}
+          ]}.
+
+    {target_dir, "release_h"}.
+
+    {overlay, [
+               {mkdir, "log/sasl"},
+               {copy, "files/erl", "\{\{erts_vsn\}\}/bin/erl"},
+               {copy, "files/nodetool", "\{\{erts_vsn\}\}/bin/nodetool"},
+               {copy, "files/release_h", "bin/release_h"},
+               {copy, "files/release_h.cmd", "bin/release_h.cmd"},
+               {copy, "files/start_erl.cmd", "bin/start_erl.cmd"},
+               {copy, "files/install_upgrade.escript", "bin/install_upgrade.escript"},
+               {copy, "files/sys.config", "releases/\{\{rel_vsn\}\}/sys.config"},
+               {copy, "files/vm.args", "releases/\{\{rel_vsn\}\}/vm.args"}
+              ]}.
+</span><span class="org-block-end-line">  #+END_SRC
+</span>  &#36825;&#20010;&#29983;&#25104;&#30340;reltool.config&#26377;&#20960;&#22788;&#38656;&#35201;&#20462;&#25913;
+ + &#27880;&#37322;&#25481;&#36825;&#19968;&#34892;&#65292;{app_file, strip},
+   &#21487;&#33021;&#26159;rebar bug&#30340;&#21407;&#22240;&#65292;
+   &#25105;&#22312; rebar generate-upgrade&#12290;&#12290;&#12290; &#26102;&#65292;&#20250;&#25253;&#38169;&#65292;&#27880;&#37322;&#25481;&#36825;&#21477;&#23601;&#21487;&#20197;&#20102;
+ + {lib_dirs, ["../.."]},
+          &#23558;&#26412;&#39033;&#30446;&#28304;&#30721;&#25152;&#22312;&#30446;&#24405;&#21152;&#21040;reltool.config&#30340; lib_dirs&#20013;&#65292;&#36825;&#37324;&#20351;&#29992;&#20102;&#30456;&#23545;
+   &#30446;&#24452;&#65292;&#36825;&#26679; reltool&#25165;&#33021;&#25214;&#21040; &#26412;&#28304;&#30446;
+ + &#20462;&#25913;&#29256;&#26412;&#21495;&#20026;0.1    {rel, "release_h", "0.1",...}
+
+&#20462;&#25913;&#21518;&#30340;&#25991;&#20214;&#20026;
+
+<span class="org-block-begin-line">  #+BEGIN_SRC erlang
+</span><span class="org-block">    {sys, [
+           {lib_dirs, ["../.."]},
+           {erts, [{mod_cond, derived}, {app_file, strip}]},
+           %% {app_file, strip},
+           {rel, "release_h", "0.1",
+            [
+             kernel,
+             stdlib,
+             sasl,
+             release_h
+            ]},
+           {rel, "start_clean", "",
+            [
+             kernel,
+             stdlib
+            ]},
+           {boot_rel, "release_h"},
+           {profile, embedded},
+           {incl_cond, exclude},
+           {excl_archive_filters, [".*"]}, %% Do not archive built libs
+           {excl_sys_filters, ["^bin/.*", "^erts.*/bin/(dialyzer|typer)",
+                               "^erts.*/(doc|info|include|lib|man|src)"]},
+           {excl_app_filters, ["\.gitignore"]},
+           {app, sasl,   [{incl_cond, include}]},
+           {app, stdlib, [{incl_cond, include}]},
+           {app, kernel, [{incl_cond, include}]},
+           {app, release_h, [{incl_cond, include}]}
+          ]}.
+
+    {target_dir, "release_h"}.
+
+    {overlay, [
+               {mkdir, "log/sasl"},
+               {copy, "files/erl", "\{\{erts_vsn\}\}/bin/erl"},
+               {copy, "files/nodetool", "\{\{erts_vsn\}\}/bin/nodetool"},
+               {copy, "files/release_h", "bin/release_h"},
+               {copy, "files/release_h.cmd", "bin/release_h.cmd"},
+               {copy, "files/start_erl.cmd", "bin/start_erl.cmd"},
+               {copy, "files/install_upgrade.escript", "bin/install_upgrade.escript"},
+               {copy, "files/sys.config", "releases/\{\{rel_vsn\}\}/sys.config"},
+               {copy, "files/vm.args", "releases/\{\{rel_vsn\}\}/vm.args"}
+              ]}.
+
+</span><span class="org-block-end-line">  #+END_SRC
+</span>&#29983;&#25104; ./rel/release_h
+<span class="org-block-begin-line">#+BEGIN_SRC sh
+</span><span class="org-block">make generate
+#&#23454;&#38469;&#36816;&#34892;&#30340;&#26159; ./rebar generate
+
+&#21487;&#20197;&#26597;&#30475;&#19979;&#30830;&#20445;release_h-0.1&#34987; &#25171;&#21253;&#21040;&#30456;&#24212;&#29256;&#26412;&#20013;
+ ls ./rel/release_h/lib/|grep release_h
+mv ./rel/release_h/ ./rel/release_h-0.1/
+</span><span class="org-block-end-line">#+END_SRC
+</span>0.1&#29256;&#30340;release_h&#24050;&#32463;&#29983;&#25104;&#22909;&#20102;,&#36866;&#36816;&#34892;&#19968;&#19979;
+<span class="org-block-begin-line">#+BEGIN_SRC sh
+</span><span class="org-block">cd ./rel/release_h/bin
+./release_h console
+</span><span class="org-block-end-line">#+END_SRC
+</span><span class="org-block-begin-line">#+BEGIN_SRC sh
+</span><span class="org-block">Eshell V5.9.1  (abort with ^G)
+(release_h@jixiufeng-Joseph)1&gt; hello_gen:hello().
+1
+(release_h@jixiufeng-Joseph)2&gt; hello_gen:module_info(attributes).
+[{vsn,"0.1"}]
+(release_h@jixiufeng-Joseph)3&gt;
+(release_h@jixiufeng-Joseph)3&gt; release_handler:which_releases().
+[{"release_h","0.1",
+  ["kernel-2.15.1","stdlib-1.18.1","sasl-2.2.1",
+   "release_h-0.1"],
+  permanent}]
+(release_h@jixiufeng-Joseph)4&gt; tool:sayhello().
+this is just a common module withou process running on ,so
+update this module is easy
+ok
+(release_h@jixiufeng-Joseph)5&gt;
+</span><span class="org-block-end-line">#+END_SRC
+</span>
+&#20462;&#25913;./rel/reltool.config
+&#23558;&#29256;&#26412;&#21495;&#30001;0.1&#25913;&#25104;0.2
+<span class="org-block-begin-line">#+BEGIN_SRC sh
+</span><span class="org-block">rm src
+cp src-0.2 src
+make clean
+make
+make generate
+ls rel/release_h/lib/|grep release_h
+make up
+ls rel/release_h/lib/release_h*/ebin |grep appup
+ls rel/|grep tar
+cp rel/release_h_0.2.tar.gz ./rel/release_h-0.1/releases/
+</span><span class="org-block-end-line">#+END_SRC
+</span>
+&#29992;0.2&#29256;&#30340;&#20195;&#30721;&#29983;&#25104;&#26032;&#30340; ./rel/release_h/
+&#27880;&#24847;&#22312;0.2&#29256;&#30340;&#20195;&#30721;&#20013; src/&#26377; release_h.appup.src
+&#32534;&#35793;&#36807;&#31243;&#20013;&#65292;&#20250;&#25918;&#21040; ebin/release_h.appup
+make up &#21629;&#20196;&#25191;&#34892;&#20004;&#20010;&#21629;&#20196;
+<span class="org-block-begin-line">#+BEGIN_SRC sh
+</span><span class="org-block">    ./rebar generate-appups previous_release=release_h-0.1
+    ./rebar generate-upgrade previous_release=release_h-0.1
+</span><span class="org-block-end-line">#+END_SRC
+</span>&#20851;&#20110;&#21442;&#25968;previous_release&#21518;&#38754;&#36319; &#30456;&#23545;&#20110;./rel/&#30446;&#24405;&#30340;&#36335;&#24452;&#65292;&#27604;&#22914;&#65292;&#25105;&#23558;0.1&#29256;&#30340;
+release_h&#30446;&#24405;&#21629;&#21517;&#20026; release_h-0.1
+generate-appups&#20250;&#22312; ./rel/release_h/lib/release_h-0.2/ebin&#30446;&#24405;&#19979;&#29983;&#25104;
+release_h.appup&#25991;&#20214;
+&#22914;&#26524; &#20320;&#30340;ebin/&#30446;&#24405;&#19979;&#27809;&#26377;appup&#25991;&#20214;&#30340;&#35805;&#65292; rebar &#20250;&#20026;&#20320;&#29983;&#25104;&#19968;&#20010;&#65292;&#28982;&#21518;&#36825;&#23427;&#25918;&#21040;
+ ./rel/release_h/lib/release_h-0.2/ebin&#30446;&#24405;&#20013;
+generate-upgrade&#21629;&#20196;&#20250;&#22312;./rebar &#29983;&#25104;&#19968;&#20010;tar.gz&#21253;
+<span class="org-block-begin-line">#+BEGIN_SRC sh
+</span><span class="org-block">&#25226;release_h_0.2.tar.gz&#21319;&#32423;&#21253;  copy&#21040; 0.1&#29256; &#30340;releases&#30446;&#24405;&#19979;
+cp ./rel/release_h_0.2.tar.gz ./rel/release-0.1/releases/
+</span><span class="org-block-end-line">#+END_SRC
+</span>&#22312;&#21018;&#25165;&#27979;&#35797;0.1&#29256;&#30340;erlang shell&#20013;&#25191;&#34892;
+<span class="org-block-begin-line">#+BEGIN_SRC erlang
+</span><span class="org-block">erl&gt; release_handler:unpack_release("release_h_0.2"). %&#35299;&#21253;
+erl&gt; release_handler:install_release("0.2"). % install
+erl&gt; release_handler:make_permanent("0.2"). % &#20351;0.2&#29256;&#25104;&#20026;&#40664;&#35748;&#29256;&#26412;
+</span><span class="org-block-end-line">#+END_SRC
+</span>
+<span class="org-block-begin-line">#+BEGIN_SRC erlang
+</span><span class="org-block">(release_h@jixiufeng-Joseph)2&gt; release_handler:unpack_release("release_h_0.2").
+{ok,"0.2"}
+(release_h@jixiufeng-Joseph)3&gt;  release_handler:install_release("0.2").
+if you see this line ,that means hello_gen.erl is updated
+hello_gen update from version 0.1 and current version is 0.2
+and the third param Extra is "Extra info for code_change/3"
+
+if you see this line that means world_gen is started
+{ok,"0.1",[]}
+(release_h@jixiufeng-Joseph)4&gt;  release_handler:make_permanent("0.2").
+ok
+(release_h@jixiufeng-Joseph)5&gt;
+</span><span class="org-block-end-line">#+END_SRC
+</span>
+&#26597;&#30475;&#19968;&#19979;&#30830;&#35748;&#24050;&#32463;&#21319;&#32423;&#21040;0.2
+<span class="org-block-begin-line">#+BEGIN_SRC erlang
+</span><span class="org-block">(release_h@jixiufeng-Joseph)5&gt; release_handler:which_releases().
+[{"release_h","0.2",
+  ["kernel-2.15.1","stdlib-1.18.1","sasl-2.2.1",
+   "release_h-0.2"],
+  current},
+ {"release_h","0.1",
+  ["kernel-2.15.1","stdlib-1.18.1","sasl-2.2.1",
+   "release_h-0.1"],
+  permanent}]
+(release_h@jixiufeng-Joseph)7&gt; whereis(world_gen).
+&lt;0.60.0&gt;
+(release_h@jixiufeng-Joseph)10&gt; supervisor:which_children(hello_sup).
+[{world_gen,&lt;0.60.0&gt;,worker,[world_gen]},
+ {hello_gen,&lt;0.49.0&gt;,worker,[hello_gen]}]
+(release_h@jixiufeng-Joseph)11&gt;
+(release_h@jixiufeng-Joseph)11&gt; tool:sayworld().
+this is just a common module withou process running on ,so
+update this module is easy
+</span><span class="org-block-end-line">#+END_SRC
+</span></pre>
+  </body>
+</html>

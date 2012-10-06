@@ -1,0 +1,93 @@
+# -*- coding:utf-8 -*-
+#+LANGUAGE:  zh
+#+TITLE:     emacs smart-end-of-line smart-beginning-of-line
+#+AUTHOR:    孤峰独秀
+#+EMAIL:     jixiuf@gmail.com
+#+DATE:     2011-07-04 一
+#+FILETAGS: @Emacs
+#+DESCRIPTION:emacs smart-end-of-line smart-beginning-of-line
+#+KEYWORDS: emacs function command
+*  smart-beginning-of-line
+   默认情况下C-a 绑定的的函数move-beginning-of-line (要想查看某个按键绑定了
+   哪个函数，只需要按下C-hk 然后是你的按键，就会显示出此按键所绑定的函数名
+   (详见[[file:emacs-help-system.org][emacs的帮助系统]]))。
+   但是我对   move-beginning-of-line这个函数不太满意，我想做到，当我第一次
+   按下C-a时，跳到行首，当已经在行首时，则忽略行首的空行，并且C-a 可以在这
+   两个位置来回跳转.于是有了下面的  smart-beginning-of-line 
+#+begin_src emacs-lisp
+;;;###autoload
+(defun smart-beginning-of-line ()
+  "Move point to first non-whitespace character or beginning-of-line.
+Move point to beginning-of-line ,if point was already at that position,
+  move point to first non-whitespace character. "
+  (interactive)
+  (let ((oldpos (point)))
+    (beginning-of-line)
+    (and (= oldpos (point))
+         (back-to-indentation) )))
+#+end_src
+这个是org-mode对应的smart-beginning-of-line，   
+#+begin_src emacs-lisp
+;;;###autoload
+(defun org-mode-smart-beginning-of-line ()
+  "Move point to first non-whitespace character or beginning-of-line.
+Move point to beginning-of-line ,if point was already at that position,
+  move point to first non-whitespace character. "
+  (interactive)
+  (let ((oldpos (point)))
+    (org-beginning-of-line)
+    (and (= oldpos (point))
+         (back-to-indentation) )))
+#+end_src
+*  smart-end-of-line
+C-e对于end-of-line ,也想要同样的效果。
+#+begin_src emacs-lisp
+;;;###autoload
+(defun smart-end-of-line()
+  "Move point to first non-whitespace character or end-of-line.
+Move point to end-of-line ,if point was already at that position,
+  move point to first non-whitespace character."
+  (interactive)
+  (let ((oldpos (point)))
+    (beginning-of-line)
+    (when (re-search-forward "[ \t]*$" (point-at-eol) t)
+      (goto-char (match-beginning 0)))
+    (when (= oldpos (point))
+      (end-of-line))))
+#+end_src
+同样org-mode 下对应的版本
+#+begin_src  emacs-lisp
+;;;###autoload
+(defun org-mode-smart-end-of-line()
+  "Move point to first non-whitespace character or end-of-line.
+Move point to end-of-line ,if point was already at that position,
+  move point to first non-whitespace character."
+  (interactive)
+  (let ((oldpos (point)))
+    (org-end-of-line)
+    (if  (equal (point-at-eol) (point))
+      (progn
+        (beginning-of-line)
+        (when (re-search-forward "[ \t]*$" (point-at-eol) t)
+          (goto-char (match-beginning 0)))
+        )
+      (when (equal oldpos (point))
+        (end-of-line)
+        )
+      )
+    ))
+#+end_src
+只需要将以上函数分别绑定到C-a 及C-e上，即可替代默认的键绑定
+#+begin_src  emacs-lisp
+(global-set-key (kbd "C-a") 'smart-beginning-of-line)
+(global-set-key (kbd "C-e") 'smart-end-of-line)
+
+(eval-after-load 'org
+  '(progn
+     (define-key org-mode-map "\C-a" 'org-mode-smart-beginning-of-line)
+     (define-key org-mode-map "\C-e" 'org-mode-smart-end-of-line)
+     )
+  )
+
+#+end_src
+关于键绑定,建议看[[http://docs.huihoo.com/homepage/shredderyin/wiki/KeyBinding.html][王垠的键盘绑定技巧]], 不重复了。

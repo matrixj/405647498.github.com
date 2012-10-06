@@ -1,0 +1,44 @@
+#+SETUPFILE: ~/.emacs.d/org-templates/level-setupfile-1.org
+#+INCLUDE: ~/.emacs.d/org-templates/level-1.org
+#+INCLUDE: ~/.emacs.d/org-templates/level-all.org
+# -*- coding:utf-8 -*-
+
+#+TITLE: Tag: cedet
+
+#+LANGUAGE:  zh
+   + [[file:../emacs/c-c++-cedet-symref.org][c-c++-cedet-symref.org]]
+
+#+begin_html
+<div id='my-src'>
+<div id='org-src'><a href='../src/tags/cedet.org'>src</a></div>
+<div id='htmlized-src'><a href='../htmlized-src/tags/cedet.org.html'>htmlized-src</a></div>
+</div>
+#+end_html
+#+begin_html
+<div id='tags'><span id='tags-title'>Tags:</span><br />
+#+end_html
+    [[file:@SVN.org][@SVN]]
+    [[file:@perl.org][@perl]]
+    [[file:@Java.org][@Java]]
+    [[file:@Mysql.org][@Mysql]]
+    [[file:@Erlang.org][@Erlang]]
+    [[file:@SQL.org][@SQL]]
+    [[file:@DB.org][@DB]]
+    [[file:@Oracle.org][@Oracle]]
+    [[file:@Ediff.org][@Ediff]]
+    [[file:@Git.org][@Git]]
+    [[file:cedet.org][cedet]]
+    [[file:emacs.org][emacs]]
+    [[file:c.org][c]]
+    [[file:c++.org][c++]]
+    [[file:@Emacs.org][@Emacs]]
+    [[file:@Daily.org][@Daily]]
+    [[file:@Eclipse.org][@Eclipse]]
+    [[file:@AutoHotKey.org][@AutoHotKey]]
+    [[file:@Windows.org][@Windows]]
+    [[file:@Linux.org][@Linux]]
+    [[file:@C.org][@C]]
+
+#+begin_html
+</div>
+#+end_html

@@ -1,0 +1,30 @@
+# -*- coding:utf-8 -*-
+#+LANGUAGE:  zh
+#+TITLE:     echo
+#+AUTHOR:    纪秀峰
+#+EMAIL:     jixiuf@gmail.com
+#+DATE:     2011-11-08 二
+#+DESCRIPTION:echo
+#+KEYWORDS: erlang echo
+#+OPTIONS:   H:2 num:nil toc:t \n:t @:t ::t |:t ^:t -:t f:t *:t <:t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil
+#+FILETAGS: @Erlang
+
+#+begin_src erlang
+-module(echo).
+-export([start/0, loop/0]).
+
+start() ->
+    I=    spawn(echo, loop, []),                %启动一个进程I ,这个进程与echo 模块内的loop函数相绑定,loop函数有[](即0)个参数,
+    I!{self(),helo},                            %向进行I发送一条消息 ,内容为当前进程的Id.
+    receive                                     %发送完毕后,也进行receive阻塞状态,准备接收消息
+        Msg->                                   %
+            io:format("~w~n",[Msg])             %将接收的的消息进行  print.
+    end.
+loop() ->
+    receive                                     %进行loop函数后,马上阻隔塞.
+        {From, Message} ->                      %接收格式为{From,Message}的消息.
+            From ! Message,                     %向From 返回接收到的消息Message
+            loop()                              %继续调用loop接收下一条消息
+    end.
+#+end_src

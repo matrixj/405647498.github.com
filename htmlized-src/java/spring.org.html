@@ -1,0 +1,361 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<!-- Created by htmlize-1.34 in css mode. -->
+<html>
+  <head>
+    <title>spring.org</title>
+    <style type="text/css">
+    <!--
+      body {
+        color: #F8F8F8;
+        background-color: #0C1021;
+      }
+      .comment {
+        /* font-lock-comment-face */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .ethan-wspace {
+        /* ethan-wspace-face */
+        background-color: #ffffcccccccc;
+      }
+      .org-block {
+        /* org-block */
+        color: #b3b3b3;
+      }
+      .org-block-begin-line {
+        /* org-block-begin-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-block-end-line {
+        /* org-block-end-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-document-info {
+        /* org-document-info */
+        color: #afeeee;
+      }
+      .org-document-info-keyword {
+        /* org-document-info-keyword */
+        color: #b3b3b3;
+      }
+      .org-document-title {
+        /* org-document-title */
+        color: #afeeee;
+        font-size: 144%;
+        font-weight: bold;
+      }
+      .org-level-1 {
+        /* org-level-1 */
+        color: #FF6400;
+      }
+      .org-link {
+        /* org-link */
+        color: #00ffff;
+        text-decoration: underline;
+      }
+      .org-meta-line {
+        /* org-meta-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+
+      a {
+        color: inherit;
+        background-color: inherit;
+        font: inherit;
+        text-decoration: inherit;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+    -->
+    </style>
+  </head>
+  <body>
+    <pre>
+<span class="comment"># -*- coding:utf-8 -*-</span>
+<span class="org-meta-line">#+LANGUAGE:  zh
+</span><span class="org-document-info-keyword">#+TITLE:</span><span class="comment">     </span><span class="org-document-title">spring.rnc&#30340;&#20316;&#25104;</span>
+<span class="org-document-info-keyword">#+AUTHOR:</span><span class="comment">    </span><span class="org-document-info">&#32426;&#31168;&#23792;</span>
+<span class="org-document-info-keyword">#+EMAIL:</span><span class="comment">     </span><span class="org-document-info">jixiuf@gmail.com</span>
+<span class="org-document-info-keyword">#+DATE:</span><span class="comment">     </span><span class="org-document-info">2011-10-18 &#20108;</span>
+<span class="org-meta-line">#+DESCRIPTION:spring.rnc&#30340;&#20316;&#25104;
+#+KEYWORDS: spring rnc trang rngrnc nxml emacs
+#+OPTIONS:   H:2 num:nil toc:t \n:t @:t ::t |:t ^:t -:t f:t *:t &lt;:t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil
+#+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
+#+EXPORT_SELECT_TAGS: export
+#+EXPORT_EXCLUDE_TAGS: noexport
+#+FILETAGS: @Java @Emacs
+</span>&#38142;&#25509;:
+<span class="org-link">http://jamsa.javaeye.com/blog/38202</span>
+<span class="org-link">http://infohost.nmt.edu/tcc/help/pubs/nxml/schema-locating.html</span>
+<span class="org-link">http://infohost.nmt.edu/tcc/help/pubs/rnc/def-patterns.html</span>
+&#28436;&#31034;&#35270;&#39057;&#65306;<span class="org-link">http://screencast-repos.googlecode.com/files/emacs-can-do-what-nxml0springContext.mp4</span>
+&#25105;&#25552;&#20379;&#30340;&#20851;&#20110;spring-3.0.rnc struts &#31561;&#19968;&#20123;rnc&#25991;&#20214;  <span class="org-link">https://github.com/jixiuf/emacs_conf/tree/master/script/nxml</span>
+&#20851;&#20110;&#22914;&#20309;&#20316;&#25104;spring-3.0.rnc
+&#22240;&#20026;spring-3.0 &#30340;applicationContext.xml &#20351;&#29992;xsd&#36827;&#34892;&#32422;&#26463;.
+&#32780;&#35201;&#23558;xsd &#36716;&#25442;&#25104;rnc &#38656;&#35201;&#32463;&#36807;&#20004;&#27493;
+xsd  --&gt; rng --&gt;rnc
+&#20808;&#23558;xsd&#26684;&#24335;&#36716;&#25442;&#25104;rng&#26684;&#24335;,&#28982;&#21518;&#20877;&#36716;&#25442;&#22312;rnc
+&#30001;xsd &#36716;&#25442;&#25104;rng &#30340;&#36807;&#31243;&#21487;&#20197;&#36890;&#36807;rngconv&#26469;&#23454;&#29616;
+<span class="org-block-begin-line">#+begin_src sh
+</span><span class="org-block">  java -jar rngconv.jar spring-beans-3.0.xsd   &gt;spring-beans-3.0.rng
+</span><span class="org-block-end-line">#+end_src
+</span>&#32780;&#30001;rng&#36716;&#25442;&#25104;rnc &#30340;&#36807;&#31243;&#21487;&#20197;&#36890;&#36807;trang&#26469;&#23454;&#29616;
+<span class="org-block-begin-line">#+begin_src sh
+</span><span class="org-block">  java -jar trang.jar  spring-beans-3.0.rng spring-beans-3.0.rnc
+</span><span class="org-block-end-line">#+end_src
+</span>
+&#22914;&#26524;&#19968;&#20999;&#37117;&#27491;&#24120;&#30340;&#35805;,&#37027;&#38754;&#19978;&#38754;&#36825;&#20123;&#24050;&#32463;&#36275;&#22815;&#20102;,&#20294;&#26159;&#23454;&#38469;&#24773;&#20917;&#24635;&#26159;&#20250;&#20986;&#19968;&#20123;&#23567;&#38382;&#39064;
+&#19979;&#38754;&#20855;&#20307;&#20998;&#35828;
+<span class="org-level-1">* &#19979;&#36733;trang.jar rngconv.jar</span>
+&#39318;&#20808;&#20320;&#20808;&#35201;&#19979;&#36733;trang.jar rngconv.jar &#31561;&#20960;&#20010;jar &#21253;,&#24403;&#28982;&#21487;&#33021;&#20250;&#26377;&#20960;&#20010;&#20381;&#36182;&#30340;jar
+&#20250;&#19968;&#36215;&#29992;&#21040;,&#20998;&#21035;&#19979;&#36733;&#20004;&#20010;&#21387;&#32553;&#21253;&#35299;&#21387;&#24320;&#25214;&#21040;jar &#21363;&#21487;.
+<span class="org-level-1">* 2&#25214;&#21040;&#36825;&#20960;&#20010;&#25991;&#20214;,&#25918;&#21040;&#21516;&#19968;&#20010;&#30446;&#24405;</span>
+<span class="org-block-begin-line">#+begin_src sh
+</span><span class="org-block">  spring-aop-3.0.xsd
+  spring-beans-3.0.xsd
+  spring-context-3.0.xsd
+  spring-jdbc-3.0.xsd
+  spring-jee-3.0.xsd
+  spring-jms-3.0.xsd
+  spring-lang-3.0.xsd
+  spring-mvc-3.0.xsd
+  spring-oxm-3.0.xsd
+  spring-task-3.0.xsd
+  spring-tool-3.0.xsd
+  spring-tx-3.0.xsd
+  spring-util-3.0.xsd
+</span><span class="org-block-end-line">#+end_src
+</span><span class="org-level-1">* &#20855;&#20307;&#25805;&#20316;</span>
+<span class="org-level-1">* spring-beans-3.0.xsd &#36716;&#25442;&#25104;spring-beans-3.0.rnc</span>
+  &#24403;&#36816;&#34892;&#36825;&#26465;&#21629;&#20196;&#26102;,
+<span class="org-block-begin-line">#+begin_src sh
+</span><span class="org-block">  java -jar rngconv.jar spring-beans-3.0.xsd   &gt;spring-beans-3.0.rng
+</span><span class="org-block-end-line">#+end_src
+</span>&#20250;&#20986;&#29616;&#36825;&#20010;&#38169;&#35823;
+
+<span class="org-block-begin-line">#+begin_quote
+</span>"schemaLocation" attribute is required for "xsd:import" element, but is not specified
+  7:64@file:///tmp/spring-beans-3.0.xsd
+namespace "<span class="org-link">http://www.w3.org/XML/1998/namespace</span>" is referenced but no schema definition of this namespace was found.
+  7:64@file:///tmp/spring-beans-3.0.xsd
+failed to load the grammar<span class="org-meta-line">
+</span><span class="org-block-end-line">#+end_quote
+</span>
+&#35299;&#20915;&#21150;&#27861;&#26159;:
+&#25171;&#24320;spring-beans-3.0.xsd &#27880;&#37322;&#25481;&#19979;&#38754;&#36825;&#21477;,&#25110;&#32773;&#30452;&#25509;&#21024;&#38500;&#20063;&#21487;&#20197;
+<span class="org-block-begin-line">#+begin_quote
+</span><span class="ethan-wspace">    </span>&lt;xsd:import namespace="<span class="org-link">http://www.w3.org/XML/1998/namespace"/</span>&gt;<span class="org-meta-line">
+</span><span class="org-block-end-line">#+end_quote
+</span>&#27880;&#24847;&#25152;&#26377;&#20854;&#20182;&#20960;&#20010;&#25991;&#20214;&#20013;&#30340;&lt;xsd:import /&gt;
+namespace&#25351;&#21521;<span class="org-link">http://www.w3.org/XML/1998/namespace&#22320;&#22336;&#30340;</span> import &#37117;&#21487;&#20197;&#36825;&#26679;&#22788;
+&#29702;,&#20294;&#26159;&#19981;&#26159;&#25351;&#21521;&#36825;&#20010;&#22320;&#22336;&#30340;&#38656;&#35201;&#21478;&#20316;&#22788;&#29702;
+
+&#20877;&#27425;&#36816;&#34892;&#36825;&#26465;&#21629;&#20196;,&#20250;&#25104;&#21151;&#29983;&#25104;rng&#25991;&#20214;
+<span class="org-block-begin-line">#+begin_src sh
+</span><span class="org-block">&#28982;&#21518;&#29992;&#36825;&#26465;&#21629;&#20196;&#29983;&#25104; rnc&#25991;&#20214;
+  java -jar trang.jar  spring-beans-3.0.rng spring-beans-3.0.rnc
+</span><span class="org-block-end-line">#+end_src
+</span>&#23545;&#20110;spring-bean-.3.0.xsd&#36716;&#25442;&#25104;rnc &#30340;&#27493;&#39588;&#26159;&#26368;&#31616;&#21333;&#30340;.
+&#19982;&#27492;&#30456;&#21516;&#22788;&#29702;&#21363;&#21487;&#24471;&#21040;rnc  &#30340;&#26159;spring-tool-3.0.xsd
+&#22240;&#20026;&#23427;&#20204;&#19981;&#20381;&#36182;&#20854;&#20182;&#20960;&#20010;xsd
+
+<span class="org-level-1">* &#22914;&#20309;&#32534;&#36753;applicationContext.xml &#25991;&#20214;&#26102;,&#33258;&#21160;&#29992;spring-beans-3.0.rnc &#23545;&#20854;&#36827;&#34892;&#35299;&#26512;</span>
+<span class="org-block-begin-line">#+begin_src emacs-lisp
+</span><span class="org-block">(eval-after-load 'rng-loc
+  '(progn
+     (add-to-list 'rng-schema-locating-files (expand-file-name "~/.emacs.d/script/nxml/schemas.xml"))
+     ))
+(defun nxml-mode-hook-fun ()
+  ;;&#40664;&#35748;&#32465;&#23450;&#30340;&#38190;&#26159;`C-cC-sC-a' ,&#23558;&#24403;&#21069;&#32534;&#36753;&#30340;&#25991;&#20214;&#19982;&#29305;&#23450;&#30340;rnc &#25991;&#20214;&#36827;&#34892;&#20851;&#32852;,&#21482;&#26377;
+  ;;&#20851;&#32852;&#21518;&#30340;xml &#25165;&#21487;&#20197;&#35299;&#26512;&#20854;&#35821;&#27861;&#35268;&#21017;&#36827;&#34892;&#34917;&#20840;
+  (require 'rng-valid)
+  (rng-auto-set-schema-and-validate)
+  )
+(add-hook 'nxml-mode-hook 'nxml-mode-hook-fun)
+</span><span class="org-block-end-line">#+end_src
+</span>  &#23558;spring-beans-3.0.rnc   &#22797;&#21046;&#21040; ~/.emacs.d/script/nxml/&#30446;&#24405;&#19979;,&#19982;
+  <span class="org-link">schemas.xml</span> &#21516;&#30446;&#24405;
+&#28982;&#21518;&#23601;&#26159;&#20462;&#25913; <span class="org-link"> "~/.emacs.d/script/nxml/schemas.xml"</span>&#25991;&#20214;,
+&#28982;&#21518;&#22312;&#20854;&#20013;&#21152;&#20837;&#36825;&#26679;&#20004;&#21477;&#35805;,
+<span class="org-block-begin-line">#+begin_src xml
+</span><span class="org-block"> &lt;namespace ns="http://www.springframework.org/schema/beans" typeId="Spring3.0" /&gt;
+  &lt;typeId id="Spring3.0" uri="spring-3.0.rnc"/&gt;
+</span><span class="org-block-end-line">#+end_src
+</span><span class="org-block-begin-line">#+begin_src xml
+</span><span class="org-block">&#36825;&#19968;&#21477;&#31561;&#25928;&#20110;&#19978;&#38754;&#20004;&#21477;
+ &lt;namespace ns="http://www.springframework.org/schema/beans"  uri="spring-3.0.rnc" /&gt;
+</span><span class="org-block-end-line">#+end_src
+</span>&#20851;&#20110;schemas.xml&#30340;&#26684;&#24335;&#35814;&#35265;:
+<span class="org-link">http://infohost.nmt.edu/tcc/help/pubs/nxml/schema-locating.html</span>
+&#22240;&#20026;applicationContext.xml&#21547;&#26377;&#36825;&#26679;&#19968;&#21477;&#35805;,&#25152;&#20197;&#23427;&#20250;&#39318;&#20808;&#20351;&#29992;  spring-3.0.rnc&#23545;
+&#25991;&#20214;&#36827;&#34892;&#35299;&#26512;
+<span class="org-block-begin-line">#+begin_src xml
+</span><span class="org-block">&lt;beans xmlns="http://www.springframework.org/schema/beans"&gt;
+</span><span class="org-block-end-line">#+end_src
+</span>
+&#24403;&#20320;&#25171;&#24320;&#19968;&#20010; applicationContext.xml &#26102;,
+&#20250;&#25253;&#38169;
+<span class="org-block-begin-line">#+begin_src emacs-lisp
+</span><span class="org-block">Debugger entered--Lisp error: (error "Expected `}' but got `+'")
+  signal(error ("Expected `}' but got `+'"))
+  error("%s" "Expected `}' but got `+'")
+  nxml-display-file-parse-error((rng-c-incorrect-schema "/tmp/spring-beans-3.0.rnc" 743 "Expected `}' but got `+'"))
+  rng-set-schema-file("/tmp/spring-beans-3.0.rnc")
+  rng-set-schema-file-and-validate("/tmp/spring-beans-3.0.rnc")
+  call-interactively(rng-set-schema-file-and-validate nil nil)
+</span><span class="org-block-end-line">#+end_src
+</span>&#25110;
+<span class="org-block-begin-line">#+begin_src emacs-lisp
+</span><span class="org-block">Debugger entered--Lisp error: (error "Invalid grammar content")
+  signal(error ("Invalid grammar content"))
+  error("%s" "Invalid grammar content")
+  nxml-display-file-parse-error((rng-c-incorrect-schema "/tmp/spring-beans-3.0.rnc" 1627 "Invalid grammar content"))
+  rng-set-schema-file("/tmp/spring-beans-3.0.rnc")
+  rng-set-schema-file-and-validate("/tmp/spring-beans-3.0.rnc")
+  call-interactively(rng-set-schema-file-and-validate nil nil)
+</span><span class="org-block-end-line">#+end_src
+</span>&#24182;&#22312; spring-beans-3.0.rnc  &#20013;&#23450;&#20301;&#20986;&#38169;&#35823;&#26469;,
+&#22823;&#27010;&#23450;&#20301;&#22312;
+<span class="org-block-begin-line">#+begin_quote
+</span>         (import | alias | bean)?+,<span class="org-meta-line">
+</span><span class="org-block-end-line">#+end_quote
+</span>&#38382;&#39064;&#20986;&#22312; "?+"&#36825;&#20004;&#20010;&#23383;&#31526;,&#23558;"?"&#21024;&#38500;,&#21482;&#30041;"+"&#21495;,&#20445;&#23384;&#21518;,
+&#22238;&#21040; applicationContext.xml &#25991;&#20214;&#20013;&#25353;&#19979;C-cC-sC-a
+&#21448;&#20250;&#20986;&#38169;,&#38382;&#39064;&#30456;&#21516;,&#21024;&#38500;&#30456;&#24212;&#38382;&#21495;&#21518;,&#24212;&#35813;&#23601;&#27809;&#38382;&#39064;&#20102;.&#20272;&#35745;&#30452;&#25509;&#23558;&#20840;&#25991;&#30340;"?+"&#26367;&#25442;&#20026;
+"+"&#23601;&#21487;&#20197;.
+
+&#26368;&#21518;,&#22312; &#32534;&#36753;applicationContext.xml &#26102;,&#25353;Control+Return &#21487;&#20197;,&#34917;&#20840;&#20986;&#30456;&#24212;&#30340;&#23646;
+&#24615;&#21517;.
+<span class="org-level-1">* spring-aop-3.0.xsd &#36716;&#25442;&#25104;spring-aop-3.0.rnc</span>
+spring-aop-3.0.xsd&#27604; spring-beans-3.0.xsd&#30340;&#22788;&#29702;&#35201;&#22797;&#26434;&#19968;&#28857;
+<span class="org-block-begin-line">#+begin_src sh
+</span><span class="org-block"> java -jar rngconv.jar spring-aop-3.0.xsd   &gt;spring-aop-3.0.rng
+</span><span class="org-block-end-line">#+end_src
+</span><span class="org-block-begin-line">#+begin_src sh
+</span><span class="org-block">"schemaLocation" attribute is required for "xsd:import" element, but is not specified
+  7:64@http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+"schemaLocation" attribute is required for "xsd:import" element, but is not specified
+  8:64@http://www.springframework.org/schema/tool/spring-tool-3.0.xsd
+namespace "http://www.w3.org/XML/1998/namespace" is referenced but no schema definition of this namespace was found.
+  7:64@http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+failed to load the grammar
+</span><span class="org-block-end-line">#+end_src
+</span>&#35299;&#27861;:
+&#23558;&#20854;&#20013;&#30340;&#36825;&#20004;&#21477;
+<span class="org-block-begin-line">#+begin_src xml
+</span><span class="org-block">    &lt;xsd:import namespace="http://www.springframework.org/schema/beans" schemaLocation="http://www.springframework.org/schema/beans/spring-beans-3.0.xsd"/&gt;
+    &lt;xsd:import namespace="http://www.springframework.org/schema/tool" schemaLocation="http://www.springframework.org/schema/tool/spring-tool-3.0.xsd"/&gt;
+</span><span class="org-block-end-line">#+end_src
+</span>&#25442;&#25104;:&#20351;&#29992;&#30456;&#23545;&#36335;&#24452;
+<span class="org-block-begin-line">#+begin_src xml
+</span><span class="org-block">    &lt;xsd:import namespace="http://www.springframework.org/schema/beans" schemaLocation="spring-beans-3.0.xsd" /&gt;
+    &lt;xsd:import namespace="http://www.springframework.org/schema/tool" schemaLocation="spring-tool-3.0.xsd" /&gt;
+</span><span class="org-block-end-line">#+end_src
+</span>&#21516;&#26102;,&#19981;&#35201;&#24536;&#20102;,&#23558;spring-tool-3.0.xsd&#25991;&#20214;&#20013;&#30340; &#36825;&#21477;&#21024;&#25481;
+<span class="org-block-begin-line">#+begin_src xml
+</span><span class="org-block">    &lt;xsd:import namespace="http://www.w3.org/XML/1998/namespace"/&gt;
+</span><span class="org-block-end-line">#+end_src
+</span>&#38500;&#27492;&#20043;&#22806;,&#22788;&#29702;&#26041;&#27861;&#19982;spring-beans-3.0.xsd&#21516;,
+&#27492;&#27425;&#29983;&#25104;&#30340;rnc &#25991;&#20214;,&#30456;&#23545; spring-beans-3.0.rnc&#30340;&#20248;&#28857;&#26159;,&#19981;&#20294;&#21487;&#20197;&#34917;&#20840;&#20687;
+<span class="org-block-begin-line">#+begin_src xml
+</span><span class="org-block">    &lt;bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager"&gt;
+        &lt;property name="sessionFactory"&gt;
+            &lt;ref local="sessionFactory"/&gt;
+        &lt;/property&gt;
+    &lt;/bean&gt;
+</span><span class="org-block-end-line">#+end_src
+</span> &#36825;&#26679;&#30340;&#20803;&#32032;
+&#36824;&#21487;&#20197;&#34917;&#20840;&#24102;&#26377;aop&#21069;&#32512;&#30340;&#20803;&#32032;
+<span class="org-block-begin-line">#+begin_src xml
+</span><span class="org-block">    &lt;aop:config&gt;
+        &lt;aop:pointcut id="allManagerMethod" expression="execution (* org.jixiuf.drp.service.*.*(..))"/&gt;
+</span><span class="org-block-end-line">#+end_src
+</span>&#21516;&#26679;&#30340;&#36947;&#29702;, spring-context-3.0.rnc &#21487;&#20197;&#34917;&#20840;&#22914;&#19979;&#20803;&#32032;
+<span class="org-block-begin-line">#+begin_src xml
+</span><span class="org-block">   &lt;context:annotation-config /&gt;
+    &lt;context:component-scan base-package="org.jixiuf" /&gt;
+</span><span class="org-block-end-line">#+end_src
+</span>&#20294;&#26159;,&#32570;&#28857;&#26159; spring-context-3.0.rnc spring-beans-3.0.rnc spring-aop-3.0.rnc
+&#19977;&#20010;&#25991;&#20214;&#19981;&#33021;&#21516;&#26102;&#20351;&#29992;
+,&#35299;&#20915;&#21150;&#27861;,&#23601;&#26159;&#23558;&#25991;&#31456;&#24320;&#22836;&#21015;&#20986;&#30340;&#20960;&#20010;&#25991;&#20214;,&#36807;&#34892;&#21512;&#24182;&#21518;,&#32479;&#19968;&#29983;&#25104;&#19968;&#20010;rnc&#25991;&#20214;
+
+
+<span class="org-level-1">* &#21512;&#24182;&#25104;&#19968;&#20010;spring.rnc</span>
+  &#36890;&#36807;&#20462;&#25913; spring-aop-3.0.xsd,&#26469;&#21253;&#21547;&#20854;&#20182;&#20960;&#20010;&#25991;&#20214;&#26469;&#23454;&#29616;,&#36825;&#26679;&#29983;&#25104;&#30340;
+  spring-aop-3.0.rnc &#23601;&#21253;&#21547;&#20102;&#20854;&#20182;&#20960;&#20010;xsd&#25991;&#20214;&#20013;&#30340;&#20869;&#23481;
+  &#20462;&#25913;&#21518;&#30340; spring-aop-3.0.xsd&#22836;&#37096;&#22914;&#19979;
+<span class="org-block-begin-line">#+begin_src xml
+</span><span class="org-block">&lt;xsd:schema xmlns="http://www.springframework.org/schema/aop"
+        xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+        xmlns:beans="http://www.springframework.org/schema/beans"
+        xmlns:tx="http://www.springframework.org/schema/tx"
+        xmlns:tool="http://www.springframework.org/schema/tool"
+        xmlns:context="http://www.springframework.org/schema/context"
+        xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+        xmlns:jee="http://www.springframework.org/schema/jee"
+        xmlns:jms="http://www.springframework.org/schema/jms"
+        xmlns:lang="http://www.springframework.org/schema/lang"
+        xmlns:mvc="http://www.springframework.org/schema/mvc"
+        xmlns:oxm="http://www.springframework.org/schema/oxm"
+        xmlns:task="http://www.springframework.org/schema/task"
+        xmlns:util="http://www.springframework.org/schema/util"
+        targetNamespace="http://www.springframework.org/schema/aop"
+        elementFormDefault="qualified"
+        attributeFormDefault="unqualified"&gt;
+    &lt;xsd:import namespace="http://www.springframework.org/schema/tx" schemaLocation="spring-tx-3.0.xsd" /&gt;
+    &lt;xsd:import namespace="http://www.springframework.org/schema/context" schemaLocation="spring-context-3.0.xsd" /&gt;
+    &lt;xsd:import namespace="http://www.springframework.org/schema/jdbc" schemaLocation="spring-jdbc-3.0.xsd" /&gt;
+    &lt;xsd:import namespace="http://www.springframework.org/schema/jee" schemaLocation="spring-jee-3.0.xsd" /&gt;
+    &lt;xsd:import namespace="http://www.springframework.org/schema/jms" schemaLocation="spring-jms-3.0.xsd" /&gt;
+    &lt;xsd:import namespace="http://www.springframework.org/schema/lang" schemaLocation="spring-lang-3.0.xsd" /&gt;
+    &lt;xsd:import namespace="http://www.springframework.org/schema/mvc" schemaLocation="spring-mvc-3.0.xsd" /&gt;
+    &lt;xsd:import namespace="http://www.springframework.org/schema/oxm" schemaLocation="spring-oxm-3.0.xsd" /&gt;
+    &lt;xsd:import namespace="http://www.springframework.org/schema/task" schemaLocation="spring-task-3.0.xsd" /&gt;
+    &lt;xsd:import namespace="http://www.springframework.org/schema/util" schemaLocation="spring-util-3.0.xsd" /&gt;
+</span><span class="org-block-end-line">#+end_src
+</span>&#19979;&#38754;&#36825;&#20960;&#20010;&#25991;&#20214;&#19981;&#38656;&#35201;&#36825;&#20040;&#22797;&#26434;,&#21482;&#38656;&#35201;&#23558;&#20854;&#20013;&#30340;
+<span class="org-block-begin-line">#+begin_quote
+</span>  spring-context-3.0.xsd
+  spring-jdbc-3.0.xsd
+  spring-jee-3.0.xsd
+  spring-jms-3.0.xsd
+  spring-lang-3.0.xsd
+  spring-mvc-3.0.xsd
+  spring-oxm-3.0.xsd
+  spring-task-3.0.xsd
+  spring-tx-3.0.xsd
+  spring-util-3.0.xsd<span class="org-meta-line">
+</span><span class="org-block-end-line">#+end_quote
+</span><span class="org-block-begin-line">#+begin_src xml
+</span><span class="org-block">    &lt;xsd:import namespace="http://www.springframework.org/schema/beans" schemaLocation="http://www.springframework.org/schema/beans/spring-beans-3.0.xsd"/&gt;
+    &lt;xsd:import namespace="http://www.springframework.org/schema/tool" schemaLocation="http://www.springframework.org/schema/tool/spring-tool-3.0.xsd"/&gt;
+</span><span class="org-block-end-line">#+end_src
+</span>
+&#25442;&#25104;:&#20351;&#29992;&#30456;&#23545;&#36335;&#24452;
+<span class="org-block-begin-line">#+begin_src xml
+</span><span class="org-block">    &lt;xsd:import namespace="http://www.springframework.org/schema/beans" schemaLocation="spring-beans-3.0.xsd" /&gt;
+    &lt;xsd:import namespace="http://www.springframework.org/schema/tool" schemaLocation="spring-tool-3.0.xsd" /&gt;
+</span><span class="org-block-end-line">#+end_src
+</span>
+&#36825;&#20004;&#20010;&#25991;&#20214;,&#21024;&#38500;&#20854;&#20013;&#30340;
+<span class="org-block-begin-line">#+begin_quote
+</span>  spring-tool-3.0.xsd
+  spring-beans-3.0.xsd<span class="org-meta-line">
+</span><span class="org-block-end-line">#+end_quote
+</span><span class="org-block-begin-line">#+begin_quote
+</span><span class="ethan-wspace">    </span>&lt;xsd:import namespace="<span class="org-link">http://www.w3.org/XML/1998/namespace"/</span>&gt;<span class="org-meta-line">
+</span><span class="org-block-end-line">#+end_quote
+</span>&#29992;&#36825;&#20004;&#26465;&#21629;&#20196;&#29983;&#25104;spring-3.0.rnc,&#29983;&#25104;&#20043;&#21518;&#36824;&#20250;&#20986;&#29616; "?+" &#36825;&#20010;&#38382;&#39064;,&#35299;&#20915;&#25481;&#20043;&#21518;,&#21363;
+&#21487;
+<span class="org-block-begin-line">#+begin_src sh
+</span><span class="org-block"> java -jar rngconv.jar spring-aop-3.0.xsd   &gt;spring-aop-3.0.rng
+  java -jar trang.jar  spring-aop-3.0.rng spring-3.0.rnc
+</span><span class="org-block-end-line">#+end_src
+</span></pre>
+  </body>
+</html>

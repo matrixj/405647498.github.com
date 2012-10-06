@@ -3,14 +3,14 @@
                "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="zh" xml:lang="zh">
 <head>
-<title>一个人的狂欢</title>
+<title>nxml-mode补全</title>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
-<meta name="title" content="一个人的狂欢"/>
+<meta name="title" content="nxml-mode补全"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2011-06-04 星期六"/>
-<meta name="author" content="孤峰独秀"/>
-<meta name="description" content=""/>
-<meta name="keywords" content=""/>
+<meta name="generated" content="2011-10-22 六"/>
+<meta name="author" content="纪秀峰"/>
+<meta name="description" content="nxml-mode补全"/>
+<meta name="keywords" content="emacs nxml mode"/>
 <style type='text/css'>
        body {
     background-color: #E5E5E5;
@@ -942,15 +942,15 @@ img {
 }
 
     </style>
-<link rel="stylesheet" type="text/css" href="style/emacs.css" />
-<script type='text/javascript' src='js/emacs.js'> </script>
+<link rel="stylesheet" type="text/css" href="../style/emacs.css" />
+<script type='text/javascript' src='../js/emacs.js'> </script>
 
 </head>
 <body>
 <div id="org-div-home-and-up" style="text-align:right;font-size:70%;white-space:nowrap;">
- <a accesskey="h" href="sitemap.html"> 站点地图 </a>
+ <a accesskey="h" href="../sitemap.html"> 站点地图 </a>
  |
- <a accesskey="H" href="index.html"> 首页 </a>
+ <a accesskey="H" href="../index.html"> 首页 </a>
 </div>
 
 <div id="preamble">
@@ -958,60 +958,281 @@ img {
 </div>
 
 <div id="content">
-<h1 class="title">一个人的狂欢</h1>
+<h1 class="title">nxml-mode补全</h1>
 
 
-<div id='logo-img' ><a  href='index.html'>▇█▓▒░◕~◕░▒▓█▇</a></div>
+<div id='logo-img' ><a  href='../index.html'>▇█▓▒░◕~◕░▒▓█▇</a></div>
 
 <div id='logo-text'>
   <a href='#' ><span align="left">░◕~◕░</span></a>
 </div>
 
 
+<p>
+使用介绍 <a href="http://jamsa.javaeye.com/blog/38202">http://jamsa.javaeye.com/blog/38202</a><br/>
+官方内容:<br/>
+<a href="http://infohost.nmt.edu/tcc/help/pubs/nxml/schema-locating.html">http://infohost.nmt.edu/tcc/help/pubs/nxml/schema-locating.html</a><br/>
+</p>
+<p><br/>
+emacs nxml-mode 只支持rnc格式的xml 解析<br/>
+dtd &mdash;&gt;rnc<br/>
+xsd-&mdash;&gt;rng&ndash;&mdash;&gt;rnc<br/>
+需要用到的转换工具trang.jar     dtd&mdash;&gt;rnc         rng&mdash;&gt;rnc<br/>
+                 rngconv.jar    xsd -&mdash;&gt;rnc<br/>
+</p>
+<p><br/>
+</p>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
 <ul>
-<li>首页还未做好，先看<a href="sitemap.html">站点地图</a>吧
-</li>
-<li><a href="about.html">About</a>
-</li>
+<li><a href="#sec-1">dtd 使用 trang</a></li>
+<li><a href="#sec-2">xsd</a></li>
+<li><a href="#sec-3">&lt;uri resource="f" uri="s"/&gt;</a></li>
+<li><a href="#sec-4">&lt;uri pattern="p" uri="s"/&gt;</a></li>
+<li><a href="#sec-5">&lt;uri pattern="p" typeId="T"/&gt;</a></li>
+<li><a href="#sec-6">&lt;documentElement prefix="N" localName="E" uri="s"/&gt;</a></li>
+<li><a href="#sec-7">&lt;documentElement prefix="N" localName="E" typeId="T"/&gt;</a></li>
+<li><a href="#sec-8">&lt;transformURI fromPattern="p" toPattern="q"/&gt;</a></li>
+<li><a href="#sec-9">&lt;namespace ns="N" uri="s"/&gt; 与* &lt;namespace ns="N" typeId="T"/&gt;</a></li>
+<li><a href="#sec-10">如何定义一个typeId  &lt;typeId id="T" uri="s"/&gt;</a></li>
+<li><a href="#sec-11">也可以包含另一个schemas 文件</a></li>
 </ul>
+</div>
+</div>
+
+<div id="outline-container-1" class="outline-2">
+<h2 id="sec-1">dtd 使用 trang</h2>
+<div class="outline-text-2" id="text-1">
+
+<p>将生成的hibernate-mapping-3.0.rnc复制到emacs的nXML-mode安装目录。<br/>
+     (add-to-list 'rng-schema-locating-files (expand-file-name "~/.emacs.d/script/nxml/schemas.xml"))<br/>
+     我copy  到 "~/.emacs.d/script/nxml/" 这个目录也可<br/>
+     修改nXML-mode安装目录下的schema/schema.xml。在文件中增加一种新的文件类型对质，在文件中加入：<br/>
+</p>
+<p><br/>
+     xml 代码<br/>
+</p><ol>
+<li>&lt;typeId id="Hibernate HBM" uri="hibernate-mapping-3.0.rnc"/&gt; <br/>
+</li>
+</ol>
+
+<p>   在schema.xml文件中加入hbm的一种识别方式，这里将根据文件名以hbm.xml结尾，来识别这是一个Hibernate HBM类型的文件：<br/>
+        &lt;uri pattern="*.hbm.xml" typeId="Hibernate HBM"/&gt;  <br/>
+</p>
+<p><br/>
+
+</p>
+<hr/>
+</div>
+
+</div>
+
+<div id="outline-container-2" class="outline-2">
+<h2 id="sec-2">xsd</h2>
+<div class="outline-text-2" id="text-2">
+
+<p>rngconv 将 xsd转换成rng格式供emacs nxml-mode 编辑xml文件使用<br/>
+</p><ol>
+<li>java -jar rngconv.jar <a href="http://maven.apache.org/maven-v4_0_0.xsd">http://maven.apache.org/maven-v4_0_0.xsd</a> &gt;&gt; maven2.rng  <br/>
+       java -jar trang.jar maven2.rng maven2.rnc  <br/>
+
+<p><br/>
+       将maven2.rnc复制到nXML-mode安装目录中。修改schema.xml增加一种新的类型<br/>
+           &lt;typeId id="Maven2" uri="maven2.rnc"/&gt;  <br/>
+</p></li>
+</ol>
 
 
+<p><br/>
+修改schema.xml，加入自动识别pom文件的功能，这里不通过文件名来识别，而是使用namespace来识别<br/>
+ &lt;namespace ns="<a href="http://maven.apache.org/POM/4.0.0">http://maven.apache.org/POM/4.0.0</a>" typeId="Maven2" /&gt;  <br/>
+pom.xml 的头部声明是这样的<br/>
+ &lt;project xmlns="<a href="http://maven.apache.org/POM/4.0.0">http://maven.apache.org/POM/4.0.0</a>"<br/>
+    xsi:schemaLocation="<a href="http://maven.apache.org/POM/4.0.0">http://maven.apache.org/POM/4.0.0</a> <a href="http://maven.apache.org/maven-v4_0_0.xsd">http://maven.apache.org/maven-v4_0_0.xsd</a>"<br/>
+    xmlns:xsi="<a href="http://www.w3.org/2001/XMLSchema-instance">http://www.w3.org/2001/XMLSchema-instance</a>"&gt;<br/>
+</p>
+<p><br/>
+</p>
+<p><br/>
+.<br/>
+官方内容:<br/>
+<a href="http://infohost.nmt.edu/tcc/help/pubs/nxml/schema-locating.html">http://infohost.nmt.edu/tcc/help/pubs/nxml/schema-locating.html</a><br/>
+关于schemas.xml 内容的介绍:<br/>
+下面是一系列匹配规则用于选择使用哪个schema locating file:<br/>
+</p></div>
+
+</div>
+
+<div id="outline-container-3" class="outline-2">
+<h2 id="sec-3">&lt;uri resource="f" uri="s"/&gt;</h2>
+<div class="outline-text-2" id="text-3">
+
+<p>表示将f 对s(s is a schema file) 进行关联. f 可以是一个 full URL 也可以是一个本地的文件<br/>
+ 比如:&lt;uri resource="abc.xyz" uri="xyz.rnc"/&gt;<br/>
+ 表示文件打开abc.xyz 时使用xyz.rnc 对其进行解析.<br/>
+</p>
+<p><br/>
+</p></div>
+
+</div>
+
+<div id="outline-container-4" class="outline-2">
+<h2 id="sec-4">&lt;uri pattern="p" uri="s"/&gt;</h2>
+<div class="outline-text-2" id="text-4">
+
+<p>  相对于 &lt;uri pattern="p" uri="s"/&gt; 中的resource 所指定的内容是一个特定的不<br/>
+  具通用性.pattern 可以是一个regexp 匹配某一类的文件.<br/>
+比如:  &lt;uri pattern="*.hbm.xml" uri="hibernate-mapping-3.0.rnc"/&gt;<br/>
+所有以hbm.xml 结尾的文件,将使且hibernate-mapping-3.rnc 对其进行解析<br/>
+</p>
+<p><br/>
+</p></div>
+
+</div>
+
+<div id="outline-container-5" class="outline-2">
+<h2 id="sec-5">&lt;uri pattern="p" typeId="T"/&gt;</h2>
+<div class="outline-text-2" id="text-5">
+
+<p>  pattern 与前者相同,typeId 则是一个Id<br/>
+  比如:<br/>
+    &lt;uri pattern="*.xsl" typeId="XSLT"/&gt;<br/>
+    &lt;typeId id="XSLT" uri="xslt.rnc"/&gt;<br/>
+    效果与<br/>
+    &lt;uri pattern="*.xsl" uri="xslt.rnc"/&gt;同<br/>
+    typeId 存在的必要仅仅是 多种匹配规则都使用同一个schema s 进行解析的时候<br/>
+  用,当然可以选择不用<br/>
+</p>
+<p>    <br/>
+</p></div>
+
+</div>
+
+<div id="outline-container-6" class="outline-2">
+<h2 id="sec-6">&lt;documentElement prefix="N" localName="E" uri="s"/&gt;</h2>
+<div class="outline-text-2" id="text-6">
+
+<p>  即如果一个xml 文件的根元素是E ,并且其namespace是N的话,将使用 schema s  <br/>
+  &lt;documentElement prefix="" localName="hibernate-mapping" uri="hibernate.rnc"/&gt;<br/>
+  比如:根元素是hibernate-mapping 前缀是空的文件,将使用hibernate.rnc 进行解<br/>
+  析<br/>
+  &lt;documentElement prefix="" localName="hibernate-mapping" uri="hibernate-mapping-3.0.rnc"/&gt; <br/>
+</p>
+<p><br/>
+  prefix参数可以省略,表示只要localName="E" 即可,不考虑namespace的影响<br/>
+  &lt;documentElement  localName="hibernate-mapping" uri="hibernate-mapping-3.0.rnc"/&gt; <br/>
+  &lt;documentElement prefix="" localName="hibernate-mapping" uri="hibernate-mapping-3.0.rnc"/&gt; <br/>
+两者效果相同<br/>
+另外,似乎prefix localName 两参数只是可省略的参数<br/>
+</p></div>
+
+</div>
+
+<div id="outline-container-7" class="outline-2">
+<h2 id="sec-7">&lt;documentElement prefix="N" localName="E" typeId="T"/&gt;</h2>
+<div class="outline-text-2" id="text-7">
+
+<p>  有了前两个,这个应该不难理解<br/>
+  &lt;documentElement localName="stylesheet" typeId="XSLT"/&gt; ;所以root element <br/>
+  是stylesheep 的xml文件使用类型XSLT类型的schemas进行解析<br/>
+</p>
+<p>  <br/>
+  这个对所有根元素为 xsl:transform 的xml文件使用类型XSLT类型的schemas进行解析<br/>
+  &lt;documentElement prefix="xsl" localName="transform" typeId="XSLT"/&gt;<br/>
+</p>
+<p>  <br/>
+  &lt;typeId id="XSLT" uri="xslt.rnc"/&gt; ;这里对XSLT类型的schemas进行定义<br/>
+</p>
+<p>  <br/>
+</p></div>
+
+</div>
+
+<div id="outline-container-8" class="outline-2">
+<h2 id="sec-8">&lt;transformURI fromPattern="p" toPattern="q"/&gt;</h2>
+<div class="outline-text-2" id="text-8">
+
+<p>  p 和q 里应该含有相同数量的"*" 他们是一一对应的<br/>
+    &lt;transformURI fromPattern="*.xml" toPattern="*.rnc"/&gt;<br/>
+    比如当你编辑 a.xml 时,它将寻找一个a.rnc 文件对其将行解析<br/>
+</p></div>
+
+</div>
+
+<div id="outline-container-9" class="outline-2">
+<h2 id="sec-9">&lt;namespace ns="N" uri="s"/&gt; 与* &lt;namespace ns="N" typeId="T"/&gt;</h2>
+<div class="outline-text-2" id="text-9">
+
+<p>  &lt;namespace ns="<a href="http://www.w3.org/1999/xhtml">http://www.w3.org/1999/xhtml</a>" typeId="XHTML"/&gt;<br/>
+  &lt;namespace ns="<a href="http://www.w3.org/1999/xhtml">http://www.w3.org/1999/xhtml</a>" uri="xhtml.rnc"/&gt;<br/>
+  比如当你编辑 一个声明有 xmlns="<a href="http://www.w3.org/1999/xhtml"的xml">http://www.w3.org/1999/xhtml"的xml</a> 文件时,<br/>
+</p>
+<p><br/>
+<pre class="src src-html">&lt;<span class="org-function-name">html</span> <span class="org-variable-name">xmlns</span>=<span class="org-string">"http://www.w3.org/1999/xhtml"</span> <span class="org-sgml-namespace">xml</span>:<span class="org-variable-name">lang</span>=<span class="org-string">"en"</span> <span class="org-variable-name">lang</span>=<span class="org-string">"en"</span>&gt;
+&lt;/<span class="org-function-name">html</span>&gt;
+</pre>
 
 
+</p></div>
+
+</div>
+
+<div id="outline-container-10" class="outline-2">
+<h2 id="sec-10">如何定义一个typeId  &lt;typeId id="T" uri="s"/&gt;</h2>
+<div class="outline-text-2" id="text-10">
+
+<p>  &lt;typeId id="XSLT" uri="xslt.rnc"/&gt;<br/>
+  &lt;typeId id="XSLT<sub>alias</sub>" typeId="XSLT"/&gt;<br/>
+  对于定义了一个typeId 后可以在nxml-mode中<br/>
+  使用 `C-cC-sC-t' 列出所有的typeId ,以便使当前buffer用特定的typeId进行解析 <br/>
+</p></div>
+
+</div>
+
+<div id="outline-container-11" class="outline-2">
+<h2 id="sec-11">也可以包含另一个schemas 文件</h2>
+<div class="outline-text-2" id="text-11">
+
+<p>  &lt;include rules="F"/&gt;<br/>
+</p>
+<p>  <br/>
+</p>
+<p><br/>
 <div id='my-src'>
-<div id='org-src'><a href='src/index.org'>src</a></div>
-<div id='htmlized-src'><a href='htmlized-src/index.org.html'>htmlized-src</a></div>
+<div id='org-src'><a href='../src/emacs/nxml-mode.org'>src</a></div>
+<div id='htmlized-src'><a href='../htmlized-src/emacs/nxml-mode.org.html'>htmlized-src</a></div>
 </div>
 <div id='tags'><span id='tags-title'>Tags:</span><br />
-<p>
-    <a href="tags/@SVN.html">@SVN</a>
-    <a href="tags/@perl.html">@perl</a>
-    <a href="tags/@Java.html">@Java</a>
-    <a href="tags/@Mysql.html">@Mysql</a>
-    <a href="tags/@Erlang.html">@Erlang</a>
-    <a href="tags/@SQL.html">@SQL</a>
-    <a href="tags/@DB.html">@DB</a>
-    <a href="tags/@Oracle.html">@Oracle</a>
-    <a href="tags/@Ediff.html">@Ediff</a>
-    <a href="tags/@Git.html">@Git</a>
-    <a href="tags/@Cedet.html">@Cedet</a>
-    <a href="tags/@C-C++.html">@C-C++</a>
-    <a href="tags/@Daily.html">@Daily</a>
-    <a href="tags/@Eclipse.html">@Eclipse</a>
-    <a href="tags/@AutoHotKey.html">@AutoHotKey</a>
-    <a href="tags/@Windows.html">@Windows</a>
-    <a href="tags/@Linux.html">@Linux</a>
-    <a href="tags/@C.html">@C</a>
-    <a href="tags/@Emacs.html">@Emacs</a>
+    <a href="../tags/@SVN.html">@SVN</a><br/>
+    <a href="../tags/@perl.html">@perl</a><br/>
+    <a href="../tags/@Java.html">@Java</a><br/>
+    <a href="../tags/@Mysql.html">@Mysql</a><br/>
+    <a href="../tags/@Erlang.html">@Erlang</a><br/>
+    <a href="../tags/@SQL.html">@SQL</a><br/>
+    <a href="../tags/@DB.html">@DB</a><br/>
+    <a href="../tags/@Oracle.html">@Oracle</a><br/>
+    <a href="../tags/@Ediff.html">@Ediff</a><br/>
+    <a href="../tags/@Git.html">@Git</a><br/>
+    <a href="../tags/@Cedet.html">@Cedet</a><br/>
+    <a href="../tags/@C-C++.html">@C-C++</a><br/>
+    <a href="../tags/@Daily.html">@Daily</a><br/>
+    <a href="../tags/@Eclipse.html">@Eclipse</a><br/>
+    <a href="../tags/@AutoHotKey.html">@AutoHotKey</a><br/>
+    <a href="../tags/@Windows.html">@Windows</a><br/>
+    <a href="../tags/@Linux.html">@Linux</a><br/>
+    <a href="../tags/@C.html">@C</a><br/>
+    <a href="../tags/@Emacs.html">@Emacs</a><br/>
 </p>
-
-
+<p><br/>
+</div>
+</p></div>
 </div>
 </div>
 
 <div id="postamble">
-<p class="date">Date: 2011-06-04 星期六</p>
-<p class="author">Author: 孤峰独秀</p>
+<p class="date">Date: 2011-10-22 六</p>
+<p class="author">Author: 纪秀峰</p>
 <p class="creator">Org version 7.8.03 with Emacs version 24</p>
 
 

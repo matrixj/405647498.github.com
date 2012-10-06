@@ -1,0 +1,131 @@
+# -*- coding:utf-8 -*-
+#+LANGUAGE:  zh
+#+TITLE:     Emacs中的剪切复制
+#+AUTHOR:    孤峰独秀
+#+EMAIL:     jixiuf@gmail.com
+#+DATE:     2011-07-04 一
+#+DESCRIPTION:emacs-kill-region-or-line.org
+#+KEYWORDS: emacs kill region line
+#+OPTIONS:   H:2 num:nil toc:t \n:t @:t ::t |:t ^:t -:t f:t *:t <:t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc
+#+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
+#+EXPORT_SELECT_TAGS: export
+#+EXPORT_EXCLUDE_TAGS: noexport
+#+FILETAGS: @Emacs 
+* kill-line kill-region
+C-k : kill-line
+C-w : kill-region
+注意C-k 的功能并不是剪切当前行，而是剪切当前行从光标到行末的内容。不要尝试
+写一个剪切整行的函数了，因为实在没有必要。默认情况下，要想剪切整行，只需光
+标跳转到行首，然后C-k就可以了。即C-aC-k ，这个按键并不难按。
+另外有个属性  kill-whole-line，它来控制在行首C-k 时，是否同时删除末尾换行符
+另外C-u0C-k 这个操作是删除从光标到行首的位置之间的内容，这个按键有点长，但
+我并不常用，就没重新进行绑定。
+#+begin_src emacs-lisp
+(setq-default kill-whole-line t) ;;
+#+end_src
+* joseph-kill-region-or-line。这样就可以省下C-w 
+C-k 的功能已经够强大了吧。但是我还想做个功能增强。即当选中某区域的时候，则
+kill-region,否则才执行默认的C-k的功能。实现起来，很简单，只需要判断
+mark-active 属性是否为true就可以了。所以有了下面的
+joseph-kill-region-or-line。这样就可以省下C-w 这个按键进行其他绑定了。
+#+begin_src  emacs-lisp
+;;我写的一个函数,如果有选中区域,则kill选区,否则删除当前行
+;;注意当前行并不代表整行,它只删除光标到行尾的内容,也就是默认情况下
+;;C-k 所具有的功能
+;;;###autoload
+(defun joseph-kill-region-or-line(&optional arg)
+  "this function is a wrapper of (kill-line).
+   When called interactively with no active region, this function
+  will call (kill-line) ,else kill the region."
+  (interactive "P")
+  (if mark-active
+      (if (= (region-beginning) (region-end) ) (kill-line arg)
+        (kill-region (region-beginning) (region-end) )
+        )
+    (kill-line arg)
+    )
+  )
+#+end_src
+* 这个是org-mode 下的版本。joseph-kill-region-or-org-kill-line
+#+begin_src  emacs-lisp
+(defun joseph-kill-region-or-org-kill-line(&optional arg)
+  "this function is a wrapper of (kill-line).
+   When called interactively with no active region, this function
+  will call (kill-line) ,else kill the region."
+  (interactive "P")
+  (if mark-active
+      (if (= (region-beginning) (region-end) ) (org-kill-line arg)
+        (kill-region (region-beginning) (region-end) )
+        )
+    (org-kill-line arg)
+    )
+  )
+#+end_src
+* 另外再说一说Emacs中的剪切复制。
+Emacs 中的剪切不叫剪切（cut），叫kill
+复制(copy)不叫copy ,叫kill-ring-save （这个可以理解为先kill掉放到kill-ring
+里，然后再把它save回来）. 
+另外还有一个操作叫delete ,delete 与kill的区别是kill掉的内容会被放到
+kill-ring(剪切环)而delete掉的内容则直接删掉了，除了进行undo操作外没法找回删
+掉的内容。而kill 掉的内容很容易从kill-ring中取回。有了kill-ring的Emacs可以
+说是具有了多个剪贴板。
+说一说默认的与kill yank delete 有关的键绑定
++ C-w kill-region
++ C-k kill-line
++ C-M-k kill-sexp 这个比较复杂 它表示删除一个结构单元。对不同类型的文档（c java
+  文本 等）一个结构单元表示不同的含义。你可以尝试一下。(比如，你移动到一个
+  括号的开头，按下，则删除整个括号内的内容)
++ C-d  delete-char
++ M-d  kill-word
++ C-backspace backward-kill-word
+
++ M-w kill-ring-save 复制。
++ C-y yank 粘贴。
++ 另外在按下C-y后，按一次或多次M-y 会循环取出kill-ring中的内容，然后贴到当
+  前位置 。
+  
++ 但是kill-ring毕竟不是操作系统的剪切板，kill-ring里的内容是没法在其他程序
+  里利用的。所以要用好它又设及到与系统剪切板的同步的问题了。 在Windows 上
+  Emacs已经默认解决了这个问题。在Linux上没有。因为Linux的剪切板不只一个。所
+  以问题要复杂许多。
+* Linux 下 与系统系统剪切板相关的操作。
+#+begin_src emacs-lisp
+;;关于剪切板: X共享信息的有 clipboard primary secondary 三个区域
+;;其中clipboard 就是我们常说的剪切板,而primary 就是常说的selection ,也就是说只要你选中一段内容,
+;;那么这段内容就被存到primary 中了,而secondary 目前好像已经不推荐使用了,所以不用考虑
+;;而emacs 默认存在内容的区域不是上面任何一个,它叫kill-ring叫剪切环,它能存储不只一份内容,
+;;C-y 会取出kill-ring 中最近的一份内容,然后paste(专业点叫yank)到buffer 中,可以通过M-y
+;;取得以前的版本
+
+(defun setting-for-linux-x-clipboard (&optional frame)
+  (when (and (eq system-type 'gnu/linux)(eq (window-system frame) 'x))
+    ;;在向kill-ring 加入内容的同时会执行interprogram-cut-function 变量指定的函数
+    (setq-default interprogram-cut-function 'x-select-text);; default
+    ;;在执行yank 操作时,会检查interprogram-paste-function 变量 所指向的函数
+    ;;是否有返回值,如果有的话就将其yank在buffer 中,否则的话才会从kill-ring中取值
+    ;;而x-cut-buffer-or-selection-value  和x-select-text函数一样,
+    ;;也会根据x-select-enable-clipboard 和x-select-enable-primary 的值
+    ;;决定是否从clipboard 和primary 中取得内容
+    (setq-default interprogram-paste-function 'x-cut-buffer-or-selection-value)
+    ;;有关于往kill-ring加入内容时 是否往clipboard ,及primary 放入的判断
+    (setq-default x-select-enable-clipboard t) ;每一次往kill-ring 里加入东西时,同时往clipboard中放一份,
+    (setq-default x-select-enable-primary  nil) ;每一次往kill-ring 里加入东西时,是否也往primary 中放入
+    (setq-default select-active-regions  t);这个忘了什么意思
+    ;;在轮询kill-ring 的时候是否也同步改变系统的clipboard primary
+    ;;(要根据x-select-enable-clipboard ,及x-select-enable-primary的值决定哪个会被改变)
+    (setq-default yank-pop-change-selection t)  ;
+    ;;Save clipboard strings into kill ring before replacing them
+    (setq-default save-interprogram-paste-before-kill t)
+
+    ;; make mouse middle-click only paste from primary X11 selection, not clipboard and kill ring.
+    ;;鼠标中键粘贴,只考虑X11中的selection ,不考虑clipboard 和emacs 中的kill-ring
+    (global-set-key [mouse-2] 'mouse-yank-primary)
+    ;;其实有了以上几个配置 下面这三个键完全没有必要,但为防万一,
+    ;;将与剪切板相关的三个操作绑到这三个不常用的键上.
+    (global-set-key [(shift delete)] 'clipboard-kill-region)
+    (global-set-key [(control insert)] 'clipboard-kill-ring-save)
+    (global-set-key [(shift insert)] 'clipboard-yank)
+    )
+  )
+#+end_src

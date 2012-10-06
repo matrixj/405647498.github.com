@@ -1,0 +1,6 @@
+# -*- coding:utf-8 -*-
+
+#+TITLE: Tag: @SVN
+
+#+LANGUAGE:  zh
+   + [[file:../svn/svnignore.org][svn:ignore global-ignores property 忽略某些文件]]

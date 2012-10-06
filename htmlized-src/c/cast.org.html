@@ -1,0 +1,133 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<!-- Created by htmlize-1.34 in css mode. -->
+<html>
+  <head>
+    <title>cast.org</title>
+    <style type="text/css">
+    <!--
+      body {
+        color: #F8F8F8;
+        background-color: #0C1021;
+      }
+      .comment {
+        /* font-lock-comment-face */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-block {
+        /* org-block */
+        color: #b3b3b3;
+      }
+      .org-block-begin-line {
+        /* org-block-begin-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-block-end-line {
+        /* org-block-end-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-document-info {
+        /* org-document-info */
+        color: #afeeee;
+      }
+      .org-document-info-keyword {
+        /* org-document-info-keyword */
+        color: #b3b3b3;
+      }
+      .org-document-title {
+        /* org-document-title */
+        color: #afeeee;
+        font-size: 144%;
+        font-weight: bold;
+      }
+      .org-meta-line {
+        /* org-meta-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+
+      a {
+        color: inherit;
+        background-color: inherit;
+        font: inherit;
+        text-decoration: inherit;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+    -->
+    </style>
+  </head>
+  <body>
+    <pre>
+<span class="comment"># -*- coding:utf-8 -*-</span>
+<span class="org-meta-line">#+LANGUAGE:  zh
+</span><span class="org-document-info-keyword">#+TITLE:</span><span class="comment">     </span><span class="org-document-title">&#24378;&#21046;&#31867;&#22411;&#36716;&#25442;</span>
+<span class="org-document-info-keyword">#+AUTHOR:</span><span class="comment">    </span><span class="org-document-info">&#32426;&#31168;&#23792;</span>
+<span class="org-document-info-keyword">#+EMAIL:</span><span class="comment">     </span><span class="org-document-info">jixiuf@gmail.com</span>
+<span class="org-document-info-keyword">#+DATE:</span><span class="comment">     </span><span class="org-document-info">2011-10-26 &#19977;</span>
+<span class="org-meta-line">#+DESCRIPTION:&#24378;&#21046;&#31867;&#22411;&#36716;&#25442;
+#+KEYWORDS: C cast
+#+OPTIONS:   H:2 num:nil toc:t \n:t @:t ::t |:t ^:t -:t f:t *:t &lt;:t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil 
+#+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
+#+EXPORT_SELECT_TAGS: export
+#+EXPORT_EXCLUDE_TAGS: noexport
+#+FILETAGS: @C
+</span><span class="org-block-begin-line">#+begin_src c
+</span><span class="org-block">  long a =2;
+  int   intVar= (*((int*) (&amp;(a))));
+  printf ("%d\n",intVar);
+</span><span class="org-block-end-line">#+end_src
+</span><span class="org-block-begin-line">#+begin_src c
+</span><span class="org-block">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;malloc.h&gt;
+#include &lt;string.h&gt;
+typedef struct MS {
+  int a;
+  int b;
+} my_union;
+
+int main(int argc, char *argv[]){
+
+  long    longvar;
+  struct MS *m= malloc(sizeof(my_union));
+  m-&gt;a=1;
+  m-&gt;b=2;
+  longvar= (*((long*) (&amp;(m))));
+  printf ("%ld\n",longvar);
+  return 0;
+}
+</span><span class="org-block-end-line">#+end_src
+</span><span class="org-block-begin-line">#+begin_src c
+</span><span class="org-block">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;malloc.h&gt;
+#include &lt;string.h&gt;
+
+#define CAST(new_type,old_object) (*((new_type *)(&amp;(old_object))))
+
+typedef struct MS {
+  int a;
+  int b;
+} my_union;
+
+
+int main(int argc, char *argv[]){
+
+  long    longvar;
+  struct MS *m= malloc(sizeof(my_union));
+  m-&gt;a=1;
+  m-&gt;b=2;
+  longvar = CAST(long ,m);
+  printf ("%ld\n",longvar);
+  return 0;
+}
+
+</span><span class="org-block-end-line">#+end_src
+</span></pre>
+  </body>
+</html>

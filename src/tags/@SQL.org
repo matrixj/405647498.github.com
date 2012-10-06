@@ -1,0 +1,11 @@
+# -*- coding:utf-8 -*-
+
+#+TITLE: Tag: @SQL
+
+#+LANGUAGE:  zh
+   + [[file:../sqlserver/sqlserver-kill-all-connection.org][kill所有连接到某库的连接]]
+   + [[file:../sqlserver/clonedb.org][clone db in sqlserver ]]
+   + [[file:../oracle/oracle.org][oracle拾遗]]
+   + [[file:../oracle/hanzi_pinyin.org][汉字拼音对应表]]
+   + [[file:../mysql/benchmark_demo.org][mysql压力测试 实战]]
+   + [[file:../emacs/sqlparser.org][为mysql、sqlserver、oracle编写sql脚本时补全表名、列名]]

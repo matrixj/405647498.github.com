@@ -1,0 +1,636 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<!-- Created by htmlize-1.34 in css mode. -->
+<html>
+  <head>
+    <title>benchmark_demo.org</title>
+    <style type="text/css">
+    <!--
+      body {
+        color: #F8F8F8;
+        background-color: #0C1021;
+      }
+      .comment {
+        /* font-lock-comment-face */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-block {
+        /* org-block */
+        color: #b3b3b3;
+      }
+      .org-block-begin-line {
+        /* org-block-begin-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-block-end-line {
+        /* org-block-end-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-document-info {
+        /* org-document-info */
+        color: #afeeee;
+      }
+      .org-document-info-keyword {
+        /* org-document-info-keyword */
+        color: #b3b3b3;
+      }
+      .org-document-title {
+        /* org-document-title */
+        color: #afeeee;
+        font-size: 144%;
+        font-weight: bold;
+      }
+      .org-link {
+        /* org-link */
+        color: #00ffff;
+        text-decoration: underline;
+      }
+      .org-meta-line {
+        /* org-meta-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+
+      a {
+        color: inherit;
+        background-color: inherit;
+        font: inherit;
+        text-decoration: inherit;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+    -->
+    </style>
+  </head>
+  <body>
+    <pre>
+<span class="comment"># -*- coding:utf-8 -*-</span>
+<span class="org-meta-line">#+LANGUAGE:  zh
+</span><span class="org-document-info-keyword">#+TITLE:</span><span class="comment">     </span><span class="org-document-title">mysql&#21387;&#21147;&#27979;&#35797; &#23454;&#25112;</span>
+<span class="org-document-info-keyword">#+AUTHOR:</span><span class="comment">    </span><span class="org-document-info">&#32426;&#31168;&#23792;</span>
+<span class="org-document-info-keyword">#+EMAIL:</span><span class="comment">     </span><span class="org-document-info">jixiuf@gmail.com</span>
+<span class="org-document-info-keyword">#+DATE:</span><span class="comment">     </span><span class="org-document-info">2012-04-22 &#26085;</span>
+<span class="org-meta-line">#+DESCRIPTION:mysql&#21387;&#21147;&#27979;&#35797; &#23454;&#25112;
+#+KEYWORDS: @Mysql @DB
+#+OPTIONS:   H:2 num:nil toc:t \n:t @:t ::t |:t ^:nil -:t f:t *:t &lt;:t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil
+#+FILETAGS:@DB @Mysql @SQL
+</span>&#20851;&#20110;mysql&#30340;&#21387;&#21147;&#27979;&#35797;&#24037;&#20855;mysqlslap&#29992;&#27861;&#22312;<span class="org-link">&#36825;&#37324;</span>.
+&#24314;&#34920;&#21450;&#23384;&#35832;&#36807;&#31243;&#30340;&#35821;&#21477; create_table.sql
+mysqlslap &#26377;--create&#21442;&#25968;
+--create ="&#29992;&#20110;&#29983;&#25104;&#19968;&#20010;&#34920;&#65292;"&#21518;&#32490;&#30340;&#26597;&#35810;
+--query &#29992;&#36825;&#20010;&#34920;&#20570;&#27979;&#35797;,&#36825;&#37324;&#19968;&#33324;&#26159;insert ,&#25110;select &#25110;update &#35821;&#21477;
+--create &#21487;&#20197;&#26159;&#20960;&#26465;sql&#35821;&#21477; &#65292;&#20063;&#21487;&#20197;&#26159;&#19968;&#20010;&#25991;&#20214;&#21517;&#65292;&#37324;&#38754;&#20889;&#28385;sql&#35821;&#21477;
+&#20294;&#26159;&#36825;&#26465;&#35821;&#21477;&#22826;&#38271;&#65292;&#25918;&#22312;&#19968;&#20010;&#25991;&#20214;&#37324;,&#21448;&#25552;&#31034;$$&#20998;&#38548;&#31526;&#26377;&#38382;&#39064;&#65292;&#25152;&#20197;&#21482;&#22909;&#25163;&#21160;&#24314;&#34920;
+mysqlslap
+<span class="org-block-begin-line">#+BEGIN_SRC sql
+</span><span class="org-block">  create database if not exists mysqlslap ;
+  use mysqlslap;
+  drop table if exists tbl_test;
+  CREATE TABLE `tbl_test` (
+     `id` int(11) NOT NULL AUTO_INCREMENT,
+     `onOffType` int(11) DEFAULT NULL,
+     `accountId` int(11) DEFAULT NULL,
+     `accountType` int(11) DEFAULT NULL,
+     `playerId` int(11) DEFAULT NULL,
+     `headHeroId` int(11) DEFAULT NULL,
+     `playerLevel` int(11) DEFAULT NULL,
+     `playerName` varchar(255) DEFAULT NULL,
+     `logTime` datetime DEFAULT NULL,
+     `clientVersion` varchar(255) DEFAULT NULL,
+     `clientType` varchar(255) DEFAULT NULL,
+     `issuers` varchar(255) DEFAULT NULL,
+     `flashPlayerVersion` int(11) DEFAULT NULL,
+     `connectType` int(11) DEFAULT NULL,
+     `gameServerName` varchar(255) DEFAULT NULL,
+     `ipAddr` varchar(255) DEFAULT NULL,
+     PRIMARY KEY (`id`)
+   ) engine=myisam;
+
+   DELIMITER $$
+
+  drop procedure if exists `insert_tbl_test`$$
+
+  create procedure `insert_tbl_test`(
+  IN inaccountId int(11),/**/
+  IN inaccountType int(11),/**/
+  IN inplayerId int(11),/**/
+  IN inheadHeroId int(11),/**/
+  IN inplayerLevel int(11),/**/
+  IN inplayerName varchar(255),/**/
+  IN inlogTime datetime,/**/
+  IN inclientVersion varchar(255),/**/
+  IN inclientType varchar(255),/**/
+  IN inissuers varchar(255),/**/
+  IN inflashPlayerVersion int(11),/**/
+  IN inconnectType int(11),/**/
+  IN ingameServerName varchar(255),/**/
+  IN inipAddr varchar(255),/**/
+  IN inonOffType int(11) /**/
+  )
+  BEGIN
+  insert into `tbl_test`(
+  `accountId`, /**/
+  `accountType`, /**/
+  `playerId`, /**/
+  `headHeroId`, /**/
+  `playerLevel`, /**/
+  `playerName`, /**/
+  `logTime`, /**/
+  `clientVersion`, /**/
+  `clientType`, /**/
+  `issuers`, /**/
+  `flashPlayerVersion`, /**/
+  `connectType`, /**/
+  `gameServerName`, /**/
+  `ipAddr`, /**/
+  `onOffType` /**/
+  ) values(
+  inaccountId,/**/
+  inaccountType,/**/
+  inplayerId,/**/
+  inheadHeroId,/**/
+  inplayerLevel,/**/
+  inplayerName,/**/
+  inlogTime,/**/
+  inclientVersion,/**/
+  inclientType,/**/
+  inissuers,/**/
+  inflashPlayerVersion,/**/
+  inconnectType,/**/
+  ingameServerName,/**/
+  inipAddr,/**/
+   inonOffType /**/
+  );
+  END$$
+  DELIMITER ;
+
+</span><span class="org-block-end-line">#+END_SRC
+</span>
+&#21521;&#34920;&#20013;&#25554;&#20837;&#29992;&#30340;sql
+<span class="org-block-begin-line">#+BEGIN_SRC sql
+</span><span class="org-block">  /* &#20351;&#29992;&#23384;&#20648;&#36807;&#31243; */
+  call insert_tbl_test(1,1,1,1,1,'name','1989-01-26','ver','t','dd',1,1,'name','localhost',1);
+   /* &#25110; */
+   insert into tbl_test(  `accountId`,  `accountType`,  `playerId`,  `headHeroId`,  `playerLevel`,  `playerName`,  `logTime`,  `clientVersion`,  `clientType`,  `issuers`,  `flashPlayerVersion`,  `connectType`,  `gameServerName`,  `ipAddr`,  `onOffType`  ) values(1,1,1,1,1,'name','1989-01-26','ver','t','dd',1,1,'name','localhost',1);
+</span><span class="org-block-end-line">#+END_SRC
+</span>&#27979;&#35797;&#29992;&#35821;&#21477;,&#22312;&#27979;&#35797;&#36825;&#21069;&#35201;&#29992;&#19978;&#38754;create_table.sql&#24314;&#34920;&#21450;&#23384;&#20648;&#36807;&#31243;&#12290;
+<span class="org-block-begin-line">#+BEGIN_SRC sh
+</span><span class="org-block">mysqlslap --query="call insert_tbl_test(1,1,1,1,1,'name','1989-01-26','ver','t','dd',1,1,'name','localhost',1)" --concurrency=50  --number-of-queries 10000 --iterations=3 --engine=myisam -uroot -proot
+</span><span class="org-block-end-line">#+END_SRC
+</span>&#24320;50&#20010;&#36830;&#25509;&#20849;&#25191;&#34892;10000&#27425;&#25554;&#20837;&#25805;&#20316;&#65292;
+&#36827;&#34892;3&#27425;&#27979;&#35797;&#20197;&#20415;&#25968;&#25454;&#24471;&#21040;max&#12289;min&#12289;avg&#20960;&#20010;&#20540;&#65292;&#20934;&#30830;&#19968;&#28857;.
+&#24182;&#19988;&#20998;&#21035;&#27979;&#22312;myisam,ARCHIVE,InnoDB &#24341;&#25806;&#19978;&#30340;&#24046;&#24322;
+&#27979;&#35797;&#32467;&#26524;&#27809;&#22826;&#22823;&#24046;&#21035;
+<span class="org-block-begin-line">#+BEGIN_QUOTE
+</span>mysqlslap --query="call insert_tbl_test(1,1,1,1,1,'name','1989-01-26','ver','t','dd',1,1,'name','localhost',1)" --concurrency=50  --number-of-queries 10000 --iterations=3 --engine=myisam -uroot -proot
+Benchmark
+    Running for engine myisam
+    Average number of seconds to run all queries: 1.528 seconds
+    Minimum number of seconds to run all queries: 1.503 seconds
+    Maximum number of seconds to run all queries: 1.545 seconds
+    Number of clients running queries: 50
+    Average number of queries per client: 200
+
+Benchmark
+    Running for engine ARCHIVE
+    Average number of seconds to run all queries: 1.790 seconds
+    Minimum number of seconds to run all queries: 1.535 seconds
+    Maximum number of seconds to run all queries: 2.289 seconds
+    Number of clients running queries: 50
+    Average number of queries per client: 200
+
+Benchmark
+    Running for engine InnoDB
+    Average number of seconds to run all queries: 1.578 seconds
+    Minimum number of seconds to run all queries: 1.544 seconds
+    Maximum number of seconds to run all queries: 1.625 seconds
+    Number of clients running queries: 50
+    Average number of queries per client: 200<span class="org-meta-line">
+</span><span class="org-block-end-line">#+END_QUOTE
+</span>
+&#19979;&#38754;&#19981;&#20351;&#29992;&#23384;&#20648;&#36807;&#31243;&#65292;&#32780;&#30452;&#25509;&#29992;insert&#35821;&#21477;&#30340;&#25928;&#26524;
+<span class="org-block-begin-line">#+BEGIN_SRC sh
+</span><span class="org-block"> mysqlslap --query="insert into tbl_test(  accountId,  accountType,  playerId,  headHeroId,  playerLevel,  playerName,  logTime,  clientVersion,  clientType,  issuers,  flashPlayerVersion,  connectType,  gameServerName,  ipAddr,  onOffType  ) values(1,1,1,1,1,'name','1989-01-26','ver','t','dd',1,1,'name','localhost',1)" --concurrency=50  --number-of-queries 10000 --iterations=3 --engine=myisam -uroot -proot
+</span><span class="org-block-end-line">#+END_SRC
+</span><span class="org-block-begin-line">#+BEGIN_QUOTE
+</span>Benchmark
+    Running for engine myisam
+    Average number of seconds to run all queries: 1.209 seconds
+    Minimum number of seconds to run all queries: 1.188 seconds
+    Maximum number of seconds to run all queries: 1.234 seconds
+    Number of clients running queries: 50
+    Average number of queries per client: 200
+
+Benchmark
+    Running for engine ARCHIVE
+    Average number of seconds to run all queries: 1.255 seconds
+    Minimum number of seconds to run all queries: 1.178 seconds
+    Maximum number of seconds to run all queries: 1.393 seconds
+    Number of clients running queries: 50
+    Average number of queries per client: 200
+
+Benchmark
+    Running for engine InnoDB
+    Average number of seconds to run all queries: 1.245 seconds
+    Minimum number of seconds to run all queries: 1.241 seconds
+    Maximum number of seconds to run all queries: 1.250 seconds
+    Number of clients running queries: 50
+    Average number of queries per client: 200<span class="org-meta-line">
+</span><span class="org-block-end-line">#+END_QUOTE
+</span>&#21478;&#25105;&#19981;&#35299;&#30340;&#26159;&#30452;&#25509;insert&#31455;&#28982;&#27604;&#20351;&#29992;&#23384;&#20648;&#36807;&#31243;&#24555;&#65292;&#19981;&#30693;&#20309;&#35299;
+
+&#27979;&#35797;&#24320;&#19981;&#21516;&#36830;&#25509;&#25968;&#30340;&#25191;&#34892;&#36895;&#24230;
+<span class="org-block-begin-line">#+BEGIN_SRC sh
+</span><span class="org-block"> mysqlslap --query="insert into tbl_test(  accountId,  accountType,  playerId,  headHeroId,  playerLevel,  playerName,  logTime,  clientVersion,  clientType,  issuers,  flashPlayerVersion,  connectType,  gameServerName,  ipAddr,  onOffType  ) values(1,1,1,1,1,'name','1989-01-26','ver','t','dd',1,1,'name','localhost',1)" --concurrency=5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100  --number-of-queries 10000 --iterations=3 --engine=myisam -uroot -proot
+</span><span class="org-block-end-line">#+END_SRC
+</span><span class="org-block-begin-line">#+BEGIN_QUOTE
+</span>  mysqlslap --query="insert into tbl_test(  accountId,  accountType,  playerId,  headHeroId,  playerLevel,  playerName,  logTime,  clientVersion,  clientType,  issuers,  flashPlayerVersion,  connectType,  gameServerName,  ipAddr,  onOffType  ) values(1,1,1,1,1,'name','1989-01-26','ver','t','dd',1,1,'name','localhost',1)" --concurrency=5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100  --number-of-queries 10000 --iterations=3 --engine=myisam -uroot -proot
+Benchmark
+    Running for engine myisam
+    Average number of seconds to run all queries: 1.758 seconds
+    Minimum number of seconds to run all queries: 1.730 seconds
+    Maximum number of seconds to run all queries: 1.783 seconds
+    Number of clients running queries: 5
+    Average number of queries per client: 2000
+
+Benchmark
+    Running for engine myisam
+    Average number of seconds to run all queries: 1.681 seconds
+    Minimum number of seconds to run all queries: 1.455 seconds
+    Maximum number of seconds to run all queries: 1.819 seconds
+    Number of clients running queries: 10
+    Average number of queries per client: 1000
+
+Benchmark
+    Running for engine myisam
+    Average number of seconds to run all queries: 1.269 seconds
+    Minimum number of seconds to run all queries: 1.230 seconds
+    Maximum number of seconds to run all queries: 1.317 seconds
+    Number of clients running queries: 15
+    Average number of queries per client: 666
+
+Benchmark
+    Running for engine myisam
+    Average number of seconds to run all queries: 1.181 seconds
+    Minimum number of seconds to run all queries: 1.148 seconds
+    Maximum number of seconds to run all queries: 1.202 seconds
+    Number of clients running queries: 20
+    Average number of queries per client: 500
+
+Benchmark
+    Running for engine myisam
+    Average number of seconds to run all queries: 1.245 seconds
+    Minimum number of seconds to run all queries: 1.233 seconds
+    Maximum number of seconds to run all queries: 1.251 seconds
+    Number of clients running queries: 25
+    Average number of queries per client: 400
+
+Benchmark
+    Running for engine myisam
+    Average number of seconds to run all queries: 1.188 seconds
+    Minimum number of seconds to run all queries: 1.174 seconds
+    Maximum number of seconds to run all queries: 1.206 seconds
+    Number of clients running queries: 30
+    Average number of queries per client: 333
+
+Benchmark
+    Running for engine myisam
+    Average number of seconds to run all queries: 1.348 seconds
+    Minimum number of seconds to run all queries: 1.180 seconds
+    Maximum number of seconds to run all queries: 1.452 seconds
+    Number of clients running queries: 35
+    Average number of queries per client: 285
+
+Benchmark
+    Running for engine myisam
+    Average number of seconds to run all queries: 1.193 seconds
+    Minimum number of seconds to run all queries: 1.183 seconds
+    Maximum number of seconds to run all queries: 1.213 seconds
+    Number of clients running queries: 40
+    Average number of queries per client: 250
+
+Benchmark
+    Running for engine myisam
+    Average number of seconds to run all queries: 1.201 seconds
+    Minimum number of seconds to run all queries: 1.192 seconds
+    Maximum number of seconds to run all queries: 1.213 seconds
+    Number of clients running queries: 45
+    Average number of queries per client: 222
+
+Benchmark
+    Running for engine myisam
+    Average number of seconds to run all queries: 1.219 seconds
+    Minimum number of seconds to run all queries: 1.184 seconds
+    Maximum number of seconds to run all queries: 1.276 seconds
+    Number of clients running queries: 50
+    Average number of queries per client: 200
+
+Benchmark
+    Running for engine myisam
+    Average number of seconds to run all queries: 1.200 seconds
+    Minimum number of seconds to run all queries: 1.191 seconds
+    Maximum number of seconds to run all queries: 1.209 seconds
+    Number of clients running queries: 55
+    Average number of queries per client: 181
+
+Benchmark
+    Running for engine myisam
+    Average number of seconds to run all queries: 1.211 seconds
+    Minimum number of seconds to run all queries: 1.192 seconds
+    Maximum number of seconds to run all queries: 1.245 seconds
+    Number of clients running queries: 60
+    Average number of queries per client: 166
+
+Benchmark
+    Running for engine myisam
+    Average number of seconds to run all queries: 1.297 seconds
+    Minimum number of seconds to run all queries: 1.231 seconds
+    Maximum number of seconds to run all queries: 1.412 seconds
+    Number of clients running queries: 65
+    Average number of queries per client: 153
+
+Benchmark
+    Running for engine myisam
+    Average number of seconds to run all queries: 1.459 seconds
+    Minimum number of seconds to run all queries: 1.432 seconds
+    Maximum number of seconds to run all queries: 1.483 seconds
+    Number of clients running queries: 70
+    Average number of queries per client: 142
+
+Benchmark
+    Running for engine myisam
+    Average number of seconds to run all queries: 1.520 seconds
+    Minimum number of seconds to run all queries: 1.487 seconds
+    Maximum number of seconds to run all queries: 1.539 seconds
+    Number of clients running queries: 75
+    Average number of queries per client: 133
+
+Benchmark
+    Running for engine myisam
+    Average number of seconds to run all queries: 1.647 seconds
+    Minimum number of seconds to run all queries: 1.506 seconds
+    Maximum number of seconds to run all queries: 1.876 seconds
+    Number of clients running queries: 80
+    Average number of queries per client: 125
+
+Benchmark
+    Running for engine myisam
+    Average number of seconds to run all queries: 1.519 seconds
+    Minimum number of seconds to run all queries: 1.500 seconds
+    Maximum number of seconds to run all queries: 1.532 seconds
+    Number of clients running queries: 85
+    Average number of queries per client: 117
+
+Benchmark
+    Running for engine myisam
+    Average number of seconds to run all queries: 1.507 seconds
+    Minimum number of seconds to run all queries: 1.491 seconds
+    Maximum number of seconds to run all queries: 1.530 seconds
+    Number of clients running queries: 90
+    Average number of queries per client: 111
+
+Benchmark
+    Running for engine myisam
+    Average number of seconds to run all queries: 1.556 seconds
+    Minimum number of seconds to run all queries: 1.500 seconds
+    Maximum number of seconds to run all queries: 1.661 seconds
+    Number of clients running queries: 95
+    Average number of queries per client: 105
+
+Benchmark
+    Running for engine myisam
+    Average number of seconds to run all queries: 1.521 seconds
+    Minimum number of seconds to run all queries: 1.508 seconds
+    Maximum number of seconds to run all queries: 1.534 seconds
+    Number of clients running queries: 100
+    Average number of queries per client: 100<span class="org-meta-line">
+</span><span class="org-block-end-line">#+END_QUOTE
+</span>&#20174;&#32467;&#26524;&#26469;&#30475;&#65292;20&#36830;&#25509;&#65292;&#36895;&#24230;&#25552;&#21319;&#65292;&#24320;&#21040;70&#20010;&#36830;&#25509;&#26102;&#36895;&#24230;&#19979;&#38534;,&#22823;&#26966;&#22312;40&#24038;&#21491;&#26102;&#36895;&#24230;&#26368;&#22909;&#12290;
+
+<span class="org-block-begin-line">#+BEGIN_SRC sh
+</span><span class="org-block">  mysqlslap --query="insert into tbl_test(  accountId,  accountType,  playerId,  headHeroId,  playerLevel,  playerName,  logTime,  clientVersion,  clientType,  issuers,  flashPlayerVersion,  connectType,  gameServerName,  ipAddr,  onOffType  ) values(1,1,1,1,1,'name','1989-01-26','ver','t','dd',1,1,'name','localhost',1)" --concurrency=5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100  --number-of-queries 10000 --iterations=3 --engine=ARCHIVE -uroot -proot
+</span><span class="org-block-end-line">#+END_SRC
+</span>
+<span class="org-block-begin-line">#+BEGIN_SRC sql
+</span><span class="org-block">  CREATE TABLE `tbl_test` (
+     `id` int(11) NOT NULL AUTO_INCREMENT,
+     `onOffType` int(11) DEFAULT NULL,
+     `accountId` int(11) DEFAULT NULL,
+     `accountType` int(11) DEFAULT NULL,
+     `playerId` int(11) DEFAULT NULL,
+     `headHeroId` int(11) DEFAULT NULL,
+     `playerLevel` int(11) DEFAULT NULL,
+     `playerName` varchar(255) DEFAULT NULL,
+     `logTime` datetime DEFAULT NULL,
+     `clientVersion` varchar(255) DEFAULT NULL,
+     `clientType` varchar(255) DEFAULT NULL,
+     `issuers` varchar(255) DEFAULT NULL,
+     `flashPlayerVersion` int(11) DEFAULT NULL,
+     `connectType` int(11) DEFAULT NULL,
+     `gameServerName` varchar(255) DEFAULT NULL,
+     `ipAddr` varchar(255) DEFAULT NULL,
+     PRIMARY KEY (`id`)
+   ) engine=ARCHIVE;
+</span><span class="org-block-end-line">#+END_SRC
+</span><span class="org-block-begin-line">#+BEGIN_QUOTE
+</span>jixiuf@jf erlang/lib $  mysqlslap --query="insert into tbl_test(  accountId,  accountType,  playerId,  headHeroId,  playerLevel,  playerName,  logTime,  clientVersion,  clientType,  issuers,  flashPlayerVersion,  connectType,  gameServerName,  ipAddr,  onOffType  ) values(1,1,1,1,1,'name','1989-01-26','ver','t','dd',1,1,'name','localhost',1)" --concurrency=5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100  --number-of-queries 10000 --iterations=3 --engine=ARCHIVE -uroot -proot
+Benchmark
+    Running for engine ARCHIVE
+    Average number of seconds to run all queries: 0.894 seconds
+    Minimum number of seconds to run all queries: 0.879 seconds
+    Maximum number of seconds to run all queries: 0.905 seconds
+    Number of clients running queries: 5
+    Average number of queries per client: 2000
+
+Benchmark
+    Running for engine ARCHIVE
+    Average number of seconds to run all queries: 0.813 seconds
+    Minimum number of seconds to run all queries: 0.812 seconds
+    Maximum number of seconds to run all queries: 0.815 seconds
+    Number of clients running queries: 10
+    Average number of queries per client: 1000
+
+Benchmark
+    Running for engine ARCHIVE
+    Average number of seconds to run all queries: 0.784 seconds
+    Minimum number of seconds to run all queries: 0.759 seconds
+    Maximum number of seconds to run all queries: 0.802 seconds
+    Number of clients running queries: 15
+    Average number of queries per client: 666
+
+Benchmark
+    Running for engine ARCHIVE
+    Average number of seconds to run all queries: 0.790 seconds
+    Minimum number of seconds to run all queries: 0.752 seconds
+    Maximum number of seconds to run all queries: 0.852 seconds
+    Number of clients running queries: 20
+    Average number of queries per client: 500
+
+Benchmark
+    Running for engine ARCHIVE
+    Average number of seconds to run all queries: 0.747 seconds
+    Minimum number of seconds to run all queries: 0.736 seconds
+    Maximum number of seconds to run all queries: 0.758 seconds
+    Number of clients running queries: 25
+    Average number of queries per client: 400
+
+Benchmark
+    Running for engine ARCHIVE
+    Average number of seconds to run all queries: 0.728 seconds
+    Minimum number of seconds to run all queries: 0.721 seconds
+    Maximum number of seconds to run all queries: 0.741 seconds
+    Number of clients running queries: 30
+    Average number of queries per client: 333
+
+Benchmark
+    Running for engine ARCHIVE
+    Average number of seconds to run all queries: 0.749 seconds
+    Minimum number of seconds to run all queries: 0.744 seconds
+    Maximum number of seconds to run all queries: 0.761 seconds
+    Number of clients running queries: 35
+    Average number of queries per client: 285
+
+Benchmark
+    Running for engine ARCHIVE
+    Average number of seconds to run all queries: 0.708 seconds
+    Minimum number of seconds to run all queries: 0.691 seconds
+    Maximum number of seconds to run all queries: 0.721 seconds
+    Number of clients running queries: 40
+    Average number of queries per client: 250
+
+Benchmark
+    Running for engine ARCHIVE
+    Average number of seconds to run all queries: 0.688 seconds
+    Minimum number of seconds to run all queries: 0.687 seconds
+    Maximum number of seconds to run all queries: 0.691 seconds
+    Number of clients running queries: 45
+    Average number of queries per client: 222
+
+Benchmark
+    Running for engine ARCHIVE
+    Average number of seconds to run all queries: 0.682 seconds
+    Minimum number of seconds to run all queries: 0.673 seconds
+    Maximum number of seconds to run all queries: 0.688 seconds
+    Number of clients running queries: 50
+    Average number of queries per client: 200
+
+Benchmark
+    Running for engine ARCHIVE
+    Average number of seconds to run all queries: 0.750 seconds
+    Minimum number of seconds to run all queries: 0.673 seconds
+    Maximum number of seconds to run all queries: 0.879 seconds
+    Number of clients running queries: 55
+    Average number of queries per client: 181
+
+Benchmark
+    Running for engine ARCHIVE
+    Average number of seconds to run all queries: 0.825 seconds
+    Minimum number of seconds to run all queries: 0.668 seconds
+    Maximum number of seconds to run all queries: 1.138 seconds
+    Number of clients running queries: 60
+    Average number of queries per client: 166
+
+Benchmark
+    Running for engine ARCHIVE
+    Average number of seconds to run all queries: 0.680 seconds
+    Minimum number of seconds to run all queries: 0.676 seconds
+    Maximum number of seconds to run all queries: 0.686 seconds
+    Number of clients running queries: 65
+    Average number of queries per client: 153
+
+Benchmark
+    Running for engine ARCHIVE
+    Average number of seconds to run all queries: 0.691 seconds
+    Minimum number of seconds to run all queries: 0.690 seconds
+    Maximum number of seconds to run all queries: 0.695 seconds
+    Number of clients running queries: 70
+    Average number of queries per client: 142
+
+Benchmark
+    Running for engine ARCHIVE
+    Average number of seconds to run all queries: 0.723 seconds
+    Minimum number of seconds to run all queries: 0.686 seconds
+    Maximum number of seconds to run all queries: 0.756 seconds
+    Number of clients running queries: 75
+    Average number of queries per client: 133
+
+Benchmark
+    Running for engine ARCHIVE
+    Average number of seconds to run all queries: 0.746 seconds
+    Minimum number of seconds to run all queries: 0.710 seconds
+    Maximum number of seconds to run all queries: 0.799 seconds
+    Number of clients running queries: 80
+    Average number of queries per client: 125
+
+Benchmark
+    Running for engine ARCHIVE
+    Average number of seconds to run all queries: 0.715 seconds
+    Minimum number of seconds to run all queries: 0.707 seconds
+    Maximum number of seconds to run all queries: 0.723 seconds
+    Number of clients running queries: 85
+    Average number of queries per client: 117
+
+Benchmark
+    Running for engine ARCHIVE
+    Average number of seconds to run all queries: 0.737 seconds
+    Minimum number of seconds to run all queries: 0.723 seconds
+    Maximum number of seconds to run all queries: 0.759 seconds
+    Number of clients running queries: 90
+    Average number of queries per client: 111
+
+Benchmark
+    Running for engine ARCHIVE
+    Average number of seconds to run all queries: 0.796 seconds
+    Minimum number of seconds to run all queries: 0.754 seconds
+    Maximum number of seconds to run all queries: 0.859 seconds
+    Number of clients running queries: 95
+    Average number of queries per client: 105
+
+Benchmark
+    Running for engine ARCHIVE
+    Average number of seconds to run all queries: 0.751 seconds
+    Minimum number of seconds to run all queries: 0.738 seconds
+    Maximum number of seconds to run all queries: 0.760 seconds
+    Number of clients running queries: 100
+    Average number of queries per client: 100<span class="org-meta-line">
+</span><span class="org-block-end-line">#+END_QUOTE
+</span>&#24456;&#26126;&#26174;&#20351;&#29992;ARCHIVE&#22312;insert &#26041;&#38754; &#35201;&#27604; myisam &#24555;&#23558;&#36817;&#19968;&#20493;
+&#36830;&#25509;&#25968;&#22312;40~65&#20043;&#38388;&#26102;&#25554;&#20837;&#36895;&#24230;&#36798;&#21040;&#26368;&#22823;
+
+<span class="org-block-begin-line">#+BEGIN_SRC sh
+</span><span class="org-block">  mysqlslap --query="insert into tbl_test(  accountId,  accountType,  playerId,  headHeroId,  playerLevel,  playerName,  logTime,  clientVersion,  clientType,  issuers,  flashPlayerVersion,  connectType,  gameServerName,  ipAddr,  onOffType  ) values(1,1,1,1,1,'name','1989-01-26','ver','t','dd',1,1,'name','localhost',1)" --concurrency=5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100  --number-of-queries 10000 --iterations=3 --engine=InnoDB -uroot -proot
+</span><span class="org-block-end-line">#+END_SRC
+</span>
+<span class="org-block-begin-line">#+BEGIN_SRC sql
+</span><span class="org-block">  CREATE TABLE `tbl_test` (
+     `id` int(11) NOT NULL AUTO_INCREMENT,
+     `onOffType` int(11) DEFAULT NULL,
+     `accountId` int(11) DEFAULT NULL,
+     `accountType` int(11) DEFAULT NULL,
+     `playerId` int(11) DEFAULT NULL,
+     `headHeroId` int(11) DEFAULT NULL,
+     `playerLevel` int(11) DEFAULT NULL,
+     `playerName` varchar(255) DEFAULT NULL,
+     `logTime` datetime DEFAULT NULL,
+     `clientVersion` varchar(255) DEFAULT NULL,
+     `clientType` varchar(255) DEFAULT NULL,
+     `issuers` varchar(255) DEFAULT NULL,
+     `flashPlayerVersion` int(11) DEFAULT NULL,
+     `connectType` int(11) DEFAULT NULL,
+     `gameServerName` varchar(255) DEFAULT NULL,
+     `ipAddr` varchar(255) DEFAULT NULL,
+     PRIMARY KEY (`id`)
+   ) engine= InnoDB;
+</span><span class="org-block-end-line">#+END_SRC
+</span>&#25105;&#19981;&#36148; InnoDB&#30340;&#27979;&#35797;&#25968;&#25454;&#20102;&#65292;&#25105;&#27809;&#32784;&#24515;&#31561;&#20102;, InnoDB&#25903;&#25345;&#20107;&#21153; &#65292;&#20840;&#34920;&#38145;&#65292;&#25554;&#20837;&#22855;&#24930;&#26080;&#27604;&#12290;
+
+&#26368;&#21518;&#34917;&#20805;&#19968;&#28857;&#65306;
+&#29031;&#24120;&#26469;&#35828; &#24314;&#34920;&#35821;&#21477; &#24212;&#35813;&#22312; --create&#35821;&#21477;&#20013;&#30340;&#65292;&#36825;&#26679;&#25351;&#23450; --engine&#21487;&#20197;&#25351;&#23450;&#22810;&#20010;engine,&#20197;&#36887;&#21495;&#38548;&#24320;&#65292;
+&#30452;&#25509;&#20986;&#27979;&#35797;&#32467;&#26524; &#65292;&#19981;&#24517;&#27599;&#27425;&#25163;&#21160;&#24314;&#34920;&#24314;&#34920;.
+</pre>
+  </body>
+</html>

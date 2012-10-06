@@ -1,0 +1,8 @@
+# -*- coding:utf-8 -*-
+
+#+TITLE: Tag: @Mysql
+
+#+LANGUAGE:  zh
+   + [[file:../mysql/benchmark_demo.org][mysql压力测试 实战]]
+   + [[file:../mysql/benchmark.org][mysql压力测试]]
+   + [[file:../erlang/emysql_benchmark.org][emysql 压力测试]]

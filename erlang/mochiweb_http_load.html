@@ -3,12 +3,12 @@
                "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="zh" xml:lang="zh">
 <head>
-<title>一个人的狂欢</title>
+<title>mochiweb 的使用 及 可开tcp连接数的(http长连接) 测试</title>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
-<meta name="title" content="一个人的狂欢"/>
+<meta name="title" content="mochiweb 的使用 及 可开tcp连接数的(http长连接) 测试"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2011-06-04 星期六"/>
-<meta name="author" content="孤峰独秀"/>
+<meta name="generated" content="2012-10-03 21:59:51 CST"/>
+<meta name="author" content="纪秀峰"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
 <style type='text/css'>
@@ -942,15 +942,15 @@ img {
 }
 
     </style>
-<link rel="stylesheet" type="text/css" href="style/emacs.css" />
-<script type='text/javascript' src='js/emacs.js'> </script>
+<link rel="stylesheet" type="text/css" href="../style/emacs.css" />
+<script type='text/javascript' src='../js/emacs.js'> </script>
 
 </head>
 <body>
 <div id="org-div-home-and-up" style="text-align:right;font-size:70%;white-space:nowrap;">
- <a accesskey="h" href="sitemap.html"> 站点地图 </a>
+ <a accesskey="h" href="../sitemap.html"> 站点地图 </a>
  |
- <a accesskey="H" href="index.html"> 首页 </a>
+ <a accesskey="H" href="../index.html"> 首页 </a>
 </div>
 
 <div id="preamble">
@@ -958,60 +958,187 @@ img {
 </div>
 
 <div id="content">
-<h1 class="title">一个人的狂欢</h1>
+<h1 class="title">mochiweb 的使用 及 可开tcp连接数的(http长连接) 测试</h1>
 
 
-<div id='logo-img' ><a  href='index.html'>▇█▓▒░◕~◕░▒▓█▇</a></div>
+<div id='logo-img' ><a  href='../index.html'>▇█▓▒░◕~◕░▒▓█▇</a></div>
 
 <div id='logo-text'>
   <a href='#' ><span align="left">░◕~◕░</span></a>
 </div>
 
 
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
 <ul>
-<li>首页还未做好，先看<a href="sitemap.html">站点地图</a>吧
-</li>
-<li><a href="about.html">About</a>
-</li>
+<li><a href="#sec-1">测试代码位置</a></li>
+<li><a href="#sec-2">mochiweb 的使用</a></li>
+<li><a href="#sec-3">可开tcp连接数的(http长连接) 测试</a></li>
 </ul>
+</div>
+</div>
+
+<div id="outline-container-1" class="outline-2">
+<h2 id="sec-1">测试代码位置</h2>
+<div class="outline-text-2" id="text-1">
+
+<p>  <a href="https://github.com/jixiuf/helloerlang/tree/master/mochiweb_test">https://github.com/jixiuf/helloerlang/tree/master/mochiweb_test</a>
+</p></div>
+
+</div>
+
+<div id="outline-container-2" class="outline-2">
+<h2 id="sec-2">mochiweb 的使用</h2>
+<div class="outline-text-2" id="text-2">
+
+<ol>
+<li>先得到源码
 
 
+
+<pre class="src src-sh">git clone git://github.com/mochi/mochiweb.git
+</pre>
+
+</li>
+<li>在根目录下make 进行编译
+</li>
+<li>
+
+
+
+<pre class="src src-sh">make app <span class="org-variable-name">PROJECT</span>=mochiweb_test
+</pre>
+
+<p>
+    然后在mochiweb 同级目录下会生成mochiweb_test目录
+    在这个目录下，运行make
+    对这个项目进行一定的准备工作，比如得到它depend 的项目mochiweb(会上网继续下载mochiweb)
+    启动mochiweb ,
+</p>
+
+
+<pre class="src src-sh">./start-dev.sh
+</pre>
+
+<p>
+    然后在浏览器里访问<a href="http://localhost:8080/">http://localhost:8080/</a>
+</p></li>
+</ol>
+
+<p>  mochiweb_test_web.erl 模块是处理具体业务 的模块。
+  比如:
+</p>
+
+
+<pre class="src src-erlang">....
+                <span class="org-keyword">case</span> <span class="org-variable-name">Path</span> <span class="org-keyword">of</span>
+                    <span class="org-string">"time"</span> -&gt;<span class="org-comment-delimiter">%% </span><span class="org-comment">&#26032;&#22686;&#20102; /timer &#36825;&#20010; URL&#65292;&#23427;&#26159;&#19968;&#20010; HTTP Chunked &#30340;&#20363;&#23376;</span>
+                    <span class="org-variable-name">Response</span> = <span class="org-variable-name">Req</span>:<span class="org-type">ok</span>({<span class="org-string">"text/plain"</span>, chunked}),
+                    <span class="org-builtin">time</span>(<span class="org-variable-name">Response</span>);
+                    <span class="org-variable-name">_</span> -&gt;
+                        <span class="org-variable-name">Req</span>:<span class="org-type">serve_file</span>(<span class="org-variable-name">Path</span>, <span class="org-variable-name">DocRoot</span>)
+                <span class="org-keyword">end</span>;
+...
+
+
+<span class="org-comment-delimiter">%% </span><span class="org-comment">&#25171;&#21360;&#24403;&#21069;&#26102;&#38388;&#65292;&#38388;&#38548;&#19968;&#31186;&#65292;&#20877;&#22312;&#24050;&#32463;&#25171;&#24320;&#30340; http &#36830;&#25509;&#20043;&#19978;&#65292;&#20877;&#27425;&#25171;&#21360;&#65292;&#36825;&#20063;&#23601;&#26159;&#25152;&#35859; HTTP&#38271;&#36830;&#25509;/ServerPush &#30340;&#19968;&#31181;</span>
+<span class="org-function-name">time</span>(<span class="org-variable-name">Resp</span>)-&gt;
+    <span class="org-variable-name">Resp</span>:<span class="org-type">write_chunk</span>(<span class="org-type">io_lib</span>:<span class="org-type">format</span>(<span class="org-string">"The time is: ~p~n"</span>,
+                                   [<span class="org-type">calendar</span>:<span class="org-type">local_time</span>()])),
+    <span class="org-type">timer</span>:<span class="org-type">sleep</span>(1000),
+    <span class="org-builtin">time</span>(<span class="org-variable-name">Resp</span>)        .
+</pre>
+
+<p>
+  当访问<a href="http://localhost:8080/time">http://localhost:8080/time</a> 时,调用 time(Resp )方法进行处理,变是一种长
+  连接
+在对 src/目录下的erl 文件进行编辑后，运行make 命令，在
+        ./start-dev.sh启动模式下，会自动加载编译的文件，只需要在浏览器中刷新即
+        可
+</p>
+
+</div>
+
+</div>
+
+<div id="outline-container-3" class="outline-2">
+<h2 id="sec-3">可开tcp连接数的(http长连接) 测试</h2>
+<div class="outline-text-2" id="text-3">
+
+<p>  参考了<a href="http://www.metabrew.com/article/a-million-user-comet-application-with-mochiweb-part-1">http://www.metabrew.com/article/a-million-user-comet-application-with-mochiweb-part-1</a>
+  tcp_load_test.erl
+</p>
+
+
+<pre class="src src-erlang"><span class="org-comment-delimiter">%% </span><span class="org-comment">tcp_load_test:start(10000).</span>
+<span class="org-comment-delimiter">%%</span><span class="org-comment">&#25110;</span>
+<span class="org-comment-delimiter">%% </span><span class="org-comment">tcp_load_test:start("http://localhost:8080/time",10000).</span>
+<span class="org-comment-delimiter">%% </span><span class="org-comment">&#23454;&#26159;&#38469;&#35775;&#38382;</span>
+<span class="org-comment-delimiter">%% </span><span class="org-comment">http://localhost:8080/time?id=1</span>
+<span class="org-comment-delimiter">%% </span><span class="org-comment">...</span>
+<span class="org-comment-delimiter">%% </span><span class="org-comment">http://localhost:8080/time?id=10000</span>
+</pre>
+
+<p>
+  结果似乎是连接达到4000的时候，cpu 占用率已经极大，响应变慢
+  达到4900时，测试用的客户端，因
+</p>
+
+
+<pre class="src src-sh">eheap_alloc: Cannot allocate 583848200 bytes of memory (of type <span class="org-string">"heap"</span>)<span class="org-builtin">.</span>
+</pre>
+
+<p>
+  退出,
+  客户端的cpu 似乎比mochiweb服务器的占用率大，故，若非单机测试，结果或许会好一
+  些.
+结果以下面格式在客户端显示出来
+</p>
+
+
+<pre class="src src-sh"> {Active, Closed, Chunks}
+{&#27963;&#21160;&#36830;&#25509;&#25968;&#65292;&#20851;&#38381;&#30340;&#36830;&#25509;&#25968;(&#27979;&#35797;&#36807;&#31243;&#20013;&#22987;&#32456;&#20026;0),&#30001;&#26381;&#21153;&#31471;&#31471;&#21457;&#36865;&#30340;chunks&#24635;&#25968;}
+
+</pre>
 
 
 <div id='my-src'>
-<div id='org-src'><a href='src/index.org'>src</a></div>
-<div id='htmlized-src'><a href='htmlized-src/index.org.html'>htmlized-src</a></div>
+<div id='org-src'><a href='../src/erlang/mochiweb_http_load.org'>src</a></div>
+<div id='htmlized-src'><a href='../htmlized-src/erlang/mochiweb_http_load.org.html'>htmlized-src</a></div>
 </div>
 <div id='tags'><span id='tags-title'>Tags:</span><br />
 <p>
-    <a href="tags/@SVN.html">@SVN</a>
-    <a href="tags/@perl.html">@perl</a>
-    <a href="tags/@Java.html">@Java</a>
-    <a href="tags/@Mysql.html">@Mysql</a>
-    <a href="tags/@Erlang.html">@Erlang</a>
-    <a href="tags/@SQL.html">@SQL</a>
-    <a href="tags/@DB.html">@DB</a>
-    <a href="tags/@Oracle.html">@Oracle</a>
-    <a href="tags/@Ediff.html">@Ediff</a>
-    <a href="tags/@Git.html">@Git</a>
-    <a href="tags/@Cedet.html">@Cedet</a>
-    <a href="tags/@C-C++.html">@C-C++</a>
-    <a href="tags/@Daily.html">@Daily</a>
-    <a href="tags/@Eclipse.html">@Eclipse</a>
-    <a href="tags/@AutoHotKey.html">@AutoHotKey</a>
-    <a href="tags/@Windows.html">@Windows</a>
-    <a href="tags/@Linux.html">@Linux</a>
-    <a href="tags/@C.html">@C</a>
-    <a href="tags/@Emacs.html">@Emacs</a>
+    <a href="../tags/@SVN.html">@SVN</a>
+    <a href="../tags/@perl.html">@perl</a>
+    <a href="../tags/@Java.html">@Java</a>
+    <a href="../tags/@Mysql.html">@Mysql</a>
+    <a href="../tags/@Erlang.html">@Erlang</a>
+    <a href="../tags/@SQL.html">@SQL</a>
+    <a href="../tags/@DB.html">@DB</a>
+    <a href="../tags/@Oracle.html">@Oracle</a>
+    <a href="../tags/@Ediff.html">@Ediff</a>
+    <a href="../tags/@Git.html">@Git</a>
+    <a href="../tags/@Cedet.html">@Cedet</a>
+    <a href="../tags/@C-C++.html">@C-C++</a>
+    <a href="../tags/@Daily.html">@Daily</a>
+    <a href="../tags/@Eclipse.html">@Eclipse</a>
+    <a href="../tags/@AutoHotKey.html">@AutoHotKey</a>
+    <a href="../tags/@Windows.html">@Windows</a>
+    <a href="../tags/@Linux.html">@Linux</a>
+    <a href="../tags/@C.html">@C</a>
+    <a href="../tags/@Emacs.html">@Emacs</a>
 </p>
 
 
 </div>
 </div>
+</div>
+</div>
 
 <div id="postamble">
-<p class="date">Date: 2011-06-04 星期六</p>
-<p class="author">Author: 孤峰独秀</p>
+<p class="date">Date: 2012-10-03 21:59:51 CST</p>
+<p class="author">Author: 纪秀峰</p>
 <p class="creator">Org version 7.8.03 with Emacs version 24</p>
 
 

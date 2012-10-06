@@ -1,0 +1,14 @@
+# -*- coding:utf-8 -*-
+#+LANGUAGE:  zh
+#+TITLE:     todo.org
+#+AUTHOR:    纪秀峰
+#+EMAIL:     jixiuf@gmail.com
+#+DATE:     2012-02-27 一
+#+DESCRIPTION:todo.org
+#+KEYWORDS: 
+#+OPTIONS:   H:2 num:nil toc:t \n:t @:t ::t |:t ^:nil -:t f:t *:t <:t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil 
+#+FILETAGS: 
+* Tasks
+** TODO 二个月内，拉开腿(五一时验收)
+   [2012-03-06 二]

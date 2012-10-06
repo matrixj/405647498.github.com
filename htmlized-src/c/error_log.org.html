@@ -1,0 +1,106 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<!-- Created by htmlize-1.34 in css mode. -->
+<html>
+  <head>
+    <title>error_log.org</title>
+    <style type="text/css">
+    <!--
+      body {
+        color: #F8F8F8;
+        background-color: #0C1021;
+      }
+      .comment {
+        /* font-lock-comment-face */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-block {
+        /* org-block */
+        color: #b3b3b3;
+      }
+      .org-block-begin-line {
+        /* org-block-begin-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-block-end-line {
+        /* org-block-end-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-document-info {
+        /* org-document-info */
+        color: #afeeee;
+      }
+      .org-document-info-keyword {
+        /* org-document-info-keyword */
+        color: #b3b3b3;
+      }
+      .org-document-title {
+        /* org-document-title */
+        color: #afeeee;
+        font-size: 144%;
+        font-weight: bold;
+      }
+      .org-meta-line {
+        /* org-meta-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+
+      a {
+        color: inherit;
+        background-color: inherit;
+        font: inherit;
+        text-decoration: inherit;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+    -->
+    </style>
+  </head>
+  <body>
+    <pre>
+<span class="comment"># -*- coding:utf-8 -*-</span>
+<span class="org-meta-line">#+LANGUAGE:  zh
+</span><span class="org-document-info-keyword">#+TITLE:</span><span class="comment">     </span><span class="org-document-title">&#21487;&#21464;&#21442;&#25968;&#23454;&#29616;&#30340;error &#26085;&#24535;&#20989;&#25968;</span>
+<span class="org-document-info-keyword">#+AUTHOR:</span><span class="comment">    </span><span class="org-document-info">&#32426;&#31168;&#23792;</span>
+<span class="org-document-info-keyword">#+EMAIL:</span><span class="comment">     </span><span class="org-document-info">jixiuf@gmail.com</span>
+<span class="org-document-info-keyword">#+DATE:</span><span class="comment">     </span><span class="org-document-info">2011-10-22 &#20845;</span>
+<span class="org-meta-line">#+DESCRIPTION:&#21487;&#21464;&#21442;&#25968;&#23454;&#29616;&#30340;error &#26085;&#24535;&#20989;&#25968;
+#+KEYWORDS: c 
+#+OPTIONS:   H:2 num:nil toc:t \n:t @:t ::t |:t ^:t -:t f:t *:t &lt;:t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil 
+#+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
+#+EXPORT_SELECT_TAGS: export
+#+EXPORT_EXCLUDE_TAGS: noexport
+#+FILETAGS: @C 
+</span>
+<span class="org-block-begin-line">#+begin_src c
+</span><span class="org-block">//file name : error.c
+//created at: 2011&#24180;10&#26376;22&#26085; &#26143;&#26399;&#20845; 22&#26102;42&#20998;38&#31186;
+//author:  &#32426;&#31168;&#23792;
+
+#include &lt;stdio.h&gt;
+#include &lt;stdarg.h&gt;
+
+int error(const char *format,...){
+  va_list arg;
+  va_start(arg,format);
+  fprintf(stderr,"Error:");
+  vfprintf(stderr,format,arg);  /* &#27880;&#24847;&#36825;&#37324;&#29992;&#30340;&#26159;vfprintf ,&#32780;&#19981;&#26159;printf */
+  fprintf(stderr,"\n");
+
+  va_end(arg);
+  return 0;
+}
+int main(int argc, char *argv[]){
+    error("[%s]:[%s]this is a error log message","2011","10");
+    error("[%s]:[%s]this is a error log message","2011","10");
+  return 0;
+}
+</span><span class="org-block-end-line">#+end_src
+</span></pre>
+  </body>
+</html>

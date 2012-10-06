@@ -1,0 +1,166 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<!-- Created by htmlize-1.34 in css mode. -->
+<html>
+  <head>
+    <title>catch.org</title>
+    <style type="text/css">
+    <!--
+      body {
+        color: #F8F8F8;
+        background-color: #0C1021;
+      }
+      .comment {
+        /* font-lock-comment-face */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-block {
+        /* org-block */
+        color: #b3b3b3;
+      }
+      .org-block-begin-line {
+        /* org-block-begin-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-block-end-line {
+        /* org-block-end-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-document-info {
+        /* org-document-info */
+        color: #afeeee;
+      }
+      .org-document-info-keyword {
+        /* org-document-info-keyword */
+        color: #b3b3b3;
+      }
+      .org-document-title {
+        /* org-document-title */
+        color: #afeeee;
+        font-size: 144%;
+        font-weight: bold;
+      }
+      .org-meta-line {
+        /* org-meta-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+
+      a {
+        color: inherit;
+        background-color: inherit;
+        font: inherit;
+        text-decoration: inherit;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+    -->
+    </style>
+  </head>
+  <body>
+    <pre>
+<span class="comment"># -*- coding:utf-8 -*-</span>
+<span class="org-meta-line">#+LANGUAGE:  zh
+</span><span class="org-document-info-keyword">#+TITLE:</span><span class="comment">     </span><span class="org-document-title">catch ,throw ,&#24322;&#24120;&#22788;&#29702;</span>
+<span class="org-document-info-keyword">#+AUTHOR:</span><span class="comment">    </span><span class="org-document-info">&#32426;&#31168;&#23792;</span>
+<span class="org-document-info-keyword">#+EMAIL:</span><span class="comment">     </span><span class="org-document-info">jixiuf@gmail.com</span>
+<span class="org-document-info-keyword">#+DATE:</span><span class="comment">     </span><span class="org-document-info">2011-11-13 &#26085;</span>
+<span class="org-meta-line">#+DESCRIPTION:catch ,throw ,&#24322;&#24120;&#22788;&#29702;
+#+KEYWORDS: erlang
+#+OPTIONS:   H:2 num:nil toc:t \n:t @:t ::t |:t ^:t -:t f:t *:t &lt;:t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil
+#+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
+#+EXPORT_SELECT_TAGS: export
+#+EXPORT_EXCLUDE_TAGS: noexport
+#+FILETAGS: @Erlang
+</span><span class="org-block-begin-line">#+begin_src erlang
+</span><span class="org-block">  -module(foo).
+  -export([foo/1,demo/1]).
+
+
+
+  foo(1) -&gt;
+      hello;
+  foo(2) -&gt;
+      throw({myerror, abc});
+  foo(3) -&gt;
+      tuple_to_list(a);
+  foo(4) -&gt;
+      exit({myExit, 222}).
+
+  demo(X)-&gt;
+      case  catch foo(X) of
+          {myerror, abc} -&gt;
+              when2error;
+          {'EXIT',What} -&gt;
+              {i_catch_this_error ,What};
+          Other -&gt;
+              Other
+      end.
+
+  %% 24&gt; foo:demo(4).
+  %% {i_catch_this_error,{myExit,222}}
+
+  %% 25&gt; foo:demo(3).
+  %% {i_catch_this_error,{badarg,[{foo,foo,1},
+  %%                              {foo,demo,1},
+  %%                              {erl_eval,do_apply,5},
+  %%                              {shell,exprs,7},
+  %%                              {shell,eval_exprs,7},
+  %%                              {shell,eval_loop,3}]}}
+  %% 26&gt;
+</span><span class="org-block-end-line">#+end_src
+</span>
+
+<span class="org-block-begin-line">#+begin_src erlang
+</span><span class="org-block">-module(a).
+-compile([export_all]).
+
+t(F)-&gt;
+    try F() of
+        _ -&gt; ok
+    catch
+        T -&gt; {throw,caughted, T};
+        exit:custom_exit -&gt; {exit,caughted ,custom_exit};
+        exit:Exit -&gt;{exit,caughted ,Exit};
+        error:custom_error -&gt;{error, caughted,custom_error};
+        error:Error -&gt;{error, caughted,Error}
+    end.
+
+%% a:t(fun()  -&gt; throw(msg) end).
+%% a:t(fun()  -&gt; error(msg) end).
+%% a:t(fun()  -&gt; exit(custom_exit) end).
+%% a:t(fun()  -&gt; exit(msg) end).
+%% a:t(fun()  -&gt; exit(custom_error) end).
+%% a:t(fun()  -&gt; list:addddddd(ele) end).
+
+%% after == finally in java
+t2(F)-&gt;
+    try F() of
+        _ -&gt; ok
+    catch
+        T -&gt; {throw,caughted, T};
+        exit:Exit -&gt;{exit,caughted ,Exit};
+        error:Error -&gt;{error, caughted,Error}
+    after
+        io:format("this will be execute anyway like 'finally' ~n",[])
+    end.
+
+%% of &#35821;&#21477;&#21487;&#20197;&#30465;&#30053;
+
+t2(F)-&gt;
+    try F()
+    catch
+        T -&gt; {throw,caughted, T};
+        exit:Exit -&gt;{exit,caughted ,Exit};
+        error:Error -&gt;{error, caughted,Error}
+    after
+        io:format("this will be execute anyway like 'finally' ~n",[])
+    end.
+</span><span class="org-block-end-line">#+end_src
+</span></pre>
+  </body>
+</html>

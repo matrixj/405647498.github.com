@@ -1,0 +1,187 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<!-- Created by htmlize-1.34 in css mode. -->
+<html>
+  <head>
+    <title>open-with.org</title>
+    <style type="text/css">
+    <!--
+      body {
+        color: #F8F8F8;
+        background-color: #0C1021;
+      }
+      .comment {
+        /* font-lock-comment-face */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-block {
+        /* org-block */
+        color: #b3b3b3;
+      }
+      .org-block-begin-line {
+        /* org-block-begin-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-block-end-line {
+        /* org-block-end-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-document-info {
+        /* org-document-info */
+        color: #afeeee;
+      }
+      .org-document-info-keyword {
+        /* org-document-info-keyword */
+        color: #b3b3b3;
+      }
+      .org-document-title {
+        /* org-document-title */
+        color: #afeeee;
+        font-size: 144%;
+        font-weight: bold;
+      }
+      .org-meta-line {
+        /* org-meta-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+
+      a {
+        color: inherit;
+        background-color: inherit;
+        font: inherit;
+        text-decoration: inherit;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+    -->
+    </style>
+  </head>
+  <body>
+    <pre>
+<span class="comment"># -*- coding:utf-8 -*-</span>
+<span class="org-meta-line">#+LANGUAGE:  zh
+</span><span class="org-document-info-keyword">#+TITLE:</span><span class="comment">     </span><span class="org-document-title">Emacs&#30340;&#25554;&#20214;openwith.el</span>
+<span class="org-document-info-keyword">#+AUTHOR:</span><span class="comment">    </span><span class="org-document-info">&#23396;&#23792;&#29420;&#31168;</span>
+<span class="org-document-info-keyword">#+EMAIL:</span><span class="comment">     </span><span class="org-document-info">jixiuf@gmail.com</span>
+<span class="org-document-info-keyword">#+DATE:</span><span class="comment">     </span><span class="org-document-info">2011-07-08 &#20116;</span>
+<span class="org-meta-line">#+DESCRIPTION:Emacs&#30340;&#25554;&#20214;open-with.el
+#+KEYWORDS: emacs open with 
+#+OPTIONS:   H:2 num:nil toc:t \n:t @:t ::t |:t ^:t -:t f:t *:t &lt;:t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil 
+#+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
+#+FILETAGS: @Emacs
+</span>
+&#40664;&#35748;&#24773;&#20917;&#19979;&#65292;&#24403;&#20320;&#29992;Emacs&#20013;&#30340;`C-xC-f' &#25171;&#24320;&#25991;&#20214;&#26102;&#65292;&#19981;&#35770;&#23427;&#26159;&#20160;&#20040;&#31867;&#22411;&#30340;&#25991;&#20214;&#65292;&#37117;&#20250;
+&#20351;&#29992;emacs&#25171;&#24320;&#12290;&#20294;&#26377;&#20123;&#26102;&#20505;&#24076;&#26395;&#36935;&#21040;avi &#25991;&#20214;&#26102;&#20351;&#29992;&#22806;&#37096;&#25773;&#25918;&#22120;&#25171;&#24320;&#65292;&#32780;&#38750;emacs&#25152;&#20197;
+emacswiki&#19978;&#26377;&#20154;&#25552;&#20379;&#20102;openwith.el &#25554;&#20214;&#12290;&#29992;&#26469;&#23454;&#29616;&#23545;&#20110;&#19981;&#21516;&#21518;&#32512;&#30340;&#25991;&#20214;&#21487;&#20197;&#35843;&#29992;&#19981;
+&#21516;&#30340;&#21629;&#20196;&#26469;&#25171;&#24320;.&#22240;&#20026;&#25105;&#29992;Linux&#21450;Windows&#20004;&#20010;&#31995;&#32479;&#25152;&#20197;&#37197;&#32622;&#25991;&#20214;&#20998;&#25104;&#20102;&#20004;&#22871;&#12290;
+&#22312;Windows &#19978;&#65292;&#21516;&#26102;&#29992;&#21040;&#20102;w32-browser.el w32-shell-execute.el&#31561;&#25554;&#20214;&#12290;
+
+<span class="org-block-begin-line">#+begin_src emacs-lisp
+</span><span class="org-block">;;  openwith ,&#22806;&#37096;&#31243;&#24207;
+
+;;&#30452;&#25509;&#29992;&#27491;&#24120;&#30340;&#26041;&#24335;&#25171;&#24320;&#30456;&#24212;&#30340;&#25991;&#20214;,openwith&#20250;&#33258;&#21160;&#20570;&#22788;&#29702;
+;;`C-xC-f'&#21363;&#21487;
+(when (eq system-type 'windows-nt)
+  (require'w32-shell-execute)
+  )
+(require 'openwith)
+(openwith-mode t)
+(when (eq system-type 'gnu/linux)
+  (setq openwith-associations
+        '(("\\.pdf$" "acroread" (file)) ("\\.mp3$" "mplayer" (file) )
+          ("\\.mov\\|\\.RM$\\|\\.RMVB$\\|\\.avi$\\|\\.AVI$\\|\\.flv$\\|\\.mp4\\|\\.mkv$\\|\\.rmvb$" "mplayer" (file) )
+;;          ("\\.jpe?g$\\|\\.png$\\|\\.bmp\\|\\.gif$" "gpicview" (file))
+          ("\\.CHM$\\|\\.chm$" "chmsee"  (file) )
+          )
+        )
+  )
+(when (eq system-type 'windows-nt)
+  ;;windows &#19978;&#20351;&#29992;w32-shell-execute &#35843;&#29992;&#31995;&#32479;&#30340;&#30456;&#24212;&#31243;&#24207;&#25171;&#24320;
+  (setq openwith-associations
+        '(("\\.pdf$" "open" (file)) ("\\.mp3$" "open" (file) )
+          ("\\.mov\\|\\.RM$\\|\\.RMVB$\\|\\.avi$\\|\\.AVI$\\|\\.flv$\\|\\.mp4\\|\\.mkv$\\|\\.rmvb$" "open" (file) )
+          ("\\.jpe?g$\\|\\.png$\\|\\.bmp\\|\\.gif$" "open" (file))
+          ("\\.CHM$\\|\\.chm$" "open"  (file) )
+          )
+        )
+  )
+
+;;&#40664;&#35748;&#24773;&#20917;&#19979;&#65292;return &#21363;&#21487;&#20197;&#29992;`open-with'&#23545;&#29305;&#23450;&#21518;&#32512;&#30340;&#25991;&#20214;&#20351;&#29992;&#30456;&#24212;&#30340;&#31243;&#24207;&#25110;
+;;emacs mode&#25171;&#24320;&#65292;&#20294;&#26377;&#26102;&#20505;&#24819;&#25552;&#20379;&#31532;&#20108;&#31181;&#25171;&#24320;&#30340;&#26041;&#24335; &#12290;&#27604;&#22914;&#40664;&#35748;&#23545;&#20110;html&#25991;&#20214;&#65292;&#25105;
+;;&#20250;&#29992;emacs&#20013;&#30340;nxml-mode&#25171;&#24320;&#65292;&#20294;&#26377;&#26102;&#20063;&#24819;&#22312;firefox&#20013;&#27983;&#35272;&#23427;&#65292;&#20110;&#26159;return &#20351;&#29992;
+;;nxml-mode&#65292;&#32780;C-RET&#21017;&#20351;&#29992;firefox&#36827;&#34892;&#25171;&#24320;
+;;&#27880;&#24847;&#65292;&#25105;&#36825;&#37324;&#23545;html&#20570;&#20102;&#29305;&#27530;&#22788;&#29702;&#65292;&#24403;&#25171;&#24320;html&#26102;&#65292;&#28966;&#28857;&#33258;&#21160;&#20999;&#25442;&#21040;firefox&#19978;&#12290;&#20351;&#29992;&#20102;
+;; Awesome &#31383;&#21475;&#31649;&#29702;&#22120;&#30340;&#29305;&#24615;&#12290;&#25152;&#20197;&#26410;&#24517;&#36866;&#21512;&#20320;&#65292;&#20165;&#20570;&#21442;&#32771;&#12290;
+(defun open-with-C-RET-on-linux()
+  "in dired mode ,`C-RET' open file with ..."
+  (interactive)
+  (let ((file-name (dired-get-filename))
+        (openwith-associations
+        '(("\\.pdf$" "acroread" (file)) ("\\.mp3$" "mplayer" (file) )
+          ("\\.RM$\\|\\.RMVB$\\|\\.avi$\\|\\.AVI$\\|\\.flv$\\|\\.mp4\\|\\.mkv$\\|\\.rmvb$" "mplayer" (file) )
+          ("\\.jpe?g$\\|\\.png$\\|\\.bmp\\|\\.gif$" "gpicview" (file))
+          ("\\.CHM$\\|\\.chm$" "chmsee"  (file) ))))
+    (if (string-match "\\.html?$" file-name)
+          (if (&gt; (string-to-number (shell-command-to-string "pgrep firefox | wc -l")) 0)
+              (progn
+                (start-process-shell-command "firefox" nil (format "echo ' show_matched_client({class=\"Firefox\" ,instance=\"Navigator\"},\"www\",\"/usr/bin/firefox %s  \" ,nil)' |awesome-client " file-name))
+                (start-process "firefox-file" nil "firefox" file-name))
+            (start-process-shell-command "firefox" nil (format "echo ' show_matched_client({class=\"Firefox\" ,instance=\"Navigator\"},\"www\",\"/usr/bin/firefox %s  \" ,nil)' |awesome-client " file-name))
+            )
+      (dired-find-file)
+      )
+    )
+  )
+(when (equal system-type 'gnu/linux)
+  (eval-after-load 'dired
+  '(define-key dired-mode-map [(control return)] 'open-with-C-RET-on-linux)))
+
+;; &#20351;&#29992;&#22806;&#37096; &#25991;&#20214;&#31649;&#29702;&#22120; &#25171;&#24320;&#36873;&#20013;&#25991;&#20214;&#25152;&#22312;&#25991;&#20214;&#22841;
+(when (eq system-type 'windows-nt)
+  ;;on windows
+  ;;  C-RET  &#29992;&#31995;&#32479;&#40664;&#35748;&#31243;&#24207;&#25171;&#24320;&#36873;&#20013;&#25991;&#20214;
+  ;; M-RET  open Windows Explorer
+  ;; ^ &#25105;&#25913;&#25104;&#20102;u ,&#21487;&#20197;&#21015;&#20986;&#26681;&#30424;&#31526;
+  ;;
+  (require 'w32-browser)
+  ;; (define-key diredp-w32-drives-mode-map "n" 'next-line)
+  ;; (define-key diredp-w32-drives-mode-map "p" 'previous-line)
+
+  ;;C-M-&lt;RET&gt; &#29992;&#36164;&#28304;&#31649;&#29702;&#22120;&#25171;&#24320;&#24403;&#21069;&#25991;&#20214;&#25152;&#22788;&#30446;&#24405;
+  (defun explorer-open()
+"&#29992;windows &#19978;&#30340;explorer.exe&#25171;&#24320;&#27492;&#25991;&#20214;&#22841;."
+    (interactive)
+    (if (equal major-mode 'dired-mode)
+        (w32explore (expand-file-name (dired-get-filename)))
+      (w32explore (expand-file-name (buffer-file-name)))
+       )
+    )
+  (eval-after-load 'dired
+    '(define-key dired-mode-map (quote [C-M-return]) 'explorer-open))
+  (global-set-key (quote [C-M-return]) 'explorer-open)
+;;  (lambda () (interactive ) (w32explore (expand-file-name default-directory)))
+  )
+
+;; linux `C-M-RET' &#29992;pcmanfm&#25991;&#20214;&#31649;&#29702;&#22120;&#25171;&#24320;&#24403;&#21069;&#30446;&#24405;
+(when (eq system-type 'gnu/linux)
+  (defun open-directory-with-pcmanfm()
+    (interactive)
+    (start-process "pcmanfm"  nil "pcmanfm" (expand-file-name  default-directory)))
+  (eval-after-load 'dired
+    '(define-key dired-mode-map (quote [C-M-return]) 'open-directory-with-pcmanfm))
+  (global-set-key (quote [C-M-return]) (quote open-directory-with-pcmanfm))
+    )
+
+(provide 'joseph-openwith)
+
+
+
+</span><span class="org-block-end-line">#+end_src
+</span></pre>
+  </body>
+</html>

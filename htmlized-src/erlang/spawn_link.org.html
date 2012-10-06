@@ -1,0 +1,195 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<!-- Created by htmlize-1.34 in css mode. -->
+<html>
+  <head>
+    <title>spawn_link.org</title>
+    <style type="text/css">
+    <!--
+      body {
+        color: #F8F8F8;
+        background-color: #0C1021;
+      }
+      .comment {
+        /* font-lock-comment-face */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-block {
+        /* org-block */
+        color: #b3b3b3;
+      }
+      .org-block-begin-line {
+        /* org-block-begin-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-block-end-line {
+        /* org-block-end-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-document-info {
+        /* org-document-info */
+        color: #afeeee;
+      }
+      .org-document-info-keyword {
+        /* org-document-info-keyword */
+        color: #b3b3b3;
+      }
+      .org-document-title {
+        /* org-document-title */
+        color: #afeeee;
+        font-size: 144%;
+        font-weight: bold;
+      }
+      .org-level-1 {
+        /* org-level-1 */
+        color: #FF6400;
+      }
+      .org-meta-line {
+        /* org-meta-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+
+      a {
+        color: inherit;
+        background-color: inherit;
+        font: inherit;
+        text-decoration: inherit;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+    -->
+    </style>
+  </head>
+  <body>
+    <pre>
+<span class="comment"># -*- coding:utf-8 -*-</span>
+<span class="org-meta-line">#+LANGUAGE:  zh
+</span><span class="org-document-info-keyword">#+TITLE:</span><span class="comment">     </span><span class="org-document-title">spawn_link &#36827;&#31243;&#20851;&#32852;</span>
+<span class="org-document-info-keyword">#+AUTHOR:</span><span class="comment">    </span><span class="org-document-info">&#32426;&#31168;&#23792;</span>
+<span class="org-document-info-keyword">#+EMAIL:</span><span class="comment">     </span><span class="org-document-info">jixiuf@gmail.com</span>
+<span class="org-document-info-keyword">#+DATE:</span><span class="comment">     </span><span class="org-document-info">2011-11-13 &#26085;</span>
+<span class="org-meta-line">#+DESCRIPTION:spawn_link.org
+#+KEYWORDS: spawn_link erlang
+#+OPTIONS:   H:2 num:nil toc:t \n:t @:t ::t |:t ^:nil -:t f:t *:t &lt;:t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil
+#+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
+#+EXPORT_SELECT_TAGS: export
+#+EXPORT_EXCLUDE_TAGS: noexport
+#+FILETAGS: @Erlang
+</span>
+&#36827;&#31243;&#21487;&#20197;&#20114;&#30456;&#30417;&#35270;&#12290;&#36825;&#37324;&#35201;&#24341;&#20837;&#20004;&#20010;&#27010;&#24565;&#65292;&#36827;&#31243;&#38142;&#25509;&#21644;EXIT&#20449;&#21495;&#12290;&#22312;&#25191;&#34892;&#26399;&#38388;&#65292;&#36827;&#31243;&#21487;
+&#20197;&#19982;&#20854;&#20182;&#36827;&#31243;&#65288;&#21644;&#31471;&#21475;&#65292;&#21442;&#35265;??&#31456;&#33410;&#65289;&#24314;&#31435;&#38142;&#25509;&#12290;&#24403;&#19968;&#20010;&#36827;&#31243;&#32456;&#27490;&#65288;&#26080;&#35770;&#27491;&#24120;&#25110;&#38750;&#27491;&#24120;
+&#32456;&#27490;&#65289;&#26102;&#65292;&#19968;&#20010;&#29305;&#27530;&#30340;EXIT&#20449;&#21495;&#23558;&#34987;&#21457;&#36865;&#21040;&#25152;&#26377;&#19982;&#21363;&#23558;&#32456;&#27490;&#30340;&#36827;&#31243;&#30456;&#38142;&#25509;&#30340;&#36827;&#31243;&#65288;&#21450;&#31471;
+&#21475;&#65289;&#12290;&#35813;&#20449;&#21495;&#30340;&#26684;&#24335;&#22914;&#19979;&#65306;
+<span class="org-block-begin-line">#+begin_src erlang
+</span><span class="org-block">{'EXIT', Exiting_Process_Id, Reason}
+</span><span class="org-block-end-line">#+end_src
+</span>
+Exiting_Process_Id&#26159;&#21363;&#23558;&#32456;&#27490;&#30340;&#36827;&#31243;&#30340;&#36827;&#31243;&#26631;&#35782;&#65292;Reason&#21487;&#20197;&#26159;&#20219;&#24847;&#30340;Erlang&#39033;&#24335;&#12290;
+&#25910;&#21040;Reason&#19981;&#26159;&#21407;&#23376;&#24335;normal&#30340;EXIT&#20449;&#21495;&#26102;&#65292;&#20449;&#21495;&#25509;&#25910;&#36827;&#31243;&#30340;&#40664;&#35748;&#21160;&#20316;&#26159;&#31435;&#21363;&#32456;&#27490;&#24182;&#65292;
+&#21516;&#26102;&#21521;&#24403;&#21069;&#19982;&#20043;&#38142;&#25509;&#30340;&#36827;&#31243;&#21457;&#36865;EXIT&#20449;&#21495;&#12290;&#40664;&#35748;&#24773;&#20917;&#19979;&#65292;Reason&#20026;&#21407;&#23376;&#24335;normal&#30340;
+EXIT&#20449;&#21495;&#23558;&#34987;&#24573;&#30053;
+
+<span class="org-level-1">* Link/1</span>
+  &#36890;&#36807;&#25191;&#34892;BIF link(Pid)&#20415;&#21487;&#21019;&#24314;&#38142;&#25509;&#12290;&#35843;&#29992;link(Pid)&#26102;&#65292;&#33509;&#35843;&#29992;&#36827;&#31243;&#21644;Pid&#20043;&#38388;&#24050;&#32463;
+  &#23384;&#22312;&#38142;&#25509;&#65292;&#21017;&#19981;&#20250;&#20135;&#29983;&#20219;&#20309;&#24433;&#21709;&#12290;
+<span class="org-level-1">* unlink/1</span>
+  &#36827;&#31243;&#32456;&#27490;&#26102;&#65292;&#23427;&#25152;&#25345;&#26377;&#30340;&#38142;&#25509;&#37117;&#23558;&#34987;&#21024;&#38500;&#12290;&#20063;&#21487;&#20197;&#36890;&#36807;&#25191;&#34892;BIF unlink(Pid)&#26174;&#24335;&#21024;&#38500;
+  &#38142;&#25509;&#12290;&#30001;&#20110;&#25152;&#26377;&#38142;&#25509;&#37117;&#26159;&#21452;&#21521;&#30340;&#65292;&#21024;&#38500;&#36825;&#19968;&#31471;&#21040;&#21478;&#19968;&#31471;&#30340;&#38142;&#25509;&#30340;&#21516;&#26102;&#65292;&#21478;&#19968;&#31471;&#30340;&#21040;&#36825;&#19968;
+  &#31471;&#30340;&#38142;&#25509;&#20063;&#20250;&#34987;&#21024;&#38500;&#12290;&#33509;&#35843;&#29992;&#36827;&#31243;&#21644;Pid&#20043;&#38388;&#21407;&#26412;&#23601;&#27809;&#26377;&#38142;&#25509;&#65292;unlink(Pid)&#19981;&#20250;&#20135;&#29983;&#20219;
+  &#20309;&#24433;&#21709;&#12290;
+<span class="org-level-1">*  spawn_link/3</span>
+   BIF spawn_link/3&#22312;&#21019;&#24314;&#26032;&#36827;&#31243;&#30340;&#21516;&#26102;&#36824;&#20250;&#22312;&#35843;&#29992;&#36827;&#31243;&#21644;&#26032;&#36827;&#31243;&#38388;&#24314;&#31435;&#38142;&#25509;&#12290;
+   &#20854;&#34892;&#20026;&#21487;&#20197;&#23450;&#20041;&#20026;&#65306;
+<span class="org-block-begin-line">   #+begin_src erlang
+</span><span class="org-block">     spawn_link(Module, Function, ArgumentList) -&gt;
+         link(Id = spawn(Module, Function, ArgumentList)),
+         Id.
+</span><span class="org-block-end-line">   #+end_src
+</span>
+<span class="org-block-begin-line">#+begin_src erlang
+</span><span class="org-block">-module(lk).
+-export([start/0,start2/0,hello/0,sleep/1]).
+
+
+start()-&gt;
+    spawn(lk,hello,[]),
+    sleep(5000).
+
+start2()-&gt;
+    spawn_link(lk,hello,[]),
+    sleep(5000).
+
+hello()-&gt;
+    sleep(1000) ,                                %1&#21518;&#31186;&#36864;&#20986;.
+    exit(abc)
+        .
+
+sleep(ms)-&gt;
+    receive
+    after ms -&gt;
+            true
+    end.
+
+%% 40&gt; lk:start(). 5 &#31186;&#38047;&#21518;&#25165;&#36864;&#20986;
+%% true
+
+%% 41&gt; lk:start2(). 1&#31186;&#38047;&#21518;&#21363;&#19968;&#36215;&#36864;&#20986;
+%% ** exception exit: abc
+</span><span class="org-block-end-line">#+end_src
+</span>
+<span class="org-level-1">* ping &#31034;&#20363;</span>
+<span class="org-block-begin-line">#+begin_src erlang
+</span><span class="org-block">-module(ping).
+-compile([export_all]).
+
+ping (0)-&gt;
+    link(whereis(pongRegName)),
+    exit(ping_exit);                            %&#27492;&#26102;&#20250;&#21521;&#19982;&#27492;&#36827;&#31243;&#36827;&#34892;&#20851;&#32852;&#30340;&#36827;&#31243;&#21457;&#20986;'EXIT'&#20449;&#21495;,{'EXIT',self(),Reason}
+ping (N) -&gt;
+    link(whereis(pongRegName)),
+    pongRegName ! {ping,self()},
+    receive
+        _ -&gt;
+            io:format("pong~n" ,[])
+    end,
+    ping(N-1).
+pong()-&gt;
+    process_flag(trap_exit,true),
+    pong1().
+
+pong1()-&gt;
+    receive
+        {ping,F} -&gt;
+            F! pong;
+        {'EXIT',F,Reason} -&gt;                    %&#27880;&#24847;&#26159;&#21333;&#24341;&#21495;,&#19968;&#20010;atom&#19968;&#33324;&#26159;&#23567;&#20889;&#30340;,&#20294;&#20063;&#21487;&#20197;&#26159;&#21333;&#24341;&#21495;&#24341;&#36215;&#26469;&#30340;&#20219;&#24847;&#23383;&#31526;,&#22914;&#22823;&#20889;&#23383;&#27597;
+            io:format("pong found ping exited:~p,[~p].~n" ,[F,Reason]);
+        O -&gt;
+            io:format("other msg in pong process:~p~n" ,[O])
+    end        ,
+    pong1().
+
+start()-&gt;
+    process_flag(trap_exit,true),               %&#20027;&#36827;&#31243;&#20063;&#23545;exit&#20449;&#24687;&#36827;&#34892;&#22788;&#29702;
+    register(pongRegName,spawn(ping,pong,[])),
+    register(pingRegName,spawn(ping,ping,[3])),
+
+    link(whereis(pingRegName)),                 %&#23558;&#20027;&#36827;&#31243;&#19982;ping &#36827;&#31243;&#20851;&#32852;,ping &#36827;&#31243;&#36864;&#20986;&#26102;,&#20027;&#20449;&#24687;&#35201;&#25910;&#21040;&#20854;&#20449;&#21495;
+    receive
+        {'EXIT',F,Reason} -&gt;
+            io:format("main process found ping exit:~p,[~p].~n" ,[F,Reason]);
+        O -&gt;
+            io:format("other msg in main process:~p~n" ,[O])
+    end        .
+%% &#30693;&#35782;&#28857;whereis(RegName) -&gt;processId
+%% link(pid) &#23558;&#24403;&#21069;&#36827;&#31243;&#19982;pid &#36827;&#34892;&#20851;&#32852;
+%% process_flag(trap_exit,true),&#24403;&#21069;&#36827;&#31243;&#25910;&#21040;&#19982;&#24403;&#21069;&#36827;&#31243;&#36827;&#34892;&#20851;&#32852;&#30340;&#36827;&#31243;&#21457;&#20986;&#30340;EXIT&#20449;&#21495;&#26102;,&#24403;&#21069;&#36827;&#31243;&#24182;&#19981;&#33258;&#21160;&#36864;&#20986;,&#32780;&#26159;&#33258;&#34892;&#22788;&#29702;&#27492;&#20449;&#21495;
+</span><span class="org-block-end-line">#+end_src
+</span><span class="org-level-1">* &#36827;&#31243;&#24322;&#24120;&#36864;&#20986;&#26102;,&#24448;&#24448;&#19981;&#26159;&#33258;&#34892;&#22788;&#29702;,&#32780;&#26159;&#37038;&#29238;&#36827;&#31243;&#36827;&#34892;&#22788;&#29702;,&#21363;&#22914;&#26524;&#21457;&#29616;&#23376;&#36827;&#31243;&#36864;&#20986;,&#21487;&#20197;&#37325;&#21551;&#20043;.</span>
+</pre>
+  </body>
+</html>

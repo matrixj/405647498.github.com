@@ -1,0 +1,1483 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+               "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh" xml:lang="zh">
+<head>
+<title>erlang.org</title>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+<meta name="title" content="erlang.org"/>
+<meta name="generator" content="Org-mode"/>
+<meta name="generated" content="2011-11-20 日"/>
+<meta name="author" content="纪秀峰"/>
+<meta name="description" content="erlang.org"/>
+<meta name="keywords" content="erlang"/>
+<style type='text/css'>
+       body {
+    background-color: #E5E5E5;
+	scrollbar-face-color: #DEE3E7;
+	scrollbar-highlight-color: #FFFFFF;
+	scrollbar-shadow-color: #DEE3E7;
+	scrollbar-3dlight-color: #D1D7DC;
+	scrollbar-arrow-color:  #006699;
+	scrollbar-track-color: #EFEFEF;
+	scrollbar-darkshadow-color: #98AAB1;
+    /* background-color: #999966;  */
+    margin: 0em;
+}
+
+h1 {
+    font-size: 2.0em;
+    margin-top: 1.0em;
+    margin-bottom: 0.3em;
+}
+h2 {
+    font-size: 1.5em;
+    margin-top: 2.4em;
+    margin-bottom: 0.3em;
+}
+h3 {
+    font-size: 1.25em;
+    margin-top: 1.25em;
+    margin-bottom: 0.3em;
+}
+
+
+div#content {
+    font-family: Times, serif;
+    border-left: double #333300 3mm;
+    border-right: double #333300 3mm;
+    letter-spacing: 0.075em;
+    line-height: 1.4;
+    margin: 0em auto;
+    padding: 2em;
+    width: 92%;
+    height:100%; 
+    min-height:600px;           /*firefox do'nt support height:100% ,so*/
+ 
+}
+/* #table-of-contents { */
+/* 	font-size: 75%; */
+/* 	line-height: 1.4em; */
+/* 	position: fixed; */
+/* 	display: block; */
+/* 	left: -20px; */
+/* 	top: 5%; */
+/* 	width: 250px; */
+/* 	min-height:60px; */
+/* 	max-height:95%; */
+/* 	overflow:hidden; */
+/*     white-space:nowrap; */
+/* } */
+
+#org-div-home-and-up{
+	position: fixed;
+	display: block;
+	right: 18px;
+	top: 5px;
+	overflow:auto;
+    }
+#org-src{
+	position: fixed;
+	display: block;
+	right: 18px;
+	top: 20px;
+	overflow:hidden;
+    }
+#htmlized-src{
+	position: fixed;
+	display: block;
+	right: 54px;
+	top: 20px;
+	overflow:hidden;
+    }
+#table-of-contents h2 {
+	display:none;
+}
+
+#logo-text{
+	position: fixed;
+	display: block;
+	right: 16px;
+	bottom: 3px;
+	overflow:hidden;
+}
+#logo-img{
+    font-size: 60%;
+	position: fixed;
+	display: block;
+    left: 16px;
+	top: 3px;
+    }
+div#tags {
+	font-size: 75%;
+    text-align:right;
+	/* line-height: 1.4em; */
+	position: fixed;
+	display: block;
+	right: 40px;
+	top: 20%;
+	width: 90px;
+	/* min-height:60px; */
+	max-height:95%;
+	/* overflow:visible; */
+    /* white-space:pre-wrap; */
+}
+
+.title {
+    text-align:center;
+	padding-bottom: 7px;
+	margin-bottom: 20px;
+	border-bottom: 1px solid #222;
+}
+ a:link,a:active,a:visited { color : #006699; } 
+ a:hover		{ text-decoration: underline; color : #DD6900; } 
+
+.todo {color: #990000;}
+.done {color: #006666;}
+.timestamp-kwd {color: #444;}
+.tag {color: #DDD; font-size: 70%; font-weight: 500;}
+
+table {border: none;
+       width:90%;
+      }
+th	{
+	background-color: #006699; 
+}
+td	{
+    padding: .1em .7em .1em .3em;
+	background-color: Gainsboro
+}
+
+
+code {
+font-family: Andale Mono, Courier New, Courier, sans-serif; font-size: 12px; line-height: 14px; color: #0000A0;
+	background-color: #FAFAFA; border: #D1D7DC; border-style: solid;
+	border-left-width: 1px; border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px
+}
+
+/* pre { */
+/* 	border: 1px solid #555; */
+/* 	background: #EEEEEE; */
+/* 	font-size: 9pt; */
+/* 	padding: 1em; */
+/* } */
+pre.src {
+	border: 1px solid #555;
+	background:#0c1021;
+    /* background:#263111; */
+    color: #f7f8c6;
+	font-size: 10pt;
+    width:85%;
+	padding: 0em;
+	margin: 0;
+	width: 700px;
+	float: none;
+	clear: none;
+	line-height: 1.333;
+	text-align:left;
+    
+    /* overflow: scroll; */
+    max-height:500px;           /*IEXPLORE  don't support max-height*/
+    _height:expression(this.scrollHeight > 300 ? "300px" : "auto");
+    min-height:50px;
+    max-width:700px;
+    min-width:700px;
+    overflow-x:auto;
+    overflow-y:auto;
+}
+blockquote {
+	 border: #D1D7DC;
+     border-style: solid;
+	border-left-width: 1px;
+    border-top-width: 1px;
+    border-right-width: 1px;
+    border-bottom-width: 1px
+    
+    color: #444444;
+    line-height: 125%;
+	border: 1px solid #555;
+    background-color: #FAFAFA;    
+    width:95%;
+	padding: 1em;
+	margin: 0;
+	float: none;
+	clear: none;
+	text-align:left;
+    font-style:italic;
+    
+    /* overflow: scroll; */
+    max-height:300px;           /*IEXPLORE  don't support max-height*/
+    _height:expression(this.scrollHeight > 300 ? "300px" : "auto");
+    min-height:20px;
+    max-width:700px;
+    min-width:700px;
+    overflow-x:auto;
+    overflow-y:auto;
+}
+
+.org-function-name {
+    /* font-lock-function-name-face */
+    /* color: #0000ff; */
+     color: #87cefa;
+     font-stretch: normal;
+     text-decoration: none;
+}
+
+.org-keyword {
+    /* font-lock-keyword-face */
+    color: #00ffff;
+    text-decoration: none;
+    /* color: #a020f0; */
+}
+.org-doc
+ { color: #ffa07a;
+   text-decoration: none;
+ }
+p.author{
+    font-size:80%;
+    color:#556b2f;
+    font-style:italic;
+    position:fixed;
+    left:10px;
+    bottom:40px;
+}
+p.date{
+    font-size:80%;
+    color:#556b2f;
+    font-style:italic;
+    position:fixed;
+    left:10px;
+    bottom:0px;
+}
+p.creator{
+    font-size:80%;
+    color:#556b2f;
+    font-style:italic;
+    position:fixed;
+    left:10px;
+    bottom:20px;
+}
+
+img {
+    display:inline;
+	border: none;
+    float:none;
+    clear:none;
+    left:10px;
+}
+
+.share img {
+	opacity: .4;
+	-moz-opacity: .4;
+	filter: alpha(opacity=40);
+}
+
+.share img:hover {
+	opacity: 1;
+	-moz-opacity: 1;
+	filter: alpha(opacity=100);
+}
+
+.org-info-search-highlight
+{
+	background-color:#adefef; /* same color as emacs default */
+	color:#000000;
+	font-weight:bold;
+}
+
+.org-bbdb-company {
+    /* bbdb-company */
+    font-style: italic;
+}
+.org-bbdb-field-name {
+}
+.org-bbdb-field-value {
+}
+.org-bbdb-name {
+    /* bbdb-name */
+    text-decoration: underline;
+}
+.org-bold {
+    /* bold */
+    font-weight: bold;
+}
+.org-bold-italic {
+    /* bold-italic */
+    font-weight: bold;
+    font-style: italic;
+}
+.org-border {
+    /* border */
+    background-color: #000000;
+}
+.org-buffer-menu-buffer {
+    /* buffer-menu-buffer */
+    font-weight: bold;
+}
+.org-builtin {
+    /* font-lock-builtin-face */
+    color: #da70d6;
+}
+.org-button {
+    /* button */
+    text-decoration: underline;
+}
+.org-c-nonbreakable-space {
+    /* c-nonbreakable-space-face */
+    background-color: #ff0000;
+    font-weight: bold;
+}
+.org-calendar-today {
+    /* calendar-today */
+    text-decoration: underline;
+}
+.org-comment {
+    /* font-lock-comment-face */
+    color: #b22222;
+}
+.org-comment-delimiter {
+    /* font-lock-comment-delimiter-face */
+    color: #b22222;
+}
+.org-constant {
+    /* font-lock-constant-face */
+    color: #5f9ea0;
+}
+.org-cursor {
+    /* cursor */
+    background-color: #000000;
+}
+.org-default {
+    /* default */
+    color: #000000;
+    background-color: #ffffff;
+}
+.org-diary {
+    /* diary */
+    color: #ff0000;
+}
+.org-escape-glyph {
+    /* escape-glyph */
+    color: #a52a2a;
+}
+.org-file-name-shadow {
+    /* file-name-shadow */
+    color: #7f7f7f;
+}
+.org-fixed-pitch {
+}
+.org-fringe {
+    /* fringe */
+    background-color: #f2f2f2;
+}
+.org-header-line {
+    /* header-line */
+    color: #333333;
+    background-color: #e5e5e5;
+}
+.org-help-argument-name {
+    /* help-argument-name */
+    font-style: italic;
+}
+.org-highlight {
+    /* highlight */
+    background-color: #b4eeb4;
+}
+.org-holiday {
+    /* holiday */
+    background-color: #ffc0cb;
+}
+.org-info-header-node {
+    /* info-header-node */
+    color: #a52a2a;
+    font-weight: bold;
+    font-style: italic;
+}
+.org-info-header-xref {
+    /* info-header-xref */
+    color: #0000ff;
+    text-decoration: underline;
+}
+.org-info-menu-header {
+    /* info-menu-header */
+    font-weight: bold;
+}
+.org-info-menu-star {
+    /* info-menu-star */
+    color: #ff0000;
+}
+.org-info-node {
+    /* info-node */
+    color: #a52a2a;
+    font-weight: bold;
+    font-style: italic;
+}
+.org-info-title-1 {
+    /* info-title-1 */
+    font-size: 172%;
+    font-weight: bold;
+}
+.org-info-title-2 {
+    /* info-title-2 */
+    font-size: 144%;
+    font-weight: bold;
+}
+.org-info-title-3 {
+    /* info-title-3 */
+    font-size: 120%;
+    font-weight: bold;
+}
+.org-info-title-4 {
+    /* info-title-4 */
+    font-weight: bold;
+}
+.org-info-xref {
+    /* info-xref */
+    color: #0000ff;
+    text-decoration: underline;
+}
+.org-isearch {
+    /* isearch */
+    color: #b0e2ff;
+    background-color: #cd00cd;
+}
+.org-italic {
+    /* italic */
+    font-style: italic;
+}
+.org-lazy-highlight {
+    /* lazy-highlight */
+    background-color: #afeeee;
+}
+.org-link {
+    /* link */
+    color: #0000ff;
+    text-decoration: underline;
+}
+.org-link-visited {
+    /* link-visited */
+    color: #8b008b;
+    text-decoration: underline;
+}
+.org-match {
+    /* match */
+    background-color: #ffff00;
+}
+.org-menu {
+}
+.org-message-cited-text {
+    /* message-cited-text */
+    color: #ff0000;
+}
+.org-message-header-cc {
+    /* message-header-cc */
+    color: #191970;
+}
+.org-message-header-name {
+    /* message-header-name */
+    color: #6495ed;
+}
+.org-message-header-newsgroups {
+    /* message-header-newsgroups */
+    color: #00008b;
+    font-weight: bold;
+    font-style: italic;
+}
+.org-message-header-other {
+    /* message-header-other */
+    color: #4682b4;
+}
+.org-message-header-subject {
+    /* message-header-subject */
+    color: #000080;
+    font-weight: bold;
+}
+.org-message-header-to {
+    /* message-header-to */
+    color: #191970;
+    font-weight: bold;
+}
+.org-message-header-xheader {
+    /* message-header-xheader */
+    color: #0000ff;
+}
+.org-message-mml {
+    /* message-mml */
+    color: #228b22;
+}
+.org-message-separator {
+    /* message-separator */
+    color: #a52a2a;
+}
+.org-minibuffer-prompt {
+    /* minibuffer-prompt */
+    color: #0000cd;
+}
+.org-mm-uu-extract {
+    /* mm-uu-extract */
+    color: #006400;
+    background-color: #ffffe0;
+}
+.org-mode-line {
+    /* mode-line */
+    color: #000000;
+    background-color: #bfbfbf;
+}
+.org-mode-line-buffer-id {
+    /* mode-line-buffer-id */
+    font-weight: bold;
+}
+.org-mode-line-highlight {
+}
+.org-mode-line-inactive {
+    /* mode-line-inactive */
+    color: #333333;
+    background-color: #e5e5e5;
+}
+.org-mouse {
+    /* mouse */
+    background-color: #000000;
+}
+.org-negation-char {
+}
+.org-next-error {
+    /* next-error */
+    background-color: #eedc82;
+}
+.org-nobreak-space {
+    /* nobreak-space */
+    color: #a52a2a;
+    text-decoration: underline;
+}
+.org-org-agenda-date {
+    /* org-agenda-date */
+    color: #0000ff;
+}
+.org-org-agenda-date-weekend {
+    /* org-agenda-date-weekend */
+    color: #0000ff;
+    font-weight: bold;
+}
+.org-org-agenda-restriction-lock {
+    /* org-agenda-restriction-lock */
+    background-color: #ffff00;
+}
+.org-org-agenda-structure {
+    /* org-agenda-structure */
+    color: #0000ff;
+}
+.org-org-archived {
+    /* org-archived */
+    color: #7f7f7f;
+}
+.org-org-code {
+    /* org-code */
+    color: #7f7f7f;
+}
+.org-org-column {
+    /* org-column */
+    background-color: #e5e5e5;
+}
+.org-org-column-title {
+    /* org-column-title */
+    background-color: #e5e5e5;
+    font-weight: bold;
+    text-decoration: underline;
+}
+.org-org-date {
+    /* org-date */
+    color: #a020f0;
+    text-decoration: underline;
+}
+.org-org-done {
+    /* org-done */
+    color: #228b22;
+    font-weight: bold;
+}
+.org-org-drawer {
+    /* org-drawer */
+    color: #0000ff;
+}
+.org-org-ellipsis {
+    /* org-ellipsis */
+    color: #b8860b;
+    text-decoration: underline;
+}
+.org-org-formula {
+    /* org-formula */
+    color: #b22222;
+}
+.org-org-headline-done {
+    /* org-headline-done */
+    color: #bc8f8f;
+}
+.org-org-hide {
+    /* org-hide */
+    color: #e5e5e5;
+}
+.org-org-latex-and-export-specials {
+    /* org-latex-and-export-specials */
+    color: #8b4513;
+}
+.org-org-level-1 {
+    /* org-level-1 */
+    color: #0000ff;
+}
+.org-org-level-2 {
+    /* org-level-2 */
+    color: #b8860b;
+}
+.org-org-level-3 {
+    /* org-level-3 */
+    color: #a020f0;
+}
+.org-org-level-4 {
+    /* org-level-4 */
+    color: #b22222;
+}
+.org-org-level-5 {
+    /* org-level-5 */
+    color: #228b22;
+}
+.org-org-level-6 {
+    /* org-level-6 */
+    color: #5f9ea0;
+}
+.org-org-level-7 {
+    /* org-level-7 */
+    color: #da70d6;
+}
+.org-org-level-8 {
+    /* org-level-8 */
+    color: #bc8f8f;
+}
+.org-org-link {
+    /* org-link */
+    color: #a020f0;
+    text-decoration: underline;
+}
+.org-org-property-value {
+}
+.org-org-scheduled-previously {
+    /* org-scheduled-previously */
+    color: #b22222;
+}
+.org-org-scheduled-today {
+    /* org-scheduled-today */
+    color: #006400;
+}
+.org-org-sexp-date {
+    /* org-sexp-date */
+    color: #a020f0;
+}
+.org-org-special-keyword {
+    /* org-special-keyword */
+    color: #bc8f8f;
+}
+.org-org-table {
+    /* org-table */
+    color: #0000ff;
+}
+.org-org-tag {
+    /* org-tag */
+    font-weight: bold;
+}
+.org-org-target {
+    /* org-target */
+    text-decoration: underline;
+}
+.org-org-time-grid {
+    /* org-time-grid */
+    color: #b8860b;
+}
+.org-org-todo {
+    /* org-todo */
+    color: #ff0000;
+}
+.org-org-upcoming-deadline {
+    /* org-upcoming-deadline */
+    color: #b22222;
+}
+.org-org-verbatim {
+    /* org-verbatim */
+    color: #7f7f7f;
+    text-decoration: underline;
+}
+.org-org-warning {
+    /* org-warning */
+    color: #ff0000;
+    font-weight: bold;
+}
+.org-outline-1 {
+    /* outline-1 */
+    color: #0000ff;
+}
+.org-outline-2 {
+    /* outline-2 */
+    color: #b8860b;
+}
+.org-outline-3 {
+    /* outline-3 */
+    color: #a020f0;
+}
+.org-outline-4 {
+    /* outline-4 */
+    color: #b22222;
+}
+.org-outline-5 {
+    /* outline-5 */
+    color: #228b22;
+}
+.org-outline-6 {
+    /* outline-6 */
+    color: #5f9ea0;
+}
+.org-outline-7 {
+    /* outline-7 */
+    color: #da70d6;
+}
+.org-outline-8 {
+    /* outline-8 */
+    color: #bc8f8f;
+}
+.org-preprocessor {
+    /* font-lock-preprocessor-face */
+    color: #da70d6;
+}
+.org-query-replace {
+    /* query-replace */
+    color: #b0e2ff;
+    background-color: #cd00cd;
+}
+.org-regexp-grouping-backslash {
+    /* font-lock-regexp-grouping-backslash */
+    font-weight: bold;
+}
+.org-regexp-grouping-construct {
+    /* font-lock-regexp-grouping-construct */
+    font-weight: bold;
+}
+.org-region {
+    /* region */
+    background-color: #eedc82;
+}
+.org-rmail-highlight {
+}
+.org-scroll-bar {
+    /* scroll-bar */
+    background-color: #bfbfbf;
+}
+.org-secondary-selection {
+    /* secondary-selection */
+    background-color: #ffff00;
+}
+.org-shadow {
+    /* shadow */
+    color: #7f7f7f;
+}
+.org-show-paren-match {
+    /* show-paren-match */
+    background-color: #40e0d0;
+}
+.org-show-paren-mismatch {
+    /* show-paren-mismatch */
+    color: #ffffff;
+    background-color: #a020f0;
+}
+.org-string {
+    /* font-lock-string-face */
+    color: #bc8f8f;
+}
+.org-texinfo-heading {
+    /* texinfo-heading */
+    color: #0000ff;
+}
+.org-tool-bar {
+    /* tool-bar */
+    color: #000000;
+    background-color: #bfbfbf;
+}
+.org-tooltip {
+    /* tooltip */
+    color: #000000;
+    background-color: #ffffe0;
+}
+.org-trailing-whitespace {
+    /* trailing-whitespace */
+    background-color: #ff0000;
+}
+.org-type {
+    /* font-lock-type-face */
+    color: #228b22;
+}
+.org-underline {
+    /* underline */
+    text-decoration: underline;
+}
+.org-variable-name {
+    /* font-lock-variable-name-face */
+    color: #b8860b;
+}
+.org-variable-pitch {
+}
+.org-vertical-border {
+}
+.org-warning {
+    /* font-lock-warning-face */
+    color: #ff0000;
+    font-weight: bold;
+}
+
+
+
+.logo-link {
+    position: fixed;
+    top: 10px;
+    left: 30px;
+}
+
+/* These style are only for IE: */
+
+* html {
+    overflow: hidden;
+    padding-bottom:0px;
+    margin:0px;
+}
+
+* html body {
+    height: 100%;
+    overflow:auto;
+    font-size: 100%;
+    margin: 0px 0px 0px 250px;
+    padding: 0px 10% 0px 0px;
+}
+/* 针对Ie ,好像因为iexplore 不认识position:fixed 所以没办法让
+   导航部分的显示固定在特定的位置，不随滚动条而滚动
+ */
+* html #table-of-contents {
+    position: absolute;
+    width:200px;
+    left:10px
+    /*
+      The evil IE-JavaScript hack :-) depends on Picture and y-distance.
+      Added to support small screens (Netbooks...).
+      */
+    top: expression( ( 30 + ( noValue = document.documentElement.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop ) ) + 'px' );
+    /* top: expression((document.body.clientHeight - 210) + "px"); */
+     /* height: expression((document.body.clientHeight - 210) + "px"); */
+}
+* html #org-div-home-and-up {
+    position: absolute;
+    width:200px;
+    right:25px;
+    /*
+      The evil IE-JavaScript hack :-) depends on Picture and y-distance.
+      Added to support small screens (Netbooks...).
+      */
+    /* top: expression( ( 10 + ( noValue = document.documentElement.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop ) ) + 'px' ); */
+    /* top: expression((document.body.clientHeight - 210) + "px"); */
+     /* height: expression((document.body.clientHeight - 210) + "px"); */
+}
+* html #org-src{
+    position: absolute;
+    width:25px;
+    right:20px;
+}
+* html #htmlized-src{
+    position: absolute;
+    width:120px;
+    right:20px;
+}
+
+* html p.author{
+    position: absolute;
+    width:125px;
+    left:20px;
+}
+* html p.date{
+    position: absolute;
+    width:225px;
+    left:20px;
+    bottom:0px;
+}
+* html p.creator{
+    position: absolute;
+    width:425px;
+    left:20px;
+    bottom:20px;
+}
+
+* html h1 {
+    margin-top:10px;
+}
+
+* html .logo-link {
+    position: absolute;
+    top: 10px;
+    left: 30px;
+}
+
+* html #logo-text{
+    font-size: 75%;
+	position: absolute;
+	display: block;
+	right: 10px;
+	bottom: 3px;
+	overflow:hidden;
+}
+ 
+ 
+* html div#tags {
+	font-size: 75%;
+	/* line-height: 1.4em; */
+	position: absolute;
+	display: block;
+	right: -2px;
+	top: 10%;
+	width: 150px;
+	/* min-height:60px; */
+	max-height:95%;
+	/* overflow:visible; */
+    /* white-space:pre-wrap; */
+}
+
+    </style>
+<link rel="stylesheet" type="text/css" href="../style/emacs.css" />
+<script type='text/javascript' src='../js/emacs.js'> </script>
+<script type="text/javascript" src="http://orgmode.org/mathjax/MathJax.js">
+<!--/*--><![CDATA[/*><!--*/
+    MathJax.Hub.Config({
+        // Only one of the two following lines, depending on user settings
+        // First allows browser-native MathML display, second forces HTML/CSS
+        //  config: ["MMLorHTML.js"], jax: ["input/TeX"],
+            jax: ["input/TeX", "output/HTML-CSS"],
+        extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js",
+                     "TeX/noUndefined.js"],
+        tex2jax: {
+            inlineMath: [ ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"], ["\\begin{displaymath}","\\end{displaymath}"] ],
+            skipTags: ["script","noscript","style","textarea","pre","code"],
+            ignoreClass: "tex2jax_ignore",
+            processEscapes: false,
+            processEnvironments: true,
+            preview: "TeX"
+        },
+        showProcessingMessages: true,
+        displayAlign: "center",
+        displayIndent: "2em",
+
+        "HTML-CSS": {
+             scale: 100,
+             availableFonts: ["STIX","TeX"],
+             preferredFont: "TeX",
+             webFont: "TeX",
+             imageFont: "TeX",
+             showMathMenu: true,
+        },
+        MMLorHTML: {
+             prefer: {
+                 MSIE:    "MML",
+                 Firefox: "MML",
+                 Opera:   "HTML",
+                 other:   "HTML"
+             }
+        }
+    });
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="org-div-home-and-up" style="text-align:right;font-size:70%;white-space:nowrap;">
+ <a accesskey="h" href="../sitemap.html"> 站点地图 </a>
+ |
+ <a accesskey="H" href="../index.html"> 首页 </a>
+</div>
+
+<div id="preamble">
+
+</div>
+
+<div id="content">
+<h1 class="title">erlang.org</h1>
+
+
+<div id='logo-img' ><a  href='../index.html'>▇█▓▒░◕~◕░▒▓█▇</a></div>
+
+<div id='logo-text'>
+  <a href='#' ><span align="left">░◕~◕░</span></a>
+</div>
+
+
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">用systool发布</a></li>
+<li><a href="#sec-2">用reltool发布</a>
+<ul>
+<li><a href="#sec-2-1">如何发布</a></li>
+<li><a href="#sec-2-2">reltool 使用的配置文件的格式</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-1" class="outline-2">
+<h2 id="sec-1">用systool发布</h2>
+<div class="outline-text-2" id="text-1">
+
+
+<p><br/>
+<pre class="src src-sh"><span class="org-builtin">cd</span> erlcount_release/
+erl -env ERL_LIBS  .
+</pre>
+
+
+erlcount-1.0.rel<br/>
+</p>
+<p><br/>
+<pre class="src src-erlang">{release,
+ {<span class="org-string">"erlcount"</span> ,<span class="org-string">"1.0.0"</span>},
+ {erts, <span class="org-string">"5.8.5"</span>},
+ [ {kernel ,<span class="org-string">"2.14.5"</span>},
+   {stdlib,<span class="org-string">"1.17.5"</span>},
+   {ppool,<span class="org-string">"1.1.0"</span>,permanent},
+   {erlcount,<span class="org-string">"1.0.0"</span>,transient}
+ ]
+}.                    <span class="org-comment-delimiter">%</span><span class="org-comment">&#26368;&#21518;&#19968;&#20010;&#28857;&#19981;&#33021;&#23569;&#12290;</span>
+<span class="org-comment-delimiter">%% </span><span class="org-comment">&#30456;&#24212; &#30340;&#29256;&#26412;&#21495;&#21487;&#20197;&#36890;&#36807; erl &#21629;&#20196;&#21518;&#65292;&#20250;&#26174;&#31034;&#24403;&#21069; Eshell V5.8.5  (abort with ^G)</span>
+<span class="org-comment-delimiter">%% </span><span class="org-comment">application:which_applications(). &#32467;&#26524;&#26159;&#65306;</span>
+<span class="org-comment-delimiter">%% </span><span class="org-comment">[{stdlib,"ERTS  CXC 138 10","1.17.5"},</span>
+<span class="org-comment-delimiter">%%  </span><span class="org-comment">{kernel,"ERTS  CXC 138 10","2.14.5"}]</span>
+
+<span class="org-comment-delimiter">%% </span><span class="org-comment">systools:make_script("erlcount-1.0",[local]). &#36890;&#36807;&#27492;&#25991;&#20214;&#29983;&#25104;&#21551;&#21160;&#33050;&#26412;boot</span>
+
+<span class="org-comment-delimiter">%% </span><span class="org-comment">the local option means that we want the release to be possible to run from</span>
+<span class="org-comment-delimiter">%% </span><span class="org-comment">anywhere, and not just the current install.</span>
+
+<span class="org-comment-delimiter">%% </span><span class="org-comment">systools:make_tar("erlcount-1.0" ,[{erts, "d:/usr/erl5.8.5/"}]).</span>
+<span class="org-comment-delimiter">%% </span><span class="org-comment">&#29983;&#25104;tar</span>
+</pre>
+
+%% systools:make_script("erlcount-1.0",[local]). 通过 erlcount-1.0.rel  生成启动脚本boot<br/>
+%% the local option means that we want the release to be possible to run from<br/>
+%% anywhere, and not just the current install.<br/>
+</p>
+<p><br/>
+   生成的脚本名称如<br/>
+   erlcount-1.0.script<br/>
+   erlcount-1.0.boot<br/>
+</p>
+<p><br/>
+systools:make_tar("erlcount-1.0" ,[{erts, "d:/usr/erl5.8.5/"}]).<br/>
+%% 生成 tar.gz<br/>
+   解压开后的目录如<br/>
+  drwxrwxrwx  1 jixf       0 12-15 11:06 erts-5.8.5<br/>
+  drwxrwxrwx  1 jixf       0 12-15 11:06 lib<br/>
+  drwxrwxrwx  1 jixf       0 12-15 11:06 releases<br/>
+  ;;<br/>
+</p>
+<p><br/>
+通过 ./erts-5.8.8/bin/erl -boot releases/1.0.0/start可以执行.<br/>
+可以通过以下方式向 erlcount 传递 directory 参数。<br/>
+./erts-5.8.4/bin/erl -boot releases/1.0.0/start -erlcount directory '"<i>home/ferd/code/otp_src_R14B03</i>"' -noshell<br/>
+注意单双引号<br/>
+</p>
+<p><br/>
+</p></div>
+
+</div>
+
+<div id="outline-container-2" class="outline-2">
+<h2 id="sec-2">用reltool发布</h2>
+<div class="outline-text-2" id="text-2">
+
+
+</div>
+
+<div id="outline-container-2-1" class="outline-3">
+<h3 id="sec-2-1">如何发布</h3>
+<div class="outline-text-3" id="text-2-1">
+
+
+<p><br/>
+<pre class="src src-sh"><span class="org-builtin">cd</span> release
+mkdir rel
+</pre>
+
+  用到release/erlcount-1.0.config作为配置文件<br/>
+</p>
+<p><br/>
+<pre class="src src-erlang">{ok, <span class="org-variable-name">Conf</span>} = <span class="org-type">file</span>:<span class="org-type">consult</span>(<span class="org-string">"erlcount-1.0.config"</span>).
+{ok, <span class="org-variable-name">Spec</span>} = <span class="org-type">reltool</span>:<span class="org-type">get_target_spec</span>(<span class="org-variable-name">Conf</span>).
+<span class="org-type">reltool</span>:<span class="org-type">eval_target_spec</span>(<span class="org-variable-name">Spec</span>, <span class="org-type">code</span>:<span class="org-type">root_dir</span>(), <span class="org-string">"rel"</span>). <span class="org-comment-delimiter">% </span><span class="org-comment">&#22312;rel &#30446;&#24405;&#20869;&#29983;&#25104;&#30456;</span>
+&#24212;&#30340;&#20869;&#23481;
+</pre>
+
+
+
+<pre class="src src-sh"><span class="org-builtin">cd</span> rel
+./bin -noshell
+./bin -noshell -erlcount directory <span class="org-string">' "/home/jixiuf/documents/erlang/erlcount_release/"'</span>
+</pre>
+
+
+</p></div>
+
+</div>
+
+<div id="outline-container-2-2" class="outline-3">
+<h3 id="sec-2-2">reltool 使用的配置文件的格式</h3>
+<div class="outline-text-3" id="text-2-2">
+
+<p>   其可配置的Options 是分层的，分别是release 层,app层， 及module层<br/>
+   分别对应 sys ,app ,mode 三个key  ,sys 配置全局属性，app可以覆盖sys 中配置的<br/>
+   属性，仿佛子承父类，<br/>
+   {sys, [Options]},<br/>
+   {app, Appname [Options]}<br/>
+   {mod,&hellip;}<br/>
+</p>
+<p><br/>
+</p><ul>
+<li id="sec-2-2-1">{sys,[Options]}<br/>
+<ul>
+<li id="sec-2-2-1-1">erts<br/>
+     指定 erts application 信息, 具体的字段参考后面介绍的 app 配置.<br/>
+</li>
+</ul>
+<ul>
+<li id="sec-2-2-1-2">escript<br/>
+     escript 脚本配置信息, 包含 escript 文件,以及对应的配置信息<br/>
+</li>
+</ul>
+<ul>
+<li id="sec-2-2-1-3">app<br/>
+     target system 中包含的 app 信息. 比如所有的 release 都要包含 kernel,<br/>
+stdlib, 具体的app的相关配置,轻参考后面介绍的 app level 配置<br/>
+
+<p><br/>
+</p></li>
+</ul>
+<ul>
+<li id="sec-2-2-1-4">mod_cond<br/>
+设置 module 的包含策略. 此处配置的 mod_cond 是 sys level 的配置, 控制所有的<br/>
+app 中的 module 包含策略. 当然我们可以对这个信息, 在 app level 进行覆盖. 其包含<br/>
+多种方式:<br/>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<caption></caption>
+<colgroup><col class="left" /><col class="left" />
+</colgroup>
+<tbody>
+<tr><td class="left">all</td><td class="left">表示如果某个 app 被包含,那么其包含的所有模块全部被包含. 假设 app 名为 demoapp, all 不仅包含 demoapp/ebin 下的所有模块, 同时 demoapp.app 中 modules 字段描述的所有模块也将被包括(默认)</td></tr>
+<tr><td class="left">ebin</td><td class="left">表示 ebin 目录下所有的模块,以及相关的模块会被包含</td></tr>
+<tr><td class="left">app</td><td class="left">表示 .app 描述文件,以及相关的模块会被包含</td></tr>
+<tr><td class="left">derived</td><td class="left">表示被其他包含的模块用到的相关模块会被包含</td></tr>
+</tbody>
+</table>
+
+****|incl_cond 设置 applicaion 以及 escript 的包含策略.<br/>
+其包|3种类型:<br/>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<caption></caption>
+<colgroup><col class="left" /><col class="left" />
+</colgroup>
+<tbody>
+<tr><td class="left">derived</td><td class="left">表示 包含 没有明确设置 incl_cond, 同时被其他 application 直接或间接引用的application. (默认)</td></tr>
+<tr><td class="left">include</td><td class="left">表示 包含 所有没有明确设置 incl_cond 的application</td></tr>
+<tr><td class="left">exclude</td><td class="left">表示 排除 排除没有明确设置 incl_cond 的application</td></tr>
+</tbody>
+</table>
+
+include 和 exclude 意义相反. 一个是包含没有设置 incl_cond 的 apps, 一个是排除没<br/>
+有设置 incl_cond 的 apps. 一般我们使用默认的 derived 选项,这样保证所有相关的<br/>
+application 均被包含, 不会出现 target system 中,某个模块没有定义的错误.我们可以<br/>
+通过前面 reltool GUI 部分介绍的 application 依赖关系图 来了解 application 的交<br/>
+互相关信息.<br/>
+
+<p><br/>
+</p></li>
+</ul>
+<ul>
+<li id="sec-2-2-1-5">boot_rel<br/>
+指定 target system 中默认启动项 (rel), 一个target system 中可能包含很多的<br/>
+release(通过 rel 来指定)<br/>
+</li>
+</ul>
+<ul>
+<li id="sec-2-2-1-6">rel<br/>
+指定 rel 内容 <a href="http://www.erlang.org/doc/design_principles/release_structure.html#10">(Release specific configuration)</a> , 每个 rel 定义会被映射成 rel,<br/>
+script 和 boot 文件,请参考 Erlang/OTP Design Principles Release<br/>
+</li>
+</ul>
+<ul>
+<li id="sec-2-2-1-7">relocable<br/>
+指定 target system 中erl 执行时自动检测路径相关信息({relocable, true}), 还是硬<br/>
+编码指定路径启动({relocable, false}). 如果 relocable 为 false, 那么 target<br/>
+system 必须首先通过 reltool:install/2 进行安装, 如果 relocable 为 true, target<br/>
+system 移动到其他目录时,仍然可以方便的运行. {relocable, true} (默认)<br/>
+</li>
+</ul>
+<ul>
+<li id="sec-2-2-1-8">profile<br/>
+     指定 tareget system 的类型, 此选项主要影响:incl_sys_filters,<br/>
+     excl_sys_filters, incl_app_filters 和 excl_app_filters. 不同的 profile 类<br/>
+     型, 以上4个 filters 不同.<br/>
+     主要包含3种:<br/>
+
+<p><br/>
+</p><table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<caption></caption>
+<colgroup><col class="left" /><col class="left" />
+</colgroup>
+<tbody>
+<tr><td class="left">development</td><td class="left">开发测试模式(默认)</td></tr>
+<tr><td class="left">embedded</td><td class="left">嵌入式完整模式</td></tr>
+<tr><td class="left">standalone</td><td class="left">单独模式,不携带相关的可执行文件</td></tr>
+</tbody>
+</table>
+
+     在生成 target system 时, 实际上主要有两个步骤:首先创建一个完整的文件候选列<br/>
+     表,它包含尽可能多的文件; 随后调用各种相关的 filter 定义,对结果进行过滤, 最<br/>
+     后声称最终的 target system. 一般情况下,我们的target system 要是一个完整的<br/>
+     可执行的系统,因此我们许要设置 profile 为 embedded. (当然不设置 profile, 只<br/>
+     是修改4个相关的 filter, 也可以达到我们想要的效果)<br/>
+
+<p><br/>
+</p></li>
+</ul>
+<ul>
+<li id="sec-2-2-1-9">app_file<br/>
+     控制 app 的内容, 因为有各种各样的 filter, 因此最终的 target system 中包含<br/>
+     的模块,可能与 app 文件定义的模块列表不一致, 本选项控制 app 的内容. 主要包<br/>
+     含3种:<br/>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<caption></caption>
+<colgroup><col class="left" /><col class="left" />
+</colgroup>
+<tbody>
+<tr><td class="left">keep</td><td class="left">将 app 直接拷贝到 target system 中(默认)</td></tr>
+<tr><td class="left">strip</td><td class="left">依据 app 文件产生 target system 中的 app 文件, 并将未被包含的模块从 app 文件中移出</td></tr>
+<tr><td class="left">all</td><td class="left">依据 app 文件产生 tarege system 中的 app 文件, 同时所有的模块将添加到 app 文件中, 如果某个应用没有 app 文件,那么会自动创建一个 app 文件.</td></tr>
+</tbody>
+</table>
+
+
+<p><br/>
+</p>
+<p><br/>
+</p></li>
+</ul>
+<ul>
+<li id="sec-2-2-1-10">debug_info<br/>
+是否去除 beam 文件中的调试信息: keep 表示保持; strip 表示去除<br/>
+</li>
+</ul>
+<ul>
+<li id="sec-2-2-1-11">incl_sys_filters<br/>
+     指定一个正则表达式列表,用来表示哪些系统文件可以出现在 target system 中. 如果某<br/>
+     个系统文件想被包括, 那么其必须满足 incl_sys_filters 中的某个正则表达式, 同时不<br/>
+     能满足 excl_sys_filters 中的任何表达式.<br/>
+     比如:<br/>
+     {incl_sys_filters,["^bin","^erts","^lib","^releases"]},<br/>
+     表示 $ERL_ROOT 目录下的 bin, erts, lib, releases 目录均要包含.<br/>
+     incl_app_filters, excl_app_filters 同 sys 相关的 filters 含义大致相同,只是用来控制 application 的包含规则.<br/>
+</li>
+</ul>
+<ul>
+<li id="sec-2-2-1-12">excl_sys_filters<br/>
+     指定一个正则表达式列表,表示哪些系统文件不可以出现在 target system 中. 默认 为<br/>
+     [].<br/>
+</li>
+</ul>
+<ul>
+<li id="sec-2-2-1-13">incl_app_filters<br/>
+     指定一个正则表达式列表,表示 application 中的哪些文件可以被包含. 如果某个文件想<br/>
+     被包含,至少要满足正则表达式列表中的一个表达式. 默认为 [".*"], 如果设置为 [], 那<br/>
+     么 application 中的任何文件都不会被包含.<br/>
+</li>
+</ul>
+<ul>
+<li id="sec-2-2-1-14">excl_app_filters<br/>
+     指定一个正则表达式列表,表示 application 的哪些文件不可以出现在 target system 中. 默认 为 [].<br/>
+
+<p><br/>
+</p></li>
+</ul>
+<ul>
+<li id="sec-2-2-1-15">incl_archive_filters<br/>
+     指定 application 中哪些一级子目录包含在压缩包中(与包含正常的目录对应), 通<br/>
+     过一个正则表达式列表指定要包含在压缩包中的一级子目录. 默认为 [".*"]<br/>
+</li>
+</ul>
+<ul>
+<li id="sec-2-2-1-16">excl_archive_filters<br/>
+     指定一个正则表达式列表,指定 application 的哪些一级目录不包含在压缩包中. 如<br/>
+     果某个目录,匹配任何一个正则表达式,则不会包含在压缩包中. 默认为<br/>
+     ["^include\(", "^priv\)"]<br/>
+</li>
+</ul>
+<ul>
+<li id="sec-2-2-1-17">archive_opts<br/>
+     创建压缩包对应的参数,在 zip:create/3 中使用, 请参考 <a href="http://erlang.org/doc/man/zip.html">zip module</a>, 默认 为 [].<br/>
+
+<p><br/>
+</p></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li id="sec-2-2-2">{app,AppName,[Options]}<br/>
+<ul>
+<li id="sec-2-2-2-1">vsn<br/>
+    指定要包含的 application 的版本, 因为在系统中,可能存在同一应用的多个版本. 如果忽略,则使用最新版本.<br/>
+</li>
+</ul>
+<ul>
+<li id="sec-2-2-2-2">mod<br/>
+    模块相关的配置信息. 必须包含一个模块名称,以及其他可选的模块配置(参照后面 mod 配置)<br/>
+</li>
+</ul>
+<ul>
+<li id="sec-2-2-2-3">mod_cond - 同 sys level 的同名配置含义相同<br/>
+</li>
+</ul>
+<ul>
+<li id="sec-2-2-2-4">incl_cond - 同上<br/>
+</li>
+</ul>
+<ul>
+<li id="sec-2-2-2-5">debug_info - 同上<br/>
+</li>
+</ul>
+<ul>
+<li id="sec-2-2-2-6">incl_app_filters - 同上<br/>
+</li>
+</ul>
+<ul>
+<li id="sec-2-2-2-7">excl_app_filters - 同上<br/>
+</li>
+</ul>
+<ul>
+<li id="sec-2-2-2-8">incl_archive_filters - 同上<br/>
+</li>
+</ul>
+<ul>
+<li id="sec-2-2-2-9">excl_archive_filters - 同上<br/>
+</li>
+</ul>
+<ul>
+<li id="sec-2-2-2-10">archive_opts - 同上<br/>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li id="sec-2-2-3">mod 配置<br/>
+<ul>
+<li id="sec-2-2-3-1">incl_cond<br/>
+        指示模块是否被包含,其覆盖 application 及 system 配置中的 incl_cond 信息.<br/>
+        其包含3个值:<br/>
+        include - 表示本模块将被包含<br/>
+        exclude - 表示本模块不被包含<br/>
+        derived - 表示如果其他被包含的模块引用本模块,则本模块被也被包含.<br/>
+
+<p><br/>
+</p></li>
+</ul>
+<ul>
+<li id="sec-2-2-3-2">debug_info<br/>
+
+<p><br/>
+        同 app 配置中 debug_info 描述.<br/>
+</p>
+<p><br/>
+</p>
+<p><br/>
+</p>
+<p><br/>
+</p></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li id="sec-2-2-4">demo config<br/>
+
+<p><br/>
+<pre class="src src-erlang">{sys,
+   [
+   {lib_dirs,[<span class="org-string">"/home/jixiuf/erlang"</span>]},
+   {boot_rel, <span class="org-string">"erlips"</span>},
+   {rel, <span class="org-string">"erlips"</span>, <span class="org-string">"0.1"</span>, [kernel, stdlib, sasl, mochiweb, erlips]},
+   {relocatable, true},
+   {profile, embedded},
+   {app_file, keep},
+   {debug_info, strip},
+   {mod_cond, all},
+   {incl_cond, derived},
+
+   {incl_app_filters, [<span class="org-string">"^include"</span>, <span class="org-string">"^priv"</span>, <span class="org-string">"^ebin"</span>, <span class="org-string">"^src"</span>]},
+   {excl_app_filters, []},
+
+   {incl_archive_filters,[]},
+   {excl_archive_filters,[<span class="org-string">".*"</span>]},
+
+   {app, kernel, [{incl_cond, include}]},
+   {app, stdlib, [{incl_cond, include}]},
+   {app, sasl, [{incl_cond, include}]},
+   {app, erlips, [{incl_cond, include},
+                   {incl_app_filters, [<span class="org-string">".*"</span>]},
+                   {excl_app_filters, [<span class="org-string">"^log"</span>, <span class="org-string">"^var"</span>, <span class="org-string">"^release"</span>]}]},
+   {app, mochiweb, [{incl_cond, include}]},
+   {app, runtime_tools, [{incl_cond, include}]}
+   ]
+}.
+</pre>
+
+
+<div id='my-src'>
+<div id='org-src'><a href='../src/erlang/release.org'>src</a></div>
+<div id='htmlized-src'><a href='../htmlized-src/erlang/release.org.html'>htmlized-src</a></div>
+</div>
+<div id='tags'><span id='tags-title'>Tags:</span><br />
+    <a href="../tags/@SVN.html">@SVN</a><br/>
+    <a href="../tags/@perl.html">@perl</a><br/>
+    <a href="../tags/@Java.html">@Java</a><br/>
+    <a href="../tags/@Mysql.html">@Mysql</a><br/>
+    <a href="../tags/@Erlang.html">@Erlang</a><br/>
+    <a href="../tags/@SQL.html">@SQL</a><br/>
+    <a href="../tags/@DB.html">@DB</a><br/>
+    <a href="../tags/@Oracle.html">@Oracle</a><br/>
+    <a href="../tags/@Ediff.html">@Ediff</a><br/>
+    <a href="../tags/@Git.html">@Git</a><br/>
+    <a href="../tags/@Cedet.html">@Cedet</a><br/>
+    <a href="../tags/@C-C++.html">@C-C++</a><br/>
+    <a href="../tags/@Daily.html">@Daily</a><br/>
+    <a href="../tags/@Eclipse.html">@Eclipse</a><br/>
+    <a href="../tags/@AutoHotKey.html">@AutoHotKey</a><br/>
+    <a href="../tags/@Windows.html">@Windows</a><br/>
+    <a href="../tags/@Linux.html">@Linux</a><br/>
+    <a href="../tags/@C.html">@C</a><br/>
+    <a href="../tags/@Emacs.html">@Emacs</a><br/>
+</p>
+<p><br/>
+</div>
+</p></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+<div id="postamble">
+<p class="date">Date: 2011-11-20 日</p>
+<p class="author">Author: 纪秀峰</p>
+<p class="creator">Org version 7.8.03 with Emacs version 24</p>
+
+
+</div>
+<p><br/><br/>
+<!-- hhmts start --> <!-- hhmts end --></p>
+
+</body>
+</html>

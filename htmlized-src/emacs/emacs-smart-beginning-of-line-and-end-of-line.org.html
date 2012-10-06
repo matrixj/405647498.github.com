@@ -1,0 +1,169 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<!-- Created by htmlize-1.34 in css mode. -->
+<html>
+  <head>
+    <title>emacs-smart-beginning-of-line-and-end-of-line.org</title>
+    <style type="text/css">
+    <!--
+      body {
+        color: #F8F8F8;
+        background-color: #0C1021;
+      }
+      .comment {
+        /* font-lock-comment-face */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-block {
+        /* org-block */
+        color: #b3b3b3;
+      }
+      .org-block-begin-line {
+        /* org-block-begin-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-block-end-line {
+        /* org-block-end-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-document-info {
+        /* org-document-info */
+        color: #afeeee;
+      }
+      .org-document-info-keyword {
+        /* org-document-info-keyword */
+        color: #b3b3b3;
+      }
+      .org-document-title {
+        /* org-document-title */
+        color: #afeeee;
+        font-size: 144%;
+        font-weight: bold;
+      }
+      .org-level-1 {
+        /* org-level-1 */
+        color: #FF6400;
+      }
+      .org-link {
+        /* org-link */
+        color: #00ffff;
+        text-decoration: underline;
+      }
+      .org-meta-line {
+        /* org-meta-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+
+      a {
+        color: inherit;
+        background-color: inherit;
+        font: inherit;
+        text-decoration: inherit;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+    -->
+    </style>
+  </head>
+  <body>
+    <pre>
+<span class="comment"># -*- coding:utf-8 -*-</span>
+<span class="org-meta-line">#+LANGUAGE:  zh
+</span><span class="org-document-info-keyword">#+TITLE:</span><span class="comment">     </span><span class="org-document-title">emacs smart-end-of-line smart-beginning-of-line</span>
+<span class="org-document-info-keyword">#+AUTHOR:</span><span class="comment">    </span><span class="org-document-info">&#23396;&#23792;&#29420;&#31168;</span>
+<span class="org-document-info-keyword">#+EMAIL:</span><span class="comment">     </span><span class="org-document-info">jixiuf@gmail.com</span>
+<span class="org-document-info-keyword">#+DATE:</span><span class="comment">     </span><span class="org-document-info">2011-07-04 &#19968;</span>
+<span class="org-meta-line">#+FILETAGS: @Emacs
+#+DESCRIPTION:emacs smart-end-of-line smart-beginning-of-line
+#+KEYWORDS: emacs function command
+</span><span class="org-level-1">*  smart-beginning-of-line</span>
+   &#40664;&#35748;&#24773;&#20917;&#19979;C-a &#32465;&#23450;&#30340;&#30340;&#20989;&#25968;move-beginning-of-line (&#35201;&#24819;&#26597;&#30475;&#26576;&#20010;&#25353;&#38190;&#32465;&#23450;&#20102;
+   &#21738;&#20010;&#20989;&#25968;&#65292;&#21482;&#38656;&#35201;&#25353;&#19979;C-hk &#28982;&#21518;&#26159;&#20320;&#30340;&#25353;&#38190;&#65292;&#23601;&#20250;&#26174;&#31034;&#20986;&#27492;&#25353;&#38190;&#25152;&#32465;&#23450;&#30340;&#20989;&#25968;&#21517;
+   (&#35814;&#35265;<span class="org-link">emacs&#30340;&#24110;&#21161;&#31995;&#32479;</span>))&#12290;
+   &#20294;&#26159;&#25105;&#23545;   move-beginning-of-line&#36825;&#20010;&#20989;&#25968;&#19981;&#22826;&#28385;&#24847;&#65292;&#25105;&#24819;&#20570;&#21040;&#65292;&#24403;&#25105;&#31532;&#19968;&#27425;
+   &#25353;&#19979;C-a&#26102;&#65292;&#36339;&#21040;&#34892;&#39318;&#65292;&#24403;&#24050;&#32463;&#22312;&#34892;&#39318;&#26102;&#65292;&#21017;&#24573;&#30053;&#34892;&#39318;&#30340;&#31354;&#34892;&#65292;&#24182;&#19988;C-a &#21487;&#20197;&#22312;&#36825;
+   &#20004;&#20010;&#20301;&#32622;&#26469;&#22238;&#36339;&#36716;.&#20110;&#26159;&#26377;&#20102;&#19979;&#38754;&#30340;  smart-beginning-of-line 
+<span class="org-block-begin-line">#+begin_src emacs-lisp
+</span><span class="org-block">;;;###autoload
+(defun smart-beginning-of-line ()
+  "Move point to first non-whitespace character or beginning-of-line.
+Move point to beginning-of-line ,if point was already at that position,
+  move point to first non-whitespace character. "
+  (interactive)
+  (let ((oldpos (point)))
+    (beginning-of-line)
+    (and (= oldpos (point))
+         (back-to-indentation) )))
+</span><span class="org-block-end-line">#+end_src
+</span>&#36825;&#20010;&#26159;org-mode&#23545;&#24212;&#30340;smart-beginning-of-line&#65292;   
+<span class="org-block-begin-line">#+begin_src emacs-lisp
+</span><span class="org-block">;;;###autoload
+(defun org-mode-smart-beginning-of-line ()
+  "Move point to first non-whitespace character or beginning-of-line.
+Move point to beginning-of-line ,if point was already at that position,
+  move point to first non-whitespace character. "
+  (interactive)
+  (let ((oldpos (point)))
+    (org-beginning-of-line)
+    (and (= oldpos (point))
+         (back-to-indentation) )))
+</span><span class="org-block-end-line">#+end_src
+</span><span class="org-level-1">*  smart-end-of-line</span>
+C-e&#23545;&#20110;end-of-line ,&#20063;&#24819;&#35201;&#21516;&#26679;&#30340;&#25928;&#26524;&#12290;
+<span class="org-block-begin-line">#+begin_src emacs-lisp
+</span><span class="org-block">;;;###autoload
+(defun smart-end-of-line()
+  "Move point to first non-whitespace character or end-of-line.
+Move point to end-of-line ,if point was already at that position,
+  move point to first non-whitespace character."
+  (interactive)
+  (let ((oldpos (point)))
+    (beginning-of-line)
+    (when (re-search-forward "[ \t]*$" (point-at-eol) t)
+      (goto-char (match-beginning 0)))
+    (when (= oldpos (point))
+      (end-of-line))))
+</span><span class="org-block-end-line">#+end_src
+</span>&#21516;&#26679;org-mode &#19979;&#23545;&#24212;&#30340;&#29256;&#26412;
+<span class="org-block-begin-line">#+begin_src  emacs-lisp
+</span><span class="org-block">;;;###autoload
+(defun org-mode-smart-end-of-line()
+  "Move point to first non-whitespace character or end-of-line.
+Move point to end-of-line ,if point was already at that position,
+  move point to first non-whitespace character."
+  (interactive)
+  (let ((oldpos (point)))
+    (org-end-of-line)
+    (if  (equal (point-at-eol) (point))
+      (progn
+        (beginning-of-line)
+        (when (re-search-forward "[ \t]*$" (point-at-eol) t)
+          (goto-char (match-beginning 0)))
+        )
+      (when (equal oldpos (point))
+        (end-of-line)
+        )
+      )
+    ))
+</span><span class="org-block-end-line">#+end_src
+</span>&#21482;&#38656;&#35201;&#23558;&#20197;&#19978;&#20989;&#25968;&#20998;&#21035;&#32465;&#23450;&#21040;C-a &#21450;C-e&#19978;&#65292;&#21363;&#21487;&#26367;&#20195;&#40664;&#35748;&#30340;&#38190;&#32465;&#23450;
+<span class="org-block-begin-line">#+begin_src  emacs-lisp
+</span><span class="org-block">(global-set-key (kbd "C-a") 'smart-beginning-of-line)
+(global-set-key (kbd "C-e") 'smart-end-of-line)
+
+(eval-after-load 'org
+  '(progn
+     (define-key org-mode-map "\C-a" 'org-mode-smart-beginning-of-line)
+     (define-key org-mode-map "\C-e" 'org-mode-smart-end-of-line)
+     )
+  )
+
+</span><span class="org-block-end-line">#+end_src
+</span>&#20851;&#20110;&#38190;&#32465;&#23450;,&#24314;&#35758;&#30475;<span class="org-link">&#29579;&#22432;&#30340;&#38190;&#30424;&#32465;&#23450;&#25216;&#24039;</span>, &#19981;&#37325;&#22797;&#20102;&#12290;
+</pre>
+  </body>
+</html>

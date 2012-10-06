@@ -1,0 +1,152 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<!-- Created by htmlize-1.34 in css mode. -->
+<html>
+  <head>
+    <title>benchmark.org</title>
+    <style type="text/css">
+    <!--
+      body {
+        color: #F8F8F8;
+        background-color: #0C1021;
+      }
+      .comment {
+        /* font-lock-comment-face */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-block {
+        /* org-block */
+        color: #b3b3b3;
+      }
+      .org-block-begin-line {
+        /* org-block-begin-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-block-end-line {
+        /* org-block-end-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-document-info {
+        /* org-document-info */
+        color: #afeeee;
+      }
+      .org-document-info-keyword {
+        /* org-document-info-keyword */
+        color: #b3b3b3;
+      }
+      .org-document-title {
+        /* org-document-title */
+        color: #afeeee;
+        font-size: 144%;
+        font-weight: bold;
+      }
+      .org-meta-line {
+        /* org-meta-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+
+      a {
+        color: inherit;
+        background-color: inherit;
+        font: inherit;
+        text-decoration: inherit;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+    -->
+    </style>
+  </head>
+  <body>
+    <pre>
+<span class="comment"># -*- coding:utf-8 -*-</span>
+<span class="org-meta-line">#+LANGUAGE:  zh
+</span><span class="org-document-info-keyword">#+TITLE:</span><span class="comment">     </span><span class="org-document-title">mysql&#21387;&#21147;&#27979;&#35797;</span>
+<span class="org-document-info-keyword">#+AUTHOR:</span><span class="comment">    </span><span class="org-document-info">&#32426;&#31168;&#23792;</span>
+<span class="org-document-info-keyword">#+EMAIL:</span><span class="comment">     </span><span class="org-document-info">jixiuf@gmail.com</span>
+<span class="org-meta-line">#+DAkkTE:     2012-04-21 &#20845;
+#+DESCRIPTION:mysql&#21387;&#21147;&#27979;&#35797;
+#+KEYWORDS: mysql db
+#+OPTIONS:   H:2 num:nil toc:t \n:t @:t ::t |:t ^:nil -:t f:t *:t &lt;:t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil
+#+FILETAGS: @Mysql
+</span>
+MySQL&#20174;5.1.4&#29256;&#24320;&#22987;&#24102;&#26377;&#19968;&#20010;&#21387;&#21147;&#27979;&#35797;&#24037;&#20855;mysqlslap&#65292;&#36890;&#36807;&#27169;&#25311;&#22810;&#20010;&#24182;&#21457;&#23458;&#25143;&#31471;&#35775;&#38382;
+mysql&#26469;&#25191;&#34892;&#27979;&#35797;&#12290; "man mysqlslap" &#21487;&#20197;&#30475;&#21040;&#26377;&#19979;&#38754;&#19968;&#26465;&#31034;&#20363;
+
+<span class="org-block-begin-line">#+BEGIN_SRC sh
+</span><span class="org-block">mysqlslap --delimiter=";" --create="CREATE TABLE a (b int);INSERT INTO a VALUES (23)"  --query="SELECT * FROM a" --concurrency=50 --iterations=200 -uroot -p
+</span><span class="org-block-end-line">#+END_SRC
+</span>--create ="&#29992;&#20110;&#29983;&#25104;&#19968;&#20010;&#34920;&#65292;"&#21518;&#32490;&#30340;&#26597;&#35810;
+--query &#29992;&#36825;&#20010;&#34920;&#20570;&#27979;&#35797;,&#36825;&#37324;&#19968;&#33324;&#26159;insert ,&#25110;select &#25110;update &#35821;&#21477;
+--create &#21487;&#20197;&#26159;&#20960;&#26465;sql&#35821;&#21477; &#65292;&#20063;&#21487;&#20197;&#26159;&#19968;&#20010;&#25991;&#20214;&#21517;&#65292;&#37324;&#38754;&#20889;&#28385;sql&#35821;&#21477;
+
+
+&#25351;&#23450;&#24182;&#21457;&#25968;&#65306; &#8212;concurrency ,&#21487;&#20197;&#22810;&#20010;&#20540;&#65292;&#36887;&#21495;&#20998;&#24320;
+<span class="org-block-begin-line">#+BEGIN_SRC sh
+</span><span class="org-block">mysqlslap -a --concurrency=50,100 --number-of-queries 1000 --debug-info -uroot -proot
+</span><span class="org-block-end-line">#+END_SRC
+</span>&#25351;&#23450;&#26597;&#35810;&#24635;&#27425;&#25968;&#65306; &#8212;number-of-queries
+-a, --auto-generate-sql &#33258;&#21160;&#29983;&#25104;&#19968;&#26465;&#27979;&#35797;&#29992;&#30340;&#35821;&#21477;&#65292; &#19981;&#29992;&#20320;&#20889;sql&#36827;&#34892;&#27979;&#35797;
+&#27604;&#22914;&#36825;&#21477;&#30340;&#32467;&#26524;&#26159;(&#20998;&#21035;&#27979;&#35797;&#20102;&#24182;&#21457;&#20026;50,&#21644;100&#26102;&#65292;&#24635;&#20849;&#36827;&#34892;1000&#27425;&#35775;&#38382;&#33457;&#36153;&#30340;&#26102;&#38388; )
+&#36825;&#37324;&#21015;&#20986;&#20102;&#26368;&#22823;&#12289;&#26368;&#23567;&#12289;&#24179;&#22343;&#20540;&#12290;&#22343;&#20026;&#30456;&#21516;&#30340;&#20540;&#65292;&#22240;&#20026; &#21482;&#36827;&#34892;&#20102;&#19968;&#27425;&#27979;&#35797; &#65292;
+&#37325;&#22797;&#22810;&#27425;&#65288;&#36845;&#20195;&#22810;&#27425;&#65289;&#65306; &#8212;iterations
+<span class="org-block-begin-line">#+BEGIN_SRC sh
+</span><span class="org-block">&#36827;&#34892;5 &#27425;&#27979;&#35797; &#21487;&#26174;&#31034;&#20026;&#26368;&#22823; &#26368;&#23567; &#24179;&#22343;&#20540;
+mysqlslap -a --concurrency=50,100 --number-of-queries 1000 --iterations=5 --debug-info  -uroot -proot
+</span><span class="org-block-end-line">#+END_SRC
+</span><span class="org-block-begin-line">#+BEGIN_QUOTE
+</span>Benchmark
+    Average number of seconds to run all queries: 0.204 seconds
+    Minimum number of seconds to run all queries: 0.204 seconds
+    Maximum number of seconds to run all queries: 0.204 seconds
+    Number of clients running queries: 50
+    Average number of queries per client: 20
+
+Benchmark
+    Average number of seconds to run all queries: 0.260 seconds
+    Minimum number of seconds to run all queries: 0.260 seconds
+    Maximum number of seconds to run all queries: 0.260 seconds
+    Number of clients running queries: 100
+    Average number of queries per client: 10
+
+
+User time 0.13, System time 0.07
+Maximum resident set size 5640, Integral resident set size 0
+Non-physical pagefaults 2371, Physical pagefaults 0, Swaps 0
+Blocks in 0 out 0, Messages in 0 out 0, Signals 0
+Voluntary context switches 8661, Involuntary context switches 19<span class="org-meta-line">
+</span><span class="org-block-end-line">#+END_QUOTE
+</span>
+&#25351;&#23450;&#24341;&#25806;&#65306; &#8212;engine
+<span class="org-block-begin-line">#+BEGIN_SRC sh
+</span><span class="org-block">mysqlslap -a --concurrency=50,100 --number-of-queries 1000 --iterations=5 --engine=myisam,innodb --debug-info
+</span><span class="org-block-end-line">#+END_SRC
+</span>&#20854;&#20182;&#21442;&#25968; --help
+<span class="org-block-begin-line">#+BEGIN_SRC sh
+</span><span class="org-block">-auto-generate-sql, -a
+&#33258;&#21160;&#29983;&#25104;&#27979;&#35797;&#34920;&#21644;&#25968;&#25454;&#65288;&#29992;&#31995;&#32479;&#33258;&#24049;&#29983;&#25104;&#30340;SQL&#35821;&#21477;&#26469;&#27979;&#35797;&#65289;
+
+-auto-generate-sql-load-type=type
+&#27979;&#35797;&#35821;&#21477;&#30340;&#31867;&#22411;&#12290;&#21462;&#20540;&#21253;&#25324;&#65306;read&#65292;key&#65292;write&#65292;update&#21644;mixed(&#22810;&#31181;&#28151;&#21512;&#65292;&#40664;&#35748;)&#12290;
+
+-number-char-cols=N, -x N
+&#33258;&#21160;&#29983;&#25104;&#30340;&#27979;&#35797;&#34920;&#20013;&#21253;&#21547;&#22810;&#23569;&#20010;&#23383;&#31526;&#31867;&#22411;&#30340;&#21015;&#65292;&#40664;&#35748;1
+
+-number-int-cols=N, -y N
+&#33258;&#21160;&#29983;&#25104;&#30340;&#27979;&#35797;&#34920;&#20013;&#21253;&#21547;&#22810;&#23569;&#20010;&#25968;&#23383;&#31867;&#22411;&#30340;&#21015;&#65292;&#40664;&#35748;1
+
+-number-of-queries=N
+&#24635;&#30340;&#27979;&#35797;&#26597;&#35810;&#27425;&#25968;(&#24182;&#21457;&#23458;&#25143;&#25968;&#215;&#27599;&#23458;&#25143;&#26597;&#35810;&#27425;&#25968;)
+</span><span class="org-block-end-line">#+END_SRC
+</span>
+
+&#21478;&#22806;
+select benchmark( 5000000, md5( 'test' ) );
+&#21487;&#20197;&#20570;&#21387;&#21147;&#27979;&#35797; &#65292;&#22914;&#25191;&#34892;5000000 &#27425;md5()
+</pre>
+  </body>
+</html>

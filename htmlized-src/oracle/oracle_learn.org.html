@@ -1,0 +1,2072 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<!-- Created by htmlize-1.34 in css mode. -->
+<html>
+  <head>
+    <title>oracle_learn.org</title>
+    <style type="text/css">
+    <!--
+      body {
+        color: #F8F8F8;
+        background-color: #0C1021;
+      }
+      .bold {
+        /* bold */
+        font-weight: bold;
+      }
+      .italic {
+        /* italic */
+        font-style: italic;
+      }
+      .org-level-1 {
+        /* org-level-1 */
+        color: #FF6400;
+      }
+      .org-level-2 {
+        /* org-level-2 */
+        color: #40E0D0;
+      }
+
+      a {
+        color: inherit;
+        background-color: inherit;
+        font: inherit;
+        text-decoration: inherit;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+    -->
+    </style>
+  </head>
+  <body>
+    <pre>
+start d:/a.sql
+@    d:/a.sql
+
+edit [d:/a.sql]
+
+spool d:/a.sql &#23558;&#23631;&#19978;&#20869;&#23481; &#36755;&#20986;&#21040;&#25351;&#23450;&#25991;&#20214;
+spool off
+
+
+set linesize 320
+set pagesize 100
+set autoprint on
+set serveroutput on
+variable v1 refcursor 
+
+exp imp &#22791;&#20221; &#24674;
+
+
+&#21482;&#35835;&#20107;&#21153;
+ set transaction read only
+ &#29992;&#22788;&#65292;&#35774;&#32622;&#21482;&#35835;&#20107;&#21153;&#21518;&#65292;&#20854;&#20182;&#29992;&#25143;&#25552;&#20132;&#30340;&#20107;&#21153;&#22312;&#36825;&#37324;&#19981;&#21487;&#35265;&#65292;&#29992;&#22788;&#23601;&#26159;&#29992;&#20110;&#32479;&#35745;&#65292;&#20294;&#21448;&#19981;&#24819;&#21462;&#24471;&#32479;&#35745;&#26102;&#21457;&#29983;&#30340;&#20107;&#21153;&#25552;&#20132;
+
+<span class="org-level-1">* &#29992;&#25143;&#31649;&#29702; :</span>
+<span class="org-level-2">**    &#30331;&#38470;&#65306;</span>
+    sqlplus scott/tiger
+    sqlplus system/root as sysdba
+
+system sys sysdba scott;; sys &#36229;&#32423;&#31649;&#29702;&#21592;&#65292; &#20855;&#26377;&#35282;&#33394;dba ; system &#26159;&#31995;&#32479;&#31649;&#29702;&#21592;&#65292;&#35282;&#33394;dbaoper ,&#27604;sys &#20302;&#19968;&#32423;&#65292;&#27809;&#26377;create database &#26435;&#38480;
+
+<span class="org-level-2">** &#21019;&#24314;&#29992;&#25143; create user jixiuf identified by jixiuf_passwd;</span>
+create user userName identified by yourPasswrod default tablespace users temporary tablespace temp quota 50M on users  quota 400K on temp;
+create user userName identified by yourPasswrod default tablespace ts1  temporary tablespace ts2  unlimited on ts1 ;
+
+<span class="org-level-2">** &#20999;&#25442;&#29992;&#25143; conn system/root;  disconnect</span>
+&#26174;&#31034;&#24403;&#21069;&#29992;&#25143; show user
+&#26356;&#25913;&#23494;&#30721; password userName
+&#21024;&#38500;&#29992;&#25143;:drop   user jixiuf [cascade] &#65292;&#22914;&#26524; jixiuf &#29992;&#25143;&#24050;&#32463;&#21019;&#24314;&#36807;&#19968;&#20123;&#34920;&#65292;&#21152;cascade &#32423;&#32852;&#21024;&#38500;
+
+<span class="org-level-2">** &#26435;&#38480;&#20998;&#31995;&#32479;&#26435;&#38480;&#21644;&#23545;&#35937;&#26435;&#38480;&#65292;&#31995;&#32479;&#26435;&#38480;&#26159;&#29992;&#25143;&#23545;&#25968;&#25454;&#24211;&#30340;&#25511;&#21046;&#26435;&#65292;&#23545;&#35937;&#26435;&#38480;&#26159;&#29992;&#25143;&#23545;&#20854;&#23427;&#29992;&#25143;&#25152;&#25317;&#26377;&#25968;&#25454;&#23545;&#35937;&#30340;&#25805;&#20316;&#26435;&#38480;</span>
+&#23545;&#35937;&#26435;&#38480; &#65306;&#22914;select ,update delete ,create index
+&#31995;&#32479; &#26435;&#38480; &#65306;&#22914;create session &#21363;&#36830;&#25509;&#21040;&#25968;&#25454;&#24211;
+grant [&#31995;&#32479;&#29305;&#26435;&#21517;][&#35282;&#33394;]  to [&#29992;&#25143;&#21517;&#21015;&#34920; ][public] [with admin option ]
+
+
+grant connect to jixiuf ; &#35282;&#33394;connect&#36171;&#20104;jixiuf  &#27492;&#29992;&#25143;&#21487;&#20197;&#36830;&#25509;&#21040;&#25968;&#25454;&#24211; connect,resource,dba &#19977;&#20010;&#37325;&#35201;&#35282;&#33394; ,&#25317;&#26377;resource &#21487;&#20197;&#22312;&#34920;&#31354;&#38388;&#24314;&#34920;&#65292; grant resource to jixiuf
+
+&#25480;&#26435;&#65306;
+grant select on tableName to jixiuf[ with grant option];  &#20855;&#26377;&#20102;select * from userName.tableName 
+grant select,update,delete on userName.tableName to jixiuf ;
+grant all on userName.table to jixiuf; &#22686;&#21024;&#25913;&#26597;&#26435;
+&#22914;&#26524;&#26159;&#23545;&#35937;&#26435;&#38480; &#21487;&#20197;&#21152;with grant option &#65292;
+&#33509;&#26159;&#31995;&#32479;&#26435;&#38480;  &#21017;&#24102;with admin option &#22914;:
+grant connnect to jixiuf with admin option;
+&#25910;&#22238;&#26435;&#38480; &#65306;
+revoke  select on emp from jixiuf;
+&#22914;&#33509;&#21152;&#20102;with grant option &#21017;revoke &#32423;&#32852;&#25910;&#22238;&#20854;&#20182;&#20154;&#30340;&#26435;&#38480; &#65292;with admin option &#22909;&#20687;&#19981;&#25910;&#22238;
+
+&#24314;&#31435;&#35282;&#33394;&#65306;
+    create role r1 [not identified] ;  &#24120;&#29992;
+    create role r2 [identified by password];
+&#35282;&#33394;&#25480;&#26435;
+     &#31995;&#32479;&#26435;&#38480;
+        grant create session to r1 [with admin option];
+        grant conecton to r1 ;&#25226;connect &#35282;&#33394;&#30340;&#26435;&#38480;copy &#19968;&#20221;&#32473;r1;select * from  ROLE_ROLE_PRIVS;
+    &#23545;&#35937;&#26435;&#38480;
+        GRANT SELECT ON SCOTT.EMP TO R1;
+&#25968;&#25454;&#23383;&#20856;&#65306;        SELECT * FROM DICT WHERE TABLE_NAME LIKE '%ROLE%';
+
+     
+
+ 
+<span class="org-level-2">** &#20351;&#29992;profile &#31649;&#29702;&#29992;&#25143;&#21475;&#20196;&#65292;profile &#26159;&#21475;&#20196;&#38480;&#21046;&#65292;&#36164;&#28304;&#38480;&#21046;&#30340;&#21629;&#20196;&#38598;&#21512;&#65292;&#24403;&#24314;&#31435;&#25968;&#25454;&#24211;&#26102;&#65292;oracle &#20250;&#33258;&#21160;&#24314;&#31435;&#21517;&#31216;&#20026;default &#30340;profile ,&#24403;&#24314;&#31435;&#29992;&#25143;&#27809;&#26377;&#25351;&#23450;profile&#65292;&#21017;&#40664;&#35748;&#29992;&#27492;&#39033;&#20998;&#37197;&#32473;&#29992;&#25143;</span>
+  (1) &#24080;&#25143;&#38145;&#23450;&#65306;
+  &#25351;&#23450;&#29992;&#25143;&#30331;&#38470;&#26102;&#26368;&#22810;&#21487;&#20197;&#36755;&#20837;&#21475;&#20196;&#30340;&#27425;&#25968;&#65292;&#25351;&#23450;&#38145;&#23450;&#26102;&#38388;&#65292;&#29992;dba &#36523;&#20221;&#25191;&#34892;&#27492;&#21629;&#20196;
+
+  create profile profile_name_lock_user limit failed_login_attempts 3 password_lock_time 2;
+  &#26368;&#22810;&#23581;&#35797;3&#27425;&#65292;3&#27425;&#30331;&#38470;&#19981;&#25104;&#21151;&#21017;&#19981;&#33021;&#32487;&#32493;&#30331;&#38470;&#65292;&#19981;&#25104;&#21151;&#21518;&#20801;&#35768;&#19979;&#27425;&#30331;&#38470;&#26102;&#38388;&#20026;2&#22825;&#21518;
+  alter user jixiuf profile  profile_name_lock_user;
+  create user jixiuf identified by jixiudf profile profile_name_lock_user;
+  &#35299;&#38145;&#65306;alter user jixiuf acoount unlock;
+  &#23450;&#26399;&#20462;&#25913;&#23494;&#30721;
+  create profile change_password limit password_life_time 10 password_grace_time 2
+  &#19968;&#20010;&#23494;&#30721;&#29992;10&#22825;&#21518;&#24517;&#39035;&#20462;&#25913;&#65292;&#23485;&#38480;&#26399;2&#22825;&#65292;&#36825;&#20004;&#22825;&#20250;&#25552;&#31034;&#29992;&#25143;&#20462;&#25913;&#23494;&#30721;
+&#20462;&#25913;&#23494;&#30721;alter user jixiuf identified by newpassword 
+  &#21475;&#20196;&#21382;&#21490;&#65306;&#29992;&#25143;&#19981;&#33021;&#20351;&#29992;&#20197;&#21069;&#29992;&#36807;&#30340;&#23494;&#30721;
+  create profile password_history limit password_life_time 10 password_grace_time 2 password_reuse_time 15 ; 15&#22825;&#21518;&#21487;&#20197;&#37325;&#29992;&#20197;&#21069;&#30340;&#23494;&#30721;
+  &#21024; &#38500;profile
+  drop profile password_history &#65307;&#23545;&#29992;&#25143;&#20316;&#30340;&#38480;&#21046;&#20316;&#24223;
+
+  conn system/root
+  shutdown ;
+      ORA-01031: insufficient privileges
+conn system/root as sysdba &#21482;&#26377;&#20316;&#20026;sysdba &#30331;&#38470;&#26102;&#25165;&#26377;startup shutdown  &#26435;&#38480;
+shutdown ; &#20851;&#38381;&#25968;&#25454;&#24211;
+startup; &#21551;&#21160;&#25968;&#25454;&#24211;
+
+ ---------------------------------&#22791;&#20221;&#19982;&#24674;&#22797;-----------------------------------------------------
+<span class="org-level-1">* &#22791;&#20221;&#19982;&#24674;&#22797;(&#23548;&#20837;&#23548;&#20986;)</span>
+<span class="org-level-2">** exp  </span>
+    &#23548;&#20986;: &#19977;&#31867; ,&#23548;&#20986;&#34920;&#65292;&#23548;&#20986;&#26041;&#26696;(&#19968;&#20010;&#29992;&#25143;&#23545;&#24212;&#19968;&#20010;&#26041;&#26696;)&#65292;&#23548;&#20986;&#25968;&#25454;&#24211; &#29992;exp &#21629;&#20196;
+    &#22312;&#23548;&#20837;&#21644;&#23548;&#20986;&#30340;&#26102;&#20505; &#35201;&#29992;&#21040;C:/oracle/product/10.1.0/Db_1/BIN/exp.exe
+    exp help=y &#26377;&#24110;&#21161;&#25552;&#31034;
+   
+    &#65288;1&#65289;&#23548;&#20986;&#34920;( &#20063;&#21487;&#20197;&#30452;&#25509;&#36755;&#20837; exp &#21629;&#20196;&#65292;&#20197;&#20132;&#20114;&#24335;&#36827;&#34892;&#22791;&#20221;)
+         1&#23548;&#20986;&#33258;&#24050;&#30340;&#34920;&#65306;
+             exp userid=scott/tiger@orcl  tables=(tableName1,tableName2) file=d:/tableName.dmp;
+         2 &#23548;&#20986;&#21035;&#20154;&#30340;&#34920;
+              exp userid=scott/tiger@orcl  tables=(userName.tableName1,userName.tableName2) file=d:/tableName.dmp;
+         3 &#23548;&#20986;&#34920;&#32467;&#26500;&#65292;&#65288;&#21152;&#19968;&#20010;rows=n  &#65289; n means no
+              exp userid=scott/tiger@orcl  tables=(userName.tableName1,userName.tableName2) file=d:/a.dmp rows=n
+
+         4&#30452;&#25509;&#23548;&#20986;&#26041;&#24335; :&#27604;&#24120;&#35268;&#23548;&#20986;&#36895;&#24230;&#24555;&#65288;&#21152;&#19968;&#20010;direct=y ,&#19987;&#38376;&#29992;&#20110;&#23548;&#20986;&#22823;&#34920;&#65289;
+              exp userid=scott/tiger@orcl  tables=(userName.tableName1,userName.tableName2) file=d:/a.dmp direct=y
+
+
+    (2) &#23548;&#20986;&#26041;&#26696;
+        1&#23548;&#20986;&#33258;&#24049;&#26041;&#26696;
+                exp userid=scott/tiger@orcl owner=scott file=d:/scott.dmp
+        2 &#23548;&#20986;&#20854;&#20182;&#30340;&#20154;&#26041;&#26696;
+                exp userid=system/root@orcl owner=(system,scott) file=d:/scott.dmp
+    (3) &#23548;&#20986;&#25968;&#25454;&#24211;( &#39035;&#20855;&#26377;dba &#26435;&#38480;&#65292;&#25110;&#32773;exp_full_database &#26435;&#38480;  full=y inctype=complete &#22686;&#37327;&#22791;&#20221;(&#31532;&#19968;&#27425;complete)
+                exp userid=system/root@orcl  full=y inctype=complete file=d:/scott.dmp
+       
+
+
+
+<span class="org-level-2">**    &#23548;&#20837; imp  (&#36873;&#39033;&#65306; userid tables fromuser touser file=d:/a.dmp full=y inctype=complete&#22686;&#37327;&#22791;&#20221;  rows=n&#19981;&#23548;&#20837;&#25968;&#25454;  ignore=y&#33509;&#34920;&#23384;&#22312;&#21017;&#21482;&#23548;&#25968;&#25454;)</span>
+    1 &#23548;&#20837;&#34920;
+         (1) &#23548;&#20837;&#33258;&#24050;&#30340;&#34920;
+               imp userid=scott/tiger@orcl file=d:/scott.dmp tables=emp;
+               imp  userid=system/root@orcl file=d:/d.dmp fromuser=scott touser=jixiuf tables=emp;
+            &#25226;scott.emp &#23548;&#20837;&#21040;&#29992;&#25143;jixiuf &#21517;&#19979;(&#21069;&#25552;&#26159;emp &#27809;&#26377;&#22806;&#38190;&#20851;&#32852;&#21040;&#20854;&#20182;&#34920;&#65292;&#21542;&#21017;&#65292;&#22240;&#20026;&#23427;&#20851;&#32852;&#30340;&#34920;&#24182;&#19981;&#22312;jixiuf&#20013;&#65292;1&#27861;&#23454;&#29616;&#20027;&#22806;&#38190;&#20851;&#32852;)
+        (2) &#21482;&#23548;&#20837;&#34920;&#30340;&#32467;&#26500;
+             imp userid=scott/tiger@orcl tables=(emp) file=d:/scott.dmp rows=n
+         (3) &#23548;&#20837;&#25968;&#25454;&#65306;
+             imp userid=scott/tiger@orcl tables=(emp) file=d:/scott.dmp  ignore=y
+
+     2 &#23548;&#20837; &#26041;&#26696;
+        (1)&#23548;&#20837;&#33258;&#36523;&#26041;&#26696;
+            imp userid=scott/tiger  file=d:/scott.dmp
+        (2) &#23548;&#20837;&#20182;&#20154;&#26041;&#26696;
+             imp userid=system/root fromuser=scott touser=jixiuf  file=d:/scott.dmp
+        (3)&#23548;&#20837;&#25968;&#25454;&#24211;
+             imp userid=system/root full=y file=d:/scott.dmp
+         
+             
+             &#27880;&#24847;&#23548;&#20837;&#30340;&#25968;&#25454;&#21487;&#33021;&#20250;&#19982;&#24050;&#26377;&#30340;&#25968;&#25454;&#37325;&#22797;&#65288;&#22914;&#26524;&#21407;&#26469;&#30340;&#25968;&#25454;&#27809;&#20002;&#22833;&#65292;&#21364;&#36816;&#34892;&#20102;&#23548;&#20837;&#19968;&#27425;&#21629;&#20196; &#21017;&#21487;&#33021;&#25968;&#25454;&#37325;&#22797; &#65292;&#24910;!!!&#65289;
+<span class="org-level-1">* -------------------------&#25968;&#25454;&#23383;&#20856;-----------------------------------------------------</span>
+user_xxx, all_xxx ,dba_xxx &#22914;user_tables  dba_roles
+dba_users,dba_sys_privs dba_tab_privs dba_col_privs dba_role_privs
+select username ,user_id ,password from dba_users; &#26597;&#29992;&#25143;&#30340;&#20449;&#24687;
+select * from dba_role_privs where grantee='JIXIUF'; &#26597;jixiuf&#25152;&#20855;&#26377;&#30340;role
+select * from dba_roles &#26597;oracle &#20855;&#26377;&#30340;role
+&#26597;&#19968;&#20010;&#35282;&#33394;&#20855;&#26377;&#30340;&#26435;&#38480;&#65288;&#31995;&#32479;&#26435;&#38480;&#65292;&#23545;&#35937;&#26435;&#38480;&#65289;
+desc dba_sys_privs
+  select * from dba_sys_privs where grantee='CONNECT'; &#25110;&#32773;select * from  role_sys_privs where role='CONNECT'  &#21518;&#32773;&#20197;as sysdba &#36830;&#25509;&#65292;&#25165;&#21487;&#20197;&#26174;&#31034;&#20840;&#65292;&#65311;&#65311;&#65311;
+  select * from dba_tab_privs where grantee='RESOURCE';
+
+  &#25968;&#25454;&#23383;&#20856;&#30340;&#25968;&#25454;&#23383;&#20856;dict
+select * from dict where commonts like '%TABLES%'
+
+
+SELECT * FROM GLOBAL_NAME; &#26597;&#35810;&#24403;&#21069;&#20351;&#29992;&#30340;&#25968;&#25454;&#24211;orcl
+
+<span class="org-level-1">* ----------------&#34920;&#31354;&#38388;-----------------------------------</span>
+&#27573; &#21306; &#22359;
+create tablespace tsName1 datafile 'd:/a.dbf' size 20m uniform  size 128k  &#22823;&#23567;20M  &#21306;&#30340;&#22823;&#23567; 128k
+
+create table t(id int) tablespace tsName1;
+select * from all_tables where tablespace_name='TSNAME1';
+&#34920;&#31354;&#38388;&#29366;&#24577;, online offline &#32852;&#26426;(&#21487;&#35835;&#20889;)&#65292;&#33073;&#26426;(&#19981;&#21487;&#35835;&#20889;&#65292;&#31995;&#32479;&#32500;&#25252;) &#21482;&#35835;&#34920;&#31354;&#38388;
+alter tablespace tsName1 offline
+alter tablespace tsName1  read only;
+alter tablespace tsName1  read write;
+&#21024;&#38500;&#34920;&#31354;&#38388;
+drop tablespace tsname1 [ including contents [  and datafiles ] ]
+&#25193;&#23637;&#34920;&#31354;&#38388;
+  1 &#22686;&#21152;&#25968;&#25454;&#20214;
+    alter tablespace tsname1 add datafile 'd:/b.dbf' size 10M
+  2  &#22686;&#21152;datafile&#30340;&#22823;&#23567;
+    alter tablespace tsname1   'd:/b.dbf' resize 30M (?????)
+  3  &#35774;&#32622;file &#33258;&#21160;&#22686;&#38271;
+alter tablespace tsname1  'd:/a.dbf' autoextend on next 10m maxsize 500m
+  
+&#31227;&#21160;datafile  (&#30913;&#30424;&#25439;&#22351;&#65292;&#20294;datafile &#21306;&#22495;&#26410;&#22351;&#65292;&#21487;&#31227;&#32780;&#29992;&#20043;)
+    1 select tablespace_name from dba_data_files where file_name='D:/A.DBF';
+            tableSpaceName1
+    2 alter tablespace tableSpaceName1 offline
+    3 host move d:/a.dbf c:/a.dbf
+    4 alter tablespace tableSpaceName1 rename datafile 'd:/a.dbf' to 'c:/a.dbf'
+    t alter tablespace tableSpaceName1 online
+
+    &#30456;&#24212;&#25968;&#25454;&#23383;&#20856;&#65306;
+    dba_tablespaces  dba_data_files
+
+<span class="org-level-1">* &#32034;&#24341; index ------------------------------------------------------------------------------------</span>
+ 
+1&#38190;&#21387;&#32553;index
+ 
+--&#22240;job &#21015;&#26377;&#24456;&#22810;&#37325;&#22797;&#20449;&#24687;(&#21363;&#24456;&#22810;&#20154;&#30340;job&#26159;&#21516;&#19968;&#31867;&#22411;&#30340;)&#65292;&#20110;&#26159;&#26222;&#36890; &#30340;&#32034;&#24341;&#23601;&#20250;&#23548;&#33268;job &#37325;&#22797;&#29983;&#25104;&#32034;&#24341;
+&#20026;&#27492;&#21487;&#20197;&#21387;&#32553;&#65288;job&#65292;name&#65289; &#20197;&#33410;&#30465;&#31354;&#38388;&#65292;&#21363;&#21516;&#19968;&#20010;job &#21482;&#24314;&#19968;&#20010;&#65288;&#26080;&#37325;&#22797;&#29616;&#35937;&#65289;&#65292;&#32780;&#21518;&#21363;&#30340;name &#20849;&#20139;&#21069;&#32512;&#39033; job&#65292;&#25972;&#20010;&#65288;job&#65292;name&#65289;&#32034;&#24341;&#21487;&#20197;&#33410;&#30465; compress &#34920;&#31034;&#21387;&#32553;&#65292;&#32780;1&#34920;&#31034;&#21387;&#32553;&#65288;job,name&#65289;&#31532;&#19968;&#39033;&#65292;&#21363;job&#39033;
+create index idxemp on emp(job,ename) compress 1 ;
+
+2 &#20998;&#21306;&#32034;&#24341;&#65288;&#32034;&#24341;&#23384;&#20648;&#22312;&#19981;&#21516;&#30340;&#20998;&#21306;&#65289;
+     &#25454;&#34920;&#26159;&#21542;&#20998;&#21306;&#65292;&#20998;&#20026;
+   2.1 &#26412;&#22320;&#32034;&#24341; (&#26412;&#22320;&#21069;&#32512;&#32034;&#24341;&#65292;&#26412;&#22320;&#26080;&#21069;&#32512;&#32034;&#24341;)
+    2.2&#20840;&#23616;&#32034;&#24341;(&#22522;&#20110;&#25972;&#20010;&#34920;&#24314;&#32034;&#24341;)
+
+
+&#31751;cluster--------------------------------------------------------------------
+ 
+&#26377;&#20844;&#20849;&#21015;&#30340;&#20004;&#20010;&#25110;&#22810;&#20010;&#34920;&#30340;&#38598;&#21512;&#65288;&#23384;&#20648;&#20004;&#20010;&#34920;&#30340;&#37325;&#22797;&#21015;&#65289;&#20943;&#23569;io&#33410;&#30465;&#31354;&#38388;&#65292;&#25554;&#20837;&#25968;&#25454;&#24930;
+&#31751;&#34920;&#20013;&#30340;&#25968;&#25454;&#23384;&#20648;&#22312;&#20844;&#20849;&#25968;&#25454;&#22359;&#20013;(&#22914;&#26377;&#20027;&#22806;&#38190;&#20851;&#31995;&#30340;&#34920;)
+&#31751;&#38190;&#65306;&#31751;&#20013;&#30340;&#21807;&#19968;&#26631;&#35782;&#31526;&#65292;&#29992;&#20110;&#33719;&#21462;&#34892;
+&#20808;&#24314;&#31751;&#65292;&#21518;&#24314;&#32452;&#25104;&#31751;&#30340;&#34920;
+-- &#20844;&#20849;&#23383;&#27573;&#21487;&#20197;&#19981;&#21482;&#19968;&#20010;
+create cluster class_cluster (classNo number) tablespace users;
+&#20026;&#31751;&#24314;&#32034;&#24341;
+create index cluster_index_class on cluster class_cluster;
+--&#34920;&#31034;classes &#34920;&#30340;classNo_&#23383;&#27573;&#23384;&#20648;&#21040;class_cluster &#20013;
+create table classes (classNo_ number ,className varchar2(22)) cluster class_cluster(classNo_);
+create table student (studentName varchar2(22),studentNo number, classNo number) cluster class_cluster (classNo);
+
+&#20197;&#19978;&#20004;&#20010;&#34920;&#30340;classNo classNo_ &#20854;&#23454;&#37117;&#26159;class_cluster &#30340;
+
+
+ ---------------------------------------------------------------------------------------------
+&#28155;&#21152;&#23383;&#27573;
+alter table student add (desc_ varchar2(20));
+
+ &#20462;&#25913;&#23383;&#27573;&#38271;&#24230;:
+ alter table student modify (description_ varchar2(300));
+
+ &#21024; &#38500;&#19968;&#20010;&#23383;&#27573;
+ alter table student drop column col_name;
+
+ &#20462;&#25913;&#34920;&#21517; ;
+ rename studnt to stu;
+
+ &#20462;&#25913;&#26085;&#26399;&#26684;&#24335;
+ alter session set nls_date_format='yyyy-mm-dd';
+
+ &#28155;&#21152; &#31354;&#20540;
+ insert into stud values (1,null);
+
+ &#26356;&#26032;
+ update student set sex='nu',name=''  where xh='';
+ &#21024; &#38500;
+ delete from student
+ drop table student
+ truncate table student ,&#19981;&#20889;&#26085;&#24535;
+ alter table emp add constraint pk_p1 primary key (id);
+ alter table emp drop constraint pk_p1 ;
+ 
+&#22238;&#28378;
+savepoint a;
+delete from studnet ;
+rollback to a;
+
+&#23383;&#31526;&#21512;&#24182;&#20004;&#20010;&#31446;&#32447;
+select '&#22995;&#21517;&#65306;'||name from emp;
+
+&#23383;&#31526;&#20989;&#25968;
+lower() upper() substr(str,pos,len) replace(str,oldStr,newStr)
+     null--&gt;default &#22914;&#26524;comm &#20026;null &#21017;&#20197;0&#20026;&#40664;&#35748;&#20540;
+     select nvl(comm,0) from emp;  
+
+&#26085;&#26399;&#20989;&#25968; &#65306;
+select current_date,sysdate from dual;
+select * from emp where sysdate&gt;add_months(hiredate,8) &#26597;&#20843;&#20010;&#26376;&#20197;&#21069;&#30340;&#21592;&#24037;&#20837;&#32844;&#30340;
+select sysdate-hiredate as &#20837;&#32844;&#22825;&#25968; from emp;
+&#24403;&#26376; &#26368;&#21518;&#19968;&#22825;
+select hiredate,last_day(hiredate) from emp;
+select to_char(hiredate,'yyyy-mm-dd hh24:mi:ss') from emp;   
+update emp set hiredate=to_date('1988-09-09', 'yyyy-mm-dd');
+
+&#24403;&#21069;&#20351;&#29992;&#30340;&#25968;&#25454;&#24211;&#21517;&#65306;
+select sys_context('USERENV','db_name') FROM DUAL;
+&#24403;&#21069;&#20351;&#29992;&#30340;&#35821;&#35328;
+select sys_context('USERENV','language') from dual;
+select sys_context('USERENV','session_user') from dual;
+select sys_context('USERENV','current_schema') from dual;
+   
+-----------------------------------------------------------------------------------------
+
+
+
+<span class="org-level-1">*  ------------------------------ps/sql-----------------------------------------------</span>
+
+procedure ---------------------------------------------------------------------------
+&#21487;&#20197;&#29992;desc &#26597;&#19968;&#20010;procedure
+desc sp_pro1;
+&#21487;&#20197;&#22312;procedure &#20013;&#20351;&#29992;return &#65292;&#32467;&#26463;&#27492;procedure
+user_source &#34920;&#20013;&#26377;&#26356;&#35814;&#32454;&#30340;&#20449;&#24687;
+select text from user_source where name='SP_PRO1';
+
+
+pl/sql &#20197;&#22359;&#20026;&#21333;&#20301;
+-----------------------------
+--&#27880;&#24847;&#65292;procedure &#30340;&#21517;&#31216;&#26159;sp_pro1 &#22914;&#26524;&#26377;&#21442;&#25968;&#65292;&#21017;&#22768;&#26126; &#22914;&#21516;
+--create  or replace procedure sp_pro1(name varchar2) is
+--&#26080;&#21442;&#25968;&#26102;&#21152;&#19978;&#25324;&#21495;&#22909;&#20687;&#32534;&#35793;&#19981;&#36890;&#36807;
+create  or replace procedure sp_pro1 is
+--&#27492;&#22788;&#19981;&#38656;&#35201; declare &#20851;&#38190;&#23383;
+   v_var_name varchar2(255); 
+begin
+   insert into scott.t values (1);
+end ;
+--&#27880;&#24847;end &#21518;&#30340;&#20998;&#21495;
+/
+--&#36755;&#20837;&#26012;&#26464;&#23436;&#25104;
+
+--&#35843;&#29992; call sp_pro1() ;&#25110;&#32773; exec sp_pro1()
+
+------------------------------------
+set serveroutput on
+begin
+  dbms_output.put_line('hello');
+end;
+/
+----------------------------------
+&#22359;
+
+set serveroutput on
+declare
+       v_ename varchar2(5);
+       v_empno varchar2(5);
+begin
+       select ename, empno into v_ename ,v_empno from emp where empno=&amp;no;
+       dbms_output.put_line('&#23545;&#24212;&#30340;'||v_empno||'&#30340; &#29992;&#25143;&#21517;&#65306;'|| v_ename);
+
+exception
+      when
+           no_data_found
+      then
+           dbms_output.put_line('&#23545;&#24212;&#25968;&#25454;&#26410;&#25214;&#21040;');
+   
+end;
+/
+------------------------------------------------------------
+&#21487;&#20197;&#22312;&#19968;&#20010;procedure &#20013;&#35843;&#29992;&#21478;&#19968;&#20010;procedure &#22914;:
+procedure sp_getSal(p_ename in  varchar2,p_returnSal out  number) is
+ begin
+    select sal into p_returnSal from emp where ename=p_ename;
+ end;
+
+
+
+  create or replace procedure call_sp_getSal is
+  v_ename emp.ename%type:='SCOTT';
+ v_returnSal emp.sal%type;
+ BEGIN
+ --&#27492;&#22788;&#35843;&#29992;&#20102;sp_getSal&#36807;&#31243;
+ sp_getSal(v_ename,v_returnSal);
+   dbms_output.put_line(v_returnSal);
+   end;
+   /
+ 
+
+   call call_sp_getSal();
+-------------java &#35843;procedure-----------------
+
+--&#25454;&#29992;&#25143;&#21517;&#21435;&#20462;&#25913;&#24037;&#36164;
+create or replace procedure sp_updateSalDependOnEname(p_ename varchar2,p_newSal number) is
+begin
+    update emp set sal=p_newSal where ename=p_ename;
+end;
+/
+
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.DriverManager;
+//&#39318;&#20808;&#35201;&#22312;oracle &#20013;&#36816;&#34892;&#19979;&#38754;&#30340;&#20195;&#30721;&#65292;&#21019;&#24314;sp_updateSalDependOnEname&#23384;&#20648;&#36807;&#31243;
+//java &#35843;oracle &#23384;&#20648;&#36807;&#31243;
+//// --&#25454;&#29992;&#25143;&#21517;&#21435;&#20462;&#25913;&#24037;&#36164;
+//--&#25454;&#29992;&#25143;&#21517;&#21435;&#20462;&#25913;&#24037;&#36164;
+//create or replace procedure sp_updateSalDependOnEname(p_ename varchar2,p_newSal number) is
+//begin
+//    update emp set sal=p_newSal where ename=p_ename;
+//end;
+///
+public class OracleJDBCTest {
+
+    public static void main(String[] args) throws Exception {
+        Class.forName("oracle.jdbc.driver.OracleDriver").newInstance();
+        Connection conn = DriverManager
+                .getConnection("jdbc:oracle:thin:@127.0.0.1:1521:ORCL","scott","tiger");
+        CallableStatement stmt = conn
+                .prepareCall("{call sp_updateSalDependOnEname(?,?) }");
+        stmt.setString(1, "SCOTT");
+        stmt.setInt(2, 300);
+        stmt.execute();
+        stmt.close();
+
+    }
+
+}
+&#26377;&#36820;&#22238;&#20540;&#30340;&#23384;&#20648;&#36807;&#31243; ---------------------------------------------------------------------
+ --&#27880;&#24847;&#20851;&#38190;&#23383; in out &#65292;&#21442;&#25968;&#20013;  &#40664;&#35748;&#20026;in &#26377;( in  ,out ,in out &#19977;&#31181;&#27169;&#24335;&#65292;&#26368;&#21518;&#19968;&#31181;&#34920;&#31034;&#36825;&#20010;&#21442;&#25968;&#21487;&#20197;&#24448;&#37324;&#20256;&#19968;&#20010;&#20540; &#65292;&#24182;&#19988; &#36820;&#22238;&#20540; &#20063;&#21487;&#20197;&#25918;&#21040;&#36825;&#20010;&#21442;&#25968;&#37324;&#38754;&#65292;&#20174;&#32780;&#23454;&#29616;&#20256;&#20837;&#20256;&#20986;&#21482;&#29992;&#19968;&#20010;&#21442;&#25968;&#23601;&#21487;&#20197;&#23454;&#29616;)
+//&#20256;&#20837;&#29992;&#25143;&#21517;&#65292;&#36820;&#22238;&#20854;&#24037;&#36164;&#21040;p_returnSal &#21442;&#25968;&#20013;
+  create or replace procedure sp_getSal(p_ename in  varchar2,p_returnSal  out  number) is
+ begin
+    select sal into p_returnSal from emp where ename=p_ename;
+ end;
+ /
+
+
+    public static void main(String[] args) throws Exception {
+        Class.forName("oracle.jdbc.driver.OracleDriver").newInstance();
+        Connection conn = DriverManager.getConnection(
+                "jdbc:oracle:thin:@127.0.0.1:1521:ORCL", "scott", "tiger");
+        CallableStatement stmt = conn.prepareCall("{call sp_getSal(?,?) }");
+        stmt.setString(1, "SCOTT");
+        stmt.registerOutParameter(2, oracle.jdbc.OracleTypes.NUMBER);
+        stmt.execute();
+        int sal = stmt.getInt(2);
+        System.out.println("scott&#30340;&#24037;&#36164;&#65306;" + sal);
+        stmt.close();
+
+    }
+ --------------------------------------------------------------------
+ &#26377;&#36820;&#22238;&#20540; &#30340;procedure &#65292;&#19988;&#36820;&#22238;&#30340;&#26159;&#19968;&#20010;&#32467;&#26524;&#38598;&#65292;&#32780;&#19981;&#26159;&#19968;&#20010;&#20540; &#65292;
+ &#38656;&#35201; &#29992;&#21040;package ,package &#20013;&#19968;&#20010;&#20010;&#28216;&#26631;&#21464;&#37327;&#31867;&#22411;
+ create or replace package pack_return is
+   type emp_cursor is ref cursor;
+   end;
+   /
+ create or replace procedure sp_getEmps(p_deptno number, p_cursor out pack_return.emp_cursor) is
+ begin
+       open p_cursor for select * from emp where deptno=p_deptno;
+ end ;
+/
+public static void main(String[] args) throws Exception {
+        Class.forName("oracle.jdbc.driver.OracleDriver").newInstance();
+        Connection conn = DriverManager.getConnection(
+                "jdbc:oracle:thin:@127.0.0.1:1521:ORCL", "scott", "tiger");
+        CallableStatement stmt = conn.prepareCall("{call sp_getEmps(?,?) }");
+        stmt.setInt(1, 20);
+        stmt.registerOutParameter(2, oracle.jdbc.OracleTypes.CURSOR);
+        stmt.execute();
+        ResultSet rs = (ResultSet) stmt.getObject(2);
+
+        System.out.println("&#23646;&#20110;20&#21495;&#37096;&#38376;&#30340;&#21592;&#24037;&#26377;");
+        while (rs.next()) {
+            String name = rs.getString("ename");
+            int sal = rs.getInt("sal");
+            Date hireDate = rs.getDate("hiredate");
+            System.out.println("&#22995;&#21517;&#65306;" + name + "&#24037;&#36164;&#65306;" + sal + "&#19978;&#23703;&#26085;&#26399;" + hireDate);
+
+        }
+
+        stmt.close();
+
+    }
+
+ 
+&#36807;&#31243;&#35843;&#29992;&#20013;&#30340;&#20107;&#21153;&#22788;&#29702; pragma autonomous_transaction&#33258;&#20027;&#20107;&#21153;&#22788;&#29702;   ------------------------------------------------------------------------------
+create or replace procedure initDataForTestTranasction is
+begin
+      delete from dept where deptno in (55,66);
+      insert into dept values (55,'init' ,'test');
+      insert into dept values (66,'init66' ,'test');
+      COMMIT;
+end;
+/
+ create or replace  procedure p3 is
+ begin
+    update dept set dname='p3' where deptno=55;
+    --&#27880;&#24847;&#36825;&#26465;&#22238;&#28378;&#35821;&#21477;&#65292;&#27979;&#35797;&#22312;p4() &#20013;&#35843;&#29992;p3()  &#23427;&#22238;&#28378;&#21040;&#20309;&#22788;
+ rollback ;
+ end;
+ /
+
+ create or replace procedure p4 is
+   v_dname dept.dname%type;
+ begin
+      initDataForTestTranasction();--&#21021;&#22987;&#21270;&#27979;&#35797;&#25968;&#25454;
+     update dept set  dname='p4' where deptno=66 ;
+     p3();
+
+
+--&#27979;&#35797;
+     select dname into v_dname from dept  where deptno=55;
+     dbms_output.put_line( ' &#20869;&#23618;&#20107;&#21153;&#35821;&#21477;&#32467;&#26524;  55.dname='|| v_dname);
+     select dname into v_dname from dept  where deptno=66;
+     dbms_output.put_line( '&#22806;&#23618;&#35821;&#21477;&#32467;&#26524;      66.dname='|| v_dname);
+
+     dbms_output.put_line( '&#22914;&#26524;66.dname=init66&#27809;&#21464;,&#21017;&#65292;&#20869;&#23618;p3() &#37324;&#30340;&#20107;&#21153;&#35821;&#21477;&#20063;&#22238;&#28378;&#20102;&#22806;&#23618;p4&#30340;&#35821;&#21477;');
+     dbms_output.put_line( '&#22914;&#26524; 66.dname=p4 ,&#21017;p3()&#20869;&#30340;&#22238;&#28378;&#35821;&#21477;&#26410;&#24433;&#21709;&#22806;&#23618;&#30340;&#35821;&#21477;');
+
+ end;
+/
+ call p4();
+&#20026;&#20102;&#20445;&#35777;&#36807;&#31243;p3 &#30340;&#22238;&#28378;&#35821;&#21477;&#21482;&#24433;&#21709;&#36807;&#31243;p3&#26412;&#36523;&#65292;&#21487;&#20197;&#21033;&#29992;&#33258;&#20027;&#20107;&#21153;&#22788;&#29702;  pragma autonomous_transaction
+&#34920;&#31034; p4&#20013;&#35843;&#29992;p3()  &#20250;&#21551;&#21160;&#19968;&#20010;&#26032;&#20107;&#21153;, &#22240;&#20026;&#24320;&#21551;&#20102;&#19968;&#20010;&#26032;&#20107;&#21153;&#65292;&#25152;&#20197;&#38656;&#35201;&#22312;&#36807;&#31243;&#20018;&#26377;&#26174;&#24335;&#30340;&#20107;&#21153;&#25552;&#20132;&#25110;&#22238;&#28378;
+
+  create or replace  procedure p3 is
+   pragma autonomous_transaction;
+ begin
+    update dept set dname='p3' where deptno=55;
+ rollback ;
+ end;
+ /
+ &#20877;&#27425;&#35843;&#29992;call p4();    p3()&#20869;&#30340;&#22238;&#28378;&#35821;&#21477;&#65292;&#26410;&#24433;&#21709;&#21040;p4&#30340;&#35821;&#21477;&#65292;
+ 
+ 
+&#36825;&#31181;&#35299;&#20915;&#26041;&#26696;&#65292;&#26377;&#19968;&#20010;&#38382;&#39064;&#65292;&#21363;&#27515;&#38145;&#65292;&#21363;&#22806;&#23618;&#20107;&#21153;&#65292;&#19982;&#20869;&#23618;&#20107;&#21153;&#22788;&#29702;&#30340;&#26159;&#21516;&#19968;&#34892;&#25968;&#25454;&#65292;&#21017;&#20250;&#20986;&#29616;&#27515;&#38145;(&#22914;&#26524;&#22788;&#29702;&#30340;&#19981;&#26159;&#21516;&#19968;&#26465;&#25968;&#25454;&#65292;&#21017;&#19981;&#20250;&#27515;&#38145;)
+&#26426;&#29702;  1&#22806;&#23618;&#20107;&#21153;&#26242;&#20572;
+              2 &#24320;&#21551;&#20869;&#23618;&#20107;&#21153;
+                  |
+                  |
+                 <span class="italic">/|/</span>
+              3 &#20851;&#38381;&#20869;&#23618;&#20107;&#21153;
+     4 &#37325;&#21551;&#22806;&#23618;&#20107;&#21153;&#36827;&#34892;&#22788;&#29702;
+     5&#20851;&#38381;&#22806;&#23618;&#20107;&#21153;&#65292;
+1&#22788;&#20250;&#38145;&#23450;&#19968;&#20123;&#25968;&#25454;(&#22240;&#20026;&#22806;&#23618;&#20107;&#21153;&#36824;&#26410;&#25552;&#20132;)&#65292;&#32780;&#22914;&#26524;2&#65292;3 &#20043;&#38388;&#22788;&#29702;&#30340;&#25968;&#25454;&#26159;1&#38145;&#23450;&#30340;&#65292;&#21017;&#20250;&#20986;&#29616;&#27515;&#38145;
+&#27979;&#35797;&#27515;&#38145;
+  create or replace procedure p5 is
+   v_dname dept.dname%type;
+ begin
+      initDataForTestTranasction();--&#21021;&#22987;&#21270;&#27979;&#35797;&#25968;&#25454;
+     --update dept set  dname='p4' where deptno=66 ;
+     --&#25226;&#27492;&#22788;&#25913;&#20026;55 &#65292;&#21363;&#22806;&#23618;p4()&#22788;&#29702;&#25968;&#25454;55 &#65292;&#20869;&#23618;p3()&#20063;&#22788;&#29702;&#30456;&#21516;&#30340;&#34892;&#65292;&#21017;&#20250;&#27515;&#38145;
+     update dept set  dname='p4' where deptno=55 ;
+     p3();
+
+     --&#27979;&#35797;
+     select dname into v_dname from dept  where deptno=55;
+     dbms_output.put_line( ' &#20869;&#23618;&#20107;&#21153;&#35821;&#21477;&#32467;&#26524;  55.dname='|| v_dname);
+     select dname into v_dname from dept  where deptno=66;
+     dbms_output.put_line( '&#22806;&#23618;&#35821;&#21477;&#32467;&#26524;      66.dname='|| v_dname);
+
+     dbms_output.put_line( '&#22914;&#26524;66.dname=init66&#27809;&#21464;,&#21017;&#65292;&#20869;&#23618;p3() &#37324;&#30340;&#20107;&#21153;&#35821;&#21477;&#20063;&#22238;&#28378;&#20102;&#22806;&#23618;p4&#30340;&#35821;&#21477;');
+     dbms_output.put_line( '&#22914;&#26524; 66.dname=p4 ,&#21017;p3()&#20869;&#30340;&#22238;&#28378;&#35821;&#21477;&#26410;&#24433;&#21709;&#22806;&#23618;&#30340;&#35821;&#21477;');
+ end;
+/
+ call p5();-- &#27979;&#35797;&#27515;&#38145;
+
+
+&#20010;&#20154;&#24863;&#35273;&#65292;&#22914;&#26524;&#35201;&#26377;&#20107;&#21153;&#30340;&#22238;&#28378;&#26368;&#22909;&#35774;&#32622;&#22238;&#28378;&#28857;,&#24182;&#19988;&#26174;&#24335;&#25552;&#20132;&#25110;&#22238;&#28378;
+
+&#22914;p3&#25913;&#20026;&#22914;&#19979;&#25152;&#31034;&#65292;&#21017;call p5();&#20063;&#19981;&#20250;&#20986;&#29616;&#27515;&#38145;(&#22240;&#20026;&#26377;&#26126;&#30830;&#30340;&#22238;&#28378;&#21040;&#20309;&#22788;&#30340;&#35821;&#21477;)
+
+   create or replace  procedure p3 is
+ begin
+  savepoint a;
+    update dept set dname='p3' where deptno=55;
+ rollback  to a ;
+ end;
+ /
+
+
+
+
+
+
+
+&#21487;&#20197;&#22312;&#19968;&#20010;&#36807;&#31243;&#20013;&#35843;&#29992;&#21478;&#19968;&#20010;&#36807;&#31243;&#65292;&#20174;&#32780;&#23454;&#29616;&#36807;&#31243; &#30340;&#37325;&#29992;
+--------------------------------------
+
+-----------------function----------------------------------------------------------------
+------------------------------ &#21442;&#25968;&#20063;&#21487;&#20197;&#26159; out&#30340;&#20294;&#19981;&#22810;&#29992;( in , out ,in out )&#65292;&#22240;&#26377;return -----------------------------------------------------------
+--&#36755;&#20837;&#38599;&#21592;&#22995;&#21517;&#65292;&#36820;&#22238;&#38599;&#21592;&#24180;&#34218;
+create or replace function  fun_getSal(p_ename varchar2)
+    return number is  yearSal number(7,2);
+    begin
+        select sal*12+nvl(comm,0)*12 into yearSal from emp where ename=p_ename;
+        return yearSal;
+    end;
+
+--------------    &#35843;&#29992; --
+
+    --&#22768;&#26126; &#20840;&#23616;&#21464;&#37327; &#29992;&#20110;&#23384;&#20648;fun_getSal() &#30340;&#36820;&#22238;&#20540;
+    var v number
+             --&#35843;&#29992;  &#27880;&#24847;&#21464;&#37327;v  &#21069;&#30340;&#20882;&#21495;&#65292;&#34920;&#31034;v &#20840;&#23616;&#21464;&#37327;
+    call fun_getSal('SCOTT') into :v ;
+            --&#25171;&#21360;&#32467;&#26524;
+    print v;
+    ---------------java &#35843;&#29992;
+        import java.sql.Connection;
+        import java.sql.DriverManager;
+        import java.sql.PreparedStatement;
+        import java.sql.ResultSet;
+        public class OracleFunctionTest {
+            public static void main(String[] args) throws Exception {
+                Class.forName("oracle.jdbc.driver.OracleDriver").newInstance();
+                Connection conn = DriverManager.getConnection(
+                        "jdbc:oracle:thin:@127.0.0.1:1521:ORCL", "scott", "tiger");
+                PreparedStatement stmt = conn.prepareStatement("select fun_getSal(?) from dual");
+                stmt.setString(1, "SCOTT");
+                ResultSet rs = stmt.executeQuery();
+                rs.next();
+                int yearSal = rs.getInt(1);
+                stmt.close();
+                System.out.println("scott &#30340;&#24180;&#34218;" + yearSal);
+            }
+
+        }
+           
+
+-----------&#21253;------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------
+--&#36923;&#36753;&#19978;&#32452;&#21512;procedure function  &#21450;&#20854;&#20182;&#25968;&#25454;&#23545;&#35937;
+create or replace package pack_test is
+      procedure sp_updateSalDependOnEname(p_ename varchar2,p_newSal number);
+      function fun_getSal(p_ename varchar2) return number;
+end ;
+
+
+---------------------------------------
+--&#32473;&#21253;&#23454;&#29616;&#21253;&#20307;&#65292; (&#20808;&#24314;&#21253;&#22836;&#65292;&#20877;&#24314;&#21253;&#20307;)
+create or replace package body pack_test is
+    procedure sp_updateSalDependOnEname(p_ename varchar2,p_newSal number)
+         is
+            begin
+                update emp set sal=p_newSal where ename=p_ename;
+                dbms_output.put_line('------jixiuf&#25968;&#25454;&#24050;&#26356;&#26032;---');
+            end;
+
+     function  fun_getSal(p_ename varchar2) return number
+         is
+                yearSal number(7,2);
+            begin
+                select sal*12+nvl(comm,0)*12 into yearSal from emp where ename=p_ename;
+                return yearSal;
+            end;
+
+end;
+/
+
+&#35843;&#29992; call  pack_test.sp_updateSalDependOnEname('SCOTT',1);
+
+&#19968;&#20123;&#20869;&#32622;&#21253;:
+1 ,dbms_output &#21253;&#30340;&#36807;&#31243;
+   enable ,disable ,put ,put_line,new_line,get_line,get_lines
+
+   begin
+     dbms_output.put('1111111');--&#21482;&#26159;&#25226;&#23427;&#21644;&#21040;&#32531;&#20914;&#21306;&#65292;&#36755;&#19981;&#20986;&#26469;&#65292;&#35201;&#29992;put_line
+     dbms_output.put_line('22222'); --&#36825;&#26679;&#20250;&#25226;&#32531;&#20914;&#21306;&#30340;111111,&#19982;22222&#19968;&#36215;&#36755;&#20986;
+   end;
+   dbms_lob.--------------------------------------------------------------------------------
+2dbms_lob &#25805;&#20316;&#22823;&#22411;&#23545;&#35937;  (&#26222;&#36890;&#29992;&#25143;&#23545;&#20854;&#27809;&#26377;&#25805;&#20316;&#26435;&#38480;,&#35201;&#29992;system )
+       apend ,compare copy erase fileclose fileexists filegetname getlength
+       
+       conn system/root ;
+      1  create table downFileList(
+               id number primary key,
+               name varchar2(40) not null,--&#25991;&#20214;&#21517;
+               filelocation bfile, <span class="italic">/*&#25991;&#20214;&#23384;&#25918;&#20301;&#32622; binary file lob */</span>
+               description clob   <span class="italic">/*&#25991;&#20214;&#25551;&#36848;*/</span>
+               );
+       2&#27880;&#20876;&#30446;&#24405;
+          create or replace directory filedir1 as 'c:/filedir_for_oracle';
+           --create or replace directory  &#30446;&#24405;&#21517; as '&#26412;&#22320;&#25110;&#32593;&#32476;&#30446;&#24405;&#21517;';
+            --&#26684;&#24335; '//&#26381;&#21153;&#22120;&#21517;/&#30446;&#24405;&#21517;'
+       3  &#25554;&#20837;&#25968;&#25454;
+       &#27880;&#24847;&#20989;&#25968; bfilename(param1,param2)  ,param1 &#26159;&#19978;&#36848;&#21019;&#24314;&#30340;directory:filedir1 , &#31532;&#20108;&#20010;&#21442;&#25968;&#26159;&#25991;&#20214;&#21517;  &#20063;&#23601;&#26159;c:/filedir_for_oracle/oracle&#25945;&#31243;.txt
+          insert into downFileList values (1001,'orcle&#25945;&#31243;',bfilename( upper('filedir1'),'oracle&#25945;&#31243;.txt'  ),'abcdefg&#24040;&#37327;&#23383;&#31526;&#65292;&#25551;&#36848;&#27492;&#20070;abc');
+
+          4  select id ,name ,description from downFilelist ;
+          &#23454;&#38469;c:/filedir_for_oracle/oracle&#25945;&#31243;.txt &#24182;&#19981;&#23384;&#22312;&#65292;bfile &#31867;&#22411;&#21482;&#26159;&#19968;&#20010;&#25351;&#21521;&#20316;&#29992;&#65292;&#26631;&#35760;
+
+
+     5 dbms_lob &#30340;&#20351;&#29992;
+       5.1 read (p1,p2,p3 ,p_out_4);
+
+               declare
+                 v_tmpDesc clob;
+                 v_start number:=1;
+                 v_length number:=5;--&#35835;5&#20010;&#23383;&#31526;
+                 v_out_desc varchar2(100);
+               begin
+               savepoint a;
+               select description into v_tmpDesc from downFileList where id=1001;
+                --&#20174;v_tmpDesc &#20013;&#35835;&#21462;v_length&#20010;&#23383;&#31526;&#65292;&#20174;v_start &#20301;&#32622;&#24320;&#22987;&#35835;&#65292;&#25918;&#21040;v_out_desc&#20013;
+                dbms_lob.read(v_tmpDesc,v_length,v_start,v_out_desc);
+                dbms_output.put_line('&#25130;&#21462;&#30340;&#23383;&#31526;&#65306;'||v_out_desc);
+                     
+                commit ;
+               end;
+
+        5.2 getlength;
+                declare
+                         v_tmpDesc clob;
+                v_length number;
+                begin
+                       select description into v_tmpDesc from downFileList where id=1001;
+                       v_length:=dbms_lob.getlength(v_tmpDesc);
+                       dbms_output.put_line('&#22823;&#22411;&#23545;&#35937;description &#23383;&#31526;&#30340;&#38271;&#24230;'||v_length);
+                end;
+        5.3 write
+             declare
+                 v_tmpDesc clob;
+                 v_length number:=5;
+                 v_newStr varchar2(255):='&#26032;&#30340;&#20869;&#23481;&#21704;abce';
+             begin
+                       select description into v_tmpDesc from downFileList where id=1001 for update;
+                       dbms_output.put_line('old: '||v_tmpDesc);
+                       --&#27880;&#24847;&#26032;&#28155;&#21152;&#30340;&#20869;&#23481;
+                       --&#20462;&#25913;v_tmpDesc&#30340;&#20869;&#23481; &#65292;&#20462;&#25913;&#30340;&#20301;&#32622;&#20026;1~1+length(v_newStr), &#20462;&#25913;&#21518;&#30340;&#20869;&#23481;&#20026;v_newStr
+                       --&#20294;&#26159;&#19981;&#26126;&#30333;&#30340;&#26159;&#20462;&#25913;&#30340;&#26159;v_tmpDesc ,&#20026;&#20160;&#20040;&#25968;&#25454;&#24211;&#20013;&#30340;&#20869;&#23481;&#20250;&#36319;&#30528;&#21464;&#65292;&#38590;&#36947;&#26159;&#24341;&#29992;,&#25110;&#32773;&#26159;&#22240;&#20026;for update &#30340;&#20351;&#29992;
+                       dbms_lob.write(v_tmpDesc,length(v_newStr),1,v_newStr);
+                       dbms_output.put_line('new: '||v_tmpDesc);
+                       commit;
+                  
+             end;
+             /
+         5.4 append(dest_lob,appended_newStr);
+                  declare
+                     v_tmpDesc clob;
+                     v_length number:=5;
+                     v_newStr varchar2(255):='append&#26032;&#30340;&#20869;&#23481;&#21704;abce';
+                 begin
+                           select description into v_tmpDesc from downFileList where id=1001 for update;
+                           dbms_output.put_line('old: '||v_tmpDesc);
+                           --&#27880;&#24847;&#26032;&#28155;&#21152;&#30340;&#20869;&#23481;
+                           dbms_lob.append(v_tmpDesc,v_newStr);
+                           dbms_output.put_line('new: '||v_tmpDesc);
+                           commit;
+                 end;
+                 /
+          5.5 erase(clob,length,startPos) ,&#21024;&#38500;
+          5.6  copy (dest_lob,src_lob,length,destStartPos,srcStartPos)   
+                copy('abcedef','ABCDEFG' ,3,2,1)
+
+                      declare
+                      dest clob:='abcde';
+                      src clob:='ABCDE';
+                     v_length number:=3;
+                 begin
+                           dbms_output.put_line('old: '||dest);
+                                 dbms_lob.copy(dest,src,v_length,2,1);
+                           dbms_output.put_line('new: '||dest);
+                           commit;
+                 end;
+                 /
+
+            5.7 &#23545;&#25991;&#20214;&#30340;&#25805;&#20316; BFILE   (dba_directories)
+                fileclose fileexists filegetname getlength
+         --&#27979;&#35797;&#25991;&#20214;&#26159;&#21542;&#23384;&#22312;
+         select  id,name, dbms_lob.fileExists(fileLocation) from downfileList;
+         
+         declare
+          v_bfile bfile;
+          v_exists number(1);--&#25991;&#20214;&#26159;&#21542;&#23384;&#22312;
+          v_isOpen number(1);--&#25991;&#20214;&#26159;&#21542;&#25171;&#24320;
+          v_outputLength number:=5;--&#36755;&#20986;&#23383;&#31526;&#30340;&#38271;&#24230;
+          v_start number:=1;--&#20174;&#31532;&#20960;&#20010;&#23383;&#31526;&#24320;&#22987;&#36755;&#20986;
+          v_dirAlias varchar(20);--&#30446;&#24405;
+          v_fileName varchar2(30);
+          v_outputStr long ;
+         begin
+                select filelocation into v_bfile from downfilelist where id=1001;
+                --&#33719;&#24471;&#25991;&#20214;&#21517;&#65292;&#25918;&#21040;v_fileName ,&#30446;&#24405;&#21517;&#25918;&#21040;v_dirAlias
+
+                dbms_lob.fileGetName(v_bfile,v_dirAlias,v_fileName);
+                --&#27979;&#35797;&#25991;&#20214;&#26159;&#21542;&#23384;&#22312;
+                 v_exists:=dbms_lob.fileExists(v_bfile);
+                 if v_exists=1 then
+                         dbms_output.put_line('&#25991;&#20214;'||v_fileName||'&#23384;&#22312;');
+                 else
+                         dbms_output.put_line('&#25991;&#20214;'||v_fileName||'&#19981;&#23384;&#22312;&#65292;&#35831;&#22312;'||v_dirAlias||'&#25152;&#25351;&#30446;&#24405;&#19979;&#21019;&#24314;&#27492;&#25991;&#20214;');
+                         goto end_flag;
+                 end if ;
+
+                 --&#25171;&#24320;&#25991;&#20214;
+                 v_isOpen :=dbms_lob.fileIsOpen(v_bfile);
+                     if v_isOpen=1 then
+                         dbms_output.put_line('&#25991;&#20214;'||v_fileName||'&#24050;&#25171;&#24320;');
+                 else
+                         dbms_output.put_line('&#25991;&#20214;&#26410;&#25171;&#24320;,&#27491;&#22312;&#25171;&#24320;&#25991;&#20214;...');
+                         dbms_lob.fileOpen(v_bfile);
+
+                 end if ;
+         --&#36755;&#20986;&#23383;&#31526;
+          dbms_lob.read(v_bfile,v_outputLength,v_start,v_outputStr);
+          dbms_output.put_line('&#36755;&#20986;&#30340;&#38271;&#24230;&#20026;'||v_outputLength||'&#20869;&#23481;&#20026;&#65306;'||v_outputStr);
+     
+
+         --&#20851;&#38381;&#25991;&#20214;
+        dbms_lob.fileclose(v_bfile);
+          dbms_output.put_line('&#25171;&#23436;&#25910;&#24037;,&#27491;&#22312;&#20851;&#38381;&#25991;&#20214;...');
+
+                 &lt;&lt;end_flag&gt;&gt;
+                 null;
+         end;
+
+
+
+         
+
+
+
+
+----------------------------------------------------------------------------------------
+<span class="org-level-1">* &#35302;&#21457;&#22120; user_triggers------------------------------------------------------------------------------</span>
+
+1   &#19977;&#37096;&#20998;
+    1 &#35302;&#21457;&#20107;&#20214;
+    2&#21487;&#36873;&#30340;&#35302;&#21457;&#22120;&#32422;&#26463;&#26465;&#20214;
+    3&#35302;&#21457;&#22120;&#21160;&#20316;
+2  &#21487;&#20197;&#21019;&#24314;&#22914;&#19979;&#35821;&#21477;&#25152;&#35302;&#21457;&#30340;trigger
+   1 DML&#35821;&#21477;&#65288;insert update delete&#65289;
+   2 ddl     (create alter drop)
+   3 &#25968;&#25454;&#24211;&#25805;&#20316;&#65288;serverError ,logon ,logoff ,startup ,shutdown&#65289;
+3&#21487;&#21019;&#24314;&#35302;&#21457;&#22120;&#30340;&#23545;&#35937; table view &#29992;&#25143;&#27169;&#24335;&#65292;&#25968;&#25454;&#24211;&#23454;&#20363;
+4 &#35302;&#21457;&#22120;&#31867;&#22411;
+  dml &#35302;&#21457;&#22120; &#31995;&#32479;&#35302;&#21457;&#22120;&#65292;&#26367;&#20195;&#35302;&#21457;&#22120;(instead of )
+5 &#25191;&#34892;DML&#35821;&#21477;&#30340;&#39034;&#24207;
+    1 &#25191;&#34892;before &#35821;&#21477;&#32423;&#30340;
+    2 &#23545;&#20110; &#21463;&#35821;&#21477;&#24433;&#21709;&#30340;&#27599;&#19968;&#34892;&#65292;&#25191;&#34892;DML
+    3 &#25191;&#34892;after&#35821;&#21477;&#32423;&#30340;&#35302;&#21457;&#22120;
+6 &#20004;&#20010;&#29305;&#27530;&#20540; &#65306;new &#26032;&#20540;&#65292;old&#26087;&#20540;   &#21487;&#20197;&#36890;&#36807;new old &#20004;&#20010;&#23545;&#35937;&#21462;&#24471;&#26356;&#25913;&#21069;&#21518;&#30340;&#25968;&#25454;
+7 &#35302;&#21457;&#22120;&#35859;&#35789;
+   1 inserting updating deleting
+
+
+&#20108; &#21019;&#24314;DML trigger
+   create or replace trigger triggerName
+   before|after     insert|delete|update  of &#21015;&#21517;
+    on tableName [for each row]
+    when &#26465;&#20214;
+    pl/sql&#22359;
+--for each row &#34920;&#31034; &#26159;&#34892;&#32423;&#35302;&#21457;&#22120;&#65288;&#27599;&#19968;&#34892;&#37117;&#20250;&#24341;&#36215;&#35302;&#21457;&#65289;,&#21542;&#21017;&#40664;&#35748;&#34920;&#32423;&#35302;&#21457;&#22120;(&#26356;&#26032;&#22810;&#26465;&#25968;&#25454;&#21482;&#35302;&#21457;&#19968;&#27425;&#65292;)
+
+
+
+ 1 before trigger
+ 
+ create or replace trigger tg_test1 
+  before insert   on dept 
+  begin
+  dbms_output.put_line('&#21704;&#21704;before insert trigger &#34987;&#35302;&#21457;&#20102; ');
+  end;
+
+2 &#34892;&#32423;&#35302;&#21457;&#22120; &#34920;&#32423;&#35302;&#21457;&#22120;
+ create or replace trigger tg_test1 
+  after update   on dept  for each row
+  begin
+  dbms_output.put_line('&#21704;&#21704; after update  trigge &#34987; &#35302;&#21457;&#20102;,&#19988;&#26159;&#34892;&#32423;&#35302;&#21457;&#22120; ');
+  end;
+
+  update dept set dname=dname||'aaa' ;
+
+  3 new old  (for each row &#24773;&#20917;&#19979;&#25165;&#26377;&#36825;&#20004;&#20010;&#23545;&#35937;)
+ create or replace trigger tg_test1 
+    before insert   on dept   for each row
+  begin
+      dbms_output.put_line('&#21704;&#21704;before insert trigger &#34987;&#35302;&#21457;&#20102; ,&#21462;&#24471;&#26032;&#25554;&#20837;&#30340;&#25968;&#25454;');
+      dbms_output.put_line(:new.deptno);
+      dbms_output.put_line(:new.dname);
+      dbms_output.put_line(:new.loc);
+  end;
+
+  insert into dept values (22,'&#25104;&#40857;' ,'&#39321;&#28207;');
+
+  4 when &#29305;&#23450;&#26465;&#20214;&#19979;&#35302;&#21457;
+
+     create or replace trigger tg_test1 
+    after delete   on dept   for each row
+    when (old.deptno=22) --&#27880;&#24847;when &#37324;&#38754;&#30340;old ,new &#19981;&#24102;&#20882;&#21495;
+  begin
+      dbms_output.put_line('&#21704;&#21704;before insert trigger &#34987;&#35302;&#21457;&#20102; ,&#21462;&#24471;&#34987;&#21024;&#30340;&#25968;&#25454;');
+      dbms_output.put_line(:old.dname||:old.deptno);
+
+  end;
+
+   delete from dept where deptno=22;
+
+5 &#35859;&#35789;inserting updating deleting
+
+
+     create or replace trigger tg_test1 
+     --&#27880;&#24847;&#36825;&#37324;&#65292;&#28151;&#21512;&#35302;&#21457;&#22120;
+            before insert or update or delete 
+     on dept   for each row
+  begin
+         if inserting then
+                 dbms_output.put_line('&#27492;&#27425;&#20026;insert &#35302;&#21457;');
+         elsif updating then
+                 dbms_output.put_line('&#27492;&#27425;&#20026;update &#35302;&#21457;');
+         elsif deleting then
+                  dbms_output.put_line('&#27492;&#27425;&#20026;delete&#35302;&#21457;');
+         end if ;
+
+  end;
+
+  insert into dept values (44,'','');
+  update  dept set ename='aa' where deptno=44;
+  delete from dept where deptno=44;
+
+  6 instead of &#35302;&#21457;&#22120;&#65288;&#19981;&#33021;&#20316;&#29992;&#22312;&#34920;&#19978;&#65292;&#21487;&#20197;&#22312;&#35270;&#22270;&#19978;&#65289;
+  &#22914;&#26524;&#35270;&#22270;&#26159;&#22810;&#20010;&#34920;&#36830;&#25509;&#32780;&#25104;&#65292;&#25925;&#20854;&#19981;&#33021;&#25554;&#20837;&#25968;&#25454;&#65292;&#21487;&#20197;&#36890;&#36807; &#27492;trigger &#23545;&#20854;&#30456;&#24212;&#30340;&#34920;&#25554;&#20837;&#25968;&#25454;&#65292;&#23454;&#29616;&#35270;&#22270;&#30340;&#25554;&#20837;&#25805;&#20316;
+
+  --&#21521;dept &#20013;    insert &#22914;&#26524;deptno &#19981;&#23384;&#22312;&#21017;&#25554;&#20837;&#65292;&#33509;&#24050;&#23384;&#22312;&#21017;&#26356;&#26032;
+  create or replace trigger instead_of_test
+    instead of insert on dept_view
+ 
+     for each row
+ declare
+         v_count number;
+begin
+ select count(*) into v_count from dept where deptno=:new.deptno;
+        if v_count=0 then
+            insert into dept values (:new.deptno,:new.dname,:new.loc);
+        elsif v_count=1 then
+            update dept set dname=:new.dname,loc=:new.loc where deptno=:new.deptno;
+       end if ;
+end;
+/
+insert into dept_view values (10, 'a','b');--&#22914;&#24050;&#26377;
+insert into dept_view values (99, '99a','99b');--
+
+7&#21464;&#24322;&#34920;
+ &#22914;&#26524;&#19968;&#20010;&#34920;&#36827;&#34892;&#20102;insert update delete &#31561;&#20351;&#34920;&#21457;&#29983;&#21464;&#21270;&#30340;&#35821;&#21477; &#65292;&#21017;&#19981;&#33021;&#22312;&#35302;&#21457;&#22120;&#37324;&#20351;&#29992;count(*) sum &#31561;&#32479;&#35745;&#35821;&#21477; &#65292;&#22240;&#20026;&#34920;&#21457;&#29983;&#20102;&#21464;&#21270; &#65292;&#31216;&#20026;&#21464;&#24322;&#34920;
+ create or replace trigger tg_change
+ after delete on emp
+ for each row
+ declare
+ v_count number;
+ begin
+    dbms_output.put_line('&#22240;&#20026;&#26159;after delete ,&#25191;&#34892;count(<span class="bold">*)&#32479;&#35745;&#25805;&#20316;&#26159;&#22312;delete &#20043;&#21518;&#65292;&#21363;&#22312;&#19968;&#24352;&#21464;&#24322;&#34920;&#19978;&#25805;&#20316;&#65292;&#24517;&#28982;&#26377;&#38169;');
+    select count(*</span>) into v_count from emp ;
+ end;
+ delete from emp where empno=7902;
+
+ 8&#32500;&#25252;trigger
+ &#22914;&#26524;&#25191;&#34892;&#26576;&#39033;&#25805;&#20316;&#19981;&#24819;&#35302;&#21457;trigger  &#21487;&#26242;&#26102;&#31105;&#29992;&#20043;
+ alter trigger tg_test1 disable;
+ alter trigger tg_test1 enable;
+ drop trigger tg_test1;
+
+------------------------------------------------------------------------------------
+<span class="org-level-1">* &#21464;&#37327;&#31867;&#22411;------------------------------------------------------------------------------</span>
+
+ 1 &#26631;&#37327;&#65288;&#26222;&#36890;&#21464;&#37327;&#65289;&#65292;2 record&#65288;&#32467;&#26500;&#20307;&#65289; ,3 &#38598;&#21512;&#65288;&#25968;&#32452;,map &#31561;&#65289;
+
+
+1 &#26631;&#37327;&#65288;scalar&#65289;-&#24120;&#29992;&#31867;&#22411;
+            varName  [constant] datatype [not null] :=[default exp]
+            v_userName varchar2(255) :='defaultName';
+     %TYPE  &#31867;&#22411; (&#19968;&#31181;&#26681;&#25454;&#20174;&#25968;&#25454;&#24211;&#20013;&#30456;&#24212;&#23383;&#27573;&#31867;&#22411;&#32780;&#21464;&#30340;&#26631;&#37327;)
+           &#20351;&#29992;&#20363; &#23376;&#65306;
+            create or replace procedure sp_updateSalDependOnEname is
+                   v_ename varchar2(25) :='defaultName';
+                    --v_empno &#31867;&#22411;&#23601;&#26159;&#34920;emp &#30340;empno &#30340;&#31867;&#22411;
+                   v_empno  emp.empno%TYPE;
+             begin
+                  update emp set ename='scott' where rownum=1;
+                  select empno into v_empno from emp where rownum=1;
+                    dbms_output.put_line('v_ename:'||v_ename ||'  empno:'||v_empno);
+            end;
+
+2 &#35760;&#24405;record&#65288;&#22797;&#21512;&#31867;&#22411;&#65289; &#31867;&#20284;&#20110;C&#20013;&#30340;&#32467;&#26500;&#20307; ,&#34920;&#20013;&#30340;&#19968;&#34892;
+
+       &#23450;&#20041; &#35760;&#24405;&#31867;&#22411;  type_emp; &#29616;&#22312;type_emp &#22320;&#20301;&#31561;&#21516;&#20110;varchar2 number
+      type type_emp is record ( v_name emp.ename%type ,v_no emp.empno%type);
+
+
+         declare
+          type type_emp is record ( v_name emp.ename%type ,v_no emp.empno%type);
+         emp_instance type_emp ;
+         begin
+         select ename,empno into emp_instance from emp where rownum=1;
+         dbms_output.put_line('&#29992;&#25143;&#21517;&#65306;'||emp_instance.v_name||'&#29992;&#25143;&#32534;&#21495;&#65306;'||emp_instance.v_no);
+        end;
+        /
+    2.1 %rowtype  &#19968;&#31867;&#29305;&#27530;&#30340;record, &#25968;&#25454;&#31867;&#22411;&#20026;&#19968;&#24352;&#34920;&#30340;&#32467;&#26500;
+    declare
+    --&#34920;&#31034;tbl_type &#20026;&#19968;&#20010;&#32467;&#26500;&#22914;&#21516;&#34920;emp &#32467;&#26500;&#30340;&#19968;&#20010;record
+       tbl_type emp%rowtype;
+       begin
+       -- &#21482;&#33021;&#23384;&#20648;&#19968;&#26465;&#35760;&#24405;
+         select * into tbl_type from emp where rownum=1;
+          dbms_output.put_line(tbl_type.ename||tbl_type.empno);
+       end;
+
+
+
+     dept_info dept%ROWTYPE;
+      INSERT INTO dept VALUES ;
+      UPDATE dept SET ROW = dept_info WHERE deptno = 30;
+      --returning &#23376;&#21477;&#65292;
+    UPDATE employees SET salary = salary * 1.1 WHERE employee_id = emp_id
+          RETURNING last_name, salary INTO emp_info;
+     
+      
+
+3 &#38598;&#21512; 
+         1  Nested Tables &#23884;&#22871;&#34920; &#65288;&#25968;&#32452;&#65289;
+                TYPE type_name IS TABLE OF element_type [NOT NULL];
+        2  Varrays  &#21487;&#21464;&#25968;&#32452;(&#26377;&#19978;&#38480;)
+                 type varray_instance_type  is varray (100) of number [not null] ;
+        3   Associative Arrays &#65288;&#31867;&#20284;map &#65289;  &#20851;&#32852;&#25968;&#32452; (&#23450;&#20041;&#27604;nested table &#22810;&#19968;&#20010;index&#35821;&#21477; )
+                  TYPE type_name IS TABLE OF element_type [NOT NULL]  INDEX BY [PLS_INTEGER | BINARY_INTEGER | VARCHAR2(size_limit)];
+                 --index by binary_integer &#34920;&#31034; &#25968;&#32452; &#30340;&#19979;&#26631;&#20197;&#25972;&#25968;&#34920;&#31034;
+                type table_type  is table of varchar2(255) index by binary_integer; --&#36825;&#31181;&#20687;&#25968;&#32452;&#65292;table_type(0) ,table_type(1) ....
+                TYPE table_type IS TABLE OF NUMBER INDEX BY VARCHAR2(64); --&#36825;&#31181;&#25165;&#20687;map&#65292;  table_type('land') := 100000;
+
+
+                CREATE TYPE ProjectList AS VARRAY(50) OF VARCHAR2(16);--&#27492;&#31181;&#35821;&#27861;&#65292;&#20250;&#22312;&#25968;&#25454;&#24211;&#20013;&#23384;&#20648;&#65292; user_types  &#20013;&#21487;&#26597;&#21040;
+                type projectlist is varray(50) of varchar2(16) ;     --&#27492;&#31181;&#35821;&#27861;&#29992;&#20110;&#32534;&#31243;&#65292;&#22768;&#26126;&#19968;&#31181;&#31867;&#22411;&#65292;&#31243;&#24207;&#32467;&#26463;&#23601;&#19981;&#23384;&#22312;&#20102;
+ 
+                 &#38598;&#21512; &#31867;&#22411;&#65292;&#26377;&#19968;&#20123;&#23646;&#24615;(&#22909;&#35937;&#38598;&#21512;&#31867;&#22411;&#37117;&#26377;)COUNT (&#25968;&#32452;&#38271;&#24230;)&#65292;,first(&#34920;&#20013;&#31532;&#19968;&#34892;&#30340;&#32034;&#24341;)  last
+                   &#20989;&#25968;     DELETE&#65288;&#21024;&#38500;&#19968;&#20010;&#20803;&#32032;&#65289;  &#22240;&#20026;varray &#19981;&#20801;&#35768;&#25805;&#20316;&#21333;&#20010;&#20803;&#32032;&#65292;&#25925;&#26080;&#27492;&#27861;&#65292;&#21482;&#33021;&#25805;&#20316;&#25972;&#20010;&#25968;&#32452;
+                                  &#19977;&#31181;&#29992;&#27861;
+                                   1 delete(i); &#21024;&#38500;&#31532;i&#26465;&#35760;&#24405;()
+                                   2  delete (i,j) &#21024;&#38500;&#20174;&#31532;i&#21040;j&#26465;&#35760;&#24405;
+                                   3  delete  &#21024;&#38500;&#25972;&#20010;&#34920;
+                            exists (&#33509;&#25351;&#23450;&#30340;&#20803;&#32032;&#23384;&#22312;&#21017;&#20026;true)  ,
+                                 &#29992;&#27861;  exists(i) &#31532;i&#26465;&#35760;&#24405;&#26159;&#21542;&#23384;&#22312;
+                            next ,
+                                  &#29992;&#27861; next(i)    &#36820;&#22238;&#31532;index=i &#30340;&#19979;&#19968;&#20010;&#20803;&#32032;&#30340;&#19979;&#26631;(&#20803;&#32032;&#21487;&#33021;&#19981;&#36830;&#32493;&#23384;&#25918;,&#25152;&#20197;&#26410;&#24517;next(i)==i+1)&#65292;    &#20294;&#26159;&#24403;i&#20026;&#26368;&#21518;&#19968;&#26465;&#25968;&#25454;&#26102;&#65292;next(i)=null  ,&#21487;&#20197;&#25454;&#27492;&#21028;&#26029;&#26159;&#21542;&#36941;&#21382;&#23436;&#20102;
+                            prior()  &#19982;next &#30456;&#21453;&#65292;&#36870;&#21521;&#36941;&#21382;
+                            trim();   &#20943;&#23569;&#38598;&#21512;&#38271;&#24230;
+                            extend(); &#25193;&#23637; &#38598;&#21512;&#38271;&#24230;&#65292;
+                                  EXTEND appends one null element to a collection.
+                                  EXTEND(n) appends n null elements to a collection.
+                                  EXTEND(n,i) appends n copies of the ith element to a collection.
+
+     &#19982;&#38598;&#21512;&#25805;&#20316;&#26377;&#20851;&#30340; sql  &#35821;&#21477; 
+      bulk collect into  &#35821;&#21477;  (&#22312;&#21160;&#24577;sql&#37096;&#20998;&#26377;bulk collect into &#35821;&#21477;&#26356;&#35814;&#32454; &#30340;&#20351;&#29992;&#26041;&#27861; &#22914;forall )
+         
+
+3.1   Nested Tables &#23884;&#22871;&#34920;(&#31867;&#20284;&#25968;&#32452;) -------------------------------------------------------------------         
+type table_type_emp_ename  is table of emp.ename%type ;
+create or replace type  table_type_emp_ename is table of varchar2(255);
+
+        &#23454;&#20363;&#65306;
+        1--&#21019;&#24314;&#22522;&#31867;&#22411; &#23545;&#35937;&#65292;&#30456;&#24403;&#20110;pl/sql &#37324;&#30340;record
+        create or replace type DetailObj as object (
+                goodsId number,
+                count_ number,
+                name varchar2(33)
+                ) not final ; --not final &#34920;&#31034; &#27492;object&#21487;&#20197;&#34987;under &#65292;&#21363;&#32487;&#25215;
+        2 &#21019;&#24314; nested table 
+        create or replace type NestDetailType is table  of DetailObj;
+
+        3 &#24314;&#34920;
+           create table stockTable (
+                    orderId number,
+                    inDate date,
+                    detail_ NestDetailType
+                   ) nested table detail_ store as detail_real_Table ;
+        -- nested table detail_ store as detail_realTable  &#34920;&#31034;&#65292;&#34920;&#20013;&#30340;detail_&#23884;&#22871;&#34920;&#31867;&#22411;&#23383;&#27573;&#20013;&#30340;&#25968;&#25454;&#65292;&#23454;&#38469;&#23384;&#20648;&#22312;detail_real_Table&#20013;
+        4 insert
+          insert into stockTable values (
+                  1,sysdate,
+                  NestDetailType(
+                      DetailObj(111,34,'product1'),
+                      DetailObj(112,324,'product2'),
+                      DetailObj(113,314,'product3')
+                      )
+                  );
+          5 select
+             5.1 select * from stockTable;
+             5.2 table() &#20989;&#25968;        &#24212;&#35813;&#26159;&#23558;&#38598;&#21512;&#31867;&#22411;&#36716;&#21270;&#20026;&#21487;&#20197;select  &#30340;
+                  select * from table(select detail_  from stockTable);
+         6 update   --&#36825;&#19968;&#21477;&#22312;varray &#20013;&#26159;&#19981;&#20801;&#35768;&#30340;&#65292;&#22240;&#20026;varray &#26159;&#19981;&#21487;&#20197;&#25805;&#20316;&#20854;&#20013;&#30340;&#21333;&#20010;&#20803;&#32032;&#30340;&#65292;&#21482;&#33021;&#25805;&#20316;varray &#25972;&#20307;
+              update table(select detail_ from stockTable where orderId=1)  dt set dt.count_=dt.count_+1 where   name='product1' ;
+         7 delete   --&#24403;&#28982;&#20063;&#21487;&#20197;&#20351;&#29992;table()&#20989;&#25968;
+            delete from table(select detail_ from stocktable )  dt where dt.goodsid=111; --&#21024;&#38500;&#23884;&#22871;&#34920;&#20013;&#30340;&#26576;&#19968;&#26465;&#35760;&#24405;
+            delete from stockTable where orderid=1;
+
+         
+
+3.2&#21487;&#21464;&#25968;&#32452;varray -----------------------------------------------------------------------------
+&#19968;&#20010;&#23383;&#27573;&#37324;&#23384;&#22810;&#26465;&#25968;&#25454;
+--&#22522;&#31867;&#22411;
+  type dt is varray(199) of varchar2(200);   
+create or replace type baseType as object (name varchar2(22),id number);  
+--&#22312;pl/sql &#20013;&#24212;&#35813;&#29992;record &#21543;  type baseType is record  (name varchar2(22),id number);  
+--100 &#34920;&#31034;&#26368;&#22823;&#38271;&#24230; ,&#22522;&#20110;&#22522;&#31867;&#22411;&#30340;&#21487;&#21464;&#25968;&#32452;
+create or replace type detailType as varray(100) of baseType; 
+create or replace type dt as varray(100) of varchar2(22);
+
+--&#23384;&#36135;&#21333;
+create table storeOrder
+(
+ id number not null primary key,
+ inDate date,
+ --&#26126;&#32454;&#28165;&#21333;
+ detail detailType
+ );
+
+&#25554;&#20837;&#25968;&#25454;
+ insert into storeOrder values (1,sysdate,
+         detailType(
+             baseType('name1',111),
+             baseType('name2',222),
+             baseType('name3',333)
+             )
+         );
+
+ insert into storeOrder values (2,sysdate,
+         detailType(
+             baseType('name11',111),
+             baseType('name22',222),
+             baseType('name33',333)
+             )
+         );
+
+
+ select * from x;
+ &#19968;&#20010;&#20989;&#25968;&#65292;&#29992;&#20110;&#20197;&#26222;&#36890;&#34920;&#30340;&#24418;&#24335;&#26174;&#31034;&#25968;&#25454;table() &#20854;&#21442;&#25968;&#26159;&#19968;&#26465;&#35760;&#24405;&#65292;&#19981;&#33021;&#26159;&#22810;&#26465;
+     select * from table(select s.detail from storeOrder s where s.id=1);
+update storeOrder set detail =detailType(     baseType('name1111',11111),
+             baseType('name2222',22222),
+             baseType('name3333',33333)) where id=1;
+&#21482;&#33021; &#26356;&#26032;&#25972;&#20010;detail &#32780;&#19981;&#33021;&#26356;&#26032;detail &#20013;&#30340;&#25968;&#25454; (&#33268;&#21629;&#32570;&#28857;&#65292;&#19968;&#33324;&#24456;&#23569;&#34987;&#26356;&#25913;&#30340;&#25968;&#25454;&#20351;&#29992;&#36825;&#31181;&#21487;&#21464;&#25968;&#32452; )
+    &#21487;&#20197;&#36890;&#36807;procedure &#23454;&#29616;
+
+declare
+p_detail detailType :=detailType(      baseType('name11',111), baseType('name22',222), baseType('name33',333) );
+p_base baseType;
+begin
+
+ select detail  into p_detail from storeOrder  where id=1 ;
+   for  i in p_detail.first..p_detail.last
+   loop
+   p_base:=p_detail(i);
+       dbms_output.put_line(p_base.name||'      '||p_base.id);
+   end loop;
+      p_base:=baseType('name4',4);
+ 
+       select p_base into p_detail(p_detail.last) from dual; --&#21482;&#33021;&#26356;&#25913;&#65292;&#19981;&#33021;&#28155;&#21152; &#65292;&#24605;&#36335; &#25110;&#21487;&#20808;&#24314; &#19968;&#20010;&#27604;&#21442;&#25968;&#22810;&#19968;&#20010;&#30340;detail
+
+         for  i in p_detail.first..p_detail.last
+   loop
+   p_base:=p_detail(i);
+       dbms_output.put_line(p_base.name||'      '||p_base.id);
+   end loop;
+ 
+end;
+
+
+-------------varray &#20351;&#29992;first last exists(i) next &#36941;&#21382;&#22788;&#29702;&#25968;&#25454;&#65292;&#22240;&#20026;varray &#19981;&#33021;&#21333;&#29420;&#22788;&#29702;&#27599;&#20010;&#20803;&#32032;&#65292;&#32780;&#21482;&#33021;&#22788;&#29702;&#25972;&#20010;&#25968;&#32452;&#65292;&#25152;&#20197;&#19981;&#33021;&#29992;delete(i) ---------------------------------------
+&#22909;&#20687;&#19981;&#33021;&#20351;&#29992;select ... into  varray_type &#35821;&#21477; &#65292;
+
+declare
+     type table_type_emp_ename  is varray(100) of emp.ename%type;
+     ename_array   table_type_emp_ename:=table_type_emp_ename('aaa','bbb','ccc');
+     empno      emp.empno%type;
+     v_index binary_integer;
+     v_tmp number(10):=1;
+begin
+   
+    dbms_output.put_line('&#31532;&#19968;&#26465;&#25968;&#25454;&#65306;ename_array.first='||ename_array.first||' value ='||ename_array(ename_array.first));
+    dbms_output.put_line('&#26368;&#21518;&#19968;&#26465;&#25968;&#25454;&#65306;ename_array.last='||ename_array.last||' value ='||ename_array(ename_array.last));
+    dbms_output.put_line('&#27492;&#34920;&#25968;&#32452;&#20013;&#20849;&#26377;&#35760;&#24405;&#25968;&#20026;&#65306;'||ename_array.COUNT);
+
+        dbms_output.put_line('next() &#30340;&#29992;&#27861;  &#36941;&#21382; ' );
+      
+          v_index:=ename_array.first;
+          while v_index is not null
+        loop
+           dbms_output.put_line(ename_array(v_index));
+           v_index:=ename_array.next(v_index);
+        end loop;
+    dbms_output.put_line(' end of next() &#30340;&#29992;&#27861; ' );
+    dbms_output.put_line(' varray &#19981;&#33021;&#20351;&#29992;delete&#65288;&#65289;' );
+    --        ename_array.delete(ename_array.first);
+    dbms_output.put_line('&#31532;&#20108;&#31181;&#36941;&#21382;&#26041;&#24335;');
+        v_tmp:=ename_array.first;
+    loop
+        exit when false=ename_array.exists(v_tmp) ;
+        dbms_output.put_line(v_tmp||ename_array(v_tmp));
+        v_tmp:=v_tmp+1;
+    end loop;
+
+end;
+/
+     
+
+
+  3.3 Associative Arrays  (table)-----------------------------------------------------------------
+  &#36866;&#29992;&#20110;&#20869;&#23384;&#25805;&#20316;&#65292;&#19981;&#21487;&#20197;&#23558;&#20043;&#23384;&#21040;&#34920;&#20013;&#65288;&#19982;nested table &#30340;&#21306;&#21035; &#65289;
+
+        declare
+             type table_type_emp_ename  is table of emp.ename%type index by binary_integer;
+             ename_array   table_type_emp_ename;
+             empno      emp.empno%type;
+             v_index binary_integer;
+             v_tmp number(10):=1;
+        begin
+             select ename bulk collect into ename_array from emp ;
+          --  select ename into ename_array(3) from emp where empno=7369;
+            dbms_output.put_line('&#31532;&#19968;&#26465;&#25968;&#25454;&#65306;ename_array.first='||ename_array.first||' value ='||ename_array(ename_array.first));
+            dbms_output.put_line('&#26368;&#21518;&#19968;&#26465;&#25968;&#25454;&#65306;ename_array.last='||ename_array.last||' value ='||ename_array(ename_array.last));
+            dbms_output.put_line('&#27492;&#34920;&#25968;&#32452;&#20013;&#20849;&#26377;&#35760;&#24405;&#25968;&#20026;&#65306;'||ename_array.COUNT);
+            for i in ename_array.first..ename_array.last
+            loop
+                   dbms_output.put_line('index='||i||' value ='||ename_array(i));
+            end loop;
+
+                dbms_output.put_line('&#21024;&#38500;2&#20010;&#20803;&#32032;' );
+                ename_array.delete(ename_array.first);
+                ename_array.delete(ename_array.first+3);
+
+                dbms_output.put_line('next() &#30340;&#29992;&#27861;  &#36941;&#21382; ' );
+              
+                  v_index:=ename_array.first;
+                  while v_index is not null
+                loop
+                   dbms_output.put_line(v_index||'     '||ename_array(v_index));
+                   v_index:=ename_array.next(v_index);
+           
+                end loop;
+            dbms_output.put_line(' end of next() &#30340;&#29992;&#27861; ' );
+        end;
+        /
+
+3.4 &#23545;&#35937;&#34920;(&#24863;&#35273;&#19981;&#22826;&#37325;&#35201;&#65292;&#26377;&#28857;&#38754;&#21521;&#23545;&#35937;&#29305;&#24615;)--------------------------------------------------------------
+             &#23545;&#35937;&#34920;&#20013;&#27599;&#19968;&#34892;&#37117;&#26159;&#19968;&#20010;&#34892;&#23545;&#35937; &#65292;&#21253;&#21547;&#23545;&#35937;&#26631;&#35782;&#31526;oid &#65292;&#26222;&#36890;&#34920;&#26377;rowid
+              ref&#25805;&#20316;&#31526;&#29992;&#20110;&#24341;&#29992; &#34892;&#23545;&#35937;
+              defef&#25805;&#20316;&#31526;&#29992;&#20110;&#36820;&#22238;&#34892;&#23545;&#35937;&#30340;&#20540;
+         1--&#21019;  &#23545;&#35937;&#65292;
+        create or replace type TeacherObj as object (
+               id number,
+                name varchar2(33)
+                ) ;
+        2    &#21019;&#24314;&#23545;&#35937;&#34920;
+       create table teacherTable of TeacherObj;
+       create table student (
+               id number,
+               name varchar2(20),
+               --&#34920;&#26126;teacherid &#26159;&#19968;&#20010;&#24341;&#29992;&#22806;&#38190;&#65292;&#31867;&#22411;&#26159;TeacherObj  ,&#33539;&#22260;&#21482;&#33021;&#26159;teacherTable &#34920;&#20013;&#23384;&#22312;&#30340;&#34892;&#23545;&#35937;
+               teacherId ref TeacherObj  scope is teacherTable
+               );
+     
+        3   insert into teachertable values (1,'&#32769;&#24352;');
+             insert into student select 111,'&#23567;&#20110;', ref(t) from teacherTable t where t.id=1 ;
+
+       4  ref &#25805;&#20316;&#31526;,&#21462;&#24471;&#34892;&#23545;&#35937;&#30340;&#24799;&#19968;&#26631;&#35782;&#31526;
+          select ref(t) from  teacherTable t;
+       5 deref
+         select s.id ,s.name ,deref(s.teacherid) as teacher from student s where id=111;
+      6  value() &#30475;&#20004;&#32773;&#21306;&#21035; &#65292;&#20197;&#23545;&#35937;&#30340;&#24418;&#24335;&#36820;&#22238;
+         select value(t) from teacherTable t ;
+          select * from teacherTable t;
+
+3.4.1  &#23545;&#35937;&#35270;&#22270;------------------------------------
+   &#21487;&#20197;&#23558;&#26222;&#36890;&#20851;&#31995;&#34920;&#8216;&#36716;&#25442;&#8217;&#20026;&#23545;&#35937;&#34920;
+
+  
+    2 &#21019;&#24314; &#20851;&#31995;&#34920;&#23545;&#24212;&#30340;&#23545;&#35937;
+       create type deptObj is object (
+          deptno number,
+          dname varchar2(14),
+          loc varchar2(13)
+               );
+       3 &#21019;&#24314;&#23545;&#35937;&#35270;&#22270;
+       -- with object oid (deptno) &#26681;&#25454;&#34920;&#20013;&#30340;id&#23383;&#27573;&#20915;&#23450;&#23545;&#35937;&#30340;oid
+         create view deptObjView of deptObj with object oid (deptno) as select * from dept;
+       4 select
+           select v.*,ref(v) from deptObjView v;
+       5    make_ref()
+       create view  emp_view as select make_ref(deptObjView ,deptno) as  deptOid, e.* from    emp e ;
+
+
+<span class="org-level-1">* &#25277;&#35937;&#25968;&#25454;&#31867;&#22411;(&#38754;&#21521;&#23545;&#35937;&#30340;&#29305;&#24615;)-------------------------------------------------------------------</span>
+ 1 type  &#25968;&#25454;&#23383;&#20856; user_types
+create or replace type addressType as object
+( province varchar2(22),city varchar2(20));
+ 
+
+create table stu (addr addressType,stuName varchar2(22));
+insert into stu values (addressType('&#23665;&#19996;','&#20020;&#27778;'),'tom');
+select * from stu;
+select stuName, s.addr.province, s.addr.city from stu s; &#35201;&#20351;&#29992;&#21035;&#21517;
+ update stu  s set s.addr.province='' where s.addr.city='&#20020;&#27778;' ;
+
+
+ 2 &#32487;&#25215;  (USER_DEPENDENCIES  &#20381;&#36182;&#24615;&#65292; ,user_tab_columns )
+  create or replace type Person as object
+  (
+   name varchar2(29),
+   sex char(2)
+   ) not final ; 
+/
+  create or replace type studentType under Person
+  ( studentNo number
+   );
+/
+
+&#21019;&#24314;&#22522;&#20110;&#31867;&#22411;&#30340;&#34920;
+create table student of studentType;
+insert into student values ('&#23567;&#26126;','&#30007;',1);
+insert into  student select studentType('&#24935;&#24935;','&#22899;',2) from dual;
+update student set name='&#22823;&#26126;' where studentNo=1;
+
+
+3&#26377;&#26041;&#27861;(function procedure)&#30340;&#23545;&#35937;
+
+ create or replace type studentType2 as object
+ (
+name  varchar2(20),
+member function getName return varchar2,
+member procedure setName(p_name varchar2)
+  );
+ /
+ create or replace type body studentType2 as
+   member function getName   return varchar2 is
+       begin
+       return name;
+       end ;
+    member procedure setName(p_name varchar2) is
+    begin
+       name:=p_name;
+    end;
+end;
+/
+
+create table s2 of studentType2;
+insert into s2 values ('name11111111');
+
+&#27979;&#35797;&#20195;&#30721;
+set serveroutput on
+declare
+ stu studentType2 ;
+ begin
+ stu:=studentType2('name11');
+ stu.setName('name2');
+ dbms_output.put_line(stu.getName());
+   select name  into stu.name from s2 where name='name11111';
+   insert into s2 select stu from dual;
+ end;
+/
+
+ ---------------------------------------------------------------------------------------------------------
+     
+3.8 &#24403;&#28982;&#21487;&#20197;&#23558;&#20197;&#19978;record ,&#21644;table &#32467;&#21512;&#20351;&#29992;(&#32467;&#26500;&#20307;&#30340;&#25968;&#32452;)
+  type table_type_emp_ename  is table of emp.ename%rowtype index by binary_integer;
+  &#25110;&#32773;
+   type type_emp is record ( v_name emp.ename%type ,v_no emp.empno%type); 
+    type table_type_emp_ename  is table of type_emp index by binary_integer;
+
+
+
+
+<span class="org-level-1">* 4 &#28216;&#26631;&#65288;&#38544;&#24335;&#28216;&#26631;&#65292;&#26174;&#24335;&#28216;&#26631;&#12290;&#28216;&#26631;cursor &#19982;&#28216;&#26631;&#21464;&#37327;ref cursor&#19981;&#21516;&#65292;&#21069;&#32773;&#26377;&#22914;&#26159;&#24120;&#37327;&#65292;&#21518;&#32773;&#26159;&#21464;&#37327;&#65292;&#65289;</span>
+   4.1  &#183;&#38544;&#24335;&#28216;&#26631;&#65288;&#25191;&#34892;sql&#26102;&#65292;oracle&#33258;&#21160;&#21019;&#24314;&#19968;&#20010;&#38544;&#24335;&#28216;&#26631;&#65292;&#65289; sql&#28216;&#26631;&#26377;&#20197;&#19979;&#23646;&#24615; sql%rowcount ,sql%found ,sql%notfount  (sql%&#30340;&#21069;&#32512;&#65292;&#35753;&#31995;&#32479;&#26816;&#26597;&#38544;&#24335;&#28216;&#26631;&#21306;&#22495;&#65292;&#21435;&#33719;&#24471;&#30456;&#24212;&#20449;&#24687;) &#21516;&#29702;&#21487;&#30693;&#26174;&#24335;&#28216;&#26631;&#65292;&#26377;%rowcount %found %notfound  %ROWTYPE????
+
+   declare
+   v_tmp number;
+   begin
+             update emp set sal=sal+10 ;
+             dbms_output.put_line('&#21463;&#19978;&#19968;&#21477;sql &#24433;&#21709;&#30340;&#34892;&#25968;&#20026;(&#21363;update  &#20102; &#22810;&#23569;&#34892;)&#65306;'||sql%rowcount);
+
+           select empno  into v_tmp from emp where empno=7369 ;
+                   if sql%notfound then
+                       dbms_output.put_line('&#27809;&#36820;&#22238;&#20219;&#20309;&#25968;&#25454;');
+                     else
+                       dbms_output.put_line('&#21704;&#21704;&#65292;select  &#20102;:'||sql%rowcount||'&#34892;');
+                   end if;
+       end;
+   /
+
+  4.2 &#26174;&#24335;&#28216;&#26631;%FOUND, %ISOPEN %NOTFOUND, and %ROWCOUNT.
+    declare
+         cursor cursor_instance is select empno from emp ;
+         v_empno number;
+    begin
+         open cursor_instance;
+         --&#36825;&#21477;&#35805;&#65292;&#25918;&#36825;&#20799;cursor_instance%rowcount ==0
+           dbms_output.put_line('&#20849;&#26377;'||cursor_instance%rowcount||'&#34892;');
+            
+         --&#27880;&#24847;&#36825;&#37324;&#20063;&#26377;notfound &#65292;&#19982;&#38544;&#24335;&#28216;&#26631;&#21069;&#38754;&#30340;sql% &#19981;&#21516;&#65292;&#36825;&#37324;&#26159;&#33258;&#24050;&#23450;&#20041;&#30340;&#28216;&#26631;cursor_instance
+        loop
+        fetch cursor_instance into v_empno;
+                   dbms_output.put_line(v_empno);
+                   exit when cursor_instance%notfound ;
+        end loop;
+              dbms_output.put_line('&#21704;&#21704;&#65292; &#20849;&#26377;'||cursor_instance%rowcount||'&#34892;');
+        --&#21035;&#24536;&#20102;&#20851;&#38381;
+        close cursor_instance;
+     
+    end;
+    /
+
+
+   
+    --&#24102;&#21442;&#25968;&#30340;&#28216;&#26631;
+            DECLARE
+              emp_name emp.ename%TYPE := 'SCOTT';
+              emp_salary   emp.sal%TYPE := 30000;
+              my_record emp%ROWTYPE;
+              CURSOR c1 (name VARCHAR2, max_wage NUMBER) IS
+                SELECT * FROM emp WHERE ename = name and sal &lt; max_wage;
+            BEGIN
+            -- Any of the following statements opens the cursor:
+            -- OPEN c1('Austin', 3000);
+            -- OPEN c1('Austin', emp_salary);
+            -- OPEN c1(emp_name, 3000);
+            -- OPEN c1(emp_name, emp_salary);
+
+              OPEN c1(emp_name, emp_salary);
+              LOOP
+                 FETCH c1 INTO my_record;
+                 EXIT WHEN c1%NOTFOUND;
+                 -- process data record
+                dbms_output.put_line('Name = ' || my_record.ename ||
+                  ', salary = ' || my_record.sal);
+              END LOOP;
+            END;
+            /
+
+
+    4.3 cursor for &#24490;&#29615;&#65292;&#19968;&#31867;&#20026;cursor &#32780;&#29983;&#30340;for &#24490;&#29615;
+    (&#19981;&#24517;&#26174;&#31034;fetch close )
+
+    declare
+    --&#27880;&#24847;&#36825;&#37324;&#30340;for update ,&#38145;&#23450;cursor &#24403;&#21069;&#34892;&#65292;&#20197;&#20415;&#19979;&#38754;&#36827;&#34892;&#26356;&#26032;
+      cursor cursor_instance is select empno,ename,sal from emp for update   ;
+       v_empno emp.empno%type;
+      v_ename emp.ename%type;
+      v_sal emp.sal%type;
+    begin
+         for cursor_instance_index in cursor_instance
+          loop
+             v_empno:=cursor_instance_index.empno;
+            v_ename:=cursor_instance_index.ename;
+            v_sal:=cursor_instance_index.sal*1.1;
+             dbms_output.put_line(v_empno||v_ename);
+             --&#27880;&#24847;&#36825;&#37324;&#30340;where &#35821;&#21477; current of
+             update emp set sal =v_sal where  current of cursor_instance;
+          end loop;
+    end;
+    /
+
+   
+      
+
+5 &#21442;&#29031;&#21464;&#37327; (&#31867;&#20284; &#25351;&#38024;)
+   &#20998;&#20004;&#31181;&#65292; &#28216;&#26631;&#21464;&#37327;&#65292;&#23545;&#35937;&#31867;&#22411;&#21464;&#37327; 
+   (1)&#28216;&#26631;&#31867;&#22411;&#21464;&#37327; ref cursor ;
+       declare
+                      --&#23450;&#20041;&#19968;&#20010;&#31867;&#22411;
+                type emp_cursor is ref cursor ;
+                --&#36825;&#31181;&#26377;&#36820;&#22238;&#20540;&#30340;&#21482;&#33021;open emp &#34920; ,&#25110;&#30456;&#21516;&#32467;&#26500;&#30340;&#34920;&#65292;
+                --type emp_cursor is ref cursor return emp%rowtype ;
+                --type emp_cursor is ref cursor return other_record_type ;
+
+                      --&#23450;&#20041;emp_curse &#30340;&#19968;&#20010;&#21464;&#37327;
+                emp_instance_cursor emp_cursor;
+                v_ename emp.ename%type;
+                v_sal emp.sal%type;
+      begin
+            open emp_instance_cursor for select ename,sal from emp where deptno=20;
+             loop
+                    fetch  emp_instance_cursor into v_ename,v_sal;
+                    exit when emp_instance_cursor%notfound;
+                   dbms_output.put_line('&#29992;&#25143;&#65306;'||v_ename||'    &#24037;&#36164;&#65306;'||v_sal);
+            end loop;
+            close emp_instance_cursor;
+      end;
+      /
+
+
+
+ 
+
+ 
+
+
+  Cursor Expressions &#28216;&#26631;&#34920;&#36798;&#31034; (cursor &#21487;&#20197;fetch &#21478;&#19968;&#20010;cursor &#65292;&#21363;cursor &#23884;&#22871;)
+
+ 
+
+DECLARE
+   TYPE emp_cur_typ IS REF CURSOR;
+   emp_cur emp_cur_typ;
+   dept_name dept.dname%TYPE;
+   emp_name emp.ename%TYPE;
+    ----&#31532;&#19968;&#20010;&#21464;&#37327;&#26159; dname &#65292;&#32780;&#31532;&#20108;&#20010;&#21464;&#37327;&#26159;&#19968;&#20010;&#28216;&#26631;&#65292;&#23427;&#26159;&#19968;&#20010;&#25351;&#21521;&#21478;&#19968;&#24352;&#34920;&#30340;&#25351;&#38024; ,&#38656;&#35201;&#36941;&#21382;&#25165;&#33021;&#21462;&#20986;&#20854;&#20013;&#25968;&#25454;
+   CURSOR c1 IS SELECT
+      dname,
+
+      CURSOR
+      (
+         SELECT e.ename FROM emp e
+         WHERE e.deptno = d.deptno
+      ) employees
+   FROM dept d
+      WHERE dname like 'A%';
+
+BEGIN
+   OPEN c1;
+   LOOP
+      FETCH c1 INTO dept_name, emp_cur;
+      EXIT WHEN c1%NOTFOUND;
+      dbms_output.put_line('Department: ' || dept_name);
+      dbms_output.put_line('&#37096;&#38376;&#19979;&#30340;&#21592;&#24037;&#26377;&#65306;');
+-- For each row in the result set, we can process the result
+-- set from a subquery. We could pass the ref cursor to a procedure
+-- instead of processing it here in the loop.
+      LOOP
+         FETCH emp_cur INTO emp_name;
+         EXIT WHEN emp_cur%NOTFOUND;
+         dbms_output.put_line('   Employee: ' || emp_name);
+      END LOOP;
+   END LOOP;
+   CLOSE c1;
+END;
+/
+
+
+&#19968;&#20010;&#32508;&#21512;&#23454;&#20363;
+DECLARE
+--employees%rowtype &#26159;&#19968;&#26465;&#35760;&#24405;&#31867;&#22411;&#65292;EmployeeSet &#21017;&#26159;&#35760;&#24405;&#31867;&#22411;&#30340;&#25968;&#32452;&#20102;
+   TYPE EmployeeSet IS TABLE OF emp%ROWTYPE;
+   underpaid EmployeeSet; -- Holds set of rows from EMPLOYEES table.
+--&#27880;&#24847;&#65292;&#36825;&#20004;&#21477;&#30340;&#29992;&#27861;
+   CURSOR c1 IS SELECT empno, ename FROM emp;
+   TYPE NameSet IS TABLE OF c1%ROWTYPE;
+   some_names NameSet; 
+
+BEGIN
+ 
+   SELECT * BULK COLLECT INTO underpaid FROM emp      WHERE sal &lt; 2500 ORDER BY sal DESC;
+
+ 
+   dbms_output.put_line(underpaid.COUNT || ' people make less than 2500.');
+   FOR i IN underpaid.FIRST .. underpaid.LAST
+   LOOP
+      dbms_output.put_line(underpaid(i).empno || ' makes ' || underpaid(i).sal);
+   END LOOP;
+
+ 
+   SELECT empno, ename BULK COLLECT INTO some_names FROM emp
+      WHERE ROWNUM &lt; 11;
+   FOR i IN some_names.FIRST .. some_names.LAST
+   LOOP
+      dbms_output.put_line('Employee = ' || some_names(i).empno || ' ' || some_names(i).ename);
+   END LOOP;
+END;
+/
+     
+--------------------------------------------------------------------------------------
+&#25511;&#21046;&#35821;&#21477;----------------------------------------------------------------------------
+ if else &#35821;&#21477; -----------------------------------------------------------------
+ --example 
+     
+     create or replace  procedure sp_addSal10P(p_Name varchar2) 
+        is
+        v_sal emp.sal%type ;
+    begin
+
+      select sal into v_sal from emp where ename=p_Name;
+         if v_sal&lt;2000 then
+                update emp set sal=v_sal*1.1 where ename=p_Name;
+               --&#36825;&#37324;&#26377;then  &#19988;&#26159;elsif &#38750;elseif
+         elsif  v_sal&lt;3000  then
+                update emp set sal=v_sal*1.01 where ename=p_Name;
+              --&#36825;&#37324;&#27809;&#26377;then
+         else
+                update emp set sal=v_sal*1.001 where ename=p_Name;
+         end if ;
+    end;
+    /
+case ------------&#19977;&#31181;&#24418;&#24335;------------------------------------------------------
+       
+ declare v_sal number:=3;
+ begin
+       case
+          when v_sal&lt;10 then
+             null;
+         when v_sal&lt;100 then
+             null;
+      end case;
+  end;
+/
+-----------------------
+   declare v_sal number:=3;
+ begin
+       case  v_sal
+          when  3 then
+          dbms_output.put_line(v_sal||'&#23601;&#26159;3 &#22043;');
+         when 4 then
+          dbms_output.put_line(v_sal||'&#26126;&#26126;&#23601;&#26159;4 &#22043;');
+      end case;
+  end;
+/
+
+  --case &#21487;&#20197;&#20316;&#20026; &#36171;&#20540;&#35821;&#21477;-----------------------
+
+   declare
+   v_sal number:=3;
+   v_newsal number;
+ begin
+      v_newsal:= case  v_sal
+          when  3 then  3*10
+         when 4 then  4*10
+      end ;
+      -- &#27880;&#24847;&#36825;&#37324;&#26159;end &#32780;&#38750;end case ; &#32780;when &#21477;&#26411;&#26080;&#20998;&#21495;
+          dbms_output.put_line(v_newsal);
+  end;
+
+
+loop  end loop;------------------------------------------------------------------------
+         create or replace  procedure sp_addEmp 
+            is
+            v_i number :=0;
+        begin
+            loop
+                      insert into emp (empno,ename) values (v_i,'user_'||v_i);
+                      v_i := v_i+1;
+                      --&#20986;&#21475;
+               exit when v_i=10;
+            end loop;
+        end;
+        /
+
+while ------------------------------------------------------------------------------
+         create or replace  procedure sp_addEmp 
+            is
+            v_i number :=10;
+        begin
+               while v_i&lt;20 
+               loop
+                      insert into emp (empno,ename) values (v_i,'user_'||v_i);
+                      v_i := v_i+1;
+                end loop;
+        end;
+        /
+
+for------------------------------------------------------------------------------
+             create or replace  procedure sp_addEmp 
+                is
+            begin
+            --&#21463;&#38480;&#21046;&#65292;&#19968;&#33324;&#19981;&#29992;for &#22240;&#20026;&#27493;&#38271;&#22987;&#32456;&#20026;1&#65292;&#19988;&#39035;&#30693;&#22987;&#26411;
+            --&#20854;&#20013;&#30340;reverse &#21487;&#23569;&#30053;&#65292;&#26377;reverse &#34920;&#31034; &#20498;&#24207;&#65292;&#21363; i=1000;i--;
+                for i in reverse  100..1000 loop
+                          --insert into emp (empno,ename) values (i,'user_'||i);
+                          delete from emp where empno=i;
+                end loop;
+            end;
+            /
+
+        ----------------------------------
+        begin
+        for item in (select ename  from emp) 
+       loop
+
+       dbms_output.put_line(item.ename);
+       end loop;
+       end;
+       /
+
+goto -----------------------------------------------------------------
+                 create or replace  procedure sp_addEmp 
+                    is
+                    v_i number :=100;
+                begin
+                       while v_i&lt;200  loop
+                              --insert into emp (empno,ename) values (v_i,'user_'||v_i);
+                              delete from emp where empno=v_i;
+                               dbms_output.put_line('delete... '||v_i);
+                               if v_i=150 then
+                                   goto end_loop_flag;
+                               end if ;
+                              v_i := v_i+1;
+                    end loop;
+                    &lt;&lt;end_loop_flag&gt;&gt;
+                    ----&#36825;&#26159;goto &#32467;&#26463;&#26631;&#35760;&#65292;&#22909;&#20687;&#19981;&#33021;&#25918;&#21040;end &#21069;&#38754;&#65288;&#21363;&#31243;&#24207;&#30340;&#26368;&#21518;&#19968;&#20010;&#35821;&#21477; &#65289;&#65292;&#20363;&#22914;&#65292;&#26377;&#19979;&#21477;&#35805;&#65292;&#21487;&#32534;&#35793;&#36890;&#36807; ,&#26080;&#19979;&#21477;&#35805;&#32534;&#35793;--&#19981;&#36890;&#36807;
+                                dbms_output.put_line('out of loop by using goto... ');
+                end;
+                /
+ null &#35821;&#21477;     ---------------------------------------------------------------------------------------
+             &#19968;&#33324;&#22312;&#21028;&#26029;&#35821;&#21477;&#26102;&#20351;&#29992;&#25552;&#39640;&#35821;&#21477;&#21487;&#35835;&#24615;&#65292;&#34920;&#31034;&#19981;&#25191;&#34892;&#20219;&#20309;&#25805;&#20316;
+              if a&lt;3 then
+                null;
+              else
+                delete from emp ;
+                rollback;
+              end if ;
+
+
+             
+&#20363;&#22806;exception -----------------------------------------------------------------------------------
+ &#20998;&#19977;&#31867;&#65292;&#39044;&#23450;&#20041;&#24322;&#24120;&#65288;&#24120;&#35265;&#24322;&#24120;&#65289;&#65292;&#38750;&#39044;&#23450;&#20041;&#24322;&#24120;&#65288;&#19968;&#31181;&#29305;&#23450;&#30340;oracle &#38169;&#35823;&#65292;&#20294;&#26410;&#34987;&#20851;&#32852;&#25104;&#39044;&#23450;&#20041;&#24322;&#24120;&#65292;&#21487;&#20197;&#23558;&#30456;&#24212;oracle &#38169;&#35823;&#21495;&#65292;&#19982;&#33258;&#24050;&#22768;&#26126;&#30340;&#24322;&#24120;&#21517;&#31216;&#30456;&#20851;&#32852;&#65289;&#65292;&#33258;&#23450;&#20041;&#24322;&#24120;
+
+
+&#22312;begin  end &#20043;&#38388;&#21152;exception
+begin
+exception
+   when no_data_found then
+     dbms_output.put_line(' &#26410;&#25214;&#21040;&#25968;&#25454;');
+end ;
+
+--&#20960;&#20010;&#24120;&#29992; &#20363;&#22806;
+case_not_found ,no_date_found , cursor_already_open,dup_val_on_index (index &#19978;&#25554;&#20837;&#37325;&#22797;&#20540; )
+    invalid_cursor (&#20174;&#27809;&#25171;&#24320;&#30340;curosr &#19978;&#35835;&#25968;&#25454; &#65292;&#20851;&#38381;&#26410;&#25171;&#24320;&#30340;&#28216;&#26631;) &#65292;invalid_number ,too_many_rows (select into vari_ &#35821;&#21477;&#36820;&#22238;&#30340;&#19981;&#26159;&#19968;&#26465;&#35760;&#24405;) ,zero_devide ,value_error (&#38271;&#24230;&#36229;&#26631;)
+
+
+declare v_sal emp.sal%type;
+begin
+      select sal into v_sal from emp where empno=7369;
+      case
+          when v_sal&lt;10 then
+             null;
+         when v_sal&lt;100 then
+             null;
+      end case;
+
+      exception
+       when case_not_found then
+       dbms_output.put_line('case &#26410;&#25214;&#21040;!!!!!');
+end;
+
+2&#38750;&#39044;&#23450;&#20041;&#24322;&#24120;
+    declare
+         ex_example exception ;
+         --&#23558;oracle -2292 &#21495;&#38169;&#35823;&#19982;ex_example &#30456;&#20851;&#32852;&#65292; &#22806;&#38190;&#38169;&#35823; &#30340;&#24322;&#24120;
+         pragma exception_init(ex_example, -2292);
+     begin
+               delete from dept where deptno=10;
+     exception
+      when ex_example  then
+               dbms_output.put_line('&#21704;&#21704;&#65292;&#36820;&#22238;&#30340;&#38169;&#35823;&#21495;&#65306;'||sqlcode());
+               dbms_output.put_line('&#21704;&#21704;&#65292;&#36820;&#22238;&#30340;&#38169;&#35823;&#20449;&#24687;&#65306;'||sqlerrm());
+              dbms_output.put_line('&#21704;&#21704;&#65292;&#22240;&#20026;&#22806;&#38190;&#24341;&#29992;&#65292;&#26080;&#27861;&#23436;&#25104;&#20876;&#38500;');
+ end;
+
+3&#33258;&#23450;&#20041;&#20363;&#22806;-----------------
+
+create or replace procedure ex_test(p_empno number ) is
+  myex2 exception ;
+   begin
+ if   1=1 then
+ -- &#22312;&#36825;&#31181;&#24773;&#20917;&#19979;&#35302;&#21457;&#27492;exception
+       raise myex2;
+ end if ;
+ exception
+    when myex2 then
+     dbms_output.put_line('1=1&#20320;&#37117;&#25243;&#24322;&#24120;&#65292;&#23454;&#23646;&#32993;&#38393;');
+       dbms_output.put_line('&#21704;&#21704;&#65292;&#36820;&#22238;&#30340;&#38169;&#35823;&#21495;&#65306;'||sqlcode());
+   end ;
+/
+call ex_test(7611);
+call ex_test(7369);
+
+4 raise_application_error &#20801;&#35768;&#29992;&#25143;&#21019;&#24314;&#33258;&#23450;&#20041;&#24322;&#24120;&#65292;&#21457;&#32473;&#24212;&#29992;&#31243;&#24207;&#26174;&#31034;&#65292;&#32780;&#19981;&#21482;&#26159;dbms_output.put_line();
+
+declare
+e exception;
+begin
+ if 1=1 then
+  raise e;
+  end if ;
+exception
+ when e then
+   raise_application_error(-20001,'&#32431;&#23646;&#32993;&#38393;');
+ 
+end;
+&#24322;&#24120;&#30340;&#19968;&#28857;&#34917;&#20805;
+ when others then &#35821;&#21477; &#34917;&#33719;&#25152;&#26377;&#26410;&#34987;&#34917;&#30340;&#24322;&#24120;
+  exception
+   when myex then
+     dbms_output.put_line('&#27809;&#26377;&#25968;&#25454;&#34987;&#26356;&#26032;');
+    when others  then
+    null;
+
+     sqlcode()&#20989;&#25968;&#36820;&#22238;oracle&#38169;&#35823;&#21495;&#65292;sqlerrm() &#36820;&#22238;&#38169;&#35823;&#20449;&#24687;
+
+
+
+-------------------------------------------------------------------------------------------
+<span class="org-level-1">* &#21160;&#24577;SQL------------------------------------------------------------------------------------------------------------------ Except for multi-row queries(&#36820;&#22238;&#22810;&#26465;&#35760;&#24405;&#30340;&#26597;&#35810;), the dynamic string</span>
+                       can contain any SQL statement (&#19981;&#24517;&#21253;&#25324;&#26411;&#23614;&#30340;&#20998;&#21495;) or
+                       any PL/SQL block (&#21253;&#25324;&#26411;&#23614;&#20998;&#21495;).
+execute immediate stmt_sql
+execute immediate stmt_sql [ using val1,val2] 
+execute immediate  stmt_sql [ using val1,val2] [returning into someVariable]   --update insert delete &#35821;&#21477;&#21487;&#20197;&#26377;returning &#23376;&#21477;&#65292;&#36820;&#22238;&#19968;&#20010;&#20540;&#21040;&#26576;&#20010;&#21464;&#37327;&#20013;
+execute immediate stmt_sql bulk collect into ...;  &#38598;&#21512;&#30340;&#21160;&#24577;sql  select
+execute immediate stmt_sql   RETURNING BULK COLLECT INTO   --          update delete insert
+
+
+
+
+create table t2 (id int) ;
+insert into t2 values (123);
+insert into t2 values (1233);
+declare
+v_dept_name varchar2(255):='&#26085;&#26412;';
+v_sql_stmt varchar2(2000);
+v_sal number;
+begin
+ EXECUTE IMMEDIATE 'CREATE   TABLE bonu (id NUMBER, amt NUMBER)';
+--&#24102;&#21442;&#25968;&#30340;&#21160;&#24577;sql ,&#27880;&#24847;&#22914;&#26524;&#35201;&#24448;&#37324;&#38754;&#20256;&#20540;&#65292;&#24517;&#39035;&#29992;&#36825;&#31181;&#26041;&#24335; &#65292;&#22240;&#20026;&#21333;&#24341;&#21495;&#30340;&#23384;&#22312;&#20250;&#24341;&#36215;&#27495;&#20041;&#65292;&#22909;&#20687;&#27809;&#26377;&#36716;&#20041;&#23383;&#31526;&#22312;oracle&#20013;
+v_sql_stmt := 'INSERT INTO dept VALUES (:1, :2, :3)';
+EXECUTE IMMEDIATE v_sql_stmt USING 14, '&#20013;&#22269;', '&#19996;&#20122;';
+EXECUTE IMMEDIATE v_sql_stmt USING 13, v_dept_name, '&#20122;';
+   plsql_block := 'BEGIN calc_stats(:x, :x, :y, :x); END;'
+   EXECUTE IMMEDIATE plsql_block USING 4,7;
+--block  &#35843;&#29992;&#19968;&#20010;block&#22359;
+v_sql_stmt:='begin   pack_test.SP_UPDATESALDEPENDONENAME(:1,:2); end; ';
+execute immediate v_sql_stmt    using 'SCOTT',123;
+ 
+--&#26356;&#26032;&#25968;&#25454;
+ v_sql_stmt := 'UPDATE emp SET sal = 2000 WHERE empno = :1
+      RETURNING sal INTO :2';
+   EXECUTE IMMEDIATE v_sql_stmt USING 7369 RETURNING INTO v_sal;
+   dbms_output.put_line(v_sal);
+ 
+   --&#21024;&#38500;&#25968;&#25454;
+   EXECUTE IMMEDIATE 'DELETE FROM t2 WHERE id = :abce'     USING 123;
+  --&#25171;&#24320;&#28216;&#26631;
+   v_sql_stmt := 'SELECT * FROM emp WHERE job = :j';
+   OPEN emp_cv FOR sql_stmt USING my_job;
+  
+   --&#20854;&#20182; &#24773;&#20917;
+   EXECUTE IMMEDIATE 'ALTER SESSION SET SQL_TRACE TRUE';
+
+end;
+
+null&#30340;&#22788;&#29702; using &#21477;&#19981;&#33021;&#30452;&#25509;&#29992;null &#20540; &#65292;&#38656;&#22914;&#19979;&#22788;&#29702;
+DECLARE
+   a_null CHAR(1); -- set to NULL automatically at run time
+BEGIN
+   EXECUTE IMMEDIATE 'UPDATE emp SET comm = :x' USING a_null;
+END;
+/
+
+
+ 
+
+--&#21160;&#24577;sql &#20013;procedure &#30340;&#21442;&#25968; in out mode&#38656;&#35201;&#26174;&#24335;&#25351;&#26126; ----------------------------------------------------------
+CREATE PROCEDURE create_dept (
+   deptno IN OUT NUMBER,
+   dname  IN VARCHAR2,
+   loc    IN VARCHAR2) AS
+BEGIN
+   SELECT deptno_seq.NEXTVAL INTO deptno FROM dual;
+   INSERT INTO dept VALUES (deptno, dname, loc);
+END;
+/
+
+To call the procedure from a dynamic PL/SQL block, you must specify the IN OUT mode for the bind argument associated with formal parameter deptno, as follows:
+
+DECLARE
+   plsql_block VARCHAR2(500);
+   new_deptno NUMBER(2);
+   new_dname  VARCHAR2(14) := 'ADVERTISING';
+   new_loc    VARCHAR2(13) := 'NEW YORK';
+BEGIN
+   plsql_block := 'BEGIN create_dept(:a, :b, :c); END;';
+   EXECUTE IMMEDIATE plsql_block
+   --------------------&#27880;&#24847;&#36825;&#37324;&#30340;in out &#65292;&#24517;&#39035;&#26174;&#24335;&#22768;&#26126;&#65292;&#20445;&#25345;&#19982;PROCEDURE create_dept&#65288;&#65289;&#20013;&#21442;&#25968;&#30340;&#19968;&#33268;
+      USING IN OUT new_deptno, new_dname, new_loc;
+   IF new_deptno &gt; 90 THEN ...
+END;
+/
+ 
+
+
+
+<span class="org-level-1">* -&#21160;&#24577;sql &#19982; bulk collect &#38598;&#21512;&#25805;&#20316; --------------------------------------------</span>
+
+%BULK_ROWCOUNT 
+
+ bulk collect into
+
+select ename bulk collect into someCollectionTypeVar from emp  ;
+FETCH emp_cv BULK COLLECT INTO names, sals;  --emp_cv &#26159;&#19968;&#20010;&#25351;&#21521;name ,sal &#20004;&#21015;&#25968;&#25454;&#30340;&#28216;&#26631;
+SELECT employee_id, last_name, salary FROM employees BULK COLLECT INTO all_employee_ids, all_last_names, all_salaries;
+
+
+
+            DECLARE
+               TYPE EmpCurTyp IS REF CURSOR;
+               TYPE NameList IS TABLE OF emp.ename%TYPE;
+               TYPE SalList IS TABLE OF emp.sal%TYPE;
+               emp_cv EmpCurTyp;
+               names  NameList;
+               sals   SalList;
+            BEGIN
+               OPEN emp_cv FOR SELECT ename, sal FROM emp WHERE sal &lt; 3000;
+               FETCH emp_cv BULK COLLECT INTO names, sals; 
+               CLOSE emp_cv;
+            -- Now loop through the NAMES and SALS collections.
+               FOR i IN names.FIRST .. names.LAST
+               LOOP
+                  dbms_output.put_line('Name = ' || names(i) || ', salary = ' ||
+                     sals(i));
+               END LOOP;
+            END;
+            /
+                 
+
+
+
+DECLARE
+   TYPE EmpCurTyp IS REF CURSOR;
+   TYPE NumList IS TABLE OF NUMBER;
+   TYPE NameList IS TABLE OF VARCHAR2(15);
+   emp_cv EmpCurTyp;
+   empnos NumList;
+   enames NameList;
+   sals   NumList;
+BEGIN
+   OPEN emp_cv FOR 'SELECT empno, ename FROM emp';
+     --fetch &#35821;&#21477;&#30340;bulk collect into &#22788;&#29702;&#25972;&#20010;&#38598;&#21512;
+--  FETCH emp_cv BULK COLLECT INTOempnos, enames  LIMIT 7;  &#21482;&#22788;&#29702;7&#34892;&#65292;&#21487;&#20197;&#29992;&#24490;&#29615;&#22810;&#27425;&#25191;&#34892;&#27492;&#25805;&#20316;&#23436;&#25104;&#25968;&#25454;&#30340;&#22788;&#29702;
+     
+   FETCH emp_cv BULK COLLECT INTO empnos, enames;
+   CLOSE emp_cv;
+    --&#23558;&#25972;&#20010;&#36820;&#22238;&#30340;sal &#36171;&#32473;&#19968;&#20010;&#38598;&#21512; &#21464;&#37327;
+   EXECUTE IMMEDIATE 'SELECT sal FROM emp'   BULK COLLECT INTO sals;
+END;
+/
+---------------------------------------------------------
+--update insert delete &#35821;&#21477;&#21487;&#20197;&#26377;returning &#23376;&#21477;
+DECLARE
+   TYPE NameList IS TABLE OF VARCHAR2(15);
+   enames    NameList;
+   sql_stmt  VARCHAR(200);
+BEGIN
+    --update &#30340;&#21487;&#33021;&#19981;&#21482;&#19968;&#26465;&#35760;&#24405; &#25152;&#20197;   RETURNING BULK COLLECT INTO,&#25110;&#19968;&#26465;&#35760;&#24405; &#21017;returning into
+   sql_stmt := 'UPDATE emp SET sal = :1 RETURNING ename INTO :2';
+   EXECUTE IMMEDIATE sql_stmt    USING 500 RETURNING BULK COLLECT INTO enames;
+END;
+/
+ forall &#24490;&#29615;&#65292;-------------------------------------------------------
+  To speed up INSERT, UPDATE, and DELETE statements . &#20351;&#29992;forall &#32780;&#19981;&#26159;for  loop end loop;
+  To speed up SELECT statements, include the BULK COLLECT INTO clause in the SELECT statement instead of using INTO.
+
+ forall &#19982;for &#30340;&#19981;&#21516;&#20043;&#22788;&#22312;&#20110;returning bulk collect into &#26102;&#65292;
+     forall &#26159;&#32487;&#32493;&#21521;&#38598;&#20840;&#20013;&#36861;&#21152; &#65292;&#32780;for &#21017;&#26159;&#26367;&#25442;&#20102;
+DECLARE
+   TYPE NumList IS TABLE OF NUMBER;
+   TYPE NameList IS TABLE OF VARCHAR2(15);
+   empnos NumList;
+   enames NameList;
+BEGIN
+   empnos := NumList(1,2,3,4,5);
+   --&#27880;&#24847;&#36825;&#37324;&#27809;&#26377;loop end loop;  &#24403;&#28982;&#24212;&#35813;&#20063;&#21487;&#20197;&#29992;for loop end loop &#23454;&#29616;
+   FORALL i IN 1..5
+      EXECUTE IMMEDIATE 'UPDATE emp SET sal = sal*1.1 WHERE empno = :1  RETURNING ename INTO :2' USING empnos(i) RETURNING BULK COLLECT INTO enames;
+END;
+/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------
+&#19968;&#20010;&#20998;&#39029;&#23454;&#20363;(java+oracle+pl/sql)
+create table book(id number(18),name varchar2(30),description varchar2(500)   ,author char(30));
+ create or replace procedure insertBook(p_id number,p_name varchar2 ,p_desc varchar2,p_author char)       
+     is
+  begin
+       insert into book  (id ,name ,description ,author) values (p_id,p_name,p_desc,p_author);
+  end ;
+  /
+-----------------------------------------------------------------------------------------
+//&#20998;&#39029;&#35821;&#21477;
+ select t2.* from (select rownum as r,t1.* from (select * from emp) t1)    t2 where t2.r&gt;2 and  t2.r&lt;5 ;
+ 
+ create or replace package pack_cursor is
+    type cursor_instance is ref cursor ;
+end;
+ /
+
+ create or replace procedure page(  p_tableName varchar2, p_orderbyCol varchar2 ,p_pageNow number ,p_pageSize number , p_rowSumCount out number, p_pageSumCount  out number ,   p_cursor out pack_cursor.cursor_instance  ) is
+    v_begin number:=(p_pageNow-1)*p_pageSize+1;
+    v_end number:=(p_pageNow)*p_pageSize+1 ;
+    v_sql varchar2(1000):='select t2.* from (select rownum as r,t1.* from (select * from '||p_tableName ||'  order by '|| p_orderbyCol|| ') t1)    t2 where t2.r&gt;= '||v_begin||'  and  t2.r&lt; '|| v_end;
+  begin
+                --&#27880;&#24847;&#36825;&#19968;&#21477; &#65292;v_sql &#26159;&#20010;&#21464;&#37327;&#65292;&#21487;&#20197;&#19982;java &#20013;&#30340;&#21453;&#23556;&#26426;&#21046;&#65292;&#30456;&#32852;&#31995;
+         --  open p_cursor for select * from emp where deptno=p_deptno;
+         open p_cursor for v_sql;
+
+        v_sql:='select count(*) from '||p_tableName ;
+        --&#36825;&#19968;&#21477;&#65292;&#20063;&#20851;&#20110;&#21453;&#23556;&#26426;&#21046;&#65292;&#24590;&#26679;&#23558;&#19968;&#20010;&#21464;&#37327;&#65292;&#20316;&#20026;&#19968;&#20010;sql &#35821;&#21477; &#25191;&#34892;
+        --Dynamic SQL
+        execute immediate v_sql into p_rowSumCount ;
+       
+        if mod(p_rowSumCount ,p_pageSize)=0 then
+            p_pageSumCount:=p_rowSumCount/p_pageSize;
+        else
+            p_pageSumCount:=p_rowSumCount/p_pageSize+1;
+        end if ;
+  end ;
+  /
+
+ --call page2('emp.ename,emp.deptno,emp.sal,dept.dname' ,'emp,dept','emp.deptno=dept.deptno' ,1,3,  ...)
+ --   select * from   (  select rownum  as r ,t1.*  ( select  p_select from p_from where   p_where  order by p_order ) t1  )  where t2.r &gt;=1 and t2.r&lt;3 ;
+   create or replace procedure page(  p_select varchar2, p_from varchar2 , p_where varchar2, p_order  varchar2,p_pageNow number ,p_pageSize number , p_rowSumCount out number, p_pageSumCount  out number ,   p_cursor out pack_cursor.cursor_instance  ) is
+    v_begin number:=(p_pageNow-1)*p_pageSize+1;
+    v_end number:=(p_pageNow)*p_pageSize+1 ;
+    v_sql varchar2(1000):='select t2.* from (select rownum as r,t1.* from (select  '||p_select||'  from '||p_from ||'  where '||p_where||'  order by '|| p_order|| ') t1)    t2 where t2.r&gt;= '||v_begin||'  and  t2.r&lt; '|| v_end;
+  begin
+                --&#27880;&#24847;&#36825;&#19968;&#21477; &#65292;v_sql &#26159;&#20010;&#21464;&#37327;&#65292;&#21487;&#20197;&#19982;java &#20013;&#30340;&#21453;&#23556;&#26426;&#21046;&#65292;&#30456;&#32852;&#31995;
+         --  open p_cursor for select * from emp where deptno=p_deptno;
+         open p_cursor for v_sql;
+
+        v_sql:='select count(*) from '||p_from ||' where '||p_where  ;
+        --&#36825;&#19968;&#21477;&#65292;&#20063;&#20851;&#20110;&#21453;&#23556;&#26426;&#21046;&#65292;&#24590;&#26679;&#23558;&#19968;&#20010;&#21464;&#37327;&#65292;&#20316;&#20026;&#19968;&#20010;sql &#35821;&#21477; &#25191;&#34892;
+        execute immediate v_sql into p_rowSumCount ;
+       
+        if mod(p_rowSumCount ,p_pageSize)=0 then
+            p_pageSumCount:=p_rowSumCount/p_pageSize;
+        else
+            p_pageSumCount:=p_rowSumCount/p_pageSize+1;
+        end if ;
+  end ;
+  /
+</pre>
+  </body>
+</html>

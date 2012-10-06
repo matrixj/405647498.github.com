@@ -1,0 +1,25 @@
+#+begin_quote
+Emacs 是什么？
+简单粗暴点地说： Editing MACroS.
+译成中文：宏编辑器.
+再简单点：编辑器.
+
+Emacs从诞生起，延续至今的设计原则是:
+The Extensible, Customizable, Self-Documenting Display Editor
+可扩展性和可定制性是它的灵魂。
+
+Emacs的哲学不是为了“方便大众”而来的，而是为了功能和可扩展性。
+它不会为了让所有人都能接受它而委屈自已，它会试图让自己变得很强大，
+而不考虑普通人是否有能力驾驭它,
+但你也不用恢心，因为并不是所有的功能你都感兴趣.
+
+Emacs 的操作习惯让大部分用惯了 Windows 的人感到不爽,
+这是因为Emacs出生六年后，Windows才刚下地。
+很好人在没有真正见到Emacs的优点的时候，已经放弃它了。
+Emacs是少有的几个需要花时间去学习的软件.如果你在写程序的话
+花点时间学习一下Emacs及Emacs Lisp吧
+
+这几个视频不是教你如何配置你的Emacs,
+它只是演示Emacs能做什么.
+
+#+end_quote

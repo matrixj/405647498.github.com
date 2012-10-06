@@ -1,0 +1,205 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<!-- Created by htmlize-1.34 in css mode. -->
+<html>
+  <head>
+    <title>record_info.org</title>
+    <style type="text/css">
+    <!--
+      body {
+        color: #F8F8F8;
+        background-color: #0C1021;
+      }
+      .comment {
+        /* font-lock-comment-face */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-block {
+        /* org-block */
+        color: #b3b3b3;
+      }
+      .org-block-begin-line {
+        /* org-block-begin-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-block-end-line {
+        /* org-block-end-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-document-info {
+        /* org-document-info */
+        color: #afeeee;
+      }
+      .org-document-info-keyword {
+        /* org-document-info-keyword */
+        color: #b3b3b3;
+      }
+      .org-document-title {
+        /* org-document-title */
+        color: #afeeee;
+        font-size: 144%;
+        font-weight: bold;
+      }
+      .org-level-1 {
+        /* org-level-1 */
+        color: #FF6400;
+      }
+      .org-link {
+        /* org-link */
+        color: #00ffff;
+        text-decoration: underline;
+      }
+      .org-meta-line {
+        /* org-meta-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+
+      a {
+        color: inherit;
+        background-color: inherit;
+        font: inherit;
+        text-decoration: inherit;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+    -->
+    </style>
+  </head>
+  <body>
+    <pre>
+<span class="comment"># -*- coding:utf-8 -*-</span>
+<span class="org-meta-line">#+LANGUAGE:  zh
+</span><span class="org-document-info-keyword">#+TITLE:</span><span class="comment">     </span><span class="org-document-title">record_info.org</span>
+<span class="org-document-info-keyword">#+AUTHOR:</span><span class="comment">    </span><span class="org-document-info">&#32426;&#31168;&#23792;</span>
+<span class="org-document-info-keyword">#+EMAIL:</span><span class="comment">     </span><span class="org-document-info">jixiuf@gmail.com</span>
+<span class="org-document-info-keyword">#+DATE:</span><span class="comment">     </span><span class="org-document-info">2012-05-30 &#26143;&#26399;&#19977;</span>
+<span class="org-meta-line">#+DESCRIPTION:record_info.org
+#+KEYWORDS: erlang record
+#+OPTIONS:   H:2 num:nil toc:t \n:t @:t ::t |:t ^:nil -:t f:t *:t &lt;:t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil
+#+FILETAGS: @Erlang
+</span>
+<span class="org-level-1">* record_info(fields,yourrecordname), record_info(size,yourrecordname),</span>
+  &#36825;&#20004;&#20010;&#23439;&#19981;&#20687;&#23439;&#65292;&#20989;&#25968;&#19981;&#20687;&#20989;&#25968;&#30340;&#19996;&#35199;&#65292;&#21487;&#20197;&#22312;&#32534;&#35793;&#26399;&#36827;&#34892;&#23637;&#24320;&#65292;&#20294;&#26159;&#25105;&#22914;&#26524;&#24819;&#20889;&#19968;&#20010;
+  record&#21040;json &#26684;&#24335;&#30340;&#36716;&#25442;&#20989;&#25968;&#30340;&#35805;&#65292;&#26159;&#27809;&#27861;&#23454;&#29616;&#30340;&#65292;&#22240;&#20026;&#23427;&#21482;&#22312;&#32534;&#35793;&#26399;&#26377;&#38480;&#65292;&#22312;&#36816;&#34892;
+  &#20854;&#19968;&#20010; record &#23454;&#38469;&#23601;&#26159;&#19968;&#20010;tuple,&#20854;&#20013;&#26159;&#21462;&#19981;&#21040;record &#30340;field&#30340;&#21517;&#23383;&#30340;&#12290;
+  &#25152;&#20197;&#21442;&#29031;&#32593;&#19978;&#30340;&#36164;&#26009;&#20889;&#20102;&#19979;&#38754;&#19968;&#20010;&#24037;&#20855;&#65292;
+  &#20316;&#29992;&#26159;&#26681;&#25454;&#26576;&#20010;erlang&#22836;&#25991;&#20214;&#65292;&#25552;&#21462;&#20986;&#20854;&#20013;&#30340;record ,&#28982;&#21518;&#20026;&#20854;&#29983;&#25104;&#19968;&#20010;module
+  &#25552;&#20379;get_key get_value get_index ,fields_info&#31561;&#20989;&#25968; &#65292;&#21487;&#20197;&#24471;&#21040;record&#30340;&#30456;&#24212;&#20449;
+  &#24687;
+  <span class="org-link">https://github.com/jixiuf/helloerlang/blob/master/record_field/src/record_util.erl</span>
+  &#27604;&#22914;&#26377;&#36825;&#26679;&#19968;&#20010;&#22836;&#25991;&#20214;myhead.hrl
+<span class="org-block-begin-line">  #+BEGIN_SRC erlang
+</span><span class="org-block">    -record(user,{id,name,age}).
+    -record(classes,{name,id,nums}).
+</span><span class="org-block-end-line">  #+END_SRC
+</span>  &#25105;&#20462;&#25913;record_util.hrl&#20013;&#22836;&#37096;&#30340;&#20960;&#20010;&#23439;&#65292;&#35760;&#20854;&#29983;&#25104;&#20851;&#20110;myhead.hrl&#30340;&#19968;&#20010;&#24037;&#20855;&#27169;&#22359;myhead_util.erl
+<span class="org-block-begin-line">  #+BEGIN_SRC erlang
+</span><span class="org-block">    -define(HEAD_FILE_PATH,"../include/myhead.hrl").%relative to ebin/
+    %% save ?MODULENAME.erl in this dir
+    -define(DEST_DIR,"../src"). %relative to ebin/
+    -define(MODULENAME,"myhead_util").
+    -define(INCLUDE_CMD_IN_DEST_MODULE,"-include(\"myhead.hrl\").").
+</span><span class="org-block-end-line">  #+END_SRC
+</span>  &#33258;&#21160;&#29983;&#25104;&#30340;&#27169;&#22359;&#22914;&#19979;
+<span class="org-block-begin-line">#+BEGIN_SRC erlang
+</span><span class="org-block">  %% This module automatically generated - do not edit
+
+  %%% This module provides utilities for getting info about records
+  %% suppose there is a record in myhead.erl
+
+  %% -record(user,[id,name,age]).
+  %% U=#user{id=100,name=joseph,age=11}.
+
+  %% get_index(user,id)==1
+  %% get_index(U,id)==1
+
+  %% get_value(U,id)==100
+  %% get_value(U,1)==100
+
+  %% get_key(U,1)==key
+  %% get_key(user,1)==key
+
+  %% fields_info(user)==[id,name,age]
+  %% fields_info(U)==[id,name,age]
+
+  %% length(user)==3
+  %% length(U)==3
+
+  -module(myhead_util).
+
+  -include("myhead.hrl").
+  -export([get_index/2,get_key/2,get_value/2,length/1,fields_info/1]).
+
+  %% get the filed index (1 based ) of a record
+  get_index(user,id)-&gt; #user.id-1 ;
+  get_index(Record,id) when is_record(Record,user)-&gt; #user.id-1 ;
+  get_index(user,name)-&gt; #user.name-1 ;
+  get_index(Record,name) when is_record(Record,user)-&gt; #user.name-1 ;
+  get_index(user,age)-&gt; #user.age-1 ;
+  get_index(Record,age) when is_record(Record,user)-&gt; #user.age-1 ;
+  get_index(user,F) -&gt; exit({error,"Record: user has no field called "++atom_to_list(F)});
+  get_index(classes,name)-&gt; #classes.name-1 ;
+  get_index(Record,name) when is_record(Record,classes)-&gt; #classes.name-1 ;
+  get_index(classes,id)-&gt; #classes.id-1 ;
+  get_index(Record,id) when is_record(Record,classes)-&gt; #classes.id-1 ;
+  get_index(classes,nums)-&gt; #classes.nums-1 ;
+  get_index(Record,nums) when is_record(Record,classes)-&gt; #classes.nums-1 ;
+  get_index(classes,F) -&gt; exit({error,"Record: classes has no field called "++atom_to_list(F)});
+  get_index(Record,_Field) -&gt; exit({error,"Invalid Record Name: "++Record}).
+
+  %% get field value of a record by index(1 based) or field name
+  get_value(Record,id) when  is_record(Record,user)-&gt;Record#user.id;
+  get_value(Record,1) when  is_record(Record,user)-&gt;Record#user.id;
+  get_value(Record,name) when  is_record(Record,user)-&gt;Record#user.name;
+  get_value(Record,2) when  is_record(Record,user)-&gt;Record#user.name;
+  get_value(Record,age) when  is_record(Record,user)-&gt;Record#user.age;
+  get_value(Record,3) when  is_record(Record,user)-&gt;Record#user.age;
+  get_value(user,Index) -&gt; exit({error,"Record: user has no field index "++integer_to_list(Index)});
+  get_value(Record,name) when  is_record(Record,classes)-&gt;Record#classes.name;
+  get_value(Record,1) when  is_record(Record,classes)-&gt;Record#classes.name;
+  get_value(Record,id) when  is_record(Record,classes)-&gt;Record#classes.id;
+  get_value(Record,2) when  is_record(Record,classes)-&gt;Record#classes.id;
+  get_value(Record,nums) when  is_record(Record,classes)-&gt;Record#classes.nums;
+  get_value(Record,3) when  is_record(Record,classes)-&gt;Record#classes.nums;
+  get_value(classes,Index) -&gt; exit({error,"Record: classes has no field index "++integer_to_list(Index)});
+  get_value(Record,_KeyIndex) -&gt; exit({error,"Invalid Record Name: "++Record}).
+
+  %% get field name by index
+  get_key(user,1)-&gt; id;
+  get_key(Record,1) when is_record(Record,user) -&gt;id;
+  get_key(user,2)-&gt; name;
+  get_key(Record,2) when is_record(Record,user) -&gt;name;
+  get_key(user,3)-&gt; age;
+  get_key(Record,3) when is_record(Record,user) -&gt;age;
+  get_key(user,Index) -&gt; exit({error,"Record: user has no field index "++integer_to_list(Index)});
+  get_key(classes,1)-&gt; name;
+  get_key(Record,1) when is_record(Record,classes) -&gt;name;
+  get_key(classes,2)-&gt; id;
+  get_key(Record,2) when is_record(Record,classes) -&gt;id;
+  get_key(classes,3)-&gt; nums;
+  get_key(Record,3) when is_record(Record,classes) -&gt;nums;
+  get_key(classes,Index) -&gt; exit({error,"Record: classes has no field index "++integer_to_list(Index)});
+  get_key(Record,_Index) -&gt; exit({error,"Invalid  Record Name or Index out of bound : "++lists:flatten(io_lib:format("~p",[Record]))}).
+
+  %% get all field name of a record
+  fields_info(classes) -&gt; [name,id,nums];
+  fields_info(Record ) when is_record(Record,classes)-&gt;[name,id,nums];
+  fields_info(user) -&gt; [id,name,age];
+  fields_info(Record ) when is_record(Record,user)-&gt;[id,name,age];
+  fields_info(Other) -&gt; exit({error,"Invalid Record Name: "++Other}).
+
+  %% get count of fields of a record
+  length(classes) -&gt; 3;
+  length(Record ) when is_record(Record,classes)-&gt;3;
+  length(user) -&gt; 3;
+  length(Record ) when is_record(Record,user)-&gt;3;
+  length(Other) -&gt; exit({error,"Invalid Record Name: "++Other}).
+</span><span class="org-block-end-line">#+END_SRC
+</span></pre>
+  </body>
+</html>

@@ -3,14 +3,14 @@
                "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="zh" xml:lang="zh">
 <head>
-<title>一个人的狂欢</title>
+<title>数值转换</title>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
-<meta name="title" content="一个人的狂欢"/>
+<meta name="title" content="数值转换"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2011-06-04 星期六"/>
-<meta name="author" content="孤峰独秀"/>
-<meta name="description" content=""/>
-<meta name="keywords" content=""/>
+<meta name="generated" content="2012-04-23 一"/>
+<meta name="author" content="纪秀峰"/>
+<meta name="description" content="数值转换"/>
+<meta name="keywords" content="@C"/>
 <style type='text/css'>
        body {
     background-color: #E5E5E5;
@@ -942,15 +942,15 @@ img {
 }
 
     </style>
-<link rel="stylesheet" type="text/css" href="style/emacs.css" />
-<script type='text/javascript' src='js/emacs.js'> </script>
+<link rel="stylesheet" type="text/css" href="../style/emacs.css" />
+<script type='text/javascript' src='../js/emacs.js'> </script>
 
 </head>
 <body>
 <div id="org-div-home-and-up" style="text-align:right;font-size:70%;white-space:nowrap;">
- <a accesskey="h" href="sitemap.html"> 站点地图 </a>
+ <a accesskey="h" href="../sitemap.html"> 站点地图 </a>
  |
- <a accesskey="H" href="index.html"> 首页 </a>
+ <a accesskey="H" href="../index.html"> 首页 </a>
 </div>
 
 <div id="preamble">
@@ -958,60 +958,163 @@ img {
 </div>
 
 <div id="content">
-<h1 class="title">一个人的狂欢</h1>
+<h1 class="title">数值转换</h1>
 
 
-<div id='logo-img' ><a  href='index.html'>▇█▓▒░◕~◕░▒▓█▇</a></div>
+<div id='logo-img' ><a  href='../index.html'>▇█▓▒░◕~◕░▒▓█▇</a></div>
 
 <div id='logo-text'>
   <a href='#' ><span align="left">░◕~◕░</span></a>
 </div>
 
 
-<ul>
-<li>首页还未做好，先看<a href="sitemap.html">站点地图</a>吧
-</li>
-<li><a href="about.html">About</a>
+<pre class="src src-c"><span class="org-type">int</span> <span class="org-function-name">atoi</span>(<span class="org-keyword">const</span> <span class="org-type">char</span> *<span class="org-variable-name">nptr</span>);
+<span class="org-type">double</span> <span class="org-function-name">atof</span>(<span class="org-keyword">const</span> <span class="org-type">char</span> *<span class="org-variable-name">nptr</span>);
+ <span class="org-comment-delimiter">/* </span><span class="org-comment">&#36820;&#22238;&#20540;&#65306;&#36716;&#25442;&#32467;&#26524; </span><span class="org-comment-delimiter">*/</span>
+</pre>
+
+
+<p>
+atoi把一个字符串开头可以识别成十进制整数的部分转换成int型，相当于下面要讲的<br/>
+strtol(nptr, (char **) NULL, 10);。例如atoi("123abc")的返回值是123，字符串开头<br/>
+可以有若干空格，例如atoi(" -90.6-")的返回值是-90。如果字符串开头没有可识别的整<br/>
+数，例如atoi("asdf")，则返回0，而atoi("0***")也返回0，根据返回值并不能区分这两<br/>
+种情况，所以使用atoi函数不能检查出错的情况。下面要讲的strtol函数可以设置errno，<br/>
+因此可以检查出错的情况，在严格的场合下应该用strtol，而atoi用起来更简便，所以也<br/>
+很常用。<br/>
+</p>
+<p><br/>
+atof把一个字符串开头可以识别成浮点数的部分转换成double型，相当于下面要讲的<br/>
+strtod(nptr, (char **) NULL);。字符串开头可以识别的浮点数格式和C语言的浮点数常<br/>
+量相同，例如atof("31.4 ")的返回值是31.4，atof("3.14e+1AB")的返回值也是31.4。<br/>
+atof也不能检查出错的情况，而strtod可以。<br/>
+</p>
+<p><br/>
+</p>
+<p><br/>
+<pre class="src src-c"><span class="org-preprocessor">#include</span> <span class="org-string">&lt;stdlib.h&gt;</span>
+
+<span class="org-type">long</span> <span class="org-type">int</span> <span class="org-function-name">strtol</span>(<span class="org-keyword">const</span> <span class="org-type">char</span> *<span class="org-variable-name">nptr</span>, <span class="org-type">char</span> **<span class="org-variable-name">endptr</span>, <span class="org-type">int</span> <span class="org-variable-name">base</span>);
+<span class="org-type">double</span> <span class="org-function-name">strtod</span>(<span class="org-keyword">const</span> <span class="org-type">char</span> *<span class="org-variable-name">nptr</span>, <span class="org-type">char</span> **<span class="org-variable-name">endptr</span>);
+<span class="org-comment-delimiter">/* </span><span class="org-comment">&#36820;&#22238;&#20540;&#65306;&#36716;&#25442;&#32467;&#26524;&#65292;&#20986;&#38169;&#26102;&#35774;&#32622;errno </span><span class="org-comment-delimiter">*/</span>
+</pre>
+
+strtol是atoi的增强版，主要体现在这几方面：<br/>
+</p>
+<p><br/>
+</p><ul>
+<li>不仅可以识别十进制整数，还可以识别其它进制的整数，取决于base参数，比如<br/>
+      strtol("0XDEADbeE~~", NULL, 16)返回0xdeadbee的值，strtol("0777~~", NULL,<br/>
+      8)返回0777的值。<br/>
+
+<p><br/>
+</p></li>
+<li>endptr是一个传出参数，函数返回时指向后面未被识别的第一个字符。例如char<br/>
+      *pos; strtol("123abc", &amp;pos, 10);，strtol返回123，pos指向字符串中的字母a。<br/>
+      如果字符串开头没有可识别的整数，例如char *pos; strtol("ABCabc", &amp;pos,<br/>
+      10);，则strtol返回0，pos指向字符串开头，可以据此判断这种出错的情况，而这<br/>
+      是atoi处理不了的。<br/>
+
+<p><br/>
+</p></li>
+<li>如果字符串中的整数值超出long int的表示范围（上溢或下溢），则strtol返回它<br/>
+      所能表示的最大（或最小）整数，并设置errno为ERANGE，例如<br/>
+      strtol("0XDEADbeef~~", NULL, 16)返回0x7fffffff并设置errno为ERANGE。<br/>
 </li>
 </ul>
 
 
+<p><br/>
+回想一下使用fopen的套路<br/>
+</p>
+<p><br/>
+<pre class="src src-c"><span class="org-keyword">if</span> ( (fp = fopen(...)) == <span class="org-constant">NULL</span>) { &#35835;&#21462;errno }&#65292;
+</pre>
+
+fopen在出错时会返回NULL，因此我们知道需要读errno，但strtol在成功调用时也可能返<br/>
+回0x7fffffff，我们如何知道需要读errno呢？最严谨的做法是首先把errno置0，再调用<br/>
+strtol，再查看errno是否变成了错误码。Man Page上有一个很好的例子：<br/>
+</p>
+<p><br/>
+<pre class="src src-c"><span class="org-preprocessor">#include</span> <span class="org-string">&lt;stdlib.h&gt;</span>
+<span class="org-preprocessor">#include</span> <span class="org-string">&lt;limits.h&gt;</span>
+<span class="org-preprocessor">#include</span> <span class="org-string">&lt;stdio.h&gt;</span>
+<span class="org-preprocessor">#include</span> <span class="org-string">&lt;errno.h&gt;</span>
+
+<span class="org-type">int</span> <span class="org-function-name">main</span>(<span class="org-type">int</span> <span class="org-variable-name">argc</span>, <span class="org-type">char</span> *<span class="org-variable-name">argv</span>[])
+{
+    <span class="org-type">int</span> <span class="org-variable-name">base</span>;
+    <span class="org-type">char</span> *<span class="org-variable-name">endptr</span>, *<span class="org-variable-name">str</span>;
+    <span class="org-type">long</span> <span class="org-variable-name">val</span>;
+
+    <span class="org-keyword">if</span> (argc &lt; 2) {
+        fprintf(stderr, <span class="org-string">"Usage: %s str [base]\n"</span>, argv[0]);
+        exit(EXIT_FAILURE);
+    }
+
+    str = argv[1];
+    base = (argc &gt; 2) ? atoi(argv[2]) : 10;
+
+    errno = 0;    <span class="org-comment-delimiter">/* </span><span class="org-comment">To distinguish success/failure after call </span><span class="org-comment-delimiter">*/</span>
+    val = strtol(str, &amp;endptr, base);
+
+    <span class="org-comment-delimiter">/* </span><span class="org-comment">Check for various possible errors </span><span class="org-comment-delimiter">*/</span>
+
+    <span class="org-keyword">if</span> ((errno == ERANGE &amp;&amp; (val == LONG_MAX || val == LONG_MIN))
+        || (errno != 0 &amp;&amp; val == 0)) {
+        perror(<span class="org-string">"strtol"</span>);
+        exit(EXIT_FAILURE);
+    }
+
+    <span class="org-keyword">if</span> (endptr == str) {
+        fprintf(stderr, <span class="org-string">"No digits were found\n"</span>);
+        exit(EXIT_FAILURE);
+    }
+
+    <span class="org-comment-delimiter">/* </span><span class="org-comment">If we got here, strtol() successfully parsed a number </span><span class="org-comment-delimiter">*/</span>
+
+    printf(<span class="org-string">"strtol() returned %ld\n"</span>, val);
+
+    <span class="org-keyword">if</span> (*endptr != <span class="org-string">'\0'</span>)        <span class="org-comment-delimiter">/* </span><span class="org-comment">Not necessarily an error... </span><span class="org-comment-delimiter">*/</span>
+        printf(<span class="org-string">"Further characters after number: %s\n"</span>, endptr);
+
+    exit(EXIT_SUCCESS);
+}
+</pre>
 
 
 <div id='my-src'>
-<div id='org-src'><a href='src/index.org'>src</a></div>
-<div id='htmlized-src'><a href='htmlized-src/index.org.html'>htmlized-src</a></div>
+<div id='org-src'><a href='../src/c/int.org'>src</a></div>
+<div id='htmlized-src'><a href='../htmlized-src/c/int.org.html'>htmlized-src</a></div>
 </div>
 <div id='tags'><span id='tags-title'>Tags:</span><br />
-<p>
-    <a href="tags/@SVN.html">@SVN</a>
-    <a href="tags/@perl.html">@perl</a>
-    <a href="tags/@Java.html">@Java</a>
-    <a href="tags/@Mysql.html">@Mysql</a>
-    <a href="tags/@Erlang.html">@Erlang</a>
-    <a href="tags/@SQL.html">@SQL</a>
-    <a href="tags/@DB.html">@DB</a>
-    <a href="tags/@Oracle.html">@Oracle</a>
-    <a href="tags/@Ediff.html">@Ediff</a>
-    <a href="tags/@Git.html">@Git</a>
-    <a href="tags/@Cedet.html">@Cedet</a>
-    <a href="tags/@C-C++.html">@C-C++</a>
-    <a href="tags/@Daily.html">@Daily</a>
-    <a href="tags/@Eclipse.html">@Eclipse</a>
-    <a href="tags/@AutoHotKey.html">@AutoHotKey</a>
-    <a href="tags/@Windows.html">@Windows</a>
-    <a href="tags/@Linux.html">@Linux</a>
-    <a href="tags/@C.html">@C</a>
-    <a href="tags/@Emacs.html">@Emacs</a>
+    <a href="../tags/@SVN.html">@SVN</a><br/>
+    <a href="../tags/@perl.html">@perl</a><br/>
+    <a href="../tags/@Java.html">@Java</a><br/>
+    <a href="../tags/@Mysql.html">@Mysql</a><br/>
+    <a href="../tags/@Erlang.html">@Erlang</a><br/>
+    <a href="../tags/@SQL.html">@SQL</a><br/>
+    <a href="../tags/@DB.html">@DB</a><br/>
+    <a href="../tags/@Oracle.html">@Oracle</a><br/>
+    <a href="../tags/@Ediff.html">@Ediff</a><br/>
+    <a href="../tags/@Git.html">@Git</a><br/>
+    <a href="../tags/@Cedet.html">@Cedet</a><br/>
+    <a href="../tags/@C-C++.html">@C-C++</a><br/>
+    <a href="../tags/@Daily.html">@Daily</a><br/>
+    <a href="../tags/@Eclipse.html">@Eclipse</a><br/>
+    <a href="../tags/@AutoHotKey.html">@AutoHotKey</a><br/>
+    <a href="../tags/@Windows.html">@Windows</a><br/>
+    <a href="../tags/@Linux.html">@Linux</a><br/>
+    <a href="../tags/@C.html">@C</a><br/>
+    <a href="../tags/@Emacs.html">@Emacs</a><br/>
 </p>
-
-
+<p><br/>
 </div>
-</div>
+</p></div>
 
 <div id="postamble">
-<p class="date">Date: 2011-06-04 星期六</p>
-<p class="author">Author: 孤峰独秀</p>
+<p class="date">Date: 2012-04-23 一</p>
+<p class="author">Author: 纪秀峰</p>
 <p class="creator">Org version 7.8.03 with Emacs version 24</p>
 
 

@@ -1,0 +1,124 @@
+# -*- coding:utf-8 -*-
+#+LANGUAGE:  zh
+#+TITLE:     站点地图
+#+AUTHOR:    纪秀峰
+#+EMAIL:     jixiuf@gmail.com
+#+DATE:     2011-06-26 星期日
+#+DESCRIPTION:站点地图
+#+KEYWORDS: sitemap org mode emacs
+#+OPTIONS:   H:2 num:nil toc:t \n:t @:t ::t |:t ^:nil -:t f:t *:t <:t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc
+#+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
+#+EXPORT_SELECT_TAGS: export
+#+EXPORT_EXCLUDE_TAGS: noexport
+   + Autohotkey
+     + [[file:autohotkey/AutoHotKey_Introduce.org][AutoHotKey 简介]]
+     + [[file:autohotkey/AutoHotKey_1.org][AutoHotKey 几个简单的小例子]]
+     + [[file:autohotkey/AutoHotKeyExplorer.org][对"我的电脑"  进行增强]]
+     + [[file:autohotkey/AutoHotKey_auto_close_boring_window.org][自动关闭广告窗口]]
+     + [[file:autohotkey/AutoHotKey_eclipse.org][AutoHotkey对Eclipse进行增强]]
+     + [[file:autohotkey/anything-doc.org][Anything.ahk]]
+   + Erlang(一种变量只能赋值一次，没有循环只有递归的诡异语言)
+     + [[file:erlang/catch.org][catch]]
+     + [[file:erlang/timeout.org][timeout]]
+     + [[file:erlang/dic.org][dict]]
+     + [[file:erlang/message.org][message分布式聊天小例]]
+     + [[file:erlang/spawn_link.org][spawn_link进程关,同生共死]]
+     + [[file:erlang/binary_bit.org][binary bit 处理]]
+     + [[file:erlang/mochiweb_comet_chat.org][mochiweb comet ,long pull网页即时聊天系统原理代码 ]]
+     + [[file:erlang/mochiweb_http_load.org][mochiweb 的使用 及 可开tcp连接数的(http长连接) 测试 ]]
+     + [[file:erlang/distel.org][emacs 下erlang的IDE distel]]
+     + [[file:erlang/Distributed_Applications.org][Distributed_Applications]]
+     + [[file:erlang/global_register_name.org][global register name 相关内容 ]]
+     + [[file:erlang/makefile.org][Makefile for Erlang示例]]
+     + [[file:erlang/emysql_benchmark.org][emysql 压力测试]]
+     + [[file:erlang/record_info.org][record_info util]]
+     + [[file:erlang/gb_tree_dict.org][gt_tree dict orddict proplist]]
+     + [[file:erlang/release.org][发布release]]
+     + [[file:erlang/release_handle_rebar_hot_code_swap.org][release_handler rebar hot code swap]]
+     + [[file:erlang/hot_code_swap.org][热代码替换拾遗]]
+   + Emacs (编辑器圣战的主角)
+     + [[file:emacs/emacs-on-windows.org][Windows上Emacs的安装及emacsclient进行C/S连接]]
+     + [[file:emacs/emacs-first-class.org][emacs 入门第一课：Emacs里的基本概念 ]]
+     + [[file:emacs/emacs-help-system.org][emacs 的帮助系统]]
+     + [[file:emacs/emacs-introduce.org][Emacs一些并不可笑的笑话，闲言碎语]]
+     + [[file:emacs/emacs-fun.org][Emacs中一些有趣的东西]]
+     + [[file:emacs/emacs-some-func.org][我写的一些有用的函数]]
+     + [[file:emacs/emacs-vc.org][emacs中的版本控制VC接口]]
+     + [[file:emacs/open-with.org][Emacs中的openwith.el扩展]]
+     + [[file:emacs/emacs-kill-region-or-line.org][Emacs中的剪切复制]]
+     + [[file:emacs/sqlparser.org][编写mysql/oracle脚本时，补全表名、列名]]x
+     + [[file:emacs/ediff-git-mergetool.org][使用Emacs中的ediff作为Git的mergetool]]
+     + [[file:emacs/emacs-smart-beginning-of-line-and-end-of-line.org][smart-beginning-of-line]]
+     + [[file:emacs/auto-insert-and-yasnippet.org][yasnippet ,Auto Insert mode整合]]
+     + [[file:emacs/ediff.org][Windows 下使用Emacs的 Ediff 进行文件的比较、合并]]
+     + [[file:emacs/emacs-23.2-cedet.org][emacs-23.2安装官网cedet]]
+     + [[file:emacs/cedet-customize.org][cedet 的定制，（译文）]]
+     + [[file:emacs/c-c%2B%2B-cedet-eassist.org][c-c++-cedet-eassist]]
+     + [[file:emacs/c-c%2B%2B-cedet-symref.org][c-c++-cedet-symref.org]]
+     + [[file:emacs/nxml-mode.org][nxml mode ]]
+     + [[file:java/spring.org][nxml mode : spring.rnc的作成]]
+     + [[file:emacs/msys-bash-ls-color.org][Windows 上使用msys中的bash，及ls 显示颜色的配置]]
+     + [[file:emacs/image-suport-on-windows.org][Windows上Emacs中显示jpeg ,pgn 格式的图片]]
+     + [[file:emacs/goto-last-change.org][goto-last-change跳转到最近几次编辑的位置]]
+   + Java
+     + [[file:java/ant-example1.org][ant build.xml 示例 ]]
+   + C
+     + [[file:c/concat.org][c 的长度可变的参数concat(char* first ...)]]
+     + [[file:c/error_log.org][可变参数2 ,类printf的error()]]
+     + [[file:c/macro.org][宏展开 及#与##]]
+     + [[file:c/sth.org][c拾遗]]
+     + [[file:c/bit.org][二进制 与或非 移位]]
+     + [[file:c/x86.org][x86汇编的一些知识]]
+     + [[file:c/register.org][汇编 寄存器]]
+     + [[file:c/c_assemble.org][c与汇编]]
+     + [[file:c/cast.org][强制类型转换]]
+     + [[file:c/fread_fwrite_int.org][读写二进制文件,读写int]]
+     + [[file:c/fscanf.org][fscanf示例]]
+     + [[file:c/IO.org][IO]]
+     + [[file:c/malloc.org][动态内存分配]]malloc
+     + [[file:c/qsort.org][qsort 与函数指针 ]]
+     + [[file:c/errno_perror.org]]
+     + [[file:c/printf.org][格式化输出]]
+     + [[file:c/int.org][数值转换]]atoi等
+     + [[file:c/dfs_maze.org][深度优先算法dfs迷宫寻路]]
+     + [[file:c/bfs_maze.org][queue与广度优先算法bfs迷宫寻路]]
+   + Perl
+     + [[file:perl/perl.org][perl 笔记]]
+   + Git
+     + [[file:git/git.org][git拾遗]]
+     + [[file:git/git-proxy-on-windows.org][Git代理]]
+   + SVN
+     + [[file:svn/svnignore.org][svn ignore]]
+   + Windows
+     + [[file:windows/windows-keymap.org][windows 的键盘映射]]
+     + [[file:sqlserver/sqlserver-kill-all-connection.org][SQL SERVER kill all connection]]
+     + [[file:sqlserver/clonedb.org][sqlserver clone DB]]
+   + Linux
+     + [[file:Linux/lcd-vga.org][Linux下调笔记本亮度]]
+     + [[file:Linux/iptables.org][iptables防火墙]]
+     + [[file:Linux/linux-logo-by-code.htm][传说中用代码堆成的linux logo]]
+     + [[file:Linux/ext2.org][ext2]]
+<<<<<<< variant A
+     + [[file:Linux/linux_fbl.org][linux下分辨率调整]]
+     + [[file:Linux/ctags.org][Exuberant Ctags ]]
+     + [[file:Linux/nmap.org][nmap]]
+>>>>>>> variant B
+     + [[file:Linux/nmap.org][nmap]]
+####### Ancestor
+======= end
+   + Oracle
+     + [[file:oracle/3ManageAnOracleInstance.org]]
+     + [[file:oracle/4ManageADatabase.org]]
+     + [[file:oracle/oracle_learn.org][oracle笔记]]
+     + [[file:oracle/hanzi_pinyin.org][汉字拼音对应表]]
+     + [[file:oracle/oracle.org][oracle拾遗]]
+   + Mysql
+     + [[file:mysql/benchmark.org][mysql压力测试]]
+     + [[file:mysql/benchmark_demo.org][mysql压力测试实战]]
+     + [[file:mysql/mysql.org][mysql拾 遗]]
+   + 个人简历
+     - [[file:author.org][Erlang版]]
+     - [[file:author2.org][Java版]]
+   + [[file:about.org][about]]
+   + [[file:links.org][一些有用的链接]]

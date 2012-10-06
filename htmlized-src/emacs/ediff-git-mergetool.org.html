@@ -1,0 +1,173 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<!-- Created by htmlize-1.34 in css mode. -->
+<html>
+  <head>
+    <title>ediff-git-mergetool.org</title>
+    <style type="text/css">
+    <!--
+      body {
+        color: #F8F8F8;
+        background-color: #0C1021;
+      }
+      .comment {
+        /* font-lock-comment-face */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-block {
+        /* org-block */
+        color: #b3b3b3;
+      }
+      .org-block-begin-line {
+        /* org-block-begin-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-block-end-line {
+        /* org-block-end-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-document-info {
+        /* org-document-info */
+        color: #afeeee;
+      }
+      .org-document-info-keyword {
+        /* org-document-info-keyword */
+        color: #b3b3b3;
+      }
+      .org-document-title {
+        /* org-document-title */
+        color: #afeeee;
+        font-size: 144%;
+        font-weight: bold;
+      }
+      .org-level-1 {
+        /* org-level-1 */
+        color: #FF6400;
+      }
+      .org-meta-line {
+        /* org-meta-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+
+      a {
+        color: inherit;
+        background-color: inherit;
+        font: inherit;
+        text-decoration: inherit;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+    -->
+    </style>
+  </head>
+  <body>
+    <pre>
+<span class="comment"># -*- coding:utf-8 -*-</span>
+<span class="org-document-info-keyword">#+TITLE:</span><span class="comment">     </span><span class="org-document-title">&#20351;&#29992;Emacs&#20013;&#30340;Ediff &#20316;&#20026;git mergetool&#20351;&#29992;&#30340;&#24037;&#20855;&#36827;&#34892;&#25991;&#20214;&#21512;&#24182;</span>
+<span class="org-document-info-keyword">#+AUTHOR:</span><span class="comment">    </span><span class="org-document-info">&#23396;&#23792;&#29420;&#31168;</span>
+<span class="org-document-info-keyword">#+EMAIL:</span><span class="comment">     </span><span class="org-document-info">jixiuf@gmail.com</span>
+<span class="org-document-info-keyword">#+DATE:</span><span class="comment">     </span><span class="org-document-info">2011-07-04 &#19968;</span>
+<span class="org-meta-line">#+DESCRIPTION:&#20351;&#29992;Emacs&#20013;&#30340;Ediff &#20316;&#20026;git mergetool&#20351;&#29992;&#30340;&#24037;&#20855;&#36827;&#34892;&#25991;&#20214;&#21512;&#24182;
+#+KEYWORDS: Emacs Ediff git merge 
+#+OPTIONS:   H:2 num:nil toc:t \n:t @:t ::t |:t ^:t -:t f:t *:t &lt;:t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil 
+#+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
+#+EXPORT_SELECT_TAGS: export
+#+EXPORT_EXCLUDE_TAGS: noexport
+#+FILETAGS: @Emacs @Git 
+</span>
+&#20851;&#20110;&#20160;&#20040;&#26159;Ediff &#20160;&#20040;&#26159;Git &#23601;&#19981;&#20316;&#35814;&#32454;&#20171;&#32461;&#20102;&#65292;&#31616;&#21333;&#35762;Ediff&#26159;Emacs&#36827;&#34892;&#25991;&#20214;&#27604;&#36739;&#12289;
+&#21512;&#24182;&#30340;&#24037;&#20855;&#65292;Git &#26159;&#19982;svn &#19968;&#26679;&#30340;&#29256;&#26412;&#25511;&#21046;&#24037;&#20855;&#12290;&#25105;&#20010;&#20154;&#30340;&#35768;&#22810;&#20195;&#30721;&#37117;&#29992;git&#36827;&#34892;&#31649;&#29702;&#12290;
+&#36816;&#34892;git mergetool &#21629;&#20196;&#26102;&#20250;&#23545;&#26377;&#20914;&#31361;&#30340;&#25991;&#20214;&#36827;&#34892;&#21512;&#24182;&#65292;
+&#25105;&#36825;&#37324;&#20351;&#29992;&#20102;emacsclient &#65292;&#36991;&#20813;&#27599;&#27425;&#37117;&#35201;&#25171;&#24320;&#19968;&#20010;Emacs&#36827;&#31243;&#12290;
+&#24635;&#20849;&#20998;&#20026;&#20004;&#22823;&#27493;:
+<span class="org-level-1">* &#22312;.emacs &#20013;&#21152;&#20837;&#20197;&#19979;&#20195;&#30721;</span>
+<span class="org-block-begin-line">#+begin_src emacs-lisp
+</span><span class="org-block">;;git mergetool &#20351;&#29992;ediff ,&#21069;&#25552;&#21487;&#20197;&#27491;&#24120;&#20351;&#29992;emacsclient ,&#24182;&#19988;Emacs&#24050;&#32463;&#21551;&#21160;&#12290;
+;; ~/.gitconfig
+;; [mergetool "ediff"]
+;; cmd = emacsclient --eval \"(git-mergetool-emacsclient-ediff \\\"$LOCAL\\\" \\\"$REMOTE\\\" \\\"$BASE\\\" \\\"$MERGED\\\")\"
+;; trustExitCode = false
+;; [mergetool]
+;; prompt = false
+;; [merge]
+;; tool = ediff
+;;
+;; Setup for ediff.
+;;
+;;(require 'ediff)
+
+(defvar ediff-after-quit-hooks nil
+  "* Hooks to run after ediff or emerge is quit.")
+
+(defadvice ediff-quit (after edit-after-quit-hooks activate)
+  (run-hooks 'ediff-after-quit-hooks))
+
+(setq git-mergetool-emacsclient-ediff-active nil)
+
+(defun local-ediff-frame-maximize ()
+  (when (boundp 'display-usable-bounds)
+    (let* ((bounds (display-usable-bounds))
+           (x (nth 0 bounds))
+           (y (nth 1 bounds))
+           (width (/ (nth 2 bounds) (frame-char-width)))
+           (height (/ (nth 3 bounds) (frame-char-height))))
+      (set-frame-width (selected-frame) width)
+      (set-frame-height (selected-frame) height)
+      (set-frame-position (selected-frame) x y))  )
+  )
+(setq ediff-window-setup-function 'ediff-setup-windows-plain)
+(setq ediff-split-window-function 'split-window-horizontally)
+
+(defun local-ediff-before-setup-hook ()
+  (setq local-ediff-saved-frame-configuration (current-frame-configuration))
+  (setq local-ediff-saved-window-configuration (current-window-configuration))
+  (local-ediff-frame-maximize)
+  (if git-mergetool-emacsclient-ediff-active
+      (raise-frame)))
+
+(defun local-ediff-quit-hook ()
+  (set-frame-configuration local-ediff-saved-frame-configuration)
+  (set-window-configuration local-ediff-saved-window-configuration))
+
+(defun local-ediff-suspend-hook ()
+  (set-frame-configuration local-ediff-saved-frame-configuration)
+  (set-window-configuration local-ediff-saved-window-configuration))
+
+(add-hook 'ediff-before-setup-hook 'local-ediff-before-setup-hook)
+(add-hook 'ediff-quit-hook 'local-ediff-quit-hook 'append)
+(add-hook 'ediff-suspend-hook 'local-ediff-suspend-hook 'append)
+
+;; Useful for ediff merge from emacsclient.
+(defun git-mergetool-emacsclient-ediff (local remote base merged)
+  (setq git-mergetool-emacsclient-ediff-active t)
+  (if (file-readable-p base)
+      (ediff-merge-files-with-ancestor local remote base nil merged)
+    (ediff-merge-files local remote nil merged))
+  (recursive-edit))
+
+(defun git-mergetool-emacsclient-ediff-after-quit-hook ()
+  (exit-recursive-edit))
+
+(add-hook 'ediff-after-quit-hooks 'git-mergetool-emacsclient-ediff-after-quit-hook 'append)
+</span><span class="org-block-end-line">#+end_src
+</span><span class="org-level-1">* &#20462;&#25913;~/.gitconfig &#25991;&#20214;&#65292;</span>
+&#22312;&#20854;&#20013;&#21152;&#20837;&#20197;&#19979;&#20195;&#30721;
+<span class="org-block-begin-line">#+begin_src  c 
+</span><span class="org-block">[mergetool "ediff"]
+cmd = emacsclient --eval \"(git-mergetool-emacsclient-ediff \\\"$LOCAL\\\" \\\"$REMOTE\\\" \\\"$BASE\\\" \\\"$MERGED\\\")\"
+trustExitCode = false
+[mergetool]
+prompt = false
+[merge]
+tool = ediff
+
+
+</span><span class="org-block-end-line">#+end_src
+</span></pre>
+  </body>
+</html>

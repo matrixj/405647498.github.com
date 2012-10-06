@@ -1,0 +1,116 @@
+# -*- coding:utf-8 -*-
+#+LANGUAGE:  zh
+#+TITLE:     Dict,or Map的简单实现
+#+AUTHOR:    纪秀峰
+#+EMAIL:     jixiuf@gmail.com
+#+DATE:     2011-11-10 四
+#+DESCRIPTION:Dict,or Map的简单实现
+#+KEYWORDS: erlang
+#+OPTIONS:   H:2 num:nil toc:t \n:t @:t ::t |:t ^:t -:t f:t *:t <:t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil
+#+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
+#+EXPORT_SELECT_TAGS: export
+#+EXPORT_EXCLUDE_TAGS: noexport
+#+FILETAGS: @Erlang
+
+#+begin_src erlang
+-module(dic).
+-export([put/3,new/0,delete/2,get/2]).
+
+%% 用List 构建Map.
+
+new () ->
+    [].
+
+put(Key,Value,[]) ->
+    [{Key,Value}];
+put(Key,Value,[{Key,_}|T])->
+    [{Key,Value}|T];
+put(Key,Value,[{Key1,V1}|T]) ->
+    [{Key1,V1}|put(Key,Value,T)].
+
+delete(Key,[{Key,_}|T])->
+    T;
+delete(_,[]) ->
+    [];
+delete(Key,[{Key1,V1}|T]) ->
+    [{Key1,V1}|delete(Key,T)].
+
+get(Key,[{Key,Value}|_])->
+    Value;
+get(Key,[{_,_}|T]) ->
+    get(Key,T);
+get(_,[]) ->
+    nil.
+#+end_src
+上面的实现当数量很大时效率有问题.下面用非平衡二叉树来实现.
+#+begin_src erlang
+  -module(dic).
+  -export([put/3,get/2,del/2,new/0,test/0]).
+  %% 用非平衡二叉树, 这种结构的访问时间与它所包含的项的数量成对数关系
+  new()->
+      nil.
+  put(Key,Value,nil) ->                           %向空树中插值
+      [Key,Value,nil,nil];
+  put(Key,Value,[Key,_,Smaller,Bigger]) ->        %替换树中已有值
+      [Key,Value,Smaller,Bigger];
+  put(Key,Value,[Key1,V1,Smaller,Bigger]) when Key< Key1 -> % 对于比当前节点小的值如何处理
+      [Key1,V1,put(Key,Value,Smaller),Bigger];
+  put(Key,Value,[Key1,V1,Smaller,Bigger]) when Key> Key1 -> %对于比当前节点大的值如何处理.
+      [Key1,V1,Smaller,put(Key,Value,Bigger)].
+
+  get(_,nil)->
+      nil;
+  get(Key,[Key,Value,_,_]) ->
+      Value;
+  get(Key,[Key1,_,Smaller,_]) when Key<Key1 ->
+      get(Key,Smaller);
+  get(Key,[Key1,_,_,Bigger]) when Key>Key1 ->
+      get(Key,Bigger).
+
+  del(_ ,nil)->
+      nil;
+  del(Key,[Key,_,Smaller,nil]) ->
+      Smaller;
+  del(Key,[Key,_,nil,Bigger]) ->
+      Bigger;
+  del(Key,[Key1,Value1,Smaller,Bigger]) when Key < Key1 ->
+      [Key1,Value1,del(Key,Smaller) ,Bigger];
+  del(Key,[Key1,Value1,Smaller,Bigger]) when Key > Key1 ->
+      [Key1,Value1,Smaller ,del(Key,Bigger)];
+
+  del(Key,[Key1,_,Smaller,Bigger])  when Key==Key1->
+      [Key2,Value2,Smaller2]=delp(Smaller),
+      [Key2,Value2,Smaller2,Bigger].
+
+  %% delp返回,一个个[最大key,最大value,子tree]
+  %% delp(nil)->
+  %%     [nil,nil,nil];
+  delp([Key,Value,nil,nil])->
+      [Key,Value,nil];
+  delp([Key,Value,Smaller,nil])->
+      [Key,Value,Smaller];
+  delp([Key,Value,Smaller,Bigger]) ->
+      [Key2,Value2,Bigger2]=delp(Bigger),
+      [Key2,Value2,[Key,Value,Smaller,Bigger2]].
+
+  test()->
+      V1=new(),
+      V2=put(10,a,V1),
+      V3=put(3,a,V2),
+      V4=put(20,a,V3),
+      V5=put(5,a,V4),
+      V6=put(15,a,V5),
+      V7=put(25,a,V6),
+      V8=put(35,a,V7),
+      V9=put(11,a,V8),
+      V10=put(1,a,V9),
+      V11=put(9,a,V10),
+      V12=put(16,a,V11),
+      V13=put(33,a,V12),
+      V14=put(40,a,V13),
+      V15=put(18,a,V14),
+      V16=put(13,a,V15),
+      V16.
+
+#+end_src

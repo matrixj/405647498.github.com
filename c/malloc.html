@@ -3,14 +3,14 @@
                "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="zh" xml:lang="zh">
 <head>
-<title>一个人的狂欢</title>
+<title>动态内在分配</title>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
-<meta name="title" content="一个人的狂欢"/>
+<meta name="title" content="动态内在分配"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2011-06-04 星期六"/>
-<meta name="author" content="孤峰独秀"/>
-<meta name="description" content=""/>
-<meta name="keywords" content=""/>
+<meta name="generated" content="2011-10-23 日"/>
+<meta name="author" content="纪秀峰"/>
+<meta name="description" content="动态内在分配"/>
+<meta name="keywords" content="c malloc"/>
 <style type='text/css'>
        body {
     background-color: #E5E5E5;
@@ -942,15 +942,15 @@ img {
 }
 
     </style>
-<link rel="stylesheet" type="text/css" href="style/emacs.css" />
-<script type='text/javascript' src='js/emacs.js'> </script>
+<link rel="stylesheet" type="text/css" href="../style/emacs.css" />
+<script type='text/javascript' src='../js/emacs.js'> </script>
 
 </head>
 <body>
 <div id="org-div-home-and-up" style="text-align:right;font-size:70%;white-space:nowrap;">
- <a accesskey="h" href="sitemap.html"> 站点地图 </a>
+ <a accesskey="h" href="../sitemap.html"> 站点地图 </a>
  |
- <a accesskey="H" href="index.html"> 首页 </a>
+ <a accesskey="H" href="../index.html"> 首页 </a>
 </div>
 
 <div id="preamble">
@@ -958,60 +958,71 @@ img {
 </div>
 
 <div id="content">
-<h1 class="title">一个人的狂欢</h1>
+<h1 class="title">动态内在分配</h1>
 
 
-<div id='logo-img' ><a  href='index.html'>▇█▓▒░◕~◕░▒▓█▇</a></div>
+<div id='logo-img' ><a  href='../index.html'>▇█▓▒░◕~◕░▒▓█▇</a></div>
 
 <div id='logo-text'>
   <a href='#' ><span align="left">░◕~◕░</span></a>
 </div>
 
 
-<ul>
-<li>首页还未做好，先看<a href="sitemap.html">站点地图</a>吧
-</li>
-<li><a href="about.html">About</a>
-</li>
-</ul>
+<pre class="src src-c"><span class="org-preprocessor">#include</span> <span class="org-string">&lt;malloc.h&gt;</span>
+<span class="org-preprocessor">#include</span> <span class="org-string">&lt;stdio.h&gt;</span>
+<span class="org-preprocessor">#include</span> <span class="org-string">&lt;string.h&gt;</span>
 
+<span class="org-type">int</span> <span class="org-function-name">main</span>(<span class="org-type">int</span> <span class="org-variable-name">argc</span>, <span class="org-type">char</span> *<span class="org-variable-name">argv</span>[])
+{
+  <span class="org-type">char</span> * <span class="org-variable-name">src</span> =<span class="org-string">"abcde"</span>;
+  <span class="org-type">char</span> *<span class="org-variable-name">p</span> =malloc(2); <span class="org-comment-delimiter">//</span><span class="org-comment">&#20998;&#37197;2&#20010;&#21333;&#20301;</span>
+  strcpy(p ,<span class="org-string">"a"</span>);
+  printf (<span class="org-string">"%p\n"</span>,p); <span class="org-comment-delimiter">//</span><span class="org-comment">&#25171;&#21360;&#24403;&#21069;p &#30340;&#22320;&#22336;</span>
 
+  p=realloc(p,1026000);<span class="org-comment-delimiter">//</span><span class="org-comment">&#37325;&#26032;&#23545;p&#36827;&#34892;&#20998;&#37197;,&#20998;&#37197;6&#20010;&#21333;&#20301;</span>
+  printf (<span class="org-string">"%p\n"</span>,p) ;<span class="org-comment-delimiter">//</span><span class="org-comment">&#25171;&#21360;&#24403;&#21069;p &#30340;&#22320;&#22336;</span>
+  <span class="org-comment-delimiter">/* </span><span class="org-comment">realloc() &#20989;&#25968;&#35201;&#27714;&#31532;&#19968;&#20010;&#21442;&#25968;&#24517;&#39035;&#26159; malloc()&#25110; calloc()&#30340;&#36820;&#22238;&#20540;    </span><span class="org-comment-delimiter">*/</span>
+  <span class="org-comment-delimiter">/* </span><span class="org-comment">realloc&#29616;&#22312;&#21407;&#22320;&#33719;&#21462;&#25351;&#23450;&#22823;&#23567;&#30340;&#20869;&#23384;&#65292;&#22914;&#26524;&#19981;&#33021;&#65292;&#37027;&#20040;&#38656;&#35201;&#21478;&#22806;&#20998;&#37197;&#65292;&#20877;free&#21407;&#26469;&#30340;&#20869;&#23384;&#65307; </span><span class="org-comment-delimiter">*/</span>
+  strcpy(p ,src);
+  puts(p);
+  <span class="org-keyword">return</span> 0;
+}
+</pre>
 
 
 <div id='my-src'>
-<div id='org-src'><a href='src/index.org'>src</a></div>
-<div id='htmlized-src'><a href='htmlized-src/index.org.html'>htmlized-src</a></div>
+<div id='org-src'><a href='../src/c/malloc.org'>src</a></div>
+<div id='htmlized-src'><a href='../htmlized-src/c/malloc.org.html'>htmlized-src</a></div>
 </div>
 <div id='tags'><span id='tags-title'>Tags:</span><br />
 <p>
-    <a href="tags/@SVN.html">@SVN</a>
-    <a href="tags/@perl.html">@perl</a>
-    <a href="tags/@Java.html">@Java</a>
-    <a href="tags/@Mysql.html">@Mysql</a>
-    <a href="tags/@Erlang.html">@Erlang</a>
-    <a href="tags/@SQL.html">@SQL</a>
-    <a href="tags/@DB.html">@DB</a>
-    <a href="tags/@Oracle.html">@Oracle</a>
-    <a href="tags/@Ediff.html">@Ediff</a>
-    <a href="tags/@Git.html">@Git</a>
-    <a href="tags/@Cedet.html">@Cedet</a>
-    <a href="tags/@C-C++.html">@C-C++</a>
-    <a href="tags/@Daily.html">@Daily</a>
-    <a href="tags/@Eclipse.html">@Eclipse</a>
-    <a href="tags/@AutoHotKey.html">@AutoHotKey</a>
-    <a href="tags/@Windows.html">@Windows</a>
-    <a href="tags/@Linux.html">@Linux</a>
-    <a href="tags/@C.html">@C</a>
-    <a href="tags/@Emacs.html">@Emacs</a>
+    <a href="../tags/@SVN.html">@SVN</a><br/>
+    <a href="../tags/@perl.html">@perl</a><br/>
+    <a href="../tags/@Java.html">@Java</a><br/>
+    <a href="../tags/@Mysql.html">@Mysql</a><br/>
+    <a href="../tags/@Erlang.html">@Erlang</a><br/>
+    <a href="../tags/@SQL.html">@SQL</a><br/>
+    <a href="../tags/@DB.html">@DB</a><br/>
+    <a href="../tags/@Oracle.html">@Oracle</a><br/>
+    <a href="../tags/@Ediff.html">@Ediff</a><br/>
+    <a href="../tags/@Git.html">@Git</a><br/>
+    <a href="../tags/@Cedet.html">@Cedet</a><br/>
+    <a href="../tags/@C-C++.html">@C-C++</a><br/>
+    <a href="../tags/@Daily.html">@Daily</a><br/>
+    <a href="../tags/@Eclipse.html">@Eclipse</a><br/>
+    <a href="../tags/@AutoHotKey.html">@AutoHotKey</a><br/>
+    <a href="../tags/@Windows.html">@Windows</a><br/>
+    <a href="../tags/@Linux.html">@Linux</a><br/>
+    <a href="../tags/@C.html">@C</a><br/>
+    <a href="../tags/@Emacs.html">@Emacs</a><br/>
 </p>
-
-
+<p><br/>
 </div>
-</div>
+</p></div>
 
 <div id="postamble">
-<p class="date">Date: 2011-06-04 星期六</p>
-<p class="author">Author: 孤峰独秀</p>
+<p class="date">Date: 2011-10-23 日</p>
+<p class="author">Author: 纪秀峰</p>
 <p class="creator">Org version 7.8.03 with Emacs version 24</p>
 
 

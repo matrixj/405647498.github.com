@@ -1,0 +1,159 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<!-- Created by htmlize-1.34 in css mode. -->
+<html>
+  <head>
+    <title>distel.org</title>
+    <style type="text/css">
+    <!--
+      body {
+        color: #F8F8F8;
+        background-color: #0C1021;
+      }
+      .comment {
+        /* font-lock-comment-face */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-block {
+        /* org-block */
+        color: #b3b3b3;
+      }
+      .org-block-begin-line {
+        /* org-block-begin-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-block-end-line {
+        /* org-block-end-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-document-info {
+        /* org-document-info */
+        color: #afeeee;
+      }
+      .org-document-info-keyword {
+        /* org-document-info-keyword */
+        color: #b3b3b3;
+      }
+      .org-document-title {
+        /* org-document-title */
+        color: #afeeee;
+        font-size: 144%;
+        font-weight: bold;
+      }
+      .org-level-1 {
+        /* org-level-1 */
+        color: #FF6400;
+      }
+      .org-link {
+        /* org-link */
+        color: #00ffff;
+        text-decoration: underline;
+      }
+      .org-meta-line {
+        /* org-meta-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+
+      a {
+        color: inherit;
+        background-color: inherit;
+        font: inherit;
+        text-decoration: inherit;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+    -->
+    </style>
+  </head>
+  <body>
+    <pre>
+<span class="comment"># -*- coding:utf-8 -*-</span>
+<span class="org-meta-line">#+LANGUAGE:  zh
+</span><span class="org-document-info-keyword">#+TITLE:</span><span class="comment">     </span><span class="org-document-title">erlang distel</span>
+<span class="org-document-info-keyword">#+AUTHOR:</span><span class="comment">    </span><span class="org-document-info">&#32426;&#31168;&#23792;</span>
+<span class="org-document-info-keyword">#+EMAIL:</span><span class="comment">     </span><span class="org-document-info">jixiuf@gmail.com</span>
+<span class="org-document-info-keyword">#+DATE:</span><span class="comment">     </span><span class="org-document-info">2012-03-16 &#20116;</span>
+<span class="org-meta-line">#+DESCRIPTION:erlang &#30340;&#35843;&#35797; distel
+#+KEYWORDS: erlang distel
+#+OPTIONS:   H:2 num:nil toc:t \n:t @:t ::t |:t ^:nil -:nil f:t *:t &lt;:t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil
+#+FILETAGS: @Erlang
+</span>
+<span class="org-level-1">* &#21442;&#32771;&#38142;&#25509;</span>
+distel &#30340;&#28304;&#20195;&#30721;&#22312;&#36825;&#37324; <span class="org-link">https://github.com/massemanet/distel</span>
+&#36825;&#20010;&#26159;&#25105;&#20174;massemanet fork &#20986;&#26469;&#30340;&#19968;&#29256; <span class="org-link">https://github.com/jixiuf/distel</span>
+&#25105;&#20851;&#20110;erlang&#30340;&#37197;&#32622;&#22312;&#36825;&#37324;<span class="org-link">https://github.com/jixiuf/emacs_conf/raw/master/site-lisp/joseph/joseph-erlang.el</span>
+<span class="org-link">http://bc.tech.coop/blog/070528.html</span>
+<span class="org-link">http://renzhi.ca/2010/08/04/debugging-erlang-programs-in-emacs/</span>
+<span class="org-level-1">* &#20851;&#20110;&#35843;&#35797;</span>
+   distel &#19968;&#30452;&#26377;&#20010;bug&#23601;&#26159;&#19981;&#33021;&#35774;&#32622;&#26029;&#28857;
+   <span class="org-link">http://renzhi.ca/2010/08/04/debugging-erlang-programs-in-emacs/</span>
+   &#37324;&#38754;&#26377;&#25552;&#21040;&#22914;&#20309;&#22788;&#29702;.
+   &#34429;&#28982;&#36825;&#20010;&#35843;&#35797;&#24037;&#20855;&#21487;&#20197;&#29992;&#65292;&#20294;&#26159;&#24037;&#20316;&#30340;&#19981;&#26159;&#24456;&#22909;&#12290;&#24314;&#35758;&#29992;erlang &#33258;&#24102;&#30340;&#35843;&#35797;&#24037;&#20855;&#65292;&#20063;
+   &#26159;&#22270;&#24418;&#30028;&#38754;.
+   debugger:start().
+<span class="org-level-1">* &#20851;&#20110;&#25105;&#23545;distel &#30340;&#22686;&#24378; </span><span class="org-link">https://github.com/jixiuf/distel</span>
+  &#20851;&#20110;&#25105;&#30340;&#36825;&#20010;fork &#30340;&#19968;&#20123;&#25913;&#36827;
+ + &#23545;distel &#30340;&#34917;&#20840;&#26426;&#21046;&#36827;&#34892;&#20102;&#37325;&#20889;&#12290;
+   &#20351;&#29992;(completing-read) &#36827;&#34892;&#34917;&#20840;,&#20063;&#23601;&#26159;&#35828;&#22312;emacs24&#19978;&#65292;&#20320;&#21487;&#20197;&#19981;&#29992;emacs &#40664;&#35748;&#30340;
+   &#34917;&#20840;&#26426;&#21046;&#65292;&#20320;&#22914;&#26524;&#30693;&#36947;git://github.com/emacs-helm/helm.git&#30340;heml-mode(&#21069;&#36523;&#26159;anything.el)
+   &#25110;&#35768;&#20320;&#20250;&#30693;&#36947;&#36825;&#31181;&#34917;&#20840;&#26426;&#21046;&#30340;&#22909;&#22788;&#12290;
+   - &#23545;C-cC-dF erl-find-module &#36827;&#34892;&#20102;&#37325;&#20889;&#65292;&#28155;&#21152;&#20102;&#34917;&#20840;&#26426;&#21046;&#65292;&#21363;&#23427;&#20250;&#21015;&#20986;&#25152;&#26377;&#21487;&#29992;
+     &#30340;module &#35753;&#20320;&#20174;&#20013;&#36873;&#25321;&#65292;&#32780;&#19981;&#24517;&#36755;&#20837;&#25972;&#20010;&#27169;&#22359;&#21517;&#12290;
+   - &#23545;C-cC-dh (erl-find-doc-under-point)&#25171;&#24320;&#24403;&#21069;&#20809;&#26631;&#19979;&#20989;&#25968;&#30340;&#25991;&#26723;&#65292;&#24403;&#28982;&#20320;&#35201;&#35013;
+     emacs-w3m,(&#36825;&#26159;&#40664;&#35748;&#23601;&#26377;&#30340;&#65292;&#25105;&#27809;&#36827;&#34892;&#22686;&#24378;&#65292;&#22312;&#36825;&#37324;&#25552;&#19968;&#19979;&#23427;&#12290;).
+   - &#23545;C-cC-dH (erl-find-doc)&#36827;&#34892;&#22686;&#24378;&#65292;&#21516;&#26679;&#20063;&#28155;&#21152;&#20102;&#34917;&#20840;&#26426;&#21046;,&#25552;&#31034;&#20320;&#36755;&#20837;module
+     &#21517;&#23383;&#65292;&#28982;&#21518;&#29992;w3m&#27983;&#35272;&#27492;module &#23545;&#24212;&#30340;&#25991;&#26723;.
+ +  distel &#30340;&#21478;&#19968;&#21334;&#28857;&#26159;&#20989;&#25968;&#30340;&#36339;&#36716;
+<span class="org-block-begin-line">    #+BEGIN_SRC emacs-lisp
+</span><span class="org-block">  (defun my-erlang-mode-hook ()
+    (local-set-key "\M-."  'erl-find-source-under-point )
+    (local-set-key "\M-,"  'erl-find-source-unwind))
+  (add-hook 'erlang-mode-hook 'my-erlang-mode-hook)
+</span><span class="org-block-end-line">    #+END_SRC
+</span>    &#20294;&#26159;&#23427;&#21482;&#33021;&#36827;&#34892;&#20989;&#25968;&#38388;&#30340;&#36339;&#36716;&#12290;&#65288;&#21363;&#20320;&#25226;&#20809;&#26631;&#31227;&#21160;&#21040;&#20989;&#25968;&#21517;&#19978;&#65292;&#28982;&#21518;&#25353;&#19979;M-. &#21363;Alt+.&#65289;
+    &#23601;&#20250;&#25171;&#24320;&#30456;&#24212;&#30340;&#28304;&#30721;&#25991;&#20214;&#36339;&#36716;&#22312;&#20989;&#25968;&#30340;&#23450;&#20041;&#22788;&#12290;
+    &#25105;&#23545;&#27492;&#21151;&#33021;&#30340;&#22686;&#24378;&#26159;
+    - &#36339;&#36716;&#21040;&#22836;&#25991;&#20214;
+      -include_lib("kernel/include/file.hrl").
+      &#27604;&#22914;&#65292;&#25105;&#25226;&#20809;&#26631;&#31227;&#21160;&#21040;&#36825;&#26679;&#19968;&#20010;&#36335;&#24452;&#19979;"kernel/include/file.hrl" &#25353;&#19979;M-.
+      &#20250;&#25171;&#24320;file.hrl&#25991;&#20214; &#12290;
+   - &#36339;&#36716;&#21040;&#23439;&#23450;&#20041;&#22788;
+     &#36825;&#20010;&#23601;&#19981;&#22810;&#35814;&#32454;&#35299;&#37322;&#20102; &#65292;&#20063;&#38598;&#25104;&#21040;&#20102;M-.&#21151;&#33021;&#20013;
+ + &#20989;&#25968;&#21517;&#19982;&#27169;&#22359;&#21517;&#30340;&#34917;&#20840;&#65292;&#36825;&#20010;&#26159; distel &#30340;&#21448;&#19968;&#21334;&#28857;&#65292;&#20320;&#22914;&#26524;&#29992;&#36807;eclipse&#25110;VS&#31561;IDE
+   &#24037;&#20855;&#65292;&#19968;&#23450;&#19981;&#20250;&#23545;&#27492;&#38476;&#29983;&#12290;
+   &#25105;&#25226;&#36825;&#20010;&#21151;&#33021;&#32465;&#22312;Ctl-Return &#36825;&#20010;&#38190;&#19978;&#12290;
+<span class="org-block-begin-line">  #+BEGIN_SRC emacs-lisp
+</span><span class="org-block">    (defun my-erlang-mode-hook2 ()
+       (local-set-key  [(control return)]  'erl-complete)
+    )
+   (add-hook 'erlang-mode-hook 'my-erlang-mode-hook2)
+</span><span class="org-block-end-line">  #+END_SRC
+</span>  &#25105;&#23545;&#36825;&#20010;&#21151;&#33021;&#30340;&#22686;&#24378;&#26159;:
+   &#23545; include_lib &#36755;&#20837;&#22836;&#25991;&#20214;&#21517;&#36827;&#34892;&#34917;&#20840;&#12290;&#27880;&#24847;&#21482;&#23545;include_lib &#26377;&#25928;&#65292;&#23545;include&#26080;
+   &#25928;
+   &#20351;&#29992;&#26041;&#27861;:
+   -include_lib("&#20809;&#26631;&#20301;&#32622;&#22312;&#27492;&#65292;&#25353;&#19979;Ctrl-Return").
+   &#36825;&#26679;&#20250;&#21015;&#20986;&#25152;&#26377;erlang&#23433;&#35013;&#30446;&#24405;&#19979;&#21487;&#29992;&#30340;&#22836;&#25991;&#20214;&#65292;&#20320;&#21487;&#20197;&#36755;&#20837;&#20960;&#20010;&#23383;&#27597;&#20174;&#20013;&#36827;&#34892;&#36807;&#28388;.
+   &#19979;&#38754;&#38468;&#19978;&#20960;&#24352;&#25928;&#26524;&#22270;
+<span class="org-level-1">* screenshot</span>
+<span class="org-link">file:../download/2012-04-21-212041scrot.png</span>
+
+<span class="org-link">file:../download/2012-04-21-214841scrot.png</span>
+
+<span class="org-link">file:../download/2012-04-21-214947scrot.png</span>
+
+<span class="org-link">file:../download/2012-04-21-215010scrot.png</span>
+
+<span class="org-link">file:../download/2012-04-21-215028scrot.png</span>
+
+<span class="org-link">file:../download/2012-04-21-215108scrot.png</span>
+
+<span class="org-link">file:../download/2012-04-21-215159scrot.png</span>
+</pre>
+  </body>
+</html>

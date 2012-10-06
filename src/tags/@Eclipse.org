@@ -1,0 +1,6 @@
+# -*- coding:utf-8 -*-
+
+#+TITLE: Tag: @Eclipse
+
+#+LANGUAGE:  zh
+   + [[file:../autohotkey/AutoHotKey_eclipse.org][AutoHotKey对Eclipse 进行增强]]

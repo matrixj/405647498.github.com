@@ -1,0 +1,191 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<!-- Created by htmlize-1.34 in css mode. -->
+<html>
+  <head>
+    <title>git.org</title>
+    <style type="text/css">
+    <!--
+      body {
+        color: #F8F8F8;
+        background-color: #0C1021;
+      }
+      .comment {
+        /* font-lock-comment-face */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-block {
+        /* org-block */
+        color: #b3b3b3;
+      }
+      .org-block-begin-line {
+        /* org-block-begin-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-block-end-line {
+        /* org-block-end-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-document-info {
+        /* org-document-info */
+        color: #afeeee;
+      }
+      .org-document-info-keyword {
+        /* org-document-info-keyword */
+        color: #b3b3b3;
+      }
+      .org-document-title {
+        /* org-document-title */
+        color: #afeeee;
+        font-size: 144%;
+        font-weight: bold;
+      }
+      .org-level-1 {
+        /* org-level-1 */
+        color: #FF6400;
+      }
+      .org-level-2 {
+        /* org-level-2 */
+        color: #40E0D0;
+      }
+      .org-meta-line {
+        /* org-meta-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+
+      a {
+        color: inherit;
+        background-color: inherit;
+        font: inherit;
+        text-decoration: inherit;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+    -->
+    </style>
+  </head>
+  <body>
+    <pre>
+<span class="comment"># -*- coding:utf-8 -*-</span>
+<span class="org-meta-line">#+LANGUAGE:  zh
+</span><span class="org-document-info-keyword">#+TITLE:</span><span class="comment">     </span><span class="org-document-title">git&#25342;&#36951;</span>
+<span class="org-document-info-keyword">#+AUTHOR:</span><span class="comment">    </span><span class="org-document-info">&#23396;&#23792;&#29420;&#31168;</span>
+<span class="org-document-info-keyword">#+EMAIL:</span><span class="comment">     </span><span class="org-document-info">jixiuf@gmail.com</span>
+<span class="org-document-info-keyword">#+DATE:</span><span class="comment">     </span><span class="org-document-info">2011-08-09 &#20108;</span>
+<span class="org-meta-line">#+DESCRIPTION:git&#25342;&#36951;
+#+KEYWORDS: git scm 
+#+OPTIONS:   H:2 num:nil toc:t \n:t @:t ::t |:t ^:t -:t f:t *:t &lt;:t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil 
+#+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
+#+EXPORT_SELECT_TAGS: export
+#+EXPORT_EXCLUDE_TAGS: noexport
+#+FILETAGS: @Git 
+</span><span class="org-level-2">** git rm </span>
+<span class="org-block-begin-line">#+begin_src sh
+</span><span class="org-block">git rm --cache filename
+</span><span class="org-block-end-line">#+end_src
+</span>&#20174;&#24211;&#20013;&#21024;&#38500;filename ,&#21363;&#19981;&#20877;&#23545;&#23427;&#36827;&#34892;&#31649;&#29702;&#65292; &#20294;&#26412;&#22320;&#20250;&#30041;&#19968;&#20221;.
+
+<span class="org-level-2">** git submodule &#23376;&#27169;&#22359;&#30340;&#21024;&#38500;</span>
+  &#38656;&#35201;3&#27493;
+  + &#20462;&#25913; .gitmodules &#25991;&#20214;&#65292;&#21024;&#38500;&#30456;&#24212;&#30340;&#26465;&#30446;
+<span class="org-block-begin-line">    #+begin_src sh
+</span><span class="org-block">    [submodule "site-lisp/anything-config"]
+    path = site-lisp/anything-config
+    url = http://repo.or.cz/r/anything-config.git
+</span><span class="org-block-end-line">    #+end_src
+</span>  + &#20462;&#25913;.git/config &#25991;&#20214;&#65292;&#21024;&#38500;&#30456;&#24212;&#30340;&#26465;&#30446;
+<span class="org-block-begin-line">    #+begin_src sh
+</span><span class="org-block">[submodule "site-lisp/anything-config"]
+    url = http://repo.or.cz/r/anything-config.git
+</span><span class="org-block-end-line">    #+end_src
+</span>  + &#36816;&#34892;git rm --cache &#23376;&#27169;&#22359;&#25152;&#22312;&#36335;&#24452;,&#22914;:
+<span class="org-block-begin-line">    #+begin_src sh
+</span><span class="org-block">    git rm --cache site-lisp/anything-config 
+</span><span class="org-block-end-line">    #+end_src
+</span>    &#19981;&#33021;&#20889;&#25104;
+<span class="org-block-begin-line">    #+begin_src sh
+</span><span class="org-block">    git rm --cache site-lisp/anything-config/ 
+</span><span class="org-block-end-line">    #+end_src
+</span>    
+<span class="org-level-2">** &#35201;&#26597;&#30475;&#26576;&#20010;&#25991;&#20214;&#30340;&#20197;&#21069;&#30340;&#29256;&#26412;,&#20351;&#29992; git show &#21629;&#20196;</span>
+<span class="org-block-begin-line">#+begin_src sh
+</span><span class="org-block">git show 0b26bbe907c929ed88f6ba3dfeaaa9a2953b1c56:a.txt
+
+git cat-file blob 0b26bbe907c929ed88f6ba3dfeaaa9a2953b1c56:a.txt
+</span><span class="org-block-end-line">#+end_src
+</span>   
+<span class="org-level-2">** &#21487;&#20197;checkout &#26576;&#20010;&#25991;&#20214;&#30340;&#20197;&#21069;&#30340;&#29256;&#26412;</span>
+<span class="org-block-begin-line">   #+begin_src sh
+</span><span class="org-block"> git checkout 0b26bbe907c929ed88f6ba3dfeaaa9a2953b1c56 a.txt
+</span><span class="org-block-end-line">   #+end_src
+</span>
+ 
+
+<span class="org-level-2">** git ls-tree &#19982;git show </span>
+ &#19981;&#20165;&#20165;&#19968;&#27425;&#25552;&#20132;&#21518;&#20250;&#20135;&#29983;&#19968;&#20010;sha1 &#30340;&#23383;&#31526;&#20018;,&#20854;&#23454;&#27599;&#19968;&#20010;&#25552;&#20132;&#23545;&#24212;&#30340;&#25991;&#20214;&#20063;&#21518;&#26377;&#19968;&#20010;&#29366;&#24577;,&#27604;&#21518;&#25105;&#24819;&#26483;&#30475;
+0b26bbe907c929ed88f6ba3dfeaaa9a2953b1c56&#36825;&#27425;&#25552;&#20132;&#21518;&#23545;&#24212;&#30340;&#25991;&#20214;&#25152;&#23545;&#24212;&#30340;sha1&#20540;
+&#21487;&#20197;&#20351;&#29992;git ls-tree&#21629;&#20196;
+&#27604;&#22914;
+<span class="org-block-begin-line">#+begin_src sh
+</span><span class="org-block">root # git ls-tree f7619cab6a71505b23e172f3146adfa750bab71e
+100644 blob 83c4ba189edcc364ca18b0b7d2cd81655d97adc5    a
+100644 blob e69de29bb2d1d6434b8b29ae775ad8c2e48c5391    d
+</span><span class="org-block-end-line">#+end_src
+</span>&#27604;&#22914;&#27492;&#27425;&#25552;&#20132;&#21518;&#25991;&#20214;a&#19982;d &#20998;&#21035;&#23545;&#24212;&#30340;sha1 &#20540;&#21015;&#20102;&#20986;&#26469;,&#28982;&#21518;&#23601;&#21487;&#20197;&#30452;&#25509;&#29992;&#36825;&#20010;&#20540;&#21435;&#26597;&#30475;&#30456;&#24212;&#30340;&#25991;&#20214;
+<span class="org-block-begin-line">#+begin_src sh
+</span><span class="org-block">git show 83c4ba189edcc364ca18b0b7d2cd81655d97adc5 &#21518;&#26597;&#30475;&#25991;&#20214;a&#30340;&#20869;&#23481;
+</span><span class="org-block-end-line">#+end_src
+</span><span class="org-block-begin-line">#+begin_src  sh
+</span><span class="org-block">&#36825;&#19982; 
+git show f7619cab6a71505b23e172f3146adfa750bab71e:a     &#30340;&#25928;&#26524;&#30456;&#21516; 
+</span><span class="org-block-end-line">#+end_src
+</span>
+<span class="org-level-1">* git svn </span>
+  git svn clone svn-url == git clone git-url
+  git svn  fetch == git pull
+  git svn  rebase == git rebase
+  git svn dcommit == git push
+  &#22312;&#36816;&#34892;git svn dcommit &#26102;&#65292;&#24517;&#39035;&#20445;&#35777;&#26412;&#22320;&#27809;&#26377;&#24050;&#20462;&#25913;&#20294;&#26410;commit &#30340;&#25991;&#20214;&#65292;
+  &#35299;&#20915;&#26041;&#27861;&#26159;
+  git stash
+  git svn dcommit
+  git stash pop
+  &#19968;&#33324;&#20570;&#27861;&#26159;
+  git stash
+  git svn fetch
+  git svn rebase
+  git svn dcommit
+  git stash pop
+<span class="org-level-2">** svn &#30340;&#36828;&#31243;&#20998;&#25903;&#21483; remotes/git-svn </span>
+&#22914;&#26524;&#22312;&#24403;&#21069;&#20998;&#25903;&#24050;&#32463;&#26377;&#25968;&#27425;&#25552;&#20132; &#65292;&#20294;&#26159;&#21457;&#29616;&#26377;&#19968;&#20010;bug&#38656;&#35201;&#20462;&#22797;&#65292;&#20462;&#22797;&#21518;&#39532;&#19978;&#25552;&#20132; &#65292;&#32780;
+  &#24403;&#21069;&#20998;&#25903;&#37324;&#30340;commit &#24182;&#19981;&#24819;push&#21040;&#36828;&#31243;svn&#19978;&#65292;&#20570;&#27861;&#26159;
+  git co remotes/git-svn -b tmp
+  &#28982;&#21518;&#20462;&#22797;bug &#25552;&#20132; &#21363;&#21487;&#65292;&#24403;&#28982;&#20854;&#20013;&#21487;&#20197;&#20351;&#29992;stash &#26469;&#26242;&#26102;&#20445;&#23384;&#26410;commit &#30340;&#20462;&#25913;
+<span class="org-level-2">** git reset version</span>
+   &#21512;&#24182;commit &#12290;&#24819;&#23558;&#26368;&#21518;&#20960;&#27425;commit &#21512;&#24182;&#25104;&#19968;&#20010;commit 
+   &#21487;&#20197;&#29992; git reset version
+   git reset &#22238;&#36864;&#21040;&#26576;&#19968;&#29256;&#26412;&#21518;&#65292;
+   &#24037;&#20316;&#21306;&#30340;&#25991;&#20214;&#20381;&#28982;&#20445;&#23384;&#30528;&#26410;&#22238;&#36864;&#21069;&#30340;&#29366;&#24577; &#65292;&#25152;&#20197;&#21482;&#38656;&#20877;&#25552;&#20132;&#19968;&#27425;
+   &#21363;&#23558;&#26368;&#21518;&#20960;&#27425;&#30340;commit &#21512;&#24182;&#21040;&#19968;&#27425;&#25552;&#20132; 
+<span class="org-level-1">* &#25214;&#22238;&#20002;&#22833;&#30340;&#25552;&#20132;</span>
+  &#22312;&#20351;&#29992;Git&#30340;&#36807;&#31243;&#20013;&#65292;&#26377;&#26102;&#21487;&#33021;&#20250;&#26377;&#19968;&#20123;&#35823;&#25805;&#20316;
+  &#27604;&#22914;&#65306;&#25191;&#34892;checkout -f &#25110; reset -hard &#25110; branch -d&#21024;&#38500;&#19968;&#20010;&#20998;&#25903;
+  &#32467;&#26524;&#36896;&#25104;&#26412;&#22320;&#65288;&#36828;&#31243;&#65289;&#30340;&#20998;&#25903;&#25110;&#26576;&#20123;commit&#20002;&#22833;
+  &#36825;&#26102;&#65292;&#25105;&#20204;&#21487;&#20197;&#36890;&#36807;reflog&#26469;&#36827;&#34892;&#24674;&#22797;&#65292;&#21069;&#25552;&#26159;&#20002;&#22833;&#30340;&#20998;&#25903;&#25110;commit&#20449;&#24687;&#27809;&#26377;&#34987;
+  git gc&#28165;&#38500;
+  &#19968;&#33324;&#24773;&#20917;&#19979;&#65292;gc&#23545;&#37027;&#20123;&#26080;&#29992;&#30340;object&#20250;&#20445;&#30041;&#24456;&#38271;&#26102;&#38388;&#21518;&#25165;&#28165;&#38500;&#30340;
+  reflog&#26159;git&#25552;&#20379;&#30340;&#19968;&#20010;&#20869;&#37096;&#24037;&#20855;&#65292;&#29992;&#20110;&#35760;&#24405;&#23545;git&#20179;&#24211;&#36827;&#34892;&#30340;&#21508;&#31181;&#25805;&#20316;
+  &#21487;&#20197;&#20351;&#29992;git reflog show&#25110;git log -g&#21629;&#20196;&#26469;&#30475;&#21040;&#25152;&#26377;&#30340;&#25805;&#20316;&#26085;&#24535;
+  &#24674;&#22797;&#30340;&#36807;&#31243;&#24456;&#31616;&#21333;&#65306;
+1. &#36890;&#36807;git log -g&#21629;&#20196;&#26469;&#25214;&#21040;&#25105;&#20204;&#38656;&#35201;&#24674;&#22797;&#30340;&#20449;&#24687;&#23545;&#24212;&#30340;commitid&#65292;&#21487;&#20197;&#36890;&#36807;&#25552;
+   &#20132;&#30340;&#26102;&#38388;&#21644;&#26085;&#26399;&#26469;&#36776;&#21035;
+2. &#36890;&#36807;git branch recover_branch commitid &#26469;&#24314;&#31435;&#19968;&#20010;&#26032;&#30340;&#20998;&#25903;
+  &#36825;&#26679;&#65292;&#25105;&#20204;&#23601;&#25226;&#20002;&#22833;&#30340;&#19996;&#35199;&#32473;&#24674;&#22797;&#21040;&#20102;recover_branch&#20998;&#25903;&#19978;&#20102;
+</pre>
+  </body>
+</html>

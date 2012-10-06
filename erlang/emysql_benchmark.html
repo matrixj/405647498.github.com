@@ -1,0 +1,1368 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+               "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh" xml:lang="zh">
+<head>
+<title>emysql 压力测试</title>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+<meta name="title" content="emysql 压力测试"/>
+<meta name="generator" content="Org-mode"/>
+<meta name="generated" content="2012-04-22 日"/>
+<meta name="author" content="纪秀峰"/>
+<meta name="description" content="emysql 压力测试"/>
+<meta name="keywords" content="erlang mysql emysql benchmark"/>
+<style type='text/css'>
+       body {
+    background-color: #E5E5E5;
+	scrollbar-face-color: #DEE3E7;
+	scrollbar-highlight-color: #FFFFFF;
+	scrollbar-shadow-color: #DEE3E7;
+	scrollbar-3dlight-color: #D1D7DC;
+	scrollbar-arrow-color:  #006699;
+	scrollbar-track-color: #EFEFEF;
+	scrollbar-darkshadow-color: #98AAB1;
+    /* background-color: #999966;  */
+    margin: 0em;
+}
+
+h1 {
+    font-size: 2.0em;
+    margin-top: 1.0em;
+    margin-bottom: 0.3em;
+}
+h2 {
+    font-size: 1.5em;
+    margin-top: 2.4em;
+    margin-bottom: 0.3em;
+}
+h3 {
+    font-size: 1.25em;
+    margin-top: 1.25em;
+    margin-bottom: 0.3em;
+}
+
+
+div#content {
+    font-family: Times, serif;
+    border-left: double #333300 3mm;
+    border-right: double #333300 3mm;
+    letter-spacing: 0.075em;
+    line-height: 1.4;
+    margin: 0em auto;
+    padding: 2em;
+    width: 92%;
+    height:100%; 
+    min-height:600px;           /*firefox do'nt support height:100% ,so*/
+ 
+}
+/* #table-of-contents { */
+/* 	font-size: 75%; */
+/* 	line-height: 1.4em; */
+/* 	position: fixed; */
+/* 	display: block; */
+/* 	left: -20px; */
+/* 	top: 5%; */
+/* 	width: 250px; */
+/* 	min-height:60px; */
+/* 	max-height:95%; */
+/* 	overflow:hidden; */
+/*     white-space:nowrap; */
+/* } */
+
+#org-div-home-and-up{
+	position: fixed;
+	display: block;
+	right: 18px;
+	top: 5px;
+	overflow:auto;
+    }
+#org-src{
+	position: fixed;
+	display: block;
+	right: 18px;
+	top: 20px;
+	overflow:hidden;
+    }
+#htmlized-src{
+	position: fixed;
+	display: block;
+	right: 54px;
+	top: 20px;
+	overflow:hidden;
+    }
+#table-of-contents h2 {
+	display:none;
+}
+
+#logo-text{
+	position: fixed;
+	display: block;
+	right: 16px;
+	bottom: 3px;
+	overflow:hidden;
+}
+#logo-img{
+    font-size: 60%;
+	position: fixed;
+	display: block;
+    left: 16px;
+	top: 3px;
+    }
+div#tags {
+	font-size: 75%;
+    text-align:right;
+	/* line-height: 1.4em; */
+	position: fixed;
+	display: block;
+	right: 40px;
+	top: 20%;
+	width: 90px;
+	/* min-height:60px; */
+	max-height:95%;
+	/* overflow:visible; */
+    /* white-space:pre-wrap; */
+}
+
+.title {
+    text-align:center;
+	padding-bottom: 7px;
+	margin-bottom: 20px;
+	border-bottom: 1px solid #222;
+}
+ a:link,a:active,a:visited { color : #006699; } 
+ a:hover		{ text-decoration: underline; color : #DD6900; } 
+
+.todo {color: #990000;}
+.done {color: #006666;}
+.timestamp-kwd {color: #444;}
+.tag {color: #DDD; font-size: 70%; font-weight: 500;}
+
+table {border: none;
+       width:90%;
+      }
+th	{
+	background-color: #006699; 
+}
+td	{
+    padding: .1em .7em .1em .3em;
+	background-color: Gainsboro
+}
+
+
+code {
+font-family: Andale Mono, Courier New, Courier, sans-serif; font-size: 12px; line-height: 14px; color: #0000A0;
+	background-color: #FAFAFA; border: #D1D7DC; border-style: solid;
+	border-left-width: 1px; border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px
+}
+
+/* pre { */
+/* 	border: 1px solid #555; */
+/* 	background: #EEEEEE; */
+/* 	font-size: 9pt; */
+/* 	padding: 1em; */
+/* } */
+pre.src {
+	border: 1px solid #555;
+	background:#0c1021;
+    /* background:#263111; */
+    color: #f7f8c6;
+	font-size: 10pt;
+    width:85%;
+	padding: 0em;
+	margin: 0;
+	width: 700px;
+	float: none;
+	clear: none;
+	line-height: 1.333;
+	text-align:left;
+    
+    /* overflow: scroll; */
+    max-height:500px;           /*IEXPLORE  don't support max-height*/
+    _height:expression(this.scrollHeight > 300 ? "300px" : "auto");
+    min-height:50px;
+    max-width:700px;
+    min-width:700px;
+    overflow-x:auto;
+    overflow-y:auto;
+}
+blockquote {
+	 border: #D1D7DC;
+     border-style: solid;
+	border-left-width: 1px;
+    border-top-width: 1px;
+    border-right-width: 1px;
+    border-bottom-width: 1px
+    
+    color: #444444;
+    line-height: 125%;
+	border: 1px solid #555;
+    background-color: #FAFAFA;    
+    width:95%;
+	padding: 1em;
+	margin: 0;
+	float: none;
+	clear: none;
+	text-align:left;
+    font-style:italic;
+    
+    /* overflow: scroll; */
+    max-height:300px;           /*IEXPLORE  don't support max-height*/
+    _height:expression(this.scrollHeight > 300 ? "300px" : "auto");
+    min-height:20px;
+    max-width:700px;
+    min-width:700px;
+    overflow-x:auto;
+    overflow-y:auto;
+}
+
+.org-function-name {
+    /* font-lock-function-name-face */
+    /* color: #0000ff; */
+     color: #87cefa;
+     font-stretch: normal;
+     text-decoration: none;
+}
+
+.org-keyword {
+    /* font-lock-keyword-face */
+    color: #00ffff;
+    text-decoration: none;
+    /* color: #a020f0; */
+}
+.org-doc
+ { color: #ffa07a;
+   text-decoration: none;
+ }
+p.author{
+    font-size:80%;
+    color:#556b2f;
+    font-style:italic;
+    position:fixed;
+    left:10px;
+    bottom:40px;
+}
+p.date{
+    font-size:80%;
+    color:#556b2f;
+    font-style:italic;
+    position:fixed;
+    left:10px;
+    bottom:0px;
+}
+p.creator{
+    font-size:80%;
+    color:#556b2f;
+    font-style:italic;
+    position:fixed;
+    left:10px;
+    bottom:20px;
+}
+
+img {
+    display:inline;
+	border: none;
+    float:none;
+    clear:none;
+    left:10px;
+}
+
+.share img {
+	opacity: .4;
+	-moz-opacity: .4;
+	filter: alpha(opacity=40);
+}
+
+.share img:hover {
+	opacity: 1;
+	-moz-opacity: 1;
+	filter: alpha(opacity=100);
+}
+
+.org-info-search-highlight
+{
+	background-color:#adefef; /* same color as emacs default */
+	color:#000000;
+	font-weight:bold;
+}
+
+.org-bbdb-company {
+    /* bbdb-company */
+    font-style: italic;
+}
+.org-bbdb-field-name {
+}
+.org-bbdb-field-value {
+}
+.org-bbdb-name {
+    /* bbdb-name */
+    text-decoration: underline;
+}
+.org-bold {
+    /* bold */
+    font-weight: bold;
+}
+.org-bold-italic {
+    /* bold-italic */
+    font-weight: bold;
+    font-style: italic;
+}
+.org-border {
+    /* border */
+    background-color: #000000;
+}
+.org-buffer-menu-buffer {
+    /* buffer-menu-buffer */
+    font-weight: bold;
+}
+.org-builtin {
+    /* font-lock-builtin-face */
+    color: #da70d6;
+}
+.org-button {
+    /* button */
+    text-decoration: underline;
+}
+.org-c-nonbreakable-space {
+    /* c-nonbreakable-space-face */
+    background-color: #ff0000;
+    font-weight: bold;
+}
+.org-calendar-today {
+    /* calendar-today */
+    text-decoration: underline;
+}
+.org-comment {
+    /* font-lock-comment-face */
+    color: #b22222;
+}
+.org-comment-delimiter {
+    /* font-lock-comment-delimiter-face */
+    color: #b22222;
+}
+.org-constant {
+    /* font-lock-constant-face */
+    color: #5f9ea0;
+}
+.org-cursor {
+    /* cursor */
+    background-color: #000000;
+}
+.org-default {
+    /* default */
+    color: #000000;
+    background-color: #ffffff;
+}
+.org-diary {
+    /* diary */
+    color: #ff0000;
+}
+.org-escape-glyph {
+    /* escape-glyph */
+    color: #a52a2a;
+}
+.org-file-name-shadow {
+    /* file-name-shadow */
+    color: #7f7f7f;
+}
+.org-fixed-pitch {
+}
+.org-fringe {
+    /* fringe */
+    background-color: #f2f2f2;
+}
+.org-header-line {
+    /* header-line */
+    color: #333333;
+    background-color: #e5e5e5;
+}
+.org-help-argument-name {
+    /* help-argument-name */
+    font-style: italic;
+}
+.org-highlight {
+    /* highlight */
+    background-color: #b4eeb4;
+}
+.org-holiday {
+    /* holiday */
+    background-color: #ffc0cb;
+}
+.org-info-header-node {
+    /* info-header-node */
+    color: #a52a2a;
+    font-weight: bold;
+    font-style: italic;
+}
+.org-info-header-xref {
+    /* info-header-xref */
+    color: #0000ff;
+    text-decoration: underline;
+}
+.org-info-menu-header {
+    /* info-menu-header */
+    font-weight: bold;
+}
+.org-info-menu-star {
+    /* info-menu-star */
+    color: #ff0000;
+}
+.org-info-node {
+    /* info-node */
+    color: #a52a2a;
+    font-weight: bold;
+    font-style: italic;
+}
+.org-info-title-1 {
+    /* info-title-1 */
+    font-size: 172%;
+    font-weight: bold;
+}
+.org-info-title-2 {
+    /* info-title-2 */
+    font-size: 144%;
+    font-weight: bold;
+}
+.org-info-title-3 {
+    /* info-title-3 */
+    font-size: 120%;
+    font-weight: bold;
+}
+.org-info-title-4 {
+    /* info-title-4 */
+    font-weight: bold;
+}
+.org-info-xref {
+    /* info-xref */
+    color: #0000ff;
+    text-decoration: underline;
+}
+.org-isearch {
+    /* isearch */
+    color: #b0e2ff;
+    background-color: #cd00cd;
+}
+.org-italic {
+    /* italic */
+    font-style: italic;
+}
+.org-lazy-highlight {
+    /* lazy-highlight */
+    background-color: #afeeee;
+}
+.org-link {
+    /* link */
+    color: #0000ff;
+    text-decoration: underline;
+}
+.org-link-visited {
+    /* link-visited */
+    color: #8b008b;
+    text-decoration: underline;
+}
+.org-match {
+    /* match */
+    background-color: #ffff00;
+}
+.org-menu {
+}
+.org-message-cited-text {
+    /* message-cited-text */
+    color: #ff0000;
+}
+.org-message-header-cc {
+    /* message-header-cc */
+    color: #191970;
+}
+.org-message-header-name {
+    /* message-header-name */
+    color: #6495ed;
+}
+.org-message-header-newsgroups {
+    /* message-header-newsgroups */
+    color: #00008b;
+    font-weight: bold;
+    font-style: italic;
+}
+.org-message-header-other {
+    /* message-header-other */
+    color: #4682b4;
+}
+.org-message-header-subject {
+    /* message-header-subject */
+    color: #000080;
+    font-weight: bold;
+}
+.org-message-header-to {
+    /* message-header-to */
+    color: #191970;
+    font-weight: bold;
+}
+.org-message-header-xheader {
+    /* message-header-xheader */
+    color: #0000ff;
+}
+.org-message-mml {
+    /* message-mml */
+    color: #228b22;
+}
+.org-message-separator {
+    /* message-separator */
+    color: #a52a2a;
+}
+.org-minibuffer-prompt {
+    /* minibuffer-prompt */
+    color: #0000cd;
+}
+.org-mm-uu-extract {
+    /* mm-uu-extract */
+    color: #006400;
+    background-color: #ffffe0;
+}
+.org-mode-line {
+    /* mode-line */
+    color: #000000;
+    background-color: #bfbfbf;
+}
+.org-mode-line-buffer-id {
+    /* mode-line-buffer-id */
+    font-weight: bold;
+}
+.org-mode-line-highlight {
+}
+.org-mode-line-inactive {
+    /* mode-line-inactive */
+    color: #333333;
+    background-color: #e5e5e5;
+}
+.org-mouse {
+    /* mouse */
+    background-color: #000000;
+}
+.org-negation-char {
+}
+.org-next-error {
+    /* next-error */
+    background-color: #eedc82;
+}
+.org-nobreak-space {
+    /* nobreak-space */
+    color: #a52a2a;
+    text-decoration: underline;
+}
+.org-org-agenda-date {
+    /* org-agenda-date */
+    color: #0000ff;
+}
+.org-org-agenda-date-weekend {
+    /* org-agenda-date-weekend */
+    color: #0000ff;
+    font-weight: bold;
+}
+.org-org-agenda-restriction-lock {
+    /* org-agenda-restriction-lock */
+    background-color: #ffff00;
+}
+.org-org-agenda-structure {
+    /* org-agenda-structure */
+    color: #0000ff;
+}
+.org-org-archived {
+    /* org-archived */
+    color: #7f7f7f;
+}
+.org-org-code {
+    /* org-code */
+    color: #7f7f7f;
+}
+.org-org-column {
+    /* org-column */
+    background-color: #e5e5e5;
+}
+.org-org-column-title {
+    /* org-column-title */
+    background-color: #e5e5e5;
+    font-weight: bold;
+    text-decoration: underline;
+}
+.org-org-date {
+    /* org-date */
+    color: #a020f0;
+    text-decoration: underline;
+}
+.org-org-done {
+    /* org-done */
+    color: #228b22;
+    font-weight: bold;
+}
+.org-org-drawer {
+    /* org-drawer */
+    color: #0000ff;
+}
+.org-org-ellipsis {
+    /* org-ellipsis */
+    color: #b8860b;
+    text-decoration: underline;
+}
+.org-org-formula {
+    /* org-formula */
+    color: #b22222;
+}
+.org-org-headline-done {
+    /* org-headline-done */
+    color: #bc8f8f;
+}
+.org-org-hide {
+    /* org-hide */
+    color: #e5e5e5;
+}
+.org-org-latex-and-export-specials {
+    /* org-latex-and-export-specials */
+    color: #8b4513;
+}
+.org-org-level-1 {
+    /* org-level-1 */
+    color: #0000ff;
+}
+.org-org-level-2 {
+    /* org-level-2 */
+    color: #b8860b;
+}
+.org-org-level-3 {
+    /* org-level-3 */
+    color: #a020f0;
+}
+.org-org-level-4 {
+    /* org-level-4 */
+    color: #b22222;
+}
+.org-org-level-5 {
+    /* org-level-5 */
+    color: #228b22;
+}
+.org-org-level-6 {
+    /* org-level-6 */
+    color: #5f9ea0;
+}
+.org-org-level-7 {
+    /* org-level-7 */
+    color: #da70d6;
+}
+.org-org-level-8 {
+    /* org-level-8 */
+    color: #bc8f8f;
+}
+.org-org-link {
+    /* org-link */
+    color: #a020f0;
+    text-decoration: underline;
+}
+.org-org-property-value {
+}
+.org-org-scheduled-previously {
+    /* org-scheduled-previously */
+    color: #b22222;
+}
+.org-org-scheduled-today {
+    /* org-scheduled-today */
+    color: #006400;
+}
+.org-org-sexp-date {
+    /* org-sexp-date */
+    color: #a020f0;
+}
+.org-org-special-keyword {
+    /* org-special-keyword */
+    color: #bc8f8f;
+}
+.org-org-table {
+    /* org-table */
+    color: #0000ff;
+}
+.org-org-tag {
+    /* org-tag */
+    font-weight: bold;
+}
+.org-org-target {
+    /* org-target */
+    text-decoration: underline;
+}
+.org-org-time-grid {
+    /* org-time-grid */
+    color: #b8860b;
+}
+.org-org-todo {
+    /* org-todo */
+    color: #ff0000;
+}
+.org-org-upcoming-deadline {
+    /* org-upcoming-deadline */
+    color: #b22222;
+}
+.org-org-verbatim {
+    /* org-verbatim */
+    color: #7f7f7f;
+    text-decoration: underline;
+}
+.org-org-warning {
+    /* org-warning */
+    color: #ff0000;
+    font-weight: bold;
+}
+.org-outline-1 {
+    /* outline-1 */
+    color: #0000ff;
+}
+.org-outline-2 {
+    /* outline-2 */
+    color: #b8860b;
+}
+.org-outline-3 {
+    /* outline-3 */
+    color: #a020f0;
+}
+.org-outline-4 {
+    /* outline-4 */
+    color: #b22222;
+}
+.org-outline-5 {
+    /* outline-5 */
+    color: #228b22;
+}
+.org-outline-6 {
+    /* outline-6 */
+    color: #5f9ea0;
+}
+.org-outline-7 {
+    /* outline-7 */
+    color: #da70d6;
+}
+.org-outline-8 {
+    /* outline-8 */
+    color: #bc8f8f;
+}
+.org-preprocessor {
+    /* font-lock-preprocessor-face */
+    color: #da70d6;
+}
+.org-query-replace {
+    /* query-replace */
+    color: #b0e2ff;
+    background-color: #cd00cd;
+}
+.org-regexp-grouping-backslash {
+    /* font-lock-regexp-grouping-backslash */
+    font-weight: bold;
+}
+.org-regexp-grouping-construct {
+    /* font-lock-regexp-grouping-construct */
+    font-weight: bold;
+}
+.org-region {
+    /* region */
+    background-color: #eedc82;
+}
+.org-rmail-highlight {
+}
+.org-scroll-bar {
+    /* scroll-bar */
+    background-color: #bfbfbf;
+}
+.org-secondary-selection {
+    /* secondary-selection */
+    background-color: #ffff00;
+}
+.org-shadow {
+    /* shadow */
+    color: #7f7f7f;
+}
+.org-show-paren-match {
+    /* show-paren-match */
+    background-color: #40e0d0;
+}
+.org-show-paren-mismatch {
+    /* show-paren-mismatch */
+    color: #ffffff;
+    background-color: #a020f0;
+}
+.org-string {
+    /* font-lock-string-face */
+    color: #bc8f8f;
+}
+.org-texinfo-heading {
+    /* texinfo-heading */
+    color: #0000ff;
+}
+.org-tool-bar {
+    /* tool-bar */
+    color: #000000;
+    background-color: #bfbfbf;
+}
+.org-tooltip {
+    /* tooltip */
+    color: #000000;
+    background-color: #ffffe0;
+}
+.org-trailing-whitespace {
+    /* trailing-whitespace */
+    background-color: #ff0000;
+}
+.org-type {
+    /* font-lock-type-face */
+    color: #228b22;
+}
+.org-underline {
+    /* underline */
+    text-decoration: underline;
+}
+.org-variable-name {
+    /* font-lock-variable-name-face */
+    color: #b8860b;
+}
+.org-variable-pitch {
+}
+.org-vertical-border {
+}
+.org-warning {
+    /* font-lock-warning-face */
+    color: #ff0000;
+    font-weight: bold;
+}
+
+
+
+.logo-link {
+    position: fixed;
+    top: 10px;
+    left: 30px;
+}
+
+/* These style are only for IE: */
+
+* html {
+    overflow: hidden;
+    padding-bottom:0px;
+    margin:0px;
+}
+
+* html body {
+    height: 100%;
+    overflow:auto;
+    font-size: 100%;
+    margin: 0px 0px 0px 250px;
+    padding: 0px 10% 0px 0px;
+}
+/* 针对Ie ,好像因为iexplore 不认识position:fixed 所以没办法让
+   导航部分的显示固定在特定的位置，不随滚动条而滚动
+ */
+* html #table-of-contents {
+    position: absolute;
+    width:200px;
+    left:10px
+    /*
+      The evil IE-JavaScript hack :-) depends on Picture and y-distance.
+      Added to support small screens (Netbooks...).
+      */
+    top: expression( ( 30 + ( noValue = document.documentElement.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop ) ) + 'px' );
+    /* top: expression((document.body.clientHeight - 210) + "px"); */
+     /* height: expression((document.body.clientHeight - 210) + "px"); */
+}
+* html #org-div-home-and-up {
+    position: absolute;
+    width:200px;
+    right:25px;
+    /*
+      The evil IE-JavaScript hack :-) depends on Picture and y-distance.
+      Added to support small screens (Netbooks...).
+      */
+    /* top: expression( ( 10 + ( noValue = document.documentElement.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop ) ) + 'px' ); */
+    /* top: expression((document.body.clientHeight - 210) + "px"); */
+     /* height: expression((document.body.clientHeight - 210) + "px"); */
+}
+* html #org-src{
+    position: absolute;
+    width:25px;
+    right:20px;
+}
+* html #htmlized-src{
+    position: absolute;
+    width:120px;
+    right:20px;
+}
+
+* html p.author{
+    position: absolute;
+    width:125px;
+    left:20px;
+}
+* html p.date{
+    position: absolute;
+    width:225px;
+    left:20px;
+    bottom:0px;
+}
+* html p.creator{
+    position: absolute;
+    width:425px;
+    left:20px;
+    bottom:20px;
+}
+
+* html h1 {
+    margin-top:10px;
+}
+
+* html .logo-link {
+    position: absolute;
+    top: 10px;
+    left: 30px;
+}
+
+* html #logo-text{
+    font-size: 75%;
+	position: absolute;
+	display: block;
+	right: 10px;
+	bottom: 3px;
+	overflow:hidden;
+}
+ 
+ 
+* html div#tags {
+	font-size: 75%;
+	/* line-height: 1.4em; */
+	position: absolute;
+	display: block;
+	right: -2px;
+	top: 10%;
+	width: 150px;
+	/* min-height:60px; */
+	max-height:95%;
+	/* overflow:visible; */
+    /* white-space:pre-wrap; */
+}
+
+    </style>
+<link rel="stylesheet" type="text/css" href="../style/emacs.css" />
+<script type='text/javascript' src='../js/emacs.js'> </script>
+
+</head>
+<body>
+<div id="org-div-home-and-up" style="text-align:right;font-size:70%;white-space:nowrap;">
+ <a accesskey="h" href="../sitemap.html"> 站点地图 </a>
+ |
+ <a accesskey="H" href="../index.html"> 首页 </a>
+</div>
+
+<div id="preamble">
+
+</div>
+
+<div id="content">
+<h1 class="title">emysql 压力测试</h1>
+
+
+<div id='logo-img' ><a  href='../index.html'>▇█▓▒░◕~◕░▒▓█▇</a></div>
+
+<div id='logo-text'>
+  <a href='#' ><span align="left">░◕~◕░</span></a>
+</div>
+
+<p>
+本站关于mysql的测试在 <a href="../mysql/benchmark_demo.html">../mysql/benchmark_demo</a><br/>
+</p>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">建表语句</a></li>
+<li><a href="#sec-2">mysqlslap 测试</a></li>
+<li><a href="#sec-3">emysql的压力测试，开一条mysql连接，用存储过程插入10000条数据</a>
+<ul>
+<li><a href="#sec-3-1">测试用 press.erl</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-1" class="outline-2">
+<h2 id="sec-1">建表语句</h2>
+<div class="outline-text-2" id="text-1">
+
+
+<p><br/>
+<pre class="src src-sql"> CREATE TABLE `tbl_test` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `onOffType` int(11) DEFAULT NULL,
+  `accountId` int(11) DEFAULT NULL,
+  `accountType` int(11) DEFAULT NULL,
+  `playerId` int(11) DEFAULT NULL,
+  `headHeroId` int(11) DEFAULT NULL,
+  `playerLevel` int(11) DEFAULT NULL,
+  `playerName` varchar(255) DEFAULT NULL,
+  `logTime` datetime DEFAULT NULL,
+  `clientVersion` varchar(255) DEFAULT NULL,
+  `clientType` varchar(255) DEFAULT NULL,
+  `issuers` varchar(255) DEFAULT NULL,
+  `flashPlayerVersion` int(11) DEFAULT NULL,
+  `connectType` int(11) DEFAULT NULL,
+  `gameServerName` varchar(255) DEFAULT NULL,
+  `ipAddr` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+);
+
+DELIMITER $$
+drop procedure if exists `insert_tbl_test`$$
+create procedure `insert_tbl_test`(
+IN inaccountId int(11),<span class="org-comment-delimiter">/**/</span>
+IN inaccountType int(11),<span class="org-comment-delimiter">/**/</span>
+IN inplayerId int(11),<span class="org-comment-delimiter">/**/</span>
+IN inheadHeroId int(11),<span class="org-comment-delimiter">/**/</span>
+IN inplayerLevel int(11),<span class="org-comment-delimiter">/**/</span>
+IN inplayerName varchar(255),<span class="org-comment-delimiter">/**/</span>
+IN inlogTime datetime,<span class="org-comment-delimiter">/**/</span>
+IN inclientVersion varchar(255),<span class="org-comment-delimiter">/**/</span>
+IN inclientType varchar(255),<span class="org-comment-delimiter">/**/</span>
+IN inissuers varchar(255),<span class="org-comment-delimiter">/**/</span>
+IN inflashPlayerVersion int(11),<span class="org-comment-delimiter">/**/</span>
+IN inconnectType int(11),<span class="org-comment-delimiter">/**/</span>
+IN ingameServerName varchar(255),<span class="org-comment-delimiter">/**/</span>
+IN inipAddr varchar(255),<span class="org-comment-delimiter">/**/</span>
+IN inonOffType int(11) <span class="org-comment-delimiter">/**/</span>
+)
+BEGIN
+insert into `tbl_on_off`(
+`accountId`, <span class="org-comment-delimiter">/**/</span>
+`accountType`, <span class="org-comment-delimiter">/**/</span>
+`playerId`, <span class="org-comment-delimiter">/**/</span>
+`headHeroId`, <span class="org-comment-delimiter">/**/</span>
+`playerLevel`, <span class="org-comment-delimiter">/**/</span>
+`playerName`, <span class="org-comment-delimiter">/**/</span>
+`logTime`, <span class="org-comment-delimiter">/**/</span>
+`clientVersion`, <span class="org-comment-delimiter">/**/</span>
+`clientType`, <span class="org-comment-delimiter">/**/</span>
+`issuers`, <span class="org-comment-delimiter">/**/</span>
+`flashPlayerVersion`, <span class="org-comment-delimiter">/**/</span>
+`connectType`, <span class="org-comment-delimiter">/**/</span>
+`gameServerName`, <span class="org-comment-delimiter">/**/</span>
+`ipAddr`, <span class="org-comment-delimiter">/**/</span>
+`onOffType` <span class="org-comment-delimiter">/**/</span>
+) values(
+inaccountId,<span class="org-comment-delimiter">/**/</span>
+inaccountType,<span class="org-comment-delimiter">/**/</span>
+inplayerId,<span class="org-comment-delimiter">/**/</span>
+inheadHeroId,<span class="org-comment-delimiter">/**/</span>
+inplayerLevel,<span class="org-comment-delimiter">/**/</span>
+inplayerName,<span class="org-comment-delimiter">/**/</span>
+inlogTime,<span class="org-comment-delimiter">/**/</span>
+inclientVersion,<span class="org-comment-delimiter">/**/</span>
+inclientType,<span class="org-comment-delimiter">/**/</span>
+inissuers,<span class="org-comment-delimiter">/**/</span>
+inflashPlayerVersion,<span class="org-comment-delimiter">/**/</span>
+inconnectType,<span class="org-comment-delimiter">/**/</span>
+ingameServerName,<span class="org-comment-delimiter">/**/</span>
+inipAddr,<span class="org-comment-delimiter">/**/</span>
+ inonOffType <span class="org-comment-delimiter">/**/</span>
+);
+END$$
+DELIMITER ;
+</pre>
+
+</p></div>
+
+</div>
+
+<div id="outline-container-2" class="outline-2">
+<h2 id="sec-2">mysqlslap 测试</h2>
+<div class="outline-text-2" id="text-2">
+
+
+<p><br/>
+<pre class="src src-sh">&#20854;&#20013;&#20851;&#20110;&#24320;&#19968;&#20010;mysql&#36830;&#25509;&#25191;&#34892;10000&#27425;&#23384;&#20648;&#36807;&#31243;&#25554;&#20837;10000&#26465;&#25968;&#25454;&#30340;&#27979;&#35797;
+ mysqlslap --query=<span class="org-string">"call insert_tbl_test(1,1,1,1,1,'name','1989-01-26','ver','t','dd',1,1,'name','localhost',1)"</span> --concurrency=1  --number-of-queries 10000 --iterations=3 --engine=myisam -uroot -proot
+</pre>
+
+</p><blockquote>
+
+<p>结果显示不用3s就插入了10000条数据<br/>
+jixiuf@jf /tmp/d $ mysqlslap &ndash;query="call insert_tbl_test(1,1,1,1,1,'name','1989-01-26','ver','t','dd',1,1,'name','localhost',1)" &ndash;concurrency=1  &ndash;number-of-queries 10000 &ndash;iterations=3 &ndash;engine=myisam -uroot -proot<br/>
+Benchmark<br/>
+    Running for engine myisam<br/>
+    Average number of seconds to run all queries: 2.496 seconds<br/>
+    Minimum number of seconds to run all queries: 2.469 seconds<br/>
+    Maximum number of seconds to run all queries: 2.551 seconds<br/>
+    Number of clients running queries: 1<br/>
+    Average number of queries per client: 10000<br/>
+</p>
+</blockquote>
+
+
+<p><br/>
+<pre class="src src-sh">&#20351;&#29992;&#26222;&#36890;&#30340;insert &#35821;&#21477; (&#23545;&#20110;&#38750;&#24120;&#31616;&#21333;&#30340;insert&#35821;&#21477; &#27809;&#26377;&#24517;&#35201;&#21253;&#35013;&#25104;&#23384;&#20648;&#36807;&#31243;&#65292;&#20197;&#19979;
+ &#35777;&#26126;&#65292;&#23384;&#20648;&#36807;&#31243;&#19981;&#27604;&#31616;&#21333;insert&#24555;)
+ mysqlslap --query=<span class="org-string">"insert into tbl_test(  accountId,  accountType,  playerId,  headHeroId,  playerLevel,  playerName,  logTime,  clientVersion,  clientType,  issuers,  flashPlayerVersion,  connectType,  gameServerName,  ipAddr,  onOffType  ) values(1,1,1,1,1,'name','1989-01-26','ver','t','dd',1,1,'name','localhost',1)"</span>  --concurrency=1  --number-of-queries 10000 --iterations=3 --engine=myisam -uroot -proot
+</pre>
+
+</p><blockquote>
+
+<p>jixiuf@jf /tmp/d $ mysqlslap &ndash;query="insert into tbl_test(  accountId,  accountType,  playerId,  headHeroId,  playerLevel,  playerName,  logTime,  clientVersion,  clientType,  issuers,  flashPlayerVersion,  connectType,  gameServerName,  ipAddr,  onOffType  ) values(1,1,1,1,1,'name','1989-01-26','ver','t','dd',1,1,'name','localhost',1)"  &ndash;concurrency=1  &ndash;number-of-queries 10000 &ndash;iterations=3 &ndash;engine=myisam -uroot -proot<br/>
+Benchmark<br/>
+  Running for engine myisam<br/>
+  Average number of seconds to run all queries: 1.642 seconds<br/>
+  Minimum number of seconds to run all queries: 1.620 seconds<br/>
+  Maximum number of seconds to run all queries: 1.676 seconds<br/>
+  Number of clients running queries: 1<br/>
+Average number of queries per client: 10000<br/>
+</p>
+</blockquote>
+
+
+<p><br/>
+</p></div>
+
+</div>
+
+<div id="outline-container-3" class="outline-2">
+<h2 id="sec-3">emysql的压力测试，开一条mysql连接，用存储过程插入10000条数据</h2>
+<div class="outline-text-2" id="text-3">
+
+<ol>
+<li>首先修改emysql的 emysql.app.src,添加env的值{lock_timeout,infinity}<br/>
+   ,以避免因超时 emysql不工作 。别忘了重新编译emysql<br/>
+
+<p><br/>
+<pre class="src src-sh">%% Emysql .app file template
+%% This template is filled out by rebar,
+%% <span class="org-keyword">or</span> make (Makefile made to fill modules<span class="org-keyword"> in</span>)
+%% <span class="org-keyword">and</span> then cp src/emysql.app.src ebin/emysql.app
+
+%% Settings (defaults<span class="org-keyword"> in</span> include/emysql.hrl):
+%% default_timeout (TIMEOUT = 8000)
+%% lock_timeout (LOCK_TIMEOUT = 5000)
+
+{application, emysql, [
+        {description, <span class="org-string">"Emysql - Erlang MySQL driver"</span>},
+        {vsn, <span class="org-string">"0.2"</span>},
+        {modules, []},
+        {mod, {emysql_app, [<span class="org-string">"%MAKETIME%"</span>]}},
+        {registered, []},
+        {applications, [kernel, stdlib, crypto]},
+        {env, [{default_timeout, 5000},
+                {lock_timeout,infinity}
+                ]}
+        ]}<span class="org-builtin">.</span>
+</pre>
+
+</p></li>
+</ol>
+
+
+<p><br/>
+</p>
+</div>
+
+<div id="outline-container-3-1" class="outline-3">
+<h3 id="sec-3-1">测试用 press.erl</h3>
+<div class="outline-text-3" id="text-3-1">
+
+
+<p><br/>
+<pre class="src src-erlang"><span class="org-preprocessor">-module</span>(press).
+<span class="org-preprocessor">-export</span>([<span class="org-type">get_timestamp/0</span>,<span class="org-type">start/3</span>,<span class="org-type">run/3</span>]).
+<span class="org-preprocessor">-include</span>(<span class="org-string">"emysql.hrl"</span>).
+
+<span class="org-preprocessor">-record</span>(<span class="org-type">state</span>,{running=0,start_time,process_count_all,sql_count_each_process}).
+<span class="org-comment-delimiter">%% </span><span class="org-comment">&#21551;&#21160;ProcessCount&#20010;&#36827;&#31243;&#65292;&#27599;&#20010;&#36827;&#31243;&#25191;&#34892;SqlCountEachProcess&#27425;sql &#25805;&#20316;</span>
+<span class="org-function-name">start</span>(<span class="org-variable-name">ProcessCount</span>,<span class="org-variable-name">SqlCountEachProcess</span>,<span class="org-variable-name">MysqlConnectionCount</span>)-&gt;
+    <span class="org-type">crypto</span>:<span class="org-type">start</span>(),
+    <span class="org-type">application</span>:<span class="org-type">start</span>(emysql),
+    <span class="org-type">emysql</span>:<span class="org-type">add_pool</span>(hello_pool, <span class="org-variable-name">MysqlConnectionCount</span>, <span class="org-string">"root"</span>, <span class="org-string">"root"</span>, <span class="org-string">"localhost"</span>, 3306, <span class="org-string">"mysqlslap"</span>, utf8),
+
+    <span class="org-variable-name">CurrentTime</span>=<span class="org-type">get_timestamp</span>(),
+    <span class="org-builtin">spawn_link</span>(?<span class="org-constant">MODULE</span>,run,[<span class="org-variable-name">ProcessCount</span>,<span class="org-variable-name">SqlCountEachProcess</span>,#<span class="org-type">state</span>{start_time=<span class="org-variable-name">CurrentTime</span>,
+                                                                    process_count_all=<span class="org-variable-name">ProcessCount</span>,
+                                                                    sql_count_each_process=<span class="org-variable-name">SqlCountEachProcess</span>}])
+        .
+
+
+<span class="org-function-name">recv</span>(#<span class="org-type">state</span>{running=0,start_time=<span class="org-variable-name">StartTime</span>,
+            process_count_all=<span class="org-variable-name">ProcessCount</span>,
+            sql_count_each_process=<span class="org-variable-name">SqlCountEachProcess</span>
+           })-&gt;
+    <span class="org-variable-name">Usedtime</span> =<span class="org-type">get_timestamp</span>()-<span class="org-variable-name">StartTime</span>,
+    <span class="org-type">io</span>:<span class="org-type">format</span>(<span class="org-string">"process_count:~p sql count each process:~p used time:~p~n"</span>,[<span class="org-variable-name">ProcessCount</span>,<span class="org-variable-name">SqlCountEachProcess</span>,<span class="org-variable-name">Usedtime</span>]),
+    <span class="org-type">emysql</span>:<span class="org-type">remove_pool</span>(hello_pool);
+<span class="org-function-name">recv</span>(#<span class="org-type">state</span>{running=<span class="org-variable-name">Running</span>}=<span class="org-variable-name">State</span>)-&gt;
+    <span class="org-keyword">receive</span>
+        done-&gt;
+            <span class="org-type">recv</span>(<span class="org-variable-name">State</span>#<span class="org-type">state</span>{running=<span class="org-variable-name">Running</span>-1})
+    <span class="org-keyword">end</span>
+        .
+
+<span class="org-function-name">run</span>(0,<span class="org-variable-name">_SqlCountEachProcess</span>,#<span class="org-type">state</span>{}=<span class="org-variable-name">State</span>)-&gt;
+    <span class="org-type">recv</span>(<span class="org-variable-name">State</span>);
+<span class="org-function-name">run</span>(<span class="org-variable-name">ProcessCount</span>,<span class="org-variable-name">SqlCountEachProcess</span>,#<span class="org-type">state</span>{running=<span class="org-variable-name">Running</span>}=<span class="org-variable-name">State</span>) -&gt;
+    <span class="org-variable-name">Parent</span> =<span class="org-builtin">self</span>(),
+    <span class="org-builtin">spawn</span>(<span class="org-keyword">fun</span>()-&gt;<span class="org-function-name"> </span><span class="org-type">run_sql</span>(<span class="org-variable-name">SqlCountEachProcess</span>,<span class="org-variable-name">Parent</span>)<span class="org-keyword">end</span>),
+    <span class="org-type">run</span>(<span class="org-variable-name">ProcessCount</span>-1,<span class="org-variable-name">SqlCountEachProcess</span>,<span class="org-variable-name">State</span>#<span class="org-type">state</span>{running=<span class="org-variable-name">Running</span>+1})
+        .
+
+<span class="org-function-name">run_sql</span>(0,<span class="org-variable-name">Parent</span>)-&gt;
+    <span class="org-variable-name">Parent</span>!done;
+<span class="org-function-name">run_sql</span>(<span class="org-variable-name">SqlCountEachProcess</span>,<span class="org-variable-name">Parent</span>) -&gt;
+    <span class="org-type">test2</span>(),
+    <span class="org-type">run_sql</span>(<span class="org-variable-name">SqlCountEachProcess</span>-1 ,<span class="org-variable-name">Parent</span>)
+        .
+
+
+<span class="org-function-name">test2</span>()-&gt;
+    <span class="org-comment-delimiter">%%</span><span class="org-comment">"insert into tbl_test(  accountId,  accountType,  playerId,  headHeroId,  playerLevel,  playerName,  logTime,  clientVersion,  clientType,  issuers,  flashPlayerVersion,  connectType,  gameServerName,  ipAddr,  onOffType  ) values(1,1,1,1,1,'name','1989-01-26','ver','t','dd',1,1,'name','localhost',1)"</span>
+    <span class="org-comment-delimiter">%% </span><span class="org-comment">"call insert_tbl_test(1,1,1,1,1,'name','1989-01-26','ver','t','dd',1,1,'name','localhost',1);"</span>
+    <span class="org-variable-name">Result</span>=<span class="org-type">emysql</span>:<span class="org-type">execute</span>(hello_pool,&lt;&lt; <span class="org-string">"call insert_tbl_test(1,1,1,1,1,'name','1989-01-26','ver','t','dd',1,1,'name','localhost',1);"</span>&gt;&gt;),
+    <span class="org-keyword">case</span> <span class="org-variable-name">Result</span> <span class="org-keyword">of</span>
+        <span class="org-variable-name">Rec</span> <span class="org-keyword">when</span> <span class="org-builtin">is_record</span>(<span class="org-variable-name">Rec</span> ,ok_packet) -&gt;
+            ok;
+        <span class="org-variable-name">Rec</span> <span class="org-keyword">when</span> <span class="org-builtin">is_record</span>(<span class="org-variable-name">Rec</span> ,error_packet) -&gt;
+            <span class="org-type">io</span>:<span class="org-type">format</span>(<span class="org-string">"~p~n"</span>,[<span class="org-variable-name">Result</span>])
+    <span class="org-keyword">end</span>
+
+    <span class="org-comment-delimiter">%% </span><span class="org-comment">%% Pid=global:whereis_name(emysql_center)</span>
+        .
+<span class="org-function-name">get_timestamp</span>() -&gt;
+    {<span class="org-variable-name">Mega</span>,<span class="org-variable-name">Sec</span>,<span class="org-variable-name">Micro</span>} = <span class="org-builtin">erlang</span>:<span class="org-builtin">now</span>(),
+    ((<span class="org-variable-name">Mega</span>*1000000+<span class="org-variable-name">Sec</span>)*1000000+<span class="org-variable-name">Micro</span>)/1000.
+
+
+</pre>
+
+
+<pre class="src src-sh">&#21551;&#29992;10000&#20010;erlang&#36827;&#31243;&#65292;&#27599;&#20010;&#36827;&#31243;&#21521;emysql&#21457;&#19968;&#26465;sql(&#23384;&#20648;&#36807;&#31243;),&#26368;&#21518;&#19968;&#20010;&#21442;&#25968;&#26159;emysql&#36830;&#25509;&#27744;
+&#37324;&#21482;&#24320;&#19968;&#20010;mysql&#36830;&#25509;
+press:start(10000,1,1)<span class="org-builtin">.</span>
+</pre>
+
+
+<pre class="src src-sh">&#27979;&#35797;&#32467;&#26524;&#26174;&#31034;&#22823;&#27010;&#29992;&#20102;8&#31186;&#65292;&#22823;&#27010;&#26159;&#27604;&#21333;&#32431;&#30340;mysql&#27979;&#35797;&#24930;3~4&#20493; (7583/2496=3.45)
+(emacsdd@jf.org)4&gt; press:start(10000,1,1)<span class="org-builtin">.</span>
+process_count:10000 sql count each process:1 used time:7583.25390625
+</pre>
+
+有些网友怀疑创建10000个进程也会消耗一部分时间 ，所以增加下面几个测试 ，结果显<br/>
+示所用时间仍然处于7~9s这个范围内，影响不大<br/>
+</p>
+<p><br/>
+<pre class="src src-sh">&#36215;&#29992;&#19968;&#20010;&#36827;&#31243;&#65292;&#27492;&#36827;&#31243;&#21521;emysql&#21457;&#36865;10000&#26465;sql&#35821;&#21477;
+1&gt;  press:start(1,10000,1)<span class="org-builtin">.</span>
+process_count:1 sql count each process:10000 used time:8632.112060546875
+</pre>
+
+
+<pre class="src src-sh">1&gt;  press:start(10,1000,1)<span class="org-builtin">.</span>
+process_count:10 sql count each process:1000 used time:7520.348876953125
+</pre>
+
+
+<pre class="src src-sh">1&gt;  press:start(100,100,1)<span class="org-builtin">.</span>
+process_count:100 sql count each process:100 used time:7613.68896484375
+</pre>
+
+
+<pre class="src src-java"><span class="org-keyword">import</span> <span class="org-constant">java</span>.<span class="org-constant">sql</span>.<span class="org-type">Date</span>;
+<span class="org-keyword">import</span> <span class="org-constant">java</span>.<span class="org-constant">sql</span>.<span class="org-type">Types</span>;
+<span class="org-keyword">import</span> <span class="org-constant">java</span>.<span class="org-constant">sql</span>.<span class="org-type">CallableStatement</span>;
+<span class="org-keyword">import</span> <span class="org-constant">java</span>.<span class="org-constant">sql</span>.<span class="org-type">Connection</span>;
+<span class="org-keyword">import</span> <span class="org-constant">java</span>.<span class="org-constant">sql</span>.<span class="org-type">DriverManager</span>;
+<span class="org-keyword">public</span> <span class="org-keyword">class</span> <span class="org-type">TestMysqlConn</span> {
+    <span class="org-keyword">public</span> <span class="org-keyword">static</span> <span class="org-type">void</span> <span class="org-function-name">main</span>(<span class="org-type">String</span>[] <span class="org-variable-name">args</span>) <span class="org-keyword">throws</span> <span class="org-type">Exception</span> {
+        <span class="org-comment-delimiter">// </span><span class="org-comment">Class.forName("com.mysql.jdbc.Driver");</span>
+        Class.forName(<span class="org-string">"org.gjt.mm.mysql.Driver"</span>);
+        <span class="org-type">long</span> <span class="org-variable-name">start</span>= System.currentTimeMillis();
+        <span class="org-type">Connection</span> <span class="org-variable-name">conn</span> = DriverManager.getConnection(<span class="org-string">"jdbc:mysql://localhost:3306/mysqlslap?user=root&amp;password=root"</span>);
+        <span class="org-comment-delimiter">// </span><span class="org-comment">call insert_tbl_test(1,1,1,1,1,'name','1989-01-26','ver','t','dd',1,1,'name','localhost',1)</span>
+        <span class="org-type">CallableStatement</span> <span class="org-variable-name">cs</span> = conn.prepareCall(<span class="org-string">"{call insert_tbl_test(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}"</span>);
+        cs.setInt(1 , 1);
+        cs.setInt(2 , 1);
+        cs.setInt(3 , 1);
+        cs.setInt(4 , 1);
+        cs.setInt(5 , 1);
+        cs.setString(6 , <span class="org-string">"name"</span>);
+        cs.setDate(7 , <span class="org-keyword">new</span> <span class="org-type">Date</span>(1989 , 1 , 26));
+        cs.setString(8 , <span class="org-string">"ver"</span>);
+        cs.setString(9 , <span class="org-string">"t"</span>);
+        cs.setString(10 , <span class="org-string">"dd"</span>);
+        cs.setInt(11 ,1);
+        cs.setInt(12 ,1);
+        cs.setString(13 , <span class="org-string">"name"</span>);
+        cs.setString(14 , <span class="org-string">"localhost"</span>);
+        cs.setInt(15 , 1);
+        <span class="org-keyword">for</span> (<span class="org-type">int</span> <span class="org-variable-name">i</span> = 0; i &lt; 10000; i++) {
+            cs.executeUpdate();
+        }
+        <span class="org-type">long</span> <span class="org-variable-name">end</span>= System.currentTimeMillis();
+        System.out.println(end-start);
+
+    }
+}
+</pre>
+
+</p><blockquote>
+
+<p>java TestMysqlConn<br/>
+7198<br/>
+java TestMysqlConn<br/>
+7453<br/>
+java TestMysqlConn<br/>
+7031<br/>
+</p>
+</blockquote>
+
+
+<p><br/>
+测测结果显示，jdbc也用了大概7s左右的时间执行10000次存储过程的插入,<br/>
+可以证明emysql跟java jdbc连mysql基本不相上下<br/>
+</p>
+<p><br/>
+<div id='my-src'>
+<div id='org-src'><a href='../src/erlang/emysql_benchmark.org'>src</a></div>
+<div id='htmlized-src'><a href='../htmlized-src/erlang/emysql_benchmark.org.html'>htmlized-src</a></div>
+</div>
+<div id='tags'><span id='tags-title'>Tags:</span><br />
+    <a href="../tags/@SVN.html">@SVN</a><br/>
+    <a href="../tags/@perl.html">@perl</a><br/>
+    <a href="../tags/@Java.html">@Java</a><br/>
+    <a href="../tags/@Mysql.html">@Mysql</a><br/>
+    <a href="../tags/@Erlang.html">@Erlang</a><br/>
+    <a href="../tags/@SQL.html">@SQL</a><br/>
+    <a href="../tags/@DB.html">@DB</a><br/>
+    <a href="../tags/@Oracle.html">@Oracle</a><br/>
+    <a href="../tags/@Ediff.html">@Ediff</a><br/>
+    <a href="../tags/@Git.html">@Git</a><br/>
+    <a href="../tags/@Cedet.html">@Cedet</a><br/>
+    <a href="../tags/@C-C++.html">@C-C++</a><br/>
+    <a href="../tags/@Daily.html">@Daily</a><br/>
+    <a href="../tags/@Eclipse.html">@Eclipse</a><br/>
+    <a href="../tags/@AutoHotKey.html">@AutoHotKey</a><br/>
+    <a href="../tags/@Windows.html">@Windows</a><br/>
+    <a href="../tags/@Linux.html">@Linux</a><br/>
+    <a href="../tags/@C.html">@C</a><br/>
+    <a href="../tags/@Emacs.html">@Emacs</a><br/>
+</p>
+<p><br/>
+</div>
+</p></div>
+</div>
+</div>
+</div>
+
+<div id="postamble">
+<p class="date">Date: 2012-04-22 日</p>
+<p class="author">Author: 纪秀峰</p>
+<p class="creator">Org version 7.8.03 with Emacs version 24</p>
+
+
+</div>
+<p><br/><br/>
+<!-- hhmts start --> <!-- hhmts end --></p>
+
+</body>
+</html>

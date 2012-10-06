@@ -1,0 +1,741 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<!-- Created by htmlize-1.34 in css mode. -->
+<html>
+  <head>
+    <title>anything-doc.org</title>
+    <style type="text/css">
+    <!--
+      body {
+        color: #F8F8F8;
+        background-color: #0C1021;
+      }
+      .comment {
+        /* font-lock-comment-face */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-block {
+        /* org-block */
+        color: #b3b3b3;
+      }
+      .org-block-begin-line {
+        /* org-block-begin-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-block-end-line {
+        /* org-block-end-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-document-info-keyword {
+        /* org-document-info-keyword */
+        color: #b3b3b3;
+      }
+      .org-document-title {
+        /* org-document-title */
+        color: #afeeee;
+        font-size: 144%;
+        font-weight: bold;
+      }
+      .org-level-1 {
+        /* org-level-1 */
+        color: #FF6400;
+      }
+      .org-level-2 {
+        /* org-level-2 */
+        color: #40E0D0;
+      }
+      .org-level-3 {
+        /* org-level-3 */
+        color: #FBDE2D;
+      }
+      .org-link {
+        /* org-link */
+        color: #00ffff;
+        text-decoration: underline;
+      }
+      .org-meta-line {
+        /* org-meta-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-table {
+        /* org-table */
+        color: #87cefa;
+      }
+
+      a {
+        color: inherit;
+        background-color: inherit;
+        font: inherit;
+        text-decoration: inherit;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+    -->
+    </style>
+  </head>
+  <body>
+    <pre>
+<span class="comment"># -*- coding:utf-8 -*-</span>
+<span class="org-meta-line">#+LANGUAGE:  zh
+</span><span class="org-document-info-keyword">#+TITLE:</span><span class="comment">     </span><span class="org-document-title">anything-doc.org</span>
+<span class="org-meta-line">#+KEYWORDS: Autohotkey windows 
+#+FILETAGS: @AutoHotKey @Windows
+#+OPTIONS:   H:2 num:nil toc:t \n:t @:t ::t |:t ^:nil -:t f:t *:t &lt;:t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc
+</span>
+<span class="org-level-1">* Introduction</span>
+  
+If you use GNU/Emacs  maybe you have known "Anything"
+maybe not , 
+you can visit "Anything" on <span class="org-link">Emacswiki</span>
+and see what "Anything" it is .
+and this isn't anything.el ,it 's anything.ahk.
+if you think anything.ahk is great ,
+and have written an anything-source for it ,you can post it on  <span class="org-link">autohotkey-forum</span>
+  
+there are some screencast here(no voice) :
++ <span class="org-link">http://www.screenr.com/xxss</span>
++ <span class="org-link">http://www.screenr.com/vp8s</span> (new one )
++ <span class="org-link">http://www.screenr.com/BH7s</span> and another one show anything-favorite-directories.ahk
++ <span class="org-link">http://www.screenr.com/MyHs</span> and another show anything-window-switch.ahk
++ <span class="org-link">http://www.screenr.com/Zbjs</span> (new one ,show anything-services.ahk) 
+
+you can also download these videos
++ <span class="org-link">anything-explore-history.ahk_anything-run.ahk.mp4</span>
++ <span class="org-link">anything-explore-history.ahk.mp4</span>
++ <span class="org-link">anything-window-switch.mp4</span>
++ <span class="org-link">anything-favorite-directories.ahk.mp4</span>
++ <span class="org-link">http://screencast-repos.googlecode.com/files/anything-services.ahk.zip</span>
+
+and source code is host on <span class="org-link">Github</span>
+
+you can follow these links ,and save them on you disk .
++ <span class="org-link">anything.ahk</span> (core)
++ <span class="org-link">anything-explorer-history.ahk</span> (an anything-source)
++ <span class="org-link">anything-favorite-directories.ahk</span> (an anything-source)
++ <span class="org-link">anything-run.ahk</span> (an anything-source)
++ <span class="org-link">anything-run-launch-plugin.ahk</span> (an anything-source work with anything-run.ahk)
++ <span class="org-link">anything-window-switch.ahk</span> (an anything-source)
++ <span class="org-link">anything-config.ahk</span>  (config file)
+
+<span class="org-level-1">* Active &lt;Anything&gt;</span>
+  to active anything.ahk , press F3 , or Windows+r , or Alt+TAB
+  see  <span class="org-link">anything-config.ahk</span>  for detail 
+<span class="org-level-1">* keybindings when &lt;Anything&gt; is activated </span>
+  you can input search string just like google to narrow the candidates
+<span class="org-level-2">** keybindings for select candiates</span>
+<span class="org-table">| Keybindings                                   | Desc                                                                                      |</span>
+<span class="org-table">|-----------------------------------------------+-------------------------------------------------------------------------------------------|</span>
+<span class="org-table">| Down or Ctrl+n                                | select next candidate                                                                     |</span>
+<span class="org-table">|-----------------------------------------------+-------------------------------------------------------------------------------------------|</span>
+<span class="org-table">| Up or Ctrl+p                                  | select previous candidate                                                                 |</span>
+<span class="org-table">|-----------------------------------------------+-------------------------------------------------------------------------------------------|</span>
+<span class="org-table">| Ctrl+o                                        | will select next source ,that means ,all candidate from first source will be send to last |</span>
+<span class="org-table">|-----------------------------------------------+-------------------------------------------------------------------------------------------|</span>
+<span class="org-table">| pageUp ,Alt-v                                 | pageup                                                                                    |</span>
+<span class="org-table">|-----------------------------------------------+-------------------------------------------------------------------------------------------|</span>
+<span class="org-table">| pageDn ,Ctrl-v(doesn't work very well),Ctrl-d | pageDn                                                                                    |</span>
+<span class="org-table">|-----------------------------------------------+-------------------------------------------------------------------------------------------|</span>
+   
+<span class="org-level-2">** keybindings for execute actions</span>
+<span class="org-table">|---------------------+-------------------------------------------------------------------------------|</span>
+<span class="org-table">| Keybindings         | Desc                                                                          |</span>
+<span class="org-table">|---------------------+-------------------------------------------------------------------------------|</span>
+<span class="org-table">| &lt;Click&gt;and  &lt;Enter&gt; | to execute the default action with the selected candiate as parameter         |</span>
+<span class="org-table">|---------------------+-------------------------------------------------------------------------------|</span>
+<span class="org-table">| &lt;Ctrl-j&gt;            | to execute the second action(if has) with the selected candidate as parameter |</span>
+<span class="org-table">|---------------------+-------------------------------------------------------------------------------|</span>
+<span class="org-table">| &lt;Ctrl-m&gt;            | to execute the third action(if has) with the selected candidate as parameter  |</span>
+<span class="org-table">|---------------------+-------------------------------------------------------------------------------|</span>
+<span class="org-table">| &lt;Ctrl-k&gt;            | to execute the forth action (if has)with the selected candidate as parameter  |</span>
+<span class="org-table">|---------------------+-------------------------------------------------------------------------------|</span>
+<span class="org-table">| &lt;Ctrl-e&gt;            | to execute the fifth action (if has)with the selected candidate as parameter  |</span>
+<span class="org-table">|---------------------+-------------------------------------------------------------------------------|</span>
+   
+<span class="org-table">|-------------+----------------------------------------------------|</span>
+<span class="org-table">| Keybindings | Desc                                               |</span>
+<span class="org-table">|-------------+----------------------------------------------------|</span>
+<span class="org-table">| &lt;Alt-j&gt;     | do the same to Ctrl-j ,but doesn't quit "Anything" |</span>
+<span class="org-table">|-------------+----------------------------------------------------|</span>
+<span class="org-table">| &lt;Alt-m&gt;     | do the same to Ctrl-m ,but doesn't quit "Anything" |</span>
+<span class="org-table">|-------------+----------------------------------------------------|</span>
+<span class="org-table">| &lt;Alt-k&gt;     | do the same to Ctrl-k ,but doesn't quit "Anything" |</span>
+<span class="org-table">|-------------+----------------------------------------------------|</span>
+<span class="org-table">| &lt;Alt-e&gt;     | do the same to Ctrl-k ,but doesn't quit "Anything" |</span>
+
+
+<span class="org-table">|-----------------+---------------------------------------------------------------------------------------------------------------------------------------------------|</span>
+<span class="org-table">| Keybindings     | Desc                                                                                                                                              |</span>
+<span class="org-table">|-----------------+---------------------------------------------------------------------------------------------------------------------------------------------------|</span>
+<span class="org-table">| &lt;Ctrl-L&gt;        | will ignore all the candidates ,and treate the search string as candidate , and list all available "action" to execute on the special "candidate" |</span>
+<span class="org-table">|-----------------+---------------------------------------------------------------------------------------------------------------------------------------------------|</span>
+<span class="org-table">| &lt;Ctrl-i&gt;        | do something similar to &lt;Ctrl-l&gt; ,but don't list all available "action" ,just execute the "action" special by "property": no_candidate_action     |</span>
+<span class="org-table">|-----------------+---------------------------------------------------------------------------------------------------------------------------------------------------|</span>
+<span class="org-table">| &lt;Esc&gt;  &lt;Ctrl-g&gt; | quit Anything                                                                                                                                     |</span>
+<span class="org-table">|-----------------+---------------------------------------------------------------------------------------------------------------------------------------------------|</span>
+   
+<span class="org-level-2">** keybindings for edit</span>
+
+<span class="org-table">|----------------------+------------------------------------|</span>
+<span class="org-table">| Keybindings          | Desc                               |</span>
+<span class="org-table">|----------------------+------------------------------------|</span>
+<span class="org-table">| backspace and Ctrl-h | back delete a char                 |</span>
+<span class="org-table">|----------------------+------------------------------------|</span>
+<span class="org-table">| Ctrl-y               | paste                              |</span>
+<span class="org-table">|----------------------+------------------------------------|</span>
+<span class="org-table">| Ctrl-w               | copy  and quit anything session    |</span>
+<span class="org-table">|----------------------+------------------------------------|</span>
+<span class="org-table">| Alt-w                | copy without quit anything session |</span>
+<span class="org-table">|----------------------+------------------------------------|</span>
+   
+<span class="org-level-1">* anything-source I have written</span>
+Now I have wrote 6 &lt;anything-source&gt; for anything.ahk
+  + anything-explorer-history.ahk ,
+            anything-source : &lt;anything_explorer_history_source&gt; defined here.
+  + anything-favorite-directories.ahk,
+            anything-source: &lt;anything_favorite_directories_source&gt; defined here.
+  + anything-run.ahk (a replacement of Windows+r)
+             anything-source: &lt;anything_run_source&gt; defined here.
+    anything-run-launch-plugin.ahk (work together with anything-run.ahk)
+             anything-source:   &lt;anything_run_launch_source&gt;  defined here.
+  + anything-window-switch.ahk (a replacement of Alt-Tab)
+            &lt;anything_window_switcher_source&gt; and
+  + anything-precess-manager.ahk
+    anything-source: &lt;anything_precess_manager_source&gt; defined here.
+  + anything-services.ahk
+    anything-source: &lt;anything_services_source&gt; defined here.
+
+<span class="org-level-2">**  anything-explorer-history.ahk</span>
+   when you visit directory (double click on a directory,up or back ) in
+   explorer.exe ,it can remember directories you have visited ,then you can
+   press &lt;F3&gt; to active "Anything" list all directory history you have
+   visited. ,you can revisit it easily with anything-explorer-history.ahk .
+   how to configure anything-explorer-history.ahk
+   <span class="org-link">file:../img/anything-directory-history1.JPG</span>
+   <span class="org-link">file:../img/anything-directory-history2.JPG</span>
+   <span class="org-link">file:../img/anything-directory-history3.JPG</span>
+   <span class="org-link">file:../img/anything-directory-history4.JPG</span>
+   <span class="org-link">file:../img/anything-directory-history5.JPG</span>
+   <span class="org-link">file:../img/anything-directory-history6.JPG</span>
+    
+<span class="org-level-3">***    if you only have one anything-source :</span>
+       anything_explorer_history_source  (defined in  anything-explorer-history.ahk)
+       you can use it like this :
+<span class="org-block-begin-line">   #+begin_src c
+</span><span class="org-block">       #include anything.ahk
+       #include anything-explorer-history.ahk
+       f3::anything(anything_explorer_history_source)
+</span><span class="org-block-end-line">   #+end_src
+</span>       
+<span class="org-level-3">***      if you also have other anything-sources ,</span>
+        default  : it is included in anything-config.ahk
+        you just need add 
+            anything_explorer_history_source
+        to the sources
+       for example :
+<span class="org-block-begin-line">#+begin_src c
+</span><span class="org-block">      #include anything.ahk
+      #include anything-explorer-history.ahk
+      #include anything-favorite-directories.ahk
+       f3::
+       sources:=Array()
+       ;; anything_explorer_history_source is an anything-source defined in  anything-explorer-history.ahk   
+       sources.insert(anything_explorer_history_source)
+       ;; anything_favorite_directories_source is an anything-source defined in anything-favorites-directory.ahk
+       sources.insert(anything_favorite_directories_source)
+       anything_multiple_sources(sources)
+       return
+</span><span class="org-block-end-line">#+end_src       
+</span><span class="org-level-3">*** actions for anything-explorer-history.ahk</span>
+<span class="org-block-begin-line">    #+begin_src c
+</span><span class="org-block">   anything_explorer_history_source["action"]:=Array("visit_directory","delete_from_directory_history" ,"delete_all_directory_history")
+</span><span class="org-block-end-line">    #+end_src
+</span><span class="org-table">|----------------------------------------+-------------------------------------------------+---------------------|</span>
+<span class="org-table">| actions                                | description                                     | key binding         |</span>
+<span class="org-table">|----------------------------------------+-------------------------------------------------+---------------------|</span>
+<span class="org-table">| visit_directory                        | visit selected directory                        | &lt;Click&gt;and  &lt;Enter&gt; |</span>
+<span class="org-table">|----------------------------------------+-------------------------------------------------+---------------------|</span>
+<span class="org-table">| delete_from_directory_history          | delete select directory from  directory history | &lt;Ctrl-j&gt;            |</span>
+<span class="org-table">|----------------------------------------+-------------------------------------------------+---------------------|</span>
+<span class="org-table">| delete_all_directory_history           | add a new directory to  directory history       | &lt;Ctrl-m&gt;            |</span>
+<span class="org-table">|----------------------------------------+-------------------------------------------------+---------------------|</span>
+<span class="org-table">| list all actions for current candidate |                                                 | TAB                 |</span>
+<span class="org-table">|----------------------------------------+-------------------------------------------------+---------------------|</span>
+<span class="org-table">| list all actions                       |                                                 | &lt;Ctrl-L&gt;            |</span>
+<span class="org-table">|----------------------------------------+-------------------------------------------------+---------------------|</span>
+   + it will visit your selected directory in current Explorer.exe (if current activated window is Explorer.exe)
+   + it will visit your selected directory in current cmd.exe (if current activated window is cmd.exe)
+   + it will visit your selected directory in current msys.bat (if current activated window is msys.bat)
+    
+<span class="org-level-2">**  anything-favorite-directories.ahk (with with   anything-explorer-history.ahk )  </span>
+    anything-favorite-directories.ahk  do something similiar to <span class="org-link">anything-explorer-history.ahk</span> 
+    add your favorite directories ,and visit it using "Anything".
+   <span class="org-link">file:../img/anything-fav-history1.JPG</span>
+   <span class="org-link">file:../img/anything-fav-history2.JPG</span>
+   <span class="org-link">file:../img/anything-fav-history3.JPG</span>
+   <span class="org-link">file:../img/anything-fav-history4.JPG</span>
+    
+    
+<span class="org-level-3">***  how to configure it . </span>
+    if you use anything-favorites-directory as the only source for anything.ahk
+    you just need to bind it to a key like this :
+<span class="org-block-begin-line">    #+begin_src c
+</span><span class="org-block">      #include anything.ahk
+       ;; anything_favorite_directories_source is an anything-source defined in anything-favorites-directory.ahk
+      #include anything-favorites-directory.ahk
+      f1::anything(anything_favorite_directories_source)
+</span><span class="org-block-end-line">    #+end_src
+</span>
+   if you also use other sources ,just need add "anything_favorite_directories_source" to 
+   the array of sources for anything_multiple_sources(sources)
+   default have added to  anything-config.ahk 
+<span class="org-block-begin-line">#+begin_src c
+</span><span class="org-block">      #include anything.ahk
+      #include anything-explorer-history.ahk
+      #include anything-favorite-directories.ahk
+       f3::
+       sources:=Array()
+       ;; anything_explorer_history_source is an anything-source defined in  anything-explorer-history.ahk   
+       sources.insert(anything_explorer_history_source)
+       ;; anything_favorite_directories_source is an anything-source defined in anything-favorites-directory.ahk
+       sources.insert(anything_favorite_directories_source)
+       anything_multiple_sources(sources)
+       return
+</span><span class="org-block-end-line">#+end_src       
+</span>
+<span class="org-level-3">*** how to add a new Folder to your favorite-directories</span>
+    for this anything-source , your favorite directories
+    are the candidates ,so before you can use it ,you should
+    add some candidates (some directories).
+    1. first activate "Anything" (default press F3 )
+    2 Press &lt;Ctrl-L&gt; list all available actions select
+    "call action: Favdirs.anything_favorite_directories_add "
+    if you don't kown what's the meaning of &lt;Ctrl-L&gt; ,
+    see keybindings for execute actions.
+    anything_favorite_directories_source have three actions
+<span class="org-block-begin-line">   #+begin_src c
+</span><span class="org-block">   anything_favorite_directories_source["action"]:=Array("anything_favorite_directories_visit","anything_favorite_directories_delete","anything_favorite_directories_add")
+</span><span class="org-block-end-line">   #+end_src
+</span><span class="org-level-3">*** actions for anything-favorite-directories.ahk </span>
+<span class="org-table">|----------------------------------------+---------------------------------------------------+---------------------|</span>
+<span class="org-table">| actions                                | description                                       | key binding         |</span>
+<span class="org-table">|----------------------------------------+---------------------------------------------------+---------------------|</span>
+<span class="org-table">| anything_favorite_directories_visit    | visit selected directory                          | &lt;Click&gt;and  &lt;Enter&gt; |</span>
+<span class="org-table">|----------------------------------------+---------------------------------------------------+---------------------|</span>
+<span class="org-table">| anything_favorite_directories_delete   | delete select directory from favorite directories | &lt;Ctrl-j&gt;            |</span>
+<span class="org-table">|----------------------------------------+---------------------------------------------------+---------------------|</span>
+<span class="org-table">| anything_favorite_directories_add      | add a new directory to favorite directories       | &lt;Ctrl-m&gt;            |</span>
+<span class="org-table">|----------------------------------------+---------------------------------------------------+---------------------|</span>
+<span class="org-table">| list all actions for current candidate |                                                   | TAB                 |</span>
+<span class="org-table">|----------------------------------------+---------------------------------------------------+---------------------|</span>
+<span class="org-table">| list all actions                       |                                                   | &lt;Ctrl-L&gt;            |</span>
+<span class="org-table">|----------------------------------------+---------------------------------------------------+---------------------|</span>
+    
+<span class="org-level-3">*** then you can use "Anything" selected one of your favorite directory </span>
+   + it will visit your selected directory in current Explorer.exe (if current activated window is Explorer.exe)
+   + it will visit your selected directory in current cmd.exe (if current activated window is cmd.exe)
+   + it will visit your selected directory in current msys.bat (if current activated window is msys.bat)
+
+<span class="org-level-2">** anything-run.ahk is a replacement of &lt;Win-r&gt;</span>
+   it could remember old command too. when you press &lt;Windows+r&gt;
+   about how to use it .see comments in anything-run.ahk
+   <span class="org-link">file:../img/anything-run1.JPG</span>
+   
+<span class="org-block-begin-line">    #+begin_src c
+</span><span class="org-block">         #include anything.ahk
+         #include anything-run.ahk
+         #include anything-run-launch-plugin.ahk
+
+         #r::
+         my_anything_properties2:=Object()
+         my_anything_properties2["anything_use_large_icon"]:=0
+         my_anything_properties2["FontSize"]:= 12
+         anything_multiple_sources_with_properties(Array(anything_run_source, anything_run_launch_source),my_anything_properties2)
+         return
+</span><span class="org-block-end-line">    #+end_src
+</span>   if a command(candidate) have not been added ,you can type the command in the
+   textfield (for example :"cmd") add press &lt;Ctrl-L&gt; list all available actions select
+   call action: Run.anything_run
+   then a cmd.exe is executed ,and "cmd" as a candidate is add to candidates
+
+   you can also append other anything-source,for example 
+<span class="org-block-begin-line">    #+begin_src c
+</span><span class="org-block">      #r::
+      sources:=Array()
+      sources.insert(anything_cmd_source)
+      sources.insert(anything_run_launch_source)
+      sources.insert(anything_explorer_history_source)
+      sources.insert(anything_favorite_directories_source)
+      anything_multiple_sources(sources)
+      return
+</span><span class="org-block-end-line">    #+end_src
+</span>   
+<span class="org-level-2">** anything-window-switch.ahk is a replacement of Alt-Tab</span>
+      <span class="org-link">file:../img/anything-ws.JPG</span>
+<span class="org-block-begin-line">   #+begin_src c
+</span><span class="org-block">      #include anything.ahk
+      #include anything-window-switch.ahk 
+       !Tab::
+      ; custom anything-properties (window width and window height)
+       my_anything_properties:=Object()
+       my_anything_properties["win_width"]:= 900    
+       my_anything_properties["win_height"]:= 180
+      
+       sources:=Array()
+       sources.insert(anything_window_switcher_source)
+       anything_multiple_sources_with_properties(sources,my_anything_properties)
+       return
+</span><span class="org-block-end-line">   #+end_src
+</span>   anything-window-switch.ahk will treat all windows as candidates
+   the window_title window_process_name is used to fitler.
+   actions for anything-window-switch.ahk
+<span class="org-block-begin-line">   #+begin_src c
+</span><span class="org-block">anything_window_switcher_source["action"]:=Array("anything_ws_activate_window", "anything_ws_close_window" ,"anything_ws_assign_key_4_current_window", "anything_ws_kill_process")
+</span><span class="org-block-end-line">   #+end_src
+</span><span class="org-table">|-----------------------------------------+---------------------------------------------------------------------------------------------------------+---------------------|</span>
+<span class="org-table">| actions                                 | description                                                                                             | key binding         |</span>
+<span class="org-table">|-----------------------------------------+---------------------------------------------------------------------------------------------------------+---------------------|</span>
+<span class="org-table">| anything_ws_activate_window             | visit selected window                                                                                   | &lt;Click&gt;and  &lt;Enter&gt; |</span>
+<span class="org-table">|-----------------------------------------+---------------------------------------------------------------------------------------------------------+---------------------|</span>
+<span class="org-table">| anything_ws_close_window                | close selected window                                                                                   | &lt;Ctrl-j&gt;            |</span>
+<span class="org-table">|-----------------------------------------+---------------------------------------------------------------------------------------------------------+---------------------|</span>
+<span class="org-table">| anything_ws_assign_key_4_current_window | assign some special "TEXT" to your selected window ,then you can use it to selected the assigned window | &lt;Ctrl-m&gt;            |</span>
+<span class="org-table">|-----------------------------------------+---------------------------------------------------------------------------------------------------------+---------------------|</span>
+<span class="org-table">| anything_ws_kill_process                | kill process of selected window                                                                         | &lt;Ctrl-k&gt;            |</span>
+<span class="org-table">|-----------------------------------------+---------------------------------------------------------------------------------------------------------+---------------------|</span>
+<span class="org-table">| anything_ws_exclude_window_by_class     | don't list this window as candidates(excluded by ahk_class)                                             | &lt;Ctrl-e&gt;            |</span>
+<span class="org-table">|-----------------------------------------+---------------------------------------------------------------------------------------------------------+---------------------|</span>
+<span class="org-table">| list all actions for current candidate  |                                                                                                         | TAB                 |</span>
+<span class="org-table">|-----------------------------------------+---------------------------------------------------------------------------------------------------------+---------------------|</span>
+
+   about the third action : anything_ws_assign_key_4_current_window
+   for example :there are three windows opened now : Firefox Explore ,Emacs
+   now the selected candidate is "Firefox" ,and you press &lt;Ctrl-m&gt;
+   then a InputBox appear ,and you type in "www" .
+   next time you press Alt-TAB ,and type "www" Firefox is activated
+<span class="org-level-2">** anything-process-manager.ahk</span>
+   is a process manager , you can use it kill a selected process
+   or change the priority of the process
+      <span class="org-link">file:../img/anything-process.jpg</span>
+      <span class="org-link">file:../img/anything-process2.jpg</span>
+<span class="org-block-begin-line">      #+begin_src c
+</span><span class="org-block">        #include anything.ahk
+        #include anything-process-manager.ahk
+        f2::
+        anything(anything_process_manager_source)
+        return
+</span><span class="org-block-end-line">      #+end_src
+</span>
+ 2  if you also have other anything-sources ,
+     you just need add 
+         anything_process_manager_source
+     to the sources
+    for example :
+<span class="org-block-begin-line">    #+begin_src c
+</span><span class="org-block">        #include anything.ahk
+        #include anything-process-manager.ahk
+        #include anything-services.ahk
+         ^f4::
+          sources:=Array()
+          sources.Insert(anything_services_source)
+          sources.Insert(anything_process_manager_source)  ;         &lt;--------- here.
+          anything_multiple_sources(sources)
+         return
+</span><span class="org-block-end-line">    #+end_src
+</span>      
+      
+<span class="org-level-2">** anything-services.ahk</span>
+   is a Windows Services Manager ,just like services.msc
+   it can start a stopped service ,or stop a running service
+   or change the start type of a service &lt;Manual&gt; &lt;Disabled&gt;&lt;Automictal&gt;
+      <span class="org-link">file:../img/anything-services1.JPG</span>
+      <span class="org-link">file:../img/anything-services2.JPG</span>
+<span class="org-block-begin-line">#+begin_src c
+</span><span class="org-block"> #include anything.ahk
+ #include anything-services.ahk
+ f4::
+ anything(anything_services_source)
+ return
+</span><span class="org-block-end-line">#+end_src
+</span>
+ 2  if you also have other anything-sources ,
+     you just need add 
+         anything_services_source
+     to the sources
+    for example :
+<span class="org-block-begin-line">     #+begin_src c
+</span><span class="org-block">        #include anything.ahk
+        #include anything-process-manager.ahk
+        #include anything-services.ahk
+         ^f4::
+          sources:=Array()
+          sources.Insert(anything_services_source) ;         &lt;--------- here.
+          sources.Insert(anything_process_manager_source) 
+          anything_multiple_sources(sources)
+         return
+</span><span class="org-block-end-line">     #+end_src
+</span>
+   
+<span class="org-level-1">* how to  write an anything-source</span>
+  an anything-source is an Object with some pre-defined properties
+  now it support 8 anything-source-properties :
+  + name
+  + action
+  + candidate
+  + icon
+  + match
+  + anything-execute-action-at-once-if-one
+  + anything-execute-action-at-once-if-one-even-no-keyword
+  + anything-action-when-2-candidates-even-no-keyword
+  for example:
+<span class="org-block-begin-line">  #+begin_src c
+</span><span class="org-block">        my_source:=Object()
+</span><span class="org-block-end-line">  #+end_src
+</span><span class="org-level-2">** &lt;name&gt;  (required)</span>
+   &lt;name&gt; is a string ,it is just a name of this anything-source
+<span class="org-block-begin-line">   #+begin_src c
+</span><span class="org-block">        my_source["name"]:="my_source_name"
+</span><span class="org-block-end-line">   #+end_src
+</span><span class="org-level-2">** &lt;candidate&gt;  (required)</span>
+   &lt;candidate&gt; is an array of all candidates ,or a function name(string)
+   without parameter which return an array .
+   each element of the array can be :
+<span class="org-level-3">*** a string</span>
+    this string will be displayed on listview , so that you can select one
+    of the candidates ,and execute action on your selected candidate.
+   for example:
+<span class="org-block-begin-line">   #+begin_src c
+</span><span class="org-block">            my_source["candidate"] :=Array("red","green")
+</span><span class="org-block-end-line">   #+end_src
+</span>      or
+<span class="org-block-begin-line">      #+begin_src c
+</span><span class="org-block">            my_candidates_fun()
+            {
+                return Array("red","green")
+            }
+           my_source["candidate"]:="my_candidates_fun"
+</span><span class="org-block-end-line">      #+end_src
+</span><span class="org-level-3">*** an array</span>
+    the first element of this array must be a string ,the string will be
+    displayed on listview ,and you can selected one of the candidates ,and
+    execute action on your selected candidate.
+    other element of this array can be anything , you can store useful info.
+    there. and when you execute action on your selected candidate,the selected
+    candidate will be the parameter for the function specified by property "action"
+    see &lt;action&gt;
+      for example:
+<span class="org-block-begin-line">      #+begin_src c
+</span><span class="org-block">         my_source["candidate"]:=Array(
+                      Array("red","useful info ,string ,object or anything(red) "),
+                      Array("green","useful info ,string ,object or anything(red)")
+                      )
+</span><span class="org-block-end-line">      #+end_src
+</span>
+<span class="org-level-2">** &lt;action&gt;  (required)</span>
+   &lt;action&gt; is a function name(string) or a list of function name (array).
+   and those functions must have one parameter. actually the parameter is
+   the selected &lt;candidate&gt; .
+<span class="org-block-begin-line">   #+begin_src c
+</span><span class="org-block">         my_action:="my_action_fun"
+                  my_action_fun(candidate)
+                {
+                  MsgBox , %candidate%
+                }
+      my_source["action"]:=my_action
+</span><span class="org-block-end-line">   #+end_src
+</span>or
+<span class="org-block-begin-line">   #+begin_src c
+</span><span class="org-block">         my_action:="my_action_fun"
+                  my_action_fun(candidate)
+                {
+                  display :=candidate[1]
+                  usefulinfo :=candidate[2]
+                  MsgBox % usefulinfo  
+                }
+      my_source["action"]:=my_action
+</span><span class="org-block-end-line">   #+end_src
+</span>
+      or
+<span class="org-block-begin-line">      #+begin_src c
+</span><span class="org-block">        my_action:=Array("my_action_fun","my_action_fun2")
+                  my_action_fun(candidate)
+                {
+                  MsgBox , %candidate% from action_fun
+                }
+                  my_action_fun2(candidate)
+                {
+                  MsgBox , %candidate% from action_fun2
+                }
+
+      my_source["action"]:=my_action
+</span><span class="org-block-end-line">      #+end_src
+</span><span class="org-level-2">** &lt;icon&gt; (optional)</span>
+    &lt;icon&gt; is a function(string) which return an ImageList.
+    this property is optional .if this property isn't empty
+    &lt;Anything&gt; will display icon before each candidates.
+<span class="org-block-begin-line">    #+begin_src c
+</span><span class="org-block">     icon_fun()
+     {
+         ImageListID := IL_Create(2)  ; Create an ImageList to hold 10 small icons.
+         Loop 2  ; Load the ImageList with a series of icons from the DLL.
+         IL_Add(ImageListID, "shell32.dll", A_Index)
+         return ImageListID
+     }
+    my_icon :="icon_fun"
+    my_source["icon"]:=my_icon
+</span><span class="org-block-end-line">    #+end_src
+</span>
+<span class="org-level-2">** &lt;match&gt; (optional) default: "anything_match"</span>
+   if it has value for example:
+<span class="org-block-begin-line">        #+begin_src c
+</span><span class="org-block">        my_source["match"]:="anything_match"
+; or 
+        my_source["match"]:="anything_match_case_sensetive"
+</span><span class="org-block-end-line">        #+end_src
+</span>or any other value .
+the value of it is a function name accept two parameters :(candidate,pattern)
+this function is used to filter candidates from all candidates depends
+on what you have type in the textfield.
+
+; if it match ,then return 1 ,else return 0
+
+and these tow function is defined in anything.ahk
+<span class="org-block-begin-line">#+begin_src c
+</span><span class="org-block">;@param: candidate is current candidate passed to this function
+;@param: pattern, is what you have typed in the textfield
+anything_match_case_sensetive(candidate,pattern){}
+anything_match(candidate,pattern){}
+</span><span class="org-block-end-line">#+end_src
+</span>
+<span class="org-level-2">** &lt;anything-execute-action-at-once-if-one&gt; (optional)</span>
+    if it has value  for example:
+<span class="org-block-begin-line">  #+begin_src c
+</span><span class="org-block">          my_source["anything-execute-action-at-once-if-one"]:="yes"
+</span><span class="org-block-end-line">  #+end_src
+</span>then if only one candidate left on the listview it will execute the
+    default action with the only one candidate as parameter automatically.
+    you needn't press &lt;Enter&gt; here.
+<span class="org-level-2">** &lt; anything-execute-action-at-once-if-one-even-no-keyword &gt; (optional)</span>
+    if it has value
+  for example
+<span class="org-block-begin-line">  #+begin_src c
+</span><span class="org-block">          my_source["anything-execute-action-at-once-if-one"]:="yes"
+</span><span class="org-block-end-line">  #+end_src
+</span>  then if only one candidate left on the listview even no key keyword in the
+  textfiled it will execute the default action with the only one candidate
+  as parameter auto. you needn't press &lt;Enter&gt; here.
+ 
+<span class="org-level-2">** &lt;anything-action-when-2-candidates-even-no-keyword&gt; (optional)</span>
+   the value of it is a function accept two parameters 
+<span class="org-block-begin-line">    #+begin_src c
+</span><span class="org-block">    funname(candidate1,candidate2){}
+    my_source["anything-action-when-2-candidates"] :="funname"
+</span><span class="org-block-end-line">    #+end_src
+</span>
+   if only two candidats for you to select 
+   then this function will be called .
+   anything-window-switch.ahk use this property :
+   when only two windows ,And you press Alt-Tab ,then select another window directly
+   without press RETURN by youself.
+<span class="org-level-2">** call anything</span>
+   
+   1. anything(source)
+<span class="org-block-begin-line">     #+begin_src c
+</span><span class="org-block">      anything(my_source)
+</span><span class="org-block-end-line">     #+end_src
+</span>   
+   2. anything_multiple_sources(sources) with other anything-source
+<span class="org-block-begin-line">     #+begin_src c
+</span><span class="org-block">       sources := Array()
+       sources.Insert(my_source)
+       sources.Insert(other_source)
+       anything_multiple_sources(sources)
+</span><span class="org-block-end-line">     #+end_src
+</span>   
+   3. anything_with_properties(anything-source,anything-properties)
+<span class="org-block-begin-line">     #+begin_src c
+</span><span class="org-block">      my_anything_properties:=Object()
+      my_anything_properties["win_width"]:= 900
+      my_anything_properties["win_height"]:= 180
+      anything_with_properties(my_source,my_anything_properties)
+</span><span class="org-block-end-line">     #+end_src
+</span>   4. anything_multiple_sources_with_properties(anything-sources,anything-properties)
+<span class="org-block-begin-line">         #+begin_src c
+</span><span class="org-block">         my_anything_properties:=Object()
+         my_anything_properties["win_width"]:= 900
+         my_anything_properties["win_height"]:= 180
+          
+         sources:=Array()
+         sources.insert(my_source)
+         sources.insert(other_source)
+         anything_multiple_sources_with_properties(sources,my_anything_properties)
+</span><span class="org-block-end-line">         #+end_src
+</span><span class="org-level-1">* anything-properties</span>
+<span class="org-table">| properties           | description                                                          | default vaule         | type                                      |</span>
+<span class="org-table">|----------------------+----------------------------------------------------------------------+-----------------------+-------------------------------------------|</span>
+<span class="org-table">| win_width            | the width of anything window                                         | 900                   | integer                                   |</span>
+<span class="org-table">| win_height           | the height of anything window                                        | 510                   | integer                                   |</span>
+<span class="org-table">| Transparent          | the transparent of anything window                                   | 225                   | integer                                   |</span>
+<span class="org-table">| WindowColor          | the color of anything window                                         | "black"               | string                                    |</span>
+<span class="org-table">| ControlColor         | the color of control on anything window                              | "black"               | string                                    |</span>
+<span class="org-table">| FontSize             | the font size of font on anyting window                              | 12                    | integer                                   |</span>
+<span class="org-table">| FontColor            | the font colorof font on anyting window                              | "c7cfc00"             | string                                    |</span>
+<span class="org-table">| FontWeight           | the font weight weight on font on anything window                    | "bold"                | bold, italic, strike, underline, and norm |</span>
+<span class="org-table">| quit_when_lose_focus | auto quit anything when anything lose focus (yes or no)              | "yes"                 | "yes" or "no"                             |</span>
+<span class="org-table">| no_candidate_action  | when no candiates left and you press Ctrl-i ,this function is called | "anything_do_nothing" | a function name (accept one parameter)    |</span>
+see " how to  write an anything-source"/"call anything" section about how to use anything-properties
+<span class="org-level-1">* global variable</span>
+ <span class="org-table">| global variable name               | description                                            |</span>
+ <span class="org-table">|------------------------------------+--------------------------------------------------------|</span>
+ <span class="org-table">| anything_wid                       | anything window id                                     |</span>
+ <span class="org-table">| anything_pattern                   | anything pattern you have typed in the textfield       |</span>
+ <span class="org-table">| anything_properties                | an Array of current anything propeties                 |</span>
+ <span class="org-table">| anything_previous_activated_win_id | previous activated win_id before anthing-window appera |</span>
+  ;; you can access these global variable when you write your anything-source
+  for the special anything property :
+  "quit_when_lose_focus"
+  when you create a new window(or Inputbox ,Dialog) while anything session is opened ,
+  then "anything" will lose focus ,because the new window you created is the child
+  window of "anything window" then it will be killed too.
+  so if you want to make it work
+  you can do it like this:
+<span class="org-block-begin-line">  #+begin_src c
+</span><span class="org-block">  your_fun(){
+    global 
+    old_value_of_quit_when_lose_focus=anything_properties["quit_when_lose_focus"] 
+    anything_set_property_4_quit_when_lose_focus("no")
+    ;write  your code here ...
+    anything_set_property_4_quit_when_lose_focus(old_value_of_quit_when_lose_focus=anything_properties)
+   }
+</span><span class="org-block-end-line">  #+end_src
+</span>  
+<span class="org-level-1">* Known Bugs</span>
+  + when sometimes you type too quickly , letters get dropped from 
+    search key , the letters get typed and then deleted .
+    or you type "ab" but got "ba".
+    or you type "abc" ,only "ab" are used to filter candidates
+    
+    Becuase I use Input() in a loop to read what you have typed 
+    if the code in loop take too long time ,maybe when you type next char 
+    the Input() hasn't been called . so the letter would be dropped
+    I try to fix this by compare %anything_pattern% with text in the textfield
+    if they are different ,then I know some letter got dropped ,but it seems
+    doesn't work very well(Now is fixed.)
+
+  + anything-explorer-history.ahk must be the last included file
+    
+    maybe the reason is
+    there is some code look like this
+    
+       #IfWinActive ahk_class ExploreWClass|CabinetWClass
+    or 
+       Return 
+
+    
+</pre>
+  </body>
+</html>

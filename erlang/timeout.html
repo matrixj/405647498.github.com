@@ -3,14 +3,14 @@
                "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="zh" xml:lang="zh">
 <head>
-<title>一个人的狂欢</title>
+<title>receive timeout</title>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
-<meta name="title" content="一个人的狂欢"/>
+<meta name="title" content="receive timeout"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2011-06-04 星期六"/>
-<meta name="author" content="孤峰独秀"/>
-<meta name="description" content=""/>
-<meta name="keywords" content=""/>
+<meta name="generated" content="2011-11-12 六"/>
+<meta name="author" content="纪秀峰"/>
+<meta name="description" content="receive timeout"/>
+<meta name="keywords" content="erlang"/>
 <style type='text/css'>
        body {
     background-color: #E5E5E5;
@@ -942,15 +942,15 @@ img {
 }
 
     </style>
-<link rel="stylesheet" type="text/css" href="style/emacs.css" />
-<script type='text/javascript' src='js/emacs.js'> </script>
+<link rel="stylesheet" type="text/css" href="../style/emacs.css" />
+<script type='text/javascript' src='../js/emacs.js'> </script>
 
 </head>
 <body>
 <div id="org-div-home-and-up" style="text-align:right;font-size:70%;white-space:nowrap;">
- <a accesskey="h" href="sitemap.html"> 站点地图 </a>
+ <a accesskey="h" href="../sitemap.html"> 站点地图 </a>
  |
- <a accesskey="H" href="index.html"> 首页 </a>
+ <a accesskey="H" href="../index.html"> 首页 </a>
 </div>
 
 <div id="preamble">
@@ -958,60 +958,183 @@ img {
 </div>
 
 <div id="content">
-<h1 class="title">一个人的狂欢</h1>
+<h1 class="title">receive timeout</h1>
 
 
-<div id='logo-img' ><a  href='index.html'>▇█▓▒░◕~◕░▒▓█▇</a></div>
+<div id='logo-img' ><a  href='../index.html'>▇█▓▒░◕~◕░▒▓█▇</a></div>
 
 <div id='logo-text'>
   <a href='#' ><span align="left">░◕~◕░</span></a>
 </div>
 
 
-<ul>
-<li>首页还未做好，先看<a href="sitemap.html">站点地图</a>吧
-</li>
-<li><a href="about.html">About</a>
+
+<pre class="src src-erlang"><span class="org-keyword">receive</span>
+    <span class="org-variable-name">Message1</span> [<span class="org-keyword">when</span> <span class="org-variable-name">Guard1</span>] -&gt;
+        <span class="org-variable-name">Actions1</span> ;
+    <span class="org-variable-name">Message2</span> [<span class="org-keyword">when</span> <span class="org-variable-name">Guard2</span>] -&gt;
+        <span class="org-variable-name">Actions2</span> ;
+    ...
+<span class="org-keyword">after</span>
+    <span class="org-variable-name">TimeOutExpr</span> -&gt;
+        <span class="org-variable-name">ActionsT</span>
+<span class="org-keyword">end</span>
+</pre>
+
+<p>
+例:<br/>
+</p>
+<p><br/>
+<pre class="src src-erlang"><span class="org-preprocessor">-module</span>(tt).
+<span class="org-preprocessor">-export</span>([<span class="org-type">start/0</span>,<span class="org-type">value/1</span>,<span class="org-type">loop/1</span>,<span class="org-type">test/0</span>]).
+
+
+<span class="org-function-name">start</span>()-&gt;
+    <span class="org-builtin">spawn</span>(tt,loop,[0])
+        .
+
+<span class="org-function-name">value</span>(<span class="org-variable-name">T</span>) -&gt;
+    <span class="org-variable-name">T</span>!{<span class="org-builtin">self</span>(),value},
+    <span class="org-keyword">receive</span>
+        <span class="org-variable-name">Val</span>-&gt;
+            <span class="org-variable-name">Val</span>
+    <span class="org-keyword">after</span> 1000 -&gt;<span class="org-function-name"> </span>                              <span class="org-comment-delimiter">%</span><span class="org-comment">&#19968;&#31186;&#38047;&#36229;&#26102;</span>
+            timeout
+    <span class="org-keyword">end</span>
+        .
+<span class="org-function-name">loop</span> (<span class="org-variable-name">Val</span>) -&gt;
+    <span class="org-keyword">receive</span>
+        inc-&gt;
+            <span class="org-type">loop</span>(<span class="org-variable-name">Val</span>+1);
+        {<span class="org-variable-name">From</span>,value}-&gt;
+            <span class="org-variable-name">From</span>! <span class="org-variable-name">Val</span>
+    <span class="org-keyword">end</span>.
+
+<span class="org-function-name">test</span>() -&gt;
+    <span class="org-variable-name">P</span>=<span class="org-type">tt</span>:<span class="org-type">start</span>(),
+    <span class="org-variable-name">P</span>!inc,
+    <span class="org-variable-name">P</span>!inc,
+    <span class="org-type">value</span>(<span class="org-variable-name">P</span>).
+</pre>
+
+
+在超时表达式的参数中有两个值有特殊意义：<br/>
+</p><ul>
+<li>infinity<br/>
 </li>
 </ul>
 
 
+<p><br/>
+原子式infinity表示超时永远也不会发生。如果超时时间需要在运行时计算的话，这个<br/>
+功能就很有用。我们可能会希望通过对一个表达式进行求值来得到超时长度：如果返回<br/>
+值是infinity的话，则永久等待。<br/>
+</p>
+<p><br/>
+</p><ul>
+<li>0<br/>
+</li>
+</ul>
+
+<p>数值0表示超时会立即发生，不过在那之前系统仍然会首先尝试对邮箱中已有的消息进<br/>
+    行匹配。(我估计含义是:如果已有的消息匹配成功,则不运行超时子句,若此时邮<br/>
+    箱中没任何消息,则立即运行超时子句.)<br/>
+</p>
+<p><br/>
+</p>
+<p><br/>
+<pre class="src src-erlang"><span class="org-comment-delimiter">%% </span><span class="org-comment">&#27604;&#22914;,&#30830;&#23450; &#40736;&#26631;&#21452;&#20987;&#25110;&#21333;&#20987;&#20107;&#20214;</span>
+<span class="org-function-name">get_event</span>() -&gt;
+    <span class="org-keyword">receive</span>
+        {mouse, click} -&gt;
+            <span class="org-keyword">receive</span>
+                {mouse, click} -&gt;
+                    double_click
+            <span class="org-keyword">after</span> <span class="org-type">double_click_interval</span>() -&gt;
+                single_click
+            <span class="org-keyword">end</span>
+        ...
+    <span class="org-keyword">end</span>.
+</pre>
+
+
+<pre class="src src-erlang"><span class="org-comment-delimiter">%% </span><span class="org-comment">&#36229;&#26102;,sleep</span>
+<span class="org-function-name">sleep</span>(<span class="org-variable-name">Time</span>) -&gt;
+    <span class="org-keyword">receive</span>
+        <span class="org-keyword">after</span> <span class="org-variable-name">Time</span> -&gt;
+            true
+    <span class="org-keyword">end</span>.
+</pre>
+
+
+<pre class="src src-erlang"><span class="org-comment-delimiter">%% </span><span class="org-comment">flush_buffer()&#28165;&#31354;&#24403;&#21069;&#36827;&#31243;&#30340;&#37038;&#31665;&#65306;</span>
+
+<span class="org-comment-delimiter">%% </span><span class="org-comment">&#21482;&#35201;&#37038;&#31665;&#20013;&#36824;&#26377;&#28040;&#24687;&#65292;&#31532;&#19968;&#20010;&#28040;&#24687;&#20250;&#34987;&#21305;&#37197;&#21040;&#65288;&#26410;&#32465;&#23450;&#21464;&#37327;AnyMessage&#20250;&#21305;&#37197;&#21040;&#20219;&#20309;&#28040;</span>
+<span class="org-comment-delimiter">%% </span><span class="org-comment">&#24687;&#65292;&#22312;&#36825;&#37324;&#23601;&#26159;&#31532;&#19968;&#20010;&#28040;&#24687;&#65289;&#65292;&#28982;&#21518;flush_buffer&#20250;&#20877;&#27425;&#34987;&#35843;&#29992;&#65292;&#20294;&#26159;&#22914;&#26524;&#37038;&#31665;&#24050;&#32463;&#20026;</span>
+<span class="org-comment-delimiter">%% </span><span class="org-comment">&#31354;&#20102;&#65292;&#37027;&#20040;&#20989;&#25968;&#20250;&#20174;&#36229;&#26102;&#23376;&#21477;&#20013;&#36820;&#22238;&#12290;</span>
+
+<span class="org-function-name">flush_buffer</span>() -&gt;
+    <span class="org-keyword">receive</span>
+        <span class="org-variable-name">AnyMessage</span> -&gt;<span class="org-function-name"> </span>                          <span class="org-comment-delimiter">%</span><span class="org-comment">&#27880;&#24847;&#39318;&#23383;&#27597;&#22823;&#20889;&#34920;&#31034;&#36825;&#26159;&#19968;&#20010;&#21464;&#37327;,&#25152;&#20197;&#21487;&#20197;&#21542;&#37197;&#20219;&#20309;&#20256;&#36807;&#26469;&#30340;&#28040;&#24687;.</span>
+            <span class="org-type">flush_buffer</span>()
+        <span class="org-keyword">after</span> 0 -&gt;
+            true
+    <span class="org-keyword">end</span>.
+
+</pre>
+
+
+<pre class="src src-erlang"><span class="org-comment-delimiter">%% </span><span class="org-comment">&#28040;&#24687;&#30340;&#20248;&#20808;&#32423;&#20063;&#21487;&#20197;&#36890;&#36807;&#20351;&#29992;0&#20316;&#20026;&#36229;&#26102;&#38271;&#24230;&#26469;&#23454;&#29616;&#65306;</span>
+
+<span class="org-comment-delimiter">%% </span><span class="org-comment">&#20989;&#25968;priority_receive&#20250;&#36820;&#22238;&#37038;&#31665;&#20013;&#31532;&#19968;&#20010;&#28040;&#24687;&#65292;</span>
+<span class="org-comment-delimiter">%% </span><span class="org-comment">&#38500;&#38750;&#26377;&#28040;&#24687;interrupt&#21457;&#36865;&#21040;&#20102;&#37038;&#31665;&#20013;&#65292;&#27492;&#26102;&#23558;&#36820;&#22238;interrupt</span>
+<span class="org-comment-delimiter">%% </span><span class="org-comment">&#21363;&#28040;&#24687; interrupt &#20248;&#20808;&#32423;&#36739;&#20854;&#20182;&#39640;.</span>
+<span class="org-function-name">priority_receive</span>() -&gt;
+    <span class="org-keyword">receive</span>
+        interrupt -&gt;
+            interrupt
+    <span class="org-keyword">after</span> 0 -&gt;
+        <span class="org-keyword">receive</span>
+            <span class="org-variable-name">AnyMessage</span> -&gt;
+                <span class="org-variable-name">AnyMessage</span>
+        <span class="org-keyword">end</span>
+    <span class="org-keyword">end</span>
+
+</pre>
 
 
 <div id='my-src'>
-<div id='org-src'><a href='src/index.org'>src</a></div>
-<div id='htmlized-src'><a href='htmlized-src/index.org.html'>htmlized-src</a></div>
+<div id='org-src'><a href='../src/erlang/timeout.org'>src</a></div>
+<div id='htmlized-src'><a href='../htmlized-src/erlang/timeout.org.html'>htmlized-src</a></div>
 </div>
 <div id='tags'><span id='tags-title'>Tags:</span><br />
-<p>
-    <a href="tags/@SVN.html">@SVN</a>
-    <a href="tags/@perl.html">@perl</a>
-    <a href="tags/@Java.html">@Java</a>
-    <a href="tags/@Mysql.html">@Mysql</a>
-    <a href="tags/@Erlang.html">@Erlang</a>
-    <a href="tags/@SQL.html">@SQL</a>
-    <a href="tags/@DB.html">@DB</a>
-    <a href="tags/@Oracle.html">@Oracle</a>
-    <a href="tags/@Ediff.html">@Ediff</a>
-    <a href="tags/@Git.html">@Git</a>
-    <a href="tags/@Cedet.html">@Cedet</a>
-    <a href="tags/@C-C++.html">@C-C++</a>
-    <a href="tags/@Daily.html">@Daily</a>
-    <a href="tags/@Eclipse.html">@Eclipse</a>
-    <a href="tags/@AutoHotKey.html">@AutoHotKey</a>
-    <a href="tags/@Windows.html">@Windows</a>
-    <a href="tags/@Linux.html">@Linux</a>
-    <a href="tags/@C.html">@C</a>
-    <a href="tags/@Emacs.html">@Emacs</a>
+    <a href="../tags/@SVN.html">@SVN</a><br/>
+    <a href="../tags/@perl.html">@perl</a><br/>
+    <a href="../tags/@Java.html">@Java</a><br/>
+    <a href="../tags/@Mysql.html">@Mysql</a><br/>
+    <a href="../tags/@Erlang.html">@Erlang</a><br/>
+    <a href="../tags/@SQL.html">@SQL</a><br/>
+    <a href="../tags/@DB.html">@DB</a><br/>
+    <a href="../tags/@Oracle.html">@Oracle</a><br/>
+    <a href="../tags/@Ediff.html">@Ediff</a><br/>
+    <a href="../tags/@Git.html">@Git</a><br/>
+    <a href="../tags/@Cedet.html">@Cedet</a><br/>
+    <a href="../tags/@C-C++.html">@C-C++</a><br/>
+    <a href="../tags/@Daily.html">@Daily</a><br/>
+    <a href="../tags/@Eclipse.html">@Eclipse</a><br/>
+    <a href="../tags/@AutoHotKey.html">@AutoHotKey</a><br/>
+    <a href="../tags/@Windows.html">@Windows</a><br/>
+    <a href="../tags/@Linux.html">@Linux</a><br/>
+    <a href="../tags/@C.html">@C</a><br/>
+    <a href="../tags/@Emacs.html">@Emacs</a><br/>
 </p>
-
-
+<p><br/>
 </div>
-</div>
+</p></div>
 
 <div id="postamble">
-<p class="date">Date: 2011-06-04 星期六</p>
-<p class="author">Author: 孤峰独秀</p>
+<p class="date">Date: 2011-11-12 六</p>
+<p class="author">Author: 纪秀峰</p>
 <p class="creator">Org version 7.8.03 with Emacs version 24</p>
 
 

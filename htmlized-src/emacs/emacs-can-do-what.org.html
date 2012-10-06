@@ -1,0 +1,327 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<!-- Created by htmlize-1.34 in css mode. -->
+<html>
+  <head>
+    <title>emacs-can-do-what.org</title>
+    <style type="text/css">
+    <!--
+      body {
+        color: #F8F8F8;
+        background-color: #0C1021;
+      }
+      .comment {
+        /* font-lock-comment-face */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .ethan-wspace {
+        /* ethan-wspace-face */
+        background-color: #ffffcccccccc;
+      }
+      .italic {
+        /* italic */
+        font-style: italic;
+      }
+      .org-block {
+        /* org-block */
+        color: #b3b3b3;
+      }
+      .org-block-begin-line {
+        /* org-block-begin-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-block-end-line {
+        /* org-block-end-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-document-info {
+        /* org-document-info */
+        color: #afeeee;
+      }
+      .org-document-info-keyword {
+        /* org-document-info-keyword */
+        color: #b3b3b3;
+      }
+      .org-document-title {
+        /* org-document-title */
+        color: #afeeee;
+        font-size: 144%;
+        font-weight: bold;
+      }
+      .org-level-1 {
+        /* org-level-1 */
+        color: #FF6400;
+      }
+      .org-link {
+        /* org-link */
+        color: #00ffff;
+        text-decoration: underline;
+      }
+      .org-meta-line {
+        /* org-meta-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-table {
+        /* org-table */
+        color: #87cefa;
+      }
+
+      a {
+        color: inherit;
+        background-color: inherit;
+        font: inherit;
+        text-decoration: inherit;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+    -->
+    </style>
+  </head>
+  <body>
+    <pre>
+<span class="comment"># -*- coding:utf-8 -*-</span>
+<span class="org-meta-line">#+LANGUAGE:  zh
+</span><span class="org-document-info-keyword">#+TITLE:</span><span class="comment">     </span><span class="org-document-title">GNU/Emacs &#21487;&#20197;&#20570;&#20160;&#20040;</span>
+<span class="org-document-info-keyword">#+AUTHOR:</span><span class="comment">    </span><span class="org-document-info">&#23396;&#23792;&#29420;&#31168;</span>
+<span class="org-document-info-keyword">#+EMAIL:</span><span class="comment">     </span><span class="org-document-info">jixiuf@gmail.com</span>
+<span class="org-document-info-keyword">#+DATE:</span><span class="comment">     </span><span class="org-document-info">2011-08-27 &#20845;</span>
+<span class="org-meta-line">#+DESCRIPTION:GNU/Emacs &#21487;&#20197;&#20570;&#20160;&#20040;
+#+KEYWORDS: emacs 
+#+OPTIONS:   H:2 num:nil toc:t \n:t @:t ::t |:t ^:nil -:t f:t *:t &lt;:t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil 
+#+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
+#+EXPORT_SELECT_TAGS: export
+#+EXPORT_EXCLUDE_TAGS: noexport
+#+FILETAGS: @Emacs
+</span>&#25105;&#25152;&#26377;&#30340;Emacs&#30456;&#20851;&#30340;&#37197;&#32622;&#65292;&#22312; <span class="org-link">https://github.com/jixiuf/emacs_conf</span> &#21487;&#20197;&#25214;&#21040;
+<span class="org-level-1">* yasnippet (yet another snippet) &#27993;&#22823;&#19968;&#29275;&#20154;&#20026;Emacs&#20889;&#30340;&#25554;&#20214; &#27169;&#29256;</span>
+  &#23427;&#21487;&#20197; &#20026; html java cs c c++ ,&#25152;&#26377;&#20320;&#21487;&#20197;&#24819;&#20687;&#30340;&#21040;&#30340;&#35821;&#35328;&#23450;&#20041; &#27169;&#29256;&#65292; &#35821;&#27861;&#26497;
+  &#31616;&#21333;
+  <span class="org-link">http://code.google.com/p/yasnippet/</span>
+  &#23448;&#32593;&#19978;&#26377;&#23436;&#25972;&#30340;&#20851;&#20110;yasnippet&#30340;&#35270;&#39057;
+  <span class="org-link">http://yasnippet.googlecode.com/files/yas_demo.mp4</span>
+
+<span class="org-level-1">* &#25105;&#20026;csharp &#20889;&#30340;&#29983;&#25104;seter getter &#30340;&#20989;&#25968;</span>
+&#23558;&#36873;&#20013;&#21306;&#22495;&#20869;&#30340;&#25152;&#26377;&#26684;&#24335;&#20026;
+private DateTime LAST_MONTH_CHECKSTOCK_DATE;
+private DateTime last;
+&#30340;&#21464;&#37327;&#65292;&#26367;&#25442;&#25104;
+private DateTime LAST_MONTH_CHECKSTOCK_DATE;
+public DateTime Last_Month_Checkstock_Date
+{
+set {LAST_MONTH_CHECKSTOCK_DATE=value ;}
+get {return LAST_MONTH_CHECKSTOCK_DATE ;}
+}
+private DateTime last;
+public DateTime Last
+{
+set {last=value ;}
+get {return last ;}
+}
+<span class="org-block-begin-line">#+begin_src emacs-lisp
+</span><span class="org-block">  (defun csharp-setter-getter(beg end)
+  "generate sets and gets for c#."
+  (interactive "r")
+  (let ((region-string (buffer-substring-no-properties beg end))
+        var var-type   capitalize-var set-gets)
+    (with-temp-buffer
+      (csharp-mode)
+      (insert region-string) (insert "\n")
+      (goto-char (point-min))(end-of-line)
+      (while (not (eobp))
+        (if (string-match "^[ \t]*$" (buffer-substring-no-properties (point-at-bol) (point-at-eol)))
+            (progn (forward-line)(end-of-line))
+          (backward-sexp)
+          (setq var (thing-at-point 'sexp))
+          (backward-sexp)
+          (setq var-type (thing-at-point 'sexp))
+          (kill-region (point-at-bol) (point-at-eol))
+          (insert (csharp-a-setter-getter var-type var))
+          (forward-line)(end-of-line)))
+      (indent-region (point-min) (point-max))
+      (setq set-gets (buffer-string))
+      )
+    (kill-region beg end)
+    (insert set-gets)
+    )
+  )
+</span><span class="org-block-end-line">#+end_src
+</span>
+<span class="org-level-1">* (&#25105;&#20889;&#30340;&#20989;&#25968;)&#33258;&#21160;&#29983;&#25104;sql server &#30340;&#24314;&#34920;&#35821;&#21477;</span>
+  &#26681;&#25454;&#26684;&#24335;&#22914;&#19979;&#30340;&#19968;&#27573;&#20869;&#23481;&#33258;&#21160;&#29983;&#25104;sql server  &#30340;create table &#35821;&#21477;
+ STOCK_ID<span class="ethan-wspace">                                   </span>IDENTITY
+ SEMIFINISHER_ID<span class="ethan-wspace">                                    </span>INT
+ STOCK_WEIGHT<span class="ethan-wspace">                                   </span>DECIMAL<span class="ethan-wspace">                 </span>18,2
+ STOCK_YEAR_MONTH<span class="ethan-wspace">                                   </span>DATATIME
+ START_WEIGHT<span class="ethan-wspace">                                   </span>DECIMAL<span class="ethan-wspace">                 </span>18,2
+ CREATE_DATETIME<span class="ethan-wspace">                                    </span>DATETIME
+ CREATER_ID<span class="ethan-wspace">                                 </span>NVARCHAR<span class="ethan-wspace">                    </span>20
+ UPDATE_DATETIME<span class="ethan-wspace">                                    </span>DATETIME
+ UPDATER_ID<span class="ethan-wspace">                                 </span>NVARCHAR<span class="ethan-wspace">                    </span>20
+ DELETE_FLG<span class="ethan-wspace">                                 </span>NVARCHAR<span class="ethan-wspace">                    </span>1
+  
+<span class="org-level-1">* Emacs &#30340;&#21015;&#32534;&#36753;&#27169;&#24335;(Emacs&#31216;&#30697;&#24418;&#32534;&#36753;rect),</span>
+  Emacs &#19981;&#20165;&#21487;&#20197;&#36873;&#25321;&#20960;&#34892;&#25968;&#25454;&#65292;&#32780;&#19988;&#21487;&#20197;&#36873;&#25321;&#21015;
+  &#25105;&#29992;&#21040;&#30340;&#19982;&#21015;&#32534;&#36753;&#26377;&#20851;&#30340; &#25193;&#23637;
+  <span class="org-link">http://www.emacswiki.org/emacs/rect-mark.el</span>
+  &#25105;&#23450;&#20041;&#30340;&#24555;&#25463;&#38190;
+  Alt+space &#35774;&#32622;mark
+  C-x-r-k(Control+x,r,k) &#21015;&#21024;&#38500;
+  C-x-r-t                &#21015;&#25554;&#20837;
+  C-x-r-y                &#21015;&#31896;&#36148;
+  
+&#27604;&#22914;&#20197;&#19979;&#27492;&#20026;&#20363;
+ 1&#21024;&#38500;&#27599;&#34892;&#24320;&#22836;&#30340;&#20998;&#21495;
+ 2 &#22312;&#27599;&#34892;&#24320;&#22836;&#25554;&#20837;# 
+<span class="comment">#whateveryouwantSTOCK_ID                                    IDENTITY</span>
+<span class="comment">#whateveryouwantSEMIFINISHER_ID                                 INT</span>
+<span class="comment">#whateveryouwantSTOCK_WEIGHT                                    DECIMAL</span>
+<span class="comment">#whateveryouwantSTOCK_YEAR_MONTH                                    DATATIME</span>
+<span class="comment">#whateveryouwantSTART_WEIGHT                                    DECIMAL</span>
+<span class="comment">#whateveryouwantCREATE_DATETIME                                 DATETIME</span>
+<span class="comment">#whateveryouwantCREATER_ID                                  NVARCHAR</span>
+<span class="comment">#whateveryouwantUPDATE_DATETIME                                 DATETIME</span>
+<span class="comment">#whateveryouwantUPDATER_ID                                  NVARCHAR</span>
+<span class="comment">#whateveryouwantDELETE_FLG                                  NVARCHAR</span>
+<span class="org-level-1">* &#32654;&#21270;sql</span>
+  &#38656;&#35201; blancosqlformatter-0.1.1.jar &#20316;&#21518;&#21488;&#36827;&#31243;&#22788;&#29702; 
+  <span class="org-link">http://www.emacswiki.org/emacs/SqlBeautify</span>
+  
+<span class="org-level-1">* &#20316;&#20026;&#25968;&#25454;&#24211;&#21069;&#31471;&#65292;&#20197;oracle ,mysql &#20026;&#20363;</span>
+<span class="org-level-1">* &#65288;&#25105;&#20889;&#30340;&#65289;&#32534;&#20889;mysql &#33050;&#26412;&#26102;&#65292;&#36866;&#26102;&#30340;&#34917;&#20840;&#34920;&#21517;&#21015;&#21517;</span>
+  <span class="org-link">http://www.emacswiki.org/emacs/sqlparser-mysql-complete.el</span>
+<span class="org-level-1">* (&#25105;&#20889;&#30340;)&#32534;&#20889;oracle &#33050;&#26412;&#26102;&#65292;&#36866;&#26102;&#30340;&#34917;&#20840;&#34920;&#21517;&#21015;&#21517;</span>
+  <span class="org-link">http://www.emacswiki.org/emacs/sqlparser-oracle-complete.el</span>
+<span class="org-level-1">* &#65288;&#25105;&#20889;&#30340;&#65289;AutoJavaComplete &#32534;&#20889;Java&#20195;&#30721;&#26102;&#33258;&#21160;&#34917;&#20840;</span>
+  <span class="org-link">http://www.emacswiki.org/emacs/AutoJavaComplete</span>
+<span class="org-level-1">* dired (Emacs&#30340;&#25991;&#20214;&#31649;&#29702;&#31995;&#32479;(&#36164;&#28304;&#31649;&#29702;&#22120;))</span>
+  &#27492;&#20363;&#28436;&#31034;&#20351;&#29992;dired&#25991;&#20214;&#31649;&#29702;&#31995;&#32479;&#21450; &#31532;&#22235;&#35762;&#20013;&#25552;&#21040;&#30340;&#21015;&#32534;&#36753;
+  &#27169;&#24335;&#25209;&#37327;&#37325;&#21629;&#21517;&#25991;&#20214;
+  
+<span class="org-level-1">* org-mode &#38750;&#31243;&#24207;&#21592;&#30340;mode</span>
+  &#25105;&#29616;&#22312;&#32534;&#20889;&#30340;&#36825;&#20010;&#25991;&#20214;&#20351;&#29992;&#30340;mode &#23601;&#26159;org-mode
+  &#23427;&#30340;&#31532;&#19968;&#29305;&#23450;&#26159;TAB &#36827;&#34892;&#25240;&#21472;
+  &#25972;&#20010;&#25991;&#20214;&#20854;&#23454;&#24456;&#22823;&#65292;&#20294;&#26159;&#29616;&#22312;&#21482;&#26174;&#31034;&#39592;&#26550;&#65292;&#25972;&#20307;&#32467;&#26500;&#24456;&#28165;&#26224;.
+
+<span class="org-level-1">* org-mode &#23558;org mode &#32534;&#20889;&#30340;&#25991;&#20214;&#23548;&#20986;&#25104;&#21333;&#20010;html&#25991;&#20214;&#65292;</span>
+  &#22312;orgmode&#27169;&#24335;&#19979;  C-cC-e &#20043;&#21518;&#65292;&#21487;&#20197;&#23548;&#20986;&#25104;&#22810;&#31181;&#26684;&#24335;&#65292;
+   &#20197;&#23548;&#20986;&#27492;&#25991;&#20214;&#20026;&#20363;
+<span class="org-level-1">* org-mode &#23558;&#26576;&#30446;&#24405;&#19979;&#25152;&#26377;org &#25991;&#20214;&#65292;&#20197;&#20010;&#20154;&#31449;&#28857;&#30340;&#24418;&#24335;&#65292;&#23548;&#20986;</span>
+  &#27604;&#22914;&#65292;&#23558;&#25105;&#30340; <span class="italic">/home/jixiuf/documents/org/src/</span>
+  &#30446;&#24405;&#19979;&#30340;&#25152;&#26377;org &#25991;&#20214;&#65292;&#23548;&#20986;&#25104;html &#25918;&#21040;
+  <span class="italic">/home/jixiuf/documents/org/public_html/</span>
+  &#30446;&#24405;&#19979;&#20026;&#20363;
+  
+<span class="org-level-1">* org-table ,org-mode &#20013;&#30340;&#34920;&#26684;</span>
+  
+  <span class="org-table">| head   | head2 | head3 |</span>
+  <span class="org-table">| hello  | world | ok    |</span>
+  <span class="org-table">| this   | is    | come  |</span>
+  <span class="org-table">| a text | table | on    |</span>
+  <span class="org-table">|        |       |       |</span>
+
+  <span class="org-table">| another     | one                    |</span>
+  <span class="org-table">|-------------+------------------------|</span>
+  <span class="org-table">| ok          | ok                     |</span>
+  <span class="org-table">| Idon't know | can you editor do this |</span>
+  <span class="org-table">|             |                        |</span>
+
+<span class="org-level-1">* &#22312;emacs&#20351;&#29992;stardict &#35789;&#20856;,&#38656;&#35201;sdvc(&#21629;&#20196;&#34892;&#19979;&#30340;stardict) &#25903;&#25345;</span>
+  &#65292;&#23558;&#19979;&#38754;&#20989;&#25968;&#32465;&#23450;&#21040;`C-cd'&#19978; .&#20809;&#26631;&#31227;&#21160;&#21040;&#21333;&#35789;&#19978;,&#25353;&#19979;C-cd&#21363;&#21487;&#26597;&#35789;&#20856;
+<span class="org-block-begin-line">#+begin_src emacs-lisp
+</span><span class="org-block">(defun sdcv-to-buffer ()
+  "Search dict in region or world."
+  (interactive)
+  (let ((word (if mark-active
+                  (buffer-substring-no-properties (region-beginning) (region-end))
+                (current-word nil t)))
+        (buf-name (buffer-name))
+        )
+    ;; (setq word (read-string (format "Search the dictionary for (default %s): " word)
+    ;;                         nil nil word))
+    (set-buffer (get-buffer-create "*sdcv*"))
+    (buffer-disable-undo)
+    (erase-buffer)
+    (insert (shell-command-to-string  (format "sdcv -n %s " word) ))
+    (if (equal buf-name "*sdcv*")
+        (switch-to-buffer "*sdcv*")
+      (switch-to-buffer-other-window "*sdcv*")
+      )
+    (goto-char (point-min))
+    ))
+</span><span class="org-block-end-line">#+end_src
+</span><span class="org-level-1">* emacs&#20013;&#30340;&#28216;&#25103;</span>
+<span class="org-level-1">* diff &#25991;&#20214;&#30340;&#27604;&#36739;</span>
+  &#27604;&#36739;&#20004;&#20010;&#25991;&#20214;&#30340;&#19981;&#21516;
+
+<span class="org-level-1">* diff &#29256;&#26412;&#25511;&#21046;&#24037;&#20855;&#20013;&#21508;&#29256;&#26412;&#30340;&#24046;&#24322;</span>
+  C-xv=  &#23545;&#24037;&#20316;&#21306;&#20013;&#30340;&#25991;&#20214;&#19982;&#29256;&#26412;&#25511;&#21046;&#19979;&#30340;&#26368;&#26032;&#29256;&#36827;&#34892;&#27604;&#36739;
+  &#27604;&#22914;&#65292;&#25105;&#25152;&#26377;&#30340;emacs&#37197;&#32622;&#25991;&#20214;&#20351;&#29992;git &#36827;&#34892;&#29256;&#26412;&#31649;&#29702;,
+<span class="org-level-1">* &#22312;svn &#25110;git&#31561;&#29256;&#26412;&#25511;&#21046;&#24037;&#20855;&#31649;&#29702;&#30340;&#25991;&#20214;&#37324;&#65292;&#26597;&#30475;&#27492;&#25991;&#20214;&#30340;&#21382;&#21490;</span>
+  C-xvl &#26597;&#30475;&#21382;&#21490;,
+  
+<span class="org-level-1">* Version Control  </span>
+  emacs &#26377;&#19968;&#20010;Version Control &#65292;&#23427;&#35797;&#22270;&#23558;&#25152;&#26377;&#29616;&#23384;&#30340;&#29256;&#26412;&#31649;&#29702;&#24037;&#20855;
+  &#22914;svn cvs git &#31561;&#31561;&#29256;&#26412;&#25511;&#21046;&#24037;&#20855;&#22312;emacs&#20013;&#30340;&#20351;&#29992;&#26041;&#24335;&#24471;&#21040;&#32479;&#19968;
+  &#27604;&#22914;&#65292;&#19981;&#35770;&#20320;&#26159;svn &#36824;&#26159;git ,
+  C-xvl &#37117;&#26159;&#26597;&#30475;&#27492;&#25991;&#20214;&#30340;&#21382;&#21490;
+  C-xv+ &#26356;&#26032;&#27492;&#25991;&#20214;&#21040;&#26368;&#26032;&#29256;
+  C-xvu revert
+  &#32780;&#21151;&#33021;&#26368;&#24378;&#22823;&#30340;&#21151;&#33021;C-xvv &#23545;&#24212;&#30340;&#65292;&#23427;&#20250;&#26681;&#25454;&#24403;&#21069;&#25991;&#20214;&#25152;&#22788;&#30340;&#29366;&#24577;&#65292;&#33258;&#21160;
+  &#20915;&#23450;&#19979;&#19968;&#37096;&#25805;&#20316;&#35813;&#22914;&#20309;&#20570;
+  
+<span class="org-level-1">* Ediff &#25991;&#20214;&#30340;&#21512;&#24182;&#65292;&#23545;&#27604;&#30340;&#24037;&#20855;&#65292;&#19968;&#33324;&#19982;&#29256;&#26412;&#25511;&#21046;&#24037;&#20855;&#20351;&#29992;&#65292;&#22914;git ,svn.</span>
+<span class="org-level-1">* &#24405;&#21046;&#38190;&#30424;&#23439;</span>
+  &#21478;&#22806;&#35828;&#19968;&#28857;&#25105;&#23545;&#38190;&#30424;&#21644;&#40736;&#26631;&#30340;&#19968;&#20123;&#30475;&#27861;&#65292;&#19981;&#24819;&#24102;&#26377;&#22826;&#22810;&#30340;&#20559;&#35265;.
+  &#38190;&#30424;&#30340;&#20248;&#28857;&#26159;:&#27599;&#19968;&#27425;&#20987;&#38190;&#37117;&#26159;&#30830;&#23450;&#30340;&#65292;&#20855;&#26377;&#21487;&#37325;&#22797;&#24615;
+  &#40736;&#26631;&#20248;&#28857;&#26159;&#26131;&#29992;&#65292;&#20294;&#26159;&#27599;&#27425;&#28857;&#20987;&#25152;&#23545;&#24212;&#30340;&#22352;&#26631;&#65292;&#19981;&#22826;&#20855;&#26377;&#21487;&#37325;&#22797;&#24615;
+  &#36825;&#19968;&#27425;&#22312;(100,200)&#22788;&#28857;&#20987;&#30340;&#26159;&#30830;&#23450;&#25353;&#38062;&#65292;&#19979;&#19968;&#27425;&#21487;&#33021;&#23601;&#26159;&#20854;&#20182;&#25353;&#38062;&#20102;.
+  &#25152;&#20197;&#20320;&#27809;&#27861;&#35760;&#20303;&#19968;&#20010;&#22352;&#26631;&#65292;&#28982;&#21518;&#23558;&#23427;&#37325;&#22797;&#28857;&#20987;n&#27425;(&#23601;&#31639;&#33021;&#65292;&#21487;&#37325;&#22797;&#24615;&#30456;&#23545;&#38190;&#30424;&#36739;&#24046;
+  &#19968;&#28857;,&#35828;&#21040;&#36825;&#65292;&#25512;&#33616;&#22823;&#23478;&#23398;&#20064;&#19968;&#19979;AutoHotKey&#36825;&#27454;&#24320;&#28304;&#36719;&#20214;).
+  
+  &#32780;Emacs &#29992;&#29087;&#20102;&#20043;&#21518;&#65292;&#26159;&#35201;&#23436;&#20840;&#33073;&#31163;&#40736;&#26631;&#30340;&#20351;&#29992;&#30340;&#65292;&#34429;&#28982;&#23427;&#20063;&#28155;&#21152;&#20102;&#23545;&#40736;&#26631;&#30340;&#25903;&#25345;&#65292;
+  &#40736;&#26631;&#12289;&#33756;&#21333;&#26639;&#12289;&#24037;&#20855;&#26639;&#21482;&#36215;&#19968;&#20010;&#36741;&#21161;&#20316;&#29992;.
+
+  &#38190;&#30424;&#30340;&#27599;&#19968;&#27425;&#25353;&#38190;&#26159;&#30830;&#23450;&#30340;&#65292;&#27599;&#19968;&#20010;&#25353;&#38190;&#24207;&#21015;&#37117;&#23545;&#24212;&#30528;Emacs&#20013;&#30340;&#19968;&#20010;&#21629;&#20196;
+  (Command). &#22914;&#27492;&#65292;&#23558;&#19968;&#27573;&#21516;&#26679;&#30340;&#25805;&#20316;&#24405;&#21046;&#19979;&#26469;&#65292;&#37325;&#22797;&#22810;&#27425;&#65292;&#20415;&#21487;&#20197;&#31616;&#21270;&#32321;&#29712;&#30340;&#37325;&#22797;
+  &#24615;&#25805;&#20316;
+  C-x(  &#24320;&#22987;&#24405;&#21046;&#38190;&#30424;&#23439;
+  C-x)  &#32467;&#26463;&#24405;&#21046;&#38190;&#30424;&#23439;
+  C-xe  &#37325;&#22797;&#26368;&#36817;&#24405;&#21046;&#30340;&#38190;&#30424;&#23439;
+  C-u3C-xe &#37325;&#22797;3&#27425;&#26368;&#36817;&#24405;&#21046;&#30340;&#38190;&#30424;&#23439;
+  C-u0C-xe &#37325;&#22797;&#26080;&#25968;&#27425;&#26368;&#36817;&#24405;&#21046;&#30340;&#38190;&#30424;&#23439;,&#30452;&#21040;&#36935;&#21040;&#38169;&#35823;
+
+  &#28436;&#31034;&#31034;&#20363;&#65292;
+  &#26377;&#36825;&#26679;&#19968;&#27573;&#20869;&#23481;&#65292;&#23427;&#20204;&#20197;&#20882;&#21495;&#36827;&#34892;&#20998;&#38548;&#65292;&#29616;&#22312;&#25226;&#27599;&#19968;&#34892;&#20197;&#20882;&#21495;&#20998;&#38548;&#30340;&#26368;&#21518;&#19968;&#37096;&#20998;&#20869;
+  &#23481;&#21024;&#25481;
+  &#19979;&#38754;&#36827;&#34892;&#25805;&#20316;
+  &#24405;&#21046;&#23436;&#25104;
+  C-xe &#35843;&#29992;
+  &#20854;&#23454;&#21487;&#20197;C-u4C-xe &#35843;&#29992;4&#27425;&#21363;&#21487;
+  &#22235;&#27425;&#35843;&#29992;
+<span class="org-block-begin-line">#+begin_quote
+</span>root:x:0:
+bin:x:1:
+daemon:x:2:
+sys:x:3:
+adm:x:4:<span class="org-meta-line">
+</span><span class="org-block-end-line">#+end_quote
+</span>
+  &#20998;&#26512;&#65306;
+   1 &#25226;&#20809;&#26631;&#31227;&#21160;&#21040;&#31532;&#19968;&#34892;&#30340;&#26411;&#23614;
+     M-&lt;   (&#23454;&#38469;&#26159;Shift-Alt+,) (beginning-of-buffer) &#20989;&#25968;&#65292;&#36339;&#21040;&#31532;&#19968;&#34892;
+     C-e    (Control-e)       (move-end-of-line)  &#31227;&#21160;&#21040;&#34892;&#23614;
+   2 &#24320;&#22987;&#24405;&#21046;&#38190;&#30424;&#23439; C-x(        (kmacro-start-macro)  
+      C-backspace              (backward-kill-word) &#21024;&#38500;&#20809;&#26631;&#21069;&#30340;&#19968;&#20010;&#21333;&#35789;
+      C-n                      (next-line)          &#20809;&#26631;&#31227;&#21160;&#21040;&#19979;&#19968;&#34892;
+      C-e                       (move-end-of-line)  &#31227;&#21160;&#21040;&#34892;&#23614;
+      &#27880;&#24847;&#24320;&#22987;&#24405;&#21046;&#30340;&#26102;&#20505;&#20809;&#26631;&#25152;&#22788;&#30340;&#20301;&#32622;&#65292;&#19982;&#24405;&#21046;&#32467;&#26463;&#21518;&#25152;&#22788;&#30340;&#20301;&#32622;&#24212;&#35813;&#30456;&#20284; ,&#25165;
+     &#33021;&#20351;&#24405;&#21046;&#30340;&#20869;&#23481;&#22810;&#27425;&#25191;&#34892;&#21518;&#26080;&#35823; (&#27604;&#22914;&#27492;&#22788;&#22343;&#22788;&#20110;&#27599;&#34892;&#30340;&#26411;&#23614;) 
+   3 &#32467;&#26463;&#24405;&#21046;&#38190;&#30424;&#23439; C-x)        (kmacro-end-macro)
+</pre>
+  </body>
+</html>

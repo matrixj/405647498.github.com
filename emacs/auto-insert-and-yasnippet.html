@@ -3,14 +3,14 @@
                "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="zh" xml:lang="zh">
 <head>
-<title>一个人的狂欢</title>
+<title>yasnippet ,Auto Insert mode整合</title>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
-<meta name="title" content="一个人的狂欢"/>
+<meta name="title" content="yasnippet ,Auto Insert mode整合"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2011-06-04 星期六"/>
+<meta name="generated" content="2011-06-03 星期五"/>
 <meta name="author" content="孤峰独秀"/>
-<meta name="description" content=""/>
-<meta name="keywords" content=""/>
+<meta name="description" content="Emacs 实现auto insert 时整合yasnippet 的模版功能"/>
+<meta name="keywords" content="Emacs yasnippet auto insert "/>
 <style type='text/css'>
        body {
     background-color: #E5E5E5;
@@ -942,15 +942,15 @@ img {
 }
 
     </style>
-<link rel="stylesheet" type="text/css" href="style/emacs.css" />
-<script type='text/javascript' src='js/emacs.js'> </script>
+<link rel="stylesheet" type="text/css" href="../style/emacs.css" />
+<script type='text/javascript' src='../js/emacs.js'> </script>
 
 </head>
 <body>
 <div id="org-div-home-and-up" style="text-align:right;font-size:70%;white-space:nowrap;">
- <a accesskey="h" href="sitemap.html"> 站点地图 </a>
+ <a accesskey="h" href="../sitemap.html"> 站点地图 </a>
  |
- <a accesskey="H" href="index.html"> 首页 </a>
+ <a accesskey="H" href="../index.html"> 首页 </a>
 </div>
 
 <div id="preamble">
@@ -958,59 +958,190 @@ img {
 </div>
 
 <div id="content">
-<h1 class="title">一个人的狂欢</h1>
+<h1 class="title">yasnippet ,Auto Insert mode整合</h1>
 
 
-<div id='logo-img' ><a  href='index.html'>▇█▓▒░◕~◕░▒▓█▇</a></div>
+<div id='logo-img' ><a  href='../index.html'>▇█▓▒░◕~◕░▒▓█▇</a></div>
 
 <div id='logo-text'>
   <a href='#' ><span align="left">░◕~◕░</span></a>
 </div>
 
 
+<p>
+auto-insert 是GNU/Emacs自带的一个功能，它可以实现当你新建一个文件的时候，自动
+在这个新建的文件里插入相应的内容，比如你新建一个c源文件的时候它自动加入这样一
+段代码：
+</p>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
 <ul>
-<li>首页还未做好，先看<a href="sitemap.html">站点地图</a>吧
-</li>
-<li><a href="about.html">About</a>
-</li>
+<li><a href="#sec-1">1 c模版代码1</a></li>
+<li><a href="#sec-2">2 启用Auto Insert 的配置代码</a></li>
+<li><a href="#sec-3">3 将auto-insert-mode与yasnippet 进行整合的代码</a></li>
+<li><a href="#sec-4">4 Yasnippet 格式的模版</a></li>
 </ul>
+</div>
+</div>
+
+<div id="outline-container-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> c模版代码1</h2>
+<div class="outline-text-2" id="text-1">
 
 
+
+
+<pre class="src src-c"><span class="org-preprocessor">#include</span> <span class="org-string">&lt;stdio.h&gt;</span>
+
+<span class="org-type">int</span> <span class="org-function-name">main</span>(<span class="org-type">void</span>){
+  <span class="org-keyword">return</span> 0;
+}
+</pre>
+
+<p>
+auto-insert 会根据你所新建文件的后缀名或major mode种类决定插入哪个模版文件。要
+实现上述功能 ，只需要在你Emacs的配置文件中加入似类如下的代码
+</p></div>
+
+</div>
+
+<div id="outline-container-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> 启用Auto Insert 的配置代码</h2>
+<div class="outline-text-2" id="text-2">
+
+
+
+
+<pre class="src src-emacs-lisp"><span class="org-comment-delimiter">;;</span><span class="org-comment">&#39318;&#20808;&#36825;&#21477;&#35805;&#35774;&#32622;&#19968;&#20010;&#30446;&#24405;&#65292;&#20320;&#30340;auto-insert &#30340;&#27169;&#29256;&#25991;&#20214;&#20250;&#23384;&#25918;&#22312;&#36825;&#20010;&#30446;&#24405;&#20013;&#65292;</span>
+(<span class="org-function-name">setq-default</span> auto-insert-directory <span class="org-string">"~/.emacs.d/auto-insert/"</span>)
+(auto-insert-mode)  <span class="org-comment-delimiter">;;; </span><span class="org-comment">&#21551;&#29992;auto-insert</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">&#40664;&#35748;&#24773;&#20917;&#19979;&#25554;&#20837;&#27169;&#29256;&#21069;&#20250;&#24490;&#38382;&#20320;&#35201;&#19981;&#35201;&#33258;&#21160;&#25554;&#20837;&#65292;&#36825;&#37324;&#35774;&#32622;&#20026;&#19981;&#24517;&#35810;&#38382;&#65292;</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">&#22312;&#26032;&#24314;&#19968;&#20010;org&#25991;&#20214;&#26102;&#65292;&#33258;&#21160;&#25554;&#20837;`</span><span class="org-comment"><span class="org-constant">auto-insert-directory</span></span><span class="org-comment">'&#30446;&#24405;&#19979;&#30340;`org-auto-insert`&#25991;&#20214;&#20013;&#30340;&#20869;&#23481;</span>
+(<span class="org-function-name">setq</span> auto-insert-query <span class="org-constant">nil</span>) 
+(define-auto-insert <span class="org-string">"\\.org"</span> <span class="org-string">"org-auto-insert"</span>)
+<span class="org-comment-delimiter">;;</span><span class="org-comment">&#36825;&#20010;&#23601;&#26159;&#26032;&#24314;&#20197;.c &#32467;&#23614;&#30340;C&#25991;&#20214;&#26102;&#65292;&#20250;&#33258;&#21160;&#25554;&#20837;c-auto-insert&#25991;&#20214;&#20013;&#30340;&#20869;&#23481;</span>
+(define-auto-insert <span class="org-string">"\\.c"</span> <span class="org-string">"c-auto-insert"</span>)
+</pre>
+
+<p>
+下面要做在只需要在~/.emacs.d/auto-insert/c-auto-insert 文件中插入上面提到的<a href="#sec-1">c模 版代码1</a>建好~/.emacs.d/auto-insert/c-auto-insert 文件后，用Emacs新建 一个c文
+件，你就会发现你新建的文件中已经包含上面那段c代码片段了。故事并没有到此结束 ，
+写到这里，还一直没yasnippet什么事呢.假如我想在创建这个c文件的时候，在文件开头
+插入文件创建的时间，作者的姓名，又或者是这个刚刚创建的文件的名称，其格式大概如
+下
+</p>
+
+
+<pre class="src src-c"><span class="org-comment-delimiter">//</span><span class="org-comment">file name : hellworld.c</span>
+<span class="org-comment-delimiter">//</span><span class="org-comment">created at: 2011-11-11 11:11:11</span>
+<span class="org-comment-delimiter">//</span><span class="org-comment">author: &#29233;&#35841;&#35841;</span>
+
+<span class="org-preprocessor">#include</span> <span class="org-string">&lt;stdio.h&gt;</span>
+
+<span class="org-type">int</span> <span class="org-function-name">main</span>(<span class="org-type">void</span>){
+  <span class="org-keyword">return</span> 0;
+}
+</pre>
+
+<p>
+这个作者姓名或许你可以硬编码到这个模版文件中，因为毕竟只有你自己在用你的Emacs
+,可是这个创建时间，及文件名你就很难把它办到了，当然EmacsWiki上介绍
+<a href="http://www.emacswiki.org/emacs/AutoInsertMode">AutoInSertMode</a>的页面上有解决这个问题的办法 ，但是它针对上面提到的每个问题都要
+写一个elisp函数来实现其功能。很明显，易用性、扩展性差了点。而讲到模版功能，相
+信在Emacs中可用的模版功能，目前可以说<a href="http://code.google.com/p/yasnippet/">yasnippet</a> 算得上是最强大的了。
+将这两者结合来用，自然再合适不过了。
+</p></div>
+
+</div>
+
+<div id="outline-container-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> 将auto-insert-mode与yasnippet 进行整合的代码</h2>
+<div class="outline-text-2" id="text-3">
+
+
+
+
+<pre class="src src-emacs-lisp">(<span class="org-keyword">defadvice</span> <span class="org-function-name">auto-insert</span>  (around yasnippet-expand-after-auto-insert activate)
+  <span class="org-doc">"expand auto-inserted content as yasnippet templete,</span>
+<span class="org-doc">  so that we could use yasnippet in autoinsert mode"</span>
+  (<span class="org-keyword">let</span> ((is-new-file (<span class="org-keyword">and</span> (<span class="org-keyword">not</span> buffer-read-only)
+                          (<span class="org-keyword">or</span> (eq this-command 'auto-insert)
+                              (<span class="org-keyword">and</span> auto-insert (bobp) (eobp))))))
+    ad-do-it
+    (<span class="org-keyword">let</span> ((old-point-max (point-max)))
+      (<span class="org-keyword">when</span> is-new-file
+        (goto-char old-point-max)
+        (yas/expand-snippet (buffer-substring-no-properties (point-min) (point-max)))
+        (delete-region (point-min) old-point-max)
+        )
+      )
+    )
+  )
+</pre>
+
+<p>
+将这段代码放到<a href="#sec-2">启用Auto Insert 的配置代码</a> 的后面，即可。然后c-auto-insert 这个
+文件里的代码 就可以是yasnippet 支持的模版文件的代码了,上面提到的功能，
+可以这样实现
+</p></div>
+
+</div>
+
+<div id="outline-container-4" class="outline-2">
+<h2 id="sec-4"><span class="section-number-2">4</span> Yasnippet 格式的模版</h2>
+<div class="outline-text-2" id="text-4">
+
+
+
+
+<pre class="src src-c"><span class="org-comment-delimiter">//</span><span class="org-comment">file name : `(buffer-name)`</span>
+<span class="org-comment-delimiter">//</span><span class="org-comment">created at: `(format-time-string "%c")`</span>
+<span class="org-comment-delimiter">//</span><span class="org-comment">author:  `user-full-name`</span>
+
+<span class="org-preprocessor">#include</span> <span class="org-string">&lt;stdio.h&gt;</span>
+
+<span class="org-type">int</span> <span class="org-function-name">main</span>(<span class="org-type">void</span>){
+  <span class="org-keyword">return</span> 0;
+}
+</pre>
 
 
 <div id='my-src'>
-<div id='org-src'><a href='src/index.org'>src</a></div>
-<div id='htmlized-src'><a href='htmlized-src/index.org.html'>htmlized-src</a></div>
+<div id='org-src'><a href='../src/emacs/auto-insert-and-yasnippet.org'>src</a></div>
+<div id='htmlized-src'><a href='../htmlized-src/emacs/auto-insert-and-yasnippet.org.html'>htmlized-src</a></div>
 </div>
 <div id='tags'><span id='tags-title'>Tags:</span><br />
 <p>
-    <a href="tags/@SVN.html">@SVN</a>
-    <a href="tags/@perl.html">@perl</a>
-    <a href="tags/@Java.html">@Java</a>
-    <a href="tags/@Mysql.html">@Mysql</a>
-    <a href="tags/@Erlang.html">@Erlang</a>
-    <a href="tags/@SQL.html">@SQL</a>
-    <a href="tags/@DB.html">@DB</a>
-    <a href="tags/@Oracle.html">@Oracle</a>
-    <a href="tags/@Ediff.html">@Ediff</a>
-    <a href="tags/@Git.html">@Git</a>
-    <a href="tags/@Cedet.html">@Cedet</a>
-    <a href="tags/@C-C++.html">@C-C++</a>
-    <a href="tags/@Daily.html">@Daily</a>
-    <a href="tags/@Eclipse.html">@Eclipse</a>
-    <a href="tags/@AutoHotKey.html">@AutoHotKey</a>
-    <a href="tags/@Windows.html">@Windows</a>
-    <a href="tags/@Linux.html">@Linux</a>
-    <a href="tags/@C.html">@C</a>
-    <a href="tags/@Emacs.html">@Emacs</a>
+    <a href="../tags/@SVN.html">@SVN</a>
+    <a href="../tags/@perl.html">@perl</a>
+    <a href="../tags/@Java.html">@Java</a>
+    <a href="../tags/@Mysql.html">@Mysql</a>
+    <a href="../tags/@Erlang.html">@Erlang</a>
+    <a href="../tags/@SQL.html">@SQL</a>
+    <a href="../tags/@DB.html">@DB</a>
+    <a href="../tags/@Oracle.html">@Oracle</a>
+    <a href="../tags/@Ediff.html">@Ediff</a>
+    <a href="../tags/@Git.html">@Git</a>
+    <a href="../tags/@Cedet.html">@Cedet</a>
+    <a href="../tags/@C-C++.html">@C-C++</a>
+    <a href="../tags/@Daily.html">@Daily</a>
+    <a href="../tags/@Eclipse.html">@Eclipse</a>
+    <a href="../tags/@AutoHotKey.html">@AutoHotKey</a>
+    <a href="../tags/@Windows.html">@Windows</a>
+    <a href="../tags/@Linux.html">@Linux</a>
+    <a href="../tags/@C.html">@C</a>
+    <a href="../tags/@Emacs.html">@Emacs</a>
 </p>
 
 
 </div>
 </div>
+</div>
+</div>
 
 <div id="postamble">
-<p class="date">Date: 2011-06-04 星期六</p>
+<p class="date">Date: 2011-06-03 星期五</p>
 <p class="author">Author: 孤峰独秀</p>
 <p class="creator">Org version 7.8.03 with Emacs version 24</p>
 

@@ -1,0 +1,26 @@
+# -*- coding:utf-8 -*-
+
+#+TITLE: Tag: @C
+
+#+LANGUAGE:  zh
+   + [[file:../c/x86.org][x86.汇编的一些知识]]
+   + [[file:../c/sth.org][c拾遗]]
+   + [[file:../c/right-left-rule.org][c里的变量或函数或数组的声明的解析,先右后左法则]]
+   + [[file:../c/register.org][汇编 寄存器]]
+   + [[file:../c/qsort.org][qsort 与函数指针 ]]
+   + [[file:../c/printf.org][格式化输出]]
+   + [[file:../c/malloc.org][动态内在分配]]
+   + [[file:../c/macro.org][c中的宏]]
+   + [[file:../c/int.org][数值转换]]
+   + [[file:../c/fscanf.org][fscanf示例]]
+   + [[file:../c/fread_fwrite_int.org][读写二进制文件,读写int]]
+   + [[file:../c/error_log.org][可变参数实现的error 日志函数]]
+   + [[file:../c/errno_perror.org][errno_perror.org]]
+   + [[file:../c/concat.org][concat()可变长度参数的实现]]
+   + [[file:../c/cast.org][强制类型转换]]
+   + [[file:../c/c_assemble.org][c与汇编]]
+   + [[file:../c/bit.org][二进制，int 的与或非、移位操作]]
+   + [[file:../c/bfs_maze.org][queue与广度优先算法与迷宫寻路]]
+   + [[file:../c/IO.org][IO.org]]
+   + [[file:../Linux/ext2.org][ext2文件系统]]
+   + [[file:../Linux/ctags.org][ctags.org]]

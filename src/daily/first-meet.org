@@ -1,0 +1,21 @@
+# -*- coding:utf-8 -*-
+#+LANGUAGE:  zh
+#+TITLE:     人生若只如初见
+#+AUTHOR:    孤峰独秀
+#+EMAIL:     jixiuf@gmail.com
+#+DATE:      2011-06-03 星期五
+#+OPTIONS:   H:2 num:nil toc:t \n:t @:t ::t |:t ^:t -:t f:t *:t <:t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc
+#+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
+#+EXPORT_SELECT_TAGS: export
+#+EXPORT_EXCLUDE_TAGS: noexport
+#+FILETAGS: @Daily
+                 人生若只如初见，
+                 何事秋风悲画扇。
+                 等闲变却故人心，
+                 却道故人心易变!
+                 
+                 骊山语罢清宵半，
+                 泪雨零铃终不怨。
+                 何如薄幸锦衣郎，
+                 比翼连枝当日愿! 

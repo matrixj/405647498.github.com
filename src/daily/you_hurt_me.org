@@ -1,0 +1,51 @@
+# -*- coding:utf-8 -*-
+#+LANGUAGE:  zh
+#+TITLE:    你伤了他的骄傲
+#+AUTHOR:    孤峰独秀
+#+EMAIL:     jixiuf@gmail.com
+#+DATE:     2011-06-25 星期六
+#+DESCRIPTION: 你伤了他的骄傲
+#+KEYWORDS: 你若无心我便休
+#+OPTIONS:   H:2 num:nil toc:t \n:t @:t ::t |:t ^:t -:t f:t *:t <:t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc
+#+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
+#+EXPORT_SELECT_TAGS: export
+#+EXPORT_EXCLUDE_TAGS: noexport
+#+FILETAGS: @Daily
+
+* 你若无心我便休
+                张若虚
+                
+你若无心我便休，青山只认白云俦[fn:1]。
+/飞泉落韵怡然夏，飘叶成诗好个秋；/ 
+十五情形怜 /月冷/ ，三千愿望对星流。
+前尘影事皆如幻，浩气当初贯斗牛。
+
+巫山原属古追求，你若无心我便休。
+冬雪寒江抛直钓，春潮野渡泊孤舟；
+落花成土多真爱，飞叶随风有至愁。
+许是今生缘未了，还从梦里记明眸。
+
+意趣曾经慕十洲，云笺封月遣谁邮？
+缘如有梦情长在，你若无心我便休。
+俗侣花间蜂又蝶，仙朋波面鹭和鸥。
+至今尚羡袈裟客，竹杖芒鞋任远游。
+
+为谁消瘦为谁忧？二月桃花五月榴。
+燕舞莺歌翻寂寞，凤衾鸳枕忆温柔。
+/水因有性山长在，你若无心我便休。/
+红泪笺成何处与？天涯渺渺路悠悠。
+
+清水寒潭落叶浮，忍将往事下眉头。
+纵然桂魄都圆缺，况复萍踪不去留？
+孤枕偏生蝴蝶梦，吟鞋怕上凤凰楼。
+此情应是长相守，你若无心我便休。
+
+* 相关链接
+http://blog.sina.com.cn/s/blog_40e28ebf0100086r.html
+http://book.douban.com/review/4124115/
+
+
+* Footnotes
+
+[fn:1] 伙伴

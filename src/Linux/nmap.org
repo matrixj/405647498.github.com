@@ -1,0 +1,24 @@
+# -*- coding:utf-8 -*-
+#+LANGUAGE:  zh
+#+TITLE:     nmap.org
+#+AUTHOR:    纪秀峰
+#+EMAIL:     jixiuf@gmail.com
+#+DATE:     2012-10-03 三
+#+DESCRIPTION:nmap.org
+#+KEYWORDS:
+#+OPTIONS:   H:2 num:nil toc:t \n:t @:t ::t |:t ^:nil -:t f:t *:t <:t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil
+#+FILETAGS:
+*** IP
+ip 地址范围 192.168.1.0/24
+          192.168.1.1-254
+*** Port
+指定端口 : -p80 -p1-1024
+
+*** -s 开头的 表示扫描
+  | -sT | 扫描Tcp连接 |
+  | -sU | 扫描Udp连接 |
+  | -sP | Ping扫描    |
+  |     |             |
+扫描tcp连接
+nmap -sT 192.168.1.101

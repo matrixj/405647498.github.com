@@ -1,0 +1,1419 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+               "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh" xml:lang="zh">
+<head>
+<title>spring.rnc的作成</title>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+<meta name="title" content="spring.rnc的作成"/>
+<meta name="generator" content="Org-mode"/>
+<meta name="generated" content="2011-10-18 二"/>
+<meta name="author" content="纪秀峰"/>
+<meta name="description" content="spring.rnc的作成"/>
+<meta name="keywords" content="spring rnc trang rngrnc nxml emacs"/>
+<style type='text/css'>
+       body {
+    background-color: #E5E5E5;
+	scrollbar-face-color: #DEE3E7;
+	scrollbar-highlight-color: #FFFFFF;
+	scrollbar-shadow-color: #DEE3E7;
+	scrollbar-3dlight-color: #D1D7DC;
+	scrollbar-arrow-color:  #006699;
+	scrollbar-track-color: #EFEFEF;
+	scrollbar-darkshadow-color: #98AAB1;
+    /* background-color: #999966;  */
+    margin: 0em;
+}
+
+h1 {
+    font-size: 2.0em;
+    margin-top: 1.0em;
+    margin-bottom: 0.3em;
+}
+h2 {
+    font-size: 1.5em;
+    margin-top: 2.4em;
+    margin-bottom: 0.3em;
+}
+h3 {
+    font-size: 1.25em;
+    margin-top: 1.25em;
+    margin-bottom: 0.3em;
+}
+
+
+div#content {
+    font-family: Times, serif;
+    border-left: double #333300 3mm;
+    border-right: double #333300 3mm;
+    letter-spacing: 0.075em;
+    line-height: 1.4;
+    margin: 0em auto;
+    padding: 2em;
+    width: 92%;
+    height:100%; 
+    min-height:600px;           /*firefox do'nt support height:100% ,so*/
+ 
+}
+/* #table-of-contents { */
+/* 	font-size: 75%; */
+/* 	line-height: 1.4em; */
+/* 	position: fixed; */
+/* 	display: block; */
+/* 	left: -20px; */
+/* 	top: 5%; */
+/* 	width: 250px; */
+/* 	min-height:60px; */
+/* 	max-height:95%; */
+/* 	overflow:hidden; */
+/*     white-space:nowrap; */
+/* } */
+
+#org-div-home-and-up{
+	position: fixed;
+	display: block;
+	right: 18px;
+	top: 5px;
+	overflow:auto;
+    }
+#org-src{
+	position: fixed;
+	display: block;
+	right: 18px;
+	top: 20px;
+	overflow:hidden;
+    }
+#htmlized-src{
+	position: fixed;
+	display: block;
+	right: 54px;
+	top: 20px;
+	overflow:hidden;
+    }
+#table-of-contents h2 {
+	display:none;
+}
+
+#logo-text{
+	position: fixed;
+	display: block;
+	right: 16px;
+	bottom: 3px;
+	overflow:hidden;
+}
+#logo-img{
+    font-size: 60%;
+	position: fixed;
+	display: block;
+    left: 16px;
+	top: 3px;
+    }
+div#tags {
+	font-size: 75%;
+    text-align:right;
+	/* line-height: 1.4em; */
+	position: fixed;
+	display: block;
+	right: 40px;
+	top: 20%;
+	width: 90px;
+	/* min-height:60px; */
+	max-height:95%;
+	/* overflow:visible; */
+    /* white-space:pre-wrap; */
+}
+
+.title {
+    text-align:center;
+	padding-bottom: 7px;
+	margin-bottom: 20px;
+	border-bottom: 1px solid #222;
+}
+ a:link,a:active,a:visited { color : #006699; } 
+ a:hover		{ text-decoration: underline; color : #DD6900; } 
+
+.todo {color: #990000;}
+.done {color: #006666;}
+.timestamp-kwd {color: #444;}
+.tag {color: #DDD; font-size: 70%; font-weight: 500;}
+
+table {border: none;
+       width:90%;
+      }
+th	{
+	background-color: #006699; 
+}
+td	{
+    padding: .1em .7em .1em .3em;
+	background-color: Gainsboro
+}
+
+
+code {
+font-family: Andale Mono, Courier New, Courier, sans-serif; font-size: 12px; line-height: 14px; color: #0000A0;
+	background-color: #FAFAFA; border: #D1D7DC; border-style: solid;
+	border-left-width: 1px; border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px
+}
+
+/* pre { */
+/* 	border: 1px solid #555; */
+/* 	background: #EEEEEE; */
+/* 	font-size: 9pt; */
+/* 	padding: 1em; */
+/* } */
+pre.src {
+	border: 1px solid #555;
+	background:#0c1021;
+    /* background:#263111; */
+    color: #f7f8c6;
+	font-size: 10pt;
+    width:85%;
+	padding: 0em;
+	margin: 0;
+	width: 700px;
+	float: none;
+	clear: none;
+	line-height: 1.333;
+	text-align:left;
+    
+    /* overflow: scroll; */
+    max-height:500px;           /*IEXPLORE  don't support max-height*/
+    _height:expression(this.scrollHeight > 300 ? "300px" : "auto");
+    min-height:50px;
+    max-width:700px;
+    min-width:700px;
+    overflow-x:auto;
+    overflow-y:auto;
+}
+blockquote {
+	 border: #D1D7DC;
+     border-style: solid;
+	border-left-width: 1px;
+    border-top-width: 1px;
+    border-right-width: 1px;
+    border-bottom-width: 1px
+    
+    color: #444444;
+    line-height: 125%;
+	border: 1px solid #555;
+    background-color: #FAFAFA;    
+    width:95%;
+	padding: 1em;
+	margin: 0;
+	float: none;
+	clear: none;
+	text-align:left;
+    font-style:italic;
+    
+    /* overflow: scroll; */
+    max-height:300px;           /*IEXPLORE  don't support max-height*/
+    _height:expression(this.scrollHeight > 300 ? "300px" : "auto");
+    min-height:20px;
+    max-width:700px;
+    min-width:700px;
+    overflow-x:auto;
+    overflow-y:auto;
+}
+
+.org-function-name {
+    /* font-lock-function-name-face */
+    /* color: #0000ff; */
+     color: #87cefa;
+     font-stretch: normal;
+     text-decoration: none;
+}
+
+.org-keyword {
+    /* font-lock-keyword-face */
+    color: #00ffff;
+    text-decoration: none;
+    /* color: #a020f0; */
+}
+.org-doc
+ { color: #ffa07a;
+   text-decoration: none;
+ }
+p.author{
+    font-size:80%;
+    color:#556b2f;
+    font-style:italic;
+    position:fixed;
+    left:10px;
+    bottom:40px;
+}
+p.date{
+    font-size:80%;
+    color:#556b2f;
+    font-style:italic;
+    position:fixed;
+    left:10px;
+    bottom:0px;
+}
+p.creator{
+    font-size:80%;
+    color:#556b2f;
+    font-style:italic;
+    position:fixed;
+    left:10px;
+    bottom:20px;
+}
+
+img {
+    display:inline;
+	border: none;
+    float:none;
+    clear:none;
+    left:10px;
+}
+
+.share img {
+	opacity: .4;
+	-moz-opacity: .4;
+	filter: alpha(opacity=40);
+}
+
+.share img:hover {
+	opacity: 1;
+	-moz-opacity: 1;
+	filter: alpha(opacity=100);
+}
+
+.org-info-search-highlight
+{
+	background-color:#adefef; /* same color as emacs default */
+	color:#000000;
+	font-weight:bold;
+}
+
+.org-bbdb-company {
+    /* bbdb-company */
+    font-style: italic;
+}
+.org-bbdb-field-name {
+}
+.org-bbdb-field-value {
+}
+.org-bbdb-name {
+    /* bbdb-name */
+    text-decoration: underline;
+}
+.org-bold {
+    /* bold */
+    font-weight: bold;
+}
+.org-bold-italic {
+    /* bold-italic */
+    font-weight: bold;
+    font-style: italic;
+}
+.org-border {
+    /* border */
+    background-color: #000000;
+}
+.org-buffer-menu-buffer {
+    /* buffer-menu-buffer */
+    font-weight: bold;
+}
+.org-builtin {
+    /* font-lock-builtin-face */
+    color: #da70d6;
+}
+.org-button {
+    /* button */
+    text-decoration: underline;
+}
+.org-c-nonbreakable-space {
+    /* c-nonbreakable-space-face */
+    background-color: #ff0000;
+    font-weight: bold;
+}
+.org-calendar-today {
+    /* calendar-today */
+    text-decoration: underline;
+}
+.org-comment {
+    /* font-lock-comment-face */
+    color: #b22222;
+}
+.org-comment-delimiter {
+    /* font-lock-comment-delimiter-face */
+    color: #b22222;
+}
+.org-constant {
+    /* font-lock-constant-face */
+    color: #5f9ea0;
+}
+.org-cursor {
+    /* cursor */
+    background-color: #000000;
+}
+.org-default {
+    /* default */
+    color: #000000;
+    background-color: #ffffff;
+}
+.org-diary {
+    /* diary */
+    color: #ff0000;
+}
+.org-escape-glyph {
+    /* escape-glyph */
+    color: #a52a2a;
+}
+.org-file-name-shadow {
+    /* file-name-shadow */
+    color: #7f7f7f;
+}
+.org-fixed-pitch {
+}
+.org-fringe {
+    /* fringe */
+    background-color: #f2f2f2;
+}
+.org-header-line {
+    /* header-line */
+    color: #333333;
+    background-color: #e5e5e5;
+}
+.org-help-argument-name {
+    /* help-argument-name */
+    font-style: italic;
+}
+.org-highlight {
+    /* highlight */
+    background-color: #b4eeb4;
+}
+.org-holiday {
+    /* holiday */
+    background-color: #ffc0cb;
+}
+.org-info-header-node {
+    /* info-header-node */
+    color: #a52a2a;
+    font-weight: bold;
+    font-style: italic;
+}
+.org-info-header-xref {
+    /* info-header-xref */
+    color: #0000ff;
+    text-decoration: underline;
+}
+.org-info-menu-header {
+    /* info-menu-header */
+    font-weight: bold;
+}
+.org-info-menu-star {
+    /* info-menu-star */
+    color: #ff0000;
+}
+.org-info-node {
+    /* info-node */
+    color: #a52a2a;
+    font-weight: bold;
+    font-style: italic;
+}
+.org-info-title-1 {
+    /* info-title-1 */
+    font-size: 172%;
+    font-weight: bold;
+}
+.org-info-title-2 {
+    /* info-title-2 */
+    font-size: 144%;
+    font-weight: bold;
+}
+.org-info-title-3 {
+    /* info-title-3 */
+    font-size: 120%;
+    font-weight: bold;
+}
+.org-info-title-4 {
+    /* info-title-4 */
+    font-weight: bold;
+}
+.org-info-xref {
+    /* info-xref */
+    color: #0000ff;
+    text-decoration: underline;
+}
+.org-isearch {
+    /* isearch */
+    color: #b0e2ff;
+    background-color: #cd00cd;
+}
+.org-italic {
+    /* italic */
+    font-style: italic;
+}
+.org-lazy-highlight {
+    /* lazy-highlight */
+    background-color: #afeeee;
+}
+.org-link {
+    /* link */
+    color: #0000ff;
+    text-decoration: underline;
+}
+.org-link-visited {
+    /* link-visited */
+    color: #8b008b;
+    text-decoration: underline;
+}
+.org-match {
+    /* match */
+    background-color: #ffff00;
+}
+.org-menu {
+}
+.org-message-cited-text {
+    /* message-cited-text */
+    color: #ff0000;
+}
+.org-message-header-cc {
+    /* message-header-cc */
+    color: #191970;
+}
+.org-message-header-name {
+    /* message-header-name */
+    color: #6495ed;
+}
+.org-message-header-newsgroups {
+    /* message-header-newsgroups */
+    color: #00008b;
+    font-weight: bold;
+    font-style: italic;
+}
+.org-message-header-other {
+    /* message-header-other */
+    color: #4682b4;
+}
+.org-message-header-subject {
+    /* message-header-subject */
+    color: #000080;
+    font-weight: bold;
+}
+.org-message-header-to {
+    /* message-header-to */
+    color: #191970;
+    font-weight: bold;
+}
+.org-message-header-xheader {
+    /* message-header-xheader */
+    color: #0000ff;
+}
+.org-message-mml {
+    /* message-mml */
+    color: #228b22;
+}
+.org-message-separator {
+    /* message-separator */
+    color: #a52a2a;
+}
+.org-minibuffer-prompt {
+    /* minibuffer-prompt */
+    color: #0000cd;
+}
+.org-mm-uu-extract {
+    /* mm-uu-extract */
+    color: #006400;
+    background-color: #ffffe0;
+}
+.org-mode-line {
+    /* mode-line */
+    color: #000000;
+    background-color: #bfbfbf;
+}
+.org-mode-line-buffer-id {
+    /* mode-line-buffer-id */
+    font-weight: bold;
+}
+.org-mode-line-highlight {
+}
+.org-mode-line-inactive {
+    /* mode-line-inactive */
+    color: #333333;
+    background-color: #e5e5e5;
+}
+.org-mouse {
+    /* mouse */
+    background-color: #000000;
+}
+.org-negation-char {
+}
+.org-next-error {
+    /* next-error */
+    background-color: #eedc82;
+}
+.org-nobreak-space {
+    /* nobreak-space */
+    color: #a52a2a;
+    text-decoration: underline;
+}
+.org-org-agenda-date {
+    /* org-agenda-date */
+    color: #0000ff;
+}
+.org-org-agenda-date-weekend {
+    /* org-agenda-date-weekend */
+    color: #0000ff;
+    font-weight: bold;
+}
+.org-org-agenda-restriction-lock {
+    /* org-agenda-restriction-lock */
+    background-color: #ffff00;
+}
+.org-org-agenda-structure {
+    /* org-agenda-structure */
+    color: #0000ff;
+}
+.org-org-archived {
+    /* org-archived */
+    color: #7f7f7f;
+}
+.org-org-code {
+    /* org-code */
+    color: #7f7f7f;
+}
+.org-org-column {
+    /* org-column */
+    background-color: #e5e5e5;
+}
+.org-org-column-title {
+    /* org-column-title */
+    background-color: #e5e5e5;
+    font-weight: bold;
+    text-decoration: underline;
+}
+.org-org-date {
+    /* org-date */
+    color: #a020f0;
+    text-decoration: underline;
+}
+.org-org-done {
+    /* org-done */
+    color: #228b22;
+    font-weight: bold;
+}
+.org-org-drawer {
+    /* org-drawer */
+    color: #0000ff;
+}
+.org-org-ellipsis {
+    /* org-ellipsis */
+    color: #b8860b;
+    text-decoration: underline;
+}
+.org-org-formula {
+    /* org-formula */
+    color: #b22222;
+}
+.org-org-headline-done {
+    /* org-headline-done */
+    color: #bc8f8f;
+}
+.org-org-hide {
+    /* org-hide */
+    color: #e5e5e5;
+}
+.org-org-latex-and-export-specials {
+    /* org-latex-and-export-specials */
+    color: #8b4513;
+}
+.org-org-level-1 {
+    /* org-level-1 */
+    color: #0000ff;
+}
+.org-org-level-2 {
+    /* org-level-2 */
+    color: #b8860b;
+}
+.org-org-level-3 {
+    /* org-level-3 */
+    color: #a020f0;
+}
+.org-org-level-4 {
+    /* org-level-4 */
+    color: #b22222;
+}
+.org-org-level-5 {
+    /* org-level-5 */
+    color: #228b22;
+}
+.org-org-level-6 {
+    /* org-level-6 */
+    color: #5f9ea0;
+}
+.org-org-level-7 {
+    /* org-level-7 */
+    color: #da70d6;
+}
+.org-org-level-8 {
+    /* org-level-8 */
+    color: #bc8f8f;
+}
+.org-org-link {
+    /* org-link */
+    color: #a020f0;
+    text-decoration: underline;
+}
+.org-org-property-value {
+}
+.org-org-scheduled-previously {
+    /* org-scheduled-previously */
+    color: #b22222;
+}
+.org-org-scheduled-today {
+    /* org-scheduled-today */
+    color: #006400;
+}
+.org-org-sexp-date {
+    /* org-sexp-date */
+    color: #a020f0;
+}
+.org-org-special-keyword {
+    /* org-special-keyword */
+    color: #bc8f8f;
+}
+.org-org-table {
+    /* org-table */
+    color: #0000ff;
+}
+.org-org-tag {
+    /* org-tag */
+    font-weight: bold;
+}
+.org-org-target {
+    /* org-target */
+    text-decoration: underline;
+}
+.org-org-time-grid {
+    /* org-time-grid */
+    color: #b8860b;
+}
+.org-org-todo {
+    /* org-todo */
+    color: #ff0000;
+}
+.org-org-upcoming-deadline {
+    /* org-upcoming-deadline */
+    color: #b22222;
+}
+.org-org-verbatim {
+    /* org-verbatim */
+    color: #7f7f7f;
+    text-decoration: underline;
+}
+.org-org-warning {
+    /* org-warning */
+    color: #ff0000;
+    font-weight: bold;
+}
+.org-outline-1 {
+    /* outline-1 */
+    color: #0000ff;
+}
+.org-outline-2 {
+    /* outline-2 */
+    color: #b8860b;
+}
+.org-outline-3 {
+    /* outline-3 */
+    color: #a020f0;
+}
+.org-outline-4 {
+    /* outline-4 */
+    color: #b22222;
+}
+.org-outline-5 {
+    /* outline-5 */
+    color: #228b22;
+}
+.org-outline-6 {
+    /* outline-6 */
+    color: #5f9ea0;
+}
+.org-outline-7 {
+    /* outline-7 */
+    color: #da70d6;
+}
+.org-outline-8 {
+    /* outline-8 */
+    color: #bc8f8f;
+}
+.org-preprocessor {
+    /* font-lock-preprocessor-face */
+    color: #da70d6;
+}
+.org-query-replace {
+    /* query-replace */
+    color: #b0e2ff;
+    background-color: #cd00cd;
+}
+.org-regexp-grouping-backslash {
+    /* font-lock-regexp-grouping-backslash */
+    font-weight: bold;
+}
+.org-regexp-grouping-construct {
+    /* font-lock-regexp-grouping-construct */
+    font-weight: bold;
+}
+.org-region {
+    /* region */
+    background-color: #eedc82;
+}
+.org-rmail-highlight {
+}
+.org-scroll-bar {
+    /* scroll-bar */
+    background-color: #bfbfbf;
+}
+.org-secondary-selection {
+    /* secondary-selection */
+    background-color: #ffff00;
+}
+.org-shadow {
+    /* shadow */
+    color: #7f7f7f;
+}
+.org-show-paren-match {
+    /* show-paren-match */
+    background-color: #40e0d0;
+}
+.org-show-paren-mismatch {
+    /* show-paren-mismatch */
+    color: #ffffff;
+    background-color: #a020f0;
+}
+.org-string {
+    /* font-lock-string-face */
+    color: #bc8f8f;
+}
+.org-texinfo-heading {
+    /* texinfo-heading */
+    color: #0000ff;
+}
+.org-tool-bar {
+    /* tool-bar */
+    color: #000000;
+    background-color: #bfbfbf;
+}
+.org-tooltip {
+    /* tooltip */
+    color: #000000;
+    background-color: #ffffe0;
+}
+.org-trailing-whitespace {
+    /* trailing-whitespace */
+    background-color: #ff0000;
+}
+.org-type {
+    /* font-lock-type-face */
+    color: #228b22;
+}
+.org-underline {
+    /* underline */
+    text-decoration: underline;
+}
+.org-variable-name {
+    /* font-lock-variable-name-face */
+    color: #b8860b;
+}
+.org-variable-pitch {
+}
+.org-vertical-border {
+}
+.org-warning {
+    /* font-lock-warning-face */
+    color: #ff0000;
+    font-weight: bold;
+}
+
+
+
+.logo-link {
+    position: fixed;
+    top: 10px;
+    left: 30px;
+}
+
+/* These style are only for IE: */
+
+* html {
+    overflow: hidden;
+    padding-bottom:0px;
+    margin:0px;
+}
+
+* html body {
+    height: 100%;
+    overflow:auto;
+    font-size: 100%;
+    margin: 0px 0px 0px 250px;
+    padding: 0px 10% 0px 0px;
+}
+/* 针对Ie ,好像因为iexplore 不认识position:fixed 所以没办法让
+   导航部分的显示固定在特定的位置，不随滚动条而滚动
+ */
+* html #table-of-contents {
+    position: absolute;
+    width:200px;
+    left:10px
+    /*
+      The evil IE-JavaScript hack :-) depends on Picture and y-distance.
+      Added to support small screens (Netbooks...).
+      */
+    top: expression( ( 30 + ( noValue = document.documentElement.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop ) ) + 'px' );
+    /* top: expression((document.body.clientHeight - 210) + "px"); */
+     /* height: expression((document.body.clientHeight - 210) + "px"); */
+}
+* html #org-div-home-and-up {
+    position: absolute;
+    width:200px;
+    right:25px;
+    /*
+      The evil IE-JavaScript hack :-) depends on Picture and y-distance.
+      Added to support small screens (Netbooks...).
+      */
+    /* top: expression( ( 10 + ( noValue = document.documentElement.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop ) ) + 'px' ); */
+    /* top: expression((document.body.clientHeight - 210) + "px"); */
+     /* height: expression((document.body.clientHeight - 210) + "px"); */
+}
+* html #org-src{
+    position: absolute;
+    width:25px;
+    right:20px;
+}
+* html #htmlized-src{
+    position: absolute;
+    width:120px;
+    right:20px;
+}
+
+* html p.author{
+    position: absolute;
+    width:125px;
+    left:20px;
+}
+* html p.date{
+    position: absolute;
+    width:225px;
+    left:20px;
+    bottom:0px;
+}
+* html p.creator{
+    position: absolute;
+    width:425px;
+    left:20px;
+    bottom:20px;
+}
+
+* html h1 {
+    margin-top:10px;
+}
+
+* html .logo-link {
+    position: absolute;
+    top: 10px;
+    left: 30px;
+}
+
+* html #logo-text{
+    font-size: 75%;
+	position: absolute;
+	display: block;
+	right: 10px;
+	bottom: 3px;
+	overflow:hidden;
+}
+ 
+ 
+* html div#tags {
+	font-size: 75%;
+	/* line-height: 1.4em; */
+	position: absolute;
+	display: block;
+	right: -2px;
+	top: 10%;
+	width: 150px;
+	/* min-height:60px; */
+	max-height:95%;
+	/* overflow:visible; */
+    /* white-space:pre-wrap; */
+}
+
+    </style>
+<link rel="stylesheet" type="text/css" href="../style/emacs.css" />
+<script type='text/javascript' src='../js/emacs.js'> </script>
+
+</head>
+<body>
+<div id="org-div-home-and-up" style="text-align:right;font-size:70%;white-space:nowrap;">
+ <a accesskey="h" href="../sitemap.html"> 站点地图 </a>
+ |
+ <a accesskey="H" href="../index.html"> 首页 </a>
+</div>
+
+<div id="preamble">
+
+</div>
+
+<div id="content">
+<h1 class="title">spring.rnc的作成</h1>
+
+
+<div id='logo-img' ><a  href='../index.html'>▇█▓▒░◕~◕░▒▓█▇</a></div>
+
+<div id='logo-text'>
+  <a href='#' ><span align="left">░◕~◕░</span></a>
+</div>
+
+<p>
+链接:<br/>
+<a href="http://jamsa.javaeye.com/blog/38202">http://jamsa.javaeye.com/blog/38202</a><br/>
+<a href="http://infohost.nmt.edu/tcc/help/pubs/nxml/schema-locating.html">http://infohost.nmt.edu/tcc/help/pubs/nxml/schema-locating.html</a><br/>
+<a href="http://infohost.nmt.edu/tcc/help/pubs/rnc/def-patterns.html">http://infohost.nmt.edu/tcc/help/pubs/rnc/def-patterns.html</a><br/>
+演示视频：<a href="http://screencast-repos.googlecode.com/files/emacs-can-do-what-nxml0springContext.mp4">http://screencast-repos.googlecode.com/files/emacs-can-do-what-nxml0springContext.mp4</a><br/>
+我提供的关于spring-3.0.rnc struts 等一些rnc文件  <a href="https://github.com/jixiuf/emacs_conf/tree/master/script/nxml">https://github.com/jixiuf/emacs_conf/tree/master/script/nxml</a><br/>
+关于如何作成spring-3.0.rnc<br/>
+因为spring-3.0 的applicationContext.xml 使用xsd进行约束.<br/>
+而要将xsd 转换成rnc 需要经过两步<br/>
+xsd  &ndash;&gt; rng &ndash;&gt;rnc<br/>
+先将xsd格式转换成rng格式,然后再转换在rnc<br/>
+由xsd 转换成rng 的过程可以通过rngconv来实现<br/>
+</p>
+<p><br/>
+<pre class="src src-sh">java -jar rngconv.jar spring-beans-3.0.xsd   &gt;spring-beans-3.0.rng
+</pre>
+
+而由rng转换成rnc 的过程可以通过trang来实现<br/>
+</p>
+<p><br/>
+<pre class="src src-sh">java -jar trang.jar  spring-beans-3.0.rng spring-beans-3.0.rnc
+</pre>
+
+
+如果一切都正常的话,那面上面这些已经足够了,但是实际情况总是会出一些小问题<br/>
+下面具体分说<br/>
+</p>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">下载trang.jar rngconv.jar</a></li>
+<li><a href="#sec-2">2找到这几个文件,放到同一个目录</a></li>
+<li><a href="#sec-3">具体操作</a></li>
+<li><a href="#sec-4">spring-beans-3.0.xsd 转换成spring-beans-3.0.rnc</a></li>
+<li><a href="#sec-5">如何编辑applicationContext.xml 文件时,自动用spring-beans-3.0.rnc 对其进行解析</a></li>
+<li><a href="#sec-6">spring-aop-3.0.xsd 转换成spring-aop-3.0.rnc</a></li>
+<li><a href="#sec-7">合并成一个spring.rnc</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-1" class="outline-2">
+<h2 id="sec-1">下载trang.jar rngconv.jar</h2>
+<div class="outline-text-2" id="text-1">
+
+<p>首先你先要下载trang.jar rngconv.jar 等几个jar 包,当然可能会有几个依赖的jar<br/>
+会一起用到,分别下载两个压缩包解压开找到jar 即可.<br/>
+</p></div>
+
+</div>
+
+<div id="outline-container-2" class="outline-2">
+<h2 id="sec-2">2找到这几个文件,放到同一个目录</h2>
+<div class="outline-text-2" id="text-2">
+
+
+<p><br/>
+<pre class="src src-sh">spring-aop-3.0.xsd
+spring-beans-3.0.xsd
+spring-context-3.0.xsd
+spring-jdbc-3.0.xsd
+spring-jee-3.0.xsd
+spring-jms-3.0.xsd
+spring-lang-3.0.xsd
+spring-mvc-3.0.xsd
+spring-oxm-3.0.xsd
+spring-task-3.0.xsd
+spring-tool-3.0.xsd
+spring-tx-3.0.xsd
+spring-util-3.0.xsd
+</pre>
+
+</p></div>
+
+</div>
+
+<div id="outline-container-3" class="outline-2">
+<h2 id="sec-3">具体操作</h2>
+<div class="outline-text-2" id="text-3">
+
+</div>
+
+</div>
+
+<div id="outline-container-4" class="outline-2">
+<h2 id="sec-4">spring-beans-3.0.xsd 转换成spring-beans-3.0.rnc</h2>
+<div class="outline-text-2" id="text-4">
+
+<p>  当运行这条命令时,<br/>
+</p>
+<p><br/>
+<pre class="src src-sh">java -jar rngconv.jar spring-beans-3.0.xsd   &gt;spring-beans-3.0.rng
+</pre>
+
+会出现这个错误<br/>
+</p>
+<p><br/>
+</p><blockquote>
+
+<p>"schemaLocation" attribute is required for "xsd:import" element, but is not specified<br/>
+  7:64@file:///tmp/spring-beans-3.0.xsd<br/>
+namespace "<a href="http://www.w3.org/XML/1998/namespace">http://www.w3.org/XML/1998/namespace</a>" is referenced but no schema definition of this namespace was found.<br/>
+  7:64@file:///tmp/spring-beans-3.0.xsd<br/>
+failed to load the grammar<br/>
+</p>
+</blockquote>
+
+
+<p><br/>
+解决办法是:<br/>
+打开spring-beans-3.0.xsd 注释掉下面这句,或者直接删除也可以<br/>
+</p><blockquote>
+
+<p>&lt;xsd:import namespace="<a href="http://www.w3.org/XML/1998/namespace"/">http://www.w3.org/XML/1998/namespace"/</a>&gt;<br/>
+</p>
+</blockquote>
+
+
+<p><br/>
+注意所有其他几个文件中的&lt;xsd:import /&gt;<br/>
+namespace指向<a href="http://www.w3.org/XML/1998/namespace地址的">http://www.w3.org/XML/1998/namespace地址的</a> import 都可以这样处<br/>
+理,但是不是指向这个地址的需要另作处理<br/>
+</p>
+<p><br/>
+再次运行这条命令,会成功生成rng文件<br/>
+</p>
+<p><br/>
+<pre class="src src-sh">&#28982;&#21518;&#29992;&#36825;&#26465;&#21629;&#20196;&#29983;&#25104; rnc&#25991;&#20214;
+  java -jar trang.jar  spring-beans-3.0.rng spring-beans-3.0.rnc
+</pre>
+
+对于spring-bean-.3.0.xsd转换成rnc 的步骤是最简单的.<br/>
+与此相同处理即可得到rnc  的是spring-tool-3.0.xsd<br/>
+因为它们不依赖其他几个xsd<br/>
+</p>
+<p><br/>
+</p></div>
+
+</div>
+
+<div id="outline-container-5" class="outline-2">
+<h2 id="sec-5">如何编辑applicationContext.xml 文件时,自动用spring-beans-3.0.rnc 对其进行解析</h2>
+<div class="outline-text-2" id="text-5">
+
+
+<p><br/>
+<pre class="src src-emacs-lisp">(<span class="org-keyword">eval-after-load</span> 'rng-loc
+  '(<span class="org-keyword">progn</span>
+     (add-to-list 'rng-schema-locating-files (expand-file-name <span class="org-string">"~/.emacs.d/script/nxml/schemas.xml"</span>))
+     ))
+(<span class="org-keyword">defun</span> <span class="org-function-name">nxml-mode-hook-fun</span> ()
+  <span class="org-comment-delimiter">;;</span><span class="org-comment">&#40664;&#35748;&#32465;&#23450;&#30340;&#38190;&#26159;`</span><span class="org-comment"><span class="org-constant">C-cC-sC-a</span></span><span class="org-comment">' ,&#23558;&#24403;&#21069;&#32534;&#36753;&#30340;&#25991;&#20214;&#19982;&#29305;&#23450;&#30340;rnc &#25991;&#20214;&#36827;&#34892;&#20851;&#32852;,&#21482;&#26377;</span>
+  <span class="org-comment-delimiter">;;</span><span class="org-comment">&#20851;&#32852;&#21518;&#30340;xml &#25165;&#21487;&#20197;&#35299;&#26512;&#20854;&#35821;&#27861;&#35268;&#21017;&#36827;&#34892;&#34917;&#20840;</span>
+  (<span class="org-keyword">require</span> '<span class="org-constant">rng-valid</span>)
+  (rng-auto-set-schema-and-validate)
+  )
+(<span class="org-function-name">add-hook</span> 'nxml-mode-hook 'nxml-mode-hook-fun)
+</pre>
+
+  将spring-beans-3.0.rnc   复制到 ~/.emacs.d/script/nxml/目录下,与<br/>
+  <a href="https://github.com/jixiuf/emacs_conf/tree/master/script/nxml">schemas.xml</a> 同目录<br/>
+然后就是修改 <a href="https://raw.github.com/jixiuf/emacs_conf/master/script/nxml/schemas.xml"> "~/.emacs.d/script/nxml/schemas.xml"</a>文件,<br/>
+然后在其中加入这样两句话,<br/>
+</p>
+<p><br/>
+<pre class="src src-xml"><span class="org-nxml-tag-delimiter">&lt;</span><span class="org-nxml-element-local-name">namespace</span> <span class="org-nxml-attribute-local-name">ns</span>=<span class="org-nxml-attribute-value-delimiter">"</span><span class="org-nxml-attribute-value">http://www.springframework.org/schema/beans</span><span class="org-nxml-attribute-value-delimiter">"</span> <span class="org-nxml-attribute-local-name">typeId</span>=<span class="org-nxml-attribute-value-delimiter">"</span><span class="org-nxml-attribute-value">Spring3.0</span><span class="org-nxml-attribute-value-delimiter">"</span> <span class="org-nxml-tag-slash">/</span><span class="org-nxml-tag-delimiter">&gt;</span>
+ <span class="org-nxml-tag-delimiter">&lt;</span><span class="org-nxml-element-local-name">typeId</span> <span class="org-nxml-attribute-local-name">id</span>=<span class="org-nxml-attribute-value-delimiter">"</span><span class="org-nxml-attribute-value">Spring3.0</span><span class="org-nxml-attribute-value-delimiter">"</span> <span class="org-nxml-attribute-local-name">uri</span>=<span class="org-nxml-attribute-value-delimiter">"</span><span class="org-nxml-attribute-value">spring-3.0.rnc</span><span class="org-nxml-attribute-value-delimiter">"</span><span class="org-nxml-tag-slash">/</span><span class="org-nxml-tag-delimiter">&gt;</span>
+</pre>
+
+
+<pre class="src src-xml"><span class="org-nxml-text">&#36825;&#19968;&#21477;&#31561;&#25928;&#20110;&#19978;&#38754;&#20004;&#21477;</span>
+<span class="org-nxml-text"> </span><span class="org-nxml-tag-delimiter">&lt;</span><span class="org-nxml-element-local-name">namespace</span> <span class="org-nxml-attribute-local-name">ns</span>=<span class="org-nxml-attribute-value-delimiter">"</span><span class="org-nxml-attribute-value">http://www.springframework.org/schema/beans</span><span class="org-nxml-attribute-value-delimiter">"</span>  <span class="org-nxml-attribute-local-name">uri</span>=<span class="org-nxml-attribute-value-delimiter">"</span><span class="org-nxml-attribute-value">spring-3.0.rnc</span><span class="org-nxml-attribute-value-delimiter">"</span> <span class="org-nxml-tag-slash">/</span><span class="org-nxml-tag-delimiter">&gt;</span>
+</pre>
+
+关于schemas.xml的格式详见:<br/>
+<a href="http://infohost.nmt.edu/tcc/help/pubs/nxml/schema-locating.html">http://infohost.nmt.edu/tcc/help/pubs/nxml/schema-locating.html</a><br/>
+因为applicationContext.xml含有这样一句话,所以它会首先使用  spring-3.0.rnc对<br/>
+文件进行解析<br/>
+</p>
+<p><br/>
+<pre class="src src-xml"><span class="org-nxml-tag-delimiter">&lt;</span><span class="org-nxml-element-local-name">beans</span> <span class="org-nxml-namespace-attribute-xmlns">xmlns</span>=<span class="org-nxml-namespace-attribute-value-delimiter">"</span><span class="org-nxml-namespace-attribute-value">http://www.springframework.org/schema/beans</span><span class="org-nxml-namespace-attribute-value-delimiter">"</span><span class="org-nxml-tag-delimiter">&gt;</span>
+</pre>
+
+
+当你打开一个 applicationContext.xml 时,<br/>
+会报错<br/>
+</p>
+<p><br/>
+<pre class="src src-emacs-lisp">Debugger entered--Lisp error: (<span class="org-warning">error</span> <span class="org-string">"Expected `}' but got `+'"</span>)
+  signal(<span class="org-warning">error</span> (<span class="org-string">"Expected `}' but got `+'"</span>))
+  error(<span class="org-string">"%s"</span> <span class="org-string">"Expected `}' but got `+'"</span>)
+  nxml-display-file-parse-error((rng-c-incorrect-schema <span class="org-string">"/tmp/spring-beans-3.0.rnc"</span> 743 <span class="org-string">"Expected `}' but got `+'"</span>))
+  rng-set-schema-file(<span class="org-string">"/tmp/spring-beans-3.0.rnc"</span>)
+  rng-set-schema-file-and-validate(<span class="org-string">"/tmp/spring-beans-3.0.rnc"</span>)
+  call-interactively(rng-set-schema-file-and-validate <span class="org-constant">nil</span> <span class="org-constant">nil</span>)
+</pre>
+
+或<br/>
+</p>
+<p><br/>
+<pre class="src src-emacs-lisp">Debugger entered--Lisp error: (<span class="org-warning">error</span> <span class="org-string">"Invalid grammar content"</span>)
+  signal(<span class="org-warning">error</span> (<span class="org-string">"Invalid grammar content"</span>))
+  error(<span class="org-string">"%s"</span> <span class="org-string">"Invalid grammar content"</span>)
+  nxml-display-file-parse-error((rng-c-incorrect-schema <span class="org-string">"/tmp/spring-beans-3.0.rnc"</span> 1627 <span class="org-string">"Invalid grammar content"</span>))
+  rng-set-schema-file(<span class="org-string">"/tmp/spring-beans-3.0.rnc"</span>)
+  rng-set-schema-file-and-validate(<span class="org-string">"/tmp/spring-beans-3.0.rnc"</span>)
+  call-interactively(rng-set-schema-file-and-validate <span class="org-constant">nil</span> <span class="org-constant">nil</span>)
+</pre>
+
+并在 spring-beans-3.0.rnc  中定位出错误来,<br/>
+大概定位在<br/>
+</p><blockquote>
+
+<p>(import | alias | bean)?+,<br/>
+</p>
+</blockquote>
+
+
+<p><br/>
+问题出在 "?+"这两个字符,将"?"删除,只留"+"号,保存后,<br/>
+回到 applicationContext.xml 文件中按下C-cC-sC-a<br/>
+又会出错,问题相同,删除相应问号后,应该就没问题了.估计直接将全文的"?+"替换为<br/>
+"+"就可以.<br/>
+</p>
+<p><br/>
+最后,在 编辑applicationContext.xml 时,按Control+Return 可以,补全出相应的属<br/>
+性名.<br/>
+</p></div>
+
+</div>
+
+<div id="outline-container-6" class="outline-2">
+<h2 id="sec-6">spring-aop-3.0.xsd 转换成spring-aop-3.0.rnc</h2>
+<div class="outline-text-2" id="text-6">
+
+<p>spring-aop-3.0.xsd比 spring-beans-3.0.xsd的处理要复杂一点<br/>
+</p>
+<p><br/>
+<pre class="src src-sh">java -jar rngconv.jar spring-aop-3.0.xsd   &gt;spring-aop-3.0.rng
+</pre>
+
+
+<pre class="src src-sh"><span class="org-string">"schemaLocation"</span> attribute is required for <span class="org-string">"xsd:import"</span> element, but is <span class="org-keyword">not</span> specified
+  7:64@http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+<span class="org-string">"schemaLocation"</span> attribute is required for <span class="org-string">"xsd:import"</span> element, but is <span class="org-keyword">not</span> specified
+  8:64@http://www.springframework.org/schema/tool/spring-tool-3.0.xsd
+namespace <span class="org-string">"http://www.w3.org/XML/1998/namespace"</span> is referenced but no schema definition of this namespace was found.
+  7:64@http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+failed to load the grammar
+</pre>
+
+解法:<br/>
+将其中的这两句<br/>
+</p>
+<p><br/>
+<pre class="src src-xml"><span class="org-nxml-tag-delimiter">&lt;</span><span class="org-nxml-element-prefix">xsd</span><span class="org-nxml-element-colon">:</span><span class="org-nxml-element-local-name">import</span> <span class="org-nxml-attribute-local-name">namespace</span>=<span class="org-nxml-attribute-value-delimiter">"</span><span class="org-nxml-attribute-value">http://www.springframework.org/schema/beans</span><span class="org-nxml-attribute-value-delimiter">"</span> <span class="org-nxml-attribute-local-name">schemaLocation</span>=<span class="org-nxml-attribute-value-delimiter">"</span><span class="org-nxml-attribute-value">http://www.springframework.org/schema/beans/spring-beans-3.0.xsd</span><span class="org-nxml-attribute-value-delimiter">"</span><span class="org-nxml-tag-slash">/</span><span class="org-nxml-tag-delimiter">&gt;</span>
+<span class="org-nxml-tag-delimiter">&lt;</span><span class="org-nxml-element-prefix">xsd</span><span class="org-nxml-element-colon">:</span><span class="org-nxml-element-local-name">import</span> <span class="org-nxml-attribute-local-name">namespace</span>=<span class="org-nxml-attribute-value-delimiter">"</span><span class="org-nxml-attribute-value">http://www.springframework.org/schema/tool</span><span class="org-nxml-attribute-value-delimiter">"</span> <span class="org-nxml-attribute-local-name">schemaLocation</span>=<span class="org-nxml-attribute-value-delimiter">"</span><span class="org-nxml-attribute-value">http://www.springframework.org/schema/tool/spring-tool-3.0.xsd</span><span class="org-nxml-attribute-value-delimiter">"</span><span class="org-nxml-tag-slash">/</span><span class="org-nxml-tag-delimiter">&gt;</span>
+</pre>
+
+换成:使用相对路径<br/>
+</p>
+<p><br/>
+<pre class="src src-xml"><span class="org-nxml-tag-delimiter">&lt;</span><span class="org-nxml-element-prefix">xsd</span><span class="org-nxml-element-colon">:</span><span class="org-nxml-element-local-name">import</span> <span class="org-nxml-attribute-local-name">namespace</span>=<span class="org-nxml-attribute-value-delimiter">"</span><span class="org-nxml-attribute-value">http://www.springframework.org/schema/beans</span><span class="org-nxml-attribute-value-delimiter">"</span> <span class="org-nxml-attribute-local-name">schemaLocation</span>=<span class="org-nxml-attribute-value-delimiter">"</span><span class="org-nxml-attribute-value">spring-beans-3.0.xsd</span><span class="org-nxml-attribute-value-delimiter">"</span> <span class="org-nxml-tag-slash">/</span><span class="org-nxml-tag-delimiter">&gt;</span>
+<span class="org-nxml-tag-delimiter">&lt;</span><span class="org-nxml-element-prefix">xsd</span><span class="org-nxml-element-colon">:</span><span class="org-nxml-element-local-name">import</span> <span class="org-nxml-attribute-local-name">namespace</span>=<span class="org-nxml-attribute-value-delimiter">"</span><span class="org-nxml-attribute-value">http://www.springframework.org/schema/tool</span><span class="org-nxml-attribute-value-delimiter">"</span> <span class="org-nxml-attribute-local-name">schemaLocation</span>=<span class="org-nxml-attribute-value-delimiter">"</span><span class="org-nxml-attribute-value">spring-tool-3.0.xsd</span><span class="org-nxml-attribute-value-delimiter">"</span> <span class="org-nxml-tag-slash">/</span><span class="org-nxml-tag-delimiter">&gt;</span>
+</pre>
+
+同时,不要忘了,将spring-tool-3.0.xsd文件中的 这句删掉<br/>
+</p>
+<p><br/>
+<pre class="src src-xml"><span class="org-nxml-tag-delimiter">&lt;</span><span class="org-nxml-element-prefix">xsd</span><span class="org-nxml-element-colon">:</span><span class="org-nxml-element-local-name">import</span> <span class="org-nxml-attribute-local-name">namespace</span>=<span class="org-nxml-attribute-value-delimiter">"</span><span class="org-nxml-attribute-value">http://www.w3.org/XML/1998/namespace</span><span class="org-nxml-attribute-value-delimiter">"</span><span class="org-nxml-tag-slash">/</span><span class="org-nxml-tag-delimiter">&gt;</span>
+</pre>
+
+除此之外,处理方法与spring-beans-3.0.xsd同,<br/>
+此次生成的rnc 文件,相对 spring-beans-3.0.rnc的优点是,不但可以补全像<br/>
+</p>
+<p><br/>
+<pre class="src src-xml"><span class="org-nxml-tag-delimiter">&lt;</span><span class="org-nxml-element-local-name">bean</span> <span class="org-nxml-attribute-local-name">id</span>=<span class="org-nxml-attribute-value-delimiter">"</span><span class="org-nxml-attribute-value">transactionManager</span><span class="org-nxml-attribute-value-delimiter">"</span> <span class="org-nxml-attribute-local-name">class</span>=<span class="org-nxml-attribute-value-delimiter">"</span><span class="org-nxml-attribute-value">org.springframework.orm.hibernate3.HibernateTransactionManager</span><span class="org-nxml-attribute-value-delimiter">"</span><span class="org-nxml-tag-delimiter">&gt;</span>
+    <span class="org-nxml-tag-delimiter">&lt;</span><span class="org-nxml-element-local-name">property</span> <span class="org-nxml-attribute-local-name">name</span>=<span class="org-nxml-attribute-value-delimiter">"</span><span class="org-nxml-attribute-value">sessionFactory</span><span class="org-nxml-attribute-value-delimiter">"</span><span class="org-nxml-tag-delimiter">&gt;</span>
+        <span class="org-nxml-tag-delimiter">&lt;</span><span class="org-nxml-element-local-name">ref</span> <span class="org-nxml-attribute-local-name">local</span>=<span class="org-nxml-attribute-value-delimiter">"</span><span class="org-nxml-attribute-value">sessionFactory</span><span class="org-nxml-attribute-value-delimiter">"</span><span class="org-nxml-tag-slash">/</span><span class="org-nxml-tag-delimiter">&gt;</span>
+    <span class="org-nxml-tag-delimiter">&lt;</span><span class="org-nxml-tag-slash">/</span><span class="org-nxml-element-local-name">property</span><span class="org-nxml-tag-delimiter">&gt;</span>
+<span class="org-nxml-tag-delimiter">&lt;</span><span class="org-nxml-tag-slash">/</span><span class="org-nxml-element-local-name">bean</span><span class="org-nxml-tag-delimiter">&gt;</span>
+</pre>
+
+ 这样的元素<br/>
+还可以补全带有aop前缀的元素<br/>
+</p>
+<p><br/>
+<pre class="src src-xml"><span class="org-nxml-tag-delimiter">&lt;</span><span class="org-nxml-element-prefix">aop</span><span class="org-nxml-element-colon">:</span><span class="org-nxml-element-local-name">config</span><span class="org-nxml-tag-delimiter">&gt;</span>
+    <span class="org-nxml-tag-delimiter">&lt;</span><span class="org-nxml-element-prefix">aop</span><span class="org-nxml-element-colon">:</span><span class="org-nxml-element-local-name">pointcut</span> <span class="org-nxml-attribute-local-name">id</span>=<span class="org-nxml-attribute-value-delimiter">"</span><span class="org-nxml-attribute-value">allManagerMethod</span><span class="org-nxml-attribute-value-delimiter">"</span> <span class="org-nxml-attribute-local-name">expression</span>=<span class="org-nxml-attribute-value-delimiter">"</span><span class="org-nxml-attribute-value">execution (* org.jixiuf.drp.service.*.*(..))</span><span class="org-nxml-attribute-value-delimiter">"</span><span class="org-nxml-tag-slash">/</span><span class="org-nxml-tag-delimiter">&gt;</span>
+</pre>
+
+同样的道理, spring-context-3.0.rnc 可以补全如下元素<br/>
+</p>
+<p><br/>
+<pre class="src src-xml"><span class="org-nxml-tag-delimiter">&lt;</span><span class="org-nxml-element-prefix">context</span><span class="org-nxml-element-colon">:</span><span class="org-nxml-element-local-name">annotation-config</span> <span class="org-nxml-tag-slash">/</span><span class="org-nxml-tag-delimiter">&gt;</span>
+ <span class="org-nxml-tag-delimiter">&lt;</span><span class="org-nxml-element-prefix">context</span><span class="org-nxml-element-colon">:</span><span class="org-nxml-element-local-name">component-scan</span> <span class="org-nxml-attribute-local-name">base-package</span>=<span class="org-nxml-attribute-value-delimiter">"</span><span class="org-nxml-attribute-value">org.jixiuf</span><span class="org-nxml-attribute-value-delimiter">"</span> <span class="org-nxml-tag-slash">/</span><span class="org-nxml-tag-delimiter">&gt;</span>
+</pre>
+
+但是,缺点是 spring-context-3.0.rnc spring-beans-3.0.rnc spring-aop-3.0.rnc<br/>
+三个文件不能同时使用<br/>
+,解决办法,就是将文章开头列出的几个文件,过行合并后,统一生成一个rnc文件<br/>
+</p>
+<p><br/>
+</p>
+<p><br/>
+</p></div>
+
+</div>
+
+<div id="outline-container-7" class="outline-2">
+<h2 id="sec-7">合并成一个spring.rnc</h2>
+<div class="outline-text-2" id="text-7">
+
+<p>  通过修改 spring-aop-3.0.xsd,来包含其他几个文件来实现,这样生成的<br/>
+  spring-aop-3.0.rnc 就包含了其他几个xsd文件中的内容<br/>
+  修改后的 spring-aop-3.0.xsd头部如下<br/>
+</p>
+<p><br/>
+<pre class="src src-xml"><span class="org-nxml-tag-delimiter">&lt;</span><span class="org-nxml-element-prefix">xsd</span><span class="org-nxml-element-colon">:</span><span class="org-nxml-element-local-name">schema</span> <span class="org-nxml-namespace-attribute-xmlns">xmlns</span>=<span class="org-nxml-namespace-attribute-value-delimiter">"</span><span class="org-nxml-namespace-attribute-value">http://www.springframework.org/schema/aop</span><span class="org-nxml-namespace-attribute-value-delimiter">"</span>
+        <span class="org-nxml-namespace-attribute-xmlns">xmlns</span><span class="org-nxml-namespace-attribute-colon">:</span><span class="org-nxml-namespace-attribute-prefix">xsd</span>=<span class="org-nxml-namespace-attribute-value-delimiter">"</span><span class="org-nxml-namespace-attribute-value">http://www.w3.org/2001/XMLSchema</span><span class="org-nxml-namespace-attribute-value-delimiter">"</span>
+        <span class="org-nxml-namespace-attribute-xmlns">xmlns</span><span class="org-nxml-namespace-attribute-colon">:</span><span class="org-nxml-namespace-attribute-prefix">beans</span>=<span class="org-nxml-namespace-attribute-value-delimiter">"</span><span class="org-nxml-namespace-attribute-value">http://www.springframework.org/schema/beans</span><span class="org-nxml-namespace-attribute-value-delimiter">"</span>
+        <span class="org-nxml-namespace-attribute-xmlns">xmlns</span><span class="org-nxml-namespace-attribute-colon">:</span><span class="org-nxml-namespace-attribute-prefix">tx</span>=<span class="org-nxml-namespace-attribute-value-delimiter">"</span><span class="org-nxml-namespace-attribute-value">http://www.springframework.org/schema/tx</span><span class="org-nxml-namespace-attribute-value-delimiter">"</span>
+        <span class="org-nxml-namespace-attribute-xmlns">xmlns</span><span class="org-nxml-namespace-attribute-colon">:</span><span class="org-nxml-namespace-attribute-prefix">tool</span>=<span class="org-nxml-namespace-attribute-value-delimiter">"</span><span class="org-nxml-namespace-attribute-value">http://www.springframework.org/schema/tool</span><span class="org-nxml-namespace-attribute-value-delimiter">"</span>
+        <span class="org-nxml-namespace-attribute-xmlns">xmlns</span><span class="org-nxml-namespace-attribute-colon">:</span><span class="org-nxml-namespace-attribute-prefix">context</span>=<span class="org-nxml-namespace-attribute-value-delimiter">"</span><span class="org-nxml-namespace-attribute-value">http://www.springframework.org/schema/context</span><span class="org-nxml-namespace-attribute-value-delimiter">"</span>
+        <span class="org-nxml-namespace-attribute-xmlns">xmlns</span><span class="org-nxml-namespace-attribute-colon">:</span><span class="org-nxml-namespace-attribute-prefix">jdbc</span>=<span class="org-nxml-namespace-attribute-value-delimiter">"</span><span class="org-nxml-namespace-attribute-value">http://www.springframework.org/schema/jdbc</span><span class="org-nxml-namespace-attribute-value-delimiter">"</span>
+        <span class="org-nxml-namespace-attribute-xmlns">xmlns</span><span class="org-nxml-namespace-attribute-colon">:</span><span class="org-nxml-namespace-attribute-prefix">jee</span>=<span class="org-nxml-namespace-attribute-value-delimiter">"</span><span class="org-nxml-namespace-attribute-value">http://www.springframework.org/schema/jee</span><span class="org-nxml-namespace-attribute-value-delimiter">"</span>
+        <span class="org-nxml-namespace-attribute-xmlns">xmlns</span><span class="org-nxml-namespace-attribute-colon">:</span><span class="org-nxml-namespace-attribute-prefix">jms</span>=<span class="org-nxml-namespace-attribute-value-delimiter">"</span><span class="org-nxml-namespace-attribute-value">http://www.springframework.org/schema/jms</span><span class="org-nxml-namespace-attribute-value-delimiter">"</span>
+        <span class="org-nxml-namespace-attribute-xmlns">xmlns</span><span class="org-nxml-namespace-attribute-colon">:</span><span class="org-nxml-namespace-attribute-prefix">lang</span>=<span class="org-nxml-namespace-attribute-value-delimiter">"</span><span class="org-nxml-namespace-attribute-value">http://www.springframework.org/schema/lang</span><span class="org-nxml-namespace-attribute-value-delimiter">"</span>
+        <span class="org-nxml-namespace-attribute-xmlns">xmlns</span><span class="org-nxml-namespace-attribute-colon">:</span><span class="org-nxml-namespace-attribute-prefix">mvc</span>=<span class="org-nxml-namespace-attribute-value-delimiter">"</span><span class="org-nxml-namespace-attribute-value">http://www.springframework.org/schema/mvc</span><span class="org-nxml-namespace-attribute-value-delimiter">"</span>
+        <span class="org-nxml-namespace-attribute-xmlns">xmlns</span><span class="org-nxml-namespace-attribute-colon">:</span><span class="org-nxml-namespace-attribute-prefix">oxm</span>=<span class="org-nxml-namespace-attribute-value-delimiter">"</span><span class="org-nxml-namespace-attribute-value">http://www.springframework.org/schema/oxm</span><span class="org-nxml-namespace-attribute-value-delimiter">"</span>
+        <span class="org-nxml-namespace-attribute-xmlns">xmlns</span><span class="org-nxml-namespace-attribute-colon">:</span><span class="org-nxml-namespace-attribute-prefix">task</span>=<span class="org-nxml-namespace-attribute-value-delimiter">"</span><span class="org-nxml-namespace-attribute-value">http://www.springframework.org/schema/task</span><span class="org-nxml-namespace-attribute-value-delimiter">"</span>
+        <span class="org-nxml-namespace-attribute-xmlns">xmlns</span><span class="org-nxml-namespace-attribute-colon">:</span><span class="org-nxml-namespace-attribute-prefix">util</span>=<span class="org-nxml-namespace-attribute-value-delimiter">"</span><span class="org-nxml-namespace-attribute-value">http://www.springframework.org/schema/util</span><span class="org-nxml-namespace-attribute-value-delimiter">"</span>
+        <span class="org-nxml-attribute-local-name">targetNamespace</span>=<span class="org-nxml-attribute-value-delimiter">"</span><span class="org-nxml-attribute-value">http://www.springframework.org/schema/aop</span><span class="org-nxml-attribute-value-delimiter">"</span>
+        <span class="org-nxml-attribute-local-name">elementFormDefault</span>=<span class="org-nxml-attribute-value-delimiter">"</span><span class="org-nxml-attribute-value">qualified</span><span class="org-nxml-attribute-value-delimiter">"</span>
+        <span class="org-nxml-attribute-local-name">attributeFormDefault</span>=<span class="org-nxml-attribute-value-delimiter">"</span><span class="org-nxml-attribute-value">unqualified</span><span class="org-nxml-attribute-value-delimiter">"</span><span class="org-nxml-tag-delimiter">&gt;</span>
+    <span class="org-nxml-tag-delimiter">&lt;</span><span class="org-nxml-element-prefix">xsd</span><span class="org-nxml-element-colon">:</span><span class="org-nxml-element-local-name">import</span> <span class="org-nxml-attribute-local-name">namespace</span>=<span class="org-nxml-attribute-value-delimiter">"</span><span class="org-nxml-attribute-value">http://www.springframework.org/schema/tx</span><span class="org-nxml-attribute-value-delimiter">"</span> <span class="org-nxml-attribute-local-name">schemaLocation</span>=<span class="org-nxml-attribute-value-delimiter">"</span><span class="org-nxml-attribute-value">spring-tx-3.0.xsd</span><span class="org-nxml-attribute-value-delimiter">"</span> <span class="org-nxml-tag-slash">/</span><span class="org-nxml-tag-delimiter">&gt;</span>
+    <span class="org-nxml-tag-delimiter">&lt;</span><span class="org-nxml-element-prefix">xsd</span><span class="org-nxml-element-colon">:</span><span class="org-nxml-element-local-name">import</span> <span class="org-nxml-attribute-local-name">namespace</span>=<span class="org-nxml-attribute-value-delimiter">"</span><span class="org-nxml-attribute-value">http://www.springframework.org/schema/context</span><span class="org-nxml-attribute-value-delimiter">"</span> <span class="org-nxml-attribute-local-name">schemaLocation</span>=<span class="org-nxml-attribute-value-delimiter">"</span><span class="org-nxml-attribute-value">spring-context-3.0.xsd</span><span class="org-nxml-attribute-value-delimiter">"</span> <span class="org-nxml-tag-slash">/</span><span class="org-nxml-tag-delimiter">&gt;</span>
+    <span class="org-nxml-tag-delimiter">&lt;</span><span class="org-nxml-element-prefix">xsd</span><span class="org-nxml-element-colon">:</span><span class="org-nxml-element-local-name">import</span> <span class="org-nxml-attribute-local-name">namespace</span>=<span class="org-nxml-attribute-value-delimiter">"</span><span class="org-nxml-attribute-value">http://www.springframework.org/schema/jdbc</span><span class="org-nxml-attribute-value-delimiter">"</span> <span class="org-nxml-attribute-local-name">schemaLocation</span>=<span class="org-nxml-attribute-value-delimiter">"</span><span class="org-nxml-attribute-value">spring-jdbc-3.0.xsd</span><span class="org-nxml-attribute-value-delimiter">"</span> <span class="org-nxml-tag-slash">/</span><span class="org-nxml-tag-delimiter">&gt;</span>
+    <span class="org-nxml-tag-delimiter">&lt;</span><span class="org-nxml-element-prefix">xsd</span><span class="org-nxml-element-colon">:</span><span class="org-nxml-element-local-name">import</span> <span class="org-nxml-attribute-local-name">namespace</span>=<span class="org-nxml-attribute-value-delimiter">"</span><span class="org-nxml-attribute-value">http://www.springframework.org/schema/jee</span><span class="org-nxml-attribute-value-delimiter">"</span> <span class="org-nxml-attribute-local-name">schemaLocation</span>=<span class="org-nxml-attribute-value-delimiter">"</span><span class="org-nxml-attribute-value">spring-jee-3.0.xsd</span><span class="org-nxml-attribute-value-delimiter">"</span> <span class="org-nxml-tag-slash">/</span><span class="org-nxml-tag-delimiter">&gt;</span>
+    <span class="org-nxml-tag-delimiter">&lt;</span><span class="org-nxml-element-prefix">xsd</span><span class="org-nxml-element-colon">:</span><span class="org-nxml-element-local-name">import</span> <span class="org-nxml-attribute-local-name">namespace</span>=<span class="org-nxml-attribute-value-delimiter">"</span><span class="org-nxml-attribute-value">http://www.springframework.org/schema/jms</span><span class="org-nxml-attribute-value-delimiter">"</span> <span class="org-nxml-attribute-local-name">schemaLocation</span>=<span class="org-nxml-attribute-value-delimiter">"</span><span class="org-nxml-attribute-value">spring-jms-3.0.xsd</span><span class="org-nxml-attribute-value-delimiter">"</span> <span class="org-nxml-tag-slash">/</span><span class="org-nxml-tag-delimiter">&gt;</span>
+    <span class="org-nxml-tag-delimiter">&lt;</span><span class="org-nxml-element-prefix">xsd</span><span class="org-nxml-element-colon">:</span><span class="org-nxml-element-local-name">import</span> <span class="org-nxml-attribute-local-name">namespace</span>=<span class="org-nxml-attribute-value-delimiter">"</span><span class="org-nxml-attribute-value">http://www.springframework.org/schema/lang</span><span class="org-nxml-attribute-value-delimiter">"</span> <span class="org-nxml-attribute-local-name">schemaLocation</span>=<span class="org-nxml-attribute-value-delimiter">"</span><span class="org-nxml-attribute-value">spring-lang-3.0.xsd</span><span class="org-nxml-attribute-value-delimiter">"</span> <span class="org-nxml-tag-slash">/</span><span class="org-nxml-tag-delimiter">&gt;</span>
+    <span class="org-nxml-tag-delimiter">&lt;</span><span class="org-nxml-element-prefix">xsd</span><span class="org-nxml-element-colon">:</span><span class="org-nxml-element-local-name">import</span> <span class="org-nxml-attribute-local-name">namespace</span>=<span class="org-nxml-attribute-value-delimiter">"</span><span class="org-nxml-attribute-value">http://www.springframework.org/schema/mvc</span><span class="org-nxml-attribute-value-delimiter">"</span> <span class="org-nxml-attribute-local-name">schemaLocation</span>=<span class="org-nxml-attribute-value-delimiter">"</span><span class="org-nxml-attribute-value">spring-mvc-3.0.xsd</span><span class="org-nxml-attribute-value-delimiter">"</span> <span class="org-nxml-tag-slash">/</span><span class="org-nxml-tag-delimiter">&gt;</span>
+    <span class="org-nxml-tag-delimiter">&lt;</span><span class="org-nxml-element-prefix">xsd</span><span class="org-nxml-element-colon">:</span><span class="org-nxml-element-local-name">import</span> <span class="org-nxml-attribute-local-name">namespace</span>=<span class="org-nxml-attribute-value-delimiter">"</span><span class="org-nxml-attribute-value">http://www.springframework.org/schema/oxm</span><span class="org-nxml-attribute-value-delimiter">"</span> <span class="org-nxml-attribute-local-name">schemaLocation</span>=<span class="org-nxml-attribute-value-delimiter">"</span><span class="org-nxml-attribute-value">spring-oxm-3.0.xsd</span><span class="org-nxml-attribute-value-delimiter">"</span> <span class="org-nxml-tag-slash">/</span><span class="org-nxml-tag-delimiter">&gt;</span>
+    <span class="org-nxml-tag-delimiter">&lt;</span><span class="org-nxml-element-prefix">xsd</span><span class="org-nxml-element-colon">:</span><span class="org-nxml-element-local-name">import</span> <span class="org-nxml-attribute-local-name">namespace</span>=<span class="org-nxml-attribute-value-delimiter">"</span><span class="org-nxml-attribute-value">http://www.springframework.org/schema/task</span><span class="org-nxml-attribute-value-delimiter">"</span> <span class="org-nxml-attribute-local-name">schemaLocation</span>=<span class="org-nxml-attribute-value-delimiter">"</span><span class="org-nxml-attribute-value">spring-task-3.0.xsd</span><span class="org-nxml-attribute-value-delimiter">"</span> <span class="org-nxml-tag-slash">/</span><span class="org-nxml-tag-delimiter">&gt;</span>
+    <span class="org-nxml-tag-delimiter">&lt;</span><span class="org-nxml-element-prefix">xsd</span><span class="org-nxml-element-colon">:</span><span class="org-nxml-element-local-name">import</span> <span class="org-nxml-attribute-local-name">namespace</span>=<span class="org-nxml-attribute-value-delimiter">"</span><span class="org-nxml-attribute-value">http://www.springframework.org/schema/util</span><span class="org-nxml-attribute-value-delimiter">"</span> <span class="org-nxml-attribute-local-name">schemaLocation</span>=<span class="org-nxml-attribute-value-delimiter">"</span><span class="org-nxml-attribute-value">spring-util-3.0.xsd</span><span class="org-nxml-attribute-value-delimiter">"</span> <span class="org-nxml-tag-slash">/</span><span class="org-nxml-tag-delimiter">&gt;</span>
+</pre>
+
+下面这几个文件不需要这么复杂,只需要将其中的<br/>
+</p><blockquote>
+
+<p>spring-context-3.0.xsd<br/>
+spring-jdbc-3.0.xsd<br/>
+spring-jee-3.0.xsd<br/>
+spring-jms-3.0.xsd<br/>
+spring-lang-3.0.xsd<br/>
+spring-mvc-3.0.xsd<br/>
+spring-oxm-3.0.xsd<br/>
+spring-task-3.0.xsd<br/>
+spring-tx-3.0.xsd<br/>
+spring-util-3.0.xsd<br/>
+</p>
+</blockquote>
+
+
+<p><br/>
+<pre class="src src-xml"><span class="org-nxml-tag-delimiter">&lt;</span><span class="org-nxml-element-prefix">xsd</span><span class="org-nxml-element-colon">:</span><span class="org-nxml-element-local-name">import</span> <span class="org-nxml-attribute-local-name">namespace</span>=<span class="org-nxml-attribute-value-delimiter">"</span><span class="org-nxml-attribute-value">http://www.springframework.org/schema/beans</span><span class="org-nxml-attribute-value-delimiter">"</span> <span class="org-nxml-attribute-local-name">schemaLocation</span>=<span class="org-nxml-attribute-value-delimiter">"</span><span class="org-nxml-attribute-value">http://www.springframework.org/schema/beans/spring-beans-3.0.xsd</span><span class="org-nxml-attribute-value-delimiter">"</span><span class="org-nxml-tag-slash">/</span><span class="org-nxml-tag-delimiter">&gt;</span>
+<span class="org-nxml-tag-delimiter">&lt;</span><span class="org-nxml-element-prefix">xsd</span><span class="org-nxml-element-colon">:</span><span class="org-nxml-element-local-name">import</span> <span class="org-nxml-attribute-local-name">namespace</span>=<span class="org-nxml-attribute-value-delimiter">"</span><span class="org-nxml-attribute-value">http://www.springframework.org/schema/tool</span><span class="org-nxml-attribute-value-delimiter">"</span> <span class="org-nxml-attribute-local-name">schemaLocation</span>=<span class="org-nxml-attribute-value-delimiter">"</span><span class="org-nxml-attribute-value">http://www.springframework.org/schema/tool/spring-tool-3.0.xsd</span><span class="org-nxml-attribute-value-delimiter">"</span><span class="org-nxml-tag-slash">/</span><span class="org-nxml-tag-delimiter">&gt;</span>
+</pre>
+
+
+换成:使用相对路径<br/>
+</p>
+<p><br/>
+<pre class="src src-xml"><span class="org-nxml-tag-delimiter">&lt;</span><span class="org-nxml-element-prefix">xsd</span><span class="org-nxml-element-colon">:</span><span class="org-nxml-element-local-name">import</span> <span class="org-nxml-attribute-local-name">namespace</span>=<span class="org-nxml-attribute-value-delimiter">"</span><span class="org-nxml-attribute-value">http://www.springframework.org/schema/beans</span><span class="org-nxml-attribute-value-delimiter">"</span> <span class="org-nxml-attribute-local-name">schemaLocation</span>=<span class="org-nxml-attribute-value-delimiter">"</span><span class="org-nxml-attribute-value">spring-beans-3.0.xsd</span><span class="org-nxml-attribute-value-delimiter">"</span> <span class="org-nxml-tag-slash">/</span><span class="org-nxml-tag-delimiter">&gt;</span>
+<span class="org-nxml-tag-delimiter">&lt;</span><span class="org-nxml-element-prefix">xsd</span><span class="org-nxml-element-colon">:</span><span class="org-nxml-element-local-name">import</span> <span class="org-nxml-attribute-local-name">namespace</span>=<span class="org-nxml-attribute-value-delimiter">"</span><span class="org-nxml-attribute-value">http://www.springframework.org/schema/tool</span><span class="org-nxml-attribute-value-delimiter">"</span> <span class="org-nxml-attribute-local-name">schemaLocation</span>=<span class="org-nxml-attribute-value-delimiter">"</span><span class="org-nxml-attribute-value">spring-tool-3.0.xsd</span><span class="org-nxml-attribute-value-delimiter">"</span> <span class="org-nxml-tag-slash">/</span><span class="org-nxml-tag-delimiter">&gt;</span>
+</pre>
+
+
+这两个文件,删除其中的<br/>
+</p><blockquote>
+
+<p>spring-tool-3.0.xsd<br/>
+spring-beans-3.0.xsd<br/>
+</p>
+</blockquote>
+
+
+<p><br/>
+</p><blockquote>
+
+<p>&lt;xsd:import namespace="<a href="http://www.w3.org/XML/1998/namespace"/">http://www.w3.org/XML/1998/namespace"/</a>&gt;<br/>
+</p>
+</blockquote>
+
+
+<p><br/>
+用这两条命令生成spring-3.0.rnc,生成之后还会出现 "?+" 这个问题,解决掉之后,即<br/>
+可<br/>
+</p>
+<p><br/>
+<pre class="src src-sh">java -jar rngconv.jar spring-aop-3.0.xsd   &gt;spring-aop-3.0.rng
+ java -jar trang.jar  spring-aop-3.0.rng spring-3.0.rnc
+</pre>
+
+
+<div id='my-src'>
+<div id='org-src'><a href='../src/java/spring.org'>src</a></div>
+<div id='htmlized-src'><a href='../htmlized-src/java/spring.org.html'>htmlized-src</a></div>
+</div>
+<div id='tags'><span id='tags-title'>Tags:</span><br />
+    <a href="../tags/@SVN.html">@SVN</a><br/>
+    <a href="../tags/@perl.html">@perl</a><br/>
+    <a href="../tags/@Java.html">@Java</a><br/>
+    <a href="../tags/@Mysql.html">@Mysql</a><br/>
+    <a href="../tags/@Erlang.html">@Erlang</a><br/>
+    <a href="../tags/@SQL.html">@SQL</a><br/>
+    <a href="../tags/@DB.html">@DB</a><br/>
+    <a href="../tags/@Oracle.html">@Oracle</a><br/>
+    <a href="../tags/@Ediff.html">@Ediff</a><br/>
+    <a href="../tags/@Git.html">@Git</a><br/>
+    <a href="../tags/@Cedet.html">@Cedet</a><br/>
+    <a href="../tags/@C-C++.html">@C-C++</a><br/>
+    <a href="../tags/@Daily.html">@Daily</a><br/>
+    <a href="../tags/@Eclipse.html">@Eclipse</a><br/>
+    <a href="../tags/@AutoHotKey.html">@AutoHotKey</a><br/>
+    <a href="../tags/@Windows.html">@Windows</a><br/>
+    <a href="../tags/@Linux.html">@Linux</a><br/>
+    <a href="../tags/@C.html">@C</a><br/>
+    <a href="../tags/@Emacs.html">@Emacs</a><br/>
+</p>
+<p><br/>
+</div>
+</p></div>
+</div>
+</div>
+
+<div id="postamble">
+<p class="date">Date: 2011-10-18 二</p>
+<p class="author">Author: 纪秀峰</p>
+<p class="creator">Org version 7.8.03 with Emacs version 24</p>
+
+
+</div>
+<p><br/><br/>
+<!-- hhmts start --> <!-- hhmts end --></p>
+
+</body>
+</html>

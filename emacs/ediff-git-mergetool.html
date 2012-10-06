@@ -3,14 +3,14 @@
                "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="zh" xml:lang="zh">
 <head>
-<title>一个人的狂欢</title>
+<title>使用Emacs中的Ediff 作为git mergetool使用的工具进行文件合并</title>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
-<meta name="title" content="一个人的狂欢"/>
+<meta name="title" content="使用Emacs中的Ediff 作为git mergetool使用的工具进行文件合并"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2011-06-04 星期六"/>
+<meta name="generated" content="2011-07-04 一"/>
 <meta name="author" content="孤峰独秀"/>
-<meta name="description" content=""/>
-<meta name="keywords" content=""/>
+<meta name="description" content="使用Emacs中的Ediff 作为git mergetool使用的工具进行文件合并"/>
+<meta name="keywords" content="Emacs Ediff git merge "/>
 <style type='text/css'>
        body {
     background-color: #E5E5E5;
@@ -942,15 +942,15 @@ img {
 }
 
     </style>
-<link rel="stylesheet" type="text/css" href="style/emacs.css" />
-<script type='text/javascript' src='js/emacs.js'> </script>
+<link rel="stylesheet" type="text/css" href="../style/emacs.css" />
+<script type='text/javascript' src='../js/emacs.js'> </script>
 
 </head>
 <body>
 <div id="org-div-home-and-up" style="text-align:right;font-size:70%;white-space:nowrap;">
- <a accesskey="h" href="sitemap.html"> 站点地图 </a>
+ <a accesskey="h" href="../sitemap.html"> 站点地图 </a>
  |
- <a accesskey="H" href="index.html"> 首页 </a>
+ <a accesskey="H" href="../index.html"> 首页 </a>
 </div>
 
 <div id="preamble">
@@ -958,59 +958,164 @@ img {
 </div>
 
 <div id="content">
-<h1 class="title">一个人的狂欢</h1>
+<h1 class="title">使用Emacs中的Ediff 作为git mergetool使用的工具进行文件合并</h1>
 
 
-<div id='logo-img' ><a  href='index.html'>▇█▓▒░◕~◕░▒▓█▇</a></div>
+<div id='logo-img' ><a  href='../index.html'>▇█▓▒░◕~◕░▒▓█▇</a></div>
 
 <div id='logo-text'>
   <a href='#' ><span align="left">░◕~◕░</span></a>
 </div>
 
 
+<p>
+关于什么是Ediff 什么是Git 就不作详细介绍了，简单讲Ediff是Emacs进行文件比较、<br/>
+合并的工具，Git 是与svn 一样的版本控制工具。我个人的许多代码都用git进行管理。<br/>
+运行git mergetool 命令时会对有冲突的文件进行合并，<br/>
+我这里使用了emacsclient ，避免每次都要打开一个Emacs进程。<br/>
+总共分为两大步:<br/>
+</p>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
 <ul>
-<li>首页还未做好，先看<a href="sitemap.html">站点地图</a>吧
-</li>
-<li><a href="about.html">About</a>
-</li>
+<li><a href="#sec-1">在.emacs 中加入以下代码</a></li>
+<li><a href="#sec-2">修改~/.gitconfig 文件，</a></li>
 </ul>
+</div>
+</div>
+
+<div id="outline-container-1" class="outline-2">
+<h2 id="sec-1">在.emacs 中加入以下代码</h2>
+<div class="outline-text-2" id="text-1">
 
 
+<p><br/>
+<pre class="src src-emacs-lisp"><span class="org-comment-delimiter">;;</span><span class="org-comment">git mergetool &#20351;&#29992;ediff ,&#21069;&#25552;&#21487;&#20197;&#27491;&#24120;&#20351;&#29992;emacsclient ,&#24182;&#19988;Emacs&#24050;&#32463;&#21551;&#21160;&#12290;</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">~/.gitconfig</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">[mergetool "ediff"]</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">cmd = emacsclient --eval \"(git-mergetool-emacsclient-ediff \\\"$LOCAL\\\" \\\"$REMOTE\\\" \\\"$BASE\\\" \\\"$MERGED\\\")\"</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">trustExitCode = false</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">[mergetool]</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">prompt = false</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">[merge]</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">tool = ediff</span>
+<span class="org-comment-delimiter">;;</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Setup for ediff.</span>
+<span class="org-comment-delimiter">;;</span>
+<span class="org-comment-delimiter">;;</span><span class="org-comment">(require 'ediff)</span>
+
+(<span class="org-keyword">defvar</span> <span class="org-variable-name">ediff-after-quit-hooks</span> <span class="org-constant">nil</span>
+  <span class="org-doc">"* Hooks to run after ediff or emerge is quit."</span>)
+
+(<span class="org-keyword">defadvice</span> <span class="org-function-name">ediff-quit</span> (after edit-after-quit-hooks activate)
+  (run-hooks 'ediff-after-quit-hooks))
+
+(<span class="org-function-name">setq</span> git-mergetool-emacsclient-ediff-active <span class="org-constant">nil</span>)
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">local-ediff-frame-maximize</span> ()
+  (<span class="org-keyword">when</span> (boundp 'display-usable-bounds)
+    (<span class="org-keyword">let*</span> ((bounds (display-usable-bounds))
+           (x (nth 0 bounds))
+           (y (nth 1 bounds))
+           (width (/ (nth 2 bounds) (frame-char-width)))
+           (height (/ (nth 3 bounds) (frame-char-height))))
+      (set-frame-width (selected-frame) width)
+      (set-frame-height (selected-frame) height)
+      (set-frame-position (selected-frame) x y))  )
+  )
+(<span class="org-function-name">setq</span> ediff-window-setup-function 'ediff-setup-windows-plain)
+(<span class="org-function-name">setq</span> ediff-split-window-function 'split-window-horizontally)
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">local-ediff-before-setup-hook</span> ()
+  (<span class="org-function-name">setq</span> local-ediff-saved-frame-configuration (current-frame-configuration))
+  (<span class="org-function-name">setq</span> local-ediff-saved-window-configuration (current-window-configuration))
+  (local-ediff-frame-maximize)
+  (<span class="org-keyword">if</span> git-mergetool-emacsclient-ediff-active
+      (raise-frame)))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">local-ediff-quit-hook</span> ()
+  (set-frame-configuration local-ediff-saved-frame-configuration)
+  (set-window-configuration local-ediff-saved-window-configuration))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">local-ediff-suspend-hook</span> ()
+  (set-frame-configuration local-ediff-saved-frame-configuration)
+  (set-window-configuration local-ediff-saved-window-configuration))
+
+(<span class="org-function-name">add-hook</span> 'ediff-before-setup-hook 'local-ediff-before-setup-hook)
+(<span class="org-function-name">add-hook</span> 'ediff-quit-hook 'local-ediff-quit-hook 'append)
+(<span class="org-function-name">add-hook</span> 'ediff-suspend-hook 'local-ediff-suspend-hook 'append)
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Useful for ediff merge from emacsclient.</span>
+(<span class="org-keyword">defun</span> <span class="org-function-name">git-mergetool-emacsclient-ediff</span> (local remote base merged)
+  (<span class="org-function-name">setq</span> git-mergetool-emacsclient-ediff-active <span class="org-constant">t</span>)
+  (<span class="org-keyword">if</span> (file-readable-p base)
+      (ediff-merge-files-with-ancestor local remote base <span class="org-constant">nil</span> merged)
+    (ediff-merge-files local remote <span class="org-constant">nil</span> merged))
+  (recursive-edit))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">git-mergetool-emacsclient-ediff-after-quit-hook</span> ()
+  (exit-recursive-edit))
+
+(<span class="org-function-name">add-hook</span> 'ediff-after-quit-hooks 'git-mergetool-emacsclient-ediff-after-quit-hook 'append)
+</pre>
+
+</p></div>
+
+</div>
+
+<div id="outline-container-2" class="outline-2">
+<h2 id="sec-2">修改~/.gitconfig 文件，</h2>
+<div class="outline-text-2" id="text-2">
+
+<p>在其中加入以下代码<br/>
+</p>
+<p><br/>
+<pre class="src src-c">[mergetool <span class="org-string">"ediff"</span>]
+cmd = emacsclient --eval \<span class="org-warning">"</span>(git-mergetool-emacsclient-ediff \\\<span class="org-warning">"</span>$LOCAL\\\<span class="org-warning">"</span> \\\<span class="org-warning">"</span>$REMOTE\\\<span class="org-warning">"</span> \\\<span class="org-warning">"</span>$BASE\\\<span class="org-warning">"</span> \\\<span class="org-warning">"</span>$MERGED\\\<span class="org-warning">"</span>)\<span class="org-warning">"</span>
+trustExitCode = <span class="org-constant">false</span>
+[mergetool]
+prompt = <span class="org-constant">false</span>
+[merge]
+tool = ediff
+
+
+</pre>
 
 
 <div id='my-src'>
-<div id='org-src'><a href='src/index.org'>src</a></div>
-<div id='htmlized-src'><a href='htmlized-src/index.org.html'>htmlized-src</a></div>
+<div id='org-src'><a href='../src/emacs/ediff-git-mergetool.org'>src</a></div>
+<div id='htmlized-src'><a href='../htmlized-src/emacs/ediff-git-mergetool.org.html'>htmlized-src</a></div>
 </div>
 <div id='tags'><span id='tags-title'>Tags:</span><br />
-<p>
-    <a href="tags/@SVN.html">@SVN</a>
-    <a href="tags/@perl.html">@perl</a>
-    <a href="tags/@Java.html">@Java</a>
-    <a href="tags/@Mysql.html">@Mysql</a>
-    <a href="tags/@Erlang.html">@Erlang</a>
-    <a href="tags/@SQL.html">@SQL</a>
-    <a href="tags/@DB.html">@DB</a>
-    <a href="tags/@Oracle.html">@Oracle</a>
-    <a href="tags/@Ediff.html">@Ediff</a>
-    <a href="tags/@Git.html">@Git</a>
-    <a href="tags/@Cedet.html">@Cedet</a>
-    <a href="tags/@C-C++.html">@C-C++</a>
-    <a href="tags/@Daily.html">@Daily</a>
-    <a href="tags/@Eclipse.html">@Eclipse</a>
-    <a href="tags/@AutoHotKey.html">@AutoHotKey</a>
-    <a href="tags/@Windows.html">@Windows</a>
-    <a href="tags/@Linux.html">@Linux</a>
-    <a href="tags/@C.html">@C</a>
-    <a href="tags/@Emacs.html">@Emacs</a>
+    <a href="../tags/@SVN.html">@SVN</a><br/>
+    <a href="../tags/@perl.html">@perl</a><br/>
+    <a href="../tags/@Java.html">@Java</a><br/>
+    <a href="../tags/@Mysql.html">@Mysql</a><br/>
+    <a href="../tags/@Erlang.html">@Erlang</a><br/>
+    <a href="../tags/@SQL.html">@SQL</a><br/>
+    <a href="../tags/@DB.html">@DB</a><br/>
+    <a href="../tags/@Oracle.html">@Oracle</a><br/>
+    <a href="../tags/@Ediff.html">@Ediff</a><br/>
+    <a href="../tags/@Git.html">@Git</a><br/>
+    <a href="../tags/@Cedet.html">@Cedet</a><br/>
+    <a href="../tags/@C-C++.html">@C-C++</a><br/>
+    <a href="../tags/@Daily.html">@Daily</a><br/>
+    <a href="../tags/@Eclipse.html">@Eclipse</a><br/>
+    <a href="../tags/@AutoHotKey.html">@AutoHotKey</a><br/>
+    <a href="../tags/@Windows.html">@Windows</a><br/>
+    <a href="../tags/@Linux.html">@Linux</a><br/>
+    <a href="../tags/@C.html">@C</a><br/>
+    <a href="../tags/@Emacs.html">@Emacs</a><br/>
 </p>
-
-
+<p><br/>
+</div>
+</p></div>
 </div>
 </div>
 
 <div id="postamble">
-<p class="date">Date: 2011-06-04 星期六</p>
+<p class="date">Date: 2011-07-04 一</p>
 <p class="author">Author: 孤峰独秀</p>
 <p class="creator">Org version 7.8.03 with Emacs version 24</p>
 

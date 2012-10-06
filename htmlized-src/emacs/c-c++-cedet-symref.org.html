@@ -1,0 +1,159 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<!-- Created by htmlize-1.34 in css mode. -->
+<html>
+  <head>
+    <title>c-c++-cedet-symref.org</title>
+    <style type="text/css">
+    <!--
+      body {
+        color: #F8F8F8;
+        background-color: #0C1021;
+      }
+      .comment {
+        /* font-lock-comment-face */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-block {
+        /* org-block */
+        color: #b3b3b3;
+      }
+      .org-block-begin-line {
+        /* org-block-begin-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-block-end-line {
+        /* org-block-end-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-document-info {
+        /* org-document-info */
+        color: #afeeee;
+      }
+      .org-document-info-keyword {
+        /* org-document-info-keyword */
+        color: #b3b3b3;
+      }
+      .org-document-title {
+        /* org-document-title */
+        color: #afeeee;
+        font-size: 144%;
+        font-weight: bold;
+      }
+      .org-level-1 {
+        /* org-level-1 */
+        color: #FF6400;
+      }
+      .org-level-2 {
+        /* org-level-2 */
+        color: #40E0D0;
+      }
+      .org-meta-line {
+        /* org-meta-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+
+      a {
+        color: inherit;
+        background-color: inherit;
+        font: inherit;
+        text-decoration: inherit;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+    -->
+    </style>
+  </head>
+  <body>
+    <pre>
+<span class="comment"># -*- coding:utf-8 -*-</span>
+<span class="org-meta-line">#+LANGUAGE:  zh
+</span><span class="org-document-info-keyword">#+TITLE:</span><span class="comment">     </span><span class="org-document-title">c-c++-cedet-symref.org</span>
+<span class="org-document-info-keyword">#+AUTHOR:</span><span class="comment">    </span><span class="org-document-info">&#32426;&#31168;&#23792;</span>
+<span class="org-document-info-keyword">#+EMAIL:</span><span class="comment">     </span><span class="org-document-info">jixiuf@gmail.com</span>
+<span class="org-document-info-keyword">#+DATE:</span><span class="comment">     </span><span class="org-document-info">2012-08-27 &#19968;</span>
+<span class="org-meta-line">#+DESCRIPTION:c-c++-cedet-.org
+#+KEYWORDS:
+#+OPTIONS:   H:2 num:nil toc:t \n:t @:t ::t |:t ^:nil -:t f:t *:t &lt;:t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil
+#+FILETAGS: @Cedet @Emacs @C-C++
+</span><span class="org-level-1">* semantic-symref semantic-symref-symbol</span>
+<span class="org-level-2">** Search for places where function is called(&#23547;&#25214;&#26576;&#20989;&#25968;&#12289;&#21464;&#37327;&#22312;&#21738;&#20010;&#22320;&#26041;&#34987;&#35843;&#29992;&#20102;)</span>
+semantic-symref&#21629;&#20196; &#21487;&#20197;&#26597;&#25214;&#21040;&#20809;&#26631;&#19979;&#21464;&#37327;&#30340;&#22312;&#26412;&#39033;&#30446;&#20013;&#22768;&#26126;&#20301;&#32622; semantic-symref-symbol &#21487;&#20197;&#36755;&#20837;&#20320;&#24819;&#35201;&#25214;&#30340;&#20855;&#20307;&#21464;&#37327;&#21517;.
+&#22914;&#26524;&#26576;&#20123;&#21517;&#31216;&#27809;&#26377;&#22312;&#30456;&#24212;&#30340;database(&#22914;gnu/global,)&#20013;&#25214;&#21040;,&#23427;&#20250;&#29992; find-grep&#21629;&#20196;&#23581;&#35797;&#25628;&#32034;.&#21487;&#20197;&#22312;&#25171;&#24320;&#30340;&#26032;buffer&#20013;&#25214;&#21040;&#20320;&#35201;&#25214;&#30340;&#21464;&#37327;&#36827;&#34892;&#36339;&#36716;.
+<span class="org-block-begin-line">#+BEGIN_SRC emacs-lisp
+</span><span class="org-block">(defun alexott/c-mode-cedet-hook ()
+  (local-set-key "\C-c\C-r" 'semantic-symref)
+  (local-set-key "\C-cr" 'semantic-symref-symbol)
+  )
+(add-hook 'c-mode-common-hook 'alexott/c-mode-cedet-hook)
+</span><span class="org-block-end-line">#+END_SRC
+</span><span class="org-block-begin-line">#+BEGIN_SRC c++
+</span><span class="org-block">#include &lt;iostream&gt;
+
+using namespace std;
+class Stu
+{
+private:
+public:
+  int age;
+  String name;
+  void test();
+};
+
+class P:
+  public Stu
+{
+public:
+  P();
+  virtual ~P();
+};
+int main(int argc, char *argv[]){
+  P p;
+  cout&lt;&lt;p.name;
+  return 0;
+}
+</span><span class="org-block-end-line">#+END_SRC
+</span>&#27604;&#22914;&#22312;&#36825;&#20010;&#19968;&#20010;cpp&#25991;&#20214;&#20013;
+&#25105;&#35843;&#29992;semantic-symref-symbol&#28982;&#21518;&#36755;&#20837; "name" &#22235;&#20010;&#23383;&#27597;
+<span class="org-block-begin-line">#+BEGIN_SRC fundamental-mode
+</span><span class="org-block">/tmp/a.cpp
+  [+] class Stu {}
+  [+] int main (int argc,char argv[])
+</span><span class="org-block-end-line">#+END_SRC
+</span>&#20250;&#20135;&#29983;&#19968;&#20010; buffer &#20869;&#23481;&#22914;&#19978;&#65292;
+&#22312;&#36825;&#20010;buffer&#20013;&#21487;&#20197;&#29992;&#36825;&#20123;&#35843;&#29992;
+<span class="org-block-begin-line">#+BEGIN_SRC emacs-lisp
+</span><span class="org-block">Tab         forward-button &#21487;&#22810;&#25353;&#20960;&#27425;tab&#36827;&#34892;&#36339;&#36716;&#65292;
+(           semantic-symref-list-create-macro-on-open-hit &#36825;&#20010;&#19981;&#24120;&#29992; ,&#36319;&#23439;&#24405;&#21046;&#30456;&#20851;
++           semantic-symref-list-toggle-showing  toogle&#23637;&#24320;&#19982;&#21542;
+R           semantic-symref-list-rename-open-hits &#21487;&#20197;&#36827;&#34892;&#25209;&#37327;&#37325;&#21629;&#21517;
+C-c C-e     semantic-symref-list-expand-all &#23637;&#24320;&#25152;&#26377;&#65292;
+C-c C-r     semantic-symref-list-contract-all &#25240;&#21472;&#25152;&#26377;
+Enter       &#22238;&#36710;&#20013;&#36716;&#21040;&#30456;&#24212;&#20195;&#30721;&#22788;
+</span><span class="org-block-end-line">#+END_SRC
+</span><span class="org-block-begin-line">#+BEGIN_SRC fundamental-mode
+</span><span class="org-block">/tmp/a.cpp
+  [-] class Stu {}
+    String name;
+  [-] int main (int argc,char argv[])
+    cout&lt;&lt;p.name;
+</span><span class="org-block-end-line">#+END_SRC
+</span>&#20840;&#37096;&#23637;&#24320;&#20043;&#21518;&#30340;&#26679;&#23376;
+<span class="org-block-begin-line">#+BEGIN_QUOTE
+</span> -- Variable: semantic-symref-tool
+     The value of this variable is a symbol that determines the external
+     symbol reference tool to use.  The default value, `detect', says
+     to look for the best available tool.  Other possible values are
+     `global', `idutils', `cscope', and `grep'.  Note that `grep' is
+     much slower than the others.<span class="org-meta-line">
+</span><span class="org-block-end-line">#+END_QUOTE
+</span>semantic &#20250;&#20351; &#29992;     `global', `idutils', `cscope', and `grep'&#36825;&#20960;&#20010;&#24037;&#20855;&#26469;&#23454;&#29616;
+&#20197;&#19978;&#21151;&#33021;&#65292; grep&#26159;&#26368;&#24930;&#30340;
+</pre>
+  </body>
+</html>

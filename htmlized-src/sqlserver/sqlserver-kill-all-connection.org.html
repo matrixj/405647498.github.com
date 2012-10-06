@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<!-- Created by htmlize-1.34 in css mode. -->
+<html>
+  <head>
+    <title>sqlserver-kill-all-connection.org</title>
+    <style type="text/css">
+    <!--
+      body {
+        color: #F8F8F8;
+        background-color: #0C1021;
+      }
+      .comment {
+        /* font-lock-comment-face */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-block {
+        /* org-block */
+        color: #b3b3b3;
+      }
+      .org-block-begin-line {
+        /* org-block-begin-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-block-end-line {
+        /* org-block-end-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-document-info {
+        /* org-document-info */
+        color: #afeeee;
+      }
+      .org-document-info-keyword {
+        /* org-document-info-keyword */
+        color: #b3b3b3;
+      }
+      .org-document-title {
+        /* org-document-title */
+        color: #afeeee;
+        font-size: 144%;
+        font-weight: bold;
+      }
+      .org-meta-line {
+        /* org-meta-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+
+      a {
+        color: inherit;
+        background-color: inherit;
+        font: inherit;
+        text-decoration: inherit;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+    -->
+    </style>
+  </head>
+  <body>
+    <pre>
+<span class="comment"># -*- coding:utf-8 -*-</span>
+<span class="org-meta-line">#+LANGUAGE:  zh
+</span><span class="org-document-info-keyword">#+TITLE:</span><span class="comment">     </span><span class="org-document-title">kill&#25152;&#26377;&#36830;&#25509;&#21040;&#26576;&#24211;&#30340;&#36830;&#25509;</span>
+<span class="org-document-info-keyword">#+AUTHOR:</span><span class="comment">    </span><span class="org-document-info">&#23396;&#23792;&#29420;&#31168;</span>
+<span class="org-document-info-keyword">#+EMAIL:</span><span class="comment">     </span><span class="org-document-info">jixiuf@gmail.com</span>
+<span class="org-document-info-keyword">#+DATE:</span><span class="comment">     </span><span class="org-document-info">2011-09-27 &#26143;&#26399;&#20108;</span>
+<span class="org-meta-line">#+DESCRIPTION:kill&#25152;&#26377;&#36830;&#25509;&#21040;&#26576;&#24211;&#30340;&#36830;&#25509;
+#+KEYWORDS: sqlserver sql 
+#+OPTIONS:   H:2 num:nil toc:t \n:t @:t ::t |:t ^:t -:t f:t *:t &lt;:t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil 
+#+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
+#+EXPORT_SELECT_TAGS: export
+#+EXPORT_EXCLUDE_TAGS: noexport
+#+FILETAGS: @SQL @Windows 
+</span>
+&#22312;&#36827;&#34892;sqlserver&#25968;&#25454;&#24211;&#24674;&#22797;&#26102;&#65292;&#38656;&#35201;&#20851;&#38381;&#25152;&#26377;&#36830;&#25509;&#21040;&#27492;&#25968;&#25454;&#24211;&#30340;&#36830;&#25509;&#12290;
+&#19979;&#38754;&#36825;&#20010;&#23384;&#20648;&#36807;&#31243;&#65292;&#21487;&#20197;&#20570;&#21040;&#65292;
+<span class="org-block-begin-line">#+begin_src sql
+</span><span class="org-block">use   master
+go
+
+create   proc   p_killspid
+@dbname   sysname --&#35201;&#20851;&#38381;&#36827;&#31243;&#30340;&#25968;&#25454;&#24211;&#21517;
+as    
+declare   @s   nvarchar(1000)
+declare   tb   cursor   local   for
+select   s= 'kill   '+cast(spid   as   varchar)
+from   master..sysprocesses  
+where   dbid=db_id(@dbname)
+
+open   tb  
+fetch   next   from   tb   into   @s
+while   @@fetch_status=0
+begin
+exec(@s)
+fetch   next   from   tb   into   @s
+end
+close   tb
+deallocate   tb
+go
+</span><span class="org-block-end-line">#+end_src
+</span><span class="org-block-begin-line">#+begin_src sql
+</span><span class="org-block">--&#29992;&#27861;    
+exec   p_killspid     'dbname' 
+</span><span class="org-block-end-line">#+end_src
+</span></pre>
+  </body>
+</html>

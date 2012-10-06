@@ -1,0 +1,6 @@
+# -*- coding:utf-8 -*-
+
+#+TITLE: Tag: @perl
+
+#+LANGUAGE:  zh
+   + [[file:../perl/perl.org][perl 一的些总结]]

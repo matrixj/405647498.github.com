@@ -1,0 +1,136 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<!-- Created by htmlize-1.34 in css mode. -->
+<html>
+  <head>
+    <title>fscanf.org</title>
+    <style type="text/css">
+    <!--
+      body {
+        color: #F8F8F8;
+        background-color: #0C1021;
+      }
+      .comment {
+        /* font-lock-comment-face */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-block {
+        /* org-block */
+        color: #b3b3b3;
+      }
+      .org-block-begin-line {
+        /* org-block-begin-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-block-end-line {
+        /* org-block-end-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-document-info {
+        /* org-document-info */
+        color: #afeeee;
+      }
+      .org-document-info-keyword {
+        /* org-document-info-keyword */
+        color: #b3b3b3;
+      }
+      .org-document-title {
+        /* org-document-title */
+        color: #afeeee;
+        font-size: 144%;
+        font-weight: bold;
+      }
+      .org-meta-line {
+        /* org-meta-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+
+      a {
+        color: inherit;
+        background-color: inherit;
+        font: inherit;
+        text-decoration: inherit;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+    -->
+    </style>
+  </head>
+  <body>
+    <pre>
+<span class="comment"># -*- coding:utf-8 -*-</span>
+<span class="org-meta-line">#+LANGUAGE:  zh
+</span><span class="org-document-info-keyword">#+TITLE:</span><span class="comment">     </span><span class="org-document-title">fscanf&#31034;&#20363;</span>
+<span class="org-document-info-keyword">#+AUTHOR:</span><span class="comment">    </span><span class="org-document-info">&#32426;&#31168;&#23792;</span>
+<span class="org-document-info-keyword">#+EMAIL:</span><span class="comment">     </span><span class="org-document-info">jixiuf@gmail.com</span>
+<span class="org-document-info-keyword">#+DATE:</span><span class="comment">     </span><span class="org-document-info">2011-10-25 &#20108;</span>
+<span class="org-meta-line">#+DESCRIPTION:fscanf&#31034;&#20363;
+#+KEYWORDS: C fscanf
+#+OPTIONS:   H:2 num:nil toc:t \n:t @:t ::t |:t ^:t -:t f:t *:t &lt;:t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil 
+#+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
+#+EXPORT_SELECT_TAGS: export
+#+EXPORT_EXCLUDE_TAGS: noexport
+#+FILETAGS: @C
+</span>&#39318;&#20808;&#21521;&#25991;&#20214;&#20013;&#20889;&#20837;&#26684;&#24335;&#21270;&#25968;&#25454;,&#28982;&#21518;&#20877;&#29992;fscanf&#35835;&#20986;
+<span class="org-block-begin-line">#+begin_src c 
+</span><span class="org-block">  #include &lt;stdio.h&gt;
+  
+  int main( void )
+  {
+    long l;
+    float fp;
+    char s[81];
+    char c;
+    FILE *f = fopen("fscanf.out", "w+");
+   /* w&#34920;&#31034;&#21487;&#20889;,+&#34920;&#31034;&#22914;&#26524;&#25991;&#20214;&#19981;&#23384;&#22312;&#21017;&#21019;&#24314;&#20043; */
+  
+    fprintf( f, "%s %ld %f%c", "a-string", 65000l, 3.14159, 'x' );
+  
+    // Set pointer to beginning of file:
+    fseek( f, 0L, SEEK_SET );
+  
+    // Read data back from file:
+    fscanf(f, "%s", s );   // C4996
+    fscanf(f, "%ld", &amp;l ); // C4996
+    fscanf(f, "%f", &amp;fp ); // C4996
+    fscanf(f, "%c", &amp;c );  // C4996
+  
+    // Output data read:
+    printf( "%s\n", s );
+    printf( "%ld\n", l );
+    printf( "%f\n", fp );
+    printf( "%c\n", c );
+  
+    fclose( f );
+    return 0;
+  }
+  
+</span><span class="org-block-end-line">#+end_src
+</span><span class="org-block-begin-line">#+begin_src c
+</span><span class="org-block">  //file name : a.c
+  //created at: 2011&#24180;10&#26376;20&#26085; &#26143;&#26399;&#22235; 00&#26102;26&#20998;11&#31186;
+  //author:  &#32426;&#31168;&#23792;
+  //a.in&#20013;&#27599;&#34892;&#19968;&#20010;&#25968;&#23383;
+  
+  #include &lt;stdio.h&gt;
+  
+  int main(void){
+    FILE *in = fopen("a.in", "r");
+    int sum=0,i;
+    //&#36825;&#20010;&#37325;&#28857;&#26159;&#22914;&#20309;&#21028;&#26029;&#35835;&#33267;&#25991;&#20214;&#26411;&#23614;
+    while (fscanf(in,"%d\n",&amp;i)!=EOF){
+      printf ("%d\n",i);
+      sum+=i;
+    }
+    printf ("sum=%d\n",sum);
+  }
+  
+</span><span class="org-block-end-line">#+end_src
+</span></pre>
+  </body>
+</html>

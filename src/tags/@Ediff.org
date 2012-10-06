@@ -1,0 +1,6 @@
+# -*- coding:utf-8 -*-
+
+#+TITLE: Tag: @Ediff
+
+#+LANGUAGE:  zh
+   + [[file:../emacs/emacs-vc.org][emacs 进行版本控制(Version Control)]]

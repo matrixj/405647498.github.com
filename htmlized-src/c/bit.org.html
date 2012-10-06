@@ -1,0 +1,139 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<!-- Created by htmlize-1.34 in css mode. -->
+<html>
+  <head>
+    <title>bit.org</title>
+    <style type="text/css">
+    <!--
+      body {
+        color: #F8F8F8;
+        background-color: #0C1021;
+      }
+      .comment {
+        /* font-lock-comment-face */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .italic {
+        /* italic */
+        font-style: italic;
+      }
+      .org-block {
+        /* org-block */
+        color: #b3b3b3;
+      }
+      .org-block-begin-line {
+        /* org-block-begin-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-block-end-line {
+        /* org-block-end-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-document-info {
+        /* org-document-info */
+        color: #afeeee;
+      }
+      .org-document-info-keyword {
+        /* org-document-info-keyword */
+        color: #b3b3b3;
+      }
+      .org-document-title {
+        /* org-document-title */
+        color: #afeeee;
+        font-size: 144%;
+        font-weight: bold;
+      }
+      .org-link {
+        /* org-link */
+        color: #00ffff;
+        text-decoration: underline;
+      }
+      .org-meta-line {
+        /* org-meta-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+
+      a {
+        color: inherit;
+        background-color: inherit;
+        font: inherit;
+        text-decoration: inherit;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+    -->
+    </style>
+  </head>
+  <body>
+    <pre>
+<span class="comment"># -*- coding:utf-8 -*-</span>
+<span class="org-meta-line">#+LANGUAGE:  zh
+</span><span class="org-document-info-keyword">#+TITLE:</span><span class="comment">     </span><span class="org-document-title">&#20108;&#36827;&#21046;&#65292;int &#30340;&#19982;&#25110;&#38750;&#12289;&#31227;&#20301;&#25805;&#20316;</span>
+<span class="org-document-info-keyword">#+AUTHOR:</span><span class="comment">    </span><span class="org-document-info">&#32426;&#31168;&#23792;</span>
+<span class="org-document-info-keyword">#+EMAIL:</span><span class="comment">     </span><span class="org-document-info">jixiuf@gmail.com</span>
+<span class="org-document-info-keyword">#+DATE:</span><span class="comment">     </span><span class="org-document-info">2012-04-19 &#22235;</span>
+<span class="org-meta-line">#+DESCRIPTION:&#20108;&#36827;&#21046;&#65292;int &#30340;&#19982;&#25110;&#38750;
+#+KEYWORDS:
+#+OPTIONS:   H:2 num:nil toc:t \n:t @:t ::t |:t ^:nil -:t f:t *:t &lt;:t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil
+#+FILETAGS:@C
+</span>  <span class="italic">/* &#20301;&#30340;&#19982;&#25110;&#38750;&#65292;&#26159;&#38024;&#23545;int &#31867;&#22411;&#30340;&#12290;&#23545;&#20110;char short &#20250;&#34987;&#33258;&#21160;&#25552;&#21319;&#20026;int &#20043;&#21518;&#20877;&#20570;&#19982;&#25110;&#38750; */</span>
+  <span class="italic">/* ~ &#21462;&#36820;(&#21333;&#30446;&#36816;&#31639;&#31526;),0&#21464;1 1&#21464;0 */</span>
+
+  <span class="italic">/* ^ &#24322;&#25110; */</span>
+  &#20174;&#24322;&#25110;&#30340;&#30495;&#20540;&#34920;&#21487;&#20197;&#30475;&#20986;&#65292;&#19981;&#31649;&#26159;0&#36824;&#26159;1&#65292;&#21644;0&#20570;&#24322;&#25110;&#20445;&#25345;&#21407;&#20540;&#19981;&#21464;&#65292;&#21644;1
+  &#20570;&#24322;&#25110;&#24471;&#21040;&#21407;&#20540;&#30340;&#30456;&#21453;&#20540;
+<span class="org-block-begin-line">  #+BEGIN_SRC c
+</span><span class="org-block">      #include &lt;stdio.h&gt;
+      #include &lt;stdlib.h&gt;
+      #include &lt;malloc.h&gt;
+      #include &lt;string.h&gt;
+
+    /* 2&#12289;&#20174;&#24322;&#25110;&#30340;&#30495;&#20540;&#34920;&#21487;&#20197;&#30475;&#20986;&#65292;&#19981;&#31649;&#26159;0&#36824;&#26159;1&#65292;&#21644;0&#20570;&#24322;&#25110;&#20445;&#25345;&#21407;&#20540;&#19981;&#21464;&#65292;&#21644;1&#20570;&#24322;&#25110;&#24471;&#21040;&#21407;&#20540;&#30340;&#30456;&#21453;&#20540;&#12290;&#21487;&#20197;&#21033;&#29992;&#36825;&#20010;&#29305;&#24615;&#37197;&#21512;&#25513;&#30721;&#23454;&#29616;&#26576;&#20123;&#20301;&#30340;&#32763;&#36716;&#65292;&#20363;&#22914; */
+      int main(int argc, char *argv[]){
+        unsigned int a, b, mask = 1U ; /* 1U=2#00000000 00000000 00000000 00000001 */
+        a = 0x12345678;                 /*  2#10010 00110100 01010110 01111000 */
+        b = a ^ mask; /*                    2#10010 00110100 01010110 01111001*/
+        printf ("%x\n",b);
+        printf ("%x\n",1U);
+        return 0;
+      }
+</span><span class="org-block-end-line">  #+END_SRC
+</span>
+  1&#12289;&#19968;&#20010;&#25968;&#21644;&#33258;&#24049;&#20570;&#24322;&#25110;&#30340;&#32467;&#26524;&#26159;0&#12290;&#22914;&#26524;&#38656;&#35201;&#19968;&#20010;&#24120;&#25968;0&#65292;x86&#24179;&#21488;&#30340;&#32534;&#35793;&#22120;&#21487;&#33021;&#20250;&#29983;&#25104;
+  &#36825;&#26679;&#30340;&#25351;&#20196;&#65306;xorl %eax, %eax&#12290;&#19981;&#31649;eax&#23492;&#23384;&#22120;&#37324;&#30340;&#20540;&#21407;&#26469;&#26159;&#22810;&#23569;&#65292;&#20570;&#24322;&#25110;&#36816;&#31639;&#37117;&#33021;&#24471;
+  &#21040;0&#65292;&#36825;&#26465;&#25351;&#20196;&#27604;&#21516;&#26679;&#25928;&#26524;&#30340;movl $0, %eax&#25351;&#20196;&#24555;&#65292;&#30452;&#25509;&#23545;&#23492;&#23384;&#22120;&#20570;&#20301;&#36816;&#31639;&#27604;&#29983;&#25104;&#19968;&#20010;
+  &#31435;&#21363;&#25968;&#20877;&#20256;&#36865;&#21040;&#23492;&#23384;&#22120;&#35201;&#24555;&#19968;&#20123;&#12290;
+
+
+<span class="org-block-begin-line">#+BEGIN_SRC c
+</span><span class="org-block">  #include &lt;stdio.h&gt;
+  #include &lt;stdlib.h&gt;
+  #include &lt;malloc.h&gt;
+  #include &lt;string.h&gt;
+  int main(int argc, char *argv[]){
+    unsigned int a, b, mask = 0x0000ff00;
+    a = 0x12345678;               /* &#38024;&#23545;a&#30340;&#23545;8&#65374;15&#20301;&#36827;&#34892;&#25805;&#20316;&#65292; */
+    b = (a &amp; mask) &gt;&gt; 8; /* 0x00000056 */
+    printf ("%x\n",b);
+
+    b =( a&gt;&gt;8) &amp;(~((~0 )&lt;&lt;8 ));   /* ~0== ffffffff , (~0)&lt;&lt;8 == ffffff00 */
+    printf ("%x\n",b);
+
+    return 0;
+  }
+</span><span class="org-block-end-line">#+END_SRC
+</span>
+&#24038;&#31227;&lt;&lt; &#20302;&#20301;&#34917;0 &#65288;&#21516;&#26679;&#26159;&#38024;&#23545;int &#31867;&#22411;&#30340;&#25805;&#20316;&#65289;
+<span class="org-link">file:../download/shiftleft.png</span>
+
+&#21491;&#31227;&#21017;&#39640;&#20301;&#34917;0
+<span class="comment"># &#27880;&#24847;&#22914;&#20026;&#23545;&#36127;&#25968;&#65288;&#26368;&#39640;&#20301;&#20026;1&#65289;&#36827;&#34892;&#21491;&#31227;&#25805;&#20316;&#12290;&#39640;&#20301;&#34917;0&#36824;&#26159;&#34917;1&#19981;&#23450;&#65292;&#20381;&#32534;&#35793;&#22120;&#32780;&#23450;&#12290;</span>
+</pre>
+  </body>
+</html>

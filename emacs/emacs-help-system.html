@@ -3,14 +3,14 @@
                "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="zh" xml:lang="zh">
 <head>
-<title>一个人的狂欢</title>
+<title>emacs 的帮助系统</title>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
-<meta name="title" content="一个人的狂欢"/>
+<meta name="title" content="emacs 的帮助系统"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2011-06-04 星期六"/>
+<meta name="generated" content="2011-06-09 星期四"/>
 <meta name="author" content="孤峰独秀"/>
-<meta name="description" content=""/>
-<meta name="keywords" content=""/>
+<meta name="description" content="emacs 的帮助系统"/>
+<meta name="keywords" content="emacs help system"/>
 <style type='text/css'>
        body {
     background-color: #E5E5E5;
@@ -942,15 +942,15 @@ img {
 }
 
     </style>
-<link rel="stylesheet" type="text/css" href="style/emacs.css" />
-<script type='text/javascript' src='js/emacs.js'> </script>
+<link rel="stylesheet" type="text/css" href="../style/emacs.css" />
+<script type='text/javascript' src='../js/emacs.js'> </script>
 
 </head>
 <body>
 <div id="org-div-home-and-up" style="text-align:right;font-size:70%;white-space:nowrap;">
- <a accesskey="h" href="sitemap.html"> 站点地图 </a>
+ <a accesskey="h" href="../sitemap.html"> 站点地图 </a>
  |
- <a accesskey="H" href="index.html"> 首页 </a>
+ <a accesskey="H" href="../index.html"> 首页 </a>
 </div>
 
 <div id="preamble">
@@ -958,59 +958,159 @@ img {
 </div>
 
 <div id="content">
-<h1 class="title">一个人的狂欢</h1>
+<h1 class="title">emacs 的帮助系统</h1>
 
 
-<div id='logo-img' ><a  href='index.html'>▇█▓▒░◕~◕░▒▓█▇</a></div>
+<div id='logo-img' ><a  href='../index.html'>▇█▓▒░◕~◕░▒▓█▇</a></div>
 
 <div id='logo-text'>
   <a href='#' ><span align="left">░◕~◕░</span></a>
 </div>
 
 
+
+<p>
+Emacs的帮助系统的按键前缀是C-h, 和F1
+</p>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
 <ul>
-<li>首页还未做好，先看<a href="sitemap.html">站点地图</a>吧
-</li>
-<li><a href="about.html">About</a>
+</ul>
+</div>
+</div>
+<ul>
+<li id="sec-1">首先是关于帮助系统的帮助系统<br/>
+C-h ?  实际是C-h S-/,它会列出C-h 前缀下可用的命令，如b ,列出当前可用的键绑定，完整的按键
+是C-h b
+
+
 </li>
 </ul>
+<ul>
+<li id="sec-2">查看变量的值和文档<br/>
+    C-h v (describe-variable) 
+</li>
+</ul>
+<ul>
+<li id="sec-3">查看函数的文档<br/>
+    C-h f (describe-function)
+    查看face的文档
+</li>
+</ul>
+<ul>
+<li id="sec-4">M-x describe-face<br/>
+    查看某个mode的文档
+</li>
+</ul>
+<ul>
+<li id="sec-5">C-h m (describe-mode)<br/>
+    刚开始学习某个mode的时候, 可以用C-h m看看当前buffer对应的主mode和副mode的文档, 这个文档一般都会包括mode中的命令和快捷键列表.
+    查看某个快捷键对应的命令
+</li>
+</ul>
+<ul>
+<li id="sec-6">C-h k (describe-key)<br/>
+    查看某个命令对应的快捷键
+</li>
+</ul>
+<ul>
+<li id="sec-7">C-h w (where-is)<br/>
+    查看当前buffer所有的快捷键列表
+</li>
+</ul>
+<ul>
+<li id="sec-8">C-h b (describe-bindings)<br/>
+    查看当前buffer中以某个快捷键序列开头的快捷键列表
+    &lt;待查看的快捷键序列&gt; C-h，比如你想查看当前buffer中所有以C-c开头的快捷键列表，按C-c C-h就可以了。
+    查看函数的代码
+</li>
+</ul>
+<ul>
+<li id="sec-9">find-function<br/>
+    查看变量的代码
+</li>
+</ul>
+<ul>
+<li id="sec-10">find-variable<br/>
+    查看face的代码
+</li>
+</ul>
+<ul>
+<li id="sec-11">find-face-definition<br/>
+</li>
+</ul>
+<ul>
+<li id="sec-12">M-x apropos<br/>
+    查看包含某个关键词的函数,变量,face
 
+</li>
+</ul>
+<ul>
+<li id="sec-13">会些简单的配置<br/>
+
+<p>
+    执行Elisp代码
+        在某条语句后面按C-x C-e (eval-last-sexp)可以执行那条语句
+        M-x eval-buffer 可以执行当前buffer内的Elisp代码
+        选中一个region后, M-x eval-region可以执行这个region内的代码
+    Emacs的插件一般都是一个以el为后缀名的文件, 把这个文件下载下来后放到一个目录, 比如~/emacs/lisps, 然后执行下面这两条语句:
+</p>
+
+
+<pre class="src src-emacs-lisp">(add-to-list 'load-path <span class="org-string">"~/emacs/lisps"</span>)
+(<span class="org-keyword">require</span> '<span class="org-constant">pluginname</span>)
+</pre>
+
+</li>
+</ul>
+<ul>
+<li id="sec-14">快捷键定制<br/>
+       建议看<a href="http://docs.huihoo.com/homepage/shredderyin/wiki/KeyBinding.html">王垠的键盘绑定技巧</a>
+</li>
+</ul>
+<ul>
+<li id="sec-15">参考文献<br/>
+<a href="http://emacser.com/emacs-beginner-must-know.htm">emacser中文网ahei Emacs初学者必会</a>
 
 
 
 <div id='my-src'>
-<div id='org-src'><a href='src/index.org'>src</a></div>
-<div id='htmlized-src'><a href='htmlized-src/index.org.html'>htmlized-src</a></div>
+<div id='org-src'><a href='../src/emacs/emacs-help-system.org'>src</a></div>
+<div id='htmlized-src'><a href='../htmlized-src/emacs/emacs-help-system.org.html'>htmlized-src</a></div>
 </div>
 <div id='tags'><span id='tags-title'>Tags:</span><br />
 <p>
-    <a href="tags/@SVN.html">@SVN</a>
-    <a href="tags/@perl.html">@perl</a>
-    <a href="tags/@Java.html">@Java</a>
-    <a href="tags/@Mysql.html">@Mysql</a>
-    <a href="tags/@Erlang.html">@Erlang</a>
-    <a href="tags/@SQL.html">@SQL</a>
-    <a href="tags/@DB.html">@DB</a>
-    <a href="tags/@Oracle.html">@Oracle</a>
-    <a href="tags/@Ediff.html">@Ediff</a>
-    <a href="tags/@Git.html">@Git</a>
-    <a href="tags/@Cedet.html">@Cedet</a>
-    <a href="tags/@C-C++.html">@C-C++</a>
-    <a href="tags/@Daily.html">@Daily</a>
-    <a href="tags/@Eclipse.html">@Eclipse</a>
-    <a href="tags/@AutoHotKey.html">@AutoHotKey</a>
-    <a href="tags/@Windows.html">@Windows</a>
-    <a href="tags/@Linux.html">@Linux</a>
-    <a href="tags/@C.html">@C</a>
-    <a href="tags/@Emacs.html">@Emacs</a>
+    <a href="../tags/@SVN.html">@SVN</a>
+    <a href="../tags/@perl.html">@perl</a>
+    <a href="../tags/@Java.html">@Java</a>
+    <a href="../tags/@Mysql.html">@Mysql</a>
+    <a href="../tags/@Erlang.html">@Erlang</a>
+    <a href="../tags/@SQL.html">@SQL</a>
+    <a href="../tags/@DB.html">@DB</a>
+    <a href="../tags/@Oracle.html">@Oracle</a>
+    <a href="../tags/@Ediff.html">@Ediff</a>
+    <a href="../tags/@Git.html">@Git</a>
+    <a href="../tags/@Cedet.html">@Cedet</a>
+    <a href="../tags/@C-C++.html">@C-C++</a>
+    <a href="../tags/@Daily.html">@Daily</a>
+    <a href="../tags/@Eclipse.html">@Eclipse</a>
+    <a href="../tags/@AutoHotKey.html">@AutoHotKey</a>
+    <a href="../tags/@Windows.html">@Windows</a>
+    <a href="../tags/@Linux.html">@Linux</a>
+    <a href="../tags/@C.html">@C</a>
+    <a href="../tags/@Emacs.html">@Emacs</a>
 </p>
 
 
 </div>
+</li>
+</ul>
+</div>
 </div>
 
 <div id="postamble">
-<p class="date">Date: 2011-06-04 星期六</p>
+<p class="date">Date: 2011-06-09 星期四</p>
 <p class="author">Author: 孤峰独秀</p>
 <p class="creator">Org version 7.8.03 with Emacs version 24</p>
 

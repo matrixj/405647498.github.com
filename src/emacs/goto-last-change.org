@@ -1,0 +1,20 @@
+# -*- coding:utf-8 -*-
+#+LANGUAGE:  zh
+#+TITLE:     goto-last-change.el 跳转到最近几次编辑的位置
+#+AUTHOR:    纪秀峰
+#+EMAIL:     jixiuf@gmail.com
+#+DATE:     2012-07-04 三
+#+DESCRIPTION:goto-last-change.org
+#+KEYWORDS:
+#+OPTIONS:   H:2 num:nil toc:t \n:t @:t ::t |:t ^:nil -:t f:t *:t <:t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil
+#+FILETAGS:
+emacs 一个好处是可以快速进行光标的定位，包括跳转到 单词、变量、行、函数、表达
+式的开头、结果等。这个 [[http://www.emacswiki.org/emacs/GotoLastChange][GotoLastChange]] 也是一个进行快速定位的扩展，
+你在某个buffer中的某处进行了编辑，然后又到另一个跨度较大的地方进行编辑，突然想
+回到原来位置时，这个扩展就很有用处了。这个扩展不仅记住的是最近一次的编辑位置，
+而已可以记住最近n次的编辑位置，只要多次调用goto-last-change即可
+#+BEGIN_SRC emacs-list
+    (require 'goto-last-change)
+    (global-set-key (kbd "C-x C-/") 'goto-last-change)
+#+END_SRC

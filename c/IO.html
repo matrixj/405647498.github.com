@@ -3,13 +3,13 @@
                "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="zh" xml:lang="zh">
 <head>
-<title>一个人的狂欢</title>
+<title>IO.org</title>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
-<meta name="title" content="一个人的狂欢"/>
+<meta name="title" content="IO.org"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2011-06-04 星期六"/>
-<meta name="author" content="孤峰独秀"/>
-<meta name="description" content=""/>
+<meta name="generated" content="2011-10-25 二"/>
+<meta name="author" content="纪秀峰"/>
+<meta name="description" content="IO.org"/>
 <meta name="keywords" content=""/>
 <style type='text/css'>
        body {
@@ -942,15 +942,15 @@ img {
 }
 
     </style>
-<link rel="stylesheet" type="text/css" href="style/emacs.css" />
-<script type='text/javascript' src='js/emacs.js'> </script>
+<link rel="stylesheet" type="text/css" href="../style/emacs.css" />
+<script type='text/javascript' src='../js/emacs.js'> </script>
 
 </head>
 <body>
 <div id="org-div-home-and-up" style="text-align:right;font-size:70%;white-space:nowrap;">
- <a accesskey="h" href="sitemap.html"> 站点地图 </a>
+ <a accesskey="h" href="../sitemap.html"> 站点地图 </a>
  |
- <a accesskey="H" href="index.html"> 首页 </a>
+ <a accesskey="H" href="../index.html"> 首页 </a>
 </div>
 
 <div id="preamble">
@@ -958,60 +958,160 @@ img {
 </div>
 
 <div id="content">
-<h1 class="title">一个人的狂欢</h1>
+<h1 class="title">IO.org</h1>
 
 
-<div id='logo-img' ><a  href='index.html'>▇█▓▒░◕~◕░▒▓█▇</a></div>
+<div id='logo-img' ><a  href='../index.html'>▇█▓▒░◕~◕░▒▓█▇</a></div>
 
 <div id='logo-text'>
   <a href='#' ><span align="left">░◕~◕░</span></a>
 </div>
 
 
-<ul>
-<li>首页还未做好，先看<a href="sitemap.html">站点地图</a>吧
-</li>
-<li><a href="about.html">About</a>
-</li>
-</ul>
+<pre class="src src-c"><span class="org-comment-delimiter">/* </span><span class="org-comment">line_nums.c &#25991;&#20214;&#25805;&#20316;&#30340;&#31034;&#20363;,&#27604;&#22914;&#27492;&#22788;&#22914;&#20309;&#21028;&#26029;&#35835;&#33267;&#25991;&#20214;&#23614;</span>
+<span class="org-comment">Sample Usage :    line_nums &lt; /etc/group</span>
+<span class="org-comment-delimiter">*/</span>
+<span class="org-preprocessor">#include</span> <span class="org-string">&lt;stdio.h&gt;</span>
+<span class="org-preprocessor">#include</span> <span class="org-string">&lt;stdlib.h&gt;</span>
+<span class="org-preprocessor">#define</span> <span class="org-variable-name">TRUE</span> 1
+<span class="org-type">int</span> <span class="org-variable-name">lineno</span> = 0;
+<span class="org-type">int</span> <span class="org-variable-name">error_flag</span> = 0;
+<span class="org-type">char</span> <span class="org-variable-name">buf</span>[BUFSIZ]; <span class="org-comment-delimiter">/* </span><span class="org-comment">BUFSIZ is defined in stdio.h </span><span class="org-comment-delimiter">*/</span>
+
+<span class="org-function-name">main</span>(){
+  <span class="org-keyword">while</span>(TRUE){
+    <span class="org-keyword">if</span> (fgets(buf,BUFSIZ, stdin) == <span class="org-constant">NULL</span>){
+      <span class="org-comment-delimiter">/* </span><span class="org-comment">fgets &#36820;&#22238;nulll&#26377;&#20004;&#31181;&#21487;&#33021;,error&#25110;&#21040;&#25991;&#20214;&#23614;,&#25925;&#26377;ferror &#19982;feof&#26469;&#21028;&#26029;&#31350;&#31455;&#26159;&#21738;&#19968;&#31181; </span><span class="org-comment-delimiter">*/</span>
+      <span class="org-keyword">if</span> (ferror(stdin) != 0){
+        fprintf(stderr,<span class="org-string">"Error during reading\n"</span>);
+        error_flag = 1;
+      }
+      <span class="org-keyword">if</span> (feof(stdin) != 0)
+        fprintf(stderr,<span class="org-string">"File ended\n"</span>);
+      clearerr(stdin);
+      <span class="org-keyword">break</span>; <span class="org-comment-delimiter">/* </span><span class="org-comment">exit the while loop </span><span class="org-comment-delimiter">*/</span>
+    }
+    <span class="org-keyword">else</span>{
+      lineno++;
+      <span class="org-comment-delimiter">/* </span><span class="org-comment">in the next line, "%3d" is used to restrict the</span>
+<span class="org-comment">         number to 3 digits.</span>
+<span class="org-comment">      </span><span class="org-comment-delimiter">*/</span>
+      fprintf(stdout,<span class="org-string">"%3d: "</span>, lineno);
+      fputs(buf, stdout);
+    }
+  }
+  fprintf(stderr,<span class="org-string">"%d lines written\n"</span>, lineno);
+  printf (<span class="org-string">"%d\n"</span>,BUFSIZ);
+  exit(error_flag);
+}
+</pre>
 
 
+<pre class="src src-c"><span class="org-preprocessor">#include</span> <span class="org-string">&lt;stdio.h&gt;</span>
+<span class="org-preprocessor">#include</span> <span class="org-string">&lt;stdlib.h&gt;</span>
+<span class="org-preprocessor">#include</span> <span class="org-string">&lt;sys/types.h&gt;</span>
+<span class="org-preprocessor">#include</span> <span class="org-string">&lt;sys/stat.h&gt;</span>
+<span class="org-preprocessor">#include</span> <span class="org-string">&lt;fcntl.h&gt;</span>    <span class="org-comment-delimiter">/* </span><span class="org-comment">the man pages of the commands say which</span>
+<span class="org-comment">                         include files need to be mentioned </span><span class="org-comment-delimiter">*/</span>
+<span class="org-preprocessor">#define</span> <span class="org-variable-name">TRUE</span> 1
+<span class="org-type">int</span> bytes_read;
+<span class="org-type">size_t</span>  <span class="org-variable-name">fp_bytes_read</span>;
+<span class="org-type">int</span> <span class="org-variable-name">fd</span>;   <span class="org-comment-delimiter">/* </span><span class="org-comment">File descriptors </span><span class="org-comment-delimiter">*/</span>
+<span class="org-type">int</span> <span class="org-variable-name">fd2</span>;
+<span class="org-type">FILE</span> *<span class="org-variable-name">fp</span>; <span class="org-comment-delimiter">/* </span><span class="org-comment">File pointers </span><span class="org-comment-delimiter">*/</span>
+<span class="org-type">FILE</span> *<span class="org-variable-name">fp2</span>;
+<span class="org-type">char</span> <span class="org-variable-name">buffer</span>[BUFSIZ]; <span class="org-comment-delimiter">/* </span><span class="org-comment">BUFSIZ is set up in stdio.h </span><span class="org-comment-delimiter">*/</span>
+
+<span class="org-function-name">main</span>(){
+
+  <span class="org-comment-delimiter">/* </span><span class="org-comment">Use File descriptors </span><span class="org-comment-delimiter">*/</span>
+  fd = open (<span class="org-string">"/etc/group"</span>, O_RDONLY);
+  <span class="org-keyword">if</span> (fd == -1){
+    perror(<span class="org-string">"Opening /etc/group"</span>);
+    exit(1);
+  }
+
+  <span class="org-keyword">while</span> (TRUE){
+    bytes_read = read (fd, buffer,BUFSIZ);
+    <span class="org-keyword">if</span> (bytes_read&gt;0)
+      printf(<span class="org-string">"%d bytes read from /etc/group.\n"</span>, bytes_read);
+    <span class="org-keyword">else</span>{
+      <span class="org-keyword">if</span> (bytes_read==0){
+        printf(<span class="org-string">"End of file /etc/group reached\n"</span>);
+        close(fd);
+        <span class="org-keyword">break</span>;
+      }
+      <span class="org-keyword">else</span> <span class="org-keyword">if</span> (bytes_read == -1){
+        perror(<span class="org-string">"Reading /etc/group"</span>);
+        exit(1);
+      }
+    }
+  }
+
+
+  <span class="org-comment-delimiter">/* </span><span class="org-comment">now use file pointers </span><span class="org-comment-delimiter">*/</span>
+  fp = fopen(<span class="org-string">"/etc/passwd"</span>,<span class="org-string">"r"</span>);
+  <span class="org-keyword">if</span> (fp == <span class="org-constant">NULL</span>){
+    printf(<span class="org-string">"fopen failed to open /etc/passwd\n"</span>);
+    exit(1);
+  }
+
+  <span class="org-keyword">while</span>(TRUE){
+    fp_bytes_read= fread (buffer, 1, BUFSIZ, fp);
+    printf(<span class="org-string">"%d bytes read from /etc/passwd.\n"</span>, fp_bytes_read);
+    <span class="org-keyword">if</span> (fp_bytes_read==0)
+      <span class="org-keyword">break</span>;
+  }
+
+  rewind(fp); <span class="org-comment-delimiter">/* </span><span class="org-comment">go back to the start of the file </span><span class="org-comment-delimiter">*/</span>
+
+  <span class="org-comment-delimiter">/* </span><span class="org-comment">Find the descriptor associated with a stream </span><span class="org-comment-delimiter">*/</span>
+  fd2 = fileno (fp);
+  <span class="org-keyword">if</span> (fd2 == -1)
+    printf(<span class="org-string">"fileno failed\n"</span>);
+
+  <span class="org-comment-delimiter">/* </span><span class="org-comment">Find the stream associated with a descriptor </span><span class="org-comment-delimiter">*/</span>
+  fp2 = fdopen (fd2, <span class="org-string">"r"</span>);
+  <span class="org-keyword">if</span> (fp2 == <span class="org-constant">NULL</span>)
+    printf(<span class="org-string">"fdopen failed\n"</span>);
+  fclose(fp2);
+}
+</pre>
 
 
 <div id='my-src'>
-<div id='org-src'><a href='src/index.org'>src</a></div>
-<div id='htmlized-src'><a href='htmlized-src/index.org.html'>htmlized-src</a></div>
+<div id='org-src'><a href='../src/c/IO.org'>src</a></div>
+<div id='htmlized-src'><a href='../htmlized-src/c/IO.org.html'>htmlized-src</a></div>
 </div>
 <div id='tags'><span id='tags-title'>Tags:</span><br />
 <p>
-    <a href="tags/@SVN.html">@SVN</a>
-    <a href="tags/@perl.html">@perl</a>
-    <a href="tags/@Java.html">@Java</a>
-    <a href="tags/@Mysql.html">@Mysql</a>
-    <a href="tags/@Erlang.html">@Erlang</a>
-    <a href="tags/@SQL.html">@SQL</a>
-    <a href="tags/@DB.html">@DB</a>
-    <a href="tags/@Oracle.html">@Oracle</a>
-    <a href="tags/@Ediff.html">@Ediff</a>
-    <a href="tags/@Git.html">@Git</a>
-    <a href="tags/@Cedet.html">@Cedet</a>
-    <a href="tags/@C-C++.html">@C-C++</a>
-    <a href="tags/@Daily.html">@Daily</a>
-    <a href="tags/@Eclipse.html">@Eclipse</a>
-    <a href="tags/@AutoHotKey.html">@AutoHotKey</a>
-    <a href="tags/@Windows.html">@Windows</a>
-    <a href="tags/@Linux.html">@Linux</a>
-    <a href="tags/@C.html">@C</a>
-    <a href="tags/@Emacs.html">@Emacs</a>
+    <a href="../tags/@SVN.html">@SVN</a><br/>
+    <a href="../tags/@perl.html">@perl</a><br/>
+    <a href="../tags/@Java.html">@Java</a><br/>
+    <a href="../tags/@Mysql.html">@Mysql</a><br/>
+    <a href="../tags/@Erlang.html">@Erlang</a><br/>
+    <a href="../tags/@SQL.html">@SQL</a><br/>
+    <a href="../tags/@DB.html">@DB</a><br/>
+    <a href="../tags/@Oracle.html">@Oracle</a><br/>
+    <a href="../tags/@Ediff.html">@Ediff</a><br/>
+    <a href="../tags/@Git.html">@Git</a><br/>
+    <a href="../tags/@Cedet.html">@Cedet</a><br/>
+    <a href="../tags/@C-C++.html">@C-C++</a><br/>
+    <a href="../tags/@Daily.html">@Daily</a><br/>
+    <a href="../tags/@Eclipse.html">@Eclipse</a><br/>
+    <a href="../tags/@AutoHotKey.html">@AutoHotKey</a><br/>
+    <a href="../tags/@Windows.html">@Windows</a><br/>
+    <a href="../tags/@Linux.html">@Linux</a><br/>
+    <a href="../tags/@C.html">@C</a><br/>
+    <a href="../tags/@Emacs.html">@Emacs</a><br/>
 </p>
-
-
+<p><br/>
 </div>
-</div>
+</p></div>
 
 <div id="postamble">
-<p class="date">Date: 2011-06-04 星期六</p>
-<p class="author">Author: 孤峰独秀</p>
+<p class="date">Date: 2011-10-25 二</p>
+<p class="author">Author: 纪秀峰</p>
 <p class="creator">Org version 7.8.03 with Emacs version 24</p>
 
 

@@ -1,0 +1,16 @@
+# -*- coding:utf-8 -*-
+#+LANGUAGE:  zh
+#+TITLE:     c拾遗
+#+AUTHOR:    纪秀峰
+#+EMAIL:     jixiuf@gmail.com
+#+DATE:     2012-08-01 星期三
+#+DESCRIPTION:c拾遗
+#+KEYWORDS: @C
+#+OPTIONS:   H:2 num:nil toc:t \n:t @:t ::t |:t ^:nil -:t f:t *:t <:t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil
+#+FILETAGS:@C
+
+#+BEGIN_SRC c
+比如MAKE_MASK(3 )会生成  二进制的 00000111
+#define MAKE_MASK(n)  ((((int)1) << (n)) -1)
+#+END_SRC

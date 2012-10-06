@@ -1,0 +1,204 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<!-- Created by htmlize-1.34 in css mode. -->
+<html>
+  <head>
+    <title>nxml-mode.org</title>
+    <style type="text/css">
+    <!--
+      body {
+        color: #F8F8F8;
+        background-color: #0C1021;
+      }
+      .comment {
+        /* font-lock-comment-face */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .ethan-wspace {
+        /* ethan-wspace-face */
+        background-color: #ffffcccccccc;
+      }
+      .org-block {
+        /* org-block */
+        color: #b3b3b3;
+      }
+      .org-block-begin-line {
+        /* org-block-begin-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-block-end-line {
+        /* org-block-end-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-document-info {
+        /* org-document-info */
+        color: #afeeee;
+      }
+      .org-document-info-keyword {
+        /* org-document-info-keyword */
+        color: #b3b3b3;
+      }
+      .org-document-title {
+        /* org-document-title */
+        color: #afeeee;
+        font-size: 144%;
+        font-weight: bold;
+      }
+      .org-level-1 {
+        /* org-level-1 */
+        color: #FF6400;
+      }
+      .org-link {
+        /* org-link */
+        color: #00ffff;
+        text-decoration: underline;
+      }
+      .org-meta-line {
+        /* org-meta-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+
+      a {
+        color: inherit;
+        background-color: inherit;
+        font: inherit;
+        text-decoration: inherit;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+    -->
+    </style>
+  </head>
+  <body>
+    <pre>
+<span class="comment"># -*- coding:utf-8 -*-</span>
+<span class="org-meta-line">#+LANGUAGE:  zh
+</span><span class="org-document-info-keyword">#+TITLE:</span><span class="comment">     </span><span class="org-document-title">nxml-mode&#34917;&#20840;</span>
+<span class="org-document-info-keyword">#+AUTHOR:</span><span class="comment">    </span><span class="org-document-info">&#32426;&#31168;&#23792;</span>
+<span class="org-document-info-keyword">#+EMAIL:</span><span class="comment">     </span><span class="org-document-info">jixiuf@gmail.com</span>
+<span class="org-document-info-keyword">#+DATE:</span><span class="comment">     </span><span class="org-document-info">2011-10-22 &#20845;</span>
+<span class="org-meta-line">#+DESCRIPTION:nxml-mode&#34917;&#20840;
+#+KEYWORDS: emacs nxml mode
+#+OPTIONS:   H:2 num:nil toc:t \n:t @:t ::t |:t ^:t -:t f:t *:t &lt;:t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil 
+#+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
+#+EXPORT_SELECT_TAGS: export
+#+EXPORT_EXCLUDE_TAGS: noexport
+#+FILETAGS: @Emacs
+</span>
+&#20351;&#29992;&#20171;&#32461; <span class="org-link">http://jamsa.javaeye.com/blog/38202</span>
+&#23448;&#26041;&#20869;&#23481;:
+<span class="org-link">http://infohost.nmt.edu/tcc/help/pubs/nxml/schema-locating.html</span>
+
+emacs nxml-mode &#21482;&#25903;&#25345;rnc&#26684;&#24335;&#30340;xml &#35299;&#26512;
+dtd ---&gt;rnc
+xsd----&gt;rng-----&gt;rnc
+&#38656;&#35201;&#29992;&#21040;&#30340;&#36716;&#25442;&#24037;&#20855;trang.jar     dtd---&gt;rnc         rng---&gt;rnc
+                 rngconv.jar    xsd ----&gt;rnc
+
+<span class="org-level-1">* dtd &#20351;&#29992; trang</span>
+<span class="comment"># java -jar trang.jar http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd hibernate-mapping-3.0.rnc  </span>
+<span class="comment"># java -jar trang.jar  http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd hibernate-cfg-3.0.rnc</span>
+&#23558;&#29983;&#25104;&#30340;hibernate-mapping-3.0.rnc&#22797;&#21046;&#21040;emacs&#30340;nXML-mode&#23433;&#35013;&#30446;&#24405;&#12290;
+     (add-to-list 'rng-schema-locating-files (expand-file-name "~/.emacs.d/script/nxml/schemas.xml"))
+     &#25105;copy  &#21040; "~/.emacs.d/script/nxml/" &#36825;&#20010;&#30446;&#24405;&#20063;&#21487;
+     &#20462;&#25913;nXML-mode&#23433;&#35013;&#30446;&#24405;&#19979;&#30340;schema/schema.xml&#12290;&#22312;&#25991;&#20214;&#20013;&#22686;&#21152;&#19968;&#31181;&#26032;&#30340;&#25991;&#20214;&#31867;&#22411;&#23545;&#36136;&#65292;&#22312;&#25991;&#20214;&#20013;&#21152;&#20837;&#65306;
+
+     xml &#20195;&#30721;
+   1. &lt;typeId id="Hibernate HBM" uri="hibernate-mapping-3.0.rnc"/&gt; 
+   &#22312;schema.xml&#25991;&#20214;&#20013;&#21152;&#20837;hbm&#30340;&#19968;&#31181;&#35782;&#21035;&#26041;&#24335;&#65292;&#36825;&#37324;&#23558;&#26681;&#25454;&#25991;&#20214;&#21517;&#20197;hbm.xml&#32467;&#23614;&#65292;&#26469;&#35782;&#21035;&#36825;&#26159;&#19968;&#20010;Hibernate HBM&#31867;&#22411;&#30340;&#25991;&#20214;&#65306;
+        &lt;uri pattern="*.hbm.xml" typeId="Hibernate HBM"/&gt;  
+
+       ------------------------------------------------------
+<span class="org-level-1">* xsd</span>
+rngconv &#23558; xsd&#36716;&#25442;&#25104;rng&#26684;&#24335;&#20379;emacs nxml-mode &#32534;&#36753;xml&#25991;&#20214;&#20351;&#29992;
+   1. java -jar rngconv.jar <span class="org-link">http://maven.apache.org/maven-v4_0_0.xsd</span> &gt;&gt; maven2.rng  
+       java -jar trang.jar maven2.rng maven2.rnc  
+
+       &#23558;maven2.rnc&#22797;&#21046;&#21040;nXML-mode&#23433;&#35013;&#30446;&#24405;&#20013;&#12290;&#20462;&#25913;schema.xml&#22686;&#21152;&#19968;&#31181;&#26032;&#30340;&#31867;&#22411;
+           &lt;typeId id="Maven2" uri="maven2.rnc"/&gt;  
+
+&#20462;&#25913;schema.xml&#65292;&#21152;&#20837;&#33258;&#21160;&#35782;&#21035;pom&#25991;&#20214;&#30340;&#21151;&#33021;&#65292;&#36825;&#37324;&#19981;&#36890;&#36807;&#25991;&#20214;&#21517;&#26469;&#35782;&#21035;&#65292;&#32780;&#26159;&#20351;&#29992;namespace&#26469;&#35782;&#21035;
+ &lt;namespace ns="<span class="org-link">http://maven.apache.org/POM/4.0.0</span>" typeId="Maven2" /&gt;  
+pom.xml &#30340;&#22836;&#37096;&#22768;&#26126;&#26159;&#36825;&#26679;&#30340;
+ &lt;project xmlns="<span class="org-link">http://maven.apache.org/POM/4.0.0</span>"
+<span class="ethan-wspace">    </span>xsi:schemaLocation="<span class="org-link">http://maven.apache.org/POM/4.0.0</span> <span class="org-link">http://maven.apache.org/maven-v4_0_0.xsd</span>"
+<span class="ethan-wspace">    </span>xmlns:xsi="<span class="org-link">http://www.w3.org/2001/XMLSchema-instance</span>"&gt;
+
+
+.
+&#23448;&#26041;&#20869;&#23481;:
+<span class="org-link">http://infohost.nmt.edu/tcc/help/pubs/nxml/schema-locating.html</span>
+&#20851;&#20110;schemas.xml &#20869;&#23481;&#30340;&#20171;&#32461;:
+&#19979;&#38754;&#26159;&#19968;&#31995;&#21015;&#21305;&#37197;&#35268;&#21017;&#29992;&#20110;&#36873;&#25321;&#20351;&#29992;&#21738;&#20010;schema locating file:
+<span class="org-level-1">* &lt;uri resource="f" uri="s"/&gt;</span>
+&#34920;&#31034;&#23558;f &#23545;s(s is a schema file) &#36827;&#34892;&#20851;&#32852;. f &#21487;&#20197;&#26159;&#19968;&#20010; full URL &#20063;&#21487;&#20197;&#26159;&#19968;&#20010;&#26412;&#22320;&#30340;&#25991;&#20214;
+ &#27604;&#22914;:&lt;uri resource="abc.xyz" uri="xyz.rnc"/&gt;
+ &#34920;&#31034;&#25991;&#20214;&#25171;&#24320;abc.xyz &#26102;&#20351;&#29992;xyz.rnc &#23545;&#20854;&#36827;&#34892;&#35299;&#26512;.
+
+<span class="org-level-1">* &lt;uri pattern="p" uri="s"/&gt;</span>
+  &#30456;&#23545;&#20110; &lt;uri pattern="p" uri="s"/&gt; &#20013;&#30340;resource &#25152;&#25351;&#23450;&#30340;&#20869;&#23481;&#26159;&#19968;&#20010;&#29305;&#23450;&#30340;&#19981;
+  &#20855;&#36890;&#29992;&#24615;.pattern &#21487;&#20197;&#26159;&#19968;&#20010;regexp &#21305;&#37197;&#26576;&#19968;&#31867;&#30340;&#25991;&#20214;.
+&#27604;&#22914;:  &lt;uri pattern="*.hbm.xml" uri="hibernate-mapping-3.0.rnc"/&gt;
+&#25152;&#26377;&#20197;hbm.xml &#32467;&#23614;&#30340;&#25991;&#20214;,&#23558;&#20351;&#19988;hibernate-mapping-3.rnc &#23545;&#20854;&#36827;&#34892;&#35299;&#26512;
+
+<span class="org-level-1">* &lt;uri pattern="p" typeId="T"/&gt;</span>
+  pattern &#19982;&#21069;&#32773;&#30456;&#21516;,typeId &#21017;&#26159;&#19968;&#20010;Id
+  &#27604;&#22914;:
+    &lt;uri pattern="*.xsl" typeId="XSLT"/&gt;
+    &lt;typeId id="XSLT" uri="xslt.rnc"/&gt;
+    &#25928;&#26524;&#19982;
+    &lt;uri pattern="*.xsl" uri="xslt.rnc"/&gt;&#21516;
+    typeId &#23384;&#22312;&#30340;&#24517;&#35201;&#20165;&#20165;&#26159; &#22810;&#31181;&#21305;&#37197;&#35268;&#21017;&#37117;&#20351;&#29992;&#21516;&#19968;&#20010;schema s &#36827;&#34892;&#35299;&#26512;&#30340;&#26102;&#20505;
+  &#29992;,&#24403;&#28982;&#21487;&#20197;&#36873;&#25321;&#19981;&#29992;
+    
+<span class="org-level-1">* &lt;documentElement prefix="N" localName="E" uri="s"/&gt;</span>
+  &#21363;&#22914;&#26524;&#19968;&#20010;xml &#25991;&#20214;&#30340;&#26681;&#20803;&#32032;&#26159;E ,&#24182;&#19988;&#20854;namespace&#26159;N&#30340;&#35805;,&#23558;&#20351;&#29992; schema s  
+  &lt;documentElement prefix="" localName="hibernate-mapping" uri="hibernate.rnc"/&gt;
+  &#27604;&#22914;:&#26681;&#20803;&#32032;&#26159;hibernate-mapping &#21069;&#32512;&#26159;&#31354;&#30340;&#25991;&#20214;,&#23558;&#20351;&#29992;hibernate.rnc &#36827;&#34892;&#35299;
+  &#26512;
+  &lt;documentElement prefix="" localName="hibernate-mapping" uri="hibernate-mapping-3.0.rnc"/&gt; 
+
+  prefix&#21442;&#25968;&#21487;&#20197;&#30465;&#30053;,&#34920;&#31034;&#21482;&#35201;localName="E" &#21363;&#21487;,&#19981;&#32771;&#34385;namespace&#30340;&#24433;&#21709;
+  &lt;documentElement  localName="hibernate-mapping" uri="hibernate-mapping-3.0.rnc"/&gt; 
+  &lt;documentElement prefix="" localName="hibernate-mapping" uri="hibernate-mapping-3.0.rnc"/&gt; 
+&#20004;&#32773;&#25928;&#26524;&#30456;&#21516;
+&#21478;&#22806;,&#20284;&#20046;prefix localName &#20004;&#21442;&#25968;&#21482;&#26159;&#21487;&#30465;&#30053;&#30340;&#21442;&#25968;
+<span class="org-level-1">* &lt;documentElement prefix="N" localName="E" typeId="T"/&gt;</span>
+  &#26377;&#20102;&#21069;&#20004;&#20010;,&#36825;&#20010;&#24212;&#35813;&#19981;&#38590;&#29702;&#35299;
+  &lt;documentElement localName="stylesheet" typeId="XSLT"/&gt; ;&#25152;&#20197;root element 
+  &#26159;stylesheep &#30340;xml&#25991;&#20214;&#20351;&#29992;&#31867;&#22411;XSLT&#31867;&#22411;&#30340;schemas&#36827;&#34892;&#35299;&#26512;
+  
+  &#36825;&#20010;&#23545;&#25152;&#26377;&#26681;&#20803;&#32032;&#20026; xsl:transform &#30340;xml&#25991;&#20214;&#20351;&#29992;&#31867;&#22411;XSLT&#31867;&#22411;&#30340;schemas&#36827;&#34892;&#35299;&#26512;
+  &lt;documentElement prefix="xsl" localName="transform" typeId="XSLT"/&gt;
+  
+  &lt;typeId id="XSLT" uri="xslt.rnc"/&gt; ;&#36825;&#37324;&#23545;XSLT&#31867;&#22411;&#30340;schemas&#36827;&#34892;&#23450;&#20041;
+  
+<span class="org-level-1">* &lt;transformURI fromPattern="p" toPattern="q"/&gt;</span>
+  p &#21644;q &#37324;&#24212;&#35813;&#21547;&#26377;&#30456;&#21516;&#25968;&#37327;&#30340;"*" &#20182;&#20204;&#26159;&#19968;&#19968;&#23545;&#24212;&#30340;
+    &lt;transformURI fromPattern="*.xml" toPattern="*.rnc"/&gt;
+    &#27604;&#22914;&#24403;&#20320;&#32534;&#36753; a.xml &#26102;,&#23427;&#23558;&#23547;&#25214;&#19968;&#20010;a.rnc &#25991;&#20214;&#23545;&#20854;&#23558;&#34892;&#35299;&#26512;
+<span class="org-level-1">* &lt;namespace ns="N" uri="s"/&gt; &#19982;* &lt;namespace ns="N" typeId="T"/&gt;</span>
+  &lt;namespace ns="<span class="org-link">http://www.w3.org/1999/xhtml</span>" typeId="XHTML"/&gt;
+  &lt;namespace ns="<span class="org-link">http://www.w3.org/1999/xhtml</span>" uri="xhtml.rnc"/&gt;
+  &#27604;&#22914;&#24403;&#20320;&#32534;&#36753; &#19968;&#20010;&#22768;&#26126;&#26377; xmlns="<span class="org-link">http://www.w3.org/1999/xhtml"&#30340;xml</span> &#25991;&#20214;&#26102;,
+<span class="org-block-begin-line">  #+begin_src html
+</span><span class="org-block">  &lt;html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"&gt;
+  &lt;/html&gt;
+</span><span class="org-block-end-line">  #+end_src
+</span>
+<span class="org-level-1">* &#22914;&#20309;&#23450;&#20041;&#19968;&#20010;typeId  &lt;typeId id="T" uri="s"/&gt;</span>
+  &lt;typeId id="XSLT" uri="xslt.rnc"/&gt;
+  &lt;typeId id="XSLT_alias" typeId="XSLT"/&gt;
+  &#23545;&#20110;&#23450;&#20041;&#20102;&#19968;&#20010;typeId &#21518;&#21487;&#20197;&#22312;nxml-mode&#20013;
+  &#20351;&#29992; `C-cC-sC-t' &#21015;&#20986;&#25152;&#26377;&#30340;typeId ,&#20197;&#20415;&#20351;&#24403;&#21069;buffer&#29992;&#29305;&#23450;&#30340;typeId&#36827;&#34892;&#35299;&#26512; 
+<span class="org-level-1">* &#20063;&#21487;&#20197;&#21253;&#21547;&#21478;&#19968;&#20010;schemas &#25991;&#20214;</span>
+  &lt;include rules="F"/&gt;
+  
+</pre>
+  </body>
+</html>

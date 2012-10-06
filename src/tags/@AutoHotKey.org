@@ -1,0 +1,11 @@
+# -*- coding:utf-8 -*-
+
+#+TITLE: Tag: @AutoHotKey
+
+#+LANGUAGE:  zh
+   + [[file:../autohotkey/anything-doc.org][anything-doc.org]]
+   + [[file:../autohotkey/AutoHotKey_eclipse.org][AutoHotKey对Eclipse 进行增强]]
+   + [[file:../autohotkey/AutoHotKey_auto_close_boring_window.org][自动关闭某些窗口]]
+   + [[file:../autohotkey/AutoHotKey_Introduce.org][AutoHotKey 简介]]
+   + [[file:../autohotkey/AutoHotKey_1.org][AutoHotKey 几个简单的小例子]]
+   + [[file:../autohotkey/AutoHotKeyExplorer.org][对"我的电脑"  进行增强]]

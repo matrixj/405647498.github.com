@@ -3,14 +3,14 @@
                "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="zh" xml:lang="zh">
 <head>
-<title>一个人的狂欢</title>
+<title>Windows 下使用Emacs的 Ediff 进行文件的比较、合并</title>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
-<meta name="title" content="一个人的狂欢"/>
+<meta name="title" content="Windows 下使用Emacs的 Ediff 进行文件的比较、合并"/>
 <meta name="generator" content="Org-mode"/>
 <meta name="generated" content="2011-06-04 星期六"/>
 <meta name="author" content="孤峰独秀"/>
 <meta name="description" content=""/>
-<meta name="keywords" content=""/>
+<meta name="keywords" content="ediff Emacs windows exe"/>
 <style type='text/css'>
        body {
     background-color: #E5E5E5;
@@ -942,15 +942,15 @@ img {
 }
 
     </style>
-<link rel="stylesheet" type="text/css" href="style/emacs.css" />
-<script type='text/javascript' src='js/emacs.js'> </script>
+<link rel="stylesheet" type="text/css" href="../style/emacs.css" />
+<script type='text/javascript' src='../js/emacs.js'> </script>
 
 </head>
 <body>
 <div id="org-div-home-and-up" style="text-align:right;font-size:70%;white-space:nowrap;">
- <a accesskey="h" href="sitemap.html"> 站点地图 </a>
+ <a accesskey="h" href="../sitemap.html"> 站点地图 </a>
  |
- <a accesskey="H" href="index.html"> 首页 </a>
+ <a accesskey="H" href="../index.html"> 首页 </a>
 </div>
 
 <div id="preamble">
@@ -958,56 +958,183 @@ img {
 </div>
 
 <div id="content">
-<h1 class="title">一个人的狂欢</h1>
+<h1 class="title">Windows 下使用Emacs的 Ediff 进行文件的比较、合并</h1>
 
 
-<div id='logo-img' ><a  href='index.html'>▇█▓▒░◕~◕░▒▓█▇</a></div>
+<div id='logo-img' ><a  href='../index.html'>▇█▓▒░◕~◕░▒▓█▇</a></div>
 
 <div id='logo-text'>
   <a href='#' ><span align="left">░◕~◕░</span></a>
 </div>
 
 
-<ul>
-<li>首页还未做好，先看<a href="sitemap.html">站点地图</a>吧
-</li>
-<li><a href="about.html">About</a>
-</li>
-</ul>
+
+<p>
+值得一提的一点Emacs中的ediff进行文件比较及合并的工具,<br/>
+</p>
+<p><br/>
+<pre class="src src-sh">emacsclientw -eval <span class="org-string">"(ediff-files \"&#25991;&#20214;1.txt\" \"&#25991;&#20214;2.txt\")"</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">&#36825;&#20010;&#27979;&#35797;&#20102;&#19968;&#19979;&#22909;&#20687;&#19981;&#34892;&#65292;&#25253;&#25214;&#19981;&#30528;&#25991;&#20214;1.txt&#30340;&#38169; </span>
+emacs -eval <span class="org-string">"(ediff-files \"&#25991;&#20214;1.txt\" \"&#25991;&#20214;2.txt\")"</span>
+</pre>
+
+这样就可以对文件1.txt 文件2.txt进行比较了不过要让它与其他工具进行集成,还真有点麻烦.<br/>
+1是路径文件 对d:\asd\1sda\a.txt这样的路径它不理解d:/asd/1sda/a.txt它理解 .<br/>
+但与其他工具进行集成的时候,它是不知道该用"/"而不是"\"<br/>
+<a href="http://www.emacswiki.org/emacs/EdiffOnWThirtyTwo">EdiffOnEmacsWiki</a> 上找到<br/>
+这样一段程序，它使用gcc 编译之后生成一个程序，这个程序接收两个参数，即两个文件名<br/>
+然后emacs就会调用ediff 对这文件进行比较 <br/>
+</p>
+<p><br/>
+<pre class="src src-c"><span class="org-preprocessor">#include</span> <span class="org-string">&lt;stdio.h&gt;</span>
+<span class="org-preprocessor">#include</span> <span class="org-string">&lt;stdlib.h&gt;</span>
+
+<span class="org-comment-delimiter">/* </span>
+<span class="org-comment"> * call-ediff is used to call ediff from Perforce.  </span>
+<span class="org-comment"> * gcc -o call-ediff call-ediff.c &amp;&amp; call-ediff y:/Source/find_audio_xmls.sh y:/Source/find_audio_xmls.sh~</span>
+<span class="org-comment"> </span><span class="org-comment-delimiter">*/</span>
+
+<span class="org-type">void</span> <span class="org-function-name">hackPathSeparator</span>(<span class="org-type">char</span> *<span class="org-variable-name">windozePath</span>) {
+    <span class="org-type">char</span> *<span class="org-variable-name">c</span>;
+
+    <span class="org-keyword">for</span> (c = windozePath; *c; c++) {
+    <span class="org-keyword">if</span> (<span class="org-string">'\\'</span> == *c)
+        *c = <span class="org-string">'/'</span>;
+    }
+}
+
+<span class="org-type">int</span> <span class="org-function-name">main</span>(<span class="org-type">int</span> <span class="org-variable-name">argc</span>, <span class="org-type">char</span> *<span class="org-variable-name">argv</span>[], <span class="org-type">char</span> *<span class="org-variable-name">envp</span>[]) {
+    <span class="org-type">char</span> *<span class="org-variable-name">param1</span> = argv[1];
+    <span class="org-type">char</span> *<span class="org-variable-name">param2</span> = argv[2];
+
+    <span class="org-comment-delimiter">/* </span><span class="org-comment">We get \ part separators from Perforce; hack these to / </span><span class="org-comment-delimiter">*/</span>
+
+    hackPathSeparator(param1);
+    hackPathSeparator(param2);
+
+    <span class="org-comment-delimiter">/* </span><span class="org-comment">hack the arg list (ugh) </span><span class="org-comment-delimiter">*/</span>
+
+    argv[1] = <span class="org-string">"-e"</span>;
+    <span class="org-comment-delimiter">/* </span><span class="org-comment">Sample usage: argv[2] = "(progn (message \"foo\") (raise-frame))"; </span><span class="org-comment-delimiter">*/</span>
+
+    <span class="org-type">char</span> *<span class="org-variable-name">command</span> = (<span class="org-type">char</span> *)malloc(4096);
+    sprintf(command, <span class="org-string">"(progn (raise-frame) (ediff \"%s\" \"%s\"))"</span>, param1, param2);
+
+    argv[2] = command;
+
+    execvp(<span class="org-string">"gnuclientw.exe"</span>, argv);
+    <span class="org-keyword">return</span> 0;
+}
 
 
+</pre>
 
 
+将文件命名为call-ediff.c<br/>
+然后在Windows上的cygwin 或mingw上,用gcc进行编译,编译后生成的文件接收两个参数,两个文件名,它会自动将路径进行转换.<br/>
+</p>
+<p><br/>
+<pre class="src src-sh">gcc -Wl,--subsystem,windows -o call-ediff call-ediff.c
+</pre>
+
+不过有个问题我用emacsclient.exe 而不是gnuclientw.exe 所以编译前需要对代码进行一下修改<br/>
+我用cygwin下的gcc 编译了生成了三个文件,分别是用<br/>
+runemacs.exe emacsclientw.exe gnuclientw.exe <br/>
+运行(ediff)函数的结果 ，不过要想使用它们，你得安装cygwin<br/>
+<a href="../download/runemacs-ediff.exe">emacs-ediff.exe</a><br/>
+<a href="../download/emacsclientw-ediff.exe">emacsclientw-ediff.exe</a><br/>
+<a href="../download/gnuclientw-ediff.exe">gnuclinet-ediff.exe</a><br/>
+你可以直接下载使用使用它们,只需emacsclientw-ediff c:\a.txt c:\b.txt即可,不必担心路径的问题.<br/>
+</p>
+<p><br/>
+</p>
+<p><br/>
+</p>
+<p><br/>
+但是用gcc 编译有个问题，那就是你必须有个gcc 编译器，且离了gcc编译器后这个程序就没用了<br/>
+我试图用VC 编译它，发现编译不了，做了一些修改，修改后的内容如下<br/>
+修改后，我是调用 emacsclientw.exe 来调用 ediff 的，所以你必须配置好让 emacs 启动server<br/>
+关于emacsclient 的另一篇文章在<a href="emacs-on-windows.html">这里</a> 有介绍。 <br/>
+有这样一段程序<br/>
+</p>
+<p><br/>
+<pre class="src src-sh">//start here.
+<span class="org-comment-delimiter">#</span><span class="org-comment">include &lt;stdio.h&gt;</span>
+<span class="org-comment-delimiter">#</span><span class="org-comment">include &lt;stdlib.h&gt;</span>
+
+/*
+ * call-ediff is used to call ediff from Perforce.
+ *  call-ediff c:\a\b\a.txt c:\a\b\b.txt
+ *  <span class="org-keyword">or</span>
+ *  call-ediff c:/a/b/a.txt :/a/b/b.txt
+ */
+
+void hackPathSeparator(char *windozePath) {
+  char *c;
+
+  <span class="org-keyword">for</span> (c = windozePath; *c; c++) {
+    <span class="org-keyword">if</span> (<span class="org-string">'\\'</span> == *c)
+      *c = <span class="org-string">'/'</span>;
+  }
+}
+
+int main(int argc, char *argv[], char *envp[]) {
+  char *param1 = argv[1];
+  char *param2 = argv[2];
+  char *command;
+  /* We get <span class="org-string">\ </span>part separators from Perforce; hack these to / */
+
+  hackPathSeparator(param1);
+  hackPathSeparator(param2);
+
+
+  /* /<span class="org-string">\*</span> hack the arg list (ugh) *<span class="org-string">\/</span> */
+  <span class="org-variable-name">command</span>= (char*) malloc(4096); 
+
+   sprintf(<span class="org-builtin">command</span>, <span class="org-string">"emacsclientw -eval \"(progn (raise-frame) (ediff \\\"%s\\\" \\\"%s\\\"))\""</span>, param1, param2);  
+   system( <span class="org-builtin">command</span>);  
+  <span class="org-keyword">return</span> 0;
+}
+//ends here.
+</pre>
+
+用VC编译的<a href="../download/call-ediff-by-emacsclientw-compiled-by-vc.exe">run-ediff-compiled-by-vc.exe</a> <br/>
+</p>
+<p>       <br/>
+</p>
+<p><br/>
+</p>
+<p>       <br/>
+</p>
+<p><br/>
 <div id='my-src'>
-<div id='org-src'><a href='src/index.org'>src</a></div>
-<div id='htmlized-src'><a href='htmlized-src/index.org.html'>htmlized-src</a></div>
+<div id='org-src'><a href='../src/emacs/ediff.org'>src</a></div>
+<div id='htmlized-src'><a href='../htmlized-src/emacs/ediff.org.html'>htmlized-src</a></div>
 </div>
 <div id='tags'><span id='tags-title'>Tags:</span><br />
-<p>
-    <a href="tags/@SVN.html">@SVN</a>
-    <a href="tags/@perl.html">@perl</a>
-    <a href="tags/@Java.html">@Java</a>
-    <a href="tags/@Mysql.html">@Mysql</a>
-    <a href="tags/@Erlang.html">@Erlang</a>
-    <a href="tags/@SQL.html">@SQL</a>
-    <a href="tags/@DB.html">@DB</a>
-    <a href="tags/@Oracle.html">@Oracle</a>
-    <a href="tags/@Ediff.html">@Ediff</a>
-    <a href="tags/@Git.html">@Git</a>
-    <a href="tags/@Cedet.html">@Cedet</a>
-    <a href="tags/@C-C++.html">@C-C++</a>
-    <a href="tags/@Daily.html">@Daily</a>
-    <a href="tags/@Eclipse.html">@Eclipse</a>
-    <a href="tags/@AutoHotKey.html">@AutoHotKey</a>
-    <a href="tags/@Windows.html">@Windows</a>
-    <a href="tags/@Linux.html">@Linux</a>
-    <a href="tags/@C.html">@C</a>
-    <a href="tags/@Emacs.html">@Emacs</a>
+    <a href="../tags/@SVN.html">@SVN</a><br/>
+    <a href="../tags/@perl.html">@perl</a><br/>
+    <a href="../tags/@Java.html">@Java</a><br/>
+    <a href="../tags/@Mysql.html">@Mysql</a><br/>
+    <a href="../tags/@Erlang.html">@Erlang</a><br/>
+    <a href="../tags/@SQL.html">@SQL</a><br/>
+    <a href="../tags/@DB.html">@DB</a><br/>
+    <a href="../tags/@Oracle.html">@Oracle</a><br/>
+    <a href="../tags/@Ediff.html">@Ediff</a><br/>
+    <a href="../tags/@Git.html">@Git</a><br/>
+    <a href="../tags/@Cedet.html">@Cedet</a><br/>
+    <a href="../tags/@C-C++.html">@C-C++</a><br/>
+    <a href="../tags/@Daily.html">@Daily</a><br/>
+    <a href="../tags/@Eclipse.html">@Eclipse</a><br/>
+    <a href="../tags/@AutoHotKey.html">@AutoHotKey</a><br/>
+    <a href="../tags/@Windows.html">@Windows</a><br/>
+    <a href="../tags/@Linux.html">@Linux</a><br/>
+    <a href="../tags/@C.html">@C</a><br/>
+    <a href="../tags/@Emacs.html">@Emacs</a><br/>
 </p>
-
-
+<p><br/>
 </div>
-</div>
+</p></div>
 
 <div id="postamble">
 <p class="date">Date: 2011-06-04 星期六</p>

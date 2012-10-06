@@ -1,0 +1,153 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<!-- Created by htmlize-1.34 in css mode. -->
+<html>
+  <head>
+    <title>emacs-fun.org</title>
+    <style type="text/css">
+    <!--
+      body {
+        color: #F8F8F8;
+        background-color: #0C1021;
+      }
+      .comment {
+        /* font-lock-comment-face */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-block {
+        /* org-block */
+        color: #b3b3b3;
+      }
+      .org-block-begin-line {
+        /* org-block-begin-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-block-end-line {
+        /* org-block-end-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+      .org-document-info {
+        /* org-document-info */
+        color: #afeeee;
+      }
+      .org-document-info-keyword {
+        /* org-document-info-keyword */
+        color: #b3b3b3;
+      }
+      .org-document-title {
+        /* org-document-title */
+        color: #afeeee;
+        font-size: 144%;
+        font-weight: bold;
+      }
+      .org-level-1 {
+        /* org-level-1 */
+        color: #FF6400;
+      }
+      .org-link {
+        /* org-link */
+        color: #00ffff;
+        text-decoration: underline;
+      }
+      .org-meta-line {
+        /* org-meta-line */
+        color: #AEAEAE;
+        font-style: italic;
+      }
+
+      a {
+        color: inherit;
+        background-color: inherit;
+        font: inherit;
+        text-decoration: inherit;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+    -->
+    </style>
+  </head>
+  <body>
+    <pre>
+<span class="comment"># -*- coding:utf-8 -*-</span>
+<span class="org-meta-line">#+LANGUAGE:  zh
+</span><span class="org-document-info-keyword">#+TITLE:</span><span class="comment">     </span><span class="org-document-title">emacs&#20013;&#19968;&#20123;&#26377;&#36259;&#30340;&#19996;&#35199;</span>
+<span class="org-document-info-keyword">#+AUTHOR:</span><span class="comment">    </span><span class="org-document-info">&#23396;&#23792;&#29420;&#31168;</span>
+<span class="org-document-info-keyword">#+EMAIL:</span><span class="comment">     </span><span class="org-document-info">jixiuf@gmail.com</span>
+<span class="org-meta-line">#+DESCRIPTION:emacs&#20013;&#19968;&#20123;&#26377;&#36259;&#30340;&#19996;&#35199;
+#+KEYWORDS: emacs fun game 
+#+OPTIONS:   H:2 num:nil toc:t \n:t @:t ::t |:t ^:t -:t f:t *:t &lt;:t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc
+#+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
+#+EXPORT_SELECT_TAGS: export
+#+EXPORT_EXCLUDE_TAGS: noexport
+#+FILETAGS: @Emacs @Linux 
+</span>
+<span class="org-level-1">* &#24515;&#29702;&#21307;&#29983;doctor</span>
+ M-x doctor ,&#28982;&#21518;&#35797;&#30528;&#36319;&#20182;&#20132;&#35848;&#65292;&#24456;&#26377;&#24847;&#24605;&#65292;&#19981;&#36807;&#23427;&#19981;&#35748;&#35782;&#20013;&#25991;&#12290;
+<span class="org-level-1">* &#20960;&#20010;&#28216;&#25103;&#65292;</span>
+&#22240;&#20026;&#24179;&#24120;&#19981;&#29609;&#28216;&#25103;&#65292;&#25152;&#20197;&#20063;&#25042;&#24471;&#21435;&#35760;&#28216;&#25103;&#23545;&#24212;&#30340;&#20989;&#25968;&#21517;,&#35797;&#30528;&#20174;&#33756;&#21333;&#26639;&#37324;&#25214;
+Tools/Games/
+&#20854;&#20013;Snake &#26159;&#36138;&#21507;&#34503;&#65292;Tetris &#26159;&#20420;&#32599;&#26031;&#26041;&#22359;,&#36824;&#26377;&#20854;&#20063;&#20960;&#20010;&#23567;&#28216;&#25103;&#65292;&#27809;&#24590;&#20040;&#29609;&#36807;
+<span class="org-level-1">* animate-birthday-present  animate-string&#20004;&#20010;&#20989;&#25968;</span>
+  &#36825;&#20010;&#21487;&#20197;&#21033;&#29992;&#25991;&#23383;&#20316;&#20986;&#21160;&#30011;&#30340;&#25928;&#26524;&#12290;&#22240;&#20026;&#26159;&#21160;&#30011;&#65292;&#25152;&#20197;&#29992;&#25991;&#23383;&#19981;&#22826;&#23481;&#26131;&#34920;&#31034;,&#21487;&#20197;&#35797;
+  &#30528;&#36816;&#34892; animate-birthday-present&#36825;&#20010;&#21629;&#20196;&#65292;&#36825;&#21482;&#26159;&#20010;&#31034;&#20363;&#65292;&#23427;&#20869;&#37096;&#23454;&#38469;&#26159;&#35843;&#29992;
+  animate-string&#36825;&#20010;&#20989;&#25968;
+  &#27604;&#22914;&#65292;&#25105;&#20889;&#30340;&#19979;&#38754;&#36825;&#20010;&#20989;&#25968;&#65292;bye bye &#30340;&#39029;&#38754;
+<span class="org-block-begin-line">#+begin_src emacs-lisp
+</span><span class="org-block">  (defun bye ()
+  "say bye-bye !"
+    (interactive)
+    ;; Make a suitable buffer to display the birthday present in.
+    (switch-to-buffer (get-buffer-create "*bye*"))
+    (erase-buffer)
+    ;; Display the empty buffer.
+    (sit-for 0)
+    (animate-string "&#19979;&#27425;&#20877;&#20250;!" 6)
+    (sit-for 1) ;;&#20572;1&#31186;&#38047;
+    (animate-string " Bye!!!" 9)
+    )
+</span><span class="org-block-end-line">#+end_src
+</span>
+<span class="org-level-1">* &#23567;&#26102;&#20505;&#29609;&#36807;&#19968;&#20010;&#25169;&#20811;&#29260;&#28216;&#25103;&#65292;&#23601;&#26159;&#32473;&#20320;&#22235;&#24352;&#29260;&#65292;&#23545;&#36825;&#22235;&#24352;&#29260;&#36827;&#34892;&#21152;&#20943;&#20056;&#38500;&#36816;&#31639;&#26368;&#32456;&#24471;&#21040;&#30340;&#25968;&#23383;&#26159;24</span>
+  &#21018;&#20174;emacswiki <span class="org-link">emacswiki</span> &#19978;&#21457;&#29616;&#19968;&#20010;&#19982;&#36825;&#20010;&#31867;&#20284;&#30340;&#28216;&#25103;&#65292;&#19981;&#36807;&#19981;&#26159;&#32473;&#20320;&#29609;&#30340;&#26159;&#65292;
+  &#26159;&#32473;Emacs &#29609;&#30340;&#12290;&#23601;&#26159;&#32473;&#20320;&#19968;&#20018;&#25968;&#23383;&#65292;&#22312;&#25968;&#23383;&#20043;&#38388;&#21487;&#20197;&#38543;&#24847;&#21152;&#20837;&#21152;&#20943;&#20056;&#38500;&#30340;&#36816;&#31639;&#31526;&#65292;
+  &#26368;&#32456;&#24471;&#21040;&#32467;&#26524;100 ,&#32467;&#26524;&#26377;&#20154;&#29992;elisp &#25226;&#23427;&#23454;&#29616;&#20102;
+<span class="org-block-begin-line">#+begin_src emacs-lisp
+</span><span class="org-block">(defvar bil-list nil "list of valid tickets.")
+(defun bil-calc (pbil pidx)
+  "nil"
+  (let ((idx pidx)
+        (sbil pbil))
+    (condition-case nil
+        ;; prevent division by zero
+        (when (string= (calc-eval sbil) "100")
+          (add-to-list 'bil-list sbil))
+      (error nil))
+    (if (= idx (length sbil))
+        nil
+      (mapcar (lambda (lid)
+                (mapcar (lambda (sign)
+                          (bil-calc (concat (substring sbil 0 lid) sign (substring sbil lid)) lid))
+                        '("+" "-" "*" "/")))
+              (let ((lix (+ idx 1)))
+                (mapcar (lambda (not-used) (setq lix (+ lix 1))) (make-list (- (length sbil) lix) nil)))))))
+
+(defun bil-findit (num)
+  "Find play solution for number NUM."
+  (progn
+    (setq bil-list nil)
+    (bil-calc num 0)
+    bil-list))
+
+  
+</span><span class="org-block-end-line">#+end_src
+</span>  &#27604;&#22914;&#23545;168324&#36827;&#34892;&#36816;&#31639;&#30340;&#32467;&#26524; &#26159;"16*8-32+4"
+<span class="org-block-begin-line">#+begin_src emacs-lisp
+</span><span class="org-block">(bil-findit "168324")
+</span><span class="org-block-end-line">#+end_src
+</span></pre>
+  </body>
+</html>

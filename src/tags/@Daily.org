@@ -1,0 +1,6 @@
+# -*- coding:utf-8 -*-
+
+#+TITLE: Tag: @Daily
+
+#+LANGUAGE:  zh
+   + [[file:../daily/beautiful-sentence.org][一些话]]
